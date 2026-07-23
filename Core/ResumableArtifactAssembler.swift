@@ -32,14 +32,18 @@ public actor ResumableArtifactAssembler {
         let received: Int64
         if fileManager.fileExists(atPath: partialURL.path) {
             do {
-                received = Int64(
-                    try partialURL.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
+                let attributes = try fileManager.attributesOfItem(
+                    atPath: partialURL.path
                 )
+                received = (attributes[.size] as? NSNumber)?.int64Value ?? 0
             } catch {
                 throw ArtifactAssemblyError.fileOperationFailed
             }
         } else {
             received = 0
+        }
+        guard received <= expectedByteCount else {
+            throw ArtifactAssemblyError.exceedsExpectedSize
         }
         return ArtifactAssemblyState(
             expectedByteCount: expectedByteCount,

@@ -46,6 +46,7 @@ public enum LlamaAdapterError: Error, Equatable {
 /// the same evidence and citation contract used by every other model.
 public actor LlamaLanguageModel: LocalLanguageModel {
     public nonisolated let tier: ModelTier
+    public nonisolated let outputMode: ModelOutputMode = .groundedJSON
 
     private let backend: any LlamaRuntimeBackend
     private let configuration: LlamaRuntimeConfiguration
@@ -84,8 +85,14 @@ public actor LlamaLanguageModel: LocalLanguageModel {
         }
         let builder = GroundedPromptBuilder()
         return try await backend.complete(
-            systemPrompt: builder.systemPrompt(for: tier),
-            userPrompt: builder.userPrompt(from: prompt),
+            systemPrompt: builder.systemPrompt(
+                for: tier,
+                outputMode: outputMode
+            ),
+            userPrompt: builder.userPrompt(
+                from: prompt,
+                outputMode: outputMode
+            ),
             imageData: prompt.permitsVisionReasoning ? prompt.imageData : nil,
             maximumOutputTokens: configuration.maximumOutputTokens
         )

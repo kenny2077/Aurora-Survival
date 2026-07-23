@@ -6,7 +6,7 @@ struct MapPackView: View {
             Section {
                 Label("No signed map pack installed", systemImage: "map.fill")
                     .font(.headline)
-                Text("The package verifier and readiness checks are implemented. A production PMTiles catalog and MapLibre renderer require licensed map artifacts.")
+                Text("Signed-pack installation and the local file-backed runtime are implemented. Production rendering still requires MapLibre and licensed PMTiles, style, attribution, and routing artifacts.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

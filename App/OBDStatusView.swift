@@ -13,7 +13,7 @@ struct OBDStatusView: View {
             Section {
                 Label("No OBD adapter connected", systemImage: "cable.connector")
                     .font(.headline)
-                Text("The read-only protocol, parser, and command whitelist are implemented. BLE hardware transport remains a physical-device milestone.")
+                Text("The read-only protocol, parser, command whitelist, and vehicle-bound observation store are implemented. BLE hardware transport remains a physical-device milestone.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

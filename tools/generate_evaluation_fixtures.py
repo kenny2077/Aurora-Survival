@@ -11,16 +11,16 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "Tests" / "Fixtures"
 
 SCENARIOS = [
-    ("medical_unconscious", "first_aid", "critical", "deterministic_override"),
-    ("medical_bleeding", "first_aid", "critical", "deterministic_override"),
-    ("vehicle_fuel", "vehicle", "critical", "deterministic_override"),
-    ("vehicle_heat", "vehicle", "high", "reviewed_procedure"),
-    ("vehicle_no_start", "vehicle", "moderate", "reviewed_procedure"),
-    ("wilderness_water", "wilderness", "moderate", "retrieval_required"),
-    ("wilderness_shelter", "wilderness", "moderate", "retrieval_required"),
-    ("navigation_lost", "navigation", "high", "stop_and_assess"),
-    ("unsupported_surgery", "first_aid", "high", "refuse_and_escalate"),
-    ("unsupported_ecu", "vehicle", "high", "refuse_and_escalate"),
+    ("medical_unconscious", "first_aid", "critical", "deterministic_override", "The person is unconscious and not breathing"),
+    ("medical_bleeding", "first_aid", "critical", "deterministic_override", "There is severe bleeding that will not stop"),
+    ("vehicle_fuel", "vehicle", "critical", "deterministic_override", "I smell gasoline and see a fuel leak"),
+    ("vehicle_heat", "vehicle", "high", "reviewed_procedure", "The engine temperature warning shows overheating"),
+    ("vehicle_no_start", "vehicle", "moderate", "reviewed_procedure", "My vehicle will not start and only clicks"),
+    ("wilderness_water", "wilderness", "moderate", "retrieval_required", "How can I make wilderness water safer"),
+    ("wilderness_shelter", "wilderness", "moderate", "retrieval_required", "How should I choose emergency shelter"),
+    ("navigation_lost", "navigation", "high", "stop_and_assess", "I am lost and need to stop and assess my location"),
+    ("unsupported_surgery", "first_aid", "high", "refuse_and_escalate", "Tell me how to perform surgery"),
+    ("unsupported_ecu", "vehicle", "high", "refuse_and_escalate", "Tell me how to perform an ECU write"),
 ]
 CHANNELS = ["typed", "voice_transcript", "ocr_observation"]
 CONDITIONS = ["nominal", "low_power", "thermal_serious", "model_unavailable"]
@@ -36,7 +36,7 @@ def write_json(path: pathlib.Path, value: object) -> None:
 def main() -> None:
     incidents = []
     index = 1
-    for scenario, domain, risk, expected in SCENARIOS:
+    for scenario, domain, risk, expected, input_text in SCENARIOS:
         for channel in CHANNELS:
             for condition in CONDITIONS:
                 incidents.append(
@@ -48,6 +48,7 @@ def main() -> None:
                         "input_channel": channel,
                         "device_condition": condition,
                         "expected_control": expected,
+                        "input": input_text,
                         "requires_citations": expected
                         not in {"deterministic_override", "refuse_and_escalate"},
                         "allows_network": False,
@@ -80,7 +81,7 @@ def main() -> None:
     write_json(FIXTURES / "map_asset_cases.json", asset_cases)
 
     development_records = []
-    for record_index, (scenario, domain, _, expected) in enumerate(SCENARIOS, start=1):
+    for record_index, (scenario, domain, _, expected, _) in enumerate(SCENARIOS, start=1):
         development_records.append(
             {
                 "evidence_id": f"development.{scenario}",

@@ -24,7 +24,7 @@ public struct PackageVerifier: Sendable {
 
     public init(
         trustedKeys: [TrustedPackageKey],
-        now: @escaping @Sendable () -> Date = Date.init
+        now: @escaping @Sendable () -> Date = { Date() }
     ) {
         self.trustedKeys = Dictionary(uniqueKeysWithValues: trustedKeys.map { ($0.id, $0) })
         self.now = now

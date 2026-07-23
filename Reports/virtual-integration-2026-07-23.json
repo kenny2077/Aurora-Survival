@@ -1,0 +1,17 @@
+{
+  "app_commit": "79a1631625a4ab75b37a25b47596216171ee54bf",
+  "created_at": "2026-07-23T09:51:00Z",
+  "device": "GitHub-hosted virtual runners",
+  "model": null,
+  "os": "macOS latest and Ubuntu latest",
+  "packs": [],
+  "policy_version": "deterministic-policy-v1",
+  "prompt_version": "grounded-prompt-v1",
+  "results": {
+    "failed": 0,
+    "passed": 3,
+    "skipped": 0
+  },
+  "schema_version": 1,
+  "suite": "github-ci-run-29996996730"
+}

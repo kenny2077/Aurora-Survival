@@ -33,7 +33,20 @@ struct ReadinessView: View {
                             }
                         }
                     }
+                    .accessibilityLabel(
+                        "\(check.title), \(check.isComplete ? "complete" : "not complete"). \(check.detail)"
+                    )
                 }
+            }
+
+            Section("Emergency core") {
+                Label(
+                    model.emergencyCoreStatus,
+                    systemImage: "checkmark.shield.fill"
+                )
+                Text("The bundled safety and guide core automatically restores if its active copy is missing or corrupt.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
 
             Section("Vehicle identity") {
@@ -52,6 +65,11 @@ struct ReadinessView: View {
             }
 
             Section("Trip systems") {
+                NavigationLink {
+                    TripSheetView()
+                } label: {
+                    Label("Printable trip sheet", systemImage: "doc.text.fill")
+                }
                 NavigationLink {
                     MapPackView()
                 } label: {

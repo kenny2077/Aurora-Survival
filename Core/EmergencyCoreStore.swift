@@ -35,7 +35,7 @@ public enum EmergencyCoreError: Error, Equatable {
     case fileOperationFailed
 }
 
-public struct EmergencyCoreStore: Sendable {
+public struct EmergencyCoreStore {
     private let rootDirectory: URL
     private let bundledData: Data
     private let fileManager: FileManager

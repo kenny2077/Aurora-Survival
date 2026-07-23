@@ -14,6 +14,9 @@ struct RootView: View {
 
             NavigationStack { ModelSettingsView() }
                 .tabItem { Label("Models", systemImage: "cpu.fill") }
+
+            NavigationStack { SystemStatusView() }
+                .tabItem { Label("Status", systemImage: "shield.lefthalf.filled") }
         }
     }
 }
