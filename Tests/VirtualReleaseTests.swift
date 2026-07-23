@@ -100,7 +100,8 @@ final class VirtualReleaseTests: XCTestCase {
             partialURL: partial,
             expectedByteCount: 6
         )
-        XCTAssertEqual(try await resumedSession.state().receivedByteCount, 3)
+        let resumedState = try await resumedSession.state()
+        XCTAssertEqual(resumedState.receivedByteCount, 3)
         try await resumedSession.append(Data("def".utf8), atOffset: 3)
         try await resumedSession.finalize(to: destination)
         XCTAssertEqual(try Data(contentsOf: destination), Data("abcdef".utf8))
