@@ -1,0 +1,17 @@
+{
+  "app_commit": "6e4014cdd997e4e42410eac8c88c1cb5faddfc4f",
+  "created_at": "2026-07-23T00:00:00Z",
+  "device": "Codex virtual workspace",
+  "model": null,
+  "os": "Linux structural runner",
+  "packs": [],
+  "policy_version": "deterministic-policy-v1",
+  "prompt_version": "grounded-prompt-v1",
+  "results": {
+    "failed": 0,
+    "passed": 2,
+    "skipped": 2
+  },
+  "schema_version": 1,
+  "suite": "remote-source-controls"
+}
