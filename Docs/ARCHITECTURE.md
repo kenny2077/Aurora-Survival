@@ -21,7 +21,9 @@ release gates are independent of model tier.
    memory, free storage, thermal state, and power mode.
 7. The selected model receives numbered evidence through
    `GroundedPromptBuilder`.
-8. `CitationPolicy` rejects missing or out-of-range citations.
+8. Citation-text models pass `CitationPolicy`. Grounded-JSON models pass
+   `GroundedResponseCodec`, which resolves only installed evidence, procedure,
+   step, and warning identifiers.
 9. Failure at steps 6–8 returns a deterministic extractive answer.
 
 ## Boundaries
@@ -37,7 +39,8 @@ release gates are independent of model tier.
 
 ## Model adapters
 
-`LocalLanguageModel` is the stable core protocol. `ClosureBackedLanguageModel`
+`LocalLanguageModel` is the stable core protocol. Its output mode distinguishes
+legacy citation text from typed grounded JSON. `ClosureBackedLanguageModel`
 adapts a runtime by accepting two prompts and returning text. A production
 llama.cpp adapter should:
 
@@ -49,7 +52,7 @@ llama.cpp adapter should:
 - stream tokens with cancellation;
 - unload on memory warning, serious heat, backgrounding, or Low Power Mode;
 - expose measured memory, first-token latency, generation rate, and temperature;
-- return plain text to the existing citation validator.
+- return grounded JSON to the evidence/procedure validator.
 
 The adapter must not bypass `IncidentAssistant`.
 
@@ -72,14 +75,26 @@ fluid types, fuse assignments, high-voltage isolation, or towing modes.
 
 ## Maps and OBD
 
-They are deliberately outside this first vertical slice.
+The dependency-free integration boundaries are part of the vertical slice.
 
-- Offline maps should use MapLibre Native and legally distributable signed
-  regional packs. The app must show pack age, coverage, contour/road detail,
-  and a no-network route preview.
-- OBD-II should start read-only. Store raw code, timestamp, freeze-frame data,
-  adapter identity, vehicle profile, and the evidence used to explain the code.
-  No clearing codes, actuator tests, coding, or ECU writes in v1.
+- `FileBackedOfflineMapRuntime` opens only a locally installed pack that passes
+  coverage, freshness, detail, file, and routing checks. MapLibre rendering and
+  licensed regional artifacts remain external release inputs.
+- `ReadOnlyOBDSession` rejects non-allowlisted commands before transport.
+  `OBDObservationStore` persists raw response, timestamp, adapter identity,
+  exact vehicle, parsed codes, and evidence sources. CoreBluetooth hardware
+  remains a physical-device gate.
+
+## Startup, delivery, and commerce
+
+- App startup loads `EmergencyCoreStore`; missing or corrupt active data is
+  atomically restored from the bundled reviewed core.
+- `PackageDownloadCoordinator` denies transfer in incident mode, uses strict
+  HTTP byte ranges, resumes partial artifacts, and passes completed content
+  through signature/hash verification before activation.
+- StoreKit verification is converted into an on-device `EntitlementLedger`.
+  Only verified purchase, renewal, restore, or family-sharing events activate
+  optional installed packs; refunds and revocations deactivate them.
 
 ## Privacy
 

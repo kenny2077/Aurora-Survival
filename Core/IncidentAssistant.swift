@@ -5,6 +5,7 @@ public actor IncidentAssistant {
     private let retrieval: RetrievalEngine
     private let router: ModelRouter
     private let citationPolicy: CitationPolicy
+    private let groundedCodec: GroundedResponseCodec
     private let modelProvider: @Sendable (ModelTier) -> any LocalLanguageModel
     private let installedTiers: Set<ModelTier>
 
@@ -14,6 +15,7 @@ public actor IncidentAssistant {
         safety: SafetyEngine = SafetyEngine(),
         router: ModelRouter = ModelRouter(),
         citationPolicy: CitationPolicy = CitationPolicy(),
+        groundedCodec: GroundedResponseCodec = GroundedResponseCodec(),
         modelProvider: @escaping @Sendable (ModelTier) -> any LocalLanguageModel = {
             ExtractiveLanguageModel(tier: $0)
         }
@@ -22,6 +24,7 @@ public actor IncidentAssistant {
         self.retrieval = RetrievalEngine(articles: articles)
         self.router = router
         self.citationPolicy = citationPolicy
+        self.groundedCodec = groundedCodec
         self.modelProvider = modelProvider
         self.installedTiers = installedTiers
     }
@@ -32,20 +35,9 @@ public actor IncidentAssistant {
     ) async -> AssistantAnswer {
         let safetyText = ([request.question] + request.imageObservations).joined(separator: " ")
         if let directive = safety.evaluate(safetyText) {
-            let actions = directive.immediateActions.map { "• \($0)" }.joined(separator: "\n")
-            let prohibited = directive.prohibitedActions.map { "• \($0)" }.joined(separator: "\n")
-            let text = "\(directive.title)\n\nDo this now:\n\(actions)\n\nDo not:\n\(prohibited)"
-            return AssistantAnswer(
-                text: text,
-                severity: directive.severity,
-                sources: [directive.source],
-                modelTier: nil,
-                usedDeterministicOverride: true,
-                visionWasUsed: false,
-                notices: [
-                    directive.rationale,
-                    "Policy: \(directive.policyID)"
-                ]
+            return Self.safetyAnswer(
+                directive,
+                visionWasUsed: false
             )
         }
 
@@ -81,11 +73,49 @@ public actor IncidentAssistant {
         do {
             let generated = try await model.generate(prompt: prompt)
             let finalText: String
-            if let validated = citationPolicy.validatedText(generated, evidenceCount: evidence.count) {
-                finalText = validated
-            } else {
-                notices.append("Generated text failed citation validation; reviewed extractive guidance was used.")
-                finalText = try await ExtractiveLanguageModel(tier: decision.selected).generate(prompt: prompt)
+            switch model.outputMode {
+            case .groundedJSON:
+                do {
+                    let response = try groundedCodec.decodeAndValidate(
+                        generated,
+                        evidence: evidence
+                    )
+                    let observationText = response.observations
+                        .map(\.fact)
+                        .joined(separator: " ")
+                    if let directive = safety.evaluate(observationText) {
+                        return Self.safetyAnswer(
+                            directive,
+                            visionWasUsed: prompt.permitsVisionReasoning,
+                            additionalNotice: "A model observation triggered a deterministic safety policy."
+                        )
+                    }
+                    finalText = try groundedCodec.renderValidated(
+                        response,
+                        evidence: evidence
+                    )
+                } catch {
+                    notices.append(
+                        "Structured model output failed evidence validation; reviewed extractive guidance was used."
+                    )
+                    finalText = try await ExtractiveLanguageModel(
+                        tier: decision.selected
+                    ).generate(prompt: prompt)
+                }
+            case .citationText:
+                if let validated = citationPolicy.validatedText(
+                    generated,
+                    evidenceCount: evidence.count
+                ) {
+                    finalText = validated
+                } else {
+                    notices.append(
+                        "Generated text failed citation validation; reviewed extractive guidance was used."
+                    )
+                    finalText = try await ExtractiveLanguageModel(
+                        tier: decision.selected
+                    ).generate(prompt: prompt)
+                }
             }
             return AssistantAnswer(
                 text: finalText,
@@ -123,5 +153,43 @@ public actor IncidentAssistant {
             vehicle: vehicle,
             limit: 20
         ).map(\.article)
+    }
+
+    private static func safetyAnswer(
+        _ directive: SafetyDirective,
+        visionWasUsed: Bool,
+        additionalNotice: String? = nil
+    ) -> AssistantAnswer {
+        let actions = directive.immediateActions
+            .map { "• \($0)" }
+            .joined(separator: "\n")
+        let prohibited = directive.prohibitedActions
+            .map { "• \($0)" }
+            .joined(separator: "\n")
+        let text = """
+        \(directive.title)
+
+        Do this now:
+        \(actions)
+
+        Do not:
+        \(prohibited)
+        """
+        var notices = [
+            directive.rationale,
+            "Policy: \(directive.policyID)",
+        ]
+        if let additionalNotice {
+            notices.append(additionalNotice)
+        }
+        return AssistantAnswer(
+            text: text,
+            severity: directive.severity,
+            sources: [directive.source],
+            modelTier: nil,
+            usedDeterministicOverride: true,
+            visionWasUsed: visionWasUsed,
+            notices: notices
+        )
     }
 }

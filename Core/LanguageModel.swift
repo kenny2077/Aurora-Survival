@@ -27,7 +27,17 @@ public struct ModelPrompt: Sendable {
 
 public protocol LocalLanguageModel: Sendable {
     var tier: ModelTier { get }
+    var outputMode: ModelOutputMode { get }
     func generate(prompt: ModelPrompt) async throws -> String
+}
+
+public enum ModelOutputMode: String, Codable, Sendable {
+    case citationText = "citation_text"
+    case groundedJSON = "grounded_json"
+}
+
+public extension LocalLanguageModel {
+    var outputMode: ModelOutputMode { .citationText }
 }
 
 public enum ModelFailure: Error, Equatable {
@@ -39,6 +49,7 @@ public enum ModelFailure: Error, Equatable {
 /// It is intentionally extractive: it only formats reviewed knowledge, never invents steps.
 public struct ExtractiveLanguageModel: LocalLanguageModel {
     public let tier: ModelTier
+    public let outputMode: ModelOutputMode = .citationText
 
     public init(tier: ModelTier = .essential) {
         self.tier = tier

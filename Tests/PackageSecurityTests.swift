@@ -34,9 +34,10 @@ final class PackageSecurityTests: XCTestCase {
                 packageDirectory: fixture.staging
             )
         ) { error in
+            let verificationError = error as? PackageVerificationError
             XCTAssertTrue(
-                error == PackageVerificationError.byteCountMismatch("weights/model.gguf")
-                    || error == PackageVerificationError.checksumMismatch("weights/model.gguf")
+                verificationError == .byteCountMismatch("weights/model.gguf")
+                    || verificationError == .checksumMismatch("weights/model.gguf")
             )
         }
     }

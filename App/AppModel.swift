@@ -11,19 +11,58 @@ final class AppModel: ObservableObject {
     @Published var libraryQuery = ""
     @Published var readinessChecks: [ReadinessCheck] = ReadinessCheck.defaults
     @Published var vehicleProfile: VehicleProfile?
+    @Published private(set) var emergencyCoreStatus = "Emergency core unavailable"
+    @Published var incidentModeEnabled = true
 
     let articles: [KnowledgeArticle]
+    let entitlementLedger: EntitlementLedger
     private let assistant: IncidentAssistant
     private let deviceProfiler = DeviceProfiler()
     private let ocr = VisionTextExtractor()
 
     init() {
+        let applicationSupport = FileManager.default.urls(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask
+        ).first ?? FileManager.default.temporaryDirectory
+        let appDataRoot = applicationSupport.appendingPathComponent(
+            "TrailGuard",
+            isDirectory: true
+        )
+        entitlementLedger = EntitlementLedger(
+            fileURL: appDataRoot.appendingPathComponent("entitlements.json")
+        )
+
         let loaded: [KnowledgeArticle]
-        if let url = Bundle.main.url(forResource: "starter_knowledge", withExtension: "json"),
-           let store = try? KnowledgeStore.load(url: url) {
+        let coreStatus: String
+        if let url = Bundle.main.url(
+            forResource: "emergency_core",
+            withExtension: "json"
+        ),
+           let bundledData = try? Data(contentsOf: url),
+           let result = try? EmergencyCoreStore(
+               rootDirectory: appDataRoot,
+               bundledData: bundledData
+           ).loadOrRecover() {
+            loaded = result.bundle.articles
+            switch result.origin {
+            case .active:
+                coreStatus = "Verified emergency core \(result.bundle.version)"
+            case .bundledFirstLaunch:
+                coreStatus = "Bundled emergency core installed"
+            case .bundledRecovery:
+                coreStatus = "Emergency core recovered from bundled copy"
+            }
+        } else if let url = Bundle.main.url(
+            forResource: "starter_knowledge",
+            withExtension: "json"
+        ),
+                  let store = try? KnowledgeStore.load(url: url) {
             loaded = store.articles
+            coreStatus = "Legacy bundled guide loaded"
         } else {
             loaded = []
+            coreStatus = "Emergency core unavailable"
         }
         articles = loaded
 
@@ -33,6 +72,7 @@ final class AppModel: ObservableObject {
             articles: loaded,
             installedTiers: [.essential]
         )
+        emergencyCoreStatus = coreStatus
     }
 
     var filteredArticles: [KnowledgeArticle] {
@@ -46,6 +86,10 @@ final class AppModel: ObservableObject {
     var readinessProgress: Double {
         guard !readinessChecks.isEmpty else { return 0 }
         return Double(readinessChecks.filter(\.isComplete).count) / Double(readinessChecks.count)
+    }
+
+    var installedTierSummary: String {
+        "Essential installed · Field and Vision require signed model packs"
     }
 
     func attachImage(data: Data) async {

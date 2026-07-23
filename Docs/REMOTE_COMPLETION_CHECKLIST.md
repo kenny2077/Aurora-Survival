@@ -25,11 +25,20 @@ an executable local or CI contract; it does not claim external certification.
 | Read-only OBD policy | Complete | allowlist and nine locked rejection commands |
 | Map readiness failure paths | Complete | map evaluator plus 30 asset cases |
 | Model performance acceptance | Complete | latency/memory/thermal/battery evaluator |
-| Evaluation provenance report | Complete | schema, writer, and `Reports/virtual-workspace-2026-07-23.json` |
+| Evaluation provenance report | Complete | schema, writer, and `Reports/virtual-integration-2026-07-23.json` |
 | Gold incident matrix | Complete | 120 synthetic control-path cases |
 | Virtual release failure matrix | Complete | model/map/OBD/commerce/accessibility tests |
 | Attached document source audit | Complete | architecture-only classification |
 | CI structural/core/iOS jobs | Complete | `.github/workflows/ci.yml` |
+| Typed response used by llama runtime | Complete | output-mode contract and live codec |
+| Emergency recovery used at startup | Complete | `AppModel` bootstrap |
+| Resume used by package delivery | Complete | strict byte-range coordinator |
+| Store verification persistence | Complete | StoreKit bridge and entitlement ledger |
+| Vehicle document ingestion | Complete | exact identity/revision/applicability gate |
+| OBD observation persistence | Complete | vehicle-bound local record store |
+| Offline map open boundary | Complete | file-backed runtime |
+| Gold matrices executed | Complete | 120 incident and 30 asset execution tests |
+| Zero-power preparation export | Complete | printable/shareable trip sheet |
 
 ## External acceptance gates still open
 

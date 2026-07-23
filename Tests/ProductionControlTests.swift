@@ -92,6 +92,232 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertNotNil(action["evidence_ids"])
     }
 
+    func testGroundedCodecRendersOnlyApprovedStepText() throws {
+        let article = makeArticle()
+        let response = GroundedResponse(
+            domain: .vehicle,
+            riskLevel: .moderate,
+            immediateAction: GroundedAction(
+                kind: .assess,
+                evidenceIDs: [article.id]
+            ),
+            questions: [],
+            observations: [],
+            procedureID: article.id,
+            steps: [
+                GroundedStep(
+                    stepID: "\(article.id)#step-1",
+                    evidenceIDs: [article.id]
+                )
+            ],
+            doNotDo: article.warnings,
+            driveability: .unknown,
+            escalation: GroundedEscalation(
+                reason: "Cause unknown",
+                action: "Ignored in favor of fixed escalation text"
+            ),
+            answerConfidence: .supported
+        )
+        let encoded = try JSONEncoder().encode(response)
+        let rendered = try GroundedResponseCodec().decodeValidateAndRender(
+            String(decoding: encoded, as: UTF8.self),
+            evidence: [RetrievedPassage(article: article, score: 1)]
+        )
+        XCTAssertTrue(rendered.contains(article.steps[0]))
+        XCTAssertTrue(rendered.contains(article.warnings[0]))
+        XCTAssertFalse(rendered.contains(response.escalation.action))
+    }
+
+    func testGroundedCodecRejectsInventedStepID() throws {
+        let article = makeArticle()
+        let response = GroundedResponse(
+            domain: .vehicle,
+            riskLevel: .moderate,
+            immediateAction: GroundedAction(
+                kind: .assess,
+                evidenceIDs: [article.id]
+            ),
+            questions: [],
+            observations: [],
+            procedureID: article.id,
+            steps: [
+                GroundedStep(
+                    stepID: "invented#step-99",
+                    evidenceIDs: [article.id]
+                )
+            ],
+            doNotDo: article.warnings,
+            driveability: .unknown,
+            escalation: GroundedEscalation(reason: "", action: ""),
+            answerConfidence: .supported
+        )
+        let encoded = try JSONEncoder().encode(response)
+        XCTAssertThrowsError(
+            try GroundedResponseCodec().decodeValidateAndRender(
+                String(decoding: encoded, as: UTF8.self),
+                evidence: [RetrievedPassage(article: article, score: 1)]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .unknownStepID("invented#step-99")
+            )
+        }
+    }
+
+    func testIncidentAssistantUsesValidatedStructuredModelOutput() async throws {
+        let article = makeArticle()
+        let response = GroundedResponse(
+            domain: .vehicle,
+            riskLevel: .moderate,
+            immediateAction: GroundedAction(
+                kind: .assess,
+                evidenceIDs: [article.id]
+            ),
+            questions: [],
+            observations: [],
+            procedureID: article.id,
+            steps: [
+                GroundedStep(
+                    stepID: "\(article.id)#step-1",
+                    evidenceIDs: [article.id]
+                )
+            ],
+            doNotDo: article.warnings,
+            driveability: .unknown,
+            escalation: GroundedEscalation(reason: "", action: ""),
+            answerConfidence: .supported
+        )
+        let generated = String(
+            decoding: try JSONEncoder().encode(response),
+            as: UTF8.self
+        )
+        let assistant = IncidentAssistant(
+            articles: [article],
+            installedTiers: [.essential, .field],
+            modelProvider: { tier in
+                ClosureBackedLanguageModel(
+                    tier: tier,
+                    outputMode: .groundedJSON
+                ) { _, _ in
+                    generated
+                }
+            }
+        )
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "fixture engine inspection",
+                preferredTier: .field
+            ),
+            device: capableDevice()
+        )
+        XCTAssertEqual(answer.modelTier, .field)
+        XCTAssertTrue(answer.text.contains(article.steps[0]))
+        XCTAssertFalse(answer.notices.contains {
+            $0.contains("failed evidence validation")
+        })
+    }
+
+    func testStructuredOutputFallsBackWhenWarningIsInvented() async throws {
+        let article = makeArticle()
+        let response = GroundedResponse(
+            domain: .vehicle,
+            riskLevel: .moderate,
+            immediateAction: GroundedAction(
+                kind: .assess,
+                evidenceIDs: [article.id]
+            ),
+            questions: [],
+            observations: [],
+            procedureID: nil,
+            steps: [],
+            doNotDo: ["Invented warning"],
+            driveability: .unknown,
+            escalation: GroundedEscalation(reason: "", action: ""),
+            answerConfidence: .supported
+        )
+        let generated = String(
+            decoding: try JSONEncoder().encode(response),
+            as: UTF8.self
+        )
+        let assistant = IncidentAssistant(
+            articles: [article],
+            installedTiers: [.essential, .field],
+            modelProvider: { tier in
+                ClosureBackedLanguageModel(
+                    tier: tier,
+                    outputMode: .groundedJSON
+                ) { _, _ in generated }
+            }
+        )
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "fixture engine inspection",
+                preferredTier: .field
+            ),
+            device: capableDevice()
+        )
+        XCTAssertTrue(answer.text.contains(article.steps[0]))
+        XCTAssertTrue(answer.notices.contains {
+            $0.contains("failed evidence validation")
+        })
+    }
+
+    func testVisionObservationCanTriggerPostModelSafetyOverride() async throws {
+        let article = makeArticle()
+        let response = GroundedResponse(
+            domain: .vehicle,
+            riskLevel: .critical,
+            immediateAction: GroundedAction(
+                kind: .sos,
+                evidenceIDs: [article.id]
+            ),
+            questions: [],
+            observations: [
+                GroundedObservation(
+                    fact: "The image appears to show a fuel leak.",
+                    source: .photo,
+                    confidence: 0.8
+                )
+            ],
+            procedureID: nil,
+            steps: [],
+            doNotDo: article.warnings,
+            driveability: .doNotDrive,
+            escalation: GroundedEscalation(reason: "", action: ""),
+            answerConfidence: .supported
+        )
+        let generated = String(
+            decoding: try JSONEncoder().encode(response),
+            as: UTF8.self
+        )
+        let assistant = IncidentAssistant(
+            articles: [article],
+            installedTiers: [.essential, .visionExpert],
+            modelProvider: { tier in
+                ClosureBackedLanguageModel(
+                    tier: tier,
+                    outputMode: .groundedJSON
+                ) { _, _ in generated }
+            }
+        )
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "fixture engine inspection",
+                preferredTier: .visionExpert,
+                hasImage: true,
+                imageData: Data("image".utf8)
+            ),
+            device: capableDevice()
+        )
+        XCTAssertTrue(answer.usedDeterministicOverride)
+        XCTAssertTrue(answer.visionWasUsed)
+        XCTAssertEqual(answer.text.components(separatedBy: "\n").first, "Fire or fuel hazard")
+        XCTAssertTrue(answer.notices.contains {
+            $0.contains("model observation triggered")
+        })
+    }
+
     func testIncidentModeDeniesNonessentialNetworkOperations() {
         let policy = IncidentNetworkPolicy(incidentModeEnabled: true)
         XCTAssertTrue(policy.permits(.emergencyContact))
@@ -237,6 +463,34 @@ final class ProductionControlTests: XCTestCase {
             version: "1.0.0",
             policyVersion: "1.0.0",
             articles: [article]
+        )
+    }
+
+    private func makeArticle() -> KnowledgeArticle {
+        KnowledgeArticle(
+            id: "vehicle.fixture",
+            domain: .vehicle,
+            title: "Fixture engine inspection",
+            summary: "Development-only inspection fixture.",
+            steps: ["Switch the fixture engine off."],
+            warnings: ["Do not restart the fixture engine."],
+            keywords: ["fixture", "engine", "inspection"],
+            source: SourceReference(
+                id: "source.fixture",
+                title: "Fixture source",
+                organization: "TrailGuard Tests",
+                revision: "1"
+            ),
+            reviewed: true
+        )
+    }
+
+    private func capableDevice() -> DeviceSnapshot {
+        DeviceSnapshot(
+            physicalMemoryBytes: 8_000_000_000,
+            freeStorageBytes: 20_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: false
         )
     }
 
