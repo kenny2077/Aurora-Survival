@@ -47,7 +47,7 @@ def main() -> None:
     classes = test_classes()
     print(f"Discovered {len(classes)} XCTestCase classes", flush=True)
     run(
-        ["swift", "test", "--list-tests"],
+        ["swift", "test", "list"],
         BUILD_TIMEOUT_SECONDS,
         "Compile and discover Swift tests",
     )

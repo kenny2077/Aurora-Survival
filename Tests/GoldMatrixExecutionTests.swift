@@ -157,13 +157,19 @@ final class GoldMatrixExecutionTests: XCTestCase {
     private func fixture<T: Decodable>(named name: String) throws -> T {
         #if SWIFT_PACKAGE
         let bundle = Bundle.module
+        let url = bundle.url(
+            forResource: name,
+            withExtension: "json",
+            subdirectory: "Fixtures"
+        ) ?? bundle.url(forResource: name, withExtension: "json")
         #else
         let bundle = Bundle(for: GoldMatrixExecutionTests.self)
+        let url = bundle.url(forResource: name, withExtension: "json")
         #endif
-        let url = try XCTUnwrap(
-            bundle.url(forResource: name, withExtension: "json")
+        return try JSONDecoder().decode(
+            T.self,
+            from: Data(contentsOf: try XCTUnwrap(url))
         )
-        return try JSONDecoder().decode(T.self, from: Data(contentsOf: url))
     }
 
     private func temporaryDirectory() -> URL {
