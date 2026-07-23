@@ -59,6 +59,7 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
     public let keywords: [String]
     public let source: SourceReference
     public let reviewed: Bool
+    public let vehicleApplicability: VehicleApplicability?
 
     public init(
         id: String,
@@ -69,7 +70,8 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
         warnings: [String],
         keywords: [String],
         source: SourceReference,
-        reviewed: Bool
+        reviewed: Bool,
+        vehicleApplicability: VehicleApplicability? = nil
     ) {
         self.id = id
         self.domain = domain
@@ -80,6 +82,7 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
         self.keywords = keywords
         self.source = source
         self.reviewed = reviewed
+        self.vehicleApplicability = vehicleApplicability
     }
 
     public var searchableText: String {
@@ -163,20 +166,26 @@ public struct ChatRequest: Equatable, Sendable {
     public let domain: KnowledgeDomain?
     public let preferredTier: ModelTier
     public let hasImage: Bool
+    public let imageData: Data?
     public let imageObservations: [String]
+    public let vehicleProfile: VehicleProfile?
 
     public init(
         question: String,
         domain: KnowledgeDomain? = nil,
         preferredTier: ModelTier = .field,
         hasImage: Bool = false,
-        imageObservations: [String] = []
+        imageData: Data? = nil,
+        imageObservations: [String] = [],
+        vehicleProfile: VehicleProfile? = nil
     ) {
         self.question = question
         self.domain = domain
         self.preferredTier = preferredTier
         self.hasImage = hasImage
+        self.imageData = imageData
         self.imageObservations = imageObservations
+        self.vehicleProfile = vehicleProfile
     }
 }
 

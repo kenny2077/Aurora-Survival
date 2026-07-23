@@ -10,6 +10,7 @@ final class AppModel: ObservableObject {
     @Published var imageObservations: [String] = []
     @Published var libraryQuery = ""
     @Published var readinessChecks: [ReadinessCheck] = ReadinessCheck.defaults
+    @Published var vehicleProfile: VehicleProfile?
 
     let articles: [KnowledgeArticle]
     private let assistant: IncidentAssistant
@@ -73,7 +74,9 @@ final class AppModel: ObservableObject {
             domain: domain,
             preferredTier: preferredTier,
             hasImage: attachedImageData != nil,
-            imageObservations: imageObservations
+            imageData: attachedImageData,
+            imageObservations: imageObservations,
+            vehicleProfile: vehicleProfile
         )
         let answer = await assistant.answer(
             request: request,
@@ -90,6 +93,18 @@ final class AppModel: ObservableObject {
     func toggleReadiness(_ id: String) {
         guard let index = readinessChecks.firstIndex(where: { $0.id == id }) else { return }
         readinessChecks[index].isComplete.toggle()
+    }
+
+    func saveVehicle(_ profile: VehicleProfile) {
+        guard profile.isPlausible else { return }
+        vehicleProfile = profile
+        if let index = readinessChecks.firstIndex(where: { $0.id == "vehicle" }) {
+            readinessChecks[index].isComplete = true
+        }
+    }
+
+    func removeVehicle() {
+        vehicleProfile = nil
     }
 }
 

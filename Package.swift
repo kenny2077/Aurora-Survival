@@ -18,7 +18,10 @@ let package = Package(
         .testTarget(
             name: "TrailGuardCoreTests",
             dependencies: ["TrailGuardCore"],
-            path: "Tests"
+            path: "Tests",
+            resources: [
+                .copy("Fixtures")
+            ]
         )
     ]
 )

@@ -95,6 +95,29 @@ public struct SafetyEngine: Sendable {
                     ],
                     rationale: "These symptoms can indicate a condition where treatment delay changes the outcome."
                 )
+            ),
+            Rule(
+                terms: [
+                    "perform surgery", "do surgery", "amputate", "stitch the wound",
+                    "prescribe medication", "what dose should i take",
+                    "disable airbag", "bypass airbag", "bypass immobilizer",
+                    "delete trouble codes", "clear trouble codes", "ecu write",
+                    "open hot radiator", "open radiator while hot"
+                ],
+                directive: SafetyDirective(
+                    severity: .urgent,
+                    title: "Unsupported high-risk procedure",
+                    immediateActions: [
+                        "Stop and choose a reversible stabilization or scene-safety step.",
+                        "Use Emergency SOS or seek a qualified clinician, mechanic, or rescuer as appropriate.",
+                        "Use only reviewed first-aid guidance or the exact vehicle owner manual."
+                    ],
+                    prohibitedActions: [
+                        "Do not perform invasive treatment, prescribe medication, write to an ECU, or bypass a safety system.",
+                        "Do not continue a procedure that requires professional training or vehicle-specific authorization."
+                    ],
+                    rationale: "TrailGuard is limited to layperson first aid, read-only observation, and reviewed reversible procedures."
+                )
             )
         ]
     }

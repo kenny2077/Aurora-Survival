@@ -55,6 +55,56 @@ final class TrailGuardCoreTests: XCTestCase {
         XCTAssertFalse(retrieval.search(query: "radiator").contains { $0.article.id == "unsafe" })
     }
 
+    func testVehicleSpecificArticleRequiresProfile() {
+        let specific = vehicleArticle(make: "Toyota", model: "4Runner", yearFrom: 2020, yearThrough: 2024)
+        let retrieval = RetrievalEngine(articles: [specific])
+
+        XCTAssertTrue(retrieval.search(query: "jack point").isEmpty)
+    }
+
+    func testWrongVehicleArticleIsExcluded() {
+        let specific = vehicleArticle(make: "Toyota", model: "4Runner", yearFrom: 2020, yearThrough: 2024)
+        let retrieval = RetrievalEngine(articles: [specific])
+        let wrongVehicle = VehicleProfile(
+            make: "Ford",
+            model: "Bronco",
+            modelYear: 2023,
+            market: "US",
+            powertrain: .gasoline,
+            documentID: "toyota-4runner-2023-us"
+        )
+
+        XCTAssertTrue(
+            retrieval.search(
+                query: "jack point",
+                domain: .vehicle,
+                vehicle: wrongVehicle
+            ).isEmpty
+        )
+    }
+
+    func testExactVehicleAndDocumentCanRetrieveArticle() {
+        let specific = vehicleArticle(make: "Toyota", model: "4Runner", yearFrom: 2020, yearThrough: 2024)
+        let retrieval = RetrievalEngine(articles: [specific])
+        let correctVehicle = VehicleProfile(
+            make: "toyota",
+            model: "4runner",
+            modelYear: 2023,
+            market: "us",
+            powertrain: .gasoline,
+            documentID: "TOYOTA-4RUNNER-2023-US"
+        )
+
+        XCTAssertEqual(
+            retrieval.search(
+                query: "jack point",
+                domain: .vehicle,
+                vehicle: correctVehicle
+            ).first?.article.id,
+            "vehicle-specific"
+        )
+    }
+
     func testVisionRoutesOnCapableDevice() {
         let decision = ModelRouter().route(
             requested: .visionExpert,
@@ -219,6 +269,39 @@ final class TrailGuardCoreTests: XCTestCase {
                 revision: "2026-07"
             ),
             reviewed: reviewed
+        )
+    }
+
+    private func vehicleArticle(
+        make: String,
+        model: String,
+        yearFrom: Int,
+        yearThrough: Int
+    ) -> KnowledgeArticle {
+        KnowledgeArticle(
+            id: "vehicle-specific",
+            domain: .vehicle,
+            title: "Exact jack point",
+            summary: "Vehicle-specific jacking procedure.",
+            steps: ["Use only the documented point."],
+            warnings: ["Do not use this procedure for another vehicle."],
+            keywords: ["jack", "point"],
+            source: SourceReference(
+                id: "toyota-4runner-2023-us",
+                title: "2023 4Runner owner manual",
+                organization: "Vehicle manufacturer",
+                revision: "2023"
+            ),
+            reviewed: true,
+            vehicleApplicability: VehicleApplicability(
+                makes: [make],
+                models: [model],
+                yearFrom: yearFrom,
+                yearThrough: yearThrough,
+                markets: ["US"],
+                powertrains: [.gasoline],
+                documentIDs: ["toyota-4runner-2023-us"]
+            )
         )
     }
 }

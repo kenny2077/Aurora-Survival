@@ -46,7 +46,11 @@ public actor IncidentAssistant {
             )
         }
 
-        let evidence = retrieval.search(query: request.question, domain: request.domain)
+        let evidence = retrieval.search(
+            query: request.question,
+            domain: request.domain,
+            vehicle: request.vehicleProfile
+        )
         let decision = router.route(
             requested: request.preferredTier,
             installed: installedTiers,
@@ -56,6 +60,7 @@ public actor IncidentAssistant {
         let prompt = ModelPrompt(
             question: request.question,
             evidence: evidence,
+            imageData: decision.canAnalyzeImage ? request.imageData : nil,
             imageObservations: request.imageObservations,
             tier: decision.selected,
             permitsVisionReasoning: request.hasImage && decision.canAnalyzeImage
@@ -104,7 +109,16 @@ public actor IncidentAssistant {
         }
     }
 
-    public func search(_ query: String, domain: KnowledgeDomain? = nil) -> [KnowledgeArticle] {
-        retrieval.search(query: query, domain: domain, limit: 20).map(\.article)
+    public func search(
+        _ query: String,
+        domain: KnowledgeDomain? = nil,
+        vehicle: VehicleProfile? = nil
+    ) -> [KnowledgeArticle] {
+        retrieval.search(
+            query: query,
+            domain: domain,
+            vehicle: vehicle,
+            limit: 20
+        ).map(\.article)
     }
 }

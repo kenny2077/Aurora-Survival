@@ -36,6 +36,34 @@ struct ReadinessView: View {
                 }
             }
 
+            Section("Vehicle identity") {
+                NavigationLink {
+                    VehicleProfileView()
+                } label: {
+                    if let vehicle = model.vehicleProfile {
+                        LabeledContent("Active vehicle", value: vehicle.displayName)
+                    } else {
+                        Label("Add exact vehicle profile", systemImage: "car.fill")
+                    }
+                }
+                Text("Vehicle-specific procedures remain hidden until make, model, year, market, and powertrain match.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section("Trip systems") {
+                NavigationLink {
+                    MapPackView()
+                } label: {
+                    Label("Offline map packs", systemImage: "map.fill")
+                }
+                NavigationLink {
+                    OBDStatusView()
+                } label: {
+                    Label("Read-only OBD", systemImage: "cable.connector")
+                }
+            }
+
             Section("Zero-power reality") {
                 Text("No app works after the battery is drained. Carry a power bank and a paper trip plan with emergency contacts, route, return time, and essential first-aid steps.")
             }
