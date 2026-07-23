@@ -24,6 +24,7 @@ public enum PackageDownloadError: Error, Equatable {
     case incidentModeDenied
     case invalidRangeResponse
     case invalidChunkSize(expected: Int, actual: Int)
+    case assemblyDidNotAdvance(expectedOffset: Int64, actualOffset: Int64)
 }
 
 public struct URLSessionPackageTransport: ResumablePackageTransport {
@@ -172,6 +173,13 @@ public actor PackageDownloadCoordinator {
                         chunk,
                         atOffset: state.receivedByteCount
                     )
+                    let updated = try await assembler.state()
+                    guard updated.receivedByteCount == end else {
+                        throw PackageDownloadError.assemblyDidNotAdvance(
+                            expectedOffset: end,
+                            actualOffset: updated.receivedByteCount
+                        )
+                    }
                 }
                 try await assembler.finalize(to: destination)
             }
