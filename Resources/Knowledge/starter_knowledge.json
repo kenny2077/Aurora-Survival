@@ -1,0 +1,215 @@
+[
+  {
+    "id": "vehicle-roadside-scene-001",
+    "domain": "vehicle",
+    "title": "Make a roadside breakdown scene safer",
+    "summary": "Protect people before diagnosing the vehicle. Stop as far from moving traffic as conditions safely allow and make the vehicle visible.",
+    "steps": [
+      "Slow gradually, signal, and move completely off the travel lane if the vehicle can still be controlled.",
+      "Stop on firm, level ground. Apply the parking brake, select Park or a low gear, and turn on hazard lights.",
+      "Assess traffic, fire, fuel, weather, slope, and visibility before anyone exits.",
+      "If exiting is safer, use the side away from traffic and move behind a substantial barrier when available.",
+      "Place warning equipment only when doing so does not expose you to traffic.",
+      "Share your location, vehicle description, party condition, and direction of travel with help."
+    ],
+    "warnings": [
+      "Never work in a live traffic lane.",
+      "If there is fire, smoke, a fuel smell, or a damaged high-voltage battery, move well away and contact emergency services."
+    ],
+    "keywords": ["breakdown", "roadside", "hazards", "traffic", "stranded", "visibility"],
+    "source": {
+      "id": "nhtsa-roadside-2026",
+      "title": "Vehicle emergency and roadside safety guidance",
+      "organization": "National Highway Traffic Safety Administration",
+      "revision": "Starter pack 2026-07",
+      "url": "https://www.nhtsa.gov/"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "vehicle-overheat-001",
+    "domain": "vehicle",
+    "title": "Respond to an overheating engine",
+    "summary": "An overheating warning can precede engine damage or a scalding-fluid release. Reduce load, stop safely, switch the engine off, and allow it to cool.",
+    "steps": [
+      "Turn off air conditioning and reduce engine load while moving to a safe stopping place.",
+      "Stop, apply the parking brake, switch off the engine, and turn on hazard lights.",
+      "If there is steam, fire, or a fuel smell, keep away and use the fire-hazard procedure.",
+      "Wait until the engine is fully cool before any owner-manual inspection.",
+      "Check the vehicle owner's manual for the exact coolant reservoir and approved fluid.",
+      "Do not continue driving if the warning returns, coolant is leaking, or the cause is unknown."
+    ],
+    "warnings": [
+      "Never open a hot radiator or pressurized cooling-system cap.",
+      "Do not pour cold water onto a hot engine."
+    ],
+    "keywords": ["overheat", "overheating", "temperature", "coolant", "steam", "radiator", "hot engine"],
+    "source": {
+      "id": "owner-manual-generic-2026",
+      "title": "Vehicle owner manual — cooling-system procedure required",
+      "organization": "Vehicle manufacturer documentation",
+      "revision": "Starter pack 2026-07"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "vehicle-no-start-001",
+    "domain": "vehicle",
+    "title": "Triage a vehicle that will not start",
+    "summary": "Observe what happens when you attempt to start, but stop repeated attempts if there is smoke, a fuel smell, unusual heat, or mechanical impact noise.",
+    "steps": [
+      "Confirm the transmission is in Park or Neutral, or the clutch is fully pressed, and apply the parking brake.",
+      "Note whether the dash is dark, lights are dim, there is a click, the engine cranks, or the engine starts then stops.",
+      "Turn off lights and accessories, wait one minute, and make one controlled start attempt.",
+      "Check the owner's manual for immobilizer, key-battery, jump-start, hybrid, or EV-specific instructions.",
+      "Only jump-start if the exact vehicle manual permits it and you have compatible equipment and a competent helper.",
+      "If the engine cranks but does not start, avoid draining the battery with repeated attempts."
+    ],
+    "warnings": [
+      "Do not jump-start a frozen, leaking, swollen, damaged, or unidentified battery.",
+      "Never touch orange high-voltage cables or EV/hybrid traction components."
+    ],
+    "keywords": ["won't start", "wont start", "no start", "dead battery", "click", "crank", "starter", "jump start"],
+    "source": {
+      "id": "owner-manual-starting-2026",
+      "title": "Vehicle owner manual — starting and jump-start procedure required",
+      "organization": "Vehicle manufacturer documentation",
+      "revision": "Starter pack 2026-07"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "vehicle-flat-tire-001",
+    "domain": "vehicle",
+    "title": "Decide whether a roadside tire change is safe",
+    "summary": "A tire change is only appropriate on firm, level ground well outside traffic, using the vehicle's specified lift points and equipment.",
+    "steps": [
+      "Move completely away from traffic to firm, level ground; use hazard lights and apply the parking brake.",
+      "Keep occupants away from traffic and assess wind, slope, soft ground, darkness, and passing-vehicle clearance.",
+      "Read the vehicle-specific jacking and spare-tire procedure before lifting.",
+      "If any safety condition is not met, do not lift the vehicle; request roadside help or move to a safer plan.",
+      "Never place any part of your body under a vehicle supported only by a jack.",
+      "After fitting a temporary spare, follow its speed, distance, and pressure limits."
+    ],
+    "warnings": [
+      "Do not change a tire beside fast traffic, on a slope, or on unstable ground.",
+      "EV and hybrid lift points can be close to high-voltage battery structures; use only the marked points."
+    ],
+    "keywords": ["flat", "tire", "tyre", "puncture", "spare", "jack", "wheel"],
+    "source": {
+      "id": "owner-manual-jacking-2026",
+      "title": "Vehicle owner manual — jacking and spare-tire procedure required",
+      "organization": "Vehicle manufacturer documentation",
+      "revision": "Starter pack 2026-07"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "wilderness-water-001",
+    "domain": "wilderness",
+    "title": "Make backcountry water safer",
+    "summary": "Clear-looking natural water can contain disease-causing organisms. Prefer a known safe supply; otherwise collect from the best available source and treat it.",
+    "steps": [
+      "Prefer moving water upstream from camps, livestock, mining, roads, and obvious contamination.",
+      "Let cloudy water settle and prefilter it through clean cloth before the main treatment.",
+      "Use a treatment method and contact time stated by its manufacturer.",
+      "When boiling is the available method, bring water to a rolling boil; at high elevation, follow current public-health guidance for a longer boil.",
+      "Store treated water in a clean, covered container and avoid recontaminating the cap or opening.",
+      "Ration physical effort and shade, not drinking water, when dehydration is a risk."
+    ],
+    "warnings": [
+      "Boiling and common filters do not reliably remove fuels, heavy metals, salts, or toxic chemicals.",
+      "Do not drink seawater, urine, radiator fluid, or alcohol for hydration."
+    ],
+    "keywords": ["water", "drink", "filter", "boil", "purify", "dehydration", "stream"],
+    "source": {
+      "id": "cdc-water-2026",
+      "title": "Water treatment while hiking, camping, and traveling",
+      "organization": "Centers for Disease Control and Prevention",
+      "revision": "Starter pack 2026-07",
+      "url": "https://www.cdc.gov/healthy-water-emergency/about/index.html"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "wilderness-lost-001",
+    "domain": "navigation",
+    "title": "Stop and stabilize when lost",
+    "summary": "Continuing without a reliable bearing often expands the search area. Stop, reduce immediate risks, make yourself findable, and move only for a clear safety reason.",
+    "steps": [
+      "Stop. Breathe slowly, check injuries, and account for everyone.",
+      "Use Emergency SOS or a satellite communicator early if there is danger or an overdue plan.",
+      "Record your current location, time, battery, weather, and last known point.",
+      "If your present location is safe, stay together and avoid unplanned movement.",
+      "Make yourself visible with bright material, light, sound, and a clear ground signal when safe.",
+      "Prioritize shelter from the most immediate environmental threat, then water and a signaling plan."
+    ],
+    "warnings": [
+      "Do not descend an unknown drainage, cross dangerous water, or take a 'shortcut' without a verified route.",
+      "Preserve phone power: lower brightness, use Low Power Mode, and transmit location deliberately."
+    ],
+    "keywords": ["lost", "navigation", "missing", "find route", "where am i", "signal", "search"],
+    "source": {
+      "id": "nps-tripplan-2026",
+      "title": "Trip planning and backcountry safety guidance",
+      "organization": "U.S. National Park Service",
+      "revision": "Starter pack 2026-07",
+      "url": "https://www.nps.gov/subjects/trails/planning-a-hike.htm"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "wilderness-cold-001",
+    "domain": "wilderness",
+    "title": "Reduce cold exposure and hypothermia risk",
+    "summary": "Wind, wet clothing, exhaustion, and cold ground can cause dangerous heat loss even above freezing.",
+    "steps": [
+      "Move out of wind and precipitation; insulate the person from the ground.",
+      "Replace wet clothing with dry layers if this can be done without further exposure.",
+      "Warm the trunk gradually with dry insulation and shared body warmth.",
+      "If the person is alert and can swallow normally, offer warm non-alcoholic drinks.",
+      "Handle a severely cold, confused, or drowsy person gently and arrange evacuation.",
+      "Use Emergency SOS for altered mental state, slurred speech, loss of coordination, or reduced responsiveness."
+    ],
+    "warnings": [
+      "Do not use alcohol, aggressive rubbing, or intense direct heat on a severely cold person.",
+      "Do not give drinks to someone who is drowsy, vomiting, or cannot swallow safely."
+    ],
+    "keywords": ["cold", "hypothermia", "shivering", "wet", "freezing", "warm"],
+    "source": {
+      "id": "redcross-hypothermia-2026",
+      "title": "Hypothermia first-aid guidance",
+      "organization": "American Red Cross",
+      "revision": "Starter pack 2026-07",
+      "url": "https://www.redcross.org/take-a-class/first-aid/performing-first-aid/hypothermia"
+    },
+    "reviewed": true
+  },
+  {
+    "id": "firstaid-bleeding-001",
+    "domain": "first_aid",
+    "title": "Control external bleeding",
+    "summary": "Use firm, continuous direct pressure and arrange professional help for bleeding that is heavy or does not stop.",
+    "steps": [
+      "Check scene safety and use gloves or a barrier when available.",
+      "Expose the wound enough to locate the bleeding without removing embedded objects.",
+      "Apply firm, continuous direct pressure with gauze or clean cloth.",
+      "If blood soaks through, add more material while maintaining pressure.",
+      "Use Emergency SOS for severe bleeding, shock signs, an embedded object, or a wound to the neck, chest, abdomen, pelvis, or groin.",
+      "Keep the person warm, still, and observed until help takes over."
+    ],
+    "warnings": [
+      "Do not remove embedded objects.",
+      "Tourniquets require appropriate equipment and current training; follow emergency-dispatcher or certified-course instructions."
+    ],
+    "keywords": ["bleeding", "blood", "wound", "cut", "pressure", "first aid"],
+    "source": {
+      "id": "redcross-bleeding-2026",
+      "title": "Bleeding first-aid guidance",
+      "organization": "American Red Cross",
+      "revision": "Starter pack 2026-07",
+      "url": "https://www.redcross.org/take-a-class/first-aid/performing-first-aid/bleeding"
+    },
+    "reviewed": true
+  }
+]
