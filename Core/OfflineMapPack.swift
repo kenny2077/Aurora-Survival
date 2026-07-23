@@ -116,7 +116,7 @@ public struct MapReadinessResult: Equatable, Sendable {
 public struct MapReadinessEvaluator: Sendable {
     private let now: @Sendable () -> Date
 
-    public init(now: @escaping @Sendable () -> Date = Date.init) {
+    public init(now: @escaping @Sendable () -> Date = { Date() }) {
         self.now = now
     }
 

@@ -84,7 +84,7 @@ public actor PackageInstaller {
         rootDirectory: URL,
         verifier: PackageVerifier,
         fileManager: FileManager = .default,
-        now: @escaping @Sendable () -> Date = Date.init
+        now: @escaping @Sendable () -> Date = { Date() }
     ) {
         self.rootDirectory = rootDirectory
         self.verifier = verifier
