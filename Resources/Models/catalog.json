@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-23",
+  "distribution_policy": "Model weights are not bundled. Production packages require license review, SHA-256 verification, a signed manifest, and device-specific acceptance tests.",
+  "tiers": [
+    {
+      "id": "essential-extractive-v1",
+      "tier": "essential",
+      "display_name": "Essential",
+      "modality": "text",
+      "runtime": "native-swift",
+      "bundled": true,
+      "candidate_model": null,
+      "purpose": "Deterministic safety, offline retrieval, citations, and extractive answers."
+    },
+    {
+      "id": "field-qwen-text-candidate",
+      "tier": "field",
+      "display_name": "Field",
+      "modality": "text",
+      "runtime": "llama.cpp-metal",
+      "bundled": false,
+      "candidate_model": "Qwen/Qwen3-1.7B",
+      "purpose": "Higher-quality text synthesis over exactly the same reviewed evidence."
+    },
+    {
+      "id": "vision-qwen3vl-2b-candidate",
+      "tier": "vision_expert",
+      "display_name": "Vision Expert",
+      "modality": "text+image",
+      "runtime": "llama.cpp-metal-mtmd",
+      "bundled": false,
+      "candidate_model": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+      "quantization_experiment": "Q4_K_M language model plus Q8_0 vision projector",
+      "purpose": "Photo observations grounded against reviewed vehicle and field procedures.",
+      "gates": {
+        "minimum_physical_memory_bytes": 7500000000,
+        "minimum_free_storage_bytes": 3500000000,
+        "allowed_thermal_states": ["nominal", "fair"],
+        "disable_in_low_power_mode": true
+      }
+    }
+  ]
+}
