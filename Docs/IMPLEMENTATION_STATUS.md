@@ -44,6 +44,20 @@ Updated: 2026-07-23
 - [x] Virtual cross-subsystem release and accessibility contract
 - [x] Twelve source-controlled architecture decision records
 - [x] Attached-plan source audit preventing unlicensed corpus reuse
+- [x] Typed grounded JSON connected to the live llama/assistant path
+- [x] Exact evidence, procedure, step, and warning resolution before rendering
+- [x] Recoverable emergency core connected to application startup
+- [x] Strict HTTP range resume connected to signed package installation
+- [x] Incident-mode denial connected before package network access
+- [x] StoreKit purchase/restore bridge and persistent verified entitlement ledger
+- [x] Refund and revocation removal from offline entitlement snapshots
+- [x] File-backed offline map runtime boundary
+- [x] Persistent vehicle-bound OBD observation records
+- [x] Exact vehicle-document ingestion validation
+- [x] All 120 gold incidents executed through `IncidentAssistant`
+- [x] All 30 map/asset cases executed through map readiness
+- [x] Printable/shareable zero-power trip sheet
+- [x] In-app system status and external-gate disclosure
 
 ## Remaining external production milestones
 
@@ -52,13 +66,15 @@ Updated: 2026-07-23
    on the supported iPhone matrix.
 2. **Signed production delivery:** provision production trust keys and
    authenticated hosting, then publish licensed real artifacts. Local signing,
-   verification, resume, activation, rollback, and recall controls are complete.
+   verification, strict range resume, activation, rollback, and recall controls
+   are complete.
 3. **Real local runtime:** integrate a pinned llama.cpp XCFramework; first Field,
    then Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
 4. **Expert-reviewed content:** replace fixtures with separately signed Vehicle,
    Wilderness, First Aid, and Navigation packs.
-5. **Vehicle ingestion:** VIN/manual import and signed vehicle-specific manifests.
-   Exact runtime identity and wrong-vehicle exclusion are implemented.
+5. **Vehicle ingestion assets:** obtain licensed manuals and build signed
+   vehicle-specific manifests. Exact identity, document revision, applicability,
+   ingestion validation, and wrong-vehicle exclusion are implemented.
 6. **Map renderer:** MapLibre, one Scout regional pack, offline location display,
    route breadcrumb, pack age, and readiness test.
 7. **Read-only OBD hardware:** BLE adapter discovery, reconnect, code/freeze-frame
@@ -69,7 +85,7 @@ Updated: 2026-07-23
 
 ## Explicitly not implemented
 
-- Model weights, signed production catalog/keys, or commercial App Store products
+- Model weights, signed production catalog/keys, or configured App Store products
 - Generative vision inference
 - Offline map rendering
 - OBD BLE hardware access

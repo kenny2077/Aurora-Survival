@@ -2,6 +2,13 @@ import SwiftUI
 
 struct ModelSettingsView: View {
     @EnvironmentObject private var model: AppModel
+    @StateObject private var store = StoreKitEntitlementBridge()
+    @State private var purchaseStatus: String?
+
+    private let optionalProductIDs: Set<String> = [
+        "com.example.TrailGuard.model.field",
+        "com.example.TrailGuard.model.vision",
+    ]
 
     var body: some View {
         List {
@@ -32,6 +39,54 @@ struct ModelSettingsView: View {
                 )
             }
 
+            Section("Optional App Store downloads") {
+                if store.products.isEmpty {
+                    Text("No optional products are configured for this build. Essential remains fully available offline.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(store.products, id: \.id) { product in
+                        Button {
+                            Task {
+                                do {
+                                    let completed = try await store.purchase(
+                                        product,
+                                        ledger: model.entitlementLedger
+                                    )
+                                    purchaseStatus = completed
+                                        ? "\(product.displayName) entitlement verified."
+                                        : "Purchase was cancelled or remains pending."
+                                } catch {
+                                    purchaseStatus = "Purchase verification failed."
+                                }
+                            }
+                        } label: {
+                            LabeledContent(
+                                product.displayName,
+                                value: product.displayPrice
+                            )
+                        }
+                    }
+                }
+                Button("Restore purchases") {
+                    Task {
+                        do {
+                            try await store.restore(
+                                ledger: model.entitlementLedger
+                            )
+                            purchaseStatus = "Verified purchases restored."
+                        } catch {
+                            purchaseStatus = "Restore or verification failed."
+                        }
+                    }
+                }
+                if let purchaseStatus {
+                    Text(purchaseStatus)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
             Section("Important") {
                 Label(
                     "A larger model is not a safer source. Every tier uses the same signed knowledge and deterministic safety gates.",
@@ -40,6 +95,9 @@ struct ModelSettingsView: View {
             }
         }
         .navigationTitle("Model Tiers")
+        .task {
+            await store.loadProducts(productIDs: optionalProductIDs)
+        }
     }
 }
 

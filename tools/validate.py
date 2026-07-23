@@ -16,6 +16,7 @@ OBD_REJECTIONS = ROOT / "Tests" / "Fixtures" / "obd_rejected_commands.json"
 GOLD_INCIDENTS = ROOT / "Tests" / "Fixtures" / "gold_incidents.json"
 MAP_ASSET_CASES = ROOT / "Tests" / "Fixtures" / "map_asset_cases.json"
 DEVELOPMENT_PACK = ROOT / "Tests" / "Fixtures" / "development_knowledge_pack.json"
+EMERGENCY_CORE = ROOT / "Resources" / "Knowledge" / "emergency_core.json"
 
 
 def fail(message: str) -> None:
@@ -56,6 +57,20 @@ def validate_knowledge() -> tuple[int, int]:
         source_ids.add(source["id"])
 
     return len(articles), len(source_ids)
+
+
+def validate_emergency_core(expected_articles: int) -> str:
+    core = json.loads(EMERGENCY_CORE.read_text(encoding="utf-8"))
+    if core.get("schemaVersion") != 1:
+        fail("emergency core schema version is invalid")
+    if core.get("policyVersion") != "deterministic-policy-v1":
+        fail("emergency core policy version is not pinned")
+    articles = core.get("articles", [])
+    if len(articles) != expected_articles:
+        fail("emergency core does not match the starter fixture")
+    if any(article.get("reviewed") is not True for article in articles):
+        fail("emergency core contains an unreviewed article")
+    return core.get("version", "")
 
 
 def validate_model_catalog() -> int:
@@ -116,10 +131,16 @@ def validate_contracts() -> None:
 
     production_controls = [
         "GroundedResponse.swift",
+        "GroundedResponseCodec.swift",
         "IncidentNetworkPolicy.swift",
         "EmergencyCoreStore.swift",
         "ReleaseValidation.swift",
         "ResumableArtifactAssembler.swift",
+        "EntitlementLedger.swift",
+        "OfflineMapRuntime.swift",
+        "OBDObservationStore.swift",
+        "VehicleDocumentIngestor.swift",
+        "TripPlan.swift",
     ]
     for name in production_controls:
         if not (ROOT / "Core" / name).is_file():
@@ -127,6 +148,19 @@ def validate_contracts() -> None:
 
     if "sources: [directive.source]" not in assistant:
         fail("deterministic safety cards must expose policy attribution")
+    if "decodeAndValidate" not in assistant:
+        fail("typed grounded responses are not connected to IncidentAssistant")
+
+    app_model = (ROOT / "App" / "AppModel.swift").read_text(encoding="utf-8")
+    if "EmergencyCoreStore" not in app_model:
+        fail("recoverable emergency core is not connected to app startup")
+
+    downloader = (
+        ROOT / "Core" / "PackageDownloadCoordinator.swift"
+    ).read_text(encoding="utf-8")
+    for contract in ("incidentModeDenied", "ResumableArtifactAssembler", "byteRange"):
+        if contract not in downloader:
+            fail(f"package delivery integration is missing: {contract}")
 
     incident_policy = (
         ROOT / "Core" / "IncidentNetworkPolicy.swift"
@@ -138,6 +172,13 @@ def validate_contracts() -> None:
     workflow = ROOT / ".github" / "workflows" / "ci.yml"
     if not workflow.is_file():
         fail("GitHub Actions CI workflow is missing")
+    for app_source in (
+        "StoreKitEntitlementBridge.swift",
+        "SystemStatusView.swift",
+        "TripSheetView.swift",
+    ):
+        if not (ROOT / "App" / app_source).is_file():
+            fail(f"app integration missing: App/{app_source}")
 
 
 def validate_locked_evaluations() -> tuple[int, int, int]:
@@ -169,8 +210,8 @@ def validate_locked_evaluations() -> tuple[int, int, int]:
             1 for line in source.read_text(encoding="utf-8").splitlines()
             if line.strip().startswith("func test")
         )
-    if test_count < 35:
-        fail(f"expected at least 35 Swift tests, found {test_count}")
+    if test_count < 70:
+        fail(f"expected at least 70 Swift tests, found {test_count}")
     return len(safety_cases), len(rejected), test_count
 
 
@@ -223,6 +264,8 @@ def validate_evaluation_matrix() -> tuple[int, int]:
         fail("map/asset case ids must be unique")
     if any(case.get("allows_network") is not False for case in incidents):
         fail("gold incident cases must default to offline")
+    if any(not case.get("input") for case in incidents):
+        fail("gold incident cases must include executable input")
     return len(incidents), len(assets)
 
 
@@ -241,6 +284,7 @@ def validate_repository_governance() -> int:
 
 def main() -> None:
     article_count, source_count = validate_knowledge()
+    emergency_core_version = validate_emergency_core(article_count)
     model_count = validate_model_catalog()
     swift_count = validate_swift_sources()
     validate_contracts()
@@ -251,6 +295,7 @@ def main() -> None:
     print(
         "PASS: "
         f"{article_count} articles, {source_count} sources, "
+        f"emergency core {emergency_core_version}, "
         f"{model_count} model tiers, {schema_count} schemas, "
         f"{development_records} development records, {swift_count} Swift sources, "
         f"{test_count} tests, {safety_count} safety cases, "

@@ -54,17 +54,34 @@ public struct GroundedQuestion: Codable, Equatable, Sendable {
     public let id: String
     public let text: String
     public let why: String
+
+    public init(id: String, text: String, why: String) {
+        self.id = id
+        self.text = text
+        self.why = why
+    }
 }
 
 public struct GroundedObservation: Codable, Equatable, Sendable {
     public let fact: String
     public let source: ObservationSource
     public let confidence: Double
+
+    public init(fact: String, source: ObservationSource, confidence: Double) {
+        self.fact = fact
+        self.source = source
+        self.confidence = confidence
+    }
 }
 
 public struct GroundedStep: Codable, Equatable, Sendable {
     public let stepID: String
     public let evidenceIDs: [String]
+
+    public init(stepID: String, evidenceIDs: [String]) {
+        self.stepID = stepID
+        self.evidenceIDs = evidenceIDs
+    }
 
     private enum CodingKeys: String, CodingKey {
         case stepID = "step_id"
@@ -75,6 +92,11 @@ public struct GroundedStep: Codable, Equatable, Sendable {
 public struct GroundedEscalation: Codable, Equatable, Sendable {
     public let reason: String
     public let action: String
+
+    public init(reason: String, action: String) {
+        self.reason = reason
+        self.action = action
+    }
 }
 
 public struct GroundedResponse: Codable, Equatable, Sendable {
@@ -138,6 +160,8 @@ public enum GroundedResponseError: Error, Equatable {
     case stepsRequireProcedure
     case supportedAnswerRequiresEvidence
     case highRiskCannotContinue
+    case unknownStepID(String)
+    case unsupportedWarning(String)
 }
 
 public struct GroundedResponseValidator: Sendable {
@@ -146,7 +170,9 @@ public struct GroundedResponseValidator: Sendable {
     public func validate(
         _ response: GroundedResponse,
         availableEvidenceIDs: Set<String>,
-        approvedProcedureIDs: Set<String>
+        approvedProcedureIDs: Set<String>,
+        approvedStepIDs: Set<String>? = nil,
+        approvedWarnings: Set<String>? = nil
     ) throws {
         guard response.observations.allSatisfy({ (0...1).contains($0.confidence) }) else {
             throw GroundedResponseError.invalidObservationConfidence
@@ -165,6 +191,19 @@ public struct GroundedResponseValidator: Sendable {
             guard approvedProcedureIDs.contains(procedureID) else {
                 throw GroundedResponseError.unapprovedProcedure(procedureID)
             }
+            if let approvedStepIDs,
+               let unknown = response.steps
+                .map(\.stepID)
+                .first(where: { !approvedStepIDs.contains($0) }) {
+                throw GroundedResponseError.unknownStepID(unknown)
+            }
+        }
+
+        if let approvedWarnings,
+           let unsupported = response.doNotDo.first(
+               where: { !approvedWarnings.contains($0) }
+           ) {
+            throw GroundedResponseError.unsupportedWarning(unsupported)
         }
 
         if response.answerConfidence == .supported && cited.isEmpty {

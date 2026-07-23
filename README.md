@@ -24,13 +24,22 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
   vector artifacts, canonical manifests, and Ed25519 envelopes.
 - Typed grounded responses that reject unknown evidence, invented procedures,
   uncited supported answers, and unsafe high-risk continuation.
+- Live llama/Qwen responses resolve exact installed step IDs and verbatim
+  warnings before any procedural text is rendered.
 - Incident-mode network containment, cached offline entitlements, and bundled
   emergency-core recovery after first launch or corruption.
+- Strict HTTP byte-range package resume connected to verified installation.
+- A StoreKit verification bridge with persistent purchase, restore, refund,
+  revocation, and offline-launch state.
 - Exact vehicle identity and wrong-vehicle retrieval exclusion.
+- Exact vehicle-document revision and applicability ingestion validation.
 - Offline map-pack coverage, detail, freshness, and routing readiness checks.
+- A dependency-free local map runtime boundary ready for licensed MapLibre data.
 - A whitelist-only OBD protocol that cannot clear codes or write to an ECU.
+- Vehicle-bound local OBD observation records with raw responses and sources.
 - A llama.cpp backend contract for both text-only and Qwen vision packages.
-- Fifty-seven Swift tests, 120 synthetic gold incidents, 30 map/asset cases,
+- Seventy-six Swift tests, 120 executed synthetic gold incidents, 30 executed
+  map/asset cases,
   seven versioned schemas, locked safety fixtures, and GitHub Actions for core,
   reproducible packs, and iOS builds.
 
@@ -106,8 +115,13 @@ Key source files:
 - `Core/GroundedPromptBuilder.swift` — evidence-only runtime contract.
 - `Core/PackageVerifier.swift` — signed package and artifact verification.
 - `Core/GroundedResponse.swift` — typed evidence/procedure output validation.
+- `Core/GroundedResponseCodec.swift` — exact step/warning resolution and rendering.
 - `Core/EmergencyCoreStore.swift` — first-launch and corruption recovery.
 - `Core/IncidentNetworkPolicy.swift` — offline incident containment.
+- `Core/EntitlementLedger.swift` — verified offline purchase state.
+- `Core/OfflineMapRuntime.swift` — local map-pack open boundary.
+- `Core/OBDObservationStore.swift` — vehicle-bound diagnostic history.
+- `Core/VehicleDocumentIngestor.swift` — exact manual/applicability validation.
 - `Core/ReleaseValidation.swift` — model and virtual release acceptance gates.
 - `Core/VehicleIdentity.swift` — exact vehicle applicability.
 - `Core/OfflineMapPack.swift` — map readiness contract.

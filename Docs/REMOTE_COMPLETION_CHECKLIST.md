@@ -30,6 +30,15 @@ an executable local or CI contract; it does not claim external certification.
 | Virtual release failure matrix | Complete | model/map/OBD/commerce/accessibility tests |
 | Attached document source audit | Complete | architecture-only classification |
 | CI structural/core/iOS jobs | Complete | `.github/workflows/ci.yml` |
+| Typed response used by llama runtime | Complete | output-mode contract and live codec |
+| Emergency recovery used at startup | Complete | `AppModel` bootstrap |
+| Resume used by package delivery | Complete | strict byte-range coordinator |
+| Store verification persistence | Complete | StoreKit bridge and entitlement ledger |
+| Vehicle document ingestion | Complete | exact identity/revision/applicability gate |
+| OBD observation persistence | Complete | vehicle-bound local record store |
+| Offline map open boundary | Complete | file-backed runtime |
+| Gold matrices executed | Complete | 120 incident and 30 asset execution tests |
+| Zero-power preparation export | Complete | printable/shareable trip sheet |
 
 ## External acceptance gates still open
 

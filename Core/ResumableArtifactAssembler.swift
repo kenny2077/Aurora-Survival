@@ -41,6 +41,9 @@ public actor ResumableArtifactAssembler {
         } else {
             received = 0
         }
+        guard received <= expectedByteCount else {
+            throw ArtifactAssemblyError.exceedsExpectedSize
+        }
         return ArtifactAssemblyState(
             expectedByteCount: expectedByteCount,
             receivedByteCount: received,
