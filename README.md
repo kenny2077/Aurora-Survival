@@ -1,8 +1,8 @@
 # Aurora iOS MVP
 
 Aurora is a fully offline incident-assistant prototype for vehicle breakdowns,
-wilderness problems, navigation, and layperson first aid. This repository is the
-first working vertical slice of the product architecture.
+wilderness problems, navigation, and layperson first aid. This repository now
+contains the working vertical slice plus the first production foundations.
 
 It is intentionally **not** an autonomous mechanic, doctor, or surgeon. The app
 puts fixed hazard rules and reviewed evidence ahead of model output.
@@ -18,12 +18,20 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
 - Photo attachment and fully offline Apple Vision OCR on every tier.
 - A Qwen3-VL-2B/llama.cpp integration seam for capable high-tier devices.
 - A pre-trip readiness checklist and an explicit zero-power contingency.
-- Fifteen Swift unit tests plus dependency-free structural validation.
+- A signed package pipeline with Ed25519 signatures, per-file SHA-256 checks,
+  path-traversal protection, atomic activation, and rollback.
+- Exact vehicle identity and wrong-vehicle retrieval exclusion.
+- Offline map-pack coverage, detail, freshness, and routing readiness checks.
+- A whitelist-only OBD protocol that cannot clear codes or write to an ECU.
+- A llama.cpp backend contract for both text-only and Qwen vision packages.
+- Thirty-nine Swift tests, locked safety fixtures, dependency-free validation,
+  and GitHub Actions for core and iOS builds.
 
 The app is functional without model weights: Essential mode retrieves and
-formats reviewed offline material. Field and Vision Expert intentionally remain
-uninstallable in this repository until signed model hosting, license review, and
-real-device acceptance benchmarks are complete.
+formats reviewed offline material. Field and Vision Expert remain unavailable
+until model artifacts are licensed, signed, hosted, and accepted on physical
+iPhones. The package installer and runtime boundary are implemented; model
+weights and the compiled llama.cpp bridge are not stored here.
 
 ## Product-tier contract
 
@@ -62,8 +70,9 @@ python3 tools/validate.py
 ```
 
 This Linux build environment does not contain Xcode or Swift, so the checked-in
-validation script is the executable verification path here. Compile and
-real-device tests remain required before distribution.
+validation script is the executable verification path here. GitHub Actions runs
+the Swift package tests and an unsigned iOS simulator build. Physical-device
+memory, heat, battery, camera, Bluetooth, and map tests remain required.
 
 ## Architecture at a glance
 
@@ -86,6 +95,11 @@ Key source files:
 - `Core/ModelRouter.swift` — dynamic model-tier eligibility.
 - `Core/IncidentAssistant.swift` — end-to-end orchestration.
 - `Core/GroundedPromptBuilder.swift` — evidence-only runtime contract.
+- `Core/PackageVerifier.swift` — signed package and artifact verification.
+- `Core/VehicleIdentity.swift` — exact vehicle applicability.
+- `Core/OfflineMapPack.swift` — map readiness contract.
+- `Core/OBDProtocol.swift` — read-only diagnostic protocol.
+- `Core/LlamaRuntimeAdapter.swift` — text/vision backend boundary.
 - `App/VisionTextExtractor.swift` — on-device OCR fallback.
 - `Resources/Models/catalog.json` — tier candidates and gates.
 
@@ -103,6 +117,10 @@ tests.
 
 ## Safety status
 
+Incident questions and photos stay offline. The only network-capable component
+is the explicit package downloader, which accepts content only after signature
+and hash verification.
+
 This repository is an engineering prototype. The starter articles have complete
 source metadata and pass the ingestion gate, but the pack has **not** completed
 clinical, wilderness-instructor, mechanic, legal, localization, or regional
@@ -111,4 +129,6 @@ form.
 
 See [Docs/ARCHITECTURE.md](Docs/ARCHITECTURE.md),
 [Docs/SAFETY_CASE.md](Docs/SAFETY_CASE.md), and
-[Docs/IMPLEMENTATION_STATUS.md](Docs/IMPLEMENTATION_STATUS.md).
+[Docs/IMPLEMENTATION_STATUS.md](Docs/IMPLEMENTATION_STATUS.md). External
+certification and hardware blockers are tracked in
+[Docs/EXTERNAL_GATES.md](Docs/EXTERNAL_GATES.md).

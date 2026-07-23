@@ -3,6 +3,7 @@ import Foundation
 public struct ModelPrompt: Sendable {
     public let question: String
     public let evidence: [RetrievedPassage]
+    public let imageData: Data?
     public let imageObservations: [String]
     public let tier: ModelTier
     public let permitsVisionReasoning: Bool
@@ -10,12 +11,14 @@ public struct ModelPrompt: Sendable {
     public init(
         question: String,
         evidence: [RetrievedPassage],
+        imageData: Data? = nil,
         imageObservations: [String],
         tier: ModelTier,
         permitsVisionReasoning: Bool
     ) {
         self.question = question
         self.evidence = evidence
+        self.imageData = imageData
         self.imageObservations = imageObservations
         self.tier = tier
         self.permitsVisionReasoning = permitsVisionReasoning

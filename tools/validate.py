@@ -11,6 +11,8 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "Resources" / "Knowledge" / "starter_knowledge.json"
 CATALOG = ROOT / "Resources" / "Models" / "catalog.json"
+SAFETY_CASES = ROOT / "Tests" / "Fixtures" / "safety_cases.json"
+OBD_REJECTIONS = ROOT / "Tests" / "Fixtures" / "obd_rejected_commands.json"
 
 
 def fail(message: str) -> None:
@@ -97,16 +99,69 @@ def validate_contracts() -> None:
     if "larger model is not a safer source" not in settings:
         fail("tier safety disclosure is missing")
 
+    required_sources = [
+        "PackageVerifier.swift",
+        "PackageInstaller.swift",
+        "VehicleIdentity.swift",
+        "OfflineMapPack.swift",
+        "OBDProtocol.swift",
+        "LlamaRuntimeAdapter.swift",
+    ]
+    for name in required_sources:
+        if not (ROOT / "Core" / name).is_file():
+            fail(f"production foundation missing: Core/{name}")
+
+    workflow = ROOT / ".github" / "workflows" / "ci.yml"
+    if not workflow.is_file():
+        fail("GitHub Actions CI workflow is missing")
+
+
+def validate_locked_evaluations() -> tuple[int, int, int]:
+    safety_cases = json.loads(SAFETY_CASES.read_text(encoding="utf-8"))
+    if len(safety_cases) < 10:
+        fail("locked safety suite is too small")
+    ids = [case.get("id") for case in safety_cases]
+    if len(ids) != len(set(ids)) or any(not item for item in ids):
+        fail("locked safety case ids must be unique and non-empty")
+    allowed_titles = {
+        "Life-threatening emergency",
+        "Severe bleeding",
+        "Fire or fuel hazard",
+        "Possible carbon monoxide exposure",
+        "Time-critical medical symptoms",
+        "Unsupported high-risk procedure",
+    }
+    for case in safety_cases:
+        if not case.get("input") or case.get("expected_title") not in allowed_titles:
+            fail(f"invalid safety fixture: {case.get('id')}")
+
+    rejected = json.loads(OBD_REJECTIONS.read_text(encoding="utf-8"))
+    if len(rejected) < 8 or "04" not in rejected:
+        fail("locked OBD rejection suite is incomplete")
+
+    test_count = 0
+    for source in (ROOT / "Tests").glob("*.swift"):
+        test_count += sum(
+            1 for line in source.read_text(encoding="utf-8").splitlines()
+            if line.strip().startswith("func test")
+        )
+    if test_count < 35:
+        fail(f"expected at least 35 Swift tests, found {test_count}")
+    return len(safety_cases), len(rejected), test_count
+
 
 def main() -> None:
     article_count, source_count = validate_knowledge()
     model_count = validate_model_catalog()
     swift_count = validate_swift_sources()
     validate_contracts()
+    safety_count, obd_count, test_count = validate_locked_evaluations()
     print(
         "PASS: "
         f"{article_count} articles, {source_count} sources, "
-        f"{model_count} model tiers, {swift_count} Swift sources"
+        f"{model_count} model tiers, {swift_count} Swift sources, "
+        f"{test_count} tests, {safety_count} safety cases, "
+        f"{obd_count} blocked OBD commands"
     )
 
 

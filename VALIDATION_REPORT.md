@@ -18,13 +18,16 @@ Milestone: Offline iOS vertical slice
 
 Validation result:
 
+The structural gate now covers package security, vehicle applicability, maps,
+OBD, runtime adapters, locked fixtures, CI presence, and test inventory. Run:
+
 ```text
-PASS: 8 articles, 8 sources, 3 model tiers, 19 Swift sources
+python3 tools/validate.py
 ```
 
 ## Authored tests awaiting an Apple toolchain
 
-Fifteen XCTest cases cover:
+Thirty-nine XCTest cases cover:
 
 - fuel/fire and severe-bleeding model bypass;
 - retrieval ranking, domain filtering, and unapproved-content exclusion;
@@ -33,6 +36,12 @@ Fifteen XCTest cases cover:
 - valid, missing, and out-of-range citations;
 - uncited-generation and model-exception fallback;
 - knowledge serialization.
+- package signature, expiry, path, size, hash, install, and rollback behavior;
+- exact vehicle match and wrong-vehicle exclusion;
+- offline map coverage, detail, freshness, and file readiness;
+- OBD read policy, DTC/scalar parsing, and blocked writes;
+- text/vision llama runtime image routing and lifecycle;
+- twelve locked safety/refusal cases with zero model calls.
 
 ## Environment limitation
 

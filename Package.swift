@@ -18,7 +18,10 @@ let package = Package(
         .testTarget(
             name: "AuroraCoreTests",
             dependencies: ["AuroraCore"],
-            path: "Tests"
+            path: "Tests",
+            resources: [
+                .copy("Fixtures")
+            ]
         )
     ]
 )
