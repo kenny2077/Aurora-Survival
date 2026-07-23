@@ -25,7 +25,7 @@ an executable local or CI contract; it does not claim external certification.
 | Read-only OBD policy | Complete | allowlist and nine locked rejection commands |
 | Map readiness failure paths | Complete | map evaluator plus 30 asset cases |
 | Model performance acceptance | Complete | latency/memory/thermal/battery evaluator |
-| Evaluation provenance report | Complete | schema, writer, and `Reports/virtual-workspace-2026-07-23.json` |
+| Evaluation provenance report | Complete | schema, writer, and `Reports/virtual-integration-2026-07-23.json` |
 | Gold incident matrix | Complete | 120 synthetic control-path cases |
 | Virtual release failure matrix | Complete | model/map/OBD/commerce/accessibility tests |
 | Attached document source audit | Complete | architecture-only classification |

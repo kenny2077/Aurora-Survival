@@ -40,6 +40,22 @@ is connected to an executable code path.
 - structural contract validation in Linux CI;
 - Swift package and unsigned iOS simulator jobs on GitHub macOS runners.
 
+## Hosted verification
+
+GitHub Actions run
+[`29996996730`](https://github.com/kenny2077/TrailGuard/actions/runs/29996996730)
+passed all three jobs against commit
+`79a1631625a4ab75b37a25b47596216171ee54bf`:
+
+- `structural`: deterministic regeneration, repository validation, and
+  reproducible signed-pack build;
+- `swift-core`: all 11 bounded XCTest classes and 76 tests;
+- `ios-build`: XcodeGen project generation and unsigned generic iOS Simulator
+  build.
+
+The machine-readable provenance record is
+`Reports/virtual-integration-2026-07-23.json`.
+
 ## Deliberately external
 
 No virtual test is represented as evidence for real Qwen performance, licensed
