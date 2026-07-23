@@ -53,7 +53,7 @@ final class StoreKitEntitlementBridge: ObservableObject {
     func refreshCurrentEntitlements(
         ledger: EntitlementLedger
     ) async throws {
-        for await verification in Transaction.currentEntitlements {
+        for await verification in StoreKit.Transaction.currentEntitlements {
             let transaction = try verified(verification)
             try await apply(
                 transaction: transaction,
@@ -77,7 +77,7 @@ final class StoreKitEntitlementBridge: ObservableObject {
     }
 
     private func apply(
-        transaction: Transaction,
+        transaction: StoreKit.Transaction,
         kind: EntitlementEventKind,
         ledger: EntitlementLedger
     ) async throws {
