@@ -18,6 +18,10 @@ recorded.
 | Commerce | App Store products and receipt service | Purchase, restore, refund, family-sharing, and offline entitlement tests |
 | Release | Legal/privacy/accessibility/human-factors owners | Signed release checklist and rollback drill |
 
+The repository now contains executable contracts, schemas, fixtures, and virtual
+failure simulations for every row. Those reduce integration risk but do not
+replace the listed evidence.
+
 ## Non-negotiable rule
 
 A missing external gate is not resolved by changing a checkbox, loosening a test,

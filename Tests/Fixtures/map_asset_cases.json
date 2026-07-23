@@ -1,0 +1,212 @@
+[
+  {
+    "condition": "complete",
+    "expected_ready": true,
+    "id": "asset-001",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "missing_style",
+    "expected_ready": false,
+    "id": "asset-002",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "missing_map",
+    "expected_ready": false,
+    "id": "asset-003",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "missing_routing",
+    "expected_ready": false,
+    "id": "asset-004",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "expired",
+    "expected_ready": false,
+    "id": "asset-005",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "outside_bounds",
+    "expected_ready": false,
+    "id": "asset-006",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "complete",
+    "expected_ready": true,
+    "id": "asset-007",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "missing_style",
+    "expected_ready": false,
+    "id": "asset-008",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "missing_map",
+    "expected_ready": false,
+    "id": "asset-009",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "missing_routing",
+    "expected_ready": false,
+    "id": "asset-010",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "expired",
+    "expected_ready": false,
+    "id": "asset-011",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "outside_bounds",
+    "expected_ready": false,
+    "id": "asset-012",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "complete",
+    "expected_ready": true,
+    "id": "asset-013",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "missing_style",
+    "expected_ready": false,
+    "id": "asset-014",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "missing_map",
+    "expected_ready": false,
+    "id": "asset-015",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "missing_routing",
+    "expected_ready": false,
+    "id": "asset-016",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "expired",
+    "expected_ready": false,
+    "id": "asset-017",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "outside_bounds",
+    "expected_ready": false,
+    "id": "asset-018",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "complete",
+    "expected_ready": true,
+    "id": "asset-019",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "missing_style",
+    "expected_ready": false,
+    "id": "asset-020",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "missing_map",
+    "expected_ready": false,
+    "id": "asset-021",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "missing_routing",
+    "expected_ready": false,
+    "id": "asset-022",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "expired",
+    "expected_ready": false,
+    "id": "asset-023",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "outside_bounds",
+    "expected_ready": false,
+    "id": "asset-024",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "complete",
+    "expected_ready": true,
+    "id": "asset-025",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "missing_style",
+    "expected_ready": false,
+    "id": "asset-026",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "missing_map",
+    "expected_ready": false,
+    "id": "asset-027",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  },
+  {
+    "condition": "missing_routing",
+    "expected_ready": false,
+    "id": "asset-028",
+    "must_remain_offline": true,
+    "tier": "scout"
+  },
+  {
+    "condition": "expired",
+    "expected_ready": false,
+    "id": "asset-029",
+    "must_remain_offline": true,
+    "tier": "field"
+  },
+  {
+    "condition": "outside_bounds",
+    "expected_ready": false,
+    "id": "asset-030",
+    "must_remain_offline": true,
+    "tier": "expedition"
+  }
+]

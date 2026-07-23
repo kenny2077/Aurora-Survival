@@ -6,6 +6,7 @@ public enum PackageInstallError: Error, Equatable {
     case packageNotInstalled
     case cannotRollback
     case invalidIndex
+    case recalledPackage
     case fileOperationFailed
 }
 
@@ -38,13 +39,38 @@ public struct InstalledPackageVersion: Codable, Hashable, Sendable, Identifiable
 public struct PackageActivationIndex: Codable, Equatable, Sendable {
     public var activeVersions: [String: String]
     public var installed: [InstalledPackageVersion]
+    public var recalledVersions: [String: Set<String>]
 
     public init(
         activeVersions: [String: String] = [:],
-        installed: [InstalledPackageVersion] = []
+        installed: [InstalledPackageVersion] = [],
+        recalledVersions: [String: Set<String>] = [:]
     ) {
         self.activeVersions = activeVersions
         self.installed = installed
+        self.recalledVersions = recalledVersions
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case activeVersions
+        case installed
+        case recalledVersions
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        activeVersions = try container.decodeIfPresent(
+            [String: String].self,
+            forKey: .activeVersions
+        ) ?? [:]
+        installed = try container.decodeIfPresent(
+            [InstalledPackageVersion].self,
+            forKey: .installed
+        ) ?? []
+        recalledVersions = try container.decodeIfPresent(
+            [String: Set<String>].self,
+            forKey: .recalledVersions
+        ) ?? [:]
     }
 }
 
@@ -113,6 +139,12 @@ public actor PackageInstaller {
         guard !fileManager.fileExists(atPath: destination.path) else {
             throw PackageInstallError.packageAlreadyInstalled
         }
+        var current = try index()
+        guard !(current.recalledVersions[manifest.packageID] ?? []).contains(
+            manifest.version
+        ) else {
+            throw PackageInstallError.recalledPackage
+        }
 
         do {
             let envelopeData = try JSONEncoder.trailGuard.encode(envelope)
@@ -122,7 +154,6 @@ public actor PackageInstaller {
             )
             try fileManager.moveItem(at: stagedDirectory, to: destination)
 
-            var current = try index()
             let record = InstalledPackageVersion(
                 packageID: manifest.packageID,
                 version: manifest.version,
@@ -146,6 +177,9 @@ public actor PackageInstaller {
 
     public func activate(packageID: String, version: String) throws {
         var current = try index()
+        guard !(current.recalledVersions[packageID] ?? []).contains(version) else {
+            throw PackageInstallError.recalledPackage
+        }
         guard current.installed.contains(where: {
             $0.packageID == packageID && $0.version == version
         }) else {
@@ -161,7 +195,11 @@ public actor PackageInstaller {
             throw PackageInstallError.cannotRollback
         }
         let candidates = current.installed
-            .filter { $0.packageID == packageID && $0.version != active }
+            .filter {
+                $0.packageID == packageID
+                    && $0.version != active
+                    && !(current.recalledVersions[packageID] ?? []).contains($0.version)
+            }
             .sorted { $0.installedAt > $1.installedAt }
         guard let previous = candidates.first else {
             throw PackageInstallError.cannotRollback
@@ -169,6 +207,40 @@ public actor PackageInstaller {
         current.activeVersions[packageID] = previous.version
         try writeIndex(current)
         return previous.version
+    }
+
+    /// Marks a version unusable and immediately fails over to the newest
+    /// non-recalled installed version. The recalled files remain for audit
+    /// until a separate inactive-package removal is requested.
+    @discardableResult
+    public func recall(packageID: String, version: String) throws -> String? {
+        var current = try index()
+        guard current.installed.contains(where: {
+            $0.packageID == packageID && $0.version == version
+        }) else {
+            throw PackageInstallError.packageNotInstalled
+        }
+        current.recalledVersions[packageID, default: []].insert(version)
+
+        var replacement: String?
+        if current.activeVersions[packageID] == version {
+            replacement = current.installed
+                .filter {
+                    $0.packageID == packageID
+                        && $0.version != version
+                        && !(current.recalledVersions[packageID] ?? []).contains($0.version)
+                }
+                .sorted { $0.installedAt > $1.installedAt }
+                .first?
+                .version
+            if let replacement {
+                current.activeVersions[packageID] = replacement
+            } else {
+                current.activeVersions.removeValue(forKey: packageID)
+            }
+        }
+        try writeIndex(current)
+        return replacement
     }
 
     public func removeInactive(packageID: String, version: String) throws {
@@ -197,6 +269,7 @@ public actor PackageInstaller {
     public func activePackageDirectory(packageID: String) throws -> URL? {
         let current = try index()
         guard let version = current.activeVersions[packageID],
+              !(current.recalledVersions[packageID] ?? []).contains(version),
               let record = current.installed.first(where: {
                   $0.packageID == packageID && $0.version == version
               })

@@ -1,0 +1,355 @@
+{
+  "domain": "wilderness",
+  "effective_date": "2026-07-23T00:00:00Z",
+  "expires_at": null,
+  "license": {
+    "identifier": "LicenseRef-Aurora-Internal-Test",
+    "permitted_uses": [
+      "automated testing"
+    ],
+    "source_manifest_path": "Docs/SOURCE_AUDIT_SURVIVALROBINSON.md"
+  },
+  "locale": "en-US",
+  "package_id": "knowledge.development.synthetic",
+  "records": [
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.1,
+        1.0,
+        0.333,
+        1.0
+      ],
+      "evidence_id": "development.medical_unconscious",
+      "keywords": [
+        "medical_unconscious",
+        "first_aid",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:medical_unconscious",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the deterministic_override control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: medical unconscious",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.2,
+        0.9,
+        0.667,
+        1.0
+      ],
+      "evidence_id": "development.medical_bleeding",
+      "keywords": [
+        "medical_bleeding",
+        "first_aid",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:medical_bleeding",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the deterministic_override control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: medical bleeding",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.3,
+        0.8,
+        0.0,
+        1.0
+      ],
+      "evidence_id": "development.vehicle_fuel",
+      "keywords": [
+        "vehicle_fuel",
+        "vehicle",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:vehicle_fuel",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the deterministic_override control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: vehicle fuel",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.4,
+        0.7,
+        0.333,
+        1.0
+      ],
+      "evidence_id": "development.vehicle_heat",
+      "keywords": [
+        "vehicle_heat",
+        "vehicle",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:vehicle_heat",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the reviewed_procedure control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: vehicle heat",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.5,
+        0.6,
+        0.667,
+        1.0
+      ],
+      "evidence_id": "development.vehicle_no_start",
+      "keywords": [
+        "vehicle_no_start",
+        "vehicle",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:vehicle_no_start",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the reviewed_procedure control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: vehicle no start",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.6,
+        0.5,
+        0.0,
+        1.0
+      ],
+      "evidence_id": "development.wilderness_water",
+      "keywords": [
+        "wilderness_water",
+        "wilderness",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:wilderness_water",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the retrieval_required control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: wilderness water",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.7,
+        0.4,
+        0.333,
+        1.0
+      ],
+      "evidence_id": "development.wilderness_shelter",
+      "keywords": [
+        "wilderness_shelter",
+        "wilderness",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:wilderness_shelter",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the retrieval_required control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: wilderness shelter",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.8,
+        0.3,
+        0.667,
+        1.0
+      ],
+      "evidence_id": "development.navigation_lost",
+      "keywords": [
+        "navigation_lost",
+        "navigation",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:navigation_lost",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the stop_and_assess control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: navigation lost",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        0.9,
+        0.2,
+        0.0,
+        1.0
+      ],
+      "evidence_id": "development.unsupported_surgery",
+      "keywords": [
+        "unsupported_surgery",
+        "first_aid",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:unsupported_surgery",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the refuse_and_escalate control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: unsupported surgery",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    },
+    {
+      "applicability": {
+        "environment": "automated-test-only"
+      },
+      "embedding": [
+        1.0,
+        0.1,
+        0.333,
+        1.0
+      ],
+      "evidence_id": "development.unsupported_ecu",
+      "keywords": [
+        "unsupported_ecu",
+        "vehicle",
+        "development-fixture"
+      ],
+      "source": {
+        "locator": "scenario:unsupported_ecu",
+        "owner": "Aurora",
+        "revision": "1.0.0",
+        "source_id": "trailguard.synthetic-evaluation",
+        "title": "Aurora synthetic evaluation fixture"
+      },
+      "steps": [
+        "Exercise the refuse_and_escalate control path."
+      ],
+      "summary": "Synthetic control-path fixture. It is not approved field guidance and must never ship as a production knowledge answer.",
+      "supported_answer_level": "insufficient",
+      "title": "Development fixture: unsupported ecu",
+      "warnings": [
+        "Development fixture only; no real-world instruction."
+      ]
+    }
+  ],
+  "region": null,
+  "review": {
+    "attestation_id": "attestation.synthetic.1",
+    "authority_role": "test-fixture-maintainer",
+    "reviewed_at": "2026-07-23T00:00:00Z",
+    "status": "development_fixture"
+  },
+  "schema_version": 1,
+  "version": "1.0.0"
+}

@@ -38,11 +38,14 @@ public actor IncidentAssistant {
             return AssistantAnswer(
                 text: text,
                 severity: directive.severity,
-                sources: [],
+                sources: [directive.source],
                 modelTier: nil,
                 usedDeterministicOverride: true,
                 visionWasUsed: false,
-                notices: [directive.rationale]
+                notices: [
+                    directive.rationale,
+                    "Policy: \(directive.policyID)"
+                ]
             )
         }
 

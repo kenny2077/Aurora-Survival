@@ -4,3 +4,6 @@
 DerivedData/
 *.xcuserstate
 xcuserdata/
+review/
+__pycache__/
+*.pyc

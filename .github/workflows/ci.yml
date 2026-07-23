@@ -16,8 +16,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install validation dependencies
+        run: python3 -m pip install -r requirements-dev.txt
       - name: Validate packs and safety contracts
         run: python3 tools/validate.py
+      - name: Verify reproducible signed pack build
+        run: python3 tools/test_pack_reproducibility.py
 
   swift-core:
     runs-on: macos-latest

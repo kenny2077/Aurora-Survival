@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trailguard.app/schemas/catalog.schema.json",
+  "title": "Aurora independent download catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "catalog_version", "policy_version", "models", "knowledge", "maps"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "catalog_version": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "models": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "knowledge": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "maps": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package_id", "version", "manifest_url", "compressed_bytes", "minimum_free_storage_bytes", "entitlement"],
+      "properties": {
+        "package_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "manifest_url": { "type": "string", "format": "uri" },
+        "compressed_bytes": { "type": "integer", "minimum": 0 },
+        "minimum_free_storage_bytes": { "type": "integer", "minimum": 0 },
+        "entitlement": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

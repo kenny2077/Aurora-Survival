@@ -13,6 +13,7 @@ public struct SafetyEngine: Sendable {
             Rule(
                 terms: ["unconscious", "not breathing", "stopped breathing", "no pulse"],
                 directive: SafetyDirective(
+                    policyID: "first-aid.life-threat",
                     severity: .critical,
                     title: "Life-threatening emergency",
                     immediateActions: [
@@ -30,6 +31,7 @@ public struct SafetyEngine: Sendable {
             Rule(
                 terms: ["severe bleeding", "spurting blood", "bleeding won't stop", "bleeding wont stop"],
                 directive: SafetyDirective(
+                    policyID: "first-aid.severe-bleeding",
                     severity: .critical,
                     title: "Severe bleeding",
                     immediateActions: [
@@ -47,6 +49,7 @@ public struct SafetyEngine: Sendable {
             Rule(
                 terms: ["fuel leak", "smell gasoline", "smell gas", "vehicle fire", "car fire", "smoke from engine"],
                 directive: SafetyDirective(
+                    policyID: "vehicle.fire-fuel",
                     severity: .critical,
                     title: "Fire or fuel hazard",
                     immediateActions: [
@@ -65,6 +68,7 @@ public struct SafetyEngine: Sendable {
             Rule(
                 terms: ["carbon monoxide", "running engine in garage", "engine in enclosed"],
                 directive: SafetyDirective(
+                    policyID: "vehicle.carbon-monoxide",
                     severity: .critical,
                     title: "Possible carbon monoxide exposure",
                     immediateActions: [
@@ -82,6 +86,7 @@ public struct SafetyEngine: Sendable {
             Rule(
                 terms: ["chest pain", "signs of stroke", "face drooping", "slurred speech", "anaphylaxis"],
                 directive: SafetyDirective(
+                    policyID: "first-aid.time-critical",
                     severity: .critical,
                     title: "Time-critical medical symptoms",
                     immediateActions: [
@@ -105,6 +110,7 @@ public struct SafetyEngine: Sendable {
                     "open hot radiator", "open radiator while hot"
                 ],
                 directive: SafetyDirective(
+                    policyID: "global.unsupported-procedure",
                     severity: .urgent,
                     title: "Unsupported high-risk procedure",
                     immediateActions: [

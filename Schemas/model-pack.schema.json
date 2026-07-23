@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trailguard.app/schemas/model-pack.schema.json",
+  "title": "Aurora model pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_id",
+    "version",
+    "tier",
+    "model",
+    "artifacts",
+    "device_gate",
+    "capabilities",
+    "safety_policy_version",
+    "license"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "package_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+([+-][A-Za-z0-9.-]+)?$" },
+    "tier": { "enum": ["essential", "field", "vision_expert"] },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["upstream_id", "upstream_revision", "runtime", "quantization", "conversion_recipe"],
+      "properties": {
+        "upstream_id": { "type": "string", "minLength": 1 },
+        "upstream_revision": { "type": "string", "minLength": 7 },
+        "runtime": { "enum": ["native-swift", "llama.cpp-metal", "litert-lm-metal"] },
+        "quantization": { "type": "string", "minLength": 1 },
+        "conversion_recipe": { "type": "string", "minLength": 1 }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx_id", "notice_path", "commercial_use_reviewed"],
+      "properties": {
+        "spdx_id": { "type": "string", "minLength": 1 },
+        "notice_path": { "type": "string", "minLength": 1 },
+        "commercial_use_reviewed": { "type": "boolean" }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "bytes", "sha256"],
+        "properties": {
+          "role": { "enum": ["language_model", "vision_projector", "tokenizer", "license", "notice"] },
+          "path": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "device_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_os", "minimum_memory_bytes", "minimum_free_storage_bytes", "allowed_thermal_states", "disable_in_low_power_mode"],
+      "properties": {
+        "minimum_os": { "type": "string", "minLength": 1 },
+        "minimum_memory_bytes": { "type": "integer", "minimum": 0 },
+        "minimum_free_storage_bytes": { "type": "integer", "minimum": 0 },
+        "allowed_thermal_states": {
+          "type": "array",
+          "items": { "enum": ["nominal", "fair"] },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "disable_in_low_power_mode": { "type": "boolean" }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "vision", "maximum_context_tokens", "languages"],
+      "properties": {
+        "text": { "type": "boolean" },
+        "vision": { "type": "boolean" },
+        "maximum_context_tokens": { "type": "integer", "minimum": 512 },
+        "languages": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "benchmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["device", "os", "artifact_sha256", "first_token_ms", "tokens_per_second", "peak_memory_bytes", "thermal_result", "battery_percent"],
+        "properties": {
+          "device": { "type": "string" },
+          "os": { "type": "string" },
+          "artifact_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "first_token_ms": { "type": "integer", "minimum": 0 },
+          "tokens_per_second": { "type": "number", "minimum": 0 },
+          "peak_memory_bytes": { "type": "integer", "minimum": 0 },
+          "thermal_result": { "enum": ["nominal", "fair", "serious", "critical"] },
+          "battery_percent": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "safety_policy_version": { "type": "string", "minLength": 1 }
+  }
+}
