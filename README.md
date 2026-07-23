@@ -19,13 +19,20 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
 - A Qwen3-VL-2B/llama.cpp integration seam for capable high-tier devices.
 - A pre-trip readiness checklist and an explicit zero-power contingency.
 - A signed package pipeline with Ed25519 signatures, per-file SHA-256 checks,
-  path-traversal protection, atomic activation, and rollback.
+  path-traversal protection, atomic activation, rollback, and recall.
+- A reproducible knowledge-pack compiler that creates SQLite/FTS, precomputed
+  vector artifacts, canonical manifests, and Ed25519 envelopes.
+- Typed grounded responses that reject unknown evidence, invented procedures,
+  uncited supported answers, and unsafe high-risk continuation.
+- Incident-mode network containment, cached offline entitlements, and bundled
+  emergency-core recovery after first launch or corruption.
 - Exact vehicle identity and wrong-vehicle retrieval exclusion.
 - Offline map-pack coverage, detail, freshness, and routing readiness checks.
 - A whitelist-only OBD protocol that cannot clear codes or write to an ECU.
 - A llama.cpp backend contract for both text-only and Qwen vision packages.
-- Thirty-nine Swift tests, locked safety fixtures, dependency-free validation,
-  and GitHub Actions for core and iOS builds.
+- Fifty-seven Swift tests, 120 synthetic gold incidents, 30 map/asset cases,
+  seven versioned schemas, locked safety fixtures, and GitHub Actions for core,
+  reproducible packs, and iOS builds.
 
 The app is functional without model weights: Essential mode retrieves and
 formats reviewed offline material. Field and Vision Expert remain unavailable
@@ -66,7 +73,9 @@ Core tests can also run as a Swift package:
 
 ```bash
 swift test
+python3 -m pip install -r requirements-dev.txt
 python3 tools/validate.py
+python3 tools/test_pack_reproducibility.py
 ```
 
 This Linux build environment does not contain Xcode or Swift, so the checked-in
@@ -96,12 +105,18 @@ Key source files:
 - `Core/IncidentAssistant.swift` — end-to-end orchestration.
 - `Core/GroundedPromptBuilder.swift` — evidence-only runtime contract.
 - `Core/PackageVerifier.swift` — signed package and artifact verification.
+- `Core/GroundedResponse.swift` — typed evidence/procedure output validation.
+- `Core/EmergencyCoreStore.swift` — first-launch and corruption recovery.
+- `Core/IncidentNetworkPolicy.swift` — offline incident containment.
+- `Core/ReleaseValidation.swift` — model and virtual release acceptance gates.
 - `Core/VehicleIdentity.swift` — exact vehicle applicability.
 - `Core/OfflineMapPack.swift` — map readiness contract.
 - `Core/OBDProtocol.swift` — read-only diagnostic protocol.
 - `Core/LlamaRuntimeAdapter.swift` — text/vision backend boundary.
 - `App/VisionTextExtractor.swift` — on-device OCR fallback.
 - `Resources/Models/catalog.json` — tier candidates and gates.
+- `Schemas/` — independently versioned runtime and distribution contracts.
+- `Docs/ADR/` — binding architecture decisions.
 
 ## Current external technical basis
 

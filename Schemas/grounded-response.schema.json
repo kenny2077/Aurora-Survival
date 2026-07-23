@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trailguard.app/schemas/grounded-response.schema.json",
+  "title": "TrailGuard grounded response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "domain", "risk_level", "immediate_action", "questions", "observations",
+    "procedure_id", "steps", "do_not_do", "driveability", "escalation",
+    "answer_confidence"
+  ],
+  "properties": {
+    "domain": { "enum": ["vehicle", "wilderness", "first_aid", "navigation", "resilience"] },
+    "risk_level": { "enum": ["critical", "high", "moderate", "low"] },
+    "immediate_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "evidence_ids"],
+      "properties": {
+        "kind": { "enum": ["stop", "move", "sos", "assess", "continue"] },
+        "evidence_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text", "why"],
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string" },
+          "why": { "type": "string" }
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fact", "source", "confidence"],
+        "properties": {
+          "fact": { "type": "string" },
+          "source": { "enum": ["user", "photo", "obd", "sensor"] },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "procedure_id": { "type": ["string", "null"] },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step_id", "evidence_ids"],
+        "properties": {
+          "step_id": { "type": "string" },
+          "evidence_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true }
+        }
+      }
+    },
+    "do_not_do": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "driveability": { "enum": ["do_not_drive", "unknown", "conditional", "not_applicable"] },
+    "escalation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "action"],
+      "properties": {
+        "reason": { "type": "string" },
+        "action": { "type": "string" }
+      }
+    },
+    "answer_confidence": { "enum": ["insufficient", "limited", "supported"] }
+  }
+}

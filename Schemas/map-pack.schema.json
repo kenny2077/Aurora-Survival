@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trailguard.app/schemas/map-pack.schema.json",
+  "title": "TrailGuard offline map pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "package_id", "version", "region", "tier", "geometry",
+    "zoom", "layers", "source_date", "expires_at", "license", "attribution",
+    "sizes", "artifacts"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "package_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "version": { "type": "string", "minLength": 1 },
+    "region": { "type": "string", "minLength": 1 },
+    "tier": { "enum": ["scout", "field", "expedition"] },
+    "geometry": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "enum": ["Polygon", "MultiPolygon", "LineString"] },
+        "coordinates": { "type": "array", "minItems": 1 }
+      }
+    },
+    "zoom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum"],
+      "properties": {
+        "minimum": { "type": "integer", "minimum": 0, "maximum": 24 },
+        "maximum": { "type": "integer", "minimum": 0, "maximum": 24 }
+      }
+    },
+    "layers": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+    "source_date": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "license": { "type": "string", "minLength": 1 },
+    "attribution": { "type": "string", "minLength": 1 },
+    "sizes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["compressed_bytes", "unpacked_bytes", "minimum_free_storage_bytes"],
+      "properties": {
+        "compressed_bytes": { "type": "integer", "minimum": 0 },
+        "unpacked_bytes": { "type": "integer", "minimum": 0 },
+        "minimum_free_storage_bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "gazetteer_version": { "type": ["string", "null"] },
+    "routing_version": { "type": ["string", "null"] },
+    "artifacts": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "bytes", "sha256"],
+        "properties": {
+          "role": { "enum": ["pmtiles", "style", "gazetteer", "routing_graph", "license", "attribution"] },
+          "path": { "type": "string", "minLength": 1 },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

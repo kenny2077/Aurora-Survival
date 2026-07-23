@@ -190,24 +190,35 @@ public struct ChatRequest: Equatable, Sendable {
 }
 
 public struct SafetyDirective: Equatable, Sendable {
+    public let policyID: String
     public let severity: IncidentSeverity
     public let title: String
     public let immediateActions: [String]
     public let prohibitedActions: [String]
     public let rationale: String
+    public let source: SourceReference
 
     public init(
+        policyID: String = "policy.unspecified",
         severity: IncidentSeverity,
         title: String,
         immediateActions: [String],
         prohibitedActions: [String],
-        rationale: String
+        rationale: String,
+        source: SourceReference = SourceReference(
+            id: "trailguard.safety-policy",
+            title: "TrailGuard deterministic safety policy",
+            organization: "TrailGuard",
+            revision: "1.0.0"
+        )
     ) {
+        self.policyID = policyID
         self.severity = severity
         self.title = title
         self.immediateActions = immediateActions
         self.prohibitedActions = prohibitedActions
         self.rationale = rationale
+        self.source = source
     }
 }
 

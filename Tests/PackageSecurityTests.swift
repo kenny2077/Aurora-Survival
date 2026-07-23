@@ -192,6 +192,58 @@ final class PackageSecurityTests: XCTestCase {
         }
     }
 
+    func testRecallFailsOverAndBlocksReactivation() async throws {
+        let first = try makeFixture(version: "1.0.0", content: Data("v1".utf8))
+        defer { try? FileManager.default.removeItem(at: first.root) }
+        let installer = PackageInstaller(
+            rootDirectory: first.root.appendingPathComponent("store"),
+            verifier: first.verifier,
+            now: { Date(timeIntervalSince1970: 1_700_000_000) }
+        )
+        _ = try await installer.install(
+            envelope: first.envelope,
+            stagedDirectory: first.staging
+        )
+
+        let secondStaging = first.root.appendingPathComponent("stage-v2", isDirectory: true)
+        let second = try makeSignedPackage(
+            staging: secondStaging,
+            packageID: "model.field",
+            version: "2.0.0",
+            content: Data("v2".utf8),
+            keyID: first.envelope.keyID,
+            privateKey: first.privateKey
+        )
+        _ = try await installer.install(
+            envelope: second,
+            stagedDirectory: secondStaging
+        )
+
+        let replacement = try await installer.recall(
+            packageID: "model.field",
+            version: "2.0.0"
+        )
+        XCTAssertEqual(replacement, "1.0.0")
+        let index = try await installer.index()
+        XCTAssertEqual(index.activeVersions["model.field"], "1.0.0")
+        XCTAssertTrue(index.recalledVersions["model.field"]?.contains("2.0.0") == true)
+
+        do {
+            try await installer.activate(packageID: "model.field", version: "2.0.0")
+            XCTFail("Expected recalled package activation to fail")
+        } catch {
+            XCTAssertEqual(error as? PackageInstallError, .recalledPackage)
+        }
+    }
+
+    func testLegacyActivationIndexDecodesWithoutRecallField() throws {
+        let data = Data(
+            #"{"activeVersions":{},"installed":[]}"#.utf8
+        )
+        let index = try JSONDecoder().decode(PackageActivationIndex.self, from: data)
+        XCTAssertTrue(index.recalledVersions.isEmpty)
+    }
+
     private struct Fixture {
         let root: URL
         let staging: URL

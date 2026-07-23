@@ -13,6 +13,9 @@ KNOWLEDGE = ROOT / "Resources" / "Knowledge" / "starter_knowledge.json"
 CATALOG = ROOT / "Resources" / "Models" / "catalog.json"
 SAFETY_CASES = ROOT / "Tests" / "Fixtures" / "safety_cases.json"
 OBD_REJECTIONS = ROOT / "Tests" / "Fixtures" / "obd_rejected_commands.json"
+GOLD_INCIDENTS = ROOT / "Tests" / "Fixtures" / "gold_incidents.json"
+MAP_ASSET_CASES = ROOT / "Tests" / "Fixtures" / "map_asset_cases.json"
+DEVELOPMENT_PACK = ROOT / "Tests" / "Fixtures" / "development_knowledge_pack.json"
 
 
 def fail(message: str) -> None:
@@ -111,6 +114,27 @@ def validate_contracts() -> None:
         if not (ROOT / "Core" / name).is_file():
             fail(f"production foundation missing: Core/{name}")
 
+    production_controls = [
+        "GroundedResponse.swift",
+        "IncidentNetworkPolicy.swift",
+        "EmergencyCoreStore.swift",
+        "ReleaseValidation.swift",
+        "ResumableArtifactAssembler.swift",
+    ]
+    for name in production_controls:
+        if not (ROOT / "Core" / name).is_file():
+            fail(f"production control missing: Core/{name}")
+
+    if "sources: [directive.source]" not in assistant:
+        fail("deterministic safety cards must expose policy attribution")
+
+    incident_policy = (
+        ROOT / "Core" / "IncidentNetworkPolicy.swift"
+    ).read_text(encoding="utf-8")
+    for denied in ("packageCatalog", "packageDownload", "purchase", "telemetry"):
+        if denied not in incident_policy:
+            fail(f"incident network policy is missing operation: {denied}")
+
     workflow = ROOT / ".github" / "workflows" / "ci.yml"
     if not workflow.is_file():
         fail("GitHub Actions CI workflow is missing")
@@ -150,18 +174,88 @@ def validate_locked_evaluations() -> tuple[int, int, int]:
     return len(safety_cases), len(rejected), test_count
 
 
+def validate_schemas_and_pack_contract() -> tuple[int, int]:
+    schema_files = sorted((ROOT / "Schemas").glob("*.schema.json"))
+    if len(schema_files) < 7:
+        fail(f"expected at least 7 independent schemas, found {len(schema_files)}")
+    for path in schema_files:
+        schema = json.loads(path.read_text(encoding="utf-8"))
+        if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+            fail(f"schema version missing in {path.relative_to(ROOT)}")
+        if not schema.get("$id") or not schema.get("title"):
+            fail(f"schema identity missing in {path.relative_to(ROOT)}")
+
+    pack = json.loads(DEVELOPMENT_PACK.read_text(encoding="utf-8"))
+    if pack.get("review", {}).get("status") != "development_fixture":
+        fail("synthetic knowledge pack must remain development_fixture")
+    records = pack.get("records", [])
+    if len(records) < 10:
+        fail("development pack must exercise at least 10 ingestion records")
+    evidence_ids = [record.get("evidence_id") for record in records]
+    if len(evidence_ids) != len(set(evidence_ids)) or any(not item for item in evidence_ids):
+        fail("development pack evidence ids must be unique")
+    dimensions = {len(record.get("embedding", [])) for record in records}
+    if len(dimensions) != 1 or next(iter(dimensions), 0) < 4:
+        fail("development pack must contain fixed-dimension precomputed embeddings")
+
+    for tool in (
+        "build_pack.py",
+        "test_pack_reproducibility.py",
+        "write_evaluation_report.py",
+    ):
+        if not (ROOT / "tools" / tool).is_file():
+            fail(f"pack/evaluation tool missing: tools/{tool}")
+    return len(schema_files), len(records)
+
+
+def validate_evaluation_matrix() -> tuple[int, int]:
+    incidents = json.loads(GOLD_INCIDENTS.read_text(encoding="utf-8"))
+    assets = json.loads(MAP_ASSET_CASES.read_text(encoding="utf-8"))
+    if len(incidents) != 120:
+        fail(f"expected 120 gold incidents, found {len(incidents)}")
+    if len(assets) != 30:
+        fail(f"expected 30 map/asset cases, found {len(assets)}")
+    incident_ids = [case.get("id") for case in incidents]
+    asset_ids = [case.get("id") for case in assets]
+    if len(incident_ids) != len(set(incident_ids)):
+        fail("gold incident ids must be unique")
+    if len(asset_ids) != len(set(asset_ids)):
+        fail("map/asset case ids must be unique")
+    if any(case.get("allows_network") is not False for case in incidents):
+        fail("gold incident cases must default to offline")
+    return len(incidents), len(assets)
+
+
+def validate_repository_governance() -> int:
+    adrs = sorted((ROOT / "Docs" / "ADR").glob("[0-9][0-9][0-9][0-9]-*.md"))
+    if len(adrs) < 12:
+        fail(f"expected 12 architecture decisions, found {len(adrs)}")
+    source_audit = ROOT / "Docs" / "SOURCE_AUDIT_SURVIVALROBINSON.md"
+    if not source_audit.is_file():
+        fail("attached architecture document source audit is missing")
+    audit_text = source_audit.read_text(encoding="utf-8").replace("**", "")
+    if "not accepted as a runtime knowledge source" not in audit_text:
+        fail("source audit must prevent unlicensed runtime reuse")
+    return len(adrs)
+
+
 def main() -> None:
     article_count, source_count = validate_knowledge()
     model_count = validate_model_catalog()
     swift_count = validate_swift_sources()
     validate_contracts()
     safety_count, obd_count, test_count = validate_locked_evaluations()
+    schema_count, development_records = validate_schemas_and_pack_contract()
+    gold_count, asset_count = validate_evaluation_matrix()
+    adr_count = validate_repository_governance()
     print(
         "PASS: "
         f"{article_count} articles, {source_count} sources, "
-        f"{model_count} model tiers, {swift_count} Swift sources, "
+        f"{model_count} model tiers, {schema_count} schemas, "
+        f"{development_records} development records, {swift_count} Swift sources, "
         f"{test_count} tests, {safety_count} safety cases, "
-        f"{obd_count} blocked OBD commands"
+        f"{obd_count} blocked OBD commands, {gold_count} gold incidents, "
+        f"{asset_count} map/asset cases, {adr_count} ADRs"
     )
 
 

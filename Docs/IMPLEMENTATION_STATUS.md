@@ -28,13 +28,31 @@ Updated: 2026-07-23
 - [x] llama.cpp text/vision backend contract
 - [x] Locked safety and forbidden-OBD fixtures
 - [x] GitHub Actions structural, Swift, and iOS build jobs
+- [x] Independent model, knowledge, map, policy, catalog, response, and
+  evaluation schemas
+- [x] Typed grounded-response validation with evidence and procedure allowlists
+- [x] Policy identifiers and visible attribution on deterministic safety cards
+- [x] Incident-mode network containment and cached offline entitlements
+- [x] Bundled emergency-core first-launch and corruption recovery
+- [x] Package recall with automatic non-recalled failover
+- [x] Resumable artifact assembly and interruption tests
+- [x] Deterministic SQLite/FTS/vector pack builder with Ed25519 signing
+- [x] Byte-for-byte pack reproducibility test in CI
+- [x] 120 synthetic gold incident cases and 30 map/asset cases
+- [x] Versioned evaluation-report writer and schema
+- [x] Model performance/thermal/battery acceptance contract
+- [x] Virtual cross-subsystem release and accessibility contract
+- [x] Twelve source-controlled architecture decision records
+- [x] Attached-plan source audit preventing unlicensed corpus reuse
 
-## Next production milestones
+## Remaining external production milestones
 
-1. **Apple build verification:** resolve any CI/SDK warnings, add UI tests, and
-   test VoiceOver and Dynamic Type.
-2. **Signed package delivery:** add production trust keys, authenticated hosting,
-   download resume, license purchase/receipt binding, and real signed artifacts.
+1. **Apple and physical-device verification:** resolve any CI/SDK findings and
+   run VoiceOver, Dynamic Type, interruption, memory, thermal, and battery tests
+   on the supported iPhone matrix.
+2. **Signed production delivery:** provision production trust keys and
+   authenticated hosting, then publish licensed real artifacts. Local signing,
+   verification, resume, activation, rollback, and recall controls are complete.
 3. **Real local runtime:** integrate a pinned llama.cpp XCFramework; first Field,
    then Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
 4. **Expert-reviewed content:** replace fixtures with separately signed Vehicle,
@@ -45,13 +63,13 @@ Updated: 2026-07-23
    route breadcrumb, pack age, and readiness test.
 7. **Read-only OBD hardware:** BLE adapter discovery, reconnect, code/freeze-frame
    capture, vehicle binding, and cited explanations.
-8. **Release evidence:** locked evaluation sets, physical-device matrix,
-   independent red team, human-factors testing, privacy/legal review, and
-   domain-owner sign-off.
+8. **Release evidence:** execute the locked matrices on real approved assets and
+   devices, then complete independent red team, human-factors, privacy/legal,
+   and domain-owner sign-off.
 
 ## Explicitly not implemented
 
-- Model weights, signed production catalog, or commercial purchases
+- Model weights, signed production catalog/keys, or commercial App Store products
 - Generative vision inference
 - Offline map rendering
 - OBD BLE hardware access

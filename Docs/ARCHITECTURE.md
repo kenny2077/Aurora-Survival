@@ -1,5 +1,9 @@
 # TrailGuard architecture
 
+Binding decisions are recorded in `Docs/ADR/`. Distribution and runtime data
+contracts are independently versioned in `Schemas/`; changing one axis does not
+silently change another.
+
 ## Product invariant
 
 The model interprets and explains; it does not define truth or authorize a

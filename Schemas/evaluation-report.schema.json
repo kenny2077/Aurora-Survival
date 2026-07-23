@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trailguard.app/schemas/evaluation-report.schema.json",
+  "title": "TrailGuard evaluation report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "created_at", "app_commit", "prompt_version",
+    "policy_version", "model", "packs", "device", "os", "suite", "results"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "app_commit": { "type": "string", "minLength": 7 },
+    "prompt_version": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "model": {
+      "type": ["object", "null"],
+      "properties": {
+        "package_id": { "type": "string" },
+        "artifact_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "runtime_version": { "type": "string" }
+      },
+      "required": ["package_id", "artifact_sha256", "runtime_version"],
+      "additionalProperties": false
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["package_id", "version", "manifest_sha256"],
+        "properties": {
+          "package_id": { "type": "string" },
+          "version": { "type": "string" },
+          "manifest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "device": { "type": "string", "minLength": 1 },
+    "os": { "type": "string", "minLength": 1 },
+    "suite": { "type": "string", "minLength": 1 },
+    "results": {
+      "type": "object",
+      "required": ["passed", "failed", "skipped"],
+      "properties": {
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  }
+}
