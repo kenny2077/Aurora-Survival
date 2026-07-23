@@ -31,10 +31,11 @@ jobs:
 
   swift-core:
     runs-on: macos-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Test core package
-        run: swift test
+        run: python3 tools/run_swift_tests.py
 
   ios-build:
     runs-on: macos-latest
