@@ -18,6 +18,8 @@ This claim is architectural. It is not yet a clinical or product certification.
 - Missing models, model exceptions, and vision ineligibility degrade to text.
 - Model tier does not alter the knowledge pack or safety engine.
 - Vision is paused for insufficient memory/storage, heat, or Low Power Mode.
+- Signed installation, activation, rollback, recall, and launch-time active
+  package revalidation are implemented behind fail-closed boundaries.
 - The UI identifies the prototype and directs immediate danger to SOS.
 
 ## Known gaps
@@ -28,7 +30,9 @@ This claim is architectural. It is not yet a clinical or product certification.
   vehicle-specific validation has been completed.
 - OCR can be wrong and is not yet confidence-scored in the UI.
 - No physical-device performance or thermal result exists.
-- No signed package installer, update rollback, or tamper test exists.
+- Production trust keys, authenticated artifact hosting, and a completed key
+  rotation/recall drill do not yet exist. Installer and tamper tests currently
+  use development fixtures only.
 - No independent red team, human-factors study, or regulatory analysis exists.
 
 ## Release blockers

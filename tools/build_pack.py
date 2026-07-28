@@ -130,6 +130,9 @@ def build_sqlite(pack: dict[str, Any], output: pathlib.Path) -> None:
             "domain": pack["domain"],
             "locale": pack["locale"],
             "effective_date": pack["effective_date"],
+            "expires_at": pack.get("expires_at") or "",
+            "region": pack.get("region") or "",
+            "review_status": pack["review"]["status"],
             "review_attestation_id": pack["review"]["attestation_id"],
         }
         connection.executemany(

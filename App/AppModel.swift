@@ -3,7 +3,9 @@ import SwiftUI
 
 @MainActor
 final class AppModel: ObservableObject {
-    @Published var preferredTier: ModelTier = .essential
+    @Published var preferredTier: ModelTier = .essential {
+        didSet { persistPreparation() }
+    }
     @Published var messages: [ChatMessage] = []
     @Published var isThinking = false
     @Published var attachedImageData: Data?
@@ -17,6 +19,7 @@ final class AppModel: ObservableObject {
     let articles: [KnowledgeArticle]
     let entitlementLedger: EntitlementLedger
     private let assistant: IncidentAssistant
+    private let preparationStore: PreparationStateStore
     private let deviceProfiler = DeviceProfiler()
     private let ocr = VisionTextExtractor()
 
@@ -31,6 +34,9 @@ final class AppModel: ObservableObject {
         )
         entitlementLedger = EntitlementLedger(
             fileURL: appDataRoot.appendingPathComponent("entitlements.json")
+        )
+        preparationStore = PreparationStateStore(
+            fileURL: appDataRoot.appendingPathComponent("preparation-state.json")
         )
 
         let loaded: [KnowledgeArticle]
@@ -73,6 +79,23 @@ final class AppModel: ObservableObject {
             installedTiers: [.essential]
         )
         emergencyCoreStatus = coreStatus
+
+        if let state = try? preparationStore.load() {
+            vehicleProfile = state.vehicleProfile
+            preferredTier = state.preferredTier
+            readinessChecks = ReadinessCheck.defaults.map { check in
+                var restored = check
+                restored.isComplete = check.id == "knowledge"
+                    || state.completedReadinessIDs.contains(check.id)
+                return restored
+            }
+            if state.vehicleProfile != nil,
+               let index = readinessChecks.firstIndex(where: {
+                   $0.id == "vehicle"
+               }) {
+                readinessChecks[index].isComplete = true
+            }
+        }
     }
 
     var filteredArticles: [KnowledgeArticle] {
@@ -137,6 +160,7 @@ final class AppModel: ObservableObject {
     func toggleReadiness(_ id: String) {
         guard let index = readinessChecks.firstIndex(where: { $0.id == id }) else { return }
         readinessChecks[index].isComplete.toggle()
+        persistPreparation()
     }
 
     func saveVehicle(_ profile: VehicleProfile) {
@@ -145,10 +169,30 @@ final class AppModel: ObservableObject {
         if let index = readinessChecks.firstIndex(where: { $0.id == "vehicle" }) {
             readinessChecks[index].isComplete = true
         }
+        persistPreparation()
     }
 
     func removeVehicle() {
         vehicleProfile = nil
+        if let index = readinessChecks.firstIndex(where: { $0.id == "vehicle" }) {
+            readinessChecks[index].isComplete = false
+        }
+        persistPreparation()
+    }
+
+    private func persistPreparation() {
+        let completed = Set(
+            readinessChecks
+                .filter(\.isComplete)
+                .map(\.id)
+        )
+        try? preparationStore.save(
+            PreparationState(
+                vehicleProfile: vehicleProfile,
+                completedReadinessIDs: completed,
+                preferredTier: preferredTier
+            )
+        )
     }
 }
 

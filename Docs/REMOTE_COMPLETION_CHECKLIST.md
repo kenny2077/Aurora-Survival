@@ -16,6 +16,8 @@ an executable local or CI contract; it does not claim external certification.
 | SQLite FTS + precomputed vectors | Complete | deterministic pack compiler |
 | Signed install/activation/rollback | Complete | verifier and installer tests |
 | Recall and failover | Complete | activation index and recall tests |
+| Launch-time active-pack resolution | Complete | revalidation, entitlement, policy, review, version, recall, and device gates |
+| Compiled-pack runtime retrieval | Complete | SQLite FTS5/vector reader with RRF and applicability filtering |
 | Typed model response | Complete | grounded response schema and Swift validator |
 | Evidence/procedure validation | Complete | unknown IDs fail closed |
 | Policy attribution on safety cards | Complete | deterministic source and policy ID |

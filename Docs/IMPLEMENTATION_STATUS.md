@@ -35,8 +35,12 @@ Updated: 2026-07-23
 - [x] Incident-mode network containment and cached offline entitlements
 - [x] Bundled emergency-core first-launch and corruption recovery
 - [x] Package recall with automatic non-recalled failover
+- [x] Launch-time active-pack registry with signature/hash revalidation,
+  entitlement, recall, policy, app-version, review, and device gates
 - [x] Resumable artifact assembly and interruption tests
 - [x] Deterministic SQLite/FTS/vector pack builder with Ed25519 signing
+- [x] SQLite FTS5/vector runtime retriever with applicability filters,
+  deterministic reciprocal-rank fusion, and lexical fallback
 - [x] Byte-for-byte pack reproducibility test in CI
 - [x] 120 synthetic gold incident cases and 30 map/asset cases
 - [x] Versioned evaluation-report writer and schema
@@ -53,11 +57,14 @@ Updated: 2026-07-23
 - [x] Refund and revocation removal from offline entitlement snapshots
 - [x] File-backed offline map runtime boundary
 - [x] Persistent vehicle-bound OBD observation records
+- [x] Persistent vehicle profile, readiness checklist, and preferred model tier
 - [x] Exact vehicle-document ingestion validation
 - [x] All 120 gold incidents executed through `IncidentAssistant`
 - [x] All 30 map/asset cases executed through map readiness
 - [x] Printable/shareable zero-power trip sheet
 - [x] In-app system status and external-gate disclosure
+- [x] Workstation-only Ollama smoke harness for structured Gemma/Qwen output
+  and Qwen embeddings
 
 ## Remaining external production milestones
 
@@ -70,6 +77,8 @@ Updated: 2026-07-23
    are complete.
 3. **Real local runtime:** integrate a pinned llama.cpp XCFramework; first Field,
    then Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
+   Workstation Ollama tests are evaluation evidence only and are not an iOS
+   runtime substitute.
 4. **Expert-reviewed content:** replace fixtures with separately signed Vehicle,
    Wilderness, First Aid, and Navigation packs.
 5. **Vehicle ingestion assets:** obtain licensed manuals and build signed
@@ -86,6 +95,7 @@ Updated: 2026-07-23
 ## Explicitly not implemented
 
 - Model weights, signed production catalog/keys, or configured App Store products
+- Pinned llama.cpp XCFramework and the Objective-C++ bridge implementation
 - Generative vision inference
 - Offline map rendering
 - OBD BLE hardware access
