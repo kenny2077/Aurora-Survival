@@ -8,6 +8,20 @@ import XCTest
 #endif
 
 final class LlamaRuntimeAdapterTests: XCTestCase {
+    func testLiteConfigurationUsesConservativeLimits() throws {
+        let fixture = try makeFiles(includeProjector: false)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+
+        let configuration = LlamaRuntimeConfiguration.lite(
+            modelURL: fixture.model,
+            threadCount: 2
+        )
+
+        XCTAssertEqual(configuration.contextTokens, 2_048)
+        XCTAssertEqual(configuration.maximumOutputTokens, 256)
+        XCTAssertNil(configuration.visionProjectorURL)
+    }
+
     func testTextTierNeverForwardsImage() async throws {
         let fixture = try makeFiles(includeProjector: false)
         defer { try? FileManager.default.removeItem(at: fixture.root) }

@@ -124,12 +124,60 @@ final class TrailGuardCoreTests: XCTestCase {
         )
         let decision = ModelRouter().route(
             requested: .visionExpert,
-            installed: [.essential, .field, .visionExpert],
+            installed: [.essential, .lite, .field, .visionExpert],
             device: hot
         )
-        XCTAssertEqual(decision.selected, .field)
+        XCTAssertEqual(decision.selected, .essential)
         XCTAssertFalse(decision.canAnalyzeImage)
         XCTAssertTrue(decision.explanation.contains("thermal"))
+    }
+
+    func testLiteRoutesOnIPhone13ClassMemory() {
+        let iPhone13Class = DeviceSnapshot(
+            physicalMemoryBytes: 4_000_000_000,
+            freeStorageBytes: 10_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: false
+        )
+        let decision = ModelRouter().route(
+            requested: .lite,
+            installed: [.essential, .lite],
+            device: iPhone13Class
+        )
+        XCTAssertEqual(decision.selected, .lite)
+        XCTAssertFalse(decision.canAnalyzeImage)
+    }
+
+    func testFieldFallsBackToLiteOnIPhone13ClassMemory() {
+        let iPhone13Class = DeviceSnapshot(
+            physicalMemoryBytes: 4_000_000_000,
+            freeStorageBytes: 10_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: false
+        )
+        let decision = ModelRouter().route(
+            requested: .field,
+            installed: [.essential, .lite, .field],
+            device: iPhone13Class
+        )
+        XCTAssertEqual(decision.selected, .lite)
+        XCTAssertTrue(decision.explanation.contains("memory"))
+    }
+
+    func testLiteFallsBackToEssentialInLowPowerMode() {
+        let lowPower = DeviceSnapshot(
+            physicalMemoryBytes: 4_000_000_000,
+            freeStorageBytes: 10_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: true
+        )
+        let decision = ModelRouter().route(
+            requested: .lite,
+            installed: [.essential, .lite],
+            device: lowPower
+        )
+        XCTAssertEqual(decision.selected, .essential)
+        XCTAssertTrue(decision.explanation.contains("Low Power Mode"))
     }
 
     func testVisionFallsBackInLowPowerMode() {

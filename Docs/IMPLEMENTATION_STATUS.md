@@ -11,7 +11,7 @@ Updated: 2026-07-28
 - [x] Offline retrieval and domain filtering
 - [x] Citation-range validation
 - [x] Extractive no-model fallback
-- [x] Essential / Field / Vision Expert contract
+- [x] Essential / Lite / Field / Vision Expert contract
 - [x] Dynamic vision capability routing
 - [x] Offline OCR for all tiers
 - [x] Grounded runtime prompt builder
@@ -69,7 +69,17 @@ Updated: 2026-07-28
   Essential fallback and actually available model-runtime tiers
 - [x] Xcode resource packaging for app knowledge/catalog/trust files and locked
   XCTest fixtures
-- [x] Xcode 26.6 build, full 88-test iOS 26.5 Simulator run, and launch smoke
+- [x] Xcode 26.6 build, full 94-test iOS 26.5 Simulator runs on iPhone and
+  iPad form factors, and launch smoke
+- [x] Universal iPhone/iPad target with full simulator coverage and adaptive
+  portrait/landscape iPad rendering
+- [x] Signed physical build, install, and foreground launch on the iPhone 13
+  and M2 iPad Pro
+- [x] Debug-only Ed25519 development trust key and compiled knowledge-pack
+  install, activation, rollback, recall, and tamper-rejection lifecycle
+- [x] Official llama.cpp `b9637` XCFramework pinned by checksum with an isolated
+  Swift/C++ deterministic text-generation bridge; simulator and device
+  architectures compile and link
 
 ## Remaining external production milestones
 
@@ -78,13 +88,13 @@ Updated: 2026-07-28
    iPhone matrix; GitHub Actions also remains pending while the account-level
    billing/spending-limit issue prevents jobs from starting.
 2. **Signed production delivery:** provision production trust keys and
-   authenticated hosting, then publish licensed real artifacts. Local signing,
-   verification, strict range resume, activation, rollback, and recall controls
-   are complete.
-3. **Real local runtime:** integrate a pinned llama.cpp XCFramework; first Field,
-   then Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
-   Workstation Ollama tests are evaluation evidence only and are not an iOS
-   runtime substitute.
+   authenticated hosting, then publish licensed real artifacts. Debug-only
+   development trust and local signing, verification, strict range resume,
+   activation, rollback, recall, and tamper controls are complete.
+3. **Real local runtime:** select an exact licensed Lite GGUF, package it through
+   the signed model lifecycle, bind the verified active artifact to the pinned
+   llama.cpp backend, and pass physical inference gates. Then repeat for Field
+   and Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
 4. **Expert-reviewed content:** replace fixtures with separately signed Vehicle,
    Wilderness, First Aid, and Navigation packs.
 5. **Vehicle ingestion assets:** obtain licensed manuals and build signed
@@ -101,7 +111,7 @@ Updated: 2026-07-28
 ## Explicitly not implemented
 
 - Model weights, signed production catalog/keys, or configured App Store products
-- Pinned llama.cpp XCFramework and the Objective-C++ bridge implementation
+- An evaluated, signed Lite GGUF and startup activation of real model inference
 - Generative vision inference
 - Offline map rendering
 - OBD BLE hardware access

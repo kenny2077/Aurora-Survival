@@ -20,7 +20,7 @@
     "schema_version": { "const": 1 },
     "package_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
     "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+([+-][A-Za-z0-9.-]+)?$" },
-    "tier": { "enum": ["essential", "field", "vision_expert"] },
+    "tier": { "enum": ["essential", "lite", "field", "vision_expert"] },
     "model": {
       "type": "object",
       "additionalProperties": false,

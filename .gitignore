@@ -2,6 +2,7 @@
 .build/
 .swiftpm/
 DerivedData/
+.trailguard/
 App/Info.plist
 TrailGuard.xcodeproj/
 *.xcuserstate

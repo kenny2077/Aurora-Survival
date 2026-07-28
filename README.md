@@ -102,14 +102,16 @@ python tools/local_model_smoke.py `
   --output Reports/local-model-smoke.json
 ```
 
-This is an off-device evaluation harness, not the iOS runtime. The shipping app
-still requires a pinned llama.cpp XCFramework built on macOS and signed model
-packages installed on the iPhone.
+This is an off-device evaluation harness, not the iOS runtime. The app now links
+a checksum-pinned official llama.cpp XCFramework on macOS. Optional model tiers
+still require an evaluated licensed GGUF, signed model packaging, startup
+activation, and physical-device inference evidence.
 
 Local verification on 2026-07-28 used Xcode 26.6 and the iOS 26.5 Simulator:
-all 88 Swift package and simulator tests passed, the unsigned app built, and
-TrailGuard launched successfully on a simulated iPhone 17 Pro. The GitHub
-Actions workflow also runs Swift package tests and an unsigned simulator build.
+all 94 Swift package and simulator tests passed on iPhone and iPad form factors.
+The universal app also built, installed, and launched on a physical iPhone 13
+and M2 iPad Pro. The GitHub Actions workflow runs Swift package tests and an
+unsigned simulator build.
 Physical-device memory, heat, battery, camera, Bluetooth, and map tests remain
 required.
 

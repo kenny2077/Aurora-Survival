@@ -17,6 +17,7 @@ GOLD_INCIDENTS = ROOT / "Tests" / "Fixtures" / "gold_incidents.json"
 MAP_ASSET_CASES = ROOT / "Tests" / "Fixtures" / "map_asset_cases.json"
 DEVELOPMENT_PACK = ROOT / "Tests" / "Fixtures" / "development_knowledge_pack.json"
 EMERGENCY_CORE = ROOT / "Resources" / "Knowledge" / "emergency_core.json"
+LLAMA_RUNTIME_PACKAGE = ROOT / "Runtime" / "TrailGuardLlamaRuntime" / "Package.swift"
 
 
 def fail(message: str) -> None:
@@ -77,8 +78,20 @@ def validate_model_catalog() -> int:
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     tiers = catalog.get("tiers", [])
     ids = {tier["tier"] for tier in tiers}
-    if ids != {"essential", "field", "vision_expert"}:
+    if ids != {"essential", "lite", "field", "vision_expert"}:
         fail(f"model tiers do not match contract: {sorted(ids)}")
+    lite = next(tier for tier in tiers if tier["tier"] == "lite")
+    lite_gates = lite.get("gates", {})
+    if lite_gates.get("minimum_physical_memory_bytes") != 3_500_000_000:
+        fail("lite memory gate must match the iPhone 13-class contract")
+    if not lite_gates.get("disable_in_low_power_mode"):
+        fail("lite must be disabled in Low Power Mode")
+    if lite.get("maximum_context_tokens") != 2_048:
+        fail("lite context must remain conservatively bounded")
+    if lite.get("maximum_output_tokens") != 256:
+        fail("lite output must remain conservatively bounded")
+    if lite.get("candidate_model") is not None:
+        fail("lite candidate must remain unset until artifact evaluation")
     vision = next(tier for tier in tiers if tier["tier"] == "vision_expert")
     gates = vision.get("gates", {})
     if gates.get("minimum_physical_memory_bytes", 0) < 7_500_000_000:
@@ -179,6 +192,38 @@ def validate_contracts() -> None:
     ):
         if not (ROOT / "App" / app_source).is_file():
             fail(f"app integration missing: App/{app_source}")
+
+
+def validate_llama_runtime_pin() -> str:
+    manifest = LLAMA_RUNTIME_PACKAGE.read_text(encoding="utf-8")
+    release = "b9637"
+    commit = "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    checksum = "46c7dad871f804d82399ddcfeb54d23b6469888801fc35124d7e33e543a9bef7"
+    if f"/{release}/llama-{release}-xcframework.zip" not in manifest:
+        fail("llama.cpp XCFramework release is not pinned")
+    if checksum not in manifest:
+        fail("llama.cpp XCFramework checksum is not pinned")
+
+    readme = (
+        ROOT / "Runtime" / "TrailGuardLlamaRuntime" / "README.md"
+    ).read_text(encoding="utf-8")
+    for value in (release, commit, checksum):
+        if value not in readme:
+            fail(f"llama.cpp runtime provenance is missing: {value}")
+
+    bridge = (
+        ROOT
+        / "Runtime"
+        / "TrailGuardLlamaRuntime"
+        / "Sources"
+        / "TrailGuardLlamaC"
+        / "TrailGuardLlamaC.cpp"
+    ).read_text(encoding="utf-8")
+    if "llama_sampler_init_greedy" not in bridge:
+        fail("llama.cpp text bridge must use deterministic greedy sampling")
+    if "llama_model_chat_template" not in bridge:
+        fail("llama.cpp text bridge must use the model chat template")
+    return release
 
 
 def validate_locked_evaluations() -> tuple[int, int, int]:
@@ -288,6 +333,7 @@ def main() -> None:
     model_count = validate_model_catalog()
     swift_count = validate_swift_sources()
     validate_contracts()
+    llama_release = validate_llama_runtime_pin()
     safety_count, obd_count, test_count = validate_locked_evaluations()
     schema_count, development_records = validate_schemas_and_pack_contract()
     gold_count, asset_count = validate_evaluation_matrix()
@@ -296,6 +342,7 @@ def main() -> None:
         "PASS: "
         f"{article_count} articles, {source_count} sources, "
         f"emergency core {emergency_core_version}, "
+        f"llama.cpp {llama_release}, "
         f"{model_count} model tiers, {schema_count} schemas, "
         f"{development_records} development records, {swift_count} Swift sources, "
         f"{test_count} tests, {safety_count} safety cases, "

@@ -101,18 +101,70 @@ final class ActivePackRegistryTests: XCTestCase {
         XCTAssertTrue(allowed.installedTiers.contains(.field))
     }
 
+    func testFieldPackageFailsClosedBelowItsMemoryGate() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let registry = ActivePackRegistry(
+            rootDirectory: fixture.root,
+            verifier: AcceptingVerifier(),
+            appVersion: "1.2.0",
+            expectedPolicyVersion: "1.0.0"
+        )
+        let snapshot = await registry.resolve(
+            cachedEntitlements: [],
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 4_000_000_000,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertEqual(snapshot.installedTiers, [.essential])
+        XCTAssertEqual(
+            snapshot.issues,
+            [.deviceIneligible(packageID: "model.field", tier: .field)]
+        )
+    }
+
+    func testLitePackageActivatesOnIPhone13ClassMemory() async throws {
+        let fixture = try makeFixture(tier: .lite)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let registry = ActivePackRegistry(
+            rootDirectory: fixture.root,
+            verifier: AcceptingVerifier(),
+            appVersion: "1.2.0",
+            expectedPolicyVersion: "1.0.0"
+        )
+        let snapshot = await registry.resolve(
+            cachedEntitlements: [],
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 4_000_000_000,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertEqual(snapshot.models.map(\.id), ["model.lite@1.0.0"])
+        XCTAssertEqual(snapshot.installedTiers, [.essential, .lite])
+        XCTAssertTrue(snapshot.issues.isEmpty)
+    }
+
     private func makeFixture(
         policyVersion: String = "1.0.0",
         productID: String? = nil,
-        recalled: Bool = false
+        recalled: Bool = false,
+        tier: ModelTier = .field
     ) throws -> (root: URL, packageDirectory: URL) {
+        let packageID = "model.\(tier.rawValue)"
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(
             "TrailGuardActivePack-\(UUID().uuidString)",
             isDirectory: true
         )
         let packageDirectory = root
             .appendingPathComponent("packages", isDirectory: true)
-            .appendingPathComponent("model.field@1.0.0", isDirectory: true)
+            .appendingPathComponent("\(packageID)@1.0.0", isDirectory: true)
         try FileManager.default.createDirectory(
             at: packageDirectory,
             withIntermediateDirectories: true
@@ -122,7 +174,7 @@ final class ActivePackRegistryTests: XCTestCase {
         )
 
         var metadata = [
-            "model_tier": "field",
+            "model_tier": tier.rawValue,
             "model_path": "model.gguf",
             "policy_version": policyVersion,
         ]
@@ -130,7 +182,7 @@ final class ActivePackRegistryTests: XCTestCase {
             metadata["product_id"] = productID
         }
         let manifest = PackageManifest(
-            packageID: "model.field",
+            packageID: packageID,
             version: "1.0.0",
             kind: .model,
             createdAt: "2026-07-23T00:00:00Z",
@@ -156,18 +208,18 @@ final class ActivePackRegistryTests: XCTestCase {
         )
 
         let record = InstalledPackageVersion(
-            packageID: "model.field",
+            packageID: packageID,
             version: "1.0.0",
             kind: .model,
             displayName: "Field test model",
             installedAt: "2026-07-23T00:00:00Z",
-            directoryName: "model.field@1.0.0"
+            directoryName: "\(packageID)@1.0.0"
         )
         let index = PackageActivationIndex(
-            activeVersions: ["model.field": "1.0.0"],
+            activeVersions: [packageID: "1.0.0"],
             installed: [record],
             recalledVersions: recalled
-                ? ["model.field": ["1.0.0"]]
+                ? [packageID: ["1.0.0"]]
                 : [:]
         )
         try JSONEncoder.trailGuard.encode(index).write(

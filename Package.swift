@@ -8,12 +8,21 @@ let package = Package(
         .macOS(.v14)
     ],
     products: [
-        .library(name: "TrailGuardCore", targets: ["TrailGuardCore"])
+        .library(name: "TrailGuardCore", targets: ["TrailGuardCore"]),
+        .executable(
+            name: "trailguard-pack-check",
+            targets: ["TrailGuardPackCheck"]
+        )
     ],
     targets: [
         .target(
             name: "TrailGuardCore",
             path: "Core"
+        ),
+        .executableTarget(
+            name: "TrailGuardPackCheck",
+            dependencies: ["TrailGuardCore"],
+            path: "tools/pack-check"
         ),
         .testTarget(
             name: "TrailGuardCoreTests",
