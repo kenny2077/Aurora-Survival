@@ -1,6 +1,9 @@
 import Foundation
 
 public struct LlamaRuntimeConfiguration: Equatable, Sendable {
+    public static let liteContextTokens = 2_048
+    public static let liteMaximumOutputTokens = 256
+
     public let modelURL: URL
     public let visionProjectorURL: URL?
     public let contextTokens: Int
@@ -19,6 +22,18 @@ public struct LlamaRuntimeConfiguration: Equatable, Sendable {
         self.contextTokens = contextTokens
         self.maximumOutputTokens = maximumOutputTokens
         self.threadCount = threadCount
+    }
+
+    public static func lite(
+        modelURL: URL,
+        threadCount: Int
+    ) -> LlamaRuntimeConfiguration {
+        LlamaRuntimeConfiguration(
+            modelURL: modelURL,
+            contextTokens: liteContextTokens,
+            maximumOutputTokens: liteMaximumOutputTokens,
+            threadCount: threadCount
+        )
     }
 }
 

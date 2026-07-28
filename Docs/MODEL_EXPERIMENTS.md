@@ -5,8 +5,15 @@
 | Tier | Current candidate | Required outcome |
 | --- | --- | --- |
 | Essential | Native extractive pipeline | Instant, low-power, always available |
+| Lite | Exact small text GGUF pending gaming-laptop evaluation | Conservative 2,048-token context and 256-token output on iPhone 13-class memory |
 | Field | Qwen3 1.7B-class text GGUF | Better grounded dialogue than Essential without unsafe additions |
 | Vision Expert | Qwen3-VL-2B-Instruct GGUF | Useful visual observations on capable iPhones without unacceptable heat or battery cost |
+
+The iOS runtime is pinned independently of model selection to official
+llama.cpp release `b9637` (commit
+`aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3`). Its XCFramework archive is
+checksum-locked in `Runtime/AuroraLlamaRuntime/Package.swift`. This proves
+the native build and bridge boundary, not model suitability or performance.
 
 Candidates are replaceable. Tier names and safety contracts are stable.
 
@@ -62,6 +69,7 @@ required follow-up questions, and relevant evidence articles.
 ### Device performance
 
 - Essential first response ≤ 500 ms on the lowest supported device.
+- Lite first token ≤ 3 s and ≥ 8 tokens/s on the iPhone 13 acceptance device.
 - Field first token ≤ 3 s and ≥ 8 tokens/s at the p50 target device.
 - Vision Expert first useful observation ≤ 8 s on the minimum approved device.
 - No OS termination in a 30-minute incident script.

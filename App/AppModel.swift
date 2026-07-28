@@ -143,7 +143,8 @@ final class AppModel: ObservableObject {
             rootDirectory: appDataRoot,
             verifier: verifier,
             appVersion: Self.appVersion,
-            expectedPolicyVersion: policyVersion
+            expectedPolicyVersion: policyVersion,
+            allowDevelopmentKnowledge: Self.allowDevelopmentKnowledge
         )
         let snapshot = await registry.resolve(
             cachedEntitlements: await entitlementLedger.snapshots(),
@@ -257,8 +258,22 @@ final class AppModel: ObservableObject {
     }
 
     private static func loadTrustedPackageKeys() -> [TrustedPackageKey] {
+        var keys = loadTrustedPackageKeys(
+            resource: "trusted_package_keys"
+        )
+#if DEBUG
+        keys.append(contentsOf: loadTrustedPackageKeys(
+            resource: "development_trusted_package_keys"
+        ))
+#endif
+        return keys
+    }
+
+    private static func loadTrustedPackageKeys(
+        resource: String
+    ) -> [TrustedPackageKey] {
         guard let url = Bundle.main.url(
-            forResource: "trusted_package_keys",
+            forResource: resource,
             withExtension: "json"
         ),
               let data = try? Data(contentsOf: url),
@@ -268,6 +283,14 @@ final class AppModel: ObservableObject {
               )
         else { return [] }
         return keys
+    }
+
+    private static var allowDevelopmentKnowledge: Bool {
+#if DEBUG
+        true
+#else
+        false
+#endif
     }
 }
 

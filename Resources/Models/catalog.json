@@ -14,6 +14,23 @@
       "purpose": "Deterministic safety, offline retrieval, citations, and extractive answers."
     },
     {
+      "id": "lite-text-candidate-pending",
+      "tier": "lite",
+      "display_name": "Lite",
+      "modality": "text",
+      "runtime": "llama.cpp-metal",
+      "bundled": false,
+      "candidate_model": null,
+      "maximum_context_tokens": 2048,
+      "maximum_output_tokens": 256,
+      "purpose": "Conservative local text synthesis for iPhone 13-class memory over exactly the same reviewed evidence.",
+      "gates": {
+        "minimum_physical_memory_bytes": 3500000000,
+        "allowed_thermal_states": ["nominal", "fair"],
+        "disable_in_low_power_mode": true
+      }
+    },
+    {
       "id": "field-qwen-text-candidate",
       "tier": "field",
       "display_name": "Field",

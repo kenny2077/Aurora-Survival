@@ -6,6 +6,7 @@ struct ModelSettingsView: View {
     @State private var purchaseStatus: String?
 
     private let optionalProductIDs: Set<String> = [
+        "com.example.Aurora.model.lite",
         "com.example.Aurora.model.field",
         "com.example.Aurora.model.vision",
     ]
@@ -26,6 +27,11 @@ struct ModelSettingsView: View {
                     tier: .essential,
                     status: "Included",
                     detail: "Reviewed extractive answers and OCR. Works without model weights."
+                )
+                TierRow(
+                    tier: .lite,
+                    status: "Not installed",
+                    detail: "Small text-only local model for iPhone 13-class memory. Same evidence, citations, and safety authority."
                 )
                 TierRow(
                     tier: .field,

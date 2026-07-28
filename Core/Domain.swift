@@ -102,12 +102,14 @@ public struct RetrievedPassage: Hashable, Sendable {
 
 public enum ModelTier: String, Codable, CaseIterable, Sendable {
     case essential
+    case lite
     case field
     case visionExpert = "vision_expert"
 
     public var displayName: String {
         switch self {
         case .essential: return "Essential"
+        case .lite: return "Lite"
         case .field: return "Field"
         case .visionExpert: return "Vision Expert"
         }
