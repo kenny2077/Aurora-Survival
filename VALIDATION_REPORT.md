@@ -20,6 +20,10 @@ Milestone: Production Field foundations on the local workstation
 - Workstation Ollama structured-output smoke tests for Qwen3 4B and Gemma3 4B
 - Workstation Qwen3 Embedding smoke test (1,024 dimensions)
 - Persistent preparation-state source and round-trip fixtures
+- Swift 6.3.3 package compilation and all 88 XCTest methods
+- Xcode 26.6 unsigned iOS Simulator build with bundled app resources
+- Full 88-test suite on an iPhone 17 Pro iOS 26.5 Simulator
+- Successful simulator installation, launch, and initial SwiftUI render
 
 Validation result:
 
@@ -30,9 +34,9 @@ OBD, runtime adapters, locked fixtures, CI presence, and test inventory. Run:
 python3 tools/validate.py
 ```
 
-## Authored tests awaiting an Apple toolchain
+## Apple toolchain verification
 
-Eighty-two XCTest methods now cover:
+Eighty-eight XCTest methods now cover:
 
 - fuel/fire and severe-bleeding model bypass;
 - retrieval ranking, domain filtering, and unapproved-content exclusion;
@@ -49,12 +53,12 @@ Eighty-two XCTest methods now cover:
 - twelve locked safety/refusal cases with zero model calls.
 - launch-time package identity, policy, recall, entitlement, and device gates;
 - preparation-state persistence and corrupt-state fallback.
+- SQLite lexical/vector retrieval, applicability, deterministic rank fusion,
+  corrupt vector bounds, and fail-closed runtime bootstrap.
 
-## Environment limitation
+## Remaining environment limitations
 
-This Windows environment has no Swift compiler, Xcode, iOS SDK, simulator, or
-physical iPhone. The Python validation, reproducible package build, and local
-Ollama model/embedding smoke tests passed, but no iOS compile, UI test, Metal
-inference, memory, thermal, battery, or physical-device result is claimed.
-Run `make project`, `swift test`, and the `Aurora` scheme on a Mac before
-treating the source as iOS build-verified.
+The source is SwiftPM- and iOS Simulator-build verified, but no physical-iPhone
+Metal inference, memory, thermal, battery, camera, Bluetooth, map-rendering,
+VoiceOver, or interruption result is claimed. Production package trust keys,
+licensed assets, and a pinned llama.cpp XCFramework also remain external gates.

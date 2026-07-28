@@ -44,7 +44,7 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
 - A whitelist-only OBD protocol that cannot clear codes or write to an ECU.
 - Vehicle-bound local OBD observation records with raw responses and sources.
 - A llama.cpp backend contract for both text-only and Qwen vision packages.
-- Seventy-six Swift tests, 120 executed synthetic gold incidents, 30 executed
+- Eighty-eight Swift tests, 120 executed synthetic gold incidents, 30 executed
   map/asset cases,
   seven versioned schemas, locked safety fixtures, and GitHub Actions for core,
   reproducible packs, and iOS builds.
@@ -106,10 +106,12 @@ This is an off-device evaluation harness, not the iOS runtime. The shipping app
 still requires a pinned llama.cpp XCFramework built on macOS and signed model
 packages installed on the iPhone.
 
-This Linux build environment does not contain Xcode or Swift, so the checked-in
-validation script is the executable verification path here. GitHub Actions runs
-the Swift package tests and an unsigned iOS simulator build. Physical-device
-memory, heat, battery, camera, Bluetooth, and map tests remain required.
+Local verification on 2026-07-28 used Xcode 26.6 and the iOS 26.5 Simulator:
+all 88 Swift package and simulator tests passed, the unsigned app built, and
+Aurora launched successfully on a simulated iPhone 17 Pro. The GitHub
+Actions workflow also runs Swift package tests and an unsigned simulator build.
+Physical-device memory, heat, battery, camera, Bluetooth, and map tests remain
+required.
 
 ## Architecture at a glance
 

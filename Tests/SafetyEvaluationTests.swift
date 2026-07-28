@@ -64,7 +64,11 @@ final class SafetyEvaluationTests: XCTestCase {
         ) ?? bundle.url(forResource: name, withExtension: "json")
         #else
         let bundle = Bundle(for: SafetyEvaluationTests.self)
-        let url = bundle.url(forResource: name, withExtension: "json")
+        let url = bundle.url(
+            forResource: name,
+            withExtension: "json",
+            subdirectory: "Fixtures"
+        ) ?? bundle.url(forResource: name, withExtension: "json")
         #endif
         return try JSONDecoder().decode(
             T.self,

@@ -2,6 +2,8 @@
 .build/
 .swiftpm/
 DerivedData/
+App/Info.plist
+Aurora.xcodeproj/
 *.xcuserstate
 xcuserdata/
 review/

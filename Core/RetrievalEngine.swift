@@ -9,6 +9,54 @@ public protocol EvidenceRetrieving: Sendable {
     ) -> [RetrievedPassage]
 }
 
+public struct RankFusingRetriever: EvidenceRetrieving, Sendable {
+    private let sources: [any EvidenceRetrieving]
+
+    public init(sources: [any EvidenceRetrieving]) {
+        self.sources = sources
+    }
+
+    public func search(
+        query: String,
+        domain: KnowledgeDomain? = nil,
+        vehicle: VehicleProfile? = nil,
+        limit: Int = 4
+    ) -> [RetrievedPassage] {
+        var fused: [String: RetrievedPassage] = [:]
+        for source in sources {
+            let results = source.search(
+                query: query,
+                domain: domain,
+                vehicle: vehicle,
+                limit: limit
+            )
+            for (rank, passage) in results.enumerated() {
+                let contribution = 1.0 / Double(60 + rank + 1)
+                if let existing = fused[passage.article.id] {
+                    fused[passage.article.id] = RetrievedPassage(
+                        article: existing.article,
+                        score: existing.score + contribution
+                    )
+                } else {
+                    fused[passage.article.id] = RetrievedPassage(
+                        article: passage.article,
+                        score: contribution
+                    )
+                }
+            }
+        }
+        return fused.values
+            .sorted {
+                if $0.score == $1.score {
+                    return $0.article.id < $1.article.id
+                }
+                return $0.score > $1.score
+            }
+            .prefix(max(1, limit))
+            .map { $0 }
+    }
+}
+
 public struct RetrievalEngine: EvidenceRetrieving, Sendable {
     private let articles: [KnowledgeArticle]
 

@@ -9,6 +9,9 @@ struct AuroraApp: App {
             RootView()
                 .environmentObject(appModel)
                 .tint(Color("SignalOrange"))
+                .task {
+                    await appModel.refreshActivePacks()
+                }
         }
     }
 }
