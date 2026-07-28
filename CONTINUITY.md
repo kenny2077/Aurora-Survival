@@ -27,7 +27,7 @@ Code Architecture:
 ## 2. Progress--Update after every meaningful session
 
 Milestones -- Three Facts only, no raw logs : compact if needed
-- `agent/field-foundations` is pushed at `9e1975a`; the universal target passes all 94 tests on both iPhone and iPad simulators and has inspected portrait/landscape iPad rendering.
+- `agent/field-foundations` is pushed through `192227b`; the universal target passes all 94 tests on both iPhone and iPad simulators and has inspected portrait/landscape iPad rendering.
 - Apple Development signing is provisioned, and the universal runtime-linked app plus nested framework verify, install, launch, and remain alive on the physical iPhone 13 (`iPhone14,5`) and M2 iPad Pro (`iPad14,3`).
 - Debug-only signed-pack lifecycle and Release trust exclusion are green; Lite is explicit, and official llama.cpp `b9637` is checksum-pinned with a deterministic text bridge that builds for simulator and arm64 iOS while the candidate GGUF remains unset.
 
@@ -48,8 +48,8 @@ gaming laptop evaluation followed by physical-device evidence.
 ## 3. Next Stage Implementation Plan--Update after every meaningful session
 
 - Focus 1: Complete direct screen, retrieval/citation, OCR/photo, accessibility, interruption, airplane-mode relaunch, and sustained energy/battery evidence on both physical devices.
-- Focus 2: Prepare the exact gaming-laptop Lite candidate evaluation and signed-artifact handoff, without choosing a model from workstation smoke results alone.
-- Focus 3: Commit and push the verified universal-device, development-trust, Lite contract, and pinned-runtime milestone while preserving Essential as the fail-closed default.
+- Focus 2: Evaluate exact licensed Lite GGUF candidates on the gaming laptop and return the winning artifact identity, license, byte size, and SHA-256.
+- Focus 3: Package the selected Lite artifact through the signed model lifecycle, bind it to `LlamaXCFrameworkBackend`, and execute physical latency/memory/thermal/battery acceptance while preserving Essential fallback.
 
 ---
 
