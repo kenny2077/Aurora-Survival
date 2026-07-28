@@ -9,6 +9,9 @@ struct TrailGuardApp: App {
             RootView()
                 .environmentObject(appModel)
                 .tint(Color("SignalOrange"))
+                .task {
+                    await appModel.refreshActivePacks()
+                }
         }
     }
 }

@@ -16,8 +16,8 @@ targets:
     sources:
       - path: App
       - path: Core
-    resources:
       - path: Resources
+        buildPhase: resources
     info:
       path: App/Info.plist
       properties:
@@ -40,8 +40,8 @@ targets:
       - path: Tests
         excludes:
           - Fixtures
-    resources:
       - path: Tests/Fixtures
+        buildPhase: resources
     dependencies:
       - target: TrailGuard
     settings:

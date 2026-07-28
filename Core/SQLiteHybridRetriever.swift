@@ -432,11 +432,11 @@ private extension SQLiteHybridRetriever {
         guard let object = try? JSONSerialization.jsonObject(with: data),
               let dictionary = object as? [String: Any]
         else { return false }
-        if let requiredJurisdiction = filter.jurisdiction,
-           let recordJurisdiction = dictionary["jurisdiction"] as? String,
-           recordJurisdiction.caseInsensitiveCompare(requiredJurisdiction)
-                != .orderedSame {
-            return false
+        if let requiredJurisdiction = filter.jurisdiction {
+            guard let recordJurisdiction = dictionary["jurisdiction"] as? String,
+                  recordJurisdiction.caseInsensitiveCompare(requiredJurisdiction)
+                    == .orderedSame
+            else { return false }
         }
         guard domain == .vehicle else { return true }
         guard let vehicle,
@@ -494,10 +494,11 @@ private extension SQLiteHybridRetriever {
         return data.withUnsafeBytes { rawBuffer in
             (0..<dimensions).map { index in
                 let start = offset + index * 4
-                let bits = UInt32(rawBuffer[start])
-                    | UInt32(rawBuffer[start + 1]) << 8
-                    | UInt32(rawBuffer[start + 2]) << 16
-                    | UInt32(rawBuffer[start + 3]) << 24
+                let byte0 = UInt32(rawBuffer[start])
+                let byte1 = UInt32(rawBuffer[start + 1]) << 8
+                let byte2 = UInt32(rawBuffer[start + 2]) << 16
+                let byte3 = UInt32(rawBuffer[start + 3]) << 24
+                let bits = byte0 | byte1 | byte2 | byte3
                 return Float(bitPattern: bits)
             }
         }

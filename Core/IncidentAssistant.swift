@@ -45,7 +45,8 @@ public actor IncidentAssistant {
         let evidence = retrieval.search(
             query: request.question,
             domain: request.domain,
-            vehicle: request.vehicleProfile
+            vehicle: request.vehicleProfile,
+            limit: 4
         )
         let decision = router.route(
             requested: request.preferredTier,

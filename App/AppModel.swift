@@ -14,14 +14,20 @@ final class AppModel: ObservableObject {
     @Published var readinessChecks: [ReadinessCheck] = ReadinessCheck.defaults
     @Published var vehicleProfile: VehicleProfile?
     @Published private(set) var emergencyCoreStatus = "Emergency core unavailable"
+    @Published private(set) var activePackStatus = "Active packages not checked"
+    @Published private(set) var activePackIssueCount = 0
+    @Published private(set) var runtimeTiers: Set<ModelTier> = [.essential]
     @Published var incidentModeEnabled = true
 
     let articles: [KnowledgeArticle]
     let entitlementLedger: EntitlementLedger
-    private let assistant: IncidentAssistant
+    private var assistant: IncidentAssistant
+    private let appDataRoot: URL
+    private let policyVersion: String
     private let preparationStore: PreparationStateStore
     private let deviceProfiler = DeviceProfiler()
     private let ocr = VisionTextExtractor()
+    private var isRefreshingActivePacks = false
 
     init() {
         let applicationSupport = FileManager.default.urls(
@@ -32,6 +38,7 @@ final class AppModel: ObservableObject {
             "TrailGuard",
             isDirectory: true
         )
+        self.appDataRoot = appDataRoot
         entitlementLedger = EntitlementLedger(
             fileURL: appDataRoot.appendingPathComponent("entitlements.json")
         )
@@ -41,6 +48,7 @@ final class AppModel: ObservableObject {
 
         let loaded: [KnowledgeArticle]
         let coreStatus: String
+        let corePolicyVersion: String
         if let url = Bundle.main.url(
             forResource: "emergency_core",
             withExtension: "json"
@@ -51,6 +59,7 @@ final class AppModel: ObservableObject {
                bundledData: bundledData
            ).loadOrRecover() {
             loaded = result.bundle.articles
+            corePolicyVersion = result.bundle.policyVersion
             switch result.origin {
             case .active:
                 coreStatus = "Verified emergency core \(result.bundle.version)"
@@ -66,14 +75,17 @@ final class AppModel: ObservableObject {
                   let store = try? KnowledgeStore.load(url: url) {
             loaded = store.articles
             coreStatus = "Legacy bundled guide loaded"
+            corePolicyVersion = "deterministic-policy-v1"
         } else {
             loaded = []
             coreStatus = "Emergency core unavailable"
+            corePolicyVersion = "deterministic-policy-v1"
         }
         articles = loaded
+        policyVersion = corePolicyVersion
 
-        // Model package installation is intentionally explicit. Essential is the
-        // safe extractive fallback included in the binary.
+        // Essential is ready immediately. Optional packages are revalidated
+        // asynchronously before a replacement assistant can use them.
         assistant = IncidentAssistant(
             articles: loaded,
             installedTiers: [.essential]
@@ -112,7 +124,50 @@ final class AppModel: ObservableObject {
     }
 
     var installedTierSummary: String {
-        "Essential installed · Field and Vision require signed model packs"
+        let names = ModelTier.allCases
+            .filter(runtimeTiers.contains)
+            .map(\.displayName)
+            .joined(separator: ", ")
+        return "\(names) active · optional tiers require a verified package and runtime"
+    }
+
+    func refreshActivePacks() async {
+        guard !isRefreshingActivePacks else { return }
+        isRefreshingActivePacks = true
+        defer { isRefreshingActivePacks = false }
+
+        let verifier = PackageVerifier(
+            trustedKeys: Self.loadTrustedPackageKeys()
+        )
+        let registry = ActivePackRegistry(
+            rootDirectory: appDataRoot,
+            verifier: verifier,
+            appVersion: Self.appVersion,
+            expectedPolicyVersion: policyVersion
+        )
+        let snapshot = await registry.resolve(
+            cachedEntitlements: await entitlementLedger.snapshots(),
+            device: deviceProfiler.snapshot()
+        )
+        let runtime = IncidentRuntimeBootstrap(
+            bundledArticles: articles
+        ).resolve(
+            activePacks: snapshot,
+            availableModelTiers: [.essential]
+        )
+
+        assistant = runtime.assistant
+        runtimeTiers = runtime.runtimeTiers
+        activePackIssueCount = snapshot.issues.count + runtime.issues.count
+        if activePackIssueCount > 0 {
+            activePackStatus = "Essential fallback active · \(activePackIssueCount) package issue(s)"
+        } else if runtime.usesCompiledKnowledge {
+            activePackStatus = "Verified compiled knowledge active"
+        } else if snapshot.models.isEmpty && snapshot.maps.isEmpty {
+            activePackStatus = "No verified optional packs · Essential ready"
+        } else {
+            activePackStatus = "Verified optional packs checked · unavailable runtimes stay disabled"
+        }
     }
 
     func attachImage(data: Data) async {
@@ -193,6 +248,26 @@ final class AppModel: ObservableObject {
                 preferredTier: preferredTier
             )
         )
+    }
+
+    private static var appVersion: String {
+        Bundle.main.object(
+            forInfoDictionaryKey: "CFBundleShortVersionString"
+        ) as? String ?? "0"
+    }
+
+    private static func loadTrustedPackageKeys() -> [TrustedPackageKey] {
+        guard let url = Bundle.main.url(
+            forResource: "trusted_package_keys",
+            withExtension: "json"
+        ),
+              let data = try? Data(contentsOf: url),
+              let keys = try? JSONDecoder().decode(
+                  [TrustedPackageKey].self,
+                  from: data
+              )
+        else { return [] }
+        return keys
     }
 }
 

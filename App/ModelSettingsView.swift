@@ -56,6 +56,9 @@ struct ModelSettingsView: View {
                                     purchaseStatus = completed
                                         ? "\(product.displayName) entitlement verified."
                                         : "Purchase was cancelled or remains pending."
+                                    if completed {
+                                        await model.refreshActivePacks()
+                                    }
                                 } catch {
                                     purchaseStatus = "Purchase verification failed."
                                 }
@@ -74,6 +77,7 @@ struct ModelSettingsView: View {
                             try await store.restore(
                                 ledger: model.entitlementLedger
                             )
+                            await model.refreshActivePacks()
                             purchaseStatus = "Verified purchases restored."
                         } catch {
                             purchaseStatus = "Restore or verification failed."

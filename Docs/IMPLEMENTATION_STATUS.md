@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-07-23
+Updated: 2026-07-28
 
 ## Complete in this milestone
 
@@ -65,12 +65,18 @@ Updated: 2026-07-23
 - [x] In-app system status and external-gate disclosure
 - [x] Workstation-only Ollama smoke harness for structured Gemma/Qwen output
   and Qwen embeddings
+- [x] App startup composition of verified compiled knowledge with bundled
+  Essential fallback and actually available model-runtime tiers
+- [x] Xcode resource packaging for app knowledge/catalog/trust files and locked
+  XCTest fixtures
+- [x] Xcode 26.6 build, full 88-test iOS 26.5 Simulator run, and launch smoke
 
 ## Remaining external production milestones
 
-1. **Apple and physical-device verification:** resolve any CI/SDK findings and
-   run VoiceOver, Dynamic Type, interruption, memory, thermal, and battery tests
-   on the supported iPhone matrix.
+1. **Physical-device verification:** run VoiceOver, Dynamic Type, interruption,
+   memory, thermal, battery, camera, Bluetooth, and map tests on the supported
+   iPhone matrix; GitHub Actions also remains pending while the account-level
+   billing/spending-limit issue prevents jobs from starting.
 2. **Signed production delivery:** provision production trust keys and
    authenticated hosting, then publish licensed real artifacts. Local signing,
    verification, strict range resume, activation, rollback, and recall controls

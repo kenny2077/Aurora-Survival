@@ -32,6 +32,10 @@ struct SystemStatusView: View {
                     "Model tiers",
                     value: model.installedTierSummary
                 )
+                LabeledContent(
+                    "Active packages",
+                    value: model.activePackStatus
+                )
             }
 
             Section("Integrated controls") {
