@@ -12,14 +12,20 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
 - SwiftUI iPhone shell with Ask, Guide, Readiness, and Models tabs.
 - Deterministic critical-hazard screening before any model invocation.
 - Offline keyword retrieval over a bundled, source-attributed starter pack.
+- Runtime retrieval over verified compiled SQLite FTS5/vector knowledge packs,
+  with deterministic rank fusion and applicability filtering.
 - Citation validation with an extractive fallback when generation is uncited.
 - Essential, Field, and Vision Expert routing with runtime memory, storage,
   thermal-state, and Low Power Mode gates.
 - Photo attachment and fully offline Apple Vision OCR on every tier.
 - A Qwen3-VL-2B/llama.cpp integration seam for capable high-tier devices.
 - A pre-trip readiness checklist and an explicit zero-power contingency.
+- Persistent vehicle profile, readiness completion, and preferred model tier.
 - A signed package pipeline with Ed25519 signatures, per-file SHA-256 checks,
   path-traversal protection, atomic activation, rollback, and recall.
+- Launch-time active-pack resolution that rechecks recall, package identity,
+  signatures/hashes, app and policy compatibility, cached entitlement, review
+  state, and device eligibility before exposing an installed tier.
 - A reproducible knowledge-pack compiler that creates SQLite/FTS, precomputed
   vector artifacts, canonical manifests, and Ed25519 envelopes.
 - Typed grounded responses that reject unknown evidence, invented procedures,
@@ -87,6 +93,19 @@ python3 tools/validate.py
 python3 tools/test_pack_reproducibility.py
 ```
 
+On a Windows development workstation with Ollama already running, the installed
+Gemma, Qwen, and Qwen embedding models can be exercised without connecting them
+to Incident Mode:
+
+```powershell
+python tools/local_model_smoke.py `
+  --output Reports/local-model-smoke.json
+```
+
+This is an off-device evaluation harness, not the iOS runtime. The shipping app
+still requires a pinned llama.cpp XCFramework built on macOS and signed model
+packages installed on the iPhone.
+
 This Linux build environment does not contain Xcode or Swift, so the checked-in
 validation script is the executable verification path here. GitHub Actions runs
 the Swift package tests and an unsigned iOS simulator build. Physical-device
@@ -114,6 +133,8 @@ Key source files:
 - `Core/IncidentAssistant.swift` — end-to-end orchestration.
 - `Core/GroundedPromptBuilder.swift` — evidence-only runtime contract.
 - `Core/PackageVerifier.swift` — signed package and artifact verification.
+- `Core/ActivePackRegistry.swift` — fail-closed startup package resolution.
+- `Core/PreparationStateStore.swift` — persisted readiness and vehicle state.
 - `Core/GroundedResponse.swift` — typed evidence/procedure output validation.
 - `Core/GroundedResponseCodec.swift` — exact step/warning resolution and rendering.
 - `Core/EmergencyCoreStore.swift` — first-launch and corruption recovery.

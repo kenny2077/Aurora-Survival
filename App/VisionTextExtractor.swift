@@ -1,6 +1,6 @@
 import Foundation
 import ImageIO
-import Vision
+@preconcurrency import Vision
 
 struct VisionTextExtractor: Sendable {
     func extractText(from data: Data) async -> [String] {

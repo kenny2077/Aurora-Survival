@@ -2,7 +2,7 @@ import Foundation
 
 public actor IncidentAssistant {
     private let safety: SafetyEngine
-    private let retrieval: RetrievalEngine
+    private let retrieval: any EvidenceRetrieving
     private let router: ModelRouter
     private let citationPolicy: CitationPolicy
     private let groundedCodec: GroundedResponseCodec
@@ -13,6 +13,7 @@ public actor IncidentAssistant {
         articles: [KnowledgeArticle],
         installedTiers: Set<ModelTier> = [.essential],
         safety: SafetyEngine = SafetyEngine(),
+        retrieval: (any EvidenceRetrieving)? = nil,
         router: ModelRouter = ModelRouter(),
         citationPolicy: CitationPolicy = CitationPolicy(),
         groundedCodec: GroundedResponseCodec = GroundedResponseCodec(),
@@ -21,7 +22,7 @@ public actor IncidentAssistant {
         }
     ) {
         self.safety = safety
-        self.retrieval = RetrievalEngine(articles: articles)
+        self.retrieval = retrieval ?? RetrievalEngine(articles: articles)
         self.router = router
         self.citationPolicy = citationPolicy
         self.groundedCodec = groundedCodec

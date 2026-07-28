@@ -1,7 +1,7 @@
 # Validation report
 
-Date: 2026-07-23  
-Milestone: Offline iOS vertical slice
+Date: 2026-07-28
+Milestone: Production Field foundations on the local workstation
 
 ## Passed here
 
@@ -15,6 +15,11 @@ Milestone: Offline iOS vertical slice
 - Required critical hazard rule presence
 - Swift source delimiter and insecure-URL checks
 - Archive integrity check
+- Active package registry source and fail-closed fixtures
+- Compiled SQLite FTS/vector pack generation and reproducibility
+- Workstation Ollama structured-output smoke tests for Qwen3 4B and Gemma3 4B
+- Workstation Qwen3 Embedding smoke test (1,024 dimensions)
+- Persistent preparation-state source and round-trip fixtures
 
 Validation result:
 
@@ -27,7 +32,7 @@ python3 tools/validate.py
 
 ## Authored tests awaiting an Apple toolchain
 
-Thirty-nine XCTest cases cover:
+Eighty-two XCTest methods now cover:
 
 - fuel/fire and severe-bleeding model bypass;
 - retrieval ranking, domain filtering, and unapproved-content exclusion;
@@ -42,10 +47,14 @@ Thirty-nine XCTest cases cover:
 - OBD read policy, DTC/scalar parsing, and blocked writes;
 - text/vision llama runtime image routing and lifecycle;
 - twelve locked safety/refusal cases with zero model calls.
+- launch-time package identity, policy, recall, entitlement, and device gates;
+- preparation-state persistence and corrupt-state fallback.
 
 ## Environment limitation
 
-The build environment used for this milestone has no Swift compiler, Xcode,
-iOS SDK, simulator, or physical iPhone. Therefore no compile, UI test, memory,
-thermal, battery, or real Qwen inference result is claimed. Run `make project`
-and the `TrailGuard` scheme on a Mac before treating the source as build-verified.
+This Windows environment has no Swift compiler, Xcode, iOS SDK, simulator, or
+physical iPhone. The Python validation, reproducible package build, and local
+Ollama model/embedding smoke tests passed, but no iOS compile, UI test, Metal
+inference, memory, thermal, battery, or physical-device result is claimed.
+Run `make project`, `swift test`, and the `TrailGuard` scheme on a Mac before
+treating the source as iOS build-verified.

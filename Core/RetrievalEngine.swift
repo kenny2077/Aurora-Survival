@@ -1,6 +1,15 @@
 import Foundation
 
-public struct RetrievalEngine: Sendable {
+public protocol EvidenceRetrieving: Sendable {
+    func search(
+        query: String,
+        domain: KnowledgeDomain?,
+        vehicle: VehicleProfile?,
+        limit: Int
+    ) -> [RetrievedPassage]
+}
+
+public struct RetrievalEngine: EvidenceRetrieving, Sendable {
     private let articles: [KnowledgeArticle]
 
     public init(articles: [KnowledgeArticle]) {

@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-07-28T03:21:19Z",
+  "embedding": {
+    "dimensions": 1024,
+    "model": "qwen3-embedding:0.6b",
+    "prompt_tokens": 13,
+    "status": "pass",
+    "wall_seconds": 1.457
+  },
+  "generation": [
+    {
+      "answer_confidence": "supported",
+      "evidence_ids": [
+        "wilderness-water-001"
+      ],
+      "load_seconds": 2.957,
+      "model": "qwen3:4b",
+      "output_tokens": 159,
+      "prompt_tokens": 609,
+      "status": "pass",
+      "tokens_per_second": 60.425,
+      "wall_seconds": 5.9
+    },
+    {
+      "answer_confidence": "supported",
+      "evidence_ids": [
+        "wilderness-water-001"
+      ],
+      "load_seconds": 4.943,
+      "model": "gemma3:4b",
+      "output_tokens": 81,
+      "prompt_tokens": 617,
+      "status": "pass",
+      "tokens_per_second": 55.633,
+      "wall_seconds": 6.722
+    }
+  ],
+  "incident_mode_runtime": false,
+  "purpose": "workstation-only model transport and schema smoke test",
+  "schema_version": 1
+}
