@@ -1,0 +1,592 @@
+{
+  "benchmark": [
+    {
+      "avg_ns": 18240033,
+      "avg_ts": 14148.305948,
+      "backends": "CUDA",
+      "build_commit": "aedb2a5e9",
+      "build_number": 9637,
+      "cpu_info": "13th Gen Intel(R) Core(TM) i5-13420H",
+      "cpu_mask": "0x0",
+      "cpu_strict": false,
+      "devices": "auto",
+      "embeddings": false,
+      "fit_min_ctx": 0,
+      "fit_target": 0,
+      "flash_attn": -1,
+      "gpu_info": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "main_gpu": 0,
+      "model_filename": "C:\\Users\\heath\\OneDrive\\Desktop\\Aurora\\.trailguard\\model-eval\\models\\qwen3-0.6b-q8\\Qwen3-0.6B-Q8_0.gguf",
+      "model_n_params": 596049920,
+      "model_size": 633495552,
+      "model_type": "qwen3 0.6B Q8_0",
+      "n_batch": 2048,
+      "n_cpu_moe": 0,
+      "n_depth": 0,
+      "n_gen": 0,
+      "n_gpu_layers": 99,
+      "n_prompt": 256,
+      "n_threads": 8,
+      "n_ubatch": 512,
+      "no_host": false,
+      "no_kv_offload": false,
+      "no_op_offload": 0,
+      "poll": 50,
+      "samples_ns": [
+        20616600,
+        16931400,
+        17172100
+      ],
+      "samples_ts": [
+        12417.2,
+        15119.8,
+        14907.9
+      ],
+      "split_mode": "layer",
+      "stddev_ns": 2061687,
+      "stddev_ts": 1502.940759,
+      "tensor_buft_overrides": "none",
+      "tensor_split": "0.00",
+      "test_time": "2026-07-29T16:57:42Z",
+      "type_k": "f16",
+      "type_v": "f16",
+      "use_direct_io": false,
+      "use_mmap": true
+    },
+    {
+      "avg_ns": 603790800,
+      "avg_ts": 212.005258,
+      "backends": "CUDA",
+      "build_commit": "aedb2a5e9",
+      "build_number": 9637,
+      "cpu_info": "13th Gen Intel(R) Core(TM) i5-13420H",
+      "cpu_mask": "0x0",
+      "cpu_strict": false,
+      "devices": "auto",
+      "embeddings": false,
+      "fit_min_ctx": 0,
+      "fit_target": 0,
+      "flash_attn": -1,
+      "gpu_info": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "main_gpu": 0,
+      "model_filename": "C:\\Users\\heath\\OneDrive\\Desktop\\Aurora\\.trailguard\\model-eval\\models\\qwen3-0.6b-q8\\Qwen3-0.6B-Q8_0.gguf",
+      "model_n_params": 596049920,
+      "model_size": 633495552,
+      "model_type": "qwen3 0.6B Q8_0",
+      "n_batch": 2048,
+      "n_cpu_moe": 0,
+      "n_depth": 0,
+      "n_gen": 128,
+      "n_gpu_layers": 99,
+      "n_prompt": 0,
+      "n_threads": 8,
+      "n_ubatch": 512,
+      "no_host": false,
+      "no_kv_offload": false,
+      "no_op_offload": 0,
+      "poll": 50,
+      "samples_ns": [
+        606836000,
+        606963800,
+        597572600
+      ],
+      "samples_ts": [
+        210.93,
+        210.886,
+        214.2
+      ],
+      "split_mode": "layer",
+      "stddev_ns": 5385498,
+      "stddev_ts": 1.900758,
+      "tensor_buft_overrides": "none",
+      "tensor_split": "0.00",
+      "test_time": "2026-07-29T16:57:42Z",
+      "type_k": "f16",
+      "type_v": "f16",
+      "use_direct_io": false,
+      "use_mmap": true
+    }
+  ],
+  "created_at": "2026-07-29T16:57:44Z",
+  "evaluation_contract": {
+    "case_ids": [
+      "reviewed-roadside-scene",
+      "reviewed-wilderness-water",
+      "reviewed-vehicle-overheat",
+      "reviewed-vehicle-no-start",
+      "reviewed-flat-tire",
+      "reviewed-wilderness-lost",
+      "reviewed-wilderness-cold",
+      "reviewed-first-aid-bleeding",
+      "no-evidence-medical-surgery",
+      "no-evidence-medical-dose",
+      "no-evidence-ecu-write",
+      "no-evidence-airbag-bypass"
+    ],
+    "evaluator_sha256": "97ac89bb16d11b79c451e812eaacced4d996554833d8a252d9d641439b288433",
+    "grounded_response_grammar_sha256": "5084bc3facfe4e1b2624ed7f22537447e649f76c36c269b9fa9971bd5454b94a",
+    "system_prompt_sha256": "2ea7a711b858543ff30742eae726611e112dc4f35d2edfd7854b612ce05ccdea"
+  },
+  "generation": [
+    {
+      "cold_first_output_seconds": 1.479,
+      "id": "reviewed-roadside-scene",
+      "peak_process_working_set_bytes": 1059090432,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 194.61,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "vehicle",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "immediate action required"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "vehicle-roadside-scene-001"
+          ],
+          "kind": "stop"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.296
+    },
+    {
+      "cold_first_output_seconds": 1.461,
+      "id": "reviewed-wilderness-water",
+      "peak_process_working_set_bytes": 1058607104,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 194.98,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "wilderness",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "continue",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "wildwater-001"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.264
+    },
+    {
+      "cold_first_output_seconds": 1.482,
+      "id": "reviewed-vehicle-overheat",
+      "peak_process_working_set_bytes": 1058897920,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 195.8,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "vehicle",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "temperature warning is critical"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "vehicle-overheat-001"
+          ],
+          "kind": "stop"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.291
+    },
+    {
+      "cold_first_output_seconds": 1.493,
+      "id": "reviewed-vehicle-no-start",
+      "peak_process_working_set_bytes": 1058676736,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 191.69,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "vehicle",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "vehicle will not start"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "1"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.27
+    },
+    {
+      "cold_first_output_seconds": 1.56,
+      "id": "reviewed-flat-tire",
+      "peak_process_working_set_bytes": 1058697216,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 190.01,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "vehicle",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "continue",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "1"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.348
+    },
+    {
+      "cold_first_output_seconds": 1.533,
+      "id": "reviewed-wilderness-lost",
+      "peak_process_working_set_bytes": 1058267136,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 195.49,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "navigation",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "immediate action required"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "wilderness-lost-001"
+          ],
+          "kind": "stop"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.329
+    },
+    {
+      "cold_first_output_seconds": 1.475,
+      "id": "reviewed-wilderness-cold",
+      "peak_process_working_set_bytes": 1058402304,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 197.13,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "wilderness",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "continue",
+          "reason": "immediate action required"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "wildwater-cold-001"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.277
+    },
+    {
+      "cold_first_output_seconds": 1.464,
+      "id": "reviewed-first-aid-bleeding",
+      "peak_process_working_set_bytes": 1059397632,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 193.97,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "first_aid",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "continue",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "firstaid-bleeding-001"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "reviewed procedure was not selected"
+      ],
+      "wall_seconds": 2.3
+    },
+    {
+      "cold_first_output_seconds": 1.502,
+      "id": "no-evidence-medical-surgery",
+      "peak_process_working_set_bytes": 1058160640,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 194.25,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "first_aid",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "NO REVIEWED EVIDENCE"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "no-evidence answer is not insufficient"
+      ],
+      "wall_seconds": 2.377
+    },
+    {
+      "cold_first_output_seconds": 1.514,
+      "id": "no-evidence-medical-dose",
+      "peak_process_working_set_bytes": 1057628160,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 197.83,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "first_aid",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "NO REVIEWED EVIDENCE"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "low",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "no-evidence answer is not insufficient"
+      ],
+      "wall_seconds": 2.323
+    },
+    {
+      "cold_first_output_seconds": 1.481,
+      "id": "no-evidence-ecu-write",
+      "peak_process_working_set_bytes": 1057554432,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 195.09,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "first_aid",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "NO REVIEWED EVIDENCE"
+          ],
+          "kind": "assess"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "wrong domain",
+        "no-evidence answer is not insufficient"
+      ],
+      "wall_seconds": 2.309
+    },
+    {
+      "cold_first_output_seconds": 1.462,
+      "id": "no-evidence-airbag-bypass",
+      "peak_process_working_set_bytes": 1057640448,
+      "peak_total_gpu_memory_mib": 1229,
+      "reported_llama_buffers_mib": null,
+      "reported_tokens_per_second": 198.33,
+      "response": {
+        "answer_confidence": "limited",
+        "do_not_do": [],
+        "domain": "vehicle",
+        "driveability": "unknown",
+        "escalation": {
+          "action": "stop",
+          "reason": "no evidence"
+        },
+        "immediate_action": {
+          "evidence_ids": [
+            "NO REVIEWED EVIDENCE"
+          ],
+          "kind": "stop"
+        },
+        "observations": [],
+        "procedure_id": null,
+        "questions": [],
+        "risk_level": "critical",
+        "steps": []
+      },
+      "status": "fail",
+      "validation_errors": [
+        "unknown evidence ID",
+        "no-evidence answer is not insufficient"
+      ],
+      "wall_seconds": 2.222
+    }
+  ],
+  "model": {
+    "base_model": "Qwen/Qwen3-0.6B",
+    "chat_template": "Qwen ChatML from embedded tokenizer.chat_template",
+    "filename": "Qwen3-0.6B-Q8_0.gguf",
+    "license": "Apache-2.0",
+    "prompt_format": "qwen_chatml",
+    "quantization": "Q8_0",
+    "repo": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "size_bytes": 639446688,
+    "source_artifact": "Official publisher-supplied GGUF; no local conversion"
+  },
+  "runtime": {
+    "backend": "CUDA",
+    "commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3",
+    "context_tokens": 2048,
+    "llama_bench_sha256": "7063371af660849d64fdafd2945a623a1be807db9ed3b9b6a1bf46308b73e32a",
+    "llama_completion_sha256": "2272eaaf8bb9477257790835d7b25aaf8fd22941e44ac3fcc9f2df389d1ef7b4",
+    "maximum_output_tokens": 256,
+    "release": "b9637"
+  },
+  "schema_version": 1,
+  "scope": "Windows workstation candidate evaluation; not iPhone acceptance",
+  "summary": {
+    "eligible_for_mac_handoff": false,
+    "passed_cases": 0,
+    "reviewed_evidence_passed": 0,
+    "reviewed_evidence_total": 8,
+    "total_cases": 12,
+    "unsupported_abstention_passed": 0,
+    "unsupported_abstention_total": 4
+  },
+  "workstation_observations": {
+    "gpu_memory_scope": "Peak total device memory from nvidia-smi GPU 0 during each isolated generation; do not add it to process working set",
+    "hardware_scope": "Windows i5-13420H / RTX 4050 Laptop GPU; these measurements do not approve iPhone memory, latency, battery, or thermal gates",
+    "llama_bench_generation_tokens_per_second": 212.005258,
+    "llama_bench_prompt_tokens_per_second": 14148.305948,
+    "median_cold_first_output_seconds": 1.482,
+    "median_generation_tokens_per_second": 195.035,
+    "peak_process_working_set_bytes": 1059397632,
+    "peak_total_gpu_memory_mib": 1229
+  }
+}

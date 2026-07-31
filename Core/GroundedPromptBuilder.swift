@@ -16,13 +16,42 @@ public struct GroundedPromptBuilder: Sendable {
             """
         case .groundedJSON:
             outputContract = """
-            Return exactly one JSON object and no Markdown. Use the grounded-response
-            keys: domain, risk_level, immediate_action, questions, observations,
-            procedure_id, steps, do_not_do, driveability, escalation, and
-            answer_confidence. Use only EVIDENCE_ID, PROCEDURE_ID, and STEP_ID values
-            supplied below. Copy warnings exactly into do_not_do; never paraphrase
-            them. If evidence is insufficient, return no steps and confidence
-            "insufficient".
+            Return exactly one JSON object and no Markdown. Use this exact shape and
+            key casing; angle-bracket text describes allowed values and must not be
+            copied literally:
+            {
+              "domain": "<vehicle|wilderness|first_aid|navigation>",
+              "risk_level": "<critical|high|moderate|low>",
+              "immediate_action": {
+                "kind": "<stop|move|sos|assess|continue>",
+                "evidence_ids": ["<supplied EVIDENCE_ID>"]
+              },
+              "questions": [],
+              "observations": [],
+              "procedure_id": "<supplied PROCEDURE_ID or null>",
+              "steps": [],
+              "do_not_do": [],
+              "driveability": "<do_not_drive|unknown|conditional|not_applicable>",
+              "escalation": {"reason": "<reason>", "action": "<safe action>"},
+              "answer_confidence": "<insufficient|limited|supported>"
+            }
+            Emit every key as compact JSON with no indentation and no extra keys.
+            Always emit empty questions and observations. Keep escalation reason and
+            action short. risk_level must always be exactly "critical", "high",
+            "moderate", or "low"; "insufficient" is only an answer_confidence value.
+            Use only supplied EVIDENCE_ID and PROCEDURE_ID values.
+            answer_confidence describes whether a reviewed procedure applies, not
+            whether this summary contains every instruction. If any EVIDENCE block is
+            supplied, use answer_confidence "limited", select its PROCEDURE_ID, cite
+            its EVIDENCE_ID, and copy its Domain exactly; the app supplies the complete
+            approved procedure. Always emit empty steps and do_not_do arrays; the app
+            attaches every approved step and warning for the selected procedure
+            deterministically. If NO REVIEWED EVIDENCE is supplied, use null
+            procedure_id, empty steps and do_not_do, and answer_confidence
+            "insufficient". For an unsupported prohibited request, use "assess" or
+            "stop", do not echo the requested act, and keep questions empty. ECU,
+            airbag, and vehicle requests use domain "vehicle"; surgery, medication,
+            and dose requests use domain "first_aid".
             """
         }
         return """
@@ -41,25 +70,20 @@ public struct GroundedPromptBuilder: Sendable {
         from prompt: ModelPrompt,
         outputMode: ModelOutputMode = .citationText
     ) -> String {
-        let evidence = prompt.evidence.enumerated().map { index, passage in
+        let evidenceBlocks = prompt.evidence.enumerated().map { index, passage in
             let article = passage.article
-            let steps = article.steps.enumerated()
-                .map {
-                    let stepID = "\(article.id)#step-\($0.offset + 1)"
-                    return "STEP_ID \(stepID): \($0.element)"
-                }
-                .joined(separator: "\n")
-            let warnings = article.warnings.map { "WARNING: \($0)" }.joined(separator: "\n")
             return """
             EVIDENCE [\(index + 1)]
             EVIDENCE_ID: \(article.id)
             PROCEDURE_ID: \(article.id)
+            Domain: \(article.domain.rawValue)
             Title: \(article.title)
             Summary: \(article.summary)
-            \(steps)
-            \(warnings)
             """
         }.joined(separator: "\n\n")
+        let evidence = evidenceBlocks.isEmpty
+            ? "NO REVIEWED EVIDENCE is available."
+            : evidenceBlocks
 
         let observations: String
         if prompt.imageObservations.isEmpty {

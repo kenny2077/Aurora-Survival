@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-07-23",
+  "updated": "2026-07-30",
   "distribution_policy": "Model weights are not bundled. Production packages require license review, SHA-256 verification, a signed manifest, and device-specific acceptance tests.",
   "tiers": [
     {
@@ -14,13 +14,23 @@
       "purpose": "Deterministic safety, offline retrieval, citations, and extractive answers."
     },
     {
-      "id": "lite-text-candidate-pending",
+      "id": "lite-phi35-mini-q4km-candidate",
       "tier": "lite",
       "display_name": "Lite",
       "modality": "text",
       "runtime": "llama.cpp-metal",
       "bundled": false,
-      "candidate_model": null,
+      "candidate_model": "bartowski/Phi-3.5-mini-instruct-GGUF",
+      "candidate_revision": "6d70da17e749a471ccb62ade694486011a75cda3",
+      "base_model": "microsoft/Phi-3.5-mini-instruct",
+      "base_revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
+      "artifact_filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
+      "artifact_bytes": 2393232672,
+      "artifact_sha256": "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5",
+      "quantization": "Q4_K_M",
+      "license": "MIT",
+      "chat_template": "Phi-3 ChatML from embedded tokenizer.chat_template",
+      "workstation_evaluation": "Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json",
       "maximum_context_tokens": 2048,
       "maximum_output_tokens": 256,
       "purpose": "Conservative local text synthesis for iPhone 13-class memory over exactly the same reviewed evidence.",

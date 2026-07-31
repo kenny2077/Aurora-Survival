@@ -1,7 +1,7 @@
 # Validation report
 
-Date: 2026-07-28
-Milestone: Production Field foundations on the local workstation
+Date: 2026-07-30
+Milestone: Production Field foundations and Lite workstation selection
 
 ## Passed here
 
@@ -37,6 +37,15 @@ Milestone: Production Field foundations on the local workstation
 - Strict signature verification of the runtime-linked app and nested framework,
   followed by install, launch, and live-process confirmation on both physical
   devices
+- Native llama.cpp `b9637` CUDA comparison of three immutable Lite artifacts
+  under the production 2,048-token context, 256-token output cap, grounded JSON
+  grammar, and deterministic greedy sampler
+- MIT-licensed Phi-3.5 Mini Q4_K_M selection with exact artifact SHA-256,
+  8/8 reviewed retrieval/procedure cases, 4/4 unsupported safety abstentions,
+  2.002-second median cold first output, and 60.445 generated tokens/second
+- Structural validation of the grammar-constrained bridge and 97-test inventory,
+  reproducible pack verification, and an exact-artifact signed model-package
+  builder exercised with an ephemeral development package
 
 Validation result:
 
@@ -49,7 +58,7 @@ python3 tools/validate.py
 
 ## Apple toolchain verification
 
-Ninety-four XCTest methods now cover:
+The last completed Mac run contains ninety-four XCTest methods covering:
 
 - fuel/fire and severe-bleeding model bypass;
 - retrieval ranking, domain filtering, and unapproved-content exclusion;
@@ -80,8 +89,13 @@ idle traces recorded nominal thermal state with 68.75–68.91 MiB and
 19.27–19.84 MiB physical footprints respectively. These traces are baselines,
 not sustained battery or thermal acceptance.
 
+Three additional grounded prompt/validator tests bring the source inventory to
+97, but Windows has no Swift/Apple toolchain; the Mac must compile and execute
+all 97 after the grammar-bridge change.
+
 No physical-device retrieval/citation, OCR/photo, airplane-mode cold launch,
 accessibility, interruption, Bluetooth, map-rendering, or model-inference pass
-is claimed. Production package trust keys, licensed assets, and an evaluated,
-signed Lite GGUF remain external gates. The pinned runtime is compiled and
-linked but deliberately inactive while the model artifact is absent.
+is claimed. The licensed Lite artifact is selected but remains unbundled and
+unsigned for iOS. Production trust, signed-package activation, Metal/unified
+memory, latency, sustained thermal, and battery acceptance remain external
+gates, so startup deliberately remains Essential-only.

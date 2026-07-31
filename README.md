@@ -104,11 +104,15 @@ python tools/local_model_smoke.py `
 
 This is an off-device evaluation harness, not the iOS runtime. The app now links
 a checksum-pinned official llama.cpp XCFramework on macOS. Optional model tiers
-still require an evaluated licensed GGUF, signed model packaging, startup
-activation, and physical-device inference evidence.
+still require signed model packaging, startup activation, and physical-device
+inference evidence. The exact MIT-licensed Phi-3.5 Mini Q4_K_M Lite candidate is
+selected and workstation-verified in `Docs/LITE_MODEL_HANDOFF.md`, but remains
+unbundled and inactive.
 
 Local verification on 2026-07-28 used Xcode 26.6 and the iOS 26.5 Simulator:
 all 94 Swift package and simulator tests passed on iPhone and iPad form factors.
+Three new grounded-generation tests bring the source inventory to 97 and still
+require a Mac rerun after the grammar-bridge change.
 The universal app also built, installed, and launched on a physical iPhone 13
 and M2 iPad Pro. The GitHub Actions workflow runs Swift package tests and an
 unsigned simulator build.

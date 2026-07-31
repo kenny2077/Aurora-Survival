@@ -13,5 +13,7 @@ the dependency-free core package.
 
 Swift Package Manager verifies the archive checksum before exposing the
 official `llama` XCFramework. The wrapper supports text-only, single-turn,
-deterministic greedy generation. Model selection, model licensing, signed
-model packaging, and physical-device acceptance remain separate gates.
+grammar-constrained deterministic greedy generation. The grammar is generated
+from Aurora's grounded-response schema and prevents model-authored procedure
+steps or warnings. Model selection, model licensing, signed model packaging,
+and physical-device acceptance remain separate gates.

@@ -10,7 +10,7 @@
     "answer_confidence"
   ],
   "properties": {
-    "domain": { "enum": ["vehicle", "wilderness", "first_aid", "navigation", "resilience"] },
+    "domain": { "enum": ["vehicle", "wilderness", "first_aid", "navigation"] },
     "risk_level": { "enum": ["critical", "high", "moderate", "low"] },
     "immediate_action": {
       "type": "object",
@@ -23,6 +23,7 @@
     },
     "questions": {
       "type": "array",
+      "maxItems": 0,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -36,6 +37,7 @@
     },
     "observations": {
       "type": "array",
+      "maxItems": 0,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -50,6 +52,7 @@
     "procedure_id": { "type": ["string", "null"] },
     "steps": {
       "type": "array",
+      "maxItems": 0,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -60,7 +63,7 @@
         }
       }
     },
-    "do_not_do": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "do_not_do": { "type": "array", "maxItems": 0, "items": { "type": "string" }, "uniqueItems": true },
     "driveability": { "enum": ["do_not_drive", "unknown", "conditional", "not_applicable"] },
     "escalation": {
       "type": "object",

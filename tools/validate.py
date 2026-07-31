@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import sys
@@ -18,6 +19,14 @@ MAP_ASSET_CASES = ROOT / "Tests" / "Fixtures" / "map_asset_cases.json"
 DEVELOPMENT_PACK = ROOT / "Tests" / "Fixtures" / "development_knowledge_pack.json"
 EMERGENCY_CORE = ROOT / "Resources" / "Knowledge" / "emergency_core.json"
 LLAMA_RUNTIME_PACKAGE = ROOT / "Runtime" / "AuroraLlamaRuntime" / "Package.swift"
+LLAMA_GRAMMAR_HEADER = (
+    ROOT
+    / "Runtime"
+    / "AuroraLlamaRuntime"
+    / "Sources"
+    / "AuroraLlamaC"
+    / "GroundedResponseGrammar.h"
+)
 
 
 def fail(message: str) -> None:
@@ -90,8 +99,79 @@ def validate_model_catalog() -> int:
         fail("lite context must remain conservatively bounded")
     if lite.get("maximum_output_tokens") != 256:
         fail("lite output must remain conservatively bounded")
-    if lite.get("candidate_model") is not None:
-        fail("lite candidate must remain unset until artifact evaluation")
+    expected_lite_candidate = {
+        "candidate_model": "bartowski/Phi-3.5-mini-instruct-GGUF",
+        "candidate_revision": "6d70da17e749a471ccb62ade694486011a75cda3",
+        "base_model": "microsoft/Phi-3.5-mini-instruct",
+        "base_revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
+        "artifact_filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
+        "artifact_bytes": 2_393_232_672,
+        "artifact_sha256": (
+            "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5"
+        ),
+        "quantization": "Q4_K_M",
+        "license": "MIT",
+        "workstation_evaluation": (
+            "Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json"
+        ),
+    }
+    mismatched_candidate = [
+        key
+        for key, expected in expected_lite_candidate.items()
+        if lite.get(key) != expected
+    ]
+    if mismatched_candidate:
+        fail(
+            "lite candidate identity does not match the approved workstation "
+            f"artifact: {', '.join(mismatched_candidate)}"
+        )
+    if lite.get("bundled") is not False:
+        fail("evaluated lite candidate must remain unbundled before Mac acceptance")
+    evaluation_path = ROOT / lite["workstation_evaluation"]
+    if not evaluation_path.is_file():
+        fail("approved lite workstation evaluation is missing")
+    evaluation = json.loads(evaluation_path.read_text(encoding="utf-8"))
+    summary = evaluation.get("summary", {})
+    if summary.get("passed_cases") != 12 or not summary.get(
+        "eligible_for_mac_handoff"
+    ):
+        fail("approved lite workstation evaluation is not fully green")
+    evaluated_model = evaluation.get("model", {})
+    for report_key, catalog_key in (
+        ("repo", "candidate_model"),
+        ("revision", "candidate_revision"),
+        ("filename", "artifact_filename"),
+        ("sha256", "artifact_sha256"),
+        ("size_bytes", "artifact_bytes"),
+        ("quantization", "quantization"),
+        ("license", "license"),
+    ):
+        if evaluated_model.get(report_key) != lite.get(catalog_key):
+            fail(f"lite catalog and workstation report differ: {catalog_key}")
+    evaluated_runtime = evaluation.get("runtime", {})
+    if (
+        evaluated_runtime.get("release") != "b9637"
+        or evaluated_runtime.get("context_tokens") != 2_048
+        or evaluated_runtime.get("maximum_output_tokens") != 256
+    ):
+        fail("lite workstation evaluation used the wrong runtime configuration")
+    evaluator_path = ROOT / "tools" / "native_llama_lite_eval.py"
+    evaluator_sha256 = hashlib.sha256(evaluator_path.read_bytes()).hexdigest()
+    if (
+        evaluation.get("evaluation_contract", {}).get("evaluator_sha256")
+        != evaluator_sha256
+    ):
+        fail("lite workstation evaluation is stale for the current evaluator")
+    grammar_source = LLAMA_GRAMMAR_HEADER.read_text(encoding="utf-8")
+    grammar = grammar_source.split('R"GBNF(\n', 1)[1].split('\n)GBNF";', 1)[0] + "\n"
+    grammar_sha256 = hashlib.sha256(grammar.encode("utf-8")).hexdigest()
+    if (
+        evaluation.get("evaluation_contract", {}).get(
+            "grounded_response_grammar_sha256"
+        )
+        != grammar_sha256
+    ):
+        fail("lite workstation evaluation is stale for the current grammar")
     vision = next(tier for tier in tiers if tier["tier"] == "vision_expert")
     gates = vision.get("gates", {})
     if gates.get("minimum_physical_memory_bytes", 0) < 7_500_000_000:
@@ -221,6 +301,10 @@ def validate_llama_runtime_pin() -> str:
     ).read_text(encoding="utf-8")
     if "llama_sampler_init_greedy" not in bridge:
         fail("llama.cpp text bridge must use deterministic greedy sampling")
+    if "llama_sampler_init_grammar" not in bridge:
+        fail("llama.cpp text bridge must constrain grounded JSON with a grammar")
+    if not LLAMA_GRAMMAR_HEADER.is_file():
+        fail("llama.cpp grounded-response grammar is missing")
     if "llama_model_chat_template" not in bridge:
         fail("llama.cpp text bridge must use the model chat template")
     return release

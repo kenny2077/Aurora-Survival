@@ -78,8 +78,11 @@ Updated: 2026-07-28
 - [x] Debug-only Ed25519 development trust key and compiled knowledge-pack
   install, activation, rollback, recall, and tamper-rejection lifecycle
 - [x] Official llama.cpp `b9637` XCFramework pinned by checksum with an isolated
-  Swift/C++ deterministic text-generation bridge; simulator and device
-  architectures compile and link
+  Swift/C++ deterministic text-generation bridge; the prior simulator/device
+  build is green and the new grounded-JSON grammar awaits its Mac rebuild
+- [x] Exact MIT Phi-3.5 Mini Q4_K_M Lite candidate selected by immutable revision
+  and SHA-256 after 12/12 native b9637 workstation cases; detailed candidate,
+  safety/retrieval, memory, and throughput evidence is checked in
 
 ## Remaining external production milestones
 
@@ -91,10 +94,10 @@ Updated: 2026-07-28
    authenticated hosting, then publish licensed real artifacts. Debug-only
    development trust and local signing, verification, strict range resume,
    activation, rollback, recall, and tamper controls are complete.
-3. **Real local runtime:** select an exact licensed Lite GGUF, package it through
-   the signed model lifecycle, bind the verified active artifact to the pinned
-   llama.cpp backend, and pass physical inference gates. Then repeat for Field
-   and Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
+3. **Real local runtime:** sign and install the selected exact Lite GGUF through
+   the model lifecycle, bind the verified active artifact to the pinned llama.cpp
+   backend, and pass physical iPhone inference gates. Then repeat for Field and
+   Qwen3-VL-2B plus projector. Keep `IncidentAssistant` as the only entry.
 4. **Expert-reviewed content:** replace fixtures with separately signed Vehicle,
    Wilderness, First Aid, and Navigation packs.
 5. **Vehicle ingestion assets:** obtain licensed manuals and build signed
@@ -111,7 +114,7 @@ Updated: 2026-07-28
 ## Explicitly not implemented
 
 - Model weights, signed production catalog/keys, or configured App Store products
-- An evaluated, signed Lite GGUF and startup activation of real model inference
+- A signed Lite GGUF package and startup activation of real model inference
 - Generative vision inference
 - Offline map rendering
 - OBD BLE hardware access
