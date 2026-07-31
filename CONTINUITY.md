@@ -27,29 +27,30 @@ Code Architecture:
 ## 2. Progress--Update after every meaningful session
 
 Milestones -- Three Facts only, no raw logs : compact if needed
-- `agent/field-foundations` is pushed through `192227b`; the universal target passes all 94 tests on both iPhone and iPad simulators and has inspected portrait/landscape iPad rendering.
-- Apple Development signing is provisioned, and the universal runtime-linked app plus nested framework verify, install, launch, and remain alive on the physical iPhone 13 (`iPhone14,5`) and M2 iPad Pro (`iPad14,3`).
-- Debug-only signed-pack lifecycle and Release trust exclusion are green; Lite is explicit, and official llama.cpp `b9637` is checksum-pinned with a deterministic text bridge that builds for simulator and arm64 iOS while the candidate GGUF remains unset.
+- `agent/field-foundations` is pushed through substantive handoff commit `78dc400`; its Mac baseline passes 94 tests on both simulator form factors, and the signed universal app plus nested llama framework install, launch, and remain alive on the physical iPhone 13 and M2 iPad Pro.
+- MIT-licensed `Phi-3.5-mini-instruct-Q4_K_M.gguf` at revision `6d70da1` is the unbundled Lite winner: exact SHA-256 `e4165e3a...38eff5`, 12/12 native b9637 cases, 2.002 s median cold first output, 60.445 generated tok/s, 2.721 GB peak Windows working set, and 3,183 MiB peak total GPU memory.
+- The production prompt/schema/codec now keep procedure text deterministic, the b9637 bridge applies a checked-in grounded-JSON grammar before greedy sampling, structural validation counts 97 tests, pack reproducibility passes, and a hash-pinned Lite package signer is ready for the Mac.
 
 Critical Bugs / Software or Hardware or Network Issues -- Three logs maximum, compact if needed
 
 - GitHub draft PR #8 Actions cannot start because GitHub reports an account-level billing/spending-limit issue.
-- Physical VoiceOver, Dynamic Type, OCR/photo, interruption, airplane-mode cold launch, sustained energy/battery, and extended thermal gates remain pending; injected physical XCTest signing also hits `errSecInternalComponent`.
-- Production package trust keys and an evaluated signed Lite GGUF are not present; startup deliberately exposes Essential only, so the compiled llama.cpp backend is not activated.
+- Windows has no Swift/Apple toolchain, so the grammar bridge build and all 97 Swift tests require Mac reruns; physical VoiceOver, Dynamic Type, OCR/photo, interruption, airplane-mode cold launch, energy/battery, and thermal gates remain pending.
+- No trusted signed Phi package or iPhone inference acceptance exists yet; the selected candidate remains unbundled and startup deliberately exposes Essential only.
 
 Reflect on current working direction is not worth continuing or have better ideas ?
 
-The architecture remains worth continuing. The Mac-side llama.cpp boundary is
-green; selection and performance approval of a real Lite GGUF now require the
-gaming laptop evaluation followed by physical-device evidence.
+The architecture remains worth continuing. Grammar-constrained structured
+generation made the larger MIT Phi candidate reliable without granting it
+authority over reviewed steps or warnings. Mac signing and physical iPhone
+acceptance are now the remaining Lite gates.
 
 ---
 
 ## 3. Next Stage Implementation Plan--Update after every meaningful session
 
-- Focus 1: Complete direct screen, retrieval/citation, OCR/photo, accessibility, interruption, airplane-mode relaunch, and sustained energy/battery evidence on both physical devices.
-- Focus 2: Evaluate exact licensed Lite GGUF candidates on the gaming laptop and return the winning artifact identity, license, byte size, and SHA-256.
-- Focus 3: Package the selected Lite artifact through the signed model lifecycle, bind it to `LlamaXCFrameworkBackend`, and execute physical latency/memory/thermal/battery acceptance while preserving Essential fallback.
+- Focus 1: On the Mac, build the grammar-constrained b9637 package, rerun all 97 tests on both simulators, download/rehash Phi, and sign/install it through the real model-package lifecycle.
+- Focus 2: Bind the verified active package to `LlamaXCFrameworkBackend` and run iPhone 13 inference acceptance for latency, unified memory, sustained throughput, thermal state, battery, interruption, Low Power Mode, and Essential fallback.
+- Focus 3: Complete physical retrieval/citation, OCR/photo, VoiceOver, Dynamic Type, airplane-mode relaunch, and remaining direct-device evidence without upgrading any unrun gate.
 
 ---
 
@@ -62,11 +63,18 @@ Files:
 - `App/AppModel.swift`: startup active-pack resolution and assistant reinjection.
 - `Core/IncidentRuntimeBootstrap.swift`: verified compiled/bundled retrieval composition and runtime-tier intersection.
 - `Runtime/TrailGuardLlamaRuntime/Package.swift`: official llama.cpp release URL and immutable XCFramework checksum.
+- `Runtime/TrailGuardLlamaRuntime/Sources/TrailGuardLlamaC/GroundedResponseGrammar.h`: b9637-generated grammar shared by workstation evaluation and the native bridge.
 - `Core/LlamaXCFrameworkBackend.swift`: app-side conformance over the isolated deterministic runtime session.
+- `Core/GroundedPromptBuilder.swift`: exact nested JSON and evidence-selection contract.
+- `Core/GroundedResponseCodec.swift`: validation plus deterministic expansion of approved procedure steps and warnings.
 - `Core/RetrievalEngine.swift`: retrieval protocol, Essential baseline, and deterministic rank fusion.
 - `Core/SQLiteHybridRetriever.swift`: compiled SQLite FTS/vector retrieval and fail-closed applicability filters.
 - `Core/ActivePackRegistry.swift`: signature, policy, entitlement, recall, and device resolution.
 - `Tests/SQLiteHybridRetrieverTests.swift`: direct compiled retrieval and bootstrap regressions.
+- `Docs/LITE_MODEL_HANDOFF.md`: exact winner, conversion, results, measurements, and Mac continuation.
+- `Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json`: complete winning workstation evidence.
+- `tools/native_llama_lite_eval.py`: checksum-pinned native candidate evaluator.
+- `tools/prepare_lite_model_package.py`: exact-artifact verification and signed Lite package staging.
 - `Docs/PHYSICAL_DEVICE_VALIDATION.md`: form-factor decisions and direct-evidence matrix for the iPhone 13 and M2 iPad Pro.
 - `Docs/DEVELOPMENT_PACKS.md`: Debug-only key separation and signed lifecycle commands.
 - `project.yml`: XcodeGen app/test targets with explicit resource build phases.
@@ -79,8 +87,13 @@ Commands:
 rtk proxy git status --short --branch
 
 # structural and reproducibility verification
-/tmp/trailguard-dev-venv/bin/python tools/validate.py
-/tmp/trailguard-dev-venv/bin/python tools/test_pack_reproducibility.py
+python tools/validate.py
+python tools/test_pack_reproducibility.py
+
+# rerun the selected workstation candidate
+python tools/native_llama_lite_eval.py \
+  --model .trailguard/model-eval/models/phi-3.5-mini-q4_k_m/Phi-3.5-mini-instruct-Q4_K_M.gguf \
+  --output Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json
 
 # Swift package verification
 rtk proxy swift test
@@ -97,6 +110,15 @@ rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
 rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
   -destination 'platform=iOS Simulator,id=0E9D8B60-FEA9-4AD5-88C9-58D5FB31636E' \
   -derivedDataPath /tmp/TrailGuardSimulatorTests CODE_SIGNING_ALLOWED=NO test
+
+# sign the exact Lite candidate on the Mac
+/tmp/trailguard-dev-venv/bin/python tools/prepare_lite_model_package.py \
+  --model .trailguard/model-eval/models/phi-3.5-mini-q4_k_m/Phi-3.5-mini-instruct-Q4_K_M.gguf \
+  --license .trailguard/model-eval/models/phi-3.5-mini-q4_k_m/LICENSE \
+  --output .trailguard/development/model-lite-phi35@1.0.0 \
+  --private-key .trailguard/development/package-signing-key.pem \
+  --key-id development-2026-07 \
+  --created-at 2026-07-30T00:00:00Z
 
 # inspect PR #8 once GitHub Actions billing is restored
 rtk proxy gh pr checks 8 --repo kenny2077/TrailGuard
