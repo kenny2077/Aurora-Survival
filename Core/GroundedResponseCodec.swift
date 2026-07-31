@@ -3,7 +3,6 @@ import Foundation
 public enum GroundedResponseCodecError: Error, Equatable {
     case noJSONObject
     case invalidJSON
-    case unresolvedStep(String)
 }
 
 public struct GroundedResponseCodec: Sendable {
@@ -53,9 +52,16 @@ public struct GroundedResponseCodec: Sendable {
         _ response: GroundedResponse,
         evidence: [RetrievedPassage]
     ) throws -> String {
-        try Self.render(
+        Self.render(
             response,
-            stepMap: Self.stepMap(for: evidence)
+            approvedSteps: Self.approvedSteps(
+                for: response.procedureID,
+                evidence: evidence
+            ),
+            approvedWarnings: Self.approvedWarnings(
+                for: response.procedureID,
+                evidence: evidence
+            )
         )
     }
 
@@ -81,10 +87,39 @@ public struct GroundedResponseCodec: Sendable {
         return result
     }
 
+    private static func approvedWarnings(
+        for procedureID: String?,
+        evidence: [RetrievedPassage]
+    ) -> [String] {
+        guard let procedureID,
+              let article = evidence
+                .map(\.article)
+                .first(where: { $0.id == procedureID })
+        else {
+            return []
+        }
+        return article.warnings
+    }
+
+    private static func approvedSteps(
+        for procedureID: String?,
+        evidence: [RetrievedPassage]
+    ) -> [String] {
+        guard let procedureID,
+              let article = evidence
+                .map(\.article)
+                .first(where: { $0.id == procedureID })
+        else {
+            return []
+        }
+        return article.steps
+    }
+
     private static func render(
         _ response: GroundedResponse,
-        stepMap: [String: String]
-    ) throws -> String {
+        approvedSteps: [String],
+        approvedWarnings: [String]
+    ) -> String {
         var sections: [String] = []
         sections.append(immediateActionText(response.immediateAction.kind))
 
@@ -96,19 +131,19 @@ public struct GroundedResponseCodec: Sendable {
             sections.append(observations.joined(separator: "\n"))
         }
 
-        if !response.steps.isEmpty {
-            let renderedSteps = try response.steps.enumerated().map { index, step in
-                guard let text = stepMap[step.stepID] else {
-                    throw GroundedResponseCodecError.unresolvedStep(step.stepID)
-                }
+        if !approvedSteps.isEmpty {
+            let renderedSteps = approvedSteps.enumerated().map { index, text in
                 return "\(index + 1). \(text)"
             }
             sections.append(renderedSteps.joined(separator: "\n"))
         }
 
-        if !response.doNotDo.isEmpty {
+        let warnings = approvedWarnings + response.doNotDo.filter {
+            !approvedWarnings.contains($0)
+        }
+        if !warnings.isEmpty {
             sections.append(
-                "Do not:\n" + response.doNotDo.map { "• \($0)" }.joined(separator: "\n")
+                "Do not:\n" + warnings.map { "• \($0)" }.joined(separator: "\n")
             )
         }
 

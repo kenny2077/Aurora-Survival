@@ -1,4 +1,5 @@
 #include "TrailGuardLlamaC.h"
+#include "GroundedResponseGrammar.h"
 
 #include <TargetConditionals.h>
 #include <llama/llama.h>
@@ -251,11 +252,30 @@ char * tg_llama_session_complete(
         return nullptr;
     }
 
-    llama_sampler * sampler = llama_sampler_init_greedy();
-    if (sampler == nullptr) {
+    llama_sampler * sampler = llama_sampler_chain_init(
+        llama_sampler_chain_default_params()
+    );
+    llama_sampler * grammar = llama_sampler_init_grammar(
+        session.vocab,
+        kGroundedResponseGrammar,
+        "root"
+    );
+    llama_sampler * greedy = llama_sampler_init_greedy();
+    if (sampler == nullptr || grammar == nullptr || greedy == nullptr) {
+        if (sampler != nullptr) {
+            llama_sampler_free(sampler);
+        }
+        if (grammar != nullptr) {
+            llama_sampler_free(grammar);
+        }
+        if (greedy != nullptr) {
+            llama_sampler_free(greedy);
+        }
         set_error(error_out, "The deterministic sampler could not be created.");
         return nullptr;
     }
+    llama_sampler_chain_add(sampler, grammar);
+    llama_sampler_chain_add(sampler, greedy);
 
     std::string output;
     llama_batch batch = llama_batch_get_one(

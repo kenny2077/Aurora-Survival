@@ -92,6 +92,116 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertNotNil(action["evidence_ids"])
     }
 
+    func testGroundedPromptDefinesNestedJSONContract() {
+        let prompt = GroundedPromptBuilder().systemPrompt(
+            for: .lite,
+            outputMode: .groundedJSON
+        )
+
+        for required in [
+            "\"immediate_action\": {",
+            "\"evidence_ids\":",
+            "\"procedure_id\":",
+            "\"do_not_do\":",
+            "\"answer_confidence\":",
+            "use null procedure_id",
+            "extra keys",
+            "describes whether",
+            "If any EVIDENCE block",
+            "only an answer_confidence value",
+            "do not echo",
+            "attaches every",
+            "attaches every approved step",
+        ] {
+            XCTAssertTrue(prompt.contains(required), "Missing prompt contract: \(required)")
+        }
+
+        let article = makeArticle()
+        let userPrompt = GroundedPromptBuilder().userPrompt(
+            from: ModelPrompt(
+                question: "What should I do?",
+                evidence: [RetrievedPassage(article: article, score: 1)],
+                imageObservations: [],
+                tier: .lite,
+                permitsVisionReasoning: false
+            ),
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(userPrompt.contains("Domain: vehicle"))
+        XCTAssertFalse(userPrompt.contains("STEP_ID"))
+        XCTAssertFalse(userPrompt.contains("WARNING:"))
+
+        let emptyEvidencePrompt = GroundedPromptBuilder().userPrompt(
+            from: ModelPrompt(
+                question: "Unsupported request",
+                evidence: [],
+                imageObservations: [],
+                tier: .lite,
+                permitsVisionReasoning: false
+            ),
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(emptyEvidencePrompt.contains("NO REVIEWED EVIDENCE"))
+    }
+
+    func testInsufficientAnswerCannotSelectProcedure() {
+        let original = makeGroundedResponse()
+        let response = GroundedResponse(
+            domain: original.domain,
+            riskLevel: original.riskLevel,
+            immediateAction: original.immediateAction,
+            questions: original.questions,
+            observations: original.observations,
+            procedureID: original.procedureID,
+            steps: [],
+            doNotDo: [],
+            driveability: original.driveability,
+            escalation: original.escalation,
+            answerConfidence: .insufficient
+        )
+        XCTAssertThrowsError(
+            try GroundedResponseValidator().validate(
+                response,
+                availableEvidenceIDs: ["evidence.1"],
+                approvedProcedureIDs: ["procedure.1"]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .insufficientAnswerCannotSelectProcedure
+            )
+        }
+    }
+
+    func testGroundedAnswerRequiresProcedure() {
+        let original = makeGroundedResponse()
+        let response = GroundedResponse(
+            domain: original.domain,
+            riskLevel: original.riskLevel,
+            immediateAction: original.immediateAction,
+            questions: original.questions,
+            observations: original.observations,
+            procedureID: nil,
+            steps: [],
+            doNotDo: [],
+            driveability: original.driveability,
+            escalation: original.escalation,
+            answerConfidence: .limited
+        )
+        XCTAssertThrowsError(
+            try GroundedResponseValidator().validate(
+                response,
+                availableEvidenceIDs: ["evidence.1"],
+                approvedProcedureIDs: ["procedure.1"]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .groundedAnswerRequiresProcedure
+            )
+        }
+    }
+
     func testGroundedCodecRendersOnlyApprovedStepText() throws {
         let article = makeArticle()
         let response = GroundedResponse(
@@ -104,13 +214,8 @@ final class ProductionControlTests: XCTestCase {
             questions: [],
             observations: [],
             procedureID: article.id,
-            steps: [
-                GroundedStep(
-                    stepID: "\(article.id)#step-1",
-                    evidenceIDs: [article.id]
-                )
-            ],
-            doNotDo: article.warnings,
+            steps: [],
+            doNotDo: [],
             driveability: .unknown,
             escalation: GroundedEscalation(
                 reason: "Cause unknown",

@@ -160,6 +160,8 @@ public enum GroundedResponseError: Error, Equatable {
     case stepsRequireProcedure
     case supportedAnswerRequiresEvidence
     case highRiskCannotContinue
+    case insufficientAnswerCannotSelectProcedure
+    case groundedAnswerRequiresProcedure
     case unknownStepID(String)
     case unsupportedWarning(String)
 }
@@ -213,6 +215,21 @@ public struct GroundedResponseValidator: Sendable {
         if [.critical, .high].contains(response.riskLevel),
            response.immediateAction.kind == .continue {
             throw GroundedResponseError.highRiskCannotContinue
+        }
+
+        if response.answerConfidence == .insufficient,
+           response.procedureID != nil || !response.steps.isEmpty {
+            throw GroundedResponseError.insufficientAnswerCannotSelectProcedure
+        }
+
+        if [.limited, .supported].contains(response.answerConfidence),
+           response.procedureID == nil {
+            throw GroundedResponseError.groundedAnswerRequiresProcedure
+        }
+
+        if let procedureID = response.procedureID,
+           !approvedProcedureIDs.contains(procedureID) {
+            throw GroundedResponseError.unapprovedProcedure(procedureID)
         }
     }
 }
