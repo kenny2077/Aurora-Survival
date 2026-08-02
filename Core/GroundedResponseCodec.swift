@@ -20,6 +20,106 @@ public struct GroundedResponseCodec: Sendable {
         return try renderValidated(response, evidence: evidence)
     }
 
+    public func decodeConversationalAndValidate(
+        _ generated: String,
+        evidence: [RetrievedPassage]
+    ) throws -> ConversationalGroundedResponse {
+        guard let json = Self.jsonObjectData(in: generated) else {
+            throw GroundedResponseCodecError.noJSONObject
+        }
+        guard let decision = try? JSONDecoder().decode(
+            CompactConversationalDecision.self,
+            from: json
+        ) else {
+            throw GroundedResponseCodecError.invalidJSON
+        }
+
+        let answer = decision.answer.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+        guard !answer.isEmpty, answer.count <= 220 else {
+            throw GroundedResponseError.invalidConversationalAnswer
+        }
+        let followUp = decision.followUp?.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+        if let followUp, followUp.isEmpty || followUp.count > 96 {
+            throw GroundedResponseError.invalidFollowUp
+        }
+
+        let indexes = Self.unique(decision.evidenceIndexes)
+        let evidenceIDs = try indexes.map { index -> String in
+            let offset = index - 1
+            guard evidence.indices.contains(offset) else {
+                throw GroundedResponseError.unknownEvidenceIndex(index)
+            }
+            return evidence[offset].article.id
+        }
+        let procedureID: String?
+        if let procedureIndex = decision.procedureIndex {
+            let offset = procedureIndex - 1
+            guard evidence.indices.contains(offset) else {
+                throw GroundedResponseError.unknownEvidenceIndex(
+                    procedureIndex
+                )
+            }
+            guard indexes.contains(procedureIndex) else {
+                throw GroundedResponseError.procedureRequiresCitedEvidence
+            }
+            procedureID = evidence[offset].article.id
+        } else {
+            procedureID = nil
+        }
+
+        return ConversationalGroundedResponse(
+            answer: answer,
+            evidenceIDs: evidenceIDs,
+            procedureID: procedureID,
+            followUp: followUp
+        )
+    }
+
+    public func renderConversational(
+        _ response: ConversationalGroundedResponse,
+        evidence: [RetrievedPassage]
+    ) -> String {
+        var sections: [String] = []
+        let markers = response.evidenceIDs.compactMap { evidenceID in
+            evidence.firstIndex(where: { $0.article.id == evidenceID })
+                .map { "[\($0 + 1)]" }
+        }
+        sections.append(
+            markers.isEmpty
+                ? response.answer
+                : "\(response.answer) \(markers.joined(separator: " "))"
+        )
+
+        if let procedureID = response.procedureID,
+           let article = evidence
+            .map(\.article)
+            .first(where: { $0.id == procedureID }) {
+            if !article.steps.isEmpty {
+                sections.append(
+                    "Reviewed procedure\n" + article.steps.enumerated()
+                        .map { "\($0.offset + 1). \($0.element)" }
+                        .joined(separator: "\n")
+                )
+            }
+            if !article.warnings.isEmpty {
+                sections.append(
+                    "Avoid\n" + article.warnings
+                        .map { "• \($0)" }
+                        .joined(separator: "\n")
+                )
+            }
+        }
+
+        if let followUp = response.followUp {
+            sections.append(followUp)
+        }
+        return sections.joined(separator: "\n\n")
+    }
+
     public func decodeAndValidate(
         _ generated: String,
         evidence: [RetrievedPassage]
@@ -27,10 +127,16 @@ public struct GroundedResponseCodec: Sendable {
         guard let json = Self.jsonObjectData(in: generated) else {
             throw GroundedResponseCodecError.noJSONObject
         }
+        let decoder = JSONDecoder()
         let response: GroundedResponse
-        do {
-            response = try JSONDecoder().decode(GroundedResponse.self, from: json)
-        } catch {
+        if let decoded = try? decoder.decode(GroundedResponse.self, from: json) {
+            response = decoded
+        } else if let decision = try? decoder.decode(
+            CompactGroundedDecision.self,
+            from: json
+        ) {
+            response = try decision.expanded(evidence: evidence)
+        } else {
             throw GroundedResponseCodecError.invalidJSON
         }
 
@@ -38,6 +144,13 @@ public struct GroundedResponseCodec: Sendable {
         let procedureIDs = evidenceIDs
         let stepMap = Self.stepMap(for: evidence)
         let warnings = Set(evidence.flatMap(\.article.warnings))
+        if let procedureID = response.procedureID,
+           let procedure = evidence.first(where: {
+               $0.article.id == procedureID
+           }),
+           procedure.article.domain != response.domain {
+            throw GroundedResponseError.procedureDomainMismatch(procedureID)
+        }
         try validator.validate(
             response,
             availableEvidenceIDs: evidenceIDs,
@@ -73,6 +186,11 @@ public struct GroundedResponseCodec: Sendable {
             return nil
         }
         return Data(value[start...end].utf8)
+    }
+
+    private static func unique(_ values: [Int]) -> [Int] {
+        var seen: Set<Int> = []
+        return values.filter { seen.insert($0).inserted }
     }
 
     private static func stepMap(
@@ -155,7 +273,7 @@ public struct GroundedResponseCodec: Sendable {
         }
 
         sections.append("Driveability: \(driveabilityText(response.driveability))")
-        sections.append(escalationText(for: response.riskLevel))
+        sections.append(escalationText(for: response))
         return sections.joined(separator: "\n\n")
     }
 
@@ -183,14 +301,78 @@ public struct GroundedResponseCodec: Sendable {
         }
     }
 
-    private static func escalationText(for risk: GroundedRiskLevel) -> String {
-        switch risk {
+    private static func escalationText(for response: GroundedResponse) -> String {
+        switch response.riskLevel {
         case .critical, .high:
-            return "Escalation: seek qualified emergency, medical, rescue, or mechanical help now."
+            switch response.domain {
+            case .firstAid:
+                return "Escalation: contact emergency medical help now."
+            case .vehicle:
+                return "Escalation: contact emergency or qualified roadside help now."
+            case .wilderness, .navigation:
+                return "Escalation: contact emergency or rescue help now."
+            }
         case .moderate:
             return "Escalation: stop if conditions worsen or the reviewed procedure no longer matches."
         case .low:
             return "Escalation: seek qualified help if uncertainty remains."
         }
+    }
+}
+
+private struct CompactConversationalDecision: Decodable {
+    let answer: String
+    let evidenceIndexes: [Int]
+    let procedureIndex: Int?
+    let followUp: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case answer = "a"
+        case evidenceIndexes = "e"
+        case procedureIndex = "p"
+        case followUp = "q"
+    }
+}
+
+private struct CompactGroundedDecision: Decodable {
+    let domain: KnowledgeDomain
+    let procedureIndex: Int?
+
+    private enum CodingKeys: String, CodingKey {
+        case domain = "d"
+        case procedureIndex = "p"
+    }
+
+    func expanded(
+        evidence: [RetrievedPassage]
+    ) throws -> GroundedResponse {
+        let procedureID: String?
+        if let procedureIndex {
+            let offset = procedureIndex - 1
+            guard evidence.indices.contains(offset) else {
+                throw GroundedResponseError.unknownEvidenceIndex(
+                    procedureIndex
+                )
+            }
+            procedureID = evidence[offset].article.id
+        } else {
+            procedureID = nil
+        }
+        return GroundedResponse(
+            domain: domain,
+            riskLevel: procedureID == nil ? .moderate : .low,
+            immediateAction: GroundedAction(
+                kind: procedureID == nil ? .assess : .continue,
+                evidenceIDs: procedureID.map { [$0] } ?? []
+            ),
+            questions: [],
+            observations: [],
+            procedureID: procedureID,
+            steps: [],
+            doNotDo: [],
+            driveability: domain == .vehicle ? .unknown : .notApplicable,
+            escalation: GroundedEscalation(reason: "", action: ""),
+            answerConfidence: procedureID == nil ? .insufficient : .limited
+        )
     }
 }

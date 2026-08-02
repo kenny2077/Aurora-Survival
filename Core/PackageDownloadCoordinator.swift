@@ -22,9 +22,46 @@ public protocol ResumablePackageTransport: PackageTransport {
 
 public enum PackageDownloadError: Error, Equatable {
     case incidentModeDenied
+    case unexpectedPackage
     case invalidRangeResponse
     case invalidChunkSize(expected: Int, actual: Int)
     case assemblyDidNotAdvance(expectedOffset: Int64, actualOffset: Int64)
+}
+
+public struct PackageDownloadExpectation: Equatable, Sendable {
+    public let packageID: String
+    public let version: String
+    public let kind: PackageKind
+
+    public init(packageID: String, version: String, kind: PackageKind) {
+        self.packageID = packageID
+        self.version = version
+        self.kind = kind
+    }
+}
+
+public struct PackageDownloadProgress: Equatable, Sendable {
+    public let packageID: String
+    public let artifactPath: String
+    public let receivedByteCount: Int64
+    public let totalByteCount: Int64
+
+    public init(
+        packageID: String,
+        artifactPath: String,
+        receivedByteCount: Int64,
+        totalByteCount: Int64
+    ) {
+        self.packageID = packageID
+        self.artifactPath = artifactPath
+        self.receivedByteCount = receivedByteCount
+        self.totalByteCount = totalByteCount
+    }
+
+    public var fractionCompleted: Double {
+        guard totalByteCount > 0 else { return 1 }
+        return min(1, Double(receivedByteCount) / Double(totalByteCount))
+    }
 }
 
 public struct URLSessionPackageTransport: ResumablePackageTransport {
@@ -105,7 +142,11 @@ public actor PackageDownloadCoordinator {
 
     @discardableResult
     public func downloadAndInstall(
-        from location: RemotePackageLocation
+        from location: RemotePackageLocation,
+        expecting expectation: PackageDownloadExpectation? = nil,
+        progress: @escaping @MainActor @Sendable (
+            PackageDownloadProgress
+        ) async -> Void = { _ in }
     ) async throws -> InstalledPackageVersion {
         guard networkPolicy.permits(.packageDownload) else {
             throw PackageDownloadError.incidentModeDenied
@@ -115,6 +156,12 @@ public actor PackageDownloadCoordinator {
             SignedPackageEnvelope.self,
             from: envelopeData
         )
+        if let expectation,
+           envelope.manifest.packageID != expectation.packageID
+            || envelope.manifest.version != expectation.version
+            || envelope.manifest.kind != expectation.kind {
+            throw PackageDownloadError.unexpectedPackage
+        }
 
         let stagingKey = SHA256.hash(
             data: envelope.manifest.signingPayload
@@ -131,12 +178,25 @@ public actor PackageDownloadCoordinator {
         )
 
         do {
+            let totalByteCount = envelope.manifest.artifacts.reduce(Int64(0)) {
+                $0 + $1.byteCount
+            }
+            var completedByteCount: Int64 = 0
             for artifact in envelope.manifest.artifacts {
                 let destination = try PackageVerifier.safeArtifactURL(
                     path: artifact.path,
                     root: staging
                 )
                 if Self.fileSize(at: destination) == artifact.byteCount {
+                    completedByteCount += artifact.byteCount
+                    await progress(
+                        PackageDownloadProgress(
+                            packageID: envelope.manifest.packageID,
+                            artifactPath: artifact.path,
+                            receivedByteCount: completedByteCount,
+                            totalByteCount: totalByteCount
+                        )
+                    )
                     continue
                 }
                 let partial = destination.appendingPathExtension("partial")
@@ -152,7 +212,18 @@ public actor PackageDownloadCoordinator {
                 if artifact.byteCount == 0 {
                     try await assembler.append(Data(), atOffset: 0)
                 }
+                let initial = try await assembler.state()
+                await progress(
+                    PackageDownloadProgress(
+                        packageID: envelope.manifest.packageID,
+                        artifactPath: artifact.path,
+                        receivedByteCount: completedByteCount
+                            + initial.receivedByteCount,
+                        totalByteCount: totalByteCount
+                    )
+                )
                 while !(try await assembler.state()).isComplete {
+                    try Task.checkCancellation()
                     let state = try await assembler.state()
                     let end = min(
                         artifact.byteCount,
@@ -180,8 +251,18 @@ public actor PackageDownloadCoordinator {
                             actualOffset: updated.receivedByteCount
                         )
                     }
+                    await progress(
+                        PackageDownloadProgress(
+                            packageID: envelope.manifest.packageID,
+                            artifactPath: artifact.path,
+                            receivedByteCount: completedByteCount
+                                + updated.receivedByteCount,
+                            totalByteCount: totalByteCount
+                        )
+                    )
                 }
                 try await assembler.finalize(to: destination)
+                completedByteCount += artifact.byteCount
             }
             return try await installer.install(
                 envelope: envelope,

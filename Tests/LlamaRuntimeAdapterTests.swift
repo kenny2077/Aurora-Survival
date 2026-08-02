@@ -8,6 +8,17 @@ import XCTest
 #endif
 
 final class LlamaRuntimeAdapterTests: XCTestCase {
+    func testDecodeRateExcludesFirstTokenLatency() {
+        let metrics = LlamaCompletionMetrics(
+            firstTokenMilliseconds: 100,
+            totalMilliseconds: 1_100,
+            generatedTokenCount: 11,
+            coldStart: true
+        )
+
+        XCTAssertEqual(metrics.tokensPerSecond, 10, accuracy: 0.001)
+    }
+
     func testLiteConfigurationUsesConservativeLimits() throws {
         let fixture = try makeFiles(includeProjector: false)
         defer { try? FileManager.default.removeItem(at: fixture.root) }
@@ -18,7 +29,7 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
         )
 
         XCTAssertEqual(configuration.contextTokens, 2_048)
-        XCTAssertEqual(configuration.maximumOutputTokens, 256)
+        XCTAssertEqual(configuration.maximumOutputTokens, 128)
         XCTAssertNil(configuration.visionProjectorURL)
     }
 
@@ -168,9 +179,17 @@ private actor RecordingLlamaBackend: LlamaRuntimeBackend {
         userPrompt: String,
         imageData: Data?,
         maximumOutputTokens: Int
-    ) async throws -> String {
+    ) async throws -> LlamaCompletionResult {
         imageWasForwarded = imageData != nil
-        return "No evidence available."
+        return LlamaCompletionResult(
+            text: "No evidence available.",
+            metrics: LlamaCompletionMetrics(
+                firstTokenMilliseconds: 10,
+                totalMilliseconds: 20,
+                generatedTokenCount: 2,
+                coldStart: false
+            )
+        )
     }
 
     func unload() async {}

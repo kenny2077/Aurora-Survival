@@ -171,6 +171,7 @@ public struct ChatRequest: Equatable, Sendable {
     public let imageData: Data?
     public let imageObservations: [String]
     public let vehicleProfile: VehicleProfile?
+    public let conversationHistory: [ConversationTurn]
 
     public init(
         question: String,
@@ -179,7 +180,8 @@ public struct ChatRequest: Equatable, Sendable {
         hasImage: Bool = false,
         imageData: Data? = nil,
         imageObservations: [String] = [],
-        vehicleProfile: VehicleProfile? = nil
+        vehicleProfile: VehicleProfile? = nil,
+        conversationHistory: [ConversationTurn] = []
     ) {
         self.question = question
         self.domain = domain
@@ -188,6 +190,22 @@ public struct ChatRequest: Equatable, Sendable {
         self.imageData = imageData
         self.imageObservations = imageObservations
         self.vehicleProfile = vehicleProfile
+        self.conversationHistory = conversationHistory
+    }
+}
+
+public struct ConversationTurn: Equatable, Sendable {
+    public enum Role: String, Equatable, Sendable {
+        case user
+        case assistant
+    }
+
+    public let role: Role
+    public let text: String
+
+    public init(role: Role, text: String) {
+        self.role = role
+        self.text = text
     }
 }
 

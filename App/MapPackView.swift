@@ -1,54 +1,52 @@
 import SwiftUI
 
 struct MapPackView: View {
+    @EnvironmentObject private var model: AppModel
+    @State private var selectedMapID = ""
+
+    private var selectedMap: ResolvedOfflineMap? {
+        model.offlineMaps.first { $0.id == selectedMapID }
+            ?? model.offlineMaps.first { $0.id.contains("twin-cities") }
+            ?? model.offlineMaps.first
+    }
+
     var body: some View {
-        List {
-            Section {
-                Label("No signed map pack installed", systemImage: "map.fill")
-                    .font(.headline)
-                Text("Signed-pack installation and the local file-backed runtime are implemented. Production rendering still requires MapLibre and licensed PMTiles, style, attribution, and routing artifacts.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Section("Detail tiers") {
-                MapTierRow(
-                    tier: .scout,
-                    detail: "Roads, settlements, water, and basic landmarks."
+        Group {
+            if let selectedMap {
+                OfflineMapDetailView(
+                    map: selectedMap,
+                    availableMaps: model.offlineMaps,
+                    selectedMapID: $selectedMapID
                 )
-                MapTierRow(
-                    tier: .field,
-                    detail: "Adds trails, contours, land cover, and offline routing graph."
+            } else {
+                DownloadCenterView(
+                    kindFilter: .map,
+                    showsCatalogConnection: false
                 )
-                MapTierRow(
-                    tier: .expedition,
-                    detail: "Maximum regional detail and larger storage footprint."
-                )
-            }
-
-            Section("Readiness contract") {
-                Label("Signed and hash verified", systemImage: "signature")
-                Label("Trip coordinate inside coverage", systemImage: "location.fill")
-                Label("Pack detail meets trip requirement", systemImage: "square.3.layers.3d")
-                Label("Map age shown before departure", systemImage: "calendar.badge.clock")
-                Label("Airplane Mode route preview", systemImage: "airplane")
             }
         }
         .navigationTitle("Offline Maps")
-    }
-}
-
-private struct MapTierRow: View {
-    let tier: MapDetailTier
-    let detail: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(tier.displayName).font(.headline)
-            Text(detail)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+        .toolbar {
+            if !model.offlineMaps.isEmpty {
+                NavigationLink {
+                    DownloadCenterView(
+                        kindFilter: .map,
+                        showsCatalogConnection: false
+                    )
+                } label: {
+                    Label("Manage map downloads", systemImage: "arrow.down.circle")
+                }
+            }
         }
-        .padding(.vertical, 3)
+        .onAppear {
+            if selectedMapID.isEmpty {
+                selectedMapID = selectedMap?.id ?? ""
+            }
+        }
+        .onChange(of: model.offlineMaps.map(\.id)) { _, identifiers in
+            if !identifiers.contains(selectedMapID) {
+                selectedMapID = selectedMap?.id ?? ""
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-07-30",
+  "updated": "2026-08-01",
   "distribution_policy": "Model weights are not bundled. Production packages require license review, SHA-256 verification, a signed manifest, and device-specific acceptance tests.",
   "tiers": [
     {
@@ -14,26 +14,39 @@
       "purpose": "Deterministic safety, offline retrieval, citations, and extractive answers."
     },
     {
-      "id": "lite-phi35-mini-q4km-candidate",
+      "id": "lite-gemma3-1b-q4km-candidate",
       "tier": "lite",
       "display_name": "Lite",
       "modality": "text",
       "runtime": "llama.cpp-metal",
       "bundled": false,
-      "candidate_model": "bartowski/Phi-3.5-mini-instruct-GGUF",
-      "candidate_revision": "6d70da17e749a471ccb62ade694486011a75cda3",
-      "base_model": "microsoft/Phi-3.5-mini-instruct",
-      "base_revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
-      "artifact_filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
-      "artifact_bytes": 2393232672,
-      "artifact_sha256": "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5",
+      "candidate_model": "ggml-org/gemma-3-1b-it-GGUF",
+      "candidate_revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+      "base_model": "google/gemma-3-1b-it",
+      "base_revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "artifact_filename": "gemma-3-1b-it-Q4_K_M.gguf",
+      "artifact_bytes": 806058240,
+      "artifact_sha256": "8ccc5cd1f1b3602548715ae25a66ed73fd5dc68a210412eea643eb20eb75a135",
       "quantization": "Q4_K_M",
-      "license": "MIT",
-      "chat_template": "Phi-3 ChatML from embedded tokenizer.chat_template",
-      "workstation_evaluation": "Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json",
+      "license": "LicenseRef-Gemma-Terms-2026-04-01",
+      "license_review": "development_only_pending_release_review",
+      "chat_template": "Embedded Gemma 3 tokenizer.chat_template",
+      "evaluation_status": "physical_bakeoff_pending",
+      "workstation_evaluation": null,
+      "challenger": {
+        "candidate_model": "ggml-org/Qwen3-1.7B-GGUF",
+        "candidate_revision": "daeb8e2d528a760970442092f6bf1e55c3b659eb",
+        "artifact_filename": "Qwen3-1.7B-Q4_K_M.gguf",
+        "artifact_bytes": 1282439264,
+        "artifact_sha256": "d2387ca2dbfee2ffabce7120d3770dadca0b293052bc2f0e138fdc940d9bc7b5",
+        "quantization": "Q4_K_M",
+        "license": "Apache-2.0",
+        "mode": "non-thinking",
+        "status": "not_customer_visible"
+      },
       "maximum_context_tokens": 2048,
-      "maximum_output_tokens": 256,
-      "purpose": "Conservative local text synthesis for iPhone 13-class memory over exactly the same reviewed evidence.",
+      "maximum_output_tokens": 128,
+      "purpose": "Compact local text synthesis for the iPhone 13 physical bake-off over exactly the same reviewed evidence.",
       "gates": {
         "minimum_physical_memory_bytes": 3500000000,
         "allowed_thermal_states": ["nominal", "fair"],
@@ -47,8 +60,9 @@
       "modality": "text",
       "runtime": "llama.cpp-metal",
       "bundled": false,
-      "candidate_model": "Qwen/Qwen3-1.7B",
-      "purpose": "Higher-quality text synthesis over exactly the same reviewed evidence."
+      "candidate_model": null,
+      "status": "deferred_until_lite_acceptance",
+      "purpose": "A later higher-capability text tier; no customer-visible candidate is selected."
     },
     {
       "id": "vision-qwen3vl-2b-candidate",

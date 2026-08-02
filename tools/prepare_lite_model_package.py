@@ -15,13 +15,17 @@ from cryptography.hazmat.primitives import serialization
 from build_pack import canonical_json, sha256, signing_payload
 
 
-MODEL_FILENAME = "Phi-3.5-mini-instruct-Q4_K_M.gguf"
-MODEL_BYTES = 2_393_232_672
-MODEL_SHA256 = "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5"
-LICENSE_BYTES = 1_084
-LICENSE_SHA256 = "fa8235e5b48faca34e3ca98cf4f694ef08bd216d28b58071a1f85b1d50cb814d"
-UPSTREAM_REPOSITORY = "bartowski/Phi-3.5-mini-instruct-GGUF"
-UPSTREAM_REVISION = "6d70da17e749a471ccb62ade694486011a75cda3"
+MODEL_FILENAME = "gemma-3-1b-it-Q4_K_M.gguf"
+MODEL_BYTES = 806_058_240
+MODEL_SHA256 = "8ccc5cd1f1b3602548715ae25a66ed73fd5dc68a210412eea643eb20eb75a135"
+UPSTREAM_REPOSITORY = "ggml-org/gemma-3-1b-it-GGUF"
+UPSTREAM_REVISION = "f9c28bcd85737ffc5aef028638d3341d49869c27"
+MODEL_IDENTITY = f"{UPSTREAM_REPOSITORY}@{UPSTREAM_REVISION}"
+GEMMA_TERMS_URL = "https://ai.google.dev/gemma/terms"
+GEMMA_NOTICE = (
+    "Gemma is provided under and subject to the Gemma Terms of Use found at "
+    "ai.google.dev/gemma/terms\n"
+).encode("utf-8")
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
@@ -43,12 +47,22 @@ def verify_artifact(
 
 def build(args: argparse.Namespace) -> None:
     model = args.model.resolve()
-    license_path = args.license.resolve()
+    terms_path = args.terms.resolve()
     output = args.output.resolve()
     private_key_path = args.private_key.resolve()
 
     verify_artifact(model, MODEL_BYTES, MODEL_SHA256)
-    verify_artifact(license_path, LICENSE_BYTES, LICENSE_SHA256)
+    if not terms_path.is_file():
+        raise FileNotFoundError(terms_path)
+    terms = terms_path.read_bytes()
+    decoded_terms = terms.decode("utf-8")
+    required_terms_text = (
+        "Gemma Terms of Use",
+        "Last modified: April 1, 2026",
+        "DISTRIBUTION AND RESTRICTIONS",
+    )
+    if any(value not in decoded_terms for value in required_terms_text):
+        raise ValueError("the supplied Gemma terms copy is incomplete or outdated")
     if output.exists():
         raise FileExistsError(f"output already exists: {output}")
 
@@ -59,17 +73,24 @@ def build(args: argparse.Namespace) -> None:
     ) as temporary:
         staging = pathlib.Path(temporary)
         packaged_model = staging / "weights" / MODEL_FILENAME
-        packaged_license = staging / "legal" / "LICENSE.MIT"
+        packaged_terms = staging / "legal" / "GEMMA_TERMS.md"
+        packaged_notice = staging / "legal" / "NOTICE"
         packaged_model.parent.mkdir(parents=True)
-        packaged_license.parent.mkdir(parents=True)
+        packaged_terms.parent.mkdir(parents=True)
         shutil.copyfile(model, packaged_model)
-        shutil.copyfile(license_path, packaged_license)
+        shutil.copyfile(terms_path, packaged_terms)
+        packaged_notice.write_bytes(GEMMA_NOTICE)
 
         artifacts = [
             {
-                "path": "legal/LICENSE.MIT",
-                "byteCount": LICENSE_BYTES,
-                "sha256": LICENSE_SHA256,
+                "path": "legal/GEMMA_TERMS.md",
+                "byteCount": len(terms),
+                "sha256": sha256(packaged_terms),
+            },
+            {
+                "path": "legal/NOTICE",
+                "byteCount": len(GEMMA_NOTICE),
+                "sha256": sha256(packaged_notice),
             },
             {
                 "path": f"weights/{MODEL_FILENAME}",
@@ -79,23 +100,28 @@ def build(args: argparse.Namespace) -> None:
         ]
         manifest = {
             "schemaVersion": 1,
-            "packageID": "model.lite.phi35-mini-q4km",
+            "packageID": "model.lite.gemma3-1b-q4km",
             "version": args.version,
             "kind": "model",
             "createdAt": args.created_at,
             "minimumAppVersion": args.minimum_app_version,
-            "licenseIdentifier": "MIT",
-            "displayName": "TrailGuard Lite — Phi-3.5 Mini Q4_K_M",
+            "licenseIdentifier": "LicenseRef-Gemma-Terms-2026-04-01",
+            "displayName": "TrailGuard Lite — Gemma 3 1B Q4_K_M",
             "artifacts": artifacts,
             "metadata": {
                 "artifact_sha256": MODEL_SHA256,
-                "chat_template": "phi3_chatml",
+                "chat_template": "embedded",
                 "context_tokens": "2048",
-                "maximum_output_tokens": "256",
+                "license_review": "development_only_pending_release_review",
+                "model_family": "gemma3",
+                "model_identity": MODEL_IDENTITY,
+                "maximum_output_tokens": "128",
                 "model_path": f"weights/{MODEL_FILENAME}",
                 "model_tier": "lite",
                 "policy_version": "deterministic-policy-v1",
                 "quantization": "Q4_K_M",
+                "runtime_release": "b9637",
+                "terms_url": GEMMA_TERMS_URL,
                 "upstream_repository": UPSTREAM_REPOSITORY,
                 "upstream_revision": UPSTREAM_REVISION,
             },
@@ -138,7 +164,7 @@ def build(args: argparse.Namespace) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=pathlib.Path, required=True)
-    parser.add_argument("--license", type=pathlib.Path, required=True)
+    parser.add_argument("--terms", type=pathlib.Path, required=True)
     parser.add_argument("--output", type=pathlib.Path, required=True)
     parser.add_argument("--private-key", type=pathlib.Path, required=True)
     parser.add_argument(

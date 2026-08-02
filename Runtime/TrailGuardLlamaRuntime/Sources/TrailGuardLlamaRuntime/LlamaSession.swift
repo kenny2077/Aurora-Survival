@@ -7,6 +7,13 @@ public enum LlamaSessionError: Error, Equatable, Sendable {
     case completionFailed(String)
 }
 
+public struct LlamaSessionCompletion: Equatable, Sendable {
+    public let text: String
+    public let firstTokenMicroseconds: Int64
+    public let totalMicroseconds: Int64
+    public let generatedTokenCount: Int
+}
+
 public actor LlamaSession {
     private var handle: TGLlamaSessionRef?
 
@@ -50,7 +57,7 @@ public actor LlamaSession {
         systemPrompt: String,
         userPrompt: String,
         maximumOutputTokens: Int
-    ) throws -> String {
+    ) throws -> LlamaSessionCompletion {
         guard let handle,
               maximumOutputTokens > 0,
               maximumOutputTokens <= Int(Int32.max)
@@ -59,6 +66,9 @@ public actor LlamaSession {
         }
 
         var errorPointer: UnsafeMutablePointer<CChar>?
+        var firstTokenMicroseconds: Int64 = 0
+        var totalMicroseconds: Int64 = 0
+        var generatedTokenCount: Int32 = 0
         let outputPointer = systemPrompt.withCString { system in
             userPrompt.withCString { user in
                 tg_llama_session_complete(
@@ -66,6 +76,9 @@ public actor LlamaSession {
                     system,
                     user,
                     Int32(maximumOutputTokens),
+                    &firstTokenMicroseconds,
+                    &totalMicroseconds,
+                    &generatedTokenCount,
                     &errorPointer
                 )
             }
@@ -76,7 +89,12 @@ public actor LlamaSession {
             )
         }
         defer { tg_llama_string_free(outputPointer) }
-        return String(cString: outputPointer)
+        return LlamaSessionCompletion(
+            text: String(cString: outputPointer),
+            firstTokenMicroseconds: firstTokenMicroseconds,
+            totalMicroseconds: totalMicroseconds,
+            generatedTokenCount: Int(generatedTokenCount)
+        )
     }
 
     public func unload() {

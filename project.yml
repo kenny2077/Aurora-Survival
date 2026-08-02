@@ -10,6 +10,9 @@ settings:
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
 packages:
+  MapLibre:
+    url: https://github.com/maplibre/maplibre-gl-native-distribution
+    exactVersion: 6.26.0
   TrailGuardLlamaRuntime:
     path: Runtime/TrailGuardLlamaRuntime
 targets:
@@ -28,6 +31,9 @@ targets:
         UILaunchScreen: {}
         NSPhotoLibraryUsageDescription: "Attach a photo for fully offline text recognition and optional on-device visual assistance."
         NSCameraUsageDescription: "Take a photo for fully offline text recognition and optional on-device visual assistance."
+        NSLocalNetworkUsageDescription: "Connect to your trusted TrailGuard package host to download signed offline models, guides, and maps during preparation."
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UISupportedInterfaceOrientations~ipad:
@@ -39,12 +45,14 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.TrailGuard
+        DEVELOPMENT_TEAM: AL8BCFV85N
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
       configs:
         Release:
           EXCLUDED_SOURCE_FILE_NAMES: development_trusted_package_keys.json
     dependencies:
+      - package: MapLibre
       - package: TrailGuardLlamaRuntime
   TrailGuardTests:
     type: bundle.unit-test
@@ -61,6 +69,19 @@ targets:
       base:
         GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.example.TrailGuardTests
+        DEVELOPMENT_TEAM: AL8BCFV85N
+  TrailGuardUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: TrailGuard
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.TrailGuardUITests
+        DEVELOPMENT_TEAM: AL8BCFV85N
 schemes:
   TrailGuard:
     build:
@@ -70,3 +91,4 @@ schemes:
     test:
       targets:
         - TrailGuardTests
+        - TrailGuardUITests

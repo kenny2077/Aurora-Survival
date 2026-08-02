@@ -155,19 +155,20 @@
         "organization": "Centers for Disease Control and Prevention",
         "revision": "Starter pack 2026-07",
         "title": "Water treatment while hiking, camping, and traveling",
-        "url": "https://www.cdc.gov/healthy-water-emergency/about/index.html"
+        "url": "https://www.cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html"
       },
       "steps": [
         "Prefer moving water upstream from camps, livestock, mining, roads, and obvious contamination.",
         "Let cloudy water settle and prefilter it through clean cloth before the main treatment.",
         "Use a treatment method and contact time stated by its manufacturer.",
-        "When boiling is the available method, bring water to a rolling boil; at high elevation, follow current public-health guidance for a longer boil.",
+        "When boiling is the available method, bring clear water to a rolling boil for 1 minute, or for 3 minutes above 6,500 feet (about 1,980 metres), then let it cool.",
         "Store treated water in a clean, covered container and avoid recontaminating the cap or opening.",
         "Ration physical effort and shade, not drinking water, when dehydration is a risk."
       ],
       "summary": "Clear-looking natural water can contain disease-causing organisms. Prefer a known safe supply; otherwise collect from the best available source and treat it.",
       "title": "Make backcountry water safer",
       "warnings": [
+        "Cloth prefiltering removes sediment only; it does not make water microbiologically safe.",
         "Boiling and common filters do not reliably remove fuels, heavy metals, salts, or toxic chemicals.",
         "Do not drink seawater, urine, radiator fluid, or alcohol for hydration."
       ]
@@ -274,9 +275,86 @@
         "Do not remove embedded objects.",
         "Tourniquets require appropriate equipment and current training; follow emergency-dispatcher or certified-course instructions."
       ]
+    },
+    {
+      "domain": "wilderness",
+      "id": "wilderness-fire-001",
+      "keywords": ["fire", "campfire", "warmth", "flame", "embers", "tinder", "extinguish", "burn ban"],
+      "reviewed": true,
+      "source": {"id": "nps-campfire-safety-2025", "organization": "U.S. National Park Service", "revision": "Reviewed synthesis 2026-08", "title": "Campfire Safety", "url": "https://www.nps.gov/bith/planyourvisit/campfire-safety.htm"},
+      "steps": ["Check current fire restrictions, wind, and site rules before producing any flame.", "Use an established fire ring when available and clear nearby dry fuel, overhanging branches, and flammable gear.", "Keep water and a tool ready, add only small amounts of fuel, and never leave the fire unattended.", "To extinguish, add water, stir the coals, add more water, and repeat until every part is cool to the touch.", "If water is unavailable, thoroughly mix mineral soil or sand into spread-out embers; do not simply cover or bury hot coals."],
+      "summary": "Use a fire only where local rules and current conditions allow it. Keep it small, attended, and fully extinguished before you leave or sleep.",
+      "title": "Build and extinguish a campfire safely",
+      "warnings": ["Do not light a fire during a ban, in strong wind, or where escaping embers could ignite vegetation.", "Never use gasoline or another volatile liquid to start or revive a campfire."]
+    },
+    {
+      "domain": "wilderness",
+      "id": "wilderness-shelter-001",
+      "keywords": ["shelter", "tarp", "tent", "bivy", "camp", "wind", "rain", "ground", "site"],
+      "reviewed": true,
+      "source": {"id": "nps-campsite-selection-2026", "organization": "U.S. National Park Service", "revision": "Reviewed synthesis 2026-08", "title": "Finding and Setting Up a Campsite", "url": "https://www.nps.gov/subjects/camping/finding-and-setting-up-a-campsite.htm"},
+      "steps": ["Identify the environmental threat that will harm you first, then choose shelter for that threat.", "Prefer level, durable ground that is not the lowest point and is away from ravines, drainage channels, cliffs, and rising water.", "Look up and around for dead trees, hanging branches, unstable rocks, steep slopes, and other fall hazards.", "Insulate your body from the ground and block wind while keeping wet materials away from dry layers.", "Keep the sleeping area safely separated from fire, cooking, food, garbage, and scented items."],
+      "summary": "A useful shelter reduces wind, rain, cold-ground, sun, or precipitation exposure without adding hazards from flooding, lightning, falling branches, cliffs, or fire.",
+      "title": "Choose a safer emergency shelter site",
+      "warnings": ["A tent, tarp, picnic shelter, or isolated tree does not make an outdoor location safe from lightning.", "Do not shelter in a dry drainage, flood channel, under dead limbs, or at the edge of a cliff."]
+    },
+    {
+      "domain": "wilderness",
+      "id": "wilderness-food-storage-001",
+      "keywords": ["food", "eat", "ration", "forage", "plant", "mushroom", "bear", "storage", "garbage", "wildlife"],
+      "reviewed": true,
+      "source": {"id": "nps-bear-food-storage-2025", "organization": "U.S. National Park Service", "revision": "Reviewed synthesis 2026-08", "title": "Bear Safety: Storing Food", "url": "https://www.nps.gov/articles/bearsafetyfood.htm"},
+      "steps": ["Check local requirements for lockers, approved bear-resistant containers, vehicles, or food hangs before the trip.", "Secure food, garbage, cookware, toiletries, and every scented item whenever they are not in immediate use.", "Prepare and eat away from the sleeping area where backcountry rules require separation.", "Clean spills and cookware promptly, seal crumbs and waste, and pack out all food scraps and packaging.", "Prefer compact carried food that tolerates the expected temperature; use foods requiring refrigeration first."],
+      "summary": "Carried food is more dependable than improvised foraging. Secure every scented item, keep a clean camp, and follow the exact storage rules for the area.",
+      "title": "Protect food and keep wildlife out of camp",
+      "warnings": ["Never store food or scented items in a tent and never feed wildlife.", "Do not eat an unknown plant, mushroom, berry, or animal based only on an app, photo, or short description."]
+    },
+    {
+      "domain": "first_aid",
+      "id": "wilderness-heat-001",
+      "keywords": ["heat", "hot", "heat stroke", "heat exhaustion", "sweating", "confusion", "dehydration", "cool"],
+      "reviewed": true,
+      "source": {"id": "cdc-heat-illness-2024", "organization": "Centers for Disease Control and Prevention / NIOSH", "revision": "Reviewed synthesis 2026-08", "title": "First Aid for Heat Illness", "url": "https://www.cdc.gov/niosh/docs/mining/UserFiles/works/pdfs/2024-100.pdf"},
+      "steps": ["Stop activity, move out of the heat, loosen excess clothing, and begin active cooling.", "For a person who is alert and can swallow normally, offer small amounts of cool water while observing them.", "Use cool wet cloths, airflow, or a cool bath when available and do not leave the person alone.", "Use Emergency SOS immediately for confusion, seizure, collapse, loss of consciousness, or suspected heat stroke.", "Continue rapid cooling while emergency help is being arranged."],
+      "summary": "Heat illness can worsen quickly. Stop exertion, move to a cooler place, and treat confusion, loss of consciousness, or very hot skin as an emergency.",
+      "title": "Recognize heat exhaustion and heat stroke",
+      "warnings": ["Do not give anything to drink to a confused, unconscious, vomiting, or unsafe-to-swallow person.", "Do not resume exertion while symptoms remain or are worsening."]
+    },
+    {
+      "domain": "wilderness",
+      "id": "wilderness-lightning-001",
+      "keywords": ["lightning", "thunder", "storm", "rain", "shelter", "ridge", "tree", "tent"],
+      "reviewed": true,
+      "source": {"id": "nws-lightning-safety-2026", "organization": "National Weather Service", "revision": "Reviewed synthesis 2026-08", "title": "Lightning Safety", "url": "https://www.weather.gov/safety/lightning-safety"},
+      "steps": ["At the first thunder or visible nearby lightning, stop the activity and move toward a substantial enclosed building or hard-topped vehicle.", "Leave peaks, ridgelines, open fields, water, and isolated tall objects without delay.", "Do not use a tent, open shelter, shallow overhang, or isolated tree as lightning protection.", "If no safe place is reachable, spread the group apart and reduce exposure while continuing toward safer terrain.", "Wait at least 30 minutes after the last thunder before returning outdoors."],
+      "summary": "No outdoor location is safe during a thunderstorm. At the first thunder, reach a substantial enclosed building or a hard-topped vehicle when possible.",
+      "title": "Reduce lightning exposure",
+      "warnings": ["There is no completely safe outdoor fallback during lightning.", "Do not remain on or in water, on an exposed high point, or beneath an isolated tree."]
+    },
+    {
+      "domain": "navigation",
+      "id": "navigation-signaling-001",
+      "keywords": ["signal", "rescue", "sos", "whistle", "mirror", "help", "coordinates", "lost", "search"],
+      "reviewed": true,
+      "source": {"id": "nps-outdoor-emergency-plan-2026", "organization": "U.S. National Park Service", "revision": "Reviewed synthesis 2026-08", "title": "Outdoor Emergency Plan: If You Get Lost", "url": "https://www.nps.gov/articles/gtgemergencyplan.htm"},
+      "steps": ["Use Emergency SOS, 911, or a satellite communicator early when there is immediate danger or an overdue trip plan.", "Share coordinates when available, last known point, route, time, party condition, clothing, and visible landmarks.", "If the location is safe, stay put and make a bright, high-contrast signal visible from more than one direction.", "Use a whistle, light, or signal mirror in deliberate repeated groups rather than exhausting yourself with continuous noise.", "Preserve phone power, keep communication devices warm and dry, and agree on scheduled check times."],
+      "summary": "Call for help early when needed, transmit a precise location, then use deliberate visual and audible signals while avoiding movement that expands the search area.",
+      "title": "Make yourself easier to find",
+      "warnings": ["Move from a known location only for an immediate threat or a clearly safer verified route.", "Do not depend on a single signaling device or assume a sent message was received."]
+    },
+    {
+      "domain": "first_aid",
+      "id": "firstaid-burns-001",
+      "keywords": ["burn", "fire", "scald", "blister", "skin", "cool water", "first aid"],
+      "reviewed": true,
+      "source": {"id": "redcross-burns-2026", "organization": "American Red Cross", "revision": "Reviewed synthesis 2026-08", "title": "Burns: Types, Symptoms, and How To Help", "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/burns"},
+      "steps": ["Make the scene safe and stop contact with the heat source without exposing yourself.", "Remove clothing or jewelry near the burn only when it is not stuck to skin.", "Cool the area with clean, cool running water; use a clean cool compress if running water is unavailable.", "Loosely protect the cooled burn with a clean non-adhesive dressing and monitor the person.", "Use Emergency SOS for deep, large, electrical, chemical, explosive, airway, face, hand, foot, major-joint, or groin burns."],
+      "summary": "Stop the burning process, cool a thermal burn promptly with clean cool running water when available, and obtain urgent help for serious locations, sizes, or causes.",
+      "title": "Cool a thermal burn and identify emergency signs",
+      "warnings": ["Do not use ice, butter, grease, ointment, or an adhesive bandage on a fresh burn.", "Do not remove stuck material, break blisters, or attempt to clean a severe burn."]
     }
   ],
   "policyVersion": "deterministic-policy-v1",
   "schemaVersion": 1,
-  "version": "1.0.0-development"
+  "version": "1.1.1-development"
 }

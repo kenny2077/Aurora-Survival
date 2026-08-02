@@ -59,7 +59,7 @@ public struct IncidentRuntimeBootstrap: Sendable {
                     activeKnowledgePackages: activePacks.knowledge,
                     embeddingProvider: embeddingProvider
                 )
-                retrieval = RankFusingRetriever(sources: [compiled, bundled])
+                retrieval = RankFusingRetriever(sources: [bundled, compiled])
                 usesCompiledKnowledge = true
             } catch {
                 retrieval = bundled

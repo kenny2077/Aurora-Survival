@@ -7,6 +7,7 @@ public struct ModelPrompt: Sendable {
     public let imageObservations: [String]
     public let tier: ModelTier
     public let permitsVisionReasoning: Bool
+    public let conversationHistory: [ConversationTurn]
 
     public init(
         question: String,
@@ -14,7 +15,8 @@ public struct ModelPrompt: Sendable {
         imageData: Data? = nil,
         imageObservations: [String],
         tier: ModelTier,
-        permitsVisionReasoning: Bool
+        permitsVisionReasoning: Bool,
+        conversationHistory: [ConversationTurn] = []
     ) {
         self.question = question
         self.evidence = evidence
@@ -22,6 +24,7 @@ public struct ModelPrompt: Sendable {
         self.imageObservations = imageObservations
         self.tier = tier
         self.permitsVisionReasoning = permitsVisionReasoning
+        self.conversationHistory = conversationHistory
     }
 }
 
@@ -63,7 +66,7 @@ public struct ExtractiveLanguageModel: LocalLanguageModel {
         }
 
         var sections: [String] = []
-        for (index, passage) in prompt.evidence.prefix(2).enumerated() {
+        for (index, passage) in prompt.evidence.prefix(1).enumerated() {
             let article = passage.article
             var block = "\(article.title) [\(index + 1)]\n\(article.summary)"
             if !article.steps.isEmpty {
