@@ -25,17 +25,30 @@ public actor LlamaXCFrameworkBackend: LlamaRuntimeBackend {
         userPrompt: String,
         imageData: Data?,
         maximumOutputTokens: Int
-    ) async throws -> String {
+    ) async throws -> LlamaCompletionResult {
         guard imageData == nil else {
             throw LlamaXCFrameworkBackendError.imageInputNotImplemented
         }
         guard let session else {
             throw LlamaSessionError.invalidConfiguration
         }
-        return try await session.complete(
+        let completion = try await session.complete(
             systemPrompt: systemPrompt,
             userPrompt: userPrompt,
             maximumOutputTokens: maximumOutputTokens
+        )
+        return LlamaCompletionResult(
+            text: completion.text,
+            metrics: LlamaCompletionMetrics(
+                firstTokenMilliseconds: Int(
+                    completion.firstTokenMicroseconds / 1_000
+                ),
+                totalMilliseconds: Int(
+                    completion.totalMicroseconds / 1_000
+                ),
+                generatedTokenCount: completion.generatedTokenCount,
+                coldStart: false
+            )
         )
     }
 

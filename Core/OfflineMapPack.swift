@@ -61,6 +61,7 @@ public struct OfflineMapPack: Codable, Hashable, Sendable, Identifiable {
     public let bounds: GeoBounds
     public let pmtilesPath: String
     public let stylePath: String
+    public let glyphsDirectoryPath: String?
     public let routingGraphPath: String?
     public let byteCount: Int64
 
@@ -75,6 +76,7 @@ public struct OfflineMapPack: Codable, Hashable, Sendable, Identifiable {
         bounds: GeoBounds,
         pmtilesPath: String,
         stylePath: String,
+        glyphsDirectoryPath: String? = nil,
         routingGraphPath: String? = nil,
         byteCount: Int64
     ) {
@@ -88,6 +90,7 @@ public struct OfflineMapPack: Codable, Hashable, Sendable, Identifiable {
         self.bounds = bounds
         self.pmtilesPath = pmtilesPath
         self.stylePath = stylePath
+        self.glyphsDirectoryPath = glyphsDirectoryPath
         self.routingGraphPath = routingGraphPath
         self.byteCount = byteCount
     }
@@ -97,6 +100,7 @@ public enum MapReadinessIssue: String, Codable, Hashable, Sendable {
     case invalidBounds
     case mapFileMissing
     case styleFileMissing
+    case glyphAssetsMissing
     case routingGraphMissing
     case outsideDownloadedRegion
     case detailTierTooLow
@@ -138,6 +142,10 @@ public struct MapReadinessEvaluator: Sendable {
         if !Self.regularFileExists(pack.stylePath, in: packageDirectory) {
             issues.append(.styleFileMissing)
         }
+        if let glyphsDirectoryPath = pack.glyphsDirectoryPath,
+           !Self.directoryExists(glyphsDirectoryPath, in: packageDirectory) {
+            issues.append(.glyphAssetsMissing)
+        }
         if requiresOfflineRouting {
             guard let path = pack.routingGraphPath,
                   Self.regularFileExists(path, in: packageDirectory)
@@ -165,5 +173,15 @@ public struct MapReadinessEvaluator: Sendable {
               let values = try? url.resourceValues(forKeys: [.isRegularFileKey])
         else { return false }
         return values.isRegularFile == true
+    }
+
+    private static func directoryExists(_ relativePath: String, in root: URL) -> Bool {
+        guard let url = try? PackageVerifier.safeArtifactURL(
+            path: relativePath,
+            root: root
+        ),
+              let values = try? url.resourceValues(forKeys: [.isDirectoryKey])
+        else { return false }
+        return values.isDirectory == true
     }
 }

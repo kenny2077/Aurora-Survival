@@ -23,6 +23,7 @@ public enum EmergencyCoreOrigin: Equatable, Sendable {
     case active
     case bundledFirstLaunch
     case bundledRecovery
+    case bundledUpgrade
 }
 
 public struct EmergencyCoreLoadResult: Equatable, Sendable {
@@ -62,6 +63,16 @@ public struct EmergencyCoreStore {
             )
             if fileManager.fileExists(atPath: activeURL.path) {
                 if let active = try? Self.decodeAndValidate(Data(contentsOf: activeURL)) {
+                    if bundled.version.compare(
+                        active.version,
+                        options: .numeric
+                    ) == .orderedDescending {
+                        try bundledData.write(to: activeURL, options: [.atomic])
+                        return EmergencyCoreLoadResult(
+                            bundle: bundled,
+                            origin: .bundledUpgrade
+                        )
+                    }
                     return EmergencyCoreLoadResult(bundle: active, origin: .active)
                 }
                 try bundledData.write(to: activeURL, options: [.atomic])

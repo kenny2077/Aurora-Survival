@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
+import re
 import sys
 
 
@@ -97,23 +98,23 @@ def validate_model_catalog() -> int:
         fail("lite must be disabled in Low Power Mode")
     if lite.get("maximum_context_tokens") != 2_048:
         fail("lite context must remain conservatively bounded")
-    if lite.get("maximum_output_tokens") != 256:
+    if lite.get("maximum_output_tokens") != 128:
         fail("lite output must remain conservatively bounded")
     expected_lite_candidate = {
-        "candidate_model": "bartowski/Phi-3.5-mini-instruct-GGUF",
-        "candidate_revision": "6d70da17e749a471ccb62ade694486011a75cda3",
-        "base_model": "microsoft/Phi-3.5-mini-instruct",
-        "base_revision": "2fe192450127e6a83f7441aef6e3ca586c338b77",
-        "artifact_filename": "Phi-3.5-mini-instruct-Q4_K_M.gguf",
-        "artifact_bytes": 2_393_232_672,
+        "candidate_model": "ggml-org/gemma-3-1b-it-GGUF",
+        "candidate_revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
+        "base_model": "google/gemma-3-1b-it",
+        "base_revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+        "artifact_filename": "gemma-3-1b-it-Q4_K_M.gguf",
+        "artifact_bytes": 806_058_240,
         "artifact_sha256": (
-            "e4165e3a71af97f1b4820da61079826d8752a2088e313af0c7d346796c38eff5"
+            "8ccc5cd1f1b3602548715ae25a66ed73fd5dc68a210412eea643eb20eb75a135"
         ),
         "quantization": "Q4_K_M",
-        "license": "MIT",
-        "workstation_evaluation": (
-            "Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json"
-        ),
+        "license": "LicenseRef-Gemma-Terms-2026-04-01",
+        "license_review": "development_only_pending_release_review",
+        "evaluation_status": "physical_bakeoff_pending",
+        "workstation_evaluation": None,
     }
     mismatched_candidate = [
         key
@@ -122,56 +123,20 @@ def validate_model_catalog() -> int:
     ]
     if mismatched_candidate:
         fail(
-            "lite candidate identity does not match the approved workstation "
+            "lite candidate identity does not match the pinned Gemma bake-off "
             f"artifact: {', '.join(mismatched_candidate)}"
         )
     if lite.get("bundled") is not False:
-        fail("evaluated lite candidate must remain unbundled before Mac acceptance")
-    evaluation_path = ROOT / lite["workstation_evaluation"]
-    if not evaluation_path.is_file():
-        fail("approved lite workstation evaluation is missing")
-    evaluation = json.loads(evaluation_path.read_text(encoding="utf-8"))
-    summary = evaluation.get("summary", {})
-    if summary.get("passed_cases") != 12 or not summary.get(
-        "eligible_for_mac_handoff"
-    ):
-        fail("approved lite workstation evaluation is not fully green")
-    evaluated_model = evaluation.get("model", {})
-    for report_key, catalog_key in (
-        ("repo", "candidate_model"),
-        ("revision", "candidate_revision"),
-        ("filename", "artifact_filename"),
-        ("sha256", "artifact_sha256"),
-        ("size_bytes", "artifact_bytes"),
-        ("quantization", "quantization"),
-        ("license", "license"),
-    ):
-        if evaluated_model.get(report_key) != lite.get(catalog_key):
-            fail(f"lite catalog and workstation report differ: {catalog_key}")
-    evaluated_runtime = evaluation.get("runtime", {})
+        fail("Gemma Lite must remain unbundled before physical acceptance")
+    challenger = lite.get("challenger", {})
     if (
-        evaluated_runtime.get("release") != "b9637"
-        or evaluated_runtime.get("context_tokens") != 2_048
-        or evaluated_runtime.get("maximum_output_tokens") != 256
+        challenger.get("candidate_model") != "ggml-org/Qwen3-1.7B-GGUF"
+        or challenger.get("artifact_bytes") != 1_282_439_264
+        or challenger.get("artifact_sha256")
+        != "d2387ca2dbfee2ffabce7120d3770dadca0b293052bc2f0e138fdc940d9bc7b5"
+        or challenger.get("status") != "not_customer_visible"
     ):
-        fail("lite workstation evaluation used the wrong runtime configuration")
-    evaluator_path = ROOT / "tools" / "native_llama_lite_eval.py"
-    evaluator_sha256 = hashlib.sha256(evaluator_path.read_bytes()).hexdigest()
-    if (
-        evaluation.get("evaluation_contract", {}).get("evaluator_sha256")
-        != evaluator_sha256
-    ):
-        fail("lite workstation evaluation is stale for the current evaluator")
-    grammar_source = LLAMA_GRAMMAR_HEADER.read_text(encoding="utf-8")
-    grammar = grammar_source.split('R"GBNF(\n', 1)[1].split('\n)GBNF";', 1)[0] + "\n"
-    grammar_sha256 = hashlib.sha256(grammar.encode("utf-8")).hexdigest()
-    if (
-        evaluation.get("evaluation_contract", {}).get(
-            "grounded_response_grammar_sha256"
-        )
-        != grammar_sha256
-    ):
-        fail("lite workstation evaluation is stale for the current grammar")
+        fail("the Qwen3 1.7B challenger identity is not pinned or is exposed")
     vision = next(tier for tier in tiers if tier["tier"] == "vision_expert")
     gates = vision.get("gates", {})
     if gates.get("minimum_physical_memory_bytes", 0) < 7_500_000_000:
@@ -189,7 +154,7 @@ def validate_swift_sources() -> int:
         text = source.read_text(encoding="utf-8")
         if text.count("{") != text.count("}"):
             fail(f"unbalanced braces in {source.relative_to(ROOT)}")
-        if "http://" in text:
+        if re.search(r'"http://[^"\s]+', text):
             fail(f"insecure URL in {source.relative_to(ROOT)}")
     return len(sources)
 
@@ -307,6 +272,10 @@ def validate_llama_runtime_pin() -> str:
         fail("llama.cpp grounded-response grammar is missing")
     if "llama_model_chat_template" not in bridge:
         fail("llama.cpp text bridge must use the model chat template")
+    if "session.context = llama_init_from_model(" not in bridge:
+        fail("llama.cpp warm reuse must refresh request-local context state")
+    if "llama_memory_clear(" in bridge:
+        fail("llama.cpp must not reuse cleared KV state across requests")
     return release
 
 

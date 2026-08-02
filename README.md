@@ -44,22 +44,24 @@ puts fixed hazard rules and reviewed evidence ahead of model output.
 - A whitelist-only OBD protocol that cannot clear codes or write to an ECU.
 - Vehicle-bound local OBD observation records with raw responses and sources.
 - A llama.cpp backend contract for both text-only and Qwen vision packages.
-- Eighty-eight Swift tests, 120 executed synthetic gold incidents, 30 executed
+- One hundred and one Swift tests, 120 executed synthetic gold incidents, 30 executed
   map/asset cases,
   seven versioned schemas, locked safety fixtures, and GitHub Actions for core,
   reproducible packs, and iOS builds.
 
 The app is functional without model weights: Essential mode retrieves and
-formats reviewed offline material. Field and Vision Expert remain unavailable
-until model artifacts are licensed, signed, hosted, and accepted on physical
-iPhones. The package installer and runtime boundary are implemented; model
-weights and the compiled llama.cpp bridge are not stored here.
+formats reviewed offline material. Lite is exposed only when an eligible device
+has a verified active package whose model path and runtime configuration pass
+the signed-manifest boundary. Field and Vision Expert remain unavailable until
+their exact artifacts are licensed, signed, hosted, and accepted on physical
+devices. Model weights are not stored here.
 
 ## Product-tier contract
 
 | Tier | Model behavior | Photo behavior | Safety and facts |
 | --- | --- | --- | --- |
 | Essential | Extractive; no LLM required | On-device OCR | Same deterministic rules and knowledge |
+| Lite | Evaluated small text-only local LLM | OCR text is added to retrieval | Same deterministic rules and knowledge |
 | Field | Small text-only local LLM | OCR text is added to retrieval | Same deterministic rules and knowledge |
 | Vision Expert | Qwen3-VL-2B candidate | OCR plus multimodal observation | Same deterministic rules and knowledge |
 
@@ -102,22 +104,22 @@ python tools/local_model_smoke.py `
   --output Reports/local-model-smoke.json
 ```
 
-This is an off-device evaluation harness, not the iOS runtime. The app now links
-a checksum-pinned official llama.cpp XCFramework on macOS. Optional model tiers
-still require signed model packaging, startup activation, and physical-device
-inference evidence. The exact MIT-licensed Phi-3.5 Mini Q4_K_M Lite candidate is
-selected and workstation-verified in `Docs/LITE_MODEL_HANDOFF.md`, but remains
-unbundled and inactive.
+This is an off-device evaluation harness, not the iOS runtime. The app links a
+checksum-pinned official llama.cpp `b9637` XCFramework and binds only a verified
+active package to the native backend. The iPhone 13 Lite candidate is the exact
+806,058,240-byte Gemma 3 1B IT Q4_K_M artifact documented in
+`Docs/LITE_MODEL_HANDOFF.md`; Qwen3 1.7B is a hidden challenger and Phi-3.5 Mini
+is experimental/rejected. Unsafe, unlisted, missing, duplicate, recalled, or
+unsupported artifacts fail closed to Essential.
 
-Local verification on 2026-07-28 used Xcode 26.6 and the iOS 26.5 Simulator:
-all 94 Swift package and simulator tests passed on iPhone and iPad form factors.
-Three new grounded-generation tests bring the source inventory to 97 and still
-require a Mac rerun after the grammar-bridge change.
-The universal app also built, installed, and launched on a physical iPhone 13
-and M2 iPad Pro. The GitHub Actions workflow runs Swift package tests and an
-unsigned simulator build.
-Physical-device memory, heat, battery, camera, Bluetooth, and map tests remain
-required.
+Local verification on 2026-08-02 passes all 112 Swift tests and generic iOS
+builds. On the Kaiyi Guo Personal Team iPhone 13, the signed Gemma package has
+passed grounded citations, deterministic model bypass, real Apple Vision OCR,
+Twin Cities and Minnesota offline-map coexistence, five consecutive answers,
+and an optimized physical build. True Airplane Mode, Low Power Mode,
+20–30-minute battery/memory coverage, VoiceOver/Dynamic Type, production trust,
+and independent publication review remain required. GitHub Actions is also
+blocked from starting by the account billing/spending limit.
 
 ## Architecture at a glance
 

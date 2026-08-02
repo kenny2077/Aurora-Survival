@@ -164,6 +164,30 @@ public enum GroundedResponseError: Error, Equatable {
     case groundedAnswerRequiresProcedure
     case unknownStepID(String)
     case unsupportedWarning(String)
+    case procedureDomainMismatch(String)
+    case unknownEvidenceIndex(Int)
+    case invalidConversationalAnswer
+    case invalidFollowUp
+    case procedureRequiresCitedEvidence
+}
+
+public struct ConversationalGroundedResponse: Equatable, Sendable {
+    public let answer: String
+    public let evidenceIDs: [String]
+    public let procedureID: String?
+    public let followUp: String?
+
+    public init(
+        answer: String,
+        evidenceIDs: [String],
+        procedureID: String?,
+        followUp: String?
+    ) {
+        self.answer = answer
+        self.evidenceIDs = evidenceIDs
+        self.procedureID = procedureID
+        self.followUp = followUp
+    }
 }
 
 public struct GroundedResponseValidator: Sendable {

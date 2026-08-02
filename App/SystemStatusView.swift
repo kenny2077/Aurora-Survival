@@ -32,10 +32,38 @@ struct SystemStatusView: View {
                     "Model tiers",
                     value: model.installedTierSummary
                 )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(
+                    "Model tiers, \(model.installedTierSummary)"
+                )
+                .accessibilityIdentifier("status.modelTiers")
                 LabeledContent(
                     "Active packages",
                     value: model.activePackStatus
                 )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(
+                    "Active packages, \(model.activePackStatus)"
+                )
+                .accessibilityIdentifier("status.activePackages")
+                LabeledContent(
+                    "Device condition",
+                    value: model.deviceConditionSummary
+                )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(
+                    "Device condition, \(model.deviceConditionSummary)"
+                )
+                .accessibilityIdentifier("status.deviceCondition")
+                LabeledContent(
+                    "Last native run",
+                    value: model.lastModelMetricsSummary
+                )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(
+                    "Last native run, \(model.lastModelMetricsSummary)"
+                )
+                .accessibilityIdentifier("status.modelMetrics")
             }
 
             Section("Integrated controls") {

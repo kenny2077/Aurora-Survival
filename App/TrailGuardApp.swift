@@ -11,6 +11,7 @@ struct AuroraApp: App {
                 .tint(Color("SignalOrange"))
                 .task {
                     await appModel.refreshActivePacks()
+                    await appModel.loadDebugOCRFixtureIfPresent()
                 }
         }
     }

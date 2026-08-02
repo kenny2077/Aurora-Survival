@@ -5,15 +5,16 @@
 | Tier | Current candidate | Required outcome |
 | --- | --- | --- |
 | Essential | Native extractive pipeline | Instant, low-power, always available |
-| Lite | Exact small text GGUF pending gaming-laptop evaluation | Conservative 2,048-token context and 256-token output on iPhone 13-class memory |
-| Field | Qwen3 1.7B-class text GGUF | Better grounded dialogue than Essential without unsafe additions |
+| Lite | Gemma 3 1B IT Q4_K_M | Conservative 2,048-token context and 128-token output on iPhone 13-class memory |
+| Field | No release artifact selected; Qwen3 1.7B is a hidden challenger | Better grounded dialogue than Essential without unsafe additions |
 | Vision Expert | Qwen3-VL-2B-Instruct GGUF | Useful visual observations on capable iPhones without unacceptable heat or battery cost |
 
 The iOS runtime is pinned independently of model selection to official
 llama.cpp release `b9637` (commit
 `aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3`). Its XCFramework archive is
-checksum-locked in `Runtime/AuroraLlamaRuntime/Package.swift`. This proves
-the native build and bridge boundary, not model suitability or performance.
+checksum-locked in `Runtime/AuroraLlamaRuntime/Package.swift`. The exact
+signed Gemma candidate has passed short, sustained five-turn, and optimized
+physical iPhone 13 gates; those results do not approve other models or devices.
 
 Candidates are replaceable. Tier names and safety contracts are stable.
 
@@ -69,21 +70,25 @@ required follow-up questions, and relevant evidence articles.
 ### Device performance
 
 - Essential first response ≤ 500 ms on the lowest supported device.
-- Lite first token ≤ 3 s and ≥ 8 tokens/s on the iPhone 13 acceptance device.
+- Lite warm first token ≤ 3 s and ≥ 8 tokens/s on the iPhone 13 acceptance
+  device; cold app-to-first-token is recorded separately.
 - Field first token ≤ 3 s and ≥ 8 tokens/s at the p50 target device.
 - Vision Expert first useful observation ≤ 8 s on the minimum approved device.
 - No OS termination in a 30-minute incident script.
 - No transition to serious thermal state in the standard 10-turn script.
 - Vision session energy use ≤ 5% battery for the standard photo scenario.
 
-These are initial product gates, not claims that the current prototype passes.
+The current Gemma Lite candidate passes the short and five-turn latency,
+throughput, citation, safety-bypass, and thermal gates. The 30-minute and battery
+gates remain pending.
 
 ## Decision tree
 
-1. Benchmark Qwen3-VL-2B Q4 language + Q8 projector.
-2. If memory or heat fails, reduce image resolution and context before reducing
+1. Keep Gemma 3 1B as Lite; evaluate Qwen3 1.7B only as a hidden challenger.
+2. Benchmark Qwen3-VL-2B Q4 language + Q8 projector on an eligible device.
+3. If memory or heat fails, reduce image resolution and context before reducing
    quantization quality.
-3. If visual grounding still fails, compare a smaller vision encoder plus Field
+4. If visual grounding still fails, compare a smaller vision encoder plus Field
    text model.
-4. If no configuration passes, ship OCR-only on that device class.
-5. Do not relax safety, citation, or fallback gates to preserve a Vision label.
+5. If no configuration passes, ship OCR-only on that device class.
+6. Do not relax safety, citation, or fallback gates to preserve a Vision label.

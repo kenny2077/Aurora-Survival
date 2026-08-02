@@ -25,11 +25,14 @@ This claim is architectural. It is not yet a clinical or product certification.
 ## Known gaps
 
 - Phrase matching is not a certified clinical triage classifier.
-- The starter corpus has source metadata but no signed review attestations.
+- Development content and catalogs are signed and source-attributed, but final
+  release content still needs independent domain-owner review attestations.
 - No jurisdiction, language, accessibility, child, pregnancy, disability, or
   vehicle-specific validation has been completed.
 - OCR can be wrong and is not yet confidence-scored in the UI.
-- No physical-device performance or thermal result exists.
+- Short, five-turn, and optimized Gemma runs pass on the iPhone 13; true
+  Airplane/Low Power modes, 20–30-minute battery/memory coverage, and the wider
+  supported-device matrix remain incomplete.
 - Production trust keys, authenticated artifact hosting, and a completed key
   rotation/recall drill do not yet exist. Installer and tamper tests currently
   use development fixtures only.

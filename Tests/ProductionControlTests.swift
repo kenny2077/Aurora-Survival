@@ -92,26 +92,23 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertNotNil(action["evidence_ids"])
     }
 
-    func testGroundedPromptDefinesNestedJSONContract() {
+    func testGroundedPromptDefinesConversationalDecisionContract() {
         let prompt = GroundedPromptBuilder().systemPrompt(
             for: .lite,
             outputMode: .groundedJSON
         )
 
         for required in [
-            "\"immediate_action\": {",
-            "\"evidence_ids\":",
-            "\"procedure_id\":",
-            "\"do_not_do\":",
-            "\"answer_confidence\":",
-            "use null procedure_id",
+            "{\"a\":",
+            "\"e\":",
+            "\"p\":",
+            "\"q\":",
+            "four keys in that order",
             "extra keys",
-            "describes whether",
-            "If any EVIDENCE block",
-            "only an answer_confidence value",
-            "do not echo",
-            "attaches every",
-            "attaches every approved step",
+            "natural conversational answer",
+            "EVIDENCE number",
+            "NO REVIEWED",
+            "reviewed procedure",
         ] {
             XCTAssertTrue(prompt.contains(required), "Missing prompt contract: \(required)")
         }
@@ -123,13 +120,21 @@ final class ProductionControlTests: XCTestCase {
                 evidence: [RetrievedPassage(article: article, score: 1)],
                 imageObservations: [],
                 tier: .lite,
-                permitsVisionReasoning: false
+                permitsVisionReasoning: false,
+                conversationHistory: [
+                    ConversationTurn(
+                        role: .user,
+                        text: "My engine made a strange noise."
+                    )
+                ]
             ),
             outputMode: .groundedJSON
         )
         XCTAssertTrue(userPrompt.contains("Domain: vehicle"))
-        XCTAssertFalse(userPrompt.contains("STEP_ID"))
-        XCTAssertFalse(userPrompt.contains("WARNING:"))
+        XCTAssertTrue(userPrompt.contains("RECENT CONVERSATION"))
+        XCTAssertTrue(userPrompt.contains("My engine made a strange noise."))
+        XCTAssertTrue(userPrompt.contains("Reviewed steps:"))
+        XCTAssertTrue(userPrompt.contains("Reviewed warnings:"))
 
         let emptyEvidencePrompt = GroundedPromptBuilder().userPrompt(
             from: ModelPrompt(
@@ -231,6 +236,37 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertTrue(rendered.contains(article.steps[0]))
         XCTAssertTrue(rendered.contains(article.warnings[0]))
         XCTAssertFalse(rendered.contains(response.escalation.action))
+    }
+
+    func testGroundedCodecExpandsCompactDecisionFromReviewedEvidence() throws {
+        let article = makeArticle()
+        let generated = """
+        {"d":"vehicle","p":1}
+        """
+        let rendered = try GroundedResponseCodec().decodeValidateAndRender(
+            generated,
+            evidence: [RetrievedPassage(article: article, score: 1)]
+        )
+        XCTAssertTrue(rendered.contains(article.steps[0]))
+        XCTAssertTrue(rendered.contains(article.warnings[0]))
+    }
+
+    func testGroundedCodecRejectsCompactDecisionDomainMismatch() throws {
+        let article = makeArticle()
+        let generated = """
+        {"d":"wilderness","p":1}
+        """
+        XCTAssertThrowsError(
+            try GroundedResponseCodec().decodeValidateAndRender(
+                generated,
+                evidence: [RetrievedPassage(article: article, score: 1)]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .procedureDomainMismatch(article.id)
+            )
+        }
     }
 
     func testGroundedCodecRejectsInventedStepID() throws {
@@ -385,12 +421,12 @@ final class ProductionControlTests: XCTestCase {
                     confidence: 0.8
                 )
             ],
-            procedureID: nil,
+            procedureID: article.id,
             steps: [],
             doNotDo: article.warnings,
             driveability: .doNotDrive,
             escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
+            answerConfidence: .limited
         )
         let generated = String(
             decoding: try JSONEncoder().encode(response),
@@ -500,6 +536,58 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertEqual(result.bundle.version, "1.0.0")
     }
 
+    func testNewerBundledEmergencyCoreUpgradesExistingInstall() throws {
+        let root = temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        let active = makeEmergencyCore(version: "1.0.0")
+        try JSONEncoder().encode(active).write(
+            to: root.appendingPathComponent("emergency-core.json")
+        )
+        let bundled = makeEmergencyCore(version: "1.1.0")
+
+        let result = try EmergencyCoreStore(
+            rootDirectory: root,
+            bundledData: try JSONEncoder().encode(bundled)
+        ).loadOrRecover()
+
+        XCTAssertEqual(result.origin, .bundledUpgrade)
+        XCTAssertEqual(result.bundle.version, "1.1.0")
+        let persisted = try JSONDecoder().decode(
+            EmergencyCoreBundle.self,
+            from: Data(
+                contentsOf: root.appendingPathComponent("emergency-core.json")
+            )
+        )
+        XCTAssertEqual(persisted.version, "1.1.0")
+    }
+
+    func testOlderBundledEmergencyCoreDoesNotDowngradeActiveInstall() throws {
+        let root = temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        let active = makeEmergencyCore(version: "2.0.0")
+        try JSONEncoder().encode(active).write(
+            to: root.appendingPathComponent("emergency-core.json")
+        )
+
+        let result = try EmergencyCoreStore(
+            rootDirectory: root,
+            bundledData: try JSONEncoder().encode(
+                makeEmergencyCore(version: "1.1.0")
+            )
+        ).loadOrRecover()
+
+        XCTAssertEqual(result.origin, .active)
+        XCTAssertEqual(result.bundle.version, "2.0.0")
+    }
+
     func testDeterministicSafetyAnswerIncludesPolicySource() async {
         let assistant = IncidentAssistant(articles: [])
         let answer = await assistant.answer(
@@ -546,7 +634,9 @@ final class ProductionControlTests: XCTestCase {
         )
     }
 
-    private func makeEmergencyCore() -> EmergencyCoreBundle {
+    private func makeEmergencyCore(
+        version: String = "1.0.0"
+    ) -> EmergencyCoreBundle {
         let source = SourceReference(
             id: "source.1",
             title: "Reviewed fixture",
@@ -565,7 +655,7 @@ final class ProductionControlTests: XCTestCase {
             reviewed: true
         )
         return EmergencyCoreBundle(
-            version: "1.0.0",
+            version: version,
             policyVersion: "1.0.0",
             articles: [article]
         )

@@ -24,9 +24,13 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
             installer: fixture.installer,
             chunkByteCount: 3
         )
+        let progress = ProgressRecorder()
 
         do {
-            _ = try await coordinator.downloadAndInstall(from: fixture.location)
+            _ = try await coordinator.downloadAndInstall(
+                from: fixture.location,
+                progress: { await progress.record($0) }
+            )
             XCTFail("Expected simulated interruption")
         } catch {
             XCTAssertEqual((error as? URLError)?.code, .networkConnectionLost)
@@ -34,11 +38,16 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
 
         await transport.clearFailure()
         let installed = try await coordinator.downloadAndInstall(
-            from: fixture.location
+            from: fixture.location,
+            progress: { await progress.record($0) }
         )
         XCTAssertEqual(installed.packageID, "knowledge.fixture")
         let ranges = await transport.requestedRanges()
         XCTAssertEqual(ranges, [0..<3, 3..<6, 3..<6])
+        let lastProgress = await progress.last()
+        XCTAssertEqual(lastProgress?.receivedByteCount, 6)
+        XCTAssertEqual(lastProgress?.totalByteCount, 6)
+        XCTAssertEqual(lastProgress?.fractionCompleted, 1)
     }
 
     func testIncidentModeDeniesDownloadBeforeNetworkAccess() async throws {
@@ -68,6 +77,41 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
         }
         let requestCount = await transport.totalRequestCount()
         XCTAssertEqual(requestCount, 0)
+    }
+
+    func testCatalogExpectationRejectsDifferentSignedPackageBeforeArtifacts() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let transport = MemoryResumableTransport(
+            envelopeURL: fixture.location.envelopeURL,
+            envelopeData: try JSONEncoder().encode(fixture.envelope),
+            artifactData: fixture.artifactData
+        )
+        let coordinator = PackageDownloadCoordinator(
+            stagingRoot: fixture.root.appendingPathComponent("staging"),
+            transport: transport,
+            installer: fixture.installer,
+            chunkByteCount: 3
+        )
+
+        do {
+            _ = try await coordinator.downloadAndInstall(
+                from: fixture.location,
+                expecting: PackageDownloadExpectation(
+                    packageID: "model.unexpected",
+                    version: "1.0.0",
+                    kind: .model
+                )
+            )
+            XCTFail("Expected identity rejection")
+        } catch {
+            XCTAssertEqual(
+                error as? PackageDownloadError,
+                .unexpectedPackage
+            )
+        }
+        let requestCount = await transport.totalRequestCount()
+        XCTAssertEqual(requestCount, 1)
     }
 
     private struct Fixture {
@@ -131,6 +175,18 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
             ),
             installer: installer
         )
+    }
+}
+
+private actor ProgressRecorder {
+    private var values: [PackageDownloadProgress] = []
+
+    func record(_ progress: PackageDownloadProgress) {
+        values.append(progress)
+    }
+
+    func last() -> PackageDownloadProgress? {
+        values.last
     }
 }
 

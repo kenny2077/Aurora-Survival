@@ -12,8 +12,8 @@ struct RootView: View {
             NavigationStack { ReadinessView() }
                 .tabItem { Label("Ready", systemImage: "checklist") }
 
-            NavigationStack { ModelSettingsView() }
-                .tabItem { Label("Models", systemImage: "cpu.fill") }
+            NavigationStack { DownloadCenterView() }
+                .tabItem { Label("Downloads", systemImage: "arrow.down.circle.fill") }
 
             NavigationStack { SystemStatusView() }
                 .tabItem { Label("Status", systemImage: "shield.lefthalf.filled") }

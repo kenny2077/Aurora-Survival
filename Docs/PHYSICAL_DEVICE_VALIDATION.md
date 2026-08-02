@@ -1,6 +1,6 @@
 # Physical device validation
 
-Updated: 2026-07-28
+Updated: 2026-08-02
 
 ## Confirmed intent
 
@@ -50,13 +50,15 @@ Updated: 2026-07-28
 | --- | --- | --- |
 | Xcode paired | Pass: paired | Pass: paired with `devicectl` |
 | Signed build/install | Pass: Apple Development build installed | Pass: Apple Development build installed |
-| Essential first launch | Partial: foreground launch and live process confirmed; screen flow pending | Partial: foreground launch and live process confirmed; screen flow pending |
-| Emergency core and retrieval | Pending | Pending |
-| OCR | Pending | Pending |
+| Essential first launch | Pass | Partial: foreground launch and live process confirmed; screen flow pending |
+| Emergency core and retrieval | Pass: reviewed answer and deterministic safety path | Pending |
+| Signed Gemma Lite inference | Pass: grounded, sustained, and optimized-build evidence | Not evaluated |
+| Reviewed guide and offline maps | Pass: Twin Cities Scout and Minnesota Statewide Field | Pending |
+| OCR | Pass: Apple Vision text flowed into deterministic safety override | Pending |
 | Airplane-mode cold relaunch | Pending | Pending |
 | Dynamic Type and VoiceOver | Pending | Pending |
 | Background/foreground and termination | Pending | Pending |
-| Baseline memory/thermal/energy | Partial: 68.75–68.91 MiB physical footprint and nominal thermal state during a 16.93-second idle Essential trace; sustained battery/energy gate pending | Partial: 19.27–19.84 MiB physical footprint and nominal thermal state during a short idle Essential trace; sustained battery/energy gate pending |
+| Model performance/thermal | Pass for five-turn and optimized short runs: 1.35 s warm TTFT, 15.4 tok/s, thermal fair, no termination; long battery run pending | Not evaluated |
 
 Do not convert a pending cell to pass without direct device evidence.
 
@@ -72,10 +74,9 @@ Do not convert a pending cell to pass without direct device evidence.
   nested `llama.framework` passed strict code-signature verification. That exact
   runtime-linked build installed and launched on both devices, with live
   Aurora processes confirmed (iPhone PID 85350; iPad PID 680).
-- A physical XCTest attempt exposed and fixed a missing generated test-bundle
-  `Info.plist`. The retry then failed while Xcode signed its injected
-  `XCTAutomationSupport.framework` with `errSecInternalComponent`; the
-  Aurora application itself builds, signs, installs, and launches.
+- Physical XCUITests now install and run successfully on the iPhone 13, including
+  repeated native inference, deterministic safety, Apple Vision OCR, guides,
+  and local MapLibre products.
 - The baseline Activity Monitor trace is
   `/tmp/Aurora-iPhone13-activity.trace`. It is short-run engineering
   evidence, not a performance or battery acceptance pass.

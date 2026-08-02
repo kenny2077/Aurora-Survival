@@ -10,10 +10,28 @@ enum PackCheckError: Error {
 struct AuroraPackCheck {
     static func main() async throws {
         let arguments = CommandLine.arguments
+        if arguments.count == 4, arguments[1] == "model" {
+            try await checkModel(
+                keyringURL: URL(fileURLWithPath: arguments[2]),
+                source: URL(fileURLWithPath: arguments[3], isDirectory: true)
+            )
+            return
+        }
+        if arguments.count == 4, arguments[1] == "catalog" {
+            try checkCatalog(
+                keyringURL: URL(fileURLWithPath: arguments[2]),
+                catalogURL: URL(fileURLWithPath: arguments[3])
+            )
+            return
+        }
         guard arguments.count == 4 else {
             FileHandle.standardError.write(
                 Data(
-                    "usage: trailguard-pack-check <keyring.json> <pack-v1> <pack-v2>\n".utf8
+                    (
+                        "usage: trailguard-pack-check <keyring.json> <pack-v1> <pack-v2>\n"
+                            + "   or: trailguard-pack-check model <keyring.json> <model-pack>\n"
+                            + "   or: trailguard-pack-check catalog <keyring.json> <catalog.json>\n"
+                    ).utf8
                 )
             )
             throw PackCheckError.usage
@@ -122,6 +140,114 @@ struct AuroraPackCheck {
         print(
             "PASS: signed development knowledge lifecycle "
                 + "(install v1/v2, activation, rollback, recall, tamper rejection)"
+        )
+    }
+
+    private static func checkCatalog(
+        keyringURL: URL,
+        catalogURL: URL
+    ) throws {
+        let decoder = JSONDecoder()
+        let keys = try decoder.decode(
+            [TrustedPackageKey].self,
+            from: Data(contentsOf: keyringURL)
+        )
+        let signed = try decoder.decode(
+            SignedPackageCatalog.self,
+            from: Data(contentsOf: catalogURL)
+        )
+        let catalog = try PackageCatalogVerifier(
+            trustedKeys: keys
+        ).verify(signed)
+        let verifier = PackageVerifier(trustedKeys: keys)
+        for entry in catalog.entries {
+            let location = try entry.remoteLocation(relativeTo: catalogURL)
+            let envelope = try decoder.decode(
+                SignedPackageEnvelope.self,
+                from: Data(contentsOf: location.envelopeURL)
+            )
+            guard envelope.manifest.packageID == entry.packageID,
+                  envelope.manifest.version == entry.version,
+                  envelope.manifest.kind == entry.kind,
+                  envelope.manifest.artifacts.reduce(Int64(0), {
+                      $0 + $1.byteCount
+                  }) == entry.totalByteCount
+            else {
+                throw PackCheckError.invalidSnapshot(
+                    "catalog identity mismatch for \(entry.id)"
+                )
+            }
+            try verifier.verify(
+                envelope: envelope,
+                packageDirectory: location.artifactBaseURL
+            )
+        }
+        print(
+            "PASS: signed product catalog and \(catalog.entries.count) package payloads"
+        )
+    }
+
+    private static func checkModel(
+        keyringURL: URL,
+        source: URL
+    ) async throws {
+        let decoder = JSONDecoder()
+        let keys = try decoder.decode(
+            [TrustedPackageKey].self,
+            from: Data(contentsOf: keyringURL)
+        )
+        let verifier = PackageVerifier(trustedKeys: keys)
+        let envelope = try loadEnvelope(from: source, decoder: decoder)
+        guard envelope.manifest.kind == .model else {
+            throw PackCheckError.invalidSnapshot("expected a model package")
+        }
+
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(
+            "AuroraModelLifecycle-\(UUID().uuidString)",
+            isDirectory: true
+        )
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        defer { try? FileManager.default.removeItem(at: root) }
+        let installer = PackageInstaller(
+            rootDirectory: root,
+            verifier: verifier,
+            now: { Date(timeIntervalSince1970: 1_753_660_800) }
+        )
+        try await install(
+            envelope: envelope,
+            source: source,
+            stagingName: "stage-model",
+            root: root,
+            installer: installer
+        )
+
+        let snapshot = await registry(root: root, verifier: verifier).resolve(
+            cachedEntitlements: [],
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 4_000_000_000,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+        let runtime = ActiveModelRuntimeResolver().resolve(activePacks: snapshot)
+        let expectedID = "\(envelope.manifest.packageID)@\(envelope.manifest.version)"
+        guard snapshot.models.map(\.id) == [expectedID],
+              snapshot.installedTiers == [.essential, .lite],
+              snapshot.issues.isEmpty,
+              runtime.descriptors[.lite] != nil,
+              runtime.issues.isEmpty else {
+            throw PackCheckError.invalidSnapshot(
+                "model package did not reach the verified Lite runtime boundary"
+            )
+        }
+
+        print(
+            "PASS: signed Lite model lifecycle "
+                + "(verification, install, activation, registry, runtime gate)"
         )
     }
 

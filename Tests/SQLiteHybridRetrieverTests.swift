@@ -154,6 +154,32 @@ final class SQLiteHybridRetrieverTests: XCTestCase {
         XCTAssertEqual(signalIDs, ["bundled-signal"])
     }
 
+    func testRuntimeBootstrapPrefersBundledEmergencyRevisionForDuplicateID() async throws {
+        let fixture = try makeFixture(
+            records: [Record(id: "shared-water", title: "Older installed revision")]
+        )
+        defer { fixture.remove() }
+        let bundled = article(
+            id: "shared-water",
+            title: "Current bundled water emergency revision"
+        )
+        let snapshot = ActivePackSnapshot(
+            models: [],
+            knowledge: [fixture.package],
+            maps: [],
+            installedTiers: [.essential],
+            issues: []
+        )
+
+        let resolution = IncidentRuntimeBootstrap(
+            bundledArticles: [bundled]
+        ).resolve(activePacks: snapshot)
+        let result = await resolution.assistant.search("water").first
+
+        XCTAssertEqual(result?.id, bundled.id)
+        XCTAssertEqual(result?.title, bundled.title)
+    }
+
     func testRankFusionDeduplicatesAndPrefersFirstSourceContent() {
         let active = article(id: "shared", title: "Active pack revision")
         let bundled = article(id: "shared", title: "Bundled revision")
