@@ -2,170 +2,109 @@
 
 The project must always stay aligned with this thesis:
 
-> TrailGuard is a fully offline iOS incident assistant
+> TrailGuard is a fully offline universal iPhone/iPad survival assistant with four independent roots—Ask, Manual, Maps, and Tools—and concise, reviewed, source-linked wilderness actions grounded in one immutable knowledge database.
 
 Do not narrow the project into a toy demo.
 
-- Dataset: Versioned, signed local knowledge/model/map packs; development fixtures include 120 gold incidents, 30 map/asset cases, 12 safety cases, and reviewed starter/emergency-core JSON.
-- Baselines: Essential extractive retrieval is the fail-closed baseline; Lite and Field text LLMs plus Vision Expert are optional on-device tiers behind package, entitlement, policy, and device gates.
-- Metrics: Safety-rule recall and bypass behavior, evidence/citation validity, retrieval applicability, reproducible package hashes, latency/memory/thermal/battery gates, and locked incident/map matrices.
-- Related Work: llama.cpp on-device inference, Qwen3-VL candidates, Apple Vision OCR, SQLite FTS5/vector retrieval, MapLibre-compatible offline maps, and read-only OBD.
+- Dataset: Versioned `survival_knowledge.sqlite`, deterministically built from committed reviewed JSON; exactly 10 chapters, 70 lessons, 1,050 FTS5 passages, 12 primary sources, and reviewed dispositions for all 828 former chunk IDs.
+- Baselines: Manual and Ask share `SurvivalKnowledgeStore`; every stateless Lite message queries the database using only the current question/domain/OCR. Specific normalized lesson matches receive at most two reviewed lessons; unmatched messages use model-only incident fallback with no Manual link. Ten generated Manual fallback cards survive database validation failure.
+- Metrics: Deterministic build/checksum/schema, content safety lint, 200-query top-two recall, exact/legacy anchors, local latency, offline behavior, dark mode, Dynamic Type, VoiceOver, battery/memory/thermal, and physical device acceptance.
+- Related Work: SQLite FTS5/BM25, llama.cpp on-device inference, CDC, Army ATP 3-50.21, NPS, Red Cross, NWS/NOAA, FEMA/Ready.gov, NHTSA, and MapLibre-compatible offline maps.
 
 Code Architecture:
-- `App/`: SwiftUI application shell and Apple-platform adapters.
-- `Core/`: deterministic safety, retrieval, routing, package, entitlement, map, OBD, and grounded-response runtime.
-- `Resources/`: bundled emergency knowledge, development knowledge, and model catalog.
-- `Tests/`: Swift/XCTest contracts and locked fixtures.
-- `Schemas/`: independently versioned distribution and runtime JSON contracts.
-- `tools/`: validation, reproducible pack building, fixture generation, and workstation model evaluation.
-- `Runtime/`: checksum-pinned optional native inference packages and bridges.
-- `Docs/`: architecture, ADRs, safety case, implementation status, and external gates.
-- `Reports/`: checked-in virtual and workstation evaluation evidence.
+- `App/`: Ask · Manual · Maps · Tools; Manual home is search plus ten direct chapter cards with no “Start here.”
+- `Core/SurvivalKnowledge.swift`: read-only validated knowledge store, Manual models/routes, weighted search, fallback loading, and Ask retrieval.
+- `Resources/Knowledge/`: canonical reviewed JSON, legacy manifest, generated database/checksum/fallback, and no old book corpus/overlay.
+- `tools/build_survival_knowledge.py`: deterministic database/fallback builder; `tools/validate.py` enforces content and database contracts.
+- `Tests/` and `UITests/`: 135 Swift tests, 200-query retrieval benchmark, simulator journeys, and physical iPhone acceptance.
+- `Docs/`: architecture, validation, implementation status, and `FIELD_MANUAL_PROGRESS_REPORT.md` evidence.
+
+Model contract:
+- Lite targets iPhone 13-class devices. Expert targets eligible high-memory hardware only after signed artifact/projector, runtime, thermal/power/storage/memory, and physical vision gates pass.
+- Lite is fully stateless at app, retrieval, and prompt boundaries; specific Manual matches use a 35–55-word grounded prompt, unmatched incidents use a 30–60-word incident fallback, greetings/no-incident messages use incident intake, malformed output receives one repair inference, runtime failures do not retry, and only grounded validated evidence indexes create Manual links.
+- Exactly Lite and Expert remain customer-facing. Ask is unavailable without a usable model; Manual and Maps remain available. Chat has no SOS or Clear control.
 
 ---
 
 ## 2. Progress--Update after every meaningful session
 
 Milestones -- Three Facts only, no raw logs : compact if needed
-- The signed six-product catalog and range-resumable Download Center cover the exact 806,058,240-byte Gemma 3 1B Q4_K_M Lite candidate, three reviewed guides, Twin Cities Scout, and Minnesota Statewide Field products; Qwen3 1.7B remains a hidden challenger.
-- Conversational RAG now passes multi-turn history through a compact constrained model decision, validates evidence selection, and deterministically expands reviewed procedures, citations, and warnings; the shared manual contains 15 survival topics across 8 polished chapters.
-- On the Kaiyi Guo Personal Team iPhone 13, the signed Gemma model passed a two-turn offline water conversation in 55.6 seconds end to end with no fallback, one source per turn, complete prose, exact CDC 1/3-minute boil guidance, and the cloth-prefilter safety warning (`/tmp/TrailGuardConversationalPhysical/Logs/Test/Test-TrailGuard-2026.08.02_12-43-42-+0800.xcresult`).
+- TrailGuard is frozen for app/source release `1.0.0` build 1; the signed Gemma 3 1B Q4_K_M package remains independently versioned at `1.1.0`.
+- Database-first Lite routing, stateless prompting, grounded-only Manual links, incident fallback/intake, one quality repair, and banner-free chat are the accepted release behavior.
+- Release validation passes: deterministic knowledge rebuild, repository contracts, 135/135 Swift tests, native production-contract check, generic simulator test build, and signed iPhone 13 build. The user reports satisfactory manual physical prompt/scenario testing.
 
 Critical Bugs / Software or Hardware or Network Issues -- Three logs maximum, compact if needed
 
-- GitHub draft PR #8 Actions cannot start because GitHub reports an account-level billing/spending-limit issue.
-- True Airplane Mode and Low Power Mode remain unproven; server-unavailable incident mode is not being mislabeled as a radio-off test.
-- Publication still requires final human legal/clinical/mechanical review plus broader survival-intent, accessibility, terrain-map, and physical-device gates; historical Phi evidence remains rejected and must not be restored as Lite.
+- The interrupted automated 40-case physical Lite matrix remains unretained and is excluded from release evidence; no aggregate usefulness, repair-rate, or current-contract thermal pass is claimed.
+- Independent wilderness/medical/legal/licensing/accessibility SME approval is absent; current content is primary-source reviewed, not certified.
+- Current-contract TTFT/throughput/repair thermal measurements, Airplane/Low Power Mode, sustained battery/memory, full VoiceOver, M2 iPad, iPhone 17 Pro Max, native pinned-evaluator generation, and Expert vision gates remain open.
 
 Reflect on current working direction is not worth continuing or have better ideas ?
 
-The architecture remains worth continuing. The model now provides natural language and conversational continuity while reviewed evidence, deterministic safety, citations, and signed packages retain authority.
+The unified reviewed source-record pipeline is worth continuing. Future depth should be added as independently reviewed source records, not by restoring the broad single-book corpus or runtime web scraping.
 
 ---
 
 ## 3. Next Stage Implementation Plan--Update after every meaningful session
 
-- Focus 1: Expand deterministic safety and conversational evaluation across heat illness, bleeding, fire, shelter, lost-person, food, and general follow-up intents while measuring iPhone 13 latency.
-- Focus 2: Complete physical Dynamic Type, VoiceOver, Airplane Mode, Low Power Mode, download-resume, manual, and signed map gates.
-- Focus 3: Integrate and verify detailed Twin Cities/Minnesota terrain rendering, then complete the publication, attribution, and human-review audit.
+- Focus 1: Commit the approved product snapshot, merge PR #8 to `main`, tag `v1.0.0`, and publish the GitHub Release without committing interrupted stress artifacts.
+- Focus 2: In post-1.0 work, retain a complete physical Lite stress matrix and measure first-pass validity, repair rate, TTFT, throughput, completion, and thermal behavior.
+- Focus 3: Obtain independent safety/medical/legal/licensing review and keep Expert locked until signed artifacts, mtmd binding, and eligible-device evidence exist.
+
+---
 
 ## 4. Important Files and Commands
 
 Files:
 
-- `Docs/ARCHITECTURE.md`: binding runtime sequence and product invariant.
-- `VALIDATION_REPORT.md`: current local verification evidence and remaining limits.
-- `App/AppModel.swift`: startup active-pack resolution and assistant reinjection.
-- `App/DownloadCenterView.swift`: preparation-only signed catalog, progress, pause/resume, and installed/active UI.
-- `App/OfflineMapDetailView.swift`: MapLibre SwiftUI bridge, offline style preparation, region selection, and attribution.
-- `Core/PackageCatalog.swift`: signed catalog schema, verification, and same-origin safe URL resolution.
-- `Core/PackageDownloadCoordinator.swift`: range-resumable verified download and atomic installation.
-- `Core/OfflineMapRuntimeResolver.swift`: active-package identity, readiness, and safe local artifact resolution.
-- `Core/OfflineMapStyleAssembler.swift`: local PMTiles/glyph injection and no-network style enforcement.
-- `Core/ActiveModelRuntimeResolver.swift`: signed-manifest and accepted-configuration gate before native model binding.
-- `Core/IncidentRuntimeBootstrap.swift`: verified compiled/bundled retrieval composition and runtime-tier intersection.
-- `Runtime/TrailGuardLlamaRuntime/Package.swift`: official llama.cpp release URL and immutable XCFramework checksum.
-- `Runtime/TrailGuardLlamaRuntime/Sources/TrailGuardLlamaC/GroundedResponseGrammar.h`: compact bounded evidence-selection grammar used by the native bridge.
-- `Core/LlamaXCFrameworkBackend.swift`: app-side conformance over the isolated deterministic runtime session.
-- `Runtime/TrailGuardLlamaRuntime/Sources/TrailGuardLlamaC/TrailGuardLlamaC.cpp`: persistent model/Metal weights with a fresh llama context for each completion.
-- `App/ChatView.swift`: bounded incident transcript rendered eagerly so repeated answers remain visible to VoiceOver and UI automation.
-- `App/GuideLibraryView.swift`: chaptered shared survival manual driven by the same reviewed knowledge corpus as chat retrieval.
-- `Core/GroundedPromptBuilder.swift`: compact domain/evidence-index decision contract sized for the fixed 128-token iPhone budget.
-- `Core/GroundedResponseCodec.swift`: validates the bounded decision and deterministically expands only signed procedure steps, citations, warnings, risk, and action.
-- `Core/IncidentAssistant.swift`: multi-turn conversational history, retrieval, deterministic safety, and grounded-response orchestration.
-- `UITests/PhysicalProductFlowTests.swift`: iPhone 13 Gemma, safety-bypass, OCR, guide/map, and sustained physical product gates.
-- `Core/RetrievalEngine.swift`: retrieval protocol, Essential baseline, and deterministic rank fusion.
-- `Core/SQLiteHybridRetriever.swift`: compiled SQLite FTS/vector retrieval and fail-closed applicability filters.
-- `Core/ActivePackRegistry.swift`: signature, policy, entitlement, recall, and device resolution.
-- `Tests/SQLiteHybridRetrieverTests.swift`: direct compiled retrieval and bootstrap regressions.
-- `Docs/LITE_MODEL_HANDOFF.md`: exact winner, conversion, results, measurements, and Mac continuation.
-- `Docs/POLISHED_PRODUCT_DEVELOPMENT_PROMPT.md`: reusable product-quality continuation brief synthesized from both uploaded plans.
-- `Docs/CONVERSATIONAL_SURVIVAL_RAG_DESIGN.md`: iteration-one conversational RAG, source-authority, and verification design.
-- `Reports/native-llama-lite-phi-3.5-mini-q4_k_m.json`: complete winning workstation evidence.
-- `tools/native_llama_lite_eval.py`: checksum-pinned native candidate evaluator.
-- `tools/prepare_lite_model_package.py`: exact-artifact verification and signed Lite package staging.
-- `tools/prepare_product_catalog.py`: deterministic guide/map packaging and signed six-product catalog generation.
-- `tools/serve_product_catalog.py`: safe range-aware local product host for physical testing.
-- `Docs/PHYSICAL_DEVICE_VALIDATION.md`: form-factor decisions and direct-evidence matrix for the iPhone 13 and M2 iPad Pro.
-- `Docs/DEVELOPMENT_PACKS.md`: Debug-only key separation and signed lifecycle commands.
-- `project.yml`: XcodeGen app/test targets with explicit resource build phases.
-- `Resources/Packages/trusted_package_keys.json`: intentionally empty development trust store.
+- `Resources/Knowledge/survival_knowledge_source.json`: canonical reviewed curriculum/source records.
+- `Resources/Knowledge/legacy_anchor_manifest.json`: every former chunk ID redirected or retired.
+- `Resources/Knowledge/survival_knowledge.sqlite`: immutable runtime database.
+- `Resources/Knowledge/survival_fallback.json`: one emergency action card per chapter.
+- `Core/SurvivalKnowledge.swift`: unified Manual/Ask store and retrieval.
+- `Core/IncidentAssistant.swift`: stateless Lite routing, retrieval, one repair, and terminal response policy.
+- `Core/GroundedPromptBuilder.swift`: compact purpose/attempt contracts with defensive Lite history removal.
+- `Core/GroundedResponseCodec.swift`: compact JSON, leakage, completion, and evidence validation.
+- `App/GuideLibraryView.swift`: ten-chapter Manual UI and readers.
+- `App/AppModel.swift`: UI-only Lite transcript, database loading, search, and exact Manual navigation.
+- `App/ChatView.swift`: banner-free chat, Lite badge, actionable notices, and exact Manual links.
+- `tools/build_survival_knowledge.py`: deterministic build and validation.
+- `tools/native_llama_lite_eval.py`: exact pinned Gemma artifact and production prompt/grammar evaluator.
+- `Tests/SurvivalKnowledgeTests.swift`: structure, retrieval, safety, migration, fallback, and latency tests.
+- `Tests/ConversationalRAGTests.swift`: stateless sequences, prompt isolation, validation, retry, and failure regressions.
+- `Docs/FIELD_MANUAL_PROGRESS_REPORT.md`: current before/after evidence and blockers.
+- `Docs/LITE_SUBSTANTIVE_ANSWERS.md`: approved substantive-answer design, implementation contract, and measured limitations.
+- `Docs/LITE_CHAT_CASE.md`: current database-first grounded/fallback contract and measured evidence.
 
 Commands:
 
 ```bash
-# inspect branch and local changes
-rtk proxy git status --short --branch
+# rebuild database/checksum/fallback from committed source records
+rtk proxy python3 tools/build_survival_knowledge.py
 
-# structural and reproducibility verification
-python3 tools/validate.py
-/tmp/trailguard-dev-venv/bin/python tools/test_pack_reproducibility.py
+# repository and content contracts
+rtk proxy python3 tools/validate.py
 
-# rerun the selected Gemma workstation candidate
-python tools/native_llama_lite_eval.py \
-  --model .trailguard/model-eval/models/gemma-3-1b-q4_k_m/gemma-3-1b-it-Q4_K_M.gguf \
-  --output Reports/native-llama-lite-gemma-3-1b-q4_k_m.json
-
-# Swift package verification
+# full Swift suite
 rtk proxy swift test
 
-# rebuild and verify the complete local product catalog
-/tmp/trailguard-dev-venv/bin/python tools/prepare_product_catalog.py --rebuild-maps
-rtk proxy swift run trailguard-pack-check catalog \
-  Resources/Packages/development_trusted_package_keys.json \
-  .trailguard/development/catalog.json
+# exact pinned Gemma production contract
+rtk proxy python3 tools/native_llama_lite_eval.py --contract-only
 
-# serve signed packages to devices on the local network
-/tmp/trailguard-dev-venv/bin/python tools/serve_product_catalog.py \
-  --directory .trailguard/development/product-host --bind 0.0.0.0 --port 8765
+# regenerate Xcode project
+rtk proxy xcodegen generate
 
-# generate the Xcode project
-rtk xcodegen generate
-
-# unsigned generic iOS Simulator build
+# generic simulator build
 rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
   -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
-  -derivedDataPath /tmp/TrailGuardMapLibreBuild CODE_SIGNING_ALLOWED=NO build
+  -derivedDataPath /tmp/TrailGuardKnowledgeBuild CODE_SIGNING_ALLOWED=NO build-for-testing
 
-# signed connected iPhone 13 build
+# physical iPhone focused acceptance
 rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
   -destination 'platform=iOS,id=00008110-001645080EA8201E' \
-  -derivedDataPath /tmp/TrailGuardPhysicalBuild \
-  -allowProvisioningUpdates build
+  -derivedDataPath /tmp/TrailGuardKnowledgePhysical -allowProvisioningUpdates \
+  -only-testing:TrailGuardUITests/PhysicalProductFlowTests test-without-building
 
-# full installed-simulator suite
-rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
-  -destination 'platform=iOS Simulator,id=0E9D8B60-FEA9-4AD5-88C9-58D5FB31636E' \
-  -derivedDataPath /tmp/TrailGuardSimulatorTests CODE_SIGNING_ALLOWED=NO test
-
-# physical two-turn conversational RAG gate on the connected iPhone 13
-rtk proxy xcodebuild -project TrailGuard.xcodeproj -scheme TrailGuard \
-  -destination 'platform=iOS,id=00008110-001645080EA8201E' \
-  -derivedDataPath /tmp/TrailGuardConversationalPhysical \
-  -allowProvisioningUpdates \
-  -only-testing:TrailGuardUITests/PhysicalProductFlowTests/testLiteConversationalFollowUp test
-
-# sign the exact Gemma Lite release candidate on the Mac
-/tmp/trailguard-dev-venv/bin/python tools/prepare_lite_model_package.py \
-  --model .trailguard/model-eval/models/gemma-3-1b-q4_k_m/gemma-3-1b-it-Q4_K_M.gguf \
-  --terms .trailguard/model-eval/models/gemma-3-1b-q4_k_m/GEMMA_TERMS.md \
-  --output .trailguard/development/model-lite-gemma3-1b-q4km-dev@1.0.0 \
-  --private-key .trailguard/development/package-signing-key.pem \
-  --key-id development-2026-07 \
-  --created-at 2026-07-30T00:00:00Z
-
-# install and resolve the signed Lite package through the real lifecycle
-rtk proxy swift run trailguard-pack-check model \
-  Resources/Packages/development_trusted_package_keys.json \
-  .trailguard/development/model-lite-gemma3-1b-q4km-dev@1.0.0
-
-# inspect PR #8 once GitHub Actions billing is restored
-rtk proxy gh pr checks 8 --repo kenny2077/TrailGuard
-
-# build and validate signed development knowledge packages
-/tmp/trailguard-dev-venv/bin/python tools/prepare_development_packs.py
-rtk proxy swift run trailguard-pack-check \
-  Resources/Packages/development_trusted_package_keys.json \
-  .trailguard/development/knowledge-lifecycle/v1 \
-  .trailguard/development/knowledge-lifecycle/v2
+# inspect obsolete runtime references
+rtk proxy rg -n 'source_corpus|manual_catalog|ManualCatalog|SurvivalCorpusStore|startHereLessonIDs' App Core Tests tools
 ```

@@ -1,0 +1,1202 @@
+[
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stop",
+    "query": "Stop and Control Panic"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stop",
+    "query": "what do I do about stop and control panic"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stop",
+    "query": "STOP"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stop",
+    "query": "Stop moving long enough to think clearly and avoid making the emergency larger."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-danger-injury",
+    "query": "Check Danger and Injuries"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-danger-injury",
+    "query": "what do I do about check danger and injuries"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-danger-injury",
+    "query": "assessment"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-danger-injury",
+    "query": "Find immediate threats and life-threatening injuries before working on comfort or travel."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-inventory",
+    "query": "Inventory What You Have"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-inventory",
+    "query": "what do I do about inventory what you have"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-inventory",
+    "query": "gear"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-inventory",
+    "query": "Know exactly which tools, clothing, food, water, medicines, and signals are available."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-priorities",
+    "query": "Set Priorities for Conditions"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-priorities",
+    "query": "what do i do about set priorities for conditions"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-priorities",
+    "query": "priorities"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-priorities",
+    "query": "Choose the next action from immediate threats, not from a fixed rule of threes."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stay-or-move",
+    "query": "Decide Whether to Stay or Move"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stay-or-move",
+    "query": "what do I do about decide whether to stay or move"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stay-or-move",
+    "query": "stay put"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "basics",
+    "expectedLessonID": "basics-stay-or-move",
+    "query": "Stay near the last known route unless remaining creates more danger or a known safe destination is close."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-dehydration",
+    "query": "Recognize Dehydration"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-dehydration",
+    "query": "what do I do about recognize dehydration"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-dehydration",
+    "query": "dehydration"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-dehydration",
+    "query": "Reduce exertion and replace safe fluids before weakness or confusion becomes severe."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-locate",
+    "query": "Locate Likely Water"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-locate",
+    "query": "what do I do about locate likely water"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-locate",
+    "query": "find watre"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-locate",
+    "query": "Search deliberately for water without spending more fluid and energy than the search can return."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-choose-source",
+    "query": "Choose the Safest Source"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-choose-source",
+    "query": "what do I do about choose the safest source"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-choose-source",
+    "query": "water source"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-choose-source",
+    "query": "Use the least contaminated available source and still treat it for germs."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-collect-prefilter",
+    "query": "Collect and Prefilter Water"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-collect-prefilter",
+    "query": "what do i do about collect and prefilter watre"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-collect-prefilter",
+    "query": "prefilter"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-collect-prefilter",
+    "query": "Remove sediment before the main treatment without mistaking clear water for safe water."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-boil",
+    "query": "Boil Water Correctly"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-boil",
+    "query": "what do I do about boil water correctly"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-boil",
+    "query": "boil water"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "water",
+    "expectedLessonID": "water-boil",
+    "query": "Use a rolling boil for the full recommended time, then prevent recontamination."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-decision",
+    "query": "Decide Whether Fire Is Safe"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-decision",
+    "query": "what do I do about decide whether fire is safe"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-decision",
+    "query": "fire ban"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-decision",
+    "query": "Use fire only when its survival benefit exceeds wildfire, smoke, fuel, and legal risks."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-site",
+    "query": "Choose a Fire Site"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-site",
+    "query": "what do I do about choose a fire site"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-site",
+    "query": "firre site"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-site",
+    "query": "Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-materials",
+    "query": "Gather Tinder, Kindling, and Fuel"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-materials",
+    "query": "what do I do about gather tinder, kindling, and fuel"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-materials",
+    "query": "tinder"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-materials",
+    "query": "Collect enough dry material in increasing sizes before striking the first spark."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-ignition",
+    "query": "Use Common Ignition Tools"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-ignition",
+    "query": "what do i do about use common ignition tools"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-ignition",
+    "query": "lighter"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-ignition",
+    "query": "Shield the tinder and use the simplest reliable ignition method you already know."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-build-feed",
+    "query": "Build and Feed the Fire"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-build-feed",
+    "query": "what do I do about build and feed the fire"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-build-feed",
+    "query": "fire lay"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "fire",
+    "expectedLessonID": "fire-build-feed",
+    "query": "Keep airflow open and add fuel slowly enough that the flame is not smothered."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-site",
+    "query": "Choose a Shelter Site"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-site",
+    "query": "what do I do about choose a shelter site"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-site",
+    "query": "shelter site"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-site",
+    "query": "Avoid hazards above, below, and around the site before building."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-ground",
+    "query": "Insulate From the Ground"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-ground",
+    "query": "what do I do about insulate from the ground"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-ground",
+    "query": "ground insulation"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-ground",
+    "query": "Put dry insulation beneath the body before making the shelter larger or more comfortable."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-tarp",
+    "query": "Build a Tarp Shelter"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-tarp",
+    "query": "what do I do about build a tarp shelter"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-tarp",
+    "query": "tarp shelter"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-tarp",
+    "query": "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-debris",
+    "query": "Build a Debris Shelter"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-debris",
+    "query": "what do i do about build a debris sheltr"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-debris",
+    "query": "debris hut"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-debris",
+    "query": "Use a strong frame and deep dry insulation when no carried shelter is available."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-cold-snow",
+    "query": "Shelter in Cold or Snow"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-cold-snow",
+    "query": "what do I do about shelter in cold or snow"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-cold-snow",
+    "query": "snow shelter"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "shelter",
+    "expectedLessonID": "shelter-cold-snow",
+    "query": "Block wind, stay dry, insulate deeply, and keep ventilation open."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-energy",
+    "query": "Decide Whether Food Gathering Is Worth It"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-energy",
+    "query": "what do I do about decide whether food gathering is worth it"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-energy",
+    "query": "find food"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-energy",
+    "query": "Protect warmth, water, signaling, and rescue chances before spending energy to find food."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-carried",
+    "query": "Manage Carried Food"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-carried",
+    "query": "what do I do about manage carried food"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-carried",
+    "query": "ration food"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-carried",
+    "query": "Protect existing calories and use them to support warmth, decisions, and necessary work."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-unknown-plants",
+    "query": "Reject Unknown Plants and Fungi"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-unknown-plants",
+    "query": "what do I do about reject unknown plants and fungi"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-unknown-plants",
+    "query": "edible plant"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-unknown-plants",
+    "query": "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-low-risk",
+    "query": "Use Only Low-Risk Procurement"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-low-risk",
+    "query": "what do i do about use only low-risk procurement"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-low-risk",
+    "query": "fishing"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-low-risk",
+    "query": "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-cook",
+    "query": "Cook and Handle Food Safely"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-cook",
+    "query": "what do I do about cook and handle food safely"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-cook",
+    "query": "cook food"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "food",
+    "expectedLessonID": "food-cook",
+    "query": "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-stop-mark",
+    "query": "Stop and Mark the Last Known Point"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-stop-mark",
+    "query": "what do I do about stop and mark the last known point"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-stop-mark",
+    "query": "lost"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-stop-mark",
+    "query": "Prevent the search area from growing while you reconstruct where navigation failed."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-map",
+    "query": "Orient a Map"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-map",
+    "query": "what do I do about orient a map"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-map",
+    "query": "orient map"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-map",
+    "query": "Turn the map to match the ground before choosing a route."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-compass",
+    "query": "Use a Compass"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-compass",
+    "query": "what do I do about use a compass"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-compass",
+    "query": "compass"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-compass",
+    "query": "Use the compass to hold a known direction, not to invent a destination."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-terrain",
+    "query": "Read Terrain and Landmarks"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-terrain",
+    "query": "what do i do about read terrain and landmarks"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-terrain",
+    "query": "terrain association"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-terrain",
+    "query": "Match ridges, valleys, slopes, water, and human features to the map continuously."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-backtrack",
+    "query": "Backtrack Safely"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-backtrack",
+    "query": "what do I do about backtrack safely"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-backtrack",
+    "query": "backtrack"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "navigation",
+    "expectedLessonID": "navigation-backtrack",
+    "query": "Return only when the route behind you is known, short, and safer than staying."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-communication",
+    "query": "Use Emergency Communication"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-communication",
+    "query": "what do I do about use emergency communication"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-communication",
+    "query": "call rescue"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-communication",
+    "query": "Send a short complete rescue message whenever a phone, beacon, radio, or satellite device can connect."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-whistle",
+    "query": "Signal With a Whistle"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-whistle",
+    "query": "what do I do about signal with a whistle"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-whistle",
+    "query": "whistle"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-whistle",
+    "query": "Use repeated whistle blasts that travel farther than shouting and cost less energy."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-mirror-light",
+    "query": "Use Mirrors and Lights"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-mirror-light",
+    "query": "what do I do about use mirrors and lights"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-mirror-light",
+    "query": "signal mirror"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-mirror-light",
+    "query": "Aim reflected sun or repeated light flashes toward aircraft, boats, roads, and search teams."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-ground",
+    "query": "Make Visible Ground Signals"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-ground",
+    "query": "what do i do about make visible ground signals"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-ground",
+    "query": "ground signal"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-ground",
+    "query": "Create large high-contrast shapes that can be distinguished from natural terrain."
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-smoke-fire",
+    "query": "Use Smoke or Fire Only When Safe"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-smoke-fire",
+    "query": "what do I do about use smoke or fire only when safe"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-smoke-fire",
+    "query": "signal fire"
+  },
+  {
+    "critical": false,
+    "expectedChapterID": "signal",
+    "expectedLessonID": "signal-smoke-fire",
+    "query": "Create a controlled visible signal without starting a wildfire or poisoning shelter occupants."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-assessment",
+    "query": "Assess the Patient and CPR Need"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-assessment",
+    "query": "what do I do about assess the patient and cpr need"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-assessment",
+    "query": "CPR"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-assessment",
+    "query": "Make the scene safe, check responsiveness and normal breathing, and start the appropriate emergency response."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-bleeding",
+    "query": "Control Severe Bleeding"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-bleeding",
+    "query": "what do I do about control severe bleeding"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-bleeding",
+    "query": "severe bleading"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-bleeding",
+    "query": "Apply immediate firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-shock",
+    "query": "Treat for Shock"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-shock",
+    "query": "what do I do about treat for shock"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-shock",
+    "query": "shock"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-shock",
+    "query": "Control the cause, protect temperature, and evacuate urgently when circulation or mental status worsens."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-wounds-burns",
+    "query": "Care for Wounds and Burns"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-wounds-burns",
+    "query": "what do i do about care for wounds and burns"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-wounds-burns",
+    "query": "wound"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-wounds-burns",
+    "query": "Stop ongoing damage, cool or clean appropriately, cover, and watch for infection or deeper injury."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-fracture-spine",
+    "query": "Stabilize Fractures and Spine Injuries"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-fracture-spine",
+    "query": "what do I do about stabilize fractures and spine injuries"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-fracture-spine",
+    "query": "fracture"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "first-aid",
+    "expectedLessonID": "first-aid-fracture-spine",
+    "query": "Prevent further movement, check circulation, and evacuate when a serious bone, joint, head, neck, or back injury is possible."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-lightning",
+    "query": "Act During Lightning"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-lightning",
+    "query": "what do I do about act during lightning"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-lightning",
+    "query": "lightning"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-lightning",
+    "query": "Reach a substantial building or hard-topped vehicle; no outdoor place is fully safe."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-cold",
+    "query": "Survive Severe Cold"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-cold",
+    "query": "what do I do about survive severe cold"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-cold",
+    "query": "severe cold"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-cold",
+    "query": "Stay dry, block wind, add insulation, and act before shivering or coordination worsens."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-heat",
+    "query": "Survive Extreme Heat"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-heat",
+    "query": "what do I do about survive extreme heat"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-heat",
+    "query": "extreme heat"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-heat",
+    "query": "Reduce heat production and increase shade, airflow, and safe hydration before illness begins."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-flood",
+    "query": "Escape Flash-Flood Risk"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-flood",
+    "query": "what do i do about escape flash-flood risk"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-flood",
+    "query": "flash flood"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-flood",
+    "query": "Move early to higher ground when heavy rain, rising water, or a warning affects a drainage or canyon."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-wildfire",
+    "query": "Respond to Wildfire and Smoke"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-wildfire",
+    "query": "what do I do about respond to wildfire and smoke"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-wildfire",
+    "query": "wildfire"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "weather-wildlife",
+    "expectedLessonID": "weather-wildlife-wildfire",
+    "query": "Move away from fire spread and heavy smoke while avoiding steep, fuel-filled escape routes."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-scene",
+    "query": "Stop and Secure the Scene"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-scene",
+    "query": "what do I do about stop and secure the scene"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-scene",
+    "query": "breakdown"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-scene",
+    "query": "Protect people from traffic, fire, slope, and weather before diagnosing the vehicle."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-stay-walk",
+    "query": "Diagnose and Decide Whether to Stay"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-stay-walk",
+    "query": "what do I do about diagnose and decide whether to stay"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-stay-walk",
+    "query": "stay with car"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-stay-walk",
+    "query": "Stay with the vehicle unless it is unsafe or a known reachable destination clearly offers better survival odds."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-tire",
+    "query": "Change a Tire Safely"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-tire",
+    "query": "what do I do about change a tire safely"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-tire",
+    "query": "flat tire"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-tire",
+    "query": "Lift a vehicle only on firm level ground outside traffic and only at the manufacturer-specified points."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-jump",
+    "query": "Use a 12-Volt Jump Start"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-jump",
+    "query": "what do i do about use a 12-volt jump start"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-jump",
+    "query": "jump start"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-jump",
+    "query": "Jump-start only when the owner's manual permits it and both systems and connection points are identified."
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-fuse",
+    "query": "Check Fuses and Basic Electrical Faults"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-fuse",
+    "query": "what do I do about check fuses and basic electrical faults"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-fuse",
+    "query": "fuse"
+  },
+  {
+    "critical": true,
+    "expectedChapterID": "car",
+    "expectedLessonID": "car-fuse",
+    "query": "Limit checks to owner-serviceable fuses and obvious 12-volt connections documented by the vehicle maker."
+  }
+]

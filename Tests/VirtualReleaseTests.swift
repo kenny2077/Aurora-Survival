@@ -50,10 +50,9 @@ final class VirtualReleaseTests: XCTestCase {
             motionCanBeReduced: true
         )
         let scenario = VirtualReleaseScenario(
-            deterministicSafetyPasses: true,
+            survivalCorpusIsReady: true,
             bundledCoreRecovers: true,
             installedMapIsReady: true,
-            obdWritesAreBlocked: true,
             installedEntitlementsWorkOffline: true,
             accessibility: accessibility,
             incidentModeNetworkIsContained: true
@@ -73,15 +72,14 @@ final class VirtualReleaseTests: XCTestCase {
             motionCanBeReduced: false
         )
         let scenario = VirtualReleaseScenario(
-            deterministicSafetyPasses: false,
+            survivalCorpusIsReady: false,
             bundledCoreRecovers: false,
             installedMapIsReady: false,
-            obdWritesAreBlocked: false,
             installedEntitlementsWorkOffline: false,
             accessibility: accessibility,
             incidentModeNetworkIsContained: false
         )
-        XCTAssertEqual(VirtualReleaseEvaluator().evaluate(scenario).count, 7)
+        XCTAssertEqual(VirtualReleaseEvaluator().evaluate(scenario).count, 6)
     }
 
     func testInterruptedArtifactCanResumeAndFinalize() async throws {
@@ -127,10 +125,9 @@ final class VirtualReleaseTests: XCTestCase {
 
     private func passingScenario() -> VirtualReleaseScenario {
         VirtualReleaseScenario(
-            deterministicSafetyPasses: true,
+            survivalCorpusIsReady: true,
             bundledCoreRecovers: true,
             installedMapIsReady: true,
-            obdWritesAreBlocked: true,
             installedEntitlementsWorkOffline: true,
             accessibility: AccessibilityAuditSnapshot(
                 emergencyControlsHaveLabels: true,

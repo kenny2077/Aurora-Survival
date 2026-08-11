@@ -1,18 +1,18 @@
 # Physical device validation
 
-Updated: 2026-08-02
+Updated: 2026-08-09
 
 ## Confirmed intent
 
 - Ship one adaptive, universal iOS/iPadOS application rather than separate
   products.
-- Keep Essential available on every supported device without an optional model.
+- Require a usable Lite or Expert model before Ask is available.
 - Treat the iPhone 13 as the lower-memory text/OCR acceptance target.
 - Treat the M2 iPad Pro as the first Vision Expert research target, without
   approving it until exact artifacts pass measured gates.
 - Keep incident input, OCR, retrieval, and generation offline.
-- Require signed packages, reviewed evidence, citations, and deterministic
-  safety rules on both form factors.
+- Require signed packages and validated zero-to-two Field Manual links without
+  a pre-model hazard gate or fixed response card.
 - Defer model performance claims to physical-device measurements; workstation
   results are candidate evidence only.
 
@@ -24,8 +24,8 @@ Updated: 2026-08-02
   maintainable architecture.
 - SwiftUI views must adapt without device-name checks or duplicated feature
   code.
-- Essential launch, emergency-core recovery, retrieval, citations, and OCR must
-  remain available after termination and without network access.
+- Manual, Maps, package resolution, retrieval, and exact citations must remain
+  available after termination and without network access; Ask requires a model.
 - Optional runtime activation must fail closed under missing assets, low power,
   thermal pressure, insufficient memory/storage, recall, or trust failure.
 
@@ -40,9 +40,8 @@ Updated: 2026-08-02
 3. **Physical approval remains capability-based.** Marketing names document the
    test matrix but do not bypass runtime memory, storage, thermal, power, trust,
    or artifact checks.
-4. **Essential precedes model work.** Both devices must pass install, launch,
-   retrieval, OCR, offline relaunch, accessibility, and interruption checks
-   before Lite or Vision integration.
+4. **Expert remains locked.** The M2 iPad may display Expert target messaging,
+   but cannot expose vision input until signed artifacts and mtmd integration pass.
 
 ## Evidence matrix
 
@@ -50,11 +49,11 @@ Updated: 2026-08-02
 | --- | --- | --- |
 | Xcode paired | Pass: paired | Pass: paired with `devicectl` |
 | Signed build/install | Pass: Apple Development build installed | Pass: Apple Development build installed |
-| Essential first launch | Pass | Partial: foreground launch and live process confirmed; screen flow pending |
-| Emergency core and retrieval | Pass: reviewed answer and deterministic safety path | Pending |
-| Signed Gemma Lite inference | Pass: grounded, sustained, and optimized-build evidence | Not evaluated |
-| Reviewed guide and offline maps | Pass: Twin Cities Scout and Minnesota Statewide Field | Pending |
-| OCR | Pass: Apple Vision text flowed into deterministic safety override | Pending |
+| Four-tab/no-model launch | Rerun in current report | Rerun in current report |
+| Unified survival retrieval and manual links | Earlier corpus flow passed; current 10-chapter database rerun is recorded in the Field Manual report | Pending |
+| Signed Gemma Lite inference | Partial: stateless grounded-to-ordinary sequence and exact Manual navigation passed under the prior compact contract; substantive `1.1.0` installed, but final five-domain acceptance remains open | Not evaluated |
+| Manual and dedicated offline Maps tab | Rerun in current report | Rerun in current report |
+| Expert vision | Not eligible; photo control hidden in Lite | Validation-locked pending signed model/projector and mtmd |
 | Airplane-mode cold relaunch | Pending | Pending |
 | Dynamic Type and VoiceOver | Pending | Pending |
 | Background/foreground and termination | Pending | Pending |
@@ -75,8 +74,47 @@ Do not convert a pending cell to pass without direct device evidence.
   runtime-linked build installed and launched on both devices, with live
   TrailGuard processes confirmed (iPhone PID 85350; iPad PID 680).
 - Physical XCUITests now install and run successfully on the iPhone 13, including
-  repeated native inference, deterministic safety, Apple Vision OCR, guides,
+  repeated native inference, survival RAG, Apple Vision OCR, guides,
   and local MapLibre products.
+- Current stateless Lite acceptance is recorded in
+  `/tmp/TrailGuardStatelessLitePhysical-exact-link.xcresult` and
+  `/tmp/TrailGuardStatelessLitePhysical-retry.xcresult`: exact “Locate Likely
+  Water” navigation passed, the banner was absent, and a casual turn after a
+  grounded water turn contained no stale advice or Manual link.
+- `/tmp/TrailGuardStatelessLitePhysical-link-retry.xcresult` records the
+  accepted small-model deficit: “How do I make water safer?” exhausted its one
+  repair and displayed the incomplete-answer terminal response without a false
+  link. Current-contract TTFT, throughput, retry latency, and thermal impact
+  were not measured in this run.
+- `/tmp/TrailGuardSubstantivePackageInstall.xcresult` records installation and
+  activation of the signed `model-lite-gemma3-1b-q4km-dev@1.1.0` package with
+  the 160-token manifest on the iPhone 13.
+- Exploratory substantive generation accepted bleeding, water, lost, and bear
+  responses before the stuck-vehicle case failed closed. The run was not
+  retained and is not release acceptance evidence. The retained generic-car
+  result at
+  `/tmp/TrailGuardSubstantivePhysical/Logs/Test/Test-TrailGuard-2026.08.09_23-26-20-+0800.xcresult`
+  failed closed without a procedure or false Manual link, but did not produce
+  an accepted clarification.
+- Two final reruns on the unlocked iPhone ended before test launch with Xcode
+  `DebuggerVersionStore.StoreError`. No five-domain, TTFT, throughput, warm
+  completion, repair-latency, or thermal pass is claimed for the substantive
+  contract.
+- The final Lite Chat survival acceptance result is
+  `/tmp/TrailGuardLiteChatPhysicalAcceptance/Logs/Test/Test-TrailGuard-2026.08.02_14-43-28-+0800.xcresult`.
+  Both generated answers direct the user to boil water for at least one minute,
+  respect the follow-up constraint that no filter is available, and link to
+  the former page-addressable water passage. This is retained as historical
+  baseline evidence; the current database uses stable semantic passage IDs.
+- The final ordinary-chat and enriched-manual result is
+  `/tmp/TrailGuardLiteChatPhysicalAcceptance/Logs/Test/Test-TrailGuard-2026.08.02_14-34-25-+0800.xcresult`.
+  The greeting uses Gemma with no manual link; Guide reports 17 chapters and
+  the former detailed water passage. Current Manual evidence is recorded in
+  `FIELD_MANUAL_PROGRESS_REPORT.md`.
+- The app-hosted corpus/unit acceptance result is
+  `/tmp/TrailGuardLiteChatPhysicalAcceptance/Logs/Test/Test-TrailGuard-2026.08.02_14-16-42-+0800.xcresult`.
+  It verifies the retired bundled-book baseline. Current validation verifies
+  10 chapters, 70 lessons, 1,050 FTS passages, and 828 legacy dispositions.
 - The baseline Activity Monitor trace is
   `/tmp/TrailGuard-iPhone13-activity.trace`. It is short-run engineering
   evidence, not a performance or battery acceptance pass.

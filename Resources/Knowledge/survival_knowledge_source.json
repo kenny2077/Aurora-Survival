@@ -1,0 +1,3245 @@
+{
+  "chapters": [
+    {
+      "id": "basics",
+      "number": 1,
+      "overview": "Stabilize, assess, and set priorities. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Stabilize, assess, and set priorities",
+      "symbol": "shield.lefthalf.filled",
+      "theme": "forest",
+      "title": "Survival Basics"
+    },
+    {
+      "id": "water",
+      "number": 2,
+      "overview": "Find water and make it safer. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Find water and make it safer",
+      "symbol": "drop.fill",
+      "theme": "water",
+      "title": "Find and Treat Water"
+    },
+    {
+      "id": "fire",
+      "number": 3,
+      "overview": "Build heat without creating danger. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Build heat without creating danger",
+      "symbol": "flame.fill",
+      "theme": "fire",
+      "title": "Start a Fire"
+    },
+    {
+      "id": "shelter",
+      "number": 4,
+      "overview": "Get protected from exposure fast. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Get protected from exposure fast",
+      "symbol": "tent.fill",
+      "theme": "earth",
+      "title": "Build a Shelter"
+    },
+    {
+      "id": "food",
+      "number": 5,
+      "overview": "Protect energy and avoid poisoning. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Protect energy and avoid poisoning",
+      "symbol": "fork.knife",
+      "theme": "wildlife",
+      "title": "Find Food Safely"
+    },
+    {
+      "id": "navigation",
+      "number": 6,
+      "overview": "Fix your position and move safely. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Fix your position and move safely",
+      "symbol": "location.north.fill",
+      "theme": "sky",
+      "title": "Navigate When Lost"
+    },
+    {
+      "id": "signal",
+      "number": 7,
+      "overview": "Make searchers notice and find you. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Make searchers notice and find you",
+      "symbol": "wave.3.right.circle.fill",
+      "theme": "rescue",
+      "title": "Signal for Rescue"
+    },
+    {
+      "id": "first-aid",
+      "number": 8,
+      "overview": "Control immediate threats until help arrives. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Control immediate threats until help arrives",
+      "symbol": "cross.case.fill",
+      "theme": "rescue",
+      "title": "Wilderness First Aid"
+    },
+    {
+      "id": "weather-wildlife",
+      "number": 9,
+      "overview": "Avoid fast-changing outdoor hazards. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Avoid fast-changing outdoor hazards",
+      "symbol": "cloud.bolt.rain.fill",
+      "theme": "sky",
+      "title": "Weather and Wildlife"
+    },
+    {
+      "id": "car",
+      "number": 10,
+      "overview": "Stay safe and restore basic mobility. Open a 60-second lesson, act on the numbered steps, then use deeper references only when needed.",
+      "purpose": "Stay safe and restore basic mobility",
+      "symbol": "car.fill",
+      "theme": "road",
+      "title": "Car Breakdown"
+    }
+  ],
+  "contentVersion": "2026.08.09.1",
+  "language": "en",
+  "lessons": [
+    {
+      "actions": [
+        "Take slow breaths and say out loud what happened.",
+        "Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water.",
+        "Mark where you stopped and note the time, weather, and last place you were certain of your location."
+      ],
+      "aliases": [
+        "stop and control panic",
+        "STOP",
+        "panic",
+        "lost",
+        "calm",
+        "think",
+        "stop"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Stop moving long enough to think clearly and avoid making the emergency larger.",
+      "hazardTags": [
+        "lost"
+      ],
+      "id": "basics-stop",
+      "jurisdiction": "global",
+      "keywords": [
+        "STOP",
+        "panic",
+        "lost",
+        "calm",
+        "think"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Stop and Control Panic",
+      "units": "dual",
+      "warnings": [
+        "Do not run downhill or follow water just because it appears to lead out."
+      ]
+    },
+    {
+      "actions": [
+        "Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects.",
+        "Check breathing, severe bleeding, confusion, and the ability to move safely.",
+        "Control the most urgent threat, then repeat the check after any move or major change."
+      ],
+      "aliases": [
+        "check danger and injuries",
+        "assessment",
+        "injury",
+        "danger",
+        "bleeding",
+        "breathing",
+        "danger injury"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Find immediate threats and life-threatening injuries before working on comfort or travel.",
+      "hazardTags": [
+        "medical"
+      ],
+      "id": "basics-danger-injury",
+      "jurisdiction": "global",
+      "keywords": [
+        "assessment",
+        "injury",
+        "danger",
+        "bleeding",
+        "breathing"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Check Danger and Injuries",
+      "units": "dual",
+      "warnings": [
+        "Do not enter a dangerous area to recover replaceable gear."
+      ]
+    },
+    {
+      "actions": [
+        "Empty pockets and packs in one controlled place so nothing is lost.",
+        "Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items.",
+        "Protect the most important items from rain, damage, and accidental use."
+      ],
+      "aliases": [
+        "inventory what you have",
+        "gear",
+        "supplies",
+        "inventory",
+        "equipment",
+        "pack"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Know exactly which tools, clothing, food, water, medicines, and signals are available.",
+      "hazardTags": [],
+      "id": "basics-inventory",
+      "jurisdiction": "global",
+      "keywords": [
+        "gear",
+        "supplies",
+        "inventory",
+        "equipment",
+        "pack"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Inventory What You Have",
+      "units": "dual",
+      "warnings": [
+        "Do not scatter equipment while searching in darkness or bad weather."
+      ]
+    },
+    {
+      "actions": [
+        "Treat breathing and severe bleeding first.",
+        "Prevent dangerous heat loss, heat gain, fire, flood, or traffic exposure next.",
+        "Then secure water, signaling, navigation, and food in the order current conditions require."
+      ],
+      "aliases": [
+        "set priorities for conditions",
+        "priorities",
+        "rule of threes",
+        "survival order",
+        "urgent",
+        "decision"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Choose the next action from immediate threats, not from a fixed rule of threes.",
+      "hazardTags": [],
+      "id": "basics-priorities",
+      "jurisdiction": "global",
+      "keywords": [
+        "priorities",
+        "rule of threes",
+        "survival order",
+        "urgent",
+        "decision"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Set Priorities for Conditions",
+      "units": "dual",
+      "warnings": [
+        "A memorized priority list must change when the actual threat changes."
+      ]
+    },
+    {
+      "actions": [
+        "Ask whether anyone knows your route and whether searchers are likely.",
+        "Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move.",
+        "If staying, make shelter and signals; if moving, leave a clear note and mark direction and time."
+      ],
+      "aliases": [
+        "decide whether to stay or move",
+        "stay put",
+        "move",
+        "walk out",
+        "search area",
+        "last known point",
+        "stay or move"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Stay near the last known route unless remaining creates more danger or a known safe destination is close.",
+      "hazardTags": [],
+      "id": "basics-stay-or-move",
+      "jurisdiction": "global",
+      "keywords": [
+        "stay put",
+        "move",
+        "walk out",
+        "search area",
+        "last known point"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Decide Whether to Stay or Move",
+      "units": "dual",
+      "warnings": [
+        "Do not move on a guess or separate a group without a clear rescue reason."
+      ]
+    },
+    {
+      "actions": [
+        "Choose a safer site while there is enough light to inspect it.",
+        "Collect needed water and fuel before cold, fatigue, or darkness increases risk.",
+        "Place light, shoes, insulation, first aid, and signaling tools where they can be reached immediately."
+      ],
+      "aliases": [
+        "organize the first night",
+        "first night",
+        "dark",
+        "overnight",
+        "camp",
+        "night routine"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "basics",
+      "goal": "Finish shelter, warmth, water, and signals before darkness removes safe options.",
+      "hazardTags": [],
+      "id": "basics-first-night",
+      "jurisdiction": "global",
+      "keywords": [
+        "first night",
+        "dark",
+        "overnight",
+        "camp",
+        "night routine"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Organize the First Night",
+      "units": "dual",
+      "warnings": [
+        "Do not wait until dark to discover that the site floods, sheds branches, or lacks insulation."
+      ]
+    },
+    {
+      "actions": [
+        "Notice thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination.",
+        "Rest in shade, loosen excess layers, and drink safe water in manageable amounts.",
+        "Treat confusion, collapse, seizure, or inability to drink as an emergency."
+      ],
+      "aliases": [
+        "recognize dehydration",
+        "dehydration",
+        "thirst",
+        "dark urine",
+        "dizzy",
+        "weak"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Reduce exertion and replace safe fluids before weakness or confusion becomes severe.",
+      "hazardTags": [
+        "heat",
+        "medical"
+      ],
+      "id": "water-dehydration",
+      "jurisdiction": "global",
+      "keywords": [
+        "dehydration",
+        "thirst",
+        "dark urine",
+        "dizzy",
+        "weak"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water",
+        "nws-heat-cold"
+      ],
+      "title": "Recognize Dehydration",
+      "units": "dual",
+      "warnings": [
+        "Do not force fluid into anyone who is not fully alert or cannot swallow."
+      ]
+    },
+    {
+      "actions": [
+        "Check maps, valleys, drainage lines, springs, green vegetation, animal movement, and low ground.",
+        "Listen for flowing water and look for converging terrain rather than wandering randomly.",
+        "Travel during cooler hours and leave markers if a short water search takes you away from shelter."
+      ],
+      "aliases": [
+        "locate likely water",
+        "find water",
+        "spring",
+        "stream",
+        "drainage",
+        "valley",
+        "locate"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Search deliberately for water without spending more fluid and energy than the search can return.",
+      "hazardTags": [],
+      "id": "water-locate",
+      "jurisdiction": "global",
+      "keywords": [
+        "find water",
+        "spring",
+        "stream",
+        "drainage",
+        "valley"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "title": "Locate Likely Water",
+      "units": "dual",
+      "warnings": [
+        "Do not enter steep ravines, unstable banks, caves, or fast water to reach a source."
+      ]
+    },
+    {
+      "actions": [
+        "Prefer a known safe supply, then clearer moving water collected upstream from camps, livestock, roads, or waste.",
+        "Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff.",
+        "Collect where the bank is stable and you cannot be swept into the water."
+      ],
+      "aliases": [
+        "choose the safest source",
+        "water source",
+        "contamination",
+        "algae",
+        "chemical",
+        "moving water",
+        "choose source"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Use the least contaminated available source and still treat it for germs.",
+      "hazardTags": [],
+      "id": "water-choose-source",
+      "jurisdiction": "global",
+      "keywords": [
+        "water source",
+        "contamination",
+        "algae",
+        "chemical",
+        "moving water"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "title": "Choose the Safest Source",
+      "units": "dual",
+      "warnings": [
+        "Boiling and ordinary filters cannot make chemically contaminated or salty water safe."
+      ]
+    },
+    {
+      "actions": [
+        "Let cloudy water settle in a clean container.",
+        "Pour off the clearer layer or pass it through clean cloth or a coffee filter.",
+        "Keep dirty collection containers and hands away from the clean-water opening and cap."
+      ],
+      "aliases": [
+        "collect and prefilter water",
+        "prefilter",
+        "cloudy water",
+        "sediment",
+        "cloth filter",
+        "collect",
+        "collect prefilter"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Remove sediment before the main treatment without mistaking clear water for safe water.",
+      "hazardTags": [],
+      "id": "water-collect-prefilter",
+      "jurisdiction": "global",
+      "keywords": [
+        "prefilter",
+        "cloudy water",
+        "sediment",
+        "cloth filter",
+        "collect"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "title": "Collect and Prefilter Water",
+      "units": "dual",
+      "warnings": [
+        "Prefiltering removes particles only; it does not reliably remove disease-causing organisms."
+      ]
+    },
+    {
+      "actions": [
+        "Bring clear water to a rolling boil for 1 minute.",
+        "Above 6,500 feet (about 1,980 metres), boil for 3 minutes.",
+        "Let it cool and store it in a clean, covered container without touching the inside of the cap."
+      ],
+      "aliases": [
+        "boil water correctly",
+        "boil water",
+        "rolling boil",
+        "one minute",
+        "three minutes",
+        "6500 feet",
+        "water purifier",
+        "boil"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Use a rolling boil for the full recommended time, then prevent recontamination.",
+      "hazardTags": [
+        "water"
+      ],
+      "id": "water-boil",
+      "jurisdiction": "global",
+      "keywords": [
+        "boil water",
+        "rolling boil",
+        "one minute",
+        "three minutes",
+        "6500 feet",
+        "water purifier"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "title": "Boil Water Correctly",
+      "units": "dual",
+      "warnings": [
+        "Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination."
+      ]
+    },
+    {
+      "actions": [
+        "Read what the filter or purifier removes and check for damage or freezing.",
+        "Follow the maker's dose, water clarity, temperature, and contact-time instructions.",
+        "When boiling is unavailable, filter cloudy water and then disinfect it when the product permits."
+      ],
+      "aliases": [
+        "filter or disinfect water",
+        "filter water",
+        "disinfect",
+        "chlorine dioxide",
+        "iodine",
+        "purifier",
+        "UV",
+        "filter disinfect"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Follow the treatment product exactly and combine methods when one method misses important organisms.",
+      "hazardTags": [],
+      "id": "water-filter-disinfect",
+      "jurisdiction": "global",
+      "keywords": [
+        "filter water",
+        "disinfect",
+        "chlorine dioxide",
+        "iodine",
+        "purifier",
+        "UV"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "title": "Filter or Disinfect Water",
+      "units": "dual",
+      "warnings": [
+        "Many backpacking filters do not remove viruses, and some disinfectants do not reliably kill every parasite."
+      ]
+    },
+    {
+      "actions": [
+        "Use clean, covered containers and keep untreated and treated water clearly separate.",
+        "Travel in cooler hours, rest in shade, pace work, and loosen excess insulation before sweating heavily.",
+        "Drink available safe water and use normal food or directed electrolyte products during prolonged effort."
+      ],
+      "aliases": [
+        "store water and reduce fluid loss",
+        "store water",
+        "ration water",
+        "reduce sweat",
+        "hydration",
+        "container",
+        "store"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "water",
+      "goal": "Protect treated water and reduce sweating instead of dangerously withholding water.",
+      "hazardTags": [],
+      "id": "water-store",
+      "jurisdiction": "global",
+      "keywords": [
+        "store water",
+        "ration water",
+        "reduce sweat",
+        "hydration",
+        "container"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water",
+        "nws-heat-cold"
+      ],
+      "title": "Store Water and Reduce Fluid Loss",
+      "units": "dual",
+      "warnings": [
+        "Do not drink seawater, urine, alcohol, or vehicle fluids for hydration."
+      ]
+    },
+    {
+      "actions": [
+        "Check wind, dryness, overhead fuel, escape routes, local restrictions, and whether a stove or insulation can meet the need.",
+        "Choose a fire only if it can remain small, attended, and fully controlled.",
+        "Prepare water, soil, or another extinguishing method before ignition."
+      ],
+      "aliases": [
+        "decide whether fire is safe",
+        "fire ban",
+        "safe fire",
+        "wildfire risk",
+        "wind",
+        "restriction",
+        "decision"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Use fire only when its survival benefit exceeds wildfire, smoke, fuel, and legal risks.",
+      "hazardTags": [],
+      "id": "fire-decision",
+      "jurisdiction": "global",
+      "keywords": [
+        "fire ban",
+        "safe fire",
+        "wildfire risk",
+        "wind",
+        "restriction"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-trip-planning"
+      ],
+      "title": "Decide Whether Fire Is Safe",
+      "units": "dual",
+      "warnings": [
+        "Never light a fire during a ban or where wind and dry fuel can carry sparks beyond control."
+      ]
+    },
+    {
+      "actions": [
+        "Use an existing approved fire area when available.",
+        "Clear loose fuel to mineral soil for a safe distance suited to wind and conditions.",
+        "Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers."
+      ],
+      "aliases": [
+        "choose a fire site",
+        "fire site",
+        "fire ring",
+        "mineral soil",
+        "roots",
+        "embers",
+        "site"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel.",
+      "hazardTags": [],
+      "id": "fire-site",
+      "jurisdiction": "global",
+      "keywords": [
+        "fire site",
+        "fire ring",
+        "mineral soil",
+        "roots",
+        "embers"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Choose a Fire Site",
+      "units": "dual",
+      "warnings": [
+        "Do not build on peat, deep duff, roots, inside a tent, or beneath low branches."
+      ]
+    },
+    {
+      "actions": [
+        "Prepare fine dry tinder that catches a flame or spark.",
+        "Add pencil-thin kindling, then finger-thick sticks, then larger fuel only after each size burns well.",
+        "Keep a protected reserve dry and gather enough to avoid leaving the fire unattended."
+      ],
+      "aliases": [
+        "gather tinder, kindling, and fuel",
+        "tinder",
+        "kindling",
+        "fuel wood",
+        "dry material",
+        "fire bundle",
+        "materials"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Collect enough dry material in increasing sizes before striking the first spark.",
+      "hazardTags": [],
+      "id": "fire-materials",
+      "jurisdiction": "global",
+      "keywords": [
+        "tinder",
+        "kindling",
+        "fuel wood",
+        "dry material",
+        "fire bundle"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Gather Tinder, Kindling, and Fuel",
+      "units": "dual",
+      "warnings": [
+        "Do not strip live trees or collect material where local rules prohibit it."
+      ]
+    },
+    {
+      "actions": [
+        "Prepare the complete tinder and kindling bundle before using a match, lighter, or ferro rod.",
+        "Block wind with your body or a safe barrier while preserving airflow.",
+        "Move the burning tinder into the fire lay and add fuel gradually."
+      ],
+      "aliases": [
+        "use common ignition tools",
+        "lighter",
+        "matches",
+        "ferro rod",
+        "spark",
+        "ignite",
+        "ignition"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Shield the tinder and use the simplest reliable ignition method you already know.",
+      "hazardTags": [],
+      "id": "fire-ignition",
+      "jurisdiction": "global",
+      "keywords": [
+        "lighter",
+        "matches",
+        "ferro rod",
+        "spark",
+        "ignite"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Use Common Ignition Tools",
+      "units": "dual",
+      "warnings": [
+        "Do not spill liquid fuel onto a flame or improvise with batteries unless the equipment is designed for it."
+      ]
+    },
+    {
+      "actions": [
+        "Build a loose teepee, lean-to, or platform of kindling around the tinder.",
+        "Add only a few pieces at a time as the flame strengthens.",
+        "Keep the fire no larger than needed for warmth, boiling, cooking, or signaling."
+      ],
+      "aliases": [
+        "build and feed the fire",
+        "fire lay",
+        "teepee fire",
+        "feed fire",
+        "airflow",
+        "small fire",
+        "build feed"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Keep airflow open and add fuel slowly enough that the flame is not smothered.",
+      "hazardTags": [],
+      "id": "fire-build-feed",
+      "jurisdiction": "global",
+      "keywords": [
+        "fire lay",
+        "teepee fire",
+        "feed fire",
+        "airflow",
+        "small fire"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Build and Feed the Fire",
+      "units": "dual",
+      "warnings": [
+        "A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind."
+      ]
+    },
+    {
+      "actions": [
+        "Work beneath a safe cover that cannot catch fire and isolate tinder from wet ground.",
+        "Split standing dead wood when legal to reach a drier center.",
+        "Build a small platform, use extra fine tinder, and add warmed kindling gradually."
+      ],
+      "aliases": [
+        "start fire in wet conditions",
+        "wet fire",
+        "rain",
+        "snow",
+        "split wood",
+        "damp tinder",
+        "wet"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Protect the working area and expose dry inner wood instead of burning energy on soaked surfaces.",
+      "hazardTags": [],
+      "id": "fire-wet",
+      "jurisdiction": "global",
+      "keywords": [
+        "wet fire",
+        "rain",
+        "snow",
+        "split wood",
+        "damp tinder"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Start Fire in Wet Conditions",
+      "units": "dual",
+      "warnings": [
+        "Do not hold wet fuel over flames where steam, collapse, or sparks can injure you."
+      ]
+    },
+    {
+      "actions": [
+        "Burn fuel down, spread coals, add water, stir, and repeat until no heat remains.",
+        "Use soil only when water is unavailable and keep checking for heat below the surface.",
+        "Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces."
+      ],
+      "aliases": [
+        "prevent wildfire and fumes",
+        "put out fire",
+        "cold ashes",
+        "carbon monoxide",
+        "fumes",
+        "extinguish"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "fire",
+      "goal": "Attend the fire continuously and leave it cold enough to touch.",
+      "hazardTags": [
+        "fire"
+      ],
+      "id": "fire-extinguish",
+      "jurisdiction": "global",
+      "keywords": [
+        "put out fire",
+        "cold ashes",
+        "carbon monoxide",
+        "fumes",
+        "extinguish"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nws-heat-cold"
+      ],
+      "title": "Prevent Wildfire and Fumes",
+      "units": "dual",
+      "warnings": [
+        "Never sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter."
+      ]
+    },
+    {
+      "actions": [
+        "Move away from flood channels, unstable slopes, cliff edges, exposed ridges, roads, and avalanche paths.",
+        "Check for dead trees, hanging branches, loose rock, rising-water marks, wildlife trails, and fire spread.",
+        "Choose natural wind protection with drainage and enough visibility for signals."
+      ],
+      "aliases": [
+        "choose a shelter site",
+        "shelter site",
+        "widowmaker",
+        "flood path",
+        "slope",
+        "wind",
+        "site"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Avoid hazards above, below, and around the site before building.",
+      "hazardTags": [],
+      "id": "shelter-site",
+      "jurisdiction": "global",
+      "keywords": [
+        "shelter site",
+        "widowmaker",
+        "flood path",
+        "slope",
+        "wind"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Choose a Shelter Site",
+      "units": "dual",
+      "warnings": [
+        "Do not choose the lowest flat ground during rain or shelter beneath a dead tree."
+      ]
+    },
+    {
+      "actions": [
+        "Use a sleeping pad, pack, spare clothing, dry vegetation where legal, or other dry material.",
+        "Build insulation thicker than it looks necessary because body weight compresses it.",
+        "Keep wet clothing and bare skin away from cold ground and replace crushed material as needed."
+      ],
+      "aliases": [
+        "insulate from the ground",
+        "ground insulation",
+        "sleeping pad",
+        "cold ground",
+        "heat loss",
+        "bed",
+        "ground"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Put dry insulation beneath the body before making the shelter larger or more comfortable.",
+      "hazardTags": [],
+      "id": "shelter-ground",
+      "jurisdiction": "global",
+      "keywords": [
+        "ground insulation",
+        "sleeping pad",
+        "cold ground",
+        "heat loss",
+        "bed"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Insulate From the Ground",
+      "units": "dual",
+      "warnings": [
+        "Do not use toxic plants, thorny material, or wet insulation against skin."
+      ]
+    },
+    {
+      "actions": [
+        "Choose solid anchors and run a ridgeline or supported edge without damaging trees.",
+        "Angle the tarp steeply enough to shed rain and lower the windward side.",
+        "Stake or weight corners, keep fabric away from flame, and add ground insulation."
+      ],
+      "aliases": [
+        "build a tarp shelter",
+        "tarp shelter",
+        "ridgeline",
+        "stakes",
+        "rain fly",
+        "poncho shelter",
+        "tarp"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area.",
+      "hazardTags": [],
+      "id": "shelter-tarp",
+      "jurisdiction": "global",
+      "keywords": [
+        "tarp shelter",
+        "ridgeline",
+        "stakes",
+        "rain fly",
+        "poncho shelter"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Build a Tarp Shelter",
+      "units": "dual",
+      "warnings": [
+        "Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates."
+      ]
+    },
+    {
+      "actions": [
+        "Choose a stable ridge pole and supports that cannot roll or collapse.",
+        "Make the enclosed space only large enough for the body and add a thick layer of dry debris over the frame.",
+        "Add a deep dry bed, block the entrance partly, and test the structure gently before entering."
+      ],
+      "aliases": [
+        "build a debris shelter",
+        "debris hut",
+        "natural shelter",
+        "ridge pole",
+        "leaves",
+        "emergency shelter",
+        "debris"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Use a strong frame and deep dry insulation when no carried shelter is available.",
+      "hazardTags": [],
+      "id": "shelter-debris",
+      "jurisdiction": "global",
+      "keywords": [
+        "debris hut",
+        "natural shelter",
+        "ridge pole",
+        "leaves",
+        "emergency shelter"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Build a Debris Shelter",
+      "units": "dual",
+      "warnings": [
+        "Do not cut live vegetation or build where debris collection is prohibited; never use an unstable log as the main support."
+      ]
+    },
+    {
+      "actions": [
+        "Choose a site away from avalanche paths, cornices, tree wells, and drifting snow.",
+        "Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated.",
+        "Mark the entrance, keep tools inside, and clear vents as snow falls."
+      ],
+      "aliases": [
+        "shelter in cold or snow",
+        "snow shelter",
+        "cold",
+        "snow trench",
+        "ventilation",
+        "avalanche",
+        "cold snow"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Block wind, stay dry, insulate deeply, and keep ventilation open.",
+      "hazardTags": [],
+      "id": "shelter-cold-snow",
+      "jurisdiction": "global",
+      "keywords": [
+        "snow shelter",
+        "cold",
+        "snow trench",
+        "ventilation",
+        "avalanche"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Shelter in Cold or Snow",
+      "units": "dual",
+      "warnings": [
+        "Snow shelters can collapse or trap carbon monoxide; never use a flame or stove without designed ventilation."
+      ]
+    },
+    {
+      "actions": [
+        "In heat, create overhead shade, allow airflow, and avoid hot ground and enclosed vehicles.",
+        "In rain or wind, lower the profile, face the strong side into the weather, and route runoff away.",
+        "Adjust clothing and ventilation early so sweat or condensation does not soak insulation."
+      ],
+      "aliases": [
+        "shelter from heat, sun, wind, and rain",
+        "shade shelter",
+        "rain",
+        "wind",
+        "hot weather",
+        "ventilation",
+        "heat rain"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Use shade and airflow in heat, and wind and water barriers in cold rain.",
+      "hazardTags": [],
+      "id": "shelter-heat-rain",
+      "jurisdiction": "global",
+      "keywords": [
+        "shade shelter",
+        "rain",
+        "wind",
+        "hot weather",
+        "ventilation"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Shelter From Heat, Sun, Wind, and Rain",
+      "units": "dual",
+      "warnings": [
+        "A sealed shelter in sun can become dangerously hot even when outdoor air feels moderate."
+      ]
+    },
+    {
+      "actions": [
+        "Tighten or loosen lines as fabric and weather change.",
+        "Keep light, shoes, insulation, first aid, and an exit path ready.",
+        "Set safe checks for rising water, snow load, wind, fire, or a sick person."
+      ],
+      "aliases": [
+        "maintain shelter overnight",
+        "overnight shelter",
+        "maintenance",
+        "guyline",
+        "drainage",
+        "night check",
+        "overnight"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "shelter",
+      "goal": "Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.",
+      "hazardTags": [],
+      "id": "shelter-overnight",
+      "jurisdiction": "global",
+      "keywords": [
+        "overnight shelter",
+        "maintenance",
+        "guyline",
+        "drainage",
+        "night check"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Maintain Shelter Overnight",
+      "units": "dual",
+      "warnings": [
+        "Do not ignore new cracking trees, moving water, smoke, or changing wind because the shelter is already built."
+      ]
+    },
+    {
+      "actions": [
+        "Estimate likely rescue time, weather, health, daylight, and food already available.",
+        "Choose only methods with a high chance of return and low injury risk.",
+        "Stop if gathering consumes water, warmth, navigation certainty, or signaling time."
+      ],
+      "aliases": [
+        "decide whether food gathering is worth it",
+        "find food",
+        "hunger",
+        "energy budget",
+        "forage decision",
+        "rescue time",
+        "energy"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Protect warmth, water, signaling, and rescue chances before spending energy to find food.",
+      "hazardTags": [],
+      "id": "food-energy",
+      "jurisdiction": "global",
+      "keywords": [
+        "find food",
+        "hunger",
+        "energy budget",
+        "forage decision",
+        "rescue time"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Decide Whether Food Gathering Is Worth It",
+      "units": "dual",
+      "warnings": [
+        "Healthy adults can usually tolerate short food gaps better than dehydration, exposure, or injury."
+      ]
+    },
+    {
+      "actions": [
+        "Count food and separate an emergency reserve.",
+        "Eat small planned amounts during necessary activity instead of finishing easy snacks early.",
+        "Keep food dry, sealed, and protected from animals and contamination."
+      ],
+      "aliases": [
+        "manage carried food",
+        "ration food",
+        "snacks",
+        "calories",
+        "supplies",
+        "emergency food",
+        "carried"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Protect existing calories and use them to support warmth, decisions, and necessary work.",
+      "hazardTags": [],
+      "id": "food-carried",
+      "jurisdiction": "global",
+      "keywords": [
+        "ration food",
+        "snacks",
+        "calories",
+        "supplies",
+        "emergency food"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-trip-planning",
+        "nps-wildlife"
+      ],
+      "title": "Manage Carried Food",
+      "units": "dual",
+      "warnings": [
+        "Do not restrict food from children, people with diabetes, or anyone with a medical need without appropriate guidance."
+      ]
+    },
+    {
+      "actions": [
+        "Use carried food or other lower-risk options first.",
+        "Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty.",
+        "Keep unknown material away from children and food-preparation surfaces."
+      ],
+      "aliases": [
+        "reject unknown plants and fungi",
+        "edible plant",
+        "mushroom",
+        "berry",
+        "foraging",
+        "poison plant",
+        "unknown plants"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork.",
+      "hazardTags": [
+        "poison"
+      ],
+      "id": "food-unknown-plants",
+      "jurisdiction": "global",
+      "keywords": [
+        "edible plant",
+        "mushroom",
+        "berry",
+        "foraging",
+        "poison plant"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Reject Unknown Plants and Fungi",
+      "units": "dual",
+      "warnings": [
+        "TrailGuard does not identify edible plants or mushrooms; small taste tests do not prove safety."
+      ]
+    },
+    {
+      "actions": [
+        "Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons.",
+        "Fish only where legal and only if you have suitable gear and safe access to the bank.",
+        "Mark your route, limit time, and stop before weather, darkness, or fatigue worsens."
+      ],
+      "aliases": [
+        "use only low-risk procurement",
+        "fishing",
+        "procure food",
+        "catch food",
+        "low risk",
+        "legal"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost.",
+      "hazardTags": [],
+      "id": "food-low-risk",
+      "jurisdiction": "global",
+      "keywords": [
+        "fishing",
+        "procure food",
+        "catch food",
+        "low risk",
+        "legal"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Use Only Low-Risk Procurement",
+      "units": "dual",
+      "warnings": [
+        "Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them."
+      ]
+    },
+    {
+      "actions": [
+        "Wash or sanitize hands and keep raw material away from ready-to-eat food.",
+        "Cook animal food thoroughly through the center using a thermometer when available.",
+        "Discard food with unsafe storage, chemical contact, spoilage, or uncertain origin."
+      ],
+      "aliases": [
+        "cook and handle food safely",
+        "cook food",
+        "food safety",
+        "raw meat",
+        "clean",
+        "spoilage",
+        "cook"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean.",
+      "hazardTags": [],
+      "id": "food-cook",
+      "jurisdiction": "global",
+      "keywords": [
+        "cook food",
+        "food safety",
+        "raw meat",
+        "clean",
+        "spoilage"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Cook and Handle Food Safely",
+      "units": "dual",
+      "warnings": [
+        "Smoke, color, smell, or a brief sear does not prove meat or fish is safe."
+      ]
+    },
+    {
+      "actions": [
+        "Keep a clean camp and collect every crumb, wrapper, and scented item.",
+        "Use approved canisters, lockers, or vehicle storage where required; otherwise use the safest locally recommended method.",
+        "Cook and eat away from sleeping areas and never feed wildlife."
+      ],
+      "aliases": [
+        "protect food from wildlife",
+        "bear canister",
+        "food storage",
+        "hang food",
+        "clean camp",
+        "wildlife"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "food",
+      "goal": "Separate food and scented items from sleeping space and follow local storage rules.",
+      "hazardTags": [],
+      "id": "food-wildlife",
+      "jurisdiction": "global",
+      "keywords": [
+        "bear canister",
+        "food storage",
+        "hang food",
+        "clean camp",
+        "wildlife"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-wildlife",
+        "nps-yosemite-wilderness"
+      ],
+      "title": "Protect Food From Wildlife",
+      "units": "dual",
+      "warnings": [
+        "Food storage rules and animal behavior vary by region; check local guidance before travel."
+      ]
+    },
+    {
+      "actions": [
+        "Stop as soon as landmarks, trail, or position stop matching expectations.",
+        "Mark the spot without damaging the environment and record time and direction of travel.",
+        "Review the last certain point, recent turns, terrain, distance, and elevation before moving."
+      ],
+      "aliases": [
+        "stop and mark the last known point",
+        "lost",
+        "last known point",
+        "stop",
+        "mark location",
+        "wrong trail",
+        "stop mark"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Prevent the search area from growing while you reconstruct where navigation failed.",
+      "hazardTags": [],
+      "id": "navigation-stop-mark",
+      "jurisdiction": "global",
+      "keywords": [
+        "lost",
+        "last known point",
+        "stop",
+        "mark location",
+        "wrong trail"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Stop and Mark the Last Known Point",
+      "units": "dual",
+      "warnings": [
+        "Do not keep walking simply to feel productive."
+      ]
+    },
+    {
+      "actions": [
+        "Identify north, contour lines, water, roads, trails, and major landmarks.",
+        "Rotate the map until mapped features line up with the same features around you.",
+        "Use at least two reliable features to estimate position and confirm it as you move."
+      ],
+      "aliases": [
+        "orient a map",
+        "orient map",
+        "topographic map",
+        "contour",
+        "north",
+        "offline map",
+        "map"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Turn the map to match the ground before choosing a route.",
+      "hazardTags": [],
+      "id": "navigation-map",
+      "jurisdiction": "global",
+      "keywords": [
+        "orient map",
+        "topographic map",
+        "contour",
+        "north",
+        "offline map"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Orient a Map",
+      "units": "dual",
+      "warnings": [
+        "A map on a phone is only useful if the correct area is downloaded and the device has power."
+      ]
+    },
+    {
+      "actions": [
+        "Keep the compass level and away from vehicles, speakers, magnets, and large metal objects.",
+        "Set or read the bearing using the map and account for local declination when precision matters.",
+        "Choose a visible landmark on the bearing, walk to it, and recheck."
+      ],
+      "aliases": [
+        "use a compass",
+        "compass",
+        "bearing",
+        "declination",
+        "north",
+        "azimuth"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Use the compass to hold a known direction, not to invent a destination.",
+      "hazardTags": [],
+      "id": "navigation-compass",
+      "jurisdiction": "global",
+      "keywords": [
+        "compass",
+        "bearing",
+        "declination",
+        "north",
+        "azimuth"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Use a Compass",
+      "units": "dual",
+      "warnings": [
+        "A precise bearing toward the wrong destination is still wrong; verify with terrain and map."
+      ]
+    },
+    {
+      "actions": [
+        "Look for the shape and direction of large features before relying on small details.",
+        "Use handrails such as a trail, ridge, or shoreline and identify a catching feature beyond the destination.",
+        "Check that elevation, distance, and travel time agree with the expected route."
+      ],
+      "aliases": [
+        "read terrain and landmarks",
+        "terrain association",
+        "ridge",
+        "valley",
+        "handrail",
+        "landmark",
+        "terrain"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Match ridges, valleys, slopes, water, and human features to the map continuously.",
+      "hazardTags": [],
+      "id": "navigation-terrain",
+      "jurisdiction": "global",
+      "keywords": [
+        "terrain association",
+        "ridge",
+        "valley",
+        "handrail",
+        "landmark"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Read Terrain and Landmarks",
+      "units": "dual",
+      "warnings": [
+        "Streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety."
+      ]
+    },
+    {
+      "actions": [
+        "Confirm recognizable footprints, markers, junctions, or terrain before committing.",
+        "Mark progress and turn around immediately if the track becomes uncertain.",
+        "Preserve enough daylight and energy to return to shelter and signals."
+      ],
+      "aliases": [
+        "backtrack safely",
+        "backtrack",
+        "footprints",
+        "wrong turn",
+        "return trail",
+        "breadcrumbs"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Return only when the route behind you is known, short, and safer than staying.",
+      "hazardTags": [],
+      "id": "navigation-backtrack",
+      "jurisdiction": "global",
+      "keywords": [
+        "backtrack",
+        "footprints",
+        "wrong turn",
+        "return trail",
+        "breadcrumbs"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Backtrack Safely",
+      "units": "dual",
+      "warnings": [
+        "Do not follow isolated footprints or game trails as proof of the correct route."
+      ]
+    },
+    {
+      "actions": [
+        "Observe the sun's general movement and changing shadows over time.",
+        "Compare the rough direction with terrain, map, and the last known route.",
+        "Treat cloud, season, latitude, terrain, and time uncertainty as large error sources."
+      ],
+      "aliases": [
+        "use sun and shadow as rough aids",
+        "sun direction",
+        "shadow stick",
+        "natural navigation",
+        "east west",
+        "no compass",
+        "sun shadow"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Use natural direction clues only to support a map, compass, or known terrain—not as precise navigation.",
+      "hazardTags": [],
+      "id": "navigation-sun-shadow",
+      "jurisdiction": "global",
+      "keywords": [
+        "sun direction",
+        "shadow stick",
+        "natural navigation",
+        "east west",
+        "no compass"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Use Sun and Shadow as Rough Aids",
+      "units": "dual",
+      "warnings": [
+        "Do not travel toward a guessed direction from one shadow or a remembered survival trick."
+      ]
+    },
+    {
+      "actions": [
+        "Avoid unnecessary travel at night, in severe weather, or when injury or fatigue is worsening.",
+        "For a crossing, look for a wide shallow section away from rapids, falls, and hazards downstream.",
+        "Unbuckle pack waist and chest straps, face upstream, and use a sturdy pole only when the crossing is clearly manageable."
+      ],
+      "aliases": [
+        "travel and cross water safely",
+        "river crossing",
+        "stream crossing",
+        "travel safely",
+        "night travel",
+        "route",
+        "travel crossing"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "navigation",
+      "goal": "Choose routes that preserve footing, visibility, and a safe return.",
+      "hazardTags": [],
+      "id": "navigation-travel-crossing",
+      "jurisdiction": "global",
+      "keywords": [
+        "river crossing",
+        "stream crossing",
+        "travel safely",
+        "night travel",
+        "route"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness"
+      ],
+      "title": "Travel and Cross Water Safely",
+      "units": "dual",
+      "warnings": [
+        "Turn back when water is swift, deep, rising, very cold, or the exit cannot be seen; never tie yourself to a crossing rope."
+      ]
+    },
+    {
+      "actions": [
+        "Try the local emergency number; in the United States and Canada use 911 when service exists.",
+        "Give location, problem, people, injuries, supplies, weather, and planned actions.",
+        "Preserve battery, keep the device warm and dry, and follow dispatcher or beacon instructions."
+      ],
+      "aliases": [
+        "use emergency communication",
+        "call rescue",
+        "911",
+        "satellite SOS",
+        "beacon",
+        "emergency message",
+        "communication"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Send a short complete rescue message whenever a phone, beacon, radio, or satellite device can connect.",
+      "hazardTags": [],
+      "id": "signal-communication",
+      "jurisdiction": "global",
+      "keywords": [
+        "call rescue",
+        "911",
+        "satellite SOS",
+        "beacon",
+        "emergency message"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Use Emergency Communication",
+      "units": "dual",
+      "warnings": [
+        "Do not depend on a phone alone; coverage and location reporting can fail."
+      ]
+    },
+    {
+      "actions": [
+        "Give three strong blasts, pause, listen, and repeat at regular intervals.",
+        "Move only to a nearby safe opening or ridge if it clearly improves the signal.",
+        "Keep the whistle attached to clothing so it remains available after a fall or lost pack."
+      ],
+      "aliases": [
+        "signal with a whistle",
+        "whistle",
+        "three blasts",
+        "sound signal",
+        "rescue",
+        "shout"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Use repeated whistle blasts that travel farther than shouting and cost less energy.",
+      "hazardTags": [],
+      "id": "signal-whistle",
+      "jurisdiction": "global",
+      "keywords": [
+        "whistle",
+        "three blasts",
+        "sound signal",
+        "rescue",
+        "shout"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Signal With a Whistle",
+      "units": "dual",
+      "warnings": [
+        "Do not blow continuously until exhausted or unable to hear a reply."
+      ]
+    },
+    {
+      "actions": [
+        "Use a signal mirror's sighting aid or move the reflection slowly across the target.",
+        "At night, flash a light in groups of three and preserve battery between signal periods.",
+        "Use bright fabric or reflective material to make the signaling position easier to find."
+      ],
+      "aliases": [
+        "use mirrors and lights",
+        "signal mirror",
+        "flashlight",
+        "three flashes",
+        "aircraft signal",
+        "reflection",
+        "mirror light"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Aim reflected sun or repeated light flashes toward aircraft, boats, roads, and search teams.",
+      "hazardTags": [],
+      "id": "signal-mirror-light",
+      "jurisdiction": "global",
+      "keywords": [
+        "signal mirror",
+        "flashlight",
+        "three flashes",
+        "aircraft signal",
+        "reflection"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Use Mirrors and Lights",
+      "units": "dual",
+      "warnings": [
+        "Never aim a laser at an aircraft or vehicle."
+      ]
+    },
+    {
+      "actions": [
+        "Use an open area visible from likely search directions without entering an exposed hazard.",
+        "Make an SOS, X, arrow, or three repeated shapes using bright fabric, logs, rocks, or disturbed snow.",
+        "Make each line broad and much larger than a standing person, then keep the center clear."
+      ],
+      "aliases": [
+        "make visible ground signals",
+        "ground signal",
+        "SOS",
+        "X",
+        "arrow",
+        "air rescue",
+        "ground"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Create large high-contrast shapes that can be distinguished from natural terrain.",
+      "hazardTags": [],
+      "id": "signal-ground",
+      "jurisdiction": "global",
+      "keywords": [
+        "ground signal",
+        "SOS",
+        "X",
+        "arrow",
+        "air rescue"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Make Visible Ground Signals",
+      "units": "dual",
+      "warnings": [
+        "Do not dismantle shelter or scatter essential insulation to build a signal."
+      ]
+    },
+    {
+      "actions": [
+        "Prepare the site, extinguishing material, and escape path before ignition.",
+        "Use three small fires or add damp green material only after a stable fire is controlled and local conditions allow.",
+        "Extinguish fully if wind rises, the signal is no longer needed, or control weakens."
+      ],
+      "aliases": [
+        "use smoke or fire only when safe",
+        "signal fire",
+        "smoke signal",
+        "three fires",
+        "aircraft",
+        "wildfire",
+        "smoke fire"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Create a controlled visible signal without starting a wildfire or poisoning shelter occupants.",
+      "hazardTags": [],
+      "id": "signal-smoke-fire",
+      "jurisdiction": "global",
+      "keywords": [
+        "signal fire",
+        "smoke signal",
+        "three fires",
+        "aircraft",
+        "wildfire"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "army-atp-survival"
+      ],
+      "title": "Use Smoke or Fire Only When Safe",
+      "units": "dual",
+      "warnings": [
+        "Do not light a signal fire during a ban, extreme fire weather, or where sparks can escape."
+      ]
+    },
+    {
+      "actions": [
+        "Choose regular listening and signaling times around daylight, aircraft activity, or known search plans.",
+        "Keep a written log of attempts, replies, weather, and any movement.",
+        "Leave a durable note with time and direction if safety forces you to relocate."
+      ],
+      "aliases": [
+        "set a signaling schedule",
+        "signal schedule",
+        "listen",
+        "rescue log",
+        "battery",
+        "relocate note",
+        "schedule"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "signal",
+      "goal": "Repeat signals when searchers are most likely while preserving energy and batteries.",
+      "hazardTags": [],
+      "id": "signal-schedule",
+      "jurisdiction": "global",
+      "keywords": [
+        "signal schedule",
+        "listen",
+        "rescue log",
+        "battery",
+        "relocate note"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning",
+        "army-atp-survival"
+      ],
+      "title": "Set a Signaling Schedule",
+      "units": "dual",
+      "warnings": [
+        "Do not miss a reply by making constant noise or wearing headphones."
+      ]
+    },
+    {
+      "actions": [
+        "Check for danger before touching the person and use protective barriers when available.",
+        "Check responsiveness, open the airway as trained, and look for normal breathing and severe bleeding.",
+        "Call or send for help; begin CPR and use an AED when indicated by current training and the device prompts."
+      ],
+      "aliases": [
+        "assess the patient and cpr need",
+        "CPR",
+        "not breathing",
+        "unresponsive",
+        "primary assessment",
+        "AED",
+        "assessment"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Make the scene safe, check responsiveness and normal breathing, and start the appropriate emergency response.",
+      "hazardTags": [
+        "medical"
+      ],
+      "id": "first-aid-assessment",
+      "jurisdiction": "global",
+      "keywords": [
+        "CPR",
+        "not breathing",
+        "unresponsive",
+        "primary assessment",
+        "AED"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Assess the Patient and CPR Need",
+      "units": "dual",
+      "warnings": [
+        "Gasping is not normal breathing; do not delay emergency activation for a long examination."
+      ]
+    },
+    {
+      "actions": [
+        "Expose the wound and press firmly with gauze or clean cloth.",
+        "Maintain pressure and add material without repeatedly lifting the first pad to check.",
+        "For uncontrolled life-threatening limb bleeding, apply a commercial tourniquet according to training and record the time."
+      ],
+      "aliases": [
+        "control severe bleeding",
+        "severe bleeding",
+        "tourniquet",
+        "direct pressure",
+        "hemorrhage",
+        "blood",
+        "bleeding"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Apply immediate firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped.",
+      "hazardTags": [],
+      "id": "first-aid-bleeding",
+      "jurisdiction": "global",
+      "keywords": [
+        "severe bleeding",
+        "tourniquet",
+        "direct pressure",
+        "hemorrhage",
+        "blood"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Control Severe Bleeding",
+      "units": "dual",
+      "warnings": [
+        "Do not loosen a tourniquet after application; obtain emergency evacuation as quickly as possible."
+      ]
+    },
+    {
+      "actions": [
+        "Lay the person in the safest comfortable position unless breathing or injury requires otherwise.",
+        "Control bleeding, keep the person dry and insulated, and reassure them.",
+        "Monitor breathing and alertness, and arrange urgent evacuation."
+      ],
+      "aliases": [
+        "treat for shock",
+        "shock",
+        "pale",
+        "clammy",
+        "weak pulse",
+        "faint"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Control the cause, protect temperature, and evacuate urgently when circulation or mental status worsens.",
+      "hazardTags": [],
+      "id": "first-aid-shock",
+      "jurisdiction": "global",
+      "keywords": [
+        "shock",
+        "pale",
+        "clammy",
+        "weak pulse",
+        "faint"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Treat for Shock",
+      "units": "dual",
+      "warnings": [
+        "Do not give food or drink to someone with reduced alertness, vomiting, or likely surgery."
+      ]
+    },
+    {
+      "actions": [
+        "For a wound, control bleeding, rinse with the cleanest available safe water, and cover with a clean dressing.",
+        "For a thermal burn, remove the heat source and cool with cool clean running water when available.",
+        "Remove rings or tight items before swelling and arrange evacuation for deep, large, chemical, electrical, airway, face, hand, foot, or genital burns."
+      ],
+      "aliases": [
+        "care for wounds and burns",
+        "wound",
+        "burn",
+        "clean dressing",
+        "infection",
+        "blister",
+        "wounds burns"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Stop ongoing damage, cool or clean appropriately, cover, and watch for infection or deeper injury.",
+      "hazardTags": [],
+      "id": "first-aid-wounds-burns",
+      "jurisdiction": "global",
+      "keywords": [
+        "wound",
+        "burn",
+        "clean dressing",
+        "infection",
+        "blister"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Care for Wounds and Burns",
+      "units": "dual",
+      "warnings": [
+        "Do not put ice, grease, fuel, soil, or unverified remedies on a burn or wound."
+      ]
+    },
+    {
+      "actions": [
+        "Keep the person still and support the injured area in the position found unless circulation is absent or the location is dangerous.",
+        "Check feeling, warmth, color, and pulse beyond the injury before and after splinting.",
+        "Pad a splint above and below the injury without forcing the limb straight."
+      ],
+      "aliases": [
+        "stabilize fractures and spine injuries",
+        "fracture",
+        "broken bone",
+        "sprain",
+        "splint",
+        "spine",
+        "fracture spine"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Prevent further movement, check circulation, and evacuate when a serious bone, joint, head, neck, or back injury is possible.",
+      "hazardTags": [],
+      "id": "first-aid-fracture-spine",
+      "jurisdiction": "global",
+      "keywords": [
+        "fracture",
+        "broken bone",
+        "sprain",
+        "splint",
+        "spine"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Stabilize Fractures and Spine Injuries",
+      "units": "dual",
+      "warnings": [
+        "Do not move a suspected spine injury unless needed for airway, CPR, or immediate scene safety."
+      ]
+    },
+    {
+      "actions": [
+        "Move to shade, remove excess clothing, and cool skin with water and airflow.",
+        "Give cool safe fluids only if the person is fully alert and can swallow.",
+        "For confusion, seizure, collapse, or very hot skin, cool aggressively and activate emergency evacuation."
+      ],
+      "aliases": [
+        "treat heat illness",
+        "heat exhaustion",
+        "heat stroke",
+        "overheated",
+        "cooling",
+        "confusion",
+        "heat"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Stop exertion, cool early, and treat confusion or collapse as heat stroke.",
+      "hazardTags": [],
+      "id": "first-aid-heat",
+      "jurisdiction": "global",
+      "keywords": [
+        "heat exhaustion",
+        "heat stroke",
+        "overheated",
+        "cooling",
+        "confusion"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Treat Heat Illness",
+      "units": "dual",
+      "warnings": [
+        "Do not give fever medicine or force fluids into an altered person."
+      ]
+    },
+    {
+      "actions": [
+        "Move out of wind and wet, replace wet clothing, and insulate above and below.",
+        "Warm the chest, neck, armpits, and groin with wrapped warm packs or shared body heat.",
+        "Protect frostbitten tissue from pressure and refreezing; evacuate serious cases."
+      ],
+      "aliases": [
+        "treat hypothermia and frostbite",
+        "hypothermia",
+        "frostbite",
+        "shivering",
+        "rewarm",
+        "cold injury",
+        "cold"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "Stop heat loss, handle gently, and rewarm the body core without burning skin.",
+      "hazardTags": [],
+      "id": "first-aid-cold",
+      "jurisdiction": "global",
+      "keywords": [
+        "hypothermia",
+        "frostbite",
+        "shivering",
+        "rewarm",
+        "cold injury"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Treat Hypothermia and Frostbite",
+      "units": "dual",
+      "warnings": [
+        "Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze."
+      ]
+    },
+    {
+      "actions": [
+        "Move away from the animal, insects, plant, chemical, or contaminated area without creating another injury.",
+        "For anaphylaxis, help use prescribed epinephrine immediately and activate emergency response.",
+        "For poisoning, preserve the container or description and contact the local poison service when communication exists."
+      ],
+      "aliases": [
+        "respond to bites, stings, allergy, and poison",
+        "snakebite",
+        "sting",
+        "anaphylaxis",
+        "epinephrine",
+        "poison",
+        "bites allergy"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "first-aid",
+      "goal": "End exposure, support breathing, use prescribed emergency medicine, and seek expert help.",
+      "hazardTags": [],
+      "id": "first-aid-bites-allergy",
+      "jurisdiction": "global",
+      "keywords": [
+        "snakebite",
+        "sting",
+        "anaphylaxis",
+        "epinephrine",
+        "poison"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold",
+        "nps-wildlife",
+        "nps-yosemite-wilderness"
+      ],
+      "title": "Respond to Bites, Stings, Allergy, and Poison",
+      "units": "dual",
+      "warnings": [
+        "Do not cut or suck a snakebite, apply ice or an electric shock, or make the person walk unnecessarily."
+      ]
+    },
+    {
+      "actions": [
+        "Leave ridges, peaks, open water, open fields, and isolated tall objects immediately.",
+        "If no safe building or vehicle exists, spread a group apart and move toward lower terrain away from water and tall isolated trees.",
+        "Wait 30 minutes after the last thunder before leaving safe shelter."
+      ],
+      "aliases": [
+        "act during lightning",
+        "lightning",
+        "thunder",
+        "storm",
+        "tent safety",
+        "30 minutes"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Reach a substantial building or hard-topped vehicle; no outdoor place is fully safe.",
+      "hazardTags": [],
+      "id": "weather-wildlife-lightning",
+      "jurisdiction": "global",
+      "keywords": [
+        "lightning",
+        "thunder",
+        "storm",
+        "tent safety",
+        "30 minutes"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-lightning"
+      ],
+      "title": "Act During Lightning",
+      "units": "dual",
+      "warnings": [
+        "A tent, cave entrance, picnic shelter, cliff overhang, or isolated tree is not reliable lightning protection."
+      ]
+    },
+    {
+      "actions": [
+        "Add dry layers and protect head, hands, feet, and the body core.",
+        "Get off snow or cold ground and build wind protection.",
+        "Eat available food, drink safe fluids, and monitor each person for confusion, stumbling, or fading shivering."
+      ],
+      "aliases": [
+        "survive severe cold",
+        "severe cold",
+        "wind chill",
+        "freeze",
+        "shivering",
+        "winter",
+        "cold"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Stay dry, block wind, add insulation, and act before shivering or coordination worsens.",
+      "hazardTags": [],
+      "id": "weather-wildlife-cold",
+      "jurisdiction": "global",
+      "keywords": [
+        "severe cold",
+        "wind chill",
+        "freeze",
+        "shivering",
+        "winter"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Survive Severe Cold",
+      "units": "dual",
+      "warnings": [
+        "Stopping shivering while still cold can mean severe hypothermia, not recovery."
+      ]
+    },
+    {
+      "actions": [
+        "Stop or slow activity and move to shade during the hottest period.",
+        "Loosen excess clothing, wet skin when water is available, and create airflow.",
+        "Drink safe water and monitor for headache, nausea, cramps, confusion, or collapse."
+      ],
+      "aliases": [
+        "survive extreme heat",
+        "extreme heat",
+        "hot weather",
+        "shade",
+        "heat stroke",
+        "desert",
+        "heat"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Reduce heat production and increase shade, airflow, and safe hydration before illness begins.",
+      "hazardTags": [],
+      "id": "weather-wildlife-heat",
+      "jurisdiction": "global",
+      "keywords": [
+        "extreme heat",
+        "hot weather",
+        "shade",
+        "heat stroke",
+        "desert"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Survive Extreme Heat",
+      "units": "dual",
+      "warnings": [
+        "A parked vehicle or sealed shelter can become lethal in heat; confusion or collapse requires rapid cooling and emergency help."
+      ]
+    },
+    {
+      "actions": [
+        "Leave washes, stream beds, narrow canyons, low crossings, and flood-marked campsites.",
+        "Move uphill by the safest available route without crossing moving water.",
+        "Watch distant weather because flooding can arrive from rain outside your location."
+      ],
+      "aliases": [
+        "escape flash-flood risk",
+        "flash flood",
+        "canyon",
+        "rising water",
+        "wash",
+        "heavy rain",
+        "flood"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Move early to higher ground when heavy rain, rising water, or a warning affects a drainage or canyon.",
+      "hazardTags": [],
+      "id": "weather-wildlife-flood",
+      "jurisdiction": "global",
+      "keywords": [
+        "flash flood",
+        "canyon",
+        "rising water",
+        "wash",
+        "heavy rain"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-heat-cold",
+        "nws-lightning",
+        "nps-yosemite-wilderness",
+        "nps-olympic-wilderness",
+        "nps-trip-planning"
+      ],
+      "title": "Escape Flash-Flood Risk",
+      "units": "dual",
+      "warnings": [
+        "Never enter moving floodwater on foot or in a vehicle; depth and road condition cannot be judged reliably."
+      ]
+    },
+    {
+      "actions": [
+        "Call emergency services when possible and follow official evacuation routes.",
+        "Move toward a large cleared area, water edge, road, or already burned area when that is the safest reachable option.",
+        "Cover nose and mouth from ash, stay low in cleaner air, and keep skin covered."
+      ],
+      "aliases": [
+        "respond to wildfire and smoke",
+        "wildfire",
+        "smoke",
+        "forest fire",
+        "evacuate",
+        "ash"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Move away from fire spread and heavy smoke while avoiding steep, fuel-filled escape routes.",
+      "hazardTags": [],
+      "id": "weather-wildlife-wildfire",
+      "jurisdiction": "global",
+      "keywords": [
+        "wildfire",
+        "smoke",
+        "forest fire",
+        "evacuate",
+        "ash"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Respond to Wildfire and Smoke",
+      "units": "dual",
+      "warnings": [
+        "Do not try to outrun a fast fire uphill or shelter in dense vegetation, a tent, or a vehicle surrounded by burning fuel."
+      ]
+    },
+    {
+      "actions": [
+        "Move away from ridges, cliffs, dead trees, hanging branches, power lines, and unsecured objects.",
+        "Lower and reinforce shelter, secure loose gear, and keep an exit clear.",
+        "After the storm, reassess floodwater, unstable trees, cold exposure, and route damage."
+      ],
+      "aliases": [
+        "handle wind and storms",
+        "high wind",
+        "storm",
+        "hail",
+        "falling tree",
+        "tornado",
+        "wind storm"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Leave exposed and falling-object zones before wind or precipitation peaks.",
+      "hazardTags": [],
+      "id": "weather-wildlife-wind-storm",
+      "jurisdiction": "global",
+      "keywords": [
+        "high wind",
+        "storm",
+        "hail",
+        "falling tree",
+        "tornado"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nws-heat-cold",
+        "nws-lightning"
+      ],
+      "title": "Handle Wind and Storms",
+      "units": "dual",
+      "warnings": [
+        "Do not shelter in a dry stream bed or beneath damaged trees to escape wind."
+      ]
+    },
+    {
+      "actions": [
+        "Do not approach, feed, surround, or block the animal's escape route.",
+        "Back away calmly when appropriate and make your presence known without running.",
+        "Use approved bear spray only as trained and carry it where it is immediately reachable in bear country."
+      ],
+      "aliases": [
+        "respond to bears and large animals",
+        "bear",
+        "moose",
+        "bison",
+        "cougar",
+        "animal attack",
+        "large animals"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Create distance, avoid surprise, protect food, and follow species-specific local guidance.",
+      "hazardTags": [],
+      "id": "weather-wildlife-large-animals",
+      "jurisdiction": "global",
+      "keywords": [
+        "bear",
+        "moose",
+        "bison",
+        "cougar",
+        "animal attack"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-wildlife",
+        "nps-yosemite-wilderness"
+      ],
+      "title": "Respond to Bears and Large Animals",
+      "units": "dual",
+      "warnings": [
+        "Bear, moose, bison, cougar, and other animal responses differ; never treat one universal tactic as correct for every species."
+      ]
+    },
+    {
+      "actions": [
+        "Watch where hands and feet go around rocks, logs, brush, and stored gear.",
+        "Wear footwear and use repellent, nets, and clothing appropriate to local disease risks.",
+        "Shake out clothing and bedding and keep camp away from nests or obvious animal paths.",
+        "Use required canisters, lockers, or approved vehicle storage; clean crumbs, waste, cookware, and scented items before sleep."
+      ],
+      "aliases": [
+        "avoid snakes, insects, and food raids",
+        "snake",
+        "tick",
+        "mosquito",
+        "insect",
+        "spider",
+        "food storage",
+        "bear canister",
+        "snakes insects"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "weather-wildlife",
+      "goal": "Reduce animal contact, inspect before reaching, and secure every food or scented item.",
+      "hazardTags": [],
+      "id": "weather-wildlife-snakes-insects",
+      "jurisdiction": "global",
+      "keywords": [
+        "snake",
+        "tick",
+        "mosquito",
+        "insect",
+        "spider",
+        "food storage",
+        "bear canister"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nps-wildlife",
+        "nps-yosemite-wilderness",
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "title": "Avoid Snakes, Insects, and Food Raids",
+      "units": "dual",
+      "warnings": [
+        "Do not handle or attempt to kill a snake; many bites occur during handling.",
+        "Improvised food hangs are not accepted everywhere and can fail with local wildlife; follow site-specific rules."
+      ]
+    },
+    {
+      "actions": [
+        "Slow smoothly, signal, and move fully out of the travel lane when the vehicle remains controllable.",
+        "Apply the parking brake, select Park or a low gear, turn on hazard lights, and assess whether staying inside is safer.",
+        "Exit away from traffic only when needed and move behind a substantial barrier when available."
+      ],
+      "aliases": [
+        "stop and secure the scene",
+        "breakdown",
+        "roadside",
+        "hazard lights",
+        "traffic",
+        "pull over",
+        "scene"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Protect people from traffic, fire, slope, and weather before diagnosing the vehicle.",
+      "hazardTags": [
+        "vehicle"
+      ],
+      "id": "car-scene",
+      "jurisdiction": "global",
+      "keywords": [
+        "breakdown",
+        "roadside",
+        "hazard lights",
+        "traffic",
+        "pull over"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Stop and Secure the Scene",
+      "units": "dual",
+      "warnings": [
+        "Never work in a live traffic lane; move well away from smoke, fire, fuel smell, or a damaged high-voltage battery."
+      ]
+    },
+    {
+      "actions": [
+        "Note warning lights, sounds, smells, leaks, weather, location, fuel or charge, and occupants' condition.",
+        "Use the owner's manual for the exact vehicle and avoid repeated start attempts.",
+        "If sheltering, make the vehicle visible, conserve power and fuel, and send location and condition when possible."
+      ],
+      "aliases": [
+        "diagnose and decide whether to stay",
+        "stay with car",
+        "walk for help",
+        "stranded",
+        "diagnose",
+        "no start",
+        "stay walk"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Stay with the vehicle unless it is unsafe or a known reachable destination clearly offers better survival odds.",
+      "hazardTags": [],
+      "id": "car-stay-walk",
+      "jurisdiction": "global",
+      "keywords": [
+        "stay with car",
+        "walk for help",
+        "stranded",
+        "diagnose",
+        "no start"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Diagnose and Decide Whether to Stay",
+      "units": "dual",
+      "warnings": [
+        "Do not walk into unknown distance, heat, cold, flood, or darkness without a clear destination and route."
+      ]
+    },
+    {
+      "actions": [
+        "Set the parking brake, secure occupants, read the owner's procedure, and gather the correct spare and tools.",
+        "Chock a wheel, loosen fasteners slightly before lifting, and use only the marked jack point.",
+        "Fit the spare, tighten in the stated pattern, lower the vehicle, retighten, and obey temporary-spare limits."
+      ],
+      "aliases": [
+        "change a tire safely",
+        "flat tire",
+        "tyre",
+        "jack",
+        "spare wheel",
+        "puncture",
+        "tire"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Lift a vehicle only on firm level ground outside traffic and only at the manufacturer-specified points.",
+      "hazardTags": [],
+      "id": "car-tire",
+      "jurisdiction": "global",
+      "keywords": [
+        "flat tire",
+        "tyre",
+        "jack",
+        "spare wheel",
+        "puncture"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Change a Tire Safely",
+      "units": "dual",
+      "warnings": [
+        "Never put any part of your body under a vehicle supported only by a jack; do not lift on soft ground, a slope, or beside fast traffic."
+      ]
+    },
+    {
+      "actions": [
+        "Inspect for swelling, leaks, freezing, damage, smoke, or incorrect voltage; stop if any is present.",
+        "Turn vehicles and accessories off and connect clamps in the exact owner-manual order using designated points.",
+        "Keep clamps apart and clear of moving parts; disconnect in the stated reverse order after a successful start."
+      ],
+      "aliases": [
+        "use a 12-volt jump start",
+        "jump start",
+        "dead battery",
+        "12 volt",
+        "jumper cables",
+        "won't start",
+        "jump"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Jump-start only when the owner's manual permits it and both systems and connection points are identified.",
+      "hazardTags": [],
+      "id": "car-jump",
+      "jurisdiction": "global",
+      "keywords": [
+        "jump start",
+        "dead battery",
+        "12 volt",
+        "jumper cables",
+        "won't start"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Use a 12-Volt Jump Start",
+      "units": "dual",
+      "warnings": [
+        "Never jump an unidentified, damaged, frozen, or leaking battery, and never connect to hybrid or EV high-voltage components."
+      ]
+    },
+    {
+      "actions": [
+        "Switch the vehicle off and locate the correct fuse diagram in the owner's manual.",
+        "Remove only the named fuse with the supplied tool and replace it only with the same type and rating.",
+        "Stop if the new fuse fails or if wiring is hot, damaged, wet, or smells burned."
+      ],
+      "aliases": [
+        "check fuses and basic electrical faults",
+        "fuse",
+        "electrical",
+        "lights not working",
+        "12 volt",
+        "burned wire"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Limit checks to owner-serviceable fuses and obvious 12-volt connections documented by the vehicle maker.",
+      "hazardTags": [],
+      "id": "car-fuse",
+      "jurisdiction": "global",
+      "keywords": [
+        "fuse",
+        "electrical",
+        "lights not working",
+        "12 volt",
+        "burned wire"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Check Fuses and Basic Electrical Faults",
+      "units": "dual",
+      "warnings": [
+        "Never bypass a fuse, install a higher rating, probe airbags, or touch orange high-voltage wiring."
+      ]
+    },
+    {
+      "actions": [
+        "Turn off air conditioning and move to a safe stopping place without pushing a badly overheating engine.",
+        "Switch off, keep clear of steam or leaking fluid, and wait until fully cool.",
+        "Check only owner-serviceable reservoirs and approved fluids; stop driving if the warning returns or a leak continues."
+      ],
+      "aliases": [
+        "respond to overheating or fluid loss",
+        "overheating",
+        "coolant",
+        "steam",
+        "fluid leak",
+        "temperature warning",
+        "overheat"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Reduce load, stop safely, switch off, and let the system cool before any owner-approved check.",
+      "hazardTags": [],
+      "id": "car-overheat",
+      "jurisdiction": "global",
+      "keywords": [
+        "overheating",
+        "coolant",
+        "steam",
+        "fluid leak",
+        "temperature warning"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Respond to Overheating or Fluid Loss",
+      "units": "dual",
+      "warnings": [
+        "Never open a hot radiator or pressurized cap, pour cold water on a hot engine, or touch unknown leaking fluid."
+      ]
+    },
+    {
+      "actions": [
+        "Clear snow, mud, or sand from the driven wheels and ensure the exhaust outlet is open.",
+        "Straighten wheels, use traction material, and apply gentle power without prolonged wheelspin.",
+        "Stop repeated attempts if the vehicle sinks, overheats, loses traction equipment, or approaches unstable terrain."
+      ],
+      "aliases": [
+        "recover from snow, mud, or sand",
+        "stuck car",
+        "snow",
+        "mud",
+        "sand",
+        "traction",
+        "stuck"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Prevent exhaust poisoning and vehicle damage before attempting gentle self-recovery.",
+      "hazardTags": [],
+      "id": "car-stuck",
+      "jurisdiction": "global",
+      "keywords": [
+        "stuck car",
+        "snow",
+        "mud",
+        "sand",
+        "traction"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "title": "Recover From Snow, Mud, or Sand",
+      "units": "dual",
+      "warnings": [
+        "Never stand in the path of a spinning tire, tensioned strap, winch line, or rocking vehicle."
+      ]
+    },
+    {
+      "actions": [
+        "After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet/solvent odor, switch off if safe and move away.",
+        "Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle.",
+        "Use only the owner's approved towing method and tell responders if the battery was submerged or damaged.",
+        "If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable."
+      ],
+      "aliases": [
+        "handle ev/hybrid damage and shelter",
+        "EV",
+        "hybrid",
+        "high voltage",
+        "battery fire",
+        "flooded car",
+        "vehicle shelter",
+        "signal vehicle",
+        "ev hybrid"
+      ],
+      "biomeTags": [
+        "all"
+      ],
+      "chapterID": "car",
+      "goal": "Assume damaged high-voltage components are energized; keep people away and use the safe vehicle as shelter only when conditions allow.",
+      "hazardTags": [
+        "vehicle",
+        "fire"
+      ],
+      "id": "car-ev-hybrid",
+      "jurisdiction": "global",
+      "keywords": [
+        "EV",
+        "hybrid",
+        "high voltage",
+        "battery fire",
+        "flooded car",
+        "vehicle shelter",
+        "signal vehicle"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "sourceIDs": [
+        "nhtsa-ev-safety",
+        "ready-vehicle"
+      ],
+      "title": "Handle EV/Hybrid Damage and Shelter",
+      "units": "dual",
+      "warnings": [
+        "Never touch orange cables, open the traction battery, approach leaking battery material, or park a damaged battery vehicle near structures or combustibles.",
+        "Never run an engine in an enclosed area or where exhaust can enter the cabin."
+      ]
+    }
+  ],
+  "reviewDate": "2026-08-09",
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "nps-yosemite-wilderness",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Lost, water crossing, and wildlife sections",
+      "organization": "U.S. National Park Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Wilderness Safety",
+      "updatedAt": "2025-05-22",
+      "url": "https://www.nps.gov/yose/planyourvisit/wilderness_safety.htm"
+    },
+    {
+      "id": "nps-olympic-wilderness",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Lost and injured guidance",
+      "organization": "U.S. National Park Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Wilderness Safety",
+      "updatedAt": "2025-04-21",
+      "url": "https://www.nps.gov/olym/planyourvisit/wilderness-safety.htm"
+    },
+    {
+      "id": "nps-trip-planning",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Ten essentials and emergency planning",
+      "organization": "U.S. National Park Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Trip Planning Guide",
+      "updatedAt": "2025-01-16",
+      "url": "https://www.nps.gov/subjects/healthandsafety/trip-planning-guide.htm"
+    },
+    {
+      "id": "army-atp-survival",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Chapters 1, 3, 5, 6, and 7",
+      "organization": "U.S. Department of the Army",
+      "publishedAt": "2018-09-18",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "ATP 3-50.21 Survival",
+      "updatedAt": "2018-09-18",
+      "url": "https://rdl.train.army.mil/catalog-ws/view/100.ATSC/13BC7D8D-AD46-433D-9C0B-F3A1D1405259-1537466238381/atp3_50x21.pdf"
+    },
+    {
+      "id": "cdc-emergency-water",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Boil, disinfect, and contamination limits",
+      "organization": "Centers for Disease Control and Prevention",
+      "publishedAt": "2024-09-19",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "How to Make Water Safe in an Emergency",
+      "updatedAt": "2024-09-19",
+      "url": "https://www.cdc.gov/water-emergency/about/index.html"
+    },
+    {
+      "id": "cdc-backcountry-water",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Backcountry treatment decision guide",
+      "organization": "Centers for Disease Control and Prevention",
+      "publishedAt": "2021-11-24",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Water Treatment While Hiking, Camping, and Traveling",
+      "updatedAt": "2021-11-24",
+      "url": "https://stacks.cdc.gov/view/cdc/115891"
+    },
+    {
+      "id": "nws-lightning",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Camping and wilderness activities",
+      "organization": "NOAA National Weather Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Lightning Safety for Outdoor Activities",
+      "updatedAt": "current-page",
+      "url": "https://www.weather.gov/safety/lightning-outdoors"
+    },
+    {
+      "id": "nws-heat-cold",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Heat, cold, flood, and wildfire safety collections",
+      "organization": "NOAA National Weather Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Heat and Cold Safety",
+      "updatedAt": "current-page",
+      "url": "https://www.weather.gov/safety/"
+    },
+    {
+      "id": "redcross-wilderness-first-aid",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "linked-summary-only",
+      "locator": "Course topic and emergency scope overview",
+      "organization": "American Red Cross",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Wilderness and Remote First Aid Topics",
+      "updatedAt": "current-page",
+      "url": "https://www.redcross.org/take-a-class/cpr/wilderness-sports"
+    },
+    {
+      "id": "nps-wildlife",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Distance, food storage, and encounter guidance",
+      "organization": "U.S. National Park Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Wildlife Safety",
+      "updatedAt": "2026-05-15",
+      "url": "https://www.nps.gov/olym/planyourvisit/wildlife-safety.htm"
+    },
+    {
+      "id": "ready-vehicle",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Vehicle kit and stranded-traveler guidance",
+      "organization": "Federal Emergency Management Agency",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Winter Weather and Vehicle Preparedness",
+      "updatedAt": "2024-01-01",
+      "url": "https://www.ready.gov/winter-weather"
+    },
+    {
+      "id": "nhtsa-ev-safety",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Damaged battery, towing, fire, and flood guidance",
+      "organization": "National Highway Traffic Safety Administration",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-09",
+      "title": "Electric and Hybrid Vehicles: Battery, Charging and Safety",
+      "updatedAt": "current-page",
+      "url": "https://www.nhtsa.gov/vehicle-safety/electric-and-hybrid-vehicles"
+    }
+  ]
+}

@@ -2,14 +2,12 @@
 
 | ADR | Decision |
 | --- | --- |
-| 0001 | Deterministic safety precedes models |
+| 0001 | Lite Chat uses Gemma plus shared survival RAG |
 | 0002 | Model, knowledge, and map tiers are independent |
-| 0003 | Essential mode has no model dependency |
 | 0004 | Retrieval is evidence-first and source-attributed |
 | 0005 | Procedures require typed, approved identifiers |
 | 0006 | Downloadable assets are signed and recallable |
 | 0007 | Offline maps use an open, pack-based boundary |
-| 0008 | OBD access is read-only by construction |
 | 0009 | Medical scope is layperson first aid |
 | 0010 | Incident mode contains network access |
 | 0011 | Commerce never controls bundled emergency safety |

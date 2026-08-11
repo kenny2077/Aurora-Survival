@@ -22,7 +22,9 @@ public struct GroundedResponseCodec: Sendable {
 
     public func decodeConversationalAndValidate(
         _ generated: String,
-        evidence: [RetrievedPassage]
+        evidence: [RetrievedPassage],
+        purpose: ModelPromptPurpose? = nil,
+        question: String? = nil
     ) throws -> ConversationalGroundedResponse {
         guard let json = Self.jsonObjectData(in: generated) else {
             throw GroundedResponseCodecError.noJSONObject
@@ -34,11 +36,47 @@ public struct GroundedResponseCodec: Sendable {
             throw GroundedResponseCodecError.invalidJSON
         }
 
-        let answer = decision.answer.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
-        guard !answer.isEmpty, answer.count <= 220 else {
+        var answer = decision.answer
+            .replacingOccurrences(of: "\\n", with: " ")
+            .replacingOccurrences(of: "**", with: "")
+            .replacingOccurrences(
+                of: #"(^|\s)[1-4]\.\s+"#,
+                with: "$1",
+                options: .regularExpression
+            )
+            .replacingOccurrences(
+                of: #"\bWARNING:\s*"#,
+                with: "",
+                options: [.regularExpression, .caseInsensitive]
+            )
+            .replacingOccurrences(of: ".,", with: ".")
+            .replacingOccurrences(of: "!,", with: "!")
+            .replacingOccurrences(of: "?,", with: "?")
+            .replacingOccurrences(
+                of: #"\s+"#,
+                with: " ",
+                options: .regularExpression
+            )
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if answer.hasSuffix(".,") || answer.hasSuffix("!,")
+                || answer.hasSuffix("?,") || answer.hasSuffix("…,") {
+            answer.removeLast()
+        }
+        let effectivePurpose = purpose ?? (evidence.isEmpty ? .ordinary : .grounded)
+        guard Self.isUsableConversationalAnswer(
+            answer,
+            purpose: effectivePurpose,
+            question: question
+        ) else {
             throw GroundedResponseError.invalidConversationalAnswer
+        }
+        if effectivePurpose == .grounded {
+            let lowercasedAnswer = answer.lowercased()
+            guard !evidence.contains(where: {
+                lowercasedAnswer.contains($0.article.title.lowercased())
+            }) else {
+                throw GroundedResponseError.invalidConversationalAnswer
+            }
         }
         let followUp = decision.followUp?.trimmingCharacters(
             in: .whitespacesAndNewlines
@@ -47,7 +85,13 @@ public struct GroundedResponseCodec: Sendable {
             throw GroundedResponseError.invalidFollowUp
         }
 
-        let indexes = Self.unique(decision.evidenceIndexes)
+        let indexes = decision.evidenceIndexes
+        guard indexes.count <= 2,
+              Set(indexes).count == indexes.count,
+              (effectivePurpose == .grounded ? !indexes.isEmpty : indexes.isEmpty)
+        else {
+            throw GroundedResponseError.invalidConversationalEvidence
+        }
         let evidenceIDs = try indexes.map { index -> String in
             let offset = index - 1
             guard evidence.indices.contains(offset) else {
@@ -83,41 +127,7 @@ public struct GroundedResponseCodec: Sendable {
         _ response: ConversationalGroundedResponse,
         evidence: [RetrievedPassage]
     ) -> String {
-        var sections: [String] = []
-        let markers = response.evidenceIDs.compactMap { evidenceID in
-            evidence.firstIndex(where: { $0.article.id == evidenceID })
-                .map { "[\($0 + 1)]" }
-        }
-        sections.append(
-            markers.isEmpty
-                ? response.answer
-                : "\(response.answer) \(markers.joined(separator: " "))"
-        )
-
-        if let procedureID = response.procedureID,
-           let article = evidence
-            .map(\.article)
-            .first(where: { $0.id == procedureID }) {
-            if !article.steps.isEmpty {
-                sections.append(
-                    "Reviewed procedure\n" + article.steps.enumerated()
-                        .map { "\($0.offset + 1). \($0.element)" }
-                        .joined(separator: "\n")
-                )
-            }
-            if !article.warnings.isEmpty {
-                sections.append(
-                    "Avoid\n" + article.warnings
-                        .map { "• \($0)" }
-                        .joined(separator: "\n")
-                )
-            }
-        }
-
-        if let followUp = response.followUp {
-            sections.append(followUp)
-        }
-        return sections.joined(separator: "\n\n")
+        response.answer
     }
 
     public func decodeAndValidate(
@@ -188,9 +198,189 @@ public struct GroundedResponseCodec: Sendable {
         return Data(value[start...end].utf8)
     }
 
-    private static func unique(_ values: [Int]) -> [Int] {
-        var seen: Set<Int> = []
-        return values.filter { seen.insert($0).inserted }
+    private static func isUsableConversationalAnswer(
+        _ answer: String,
+        purpose: ModelPromptPurpose,
+        question: String?
+    ) -> Bool {
+        guard !answer.isEmpty,
+              answer.count <= 440,
+              let last = answer.last,
+              ".!?…".contains(last)
+        else {
+            return false
+        }
+
+        let wordCount = answer.split(whereSeparator: \.isWhitespace).count
+        let sentenceCount = answer.split {
+            ".!?…".contains($0)
+        }.filter {
+            !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }.count
+        switch purpose {
+        case .ordinary:
+            break
+        case .grounded:
+            guard (28...70).contains(wordCount),
+                  (2...4).contains(sentenceCount),
+                  Self.hasWarningOrStopCondition(answer) else {
+                return false
+            }
+        case .clarification:
+            guard (18...45).contains(wordCount),
+                  Self.isClarificationRequest(answer) else {
+                return false
+            }
+        case .incidentFallback:
+            guard (24...75).contains(wordCount),
+                  (1...6).contains(sentenceCount),
+                  !Self.impersonatesUser(answer, question: question) else {
+                return false
+            }
+        case .incidentIntake:
+            guard (14...40).contains(wordCount),
+                  (1...3).contains(sentenceCount),
+                  Self.isIncidentIntakeRequest(answer) else {
+                return false
+            }
+        }
+
+        let structuralMarkers = ["FIELD MANUAL", "USER MESSAGE"]
+        if structuralMarkers.contains(where: answer.contains) {
+            return false
+        }
+        let lowercased = answer.lowercased()
+        let unsafeInstructions = [
+            "eat an unknown", "consume an unknown", "taste an unknown",
+            "sample an unknown", "drink untreated water", "induce vomiting",
+            "make yourself vomit", "touch a live wire", "touch the live wire",
+            "pour water on an electrical", "drive yourself while impaired",
+        ]
+        guard !unsafeInstructions.contains(where: {
+            Self.containsAffirmativeInstruction(lowercased, phrase: $0)
+        }) else {
+            return false
+        }
+        let leakedInstructions = [
+            "actions:",
+            "goal:",
+            "reviewed excerpt",
+            "title:",
+            "return exactly",
+            "citation markers",
+            "do not invent steps",
+            "source names",
+            "page numbers inside",
+            "no markdown",
+            "extra keys",
+            "\"a\":",
+            "\"e\":",
+            "[1]",
+            "[2]",
+        ]
+        return !leakedInstructions.contains { lowercased.contains($0) }
+    }
+
+    private static func impersonatesUser(
+        _ answer: String,
+        question: String?
+    ) -> Bool {
+        guard let question else { return false }
+        let user = question.lowercased()
+            .replacingOccurrences(of: "’", with: "'")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard user.hasPrefix("i ") || user.hasPrefix("i'm ")
+                || user.hasPrefix("i am ") || user.hasPrefix("my ") else {
+            return false
+        }
+        let response = answer.lowercased()
+            .replacingOccurrences(of: "’", with: "'")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let allowedFirstPerson = [
+            "i'm sorry", "i am sorry", "i understand", "i recommend", "i can ",
+        ]
+        if allowedFirstPerson.contains(where: response.hasPrefix) {
+            return false
+        }
+        let selfClaimPrefixes = [
+            "i ", "i'm ", "i am ", "my ", "i feel ", "i have ", "i need ",
+            "i dropped ", "i lost ", "i was ",
+        ]
+        guard selfClaimPrefixes.contains(where: response.hasPrefix) else {
+            return false
+        }
+        let generic: Set<String> = ["am", "are", "have", "the", "this", "with"]
+        let userTerms = RetrievalEngine.tokens(in: user).subtracting(generic)
+        let firstSentence = response.split(whereSeparator: { ".!?…".contains($0) })
+            .first.map(String.init) ?? response
+        let responseTerms = RetrievalEngine.tokens(in: firstSentence).subtracting(generic)
+        return !userTerms.isDisjoint(with: responseTerms)
+    }
+
+    private static func hasWarningOrStopCondition(_ answer: String) -> Bool {
+        let lowercased = answer.lowercased()
+        let signals = [
+            "avoid", "caution", "danger", "do not", "don't", "emergency",
+            "hazard", "never", "risk", "stop", "threat", "unsafe", "warning",
+        ]
+        return signals.contains(where: lowercased.contains)
+    }
+
+    private static func containsAffirmativeInstruction(
+        _ answer: String,
+        phrase: String
+    ) -> Bool {
+        var searchStart = answer.startIndex
+        while let range = answer.range(
+            of: phrase,
+            range: searchStart..<answer.endIndex
+        ) {
+            let prefixStart = answer.index(
+                range.lowerBound,
+                offsetBy: -min(24, answer.distance(
+                    from: answer.startIndex,
+                    to: range.lowerBound
+                ))
+            )
+            let prefix = answer[prefixStart..<range.lowerBound]
+            let negations = ["avoid ", "do not ", "don't ", "never ", "not to "]
+            if !negations.contains(where: prefix.hasSuffix) {
+                return true
+            }
+            searchStart = range.upperBound
+        }
+        return false
+    }
+
+    private static func isClarificationRequest(_ answer: String) -> Bool {
+        let lowercased = answer.lowercased()
+        let detailRequests = [
+            "what ", "which ", "describe", "tell me", "detail",
+            "symptom", "condition", "observe", "happening",
+        ]
+        let procedures = [
+            "bandage", "boil", "clear the exhaust", "disconnect",
+            "filter the water", "jack up", "jump start", "remove the",
+            "replace", "splint", "start the engine", "tourniquet", "tow",
+        ]
+        return answer.contains("?")
+            && detailRequests.contains(where: lowercased.contains)
+            && !procedures.contains(where: lowercased.contains)
+    }
+
+    private static func isIncidentIntakeRequest(_ answer: String) -> Bool {
+        let lowercased = answer.lowercased()
+        let detailRequests = [
+            "describe", "detail", "happening", "location", "observe",
+            "situation", "tell me", "what ", "where ",
+        ]
+        let inventedActions = [
+            "apply pressure", "call emergency", "check the battery", "drink water",
+            "establish a secure", "move away", "secure the perimeter", "stay put",
+            "turn off", "use a tourniquet",
+        ]
+        return detailRequests.contains(where: lowercased.contains)
+            && !inventedActions.contains(where: lowercased.contains)
     }
 
     private static func stepMap(

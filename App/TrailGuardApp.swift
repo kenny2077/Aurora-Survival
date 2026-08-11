@@ -12,6 +12,7 @@ struct TrailGuardApp: App {
                 .task {
                     await appModel.refreshActivePacks()
                     await appModel.loadDebugOCRFixtureIfPresent()
+                    await appModel.runDebugPhysicalInferenceIfRequested()
                 }
         }
     }

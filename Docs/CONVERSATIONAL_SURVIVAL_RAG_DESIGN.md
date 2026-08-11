@@ -1,125 +1,55 @@
-# Conversational Survival RAG Design
+# Lite Chat and Unified Wilderness Knowledge Design
 
-Status: accepted direction for iteration one (2026-08-02)
+Status: implemented 2026-08-09
 
-## Product intent
+## Contract
 
-TrailGuard should feel like a normal multi-turn chatbot while remaining useful
-without a network connection on the base iPhone 13. The assistant may explain,
-compare options, ask a relevant follow-up, and understand short references such
-as “what if I do not have a filter?” It is scoped to survival, preparedness,
-navigation, layperson first aid, and roadside incidents.
+TrailGuard remains fully offline. Ordinary messages use the installed local
+model normally. Survival questions search the same read-only knowledge database
+used by Manual, inject at most two concise reviewed passages, and convert only
+validated evidence indexes into exact Manual links.
 
-The model is an explanation layer, not an authority. Reviewed signed content,
-deterministic emergency rules, package verification, and citation validation
-remain authoritative. The app must never imply that it replaces emergency
-services, a clinician, a vehicle manual, or local instructions.
+`survival_knowledge.sqlite` replaces the former single-book corpus and Manual
+overlay. It contains 10 chapters, exactly 70 action lessons, 1,050 indexed
+passage records, source relationships, aliases, and dispositions for all 828
+former chunk IDs. The source of truth is committed reviewed JSON; the SQLite
+file, checksum, and emergency fallback are deterministic build outputs.
 
-## Assumptions and release boundaries
+## Retrieval
 
-- The installed Gemma 3 1B Lite model remains the iPhone 13 release candidate.
-- Chat is fully offline. No prompt, transcript, image, or location is uploaded.
-- Recent dialogue is supplied as a small rolling window; a fresh native context
-  per answer remains acceptable and avoids stale inference state.
-- Procedural or factual survival guidance must identify reviewed evidence.
-  Brief social conversation and clarification may be uncited when it contains no
-  survival claim or instruction.
-- The model may naturally summarize reviewed evidence. Exact emergency actions,
-  prohibitions, medical boundaries, and high-risk procedures remain app-rendered
-  from reviewed records.
-- Wild-food identification, medication dosing, invasive treatment, weapon
-  construction, safety-system bypass, and instructions unsupported by the local
-  corpus are outside the release contract.
-- Government and nonprofit sources are references, not blanket permission to
-  republish an entire book. TrailGuard stores original reviewed summaries and
-  short procedures with source metadata; logos and third-party material are not
-  copied. Human editorial, clinical, mechanical, and legal review remain release
-  gates.
+1. Build a bounded query from the message and recent user context.
+2. Normalize common survival terms and known misspellings.
+3. Search weighted FTS5 fields for chapter, lesson, goal, aliases, answer text,
+   reference text, and keywords.
+4. Apply domain filtering, review gating, deterministic ranking, prefix fallback,
+   and lesson-level duplicate suppression.
+5. Return at most two answer-ready passages, each no longer than 120 words.
+6. If a survival query has no reviewed result, return an explicit
+   insufficient-evidence response and a relevant Manual chapter; do not ask the
+   model to invent a high-risk procedure.
+7. Convert evidence indexes into stable passage IDs. Legacy IDs resolve through
+   reviewed redirects; unrelated material opens a retired-passage state.
 
-## Considered approaches
+The 2,048-token Lite context and 128-token output ceiling are unchanged. No
+embedding model, cloud request, or runtime database migration is required.
 
-### A. Hybrid conversational response plus reviewed procedure selection
+## Manual
 
-The model returns a natural reply together with evidence indexes and an optional
-reviewed procedure index. The app validates all indexes, displays the model's
-short explanation, and appends exact reviewed steps only when a procedure was
-selected. High-risk deterministic rules still bypass the model.
+Manual home begins with search and ten compact chapter cards. There is no
+“Start here” shelf. Each lesson presents one goal, 3–6 numbered actions, 1–3
+critical warnings, and optional deep reference/source details. Search groups
+Core Lessons before Deep References. If database checksum or integrity fails,
+the generated fallback exposes one reviewed action card per chapter and disables
+deep search.
 
-This is the selected approach. It provides ordinary conversation without asking
-a 1B model to invent or semantically certify safety-critical instructions.
+## Acceptance
 
-### B. Unconstrained prose followed by citation scanning
-
-This feels flexible but a syntactically valid citation does not prove that every
-claim is supported. It is not strong enough for an offline incident product.
-
-### C. Evidence selector with deterministic rendering
-
-This is the former implementation. It is safest syntactically but behaves like a
-fixed FAQ and does not meet the conversational product requirement.
-
-## Runtime contract
-
-1. Evaluate the current question, trusted OCR observations, and relevant recent
-   user context with deterministic safety rules. A match returns immediately and
-   performs no model generation.
-2. Build a retrieval query from the current question plus a bounded amount of
-   recent dialogue. Retrieve up to four reviewed local records.
-3. Prompt Gemma with a compact rolling transcript and concise evidence blocks.
-4. Generate one grammar-constrained JSON object containing:
-   - `a`: a short natural answer;
-   - `e`: zero or more valid evidence indexes;
-   - `p`: one reviewed procedure index or `null`;
-   - `q`: an optional short follow-up question.
-5. Reject malformed output, unknown indexes, unsupported procedural selection,
-   empty grounded answers, or text that attempts to smuggle citations/markup.
-6. Render the conversational answer, source markers, optional reviewed procedure,
-   reviewed warnings, and the follow-up. On failure, use the extractive baseline.
-7. Preserve only a bounded in-memory dialogue window. Clearing the chat removes
-   that context.
-
-The codec validates provenance and structural policy; it does not pretend to be
-an offline entailment model. For that reason, actionable procedure steps stay
-verbatim from the reviewed corpus rather than being generated in free text.
-
-## Manual and retrieval model
-
-The book and the chatbot use the same reviewed corpus so a chapter can open from
-a cited chat answer and a chapter update immediately improves retrieval. The
-planned first-edition chapter order is:
-
-1. Assess, stabilize, and call for help
-2. Water
-3. Fire, warmth, and burn prevention
-4. Shelter and severe weather
-5. Food storage and emergency rations
-6. Navigation and being lost
-7. Signaling and rescue
-8. Layperson first aid boundaries
-9. Wildlife and environmental hazards
-10. Vehicle survival and roadside incidents
-
-Food content will focus on carried food, storage, ration planning, contamination,
-and avoiding unsafe identification. It will not claim that a photograph or short
-description can establish that a wild plant or mushroom is edible.
-
-## Visual direction
-
-The implementation follows Apple's current Figma design resources as a reference
-and maps them semantically to SwiftUI: system colors, SF Pro through Dynamic Type,
-SF Symbols, native navigation, prominent but calm emergency affordances, readable
-source cards, and large tap targets. Figma dimensions are guidance for hierarchy
-and composition, not literal fixed SwiftUI frames.
-
-## Acceptance criteria for iteration one
-
-- A follow-up such as “What if I do not have a filter?” receives an answer that
-  uses the preceding water context.
-- The model can greet, clarify, explain, and ask a relevant follow-up without
-  printing the same full checklist on every turn.
-- Every factual/procedural answer displays valid local sources; invalid output
-  fails closed to reviewed extractive guidance.
-- Deterministic emergency cases bypass the model with zero generation calls.
-- Clear conversation removes the rolling history.
-- Automated tests, a signed device build, and a physical iPhone 13 multi-turn test
-  pass before the feature is considered verified.
+- Exactly 10 chapters, 70 lessons, at least 1,000 indexed passages, and complete
+  source and legacy relationships.
+- Balanced 200-query benchmark with at least 90% overall and 95% critical
+  top-two lesson recall.
+- Exact Ask-to-Manual passage navigation and explicit retired legacy behavior.
+- Local search below 300 ms on the iPhone 13 acceptance target.
+- No text-only plant/mushroom identification or hybrid/EV high-voltage repair.
+- Dark mode, largest Dynamic Type, accessibility labels, offline cold launch,
+  and generated fallback coverage.

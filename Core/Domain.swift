@@ -59,7 +59,7 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
     public let keywords: [String]
     public let source: SourceReference
     public let reviewed: Bool
-    public let vehicleApplicability: VehicleApplicability?
+    public let manualReference: ManualReference?
 
     public init(
         id: String,
@@ -71,7 +71,7 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
         keywords: [String],
         source: SourceReference,
         reviewed: Bool,
-        vehicleApplicability: VehicleApplicability? = nil
+        manualReference: ManualReference? = nil
     ) {
         self.id = id
         self.domain = domain
@@ -82,7 +82,7 @@ public struct KnowledgeArticle: Codable, Hashable, Sendable, Identifiable {
         self.keywords = keywords
         self.source = source
         self.reviewed = reviewed
-        self.vehicleApplicability = vehicleApplicability
+        self.manualReference = manualReference
     }
 
     public var searchableText: String {
@@ -100,22 +100,145 @@ public struct RetrievedPassage: Hashable, Sendable {
     }
 }
 
-public enum ModelTier: String, Codable, CaseIterable, Sendable {
-    case essential
-    case lite
-    case field
-    case visionExpert = "vision_expert"
+public struct ManualReference: Codable, Hashable, Sendable, Identifiable {
+    public let passageID: String
+    public let lessonID: String
+    public let chapterID: String
+    public let chapterNumber: Int
+    public let chapterTitle: String
+    public let sectionTitle: String
+    public let sourceLabel: String
 
-    public var displayName: String {
-        switch self {
-        case .essential: return "Essential"
-        case .lite: return "Lite"
-        case .field: return "Field"
-        case .visionExpert: return "Vision Expert"
+    public var id: String { passageID }
+    public var chunkID: String { passageID }
+    public var pageStart: Int { 0 }
+    public var pageEnd: Int { 0 }
+
+    public init(
+        passageID: String,
+        lessonID: String,
+        chapterID: String,
+        chapterNumber: Int,
+        chapterTitle: String,
+        sectionTitle: String,
+        sourceLabel: String
+    ) {
+        self.passageID = passageID
+        self.lessonID = lessonID
+        self.chapterID = chapterID
+        self.chapterNumber = chapterNumber
+        self.chapterTitle = chapterTitle
+        self.sectionTitle = sectionTitle
+        self.sourceLabel = sourceLabel
+    }
+
+    /// Compatibility initializer for pre-overhaul corpus anchors.
+    public init(
+        chunkID: String,
+        chapterNumber: Int,
+        chapterTitle: String,
+        sectionTitle: String,
+        pageStart: Int,
+        pageEnd: Int
+    ) {
+        passageID = chunkID
+        lessonID = ""
+        chapterID = ""
+        self.chapterNumber = chapterNumber
+        self.chapterTitle = chapterTitle
+        self.sectionTitle = sectionTitle
+        sourceLabel = pageStart == pageEnd
+            ? "Legacy page \(pageStart)"
+            : "Legacy pages \(pageStart)–\(pageEnd)"
+    }
+
+    public var pageLabel: String { sourceLabel }
+
+    private enum CodingKeys: String, CodingKey {
+        case passageID
+        case chunkID
+        case lessonID
+        case chapterID
+        case chapterNumber
+        case chapterTitle
+        case sectionTitle
+        case sourceLabel
+        case pageStart
+        case pageEnd
+    }
+
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        passageID = try values.decodeIfPresent(String.self, forKey: .passageID)
+            ?? values.decode(String.self, forKey: .chunkID)
+        lessonID = try values.decodeIfPresent(String.self, forKey: .lessonID) ?? ""
+        chapterID = try values.decodeIfPresent(String.self, forKey: .chapterID) ?? ""
+        chapterNumber = try values.decode(Int.self, forKey: .chapterNumber)
+        chapterTitle = try values.decode(String.self, forKey: .chapterTitle)
+        sectionTitle = try values.decode(String.self, forKey: .sectionTitle)
+        if let label = try values.decodeIfPresent(String.self, forKey: .sourceLabel) {
+            sourceLabel = label
+        } else {
+            let start = try values.decodeIfPresent(Int.self, forKey: .pageStart) ?? 0
+            let end = try values.decodeIfPresent(Int.self, forKey: .pageEnd) ?? start
+            sourceLabel = start == end ? "Legacy page \(start)" : "Legacy pages \(start)–\(end)"
         }
     }
 
-    public var supportsVision: Bool { self == .visionExpert }
+    public func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(passageID, forKey: .passageID)
+        try values.encode(passageID, forKey: .chunkID)
+        try values.encode(lessonID, forKey: .lessonID)
+        try values.encode(chapterID, forKey: .chapterID)
+        try values.encode(chapterNumber, forKey: .chapterNumber)
+        try values.encode(chapterTitle, forKey: .chapterTitle)
+        try values.encode(sectionTitle, forKey: .sectionTitle)
+        try values.encode(sourceLabel, forKey: .sourceLabel)
+    }
+}
+
+public enum ModelTier: String, Codable, CaseIterable, Sendable {
+    case lite
+    case expert = "vision_expert"
+
+    public var displayName: String {
+        switch self {
+        case .lite: return "Lite"
+        case .expert: return "Expert"
+        }
+    }
+
+    public var supportsVision: Bool { self == .expert }
+}
+
+public enum ModelSelectionPreference: String, Codable, CaseIterable, Sendable {
+    case automatic
+    case lite
+    case expert
+
+    public var displayName: String {
+        switch self {
+        case .automatic: return "Auto"
+        case .lite: return "Lite"
+        case .expert: return "Expert"
+        }
+    }
+
+    public var requestedTier: ModelTier? {
+        switch self {
+        case .automatic: return nil
+        case .lite: return .lite
+        case .expert: return .expert
+        }
+    }
+}
+
+public enum ModelAvailability: String, Codable, Sendable {
+    case ready
+    case missing
+    case temporarilyIneligible = "temporarily_ineligible"
+    case validationLocked = "validation_locked"
 }
 
 public enum ThermalCondition: String, Codable, Sendable {
@@ -145,20 +268,23 @@ public struct DeviceSnapshot: Equatable, Sendable {
 }
 
 public struct ModelRoutingDecision: Equatable, Sendable {
-    public let requested: ModelTier
-    public let selected: ModelTier
+    public let requested: ModelTier?
+    public let selected: ModelTier?
     public let canAnalyzeImage: Bool
+    public let availability: ModelAvailability
     public let explanation: String
 
     public init(
-        requested: ModelTier,
-        selected: ModelTier,
+        requested: ModelTier?,
+        selected: ModelTier?,
         canAnalyzeImage: Bool,
+        availability: ModelAvailability,
         explanation: String
     ) {
         self.requested = requested
         self.selected = selected
         self.canAnalyzeImage = canAnalyzeImage
+        self.availability = availability
         self.explanation = explanation
     }
 }
@@ -170,17 +296,15 @@ public struct ChatRequest: Equatable, Sendable {
     public let hasImage: Bool
     public let imageData: Data?
     public let imageObservations: [String]
-    public let vehicleProfile: VehicleProfile?
     public let conversationHistory: [ConversationTurn]
 
     public init(
         question: String,
         domain: KnowledgeDomain? = nil,
-        preferredTier: ModelTier = .field,
+        preferredTier: ModelTier = .lite,
         hasImage: Bool = false,
         imageData: Data? = nil,
         imageObservations: [String] = [],
-        vehicleProfile: VehicleProfile? = nil,
         conversationHistory: [ConversationTurn] = []
     ) {
         self.question = question
@@ -189,7 +313,6 @@ public struct ChatRequest: Equatable, Sendable {
         self.hasImage = hasImage
         self.imageData = imageData
         self.imageObservations = imageObservations
-        self.vehicleProfile = vehicleProfile
         self.conversationHistory = conversationHistory
     }
 }
@@ -209,46 +332,13 @@ public struct ConversationTurn: Equatable, Sendable {
     }
 }
 
-public struct SafetyDirective: Equatable, Sendable {
-    public let policyID: String
-    public let severity: IncidentSeverity
-    public let title: String
-    public let immediateActions: [String]
-    public let prohibitedActions: [String]
-    public let rationale: String
-    public let source: SourceReference
-
-    public init(
-        policyID: String = "policy.unspecified",
-        severity: IncidentSeverity,
-        title: String,
-        immediateActions: [String],
-        prohibitedActions: [String],
-        rationale: String,
-        source: SourceReference = SourceReference(
-            id: "trailguard.safety-policy",
-            title: "TrailGuard deterministic safety policy",
-            organization: "TrailGuard",
-            revision: "1.0.0"
-        )
-    ) {
-        self.policyID = policyID
-        self.severity = severity
-        self.title = title
-        self.immediateActions = immediateActions
-        self.prohibitedActions = prohibitedActions
-        self.rationale = rationale
-        self.source = source
-    }
-}
-
 public struct AssistantAnswer: Equatable, Sendable, Identifiable {
     public let id: UUID
     public let text: String
     public let severity: IncidentSeverity
     public let sources: [SourceReference]
+    public let manualReferences: [ManualReference]
     public let modelTier: ModelTier?
-    public let usedDeterministicOverride: Bool
     public let visionWasUsed: Bool
     public let notices: [String]
 
@@ -257,8 +347,8 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
         text: String,
         severity: IncidentSeverity,
         sources: [SourceReference],
+        manualReferences: [ManualReference] = [],
         modelTier: ModelTier?,
-        usedDeterministicOverride: Bool,
         visionWasUsed: Bool,
         notices: [String]
     ) {
@@ -266,8 +356,8 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
         self.text = text
         self.severity = severity
         self.sources = sources
+        self.manualReferences = manualReferences
         self.modelTier = modelTier
-        self.usedDeterministicOverride = usedDeterministicOverride
         self.visionWasUsed = visionWasUsed
         self.notices = notices
     }

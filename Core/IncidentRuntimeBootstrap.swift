@@ -28,21 +28,24 @@ public struct IncidentRuntimeResolution: Sendable {
 
 public struct IncidentRuntimeBootstrap: Sendable {
     private let bundledArticles: [KnowledgeArticle]
+    private let survivalKnowledge: SurvivalKnowledgeStore?
     private let modelProvider: @Sendable (ModelTier) -> any LocalLanguageModel
 
     public init(
         bundledArticles: [KnowledgeArticle],
+        survivalKnowledge: SurvivalKnowledgeStore? = nil,
         modelProvider: @escaping @Sendable (ModelTier) -> any LocalLanguageModel = {
-            ExtractiveLanguageModel(tier: $0)
+            UnavailableLanguageModel(tier: $0)
         }
     ) {
         self.bundledArticles = bundledArticles
+        self.survivalKnowledge = survivalKnowledge
         self.modelProvider = modelProvider
     }
 
     public func resolve(
         activePacks: ActivePackSnapshot,
-        availableModelTiers: Set<ModelTier> = [.essential],
+        availableModelTiers: Set<ModelTier> = [],
         embeddingProvider: (any QueryEmbeddingProvider)? = nil
     ) -> IncidentRuntimeResolution {
         let bundled = RetrievalEngine(articles: bundledArticles)
@@ -50,7 +53,10 @@ public struct IncidentRuntimeBootstrap: Sendable {
         let usesCompiledKnowledge: Bool
         var issues: [IncidentRuntimeIssue] = []
 
-        if activePacks.knowledge.isEmpty {
+        if let survivalKnowledge {
+            retrieval = SurvivalKnowledgeRetriever(store: survivalKnowledge)
+            usesCompiledKnowledge = true
+        } else if activePacks.knowledge.isEmpty {
             retrieval = bundled
             usesCompiledKnowledge = false
         } else {
@@ -68,9 +74,8 @@ public struct IncidentRuntimeBootstrap: Sendable {
             }
         }
 
-        var runtimeTiers = activePacks.installedTiers
+        let runtimeTiers = activePacks.installedTiers
             .intersection(availableModelTiers)
-        runtimeTiers.insert(.essential)
         let assistant = IncidentAssistant(
             articles: bundledArticles,
             installedTiers: runtimeTiers,

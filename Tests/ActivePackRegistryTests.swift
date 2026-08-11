@@ -8,156 +8,136 @@ import XCTest
 #endif
 
 final class ActivePackRegistryTests: XCTestCase {
-    func testVerifiedEligibleModelBecomesActive() async throws {
+    func testVerifiedEligibleLiteModelBecomesActive() async throws {
         let fixture = try makeFixture()
         defer { try? FileManager.default.removeItem(at: fixture.root) }
 
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
-            verifier: AcceptingVerifier(),
-            appVersion: "1.2.0",
-            expectedPolicyVersion: "1.0.0"
-        )
-        let snapshot = await registry.resolve(
+        let snapshot = await registry(for: fixture.root).resolve(
             cachedEntitlements: [],
-            device: capableDevice()
+            device: iPhone13ClassDevice()
         )
 
-        XCTAssertEqual(snapshot.models.map(\.id), ["model.field@1.0.0"])
-        XCTAssertEqual(snapshot.installedTiers, [.essential, .field])
+        XCTAssertEqual(snapshot.models.map(\.id), ["model.lite@1.0.0"])
+        XCTAssertEqual(snapshot.installedTiers, [.lite])
         XCTAssertTrue(snapshot.issues.isEmpty)
     }
 
-    func testPolicyMismatchFailsClosedToEssential() async throws {
+    func testPolicyMismatchLeavesNoModel() async throws {
         let fixture = try makeFixture(policyVersion: "2.0.0")
         defer { try? FileManager.default.removeItem(at: fixture.root) }
 
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
-            verifier: AcceptingVerifier(),
-            appVersion: "1.2.0",
-            expectedPolicyVersion: "1.0.0"
-        )
-        let snapshot = await registry.resolve(
+        let snapshot = await registry(for: fixture.root).resolve(
             cachedEntitlements: [],
             device: capableDevice()
         )
 
-        XCTAssertEqual(snapshot.installedTiers, [.essential])
-        XCTAssertEqual(
-            snapshot.issues,
-            [.policyMismatch(packageID: "model.field")]
-        )
+        XCTAssertEqual(snapshot.installedTiers, [])
+        XCTAssertEqual(snapshot.issues, [.policyMismatch(packageID: "model.lite")])
     }
 
-    func testRecalledActiveVersionFailsClosed() async throws {
+    func testRecalledActiveVersionLeavesNoModel() async throws {
         let fixture = try makeFixture(recalled: true)
         defer { try? FileManager.default.removeItem(at: fixture.root) }
 
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
-            verifier: AcceptingVerifier(),
-            appVersion: "1.2.0",
-            expectedPolicyVersion: "1.0.0"
-        )
-        let snapshot = await registry.resolve(
+        let snapshot = await registry(for: fixture.root).resolve(
             cachedEntitlements: [],
             device: capableDevice()
         )
 
-        XCTAssertEqual(snapshot.installedTiers, [.essential])
+        XCTAssertEqual(snapshot.installedTiers, [])
         XCTAssertEqual(
             snapshot.issues,
-            [.recalled(packageID: "model.field", version: "1.0.0")]
+            [.recalled(packageID: "model.lite", version: "1.0.0")]
         )
     }
 
-    func testPaidModelRequiresCachedVerifiedEntitlement() async throws {
-        let fixture = try makeFixture(productID: "trailguard.field")
+    func testPaidLiteRequiresCachedVerifiedEntitlement() async throws {
+        let fixture = try makeFixture(productID: "trailguard.lite")
         defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let registry = registry(for: fixture.root)
 
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
-            verifier: AcceptingVerifier(),
-            appVersion: "1.2.0",
-            expectedPolicyVersion: "1.0.0"
-        )
         let denied = await registry.resolve(
             cachedEntitlements: [],
             device: capableDevice()
         )
-        XCTAssertEqual(denied.installedTiers, [.essential])
+        XCTAssertEqual(denied.installedTiers, [])
 
         let allowed = await registry.resolve(
             cachedEntitlements: [
                 EntitlementSnapshot(
-                    productID: "trailguard.field",
+                    productID: "trailguard.lite",
                     verified: true,
                     verifiedAt: "2026-07-23T00:00:00Z"
                 )
             ],
             device: capableDevice()
         )
-        XCTAssertTrue(allowed.installedTiers.contains(.field))
+        XCTAssertEqual(allowed.installedTiers, [.lite])
     }
 
-    func testFieldPackageFailsClosedBelowItsMemoryGate() async throws {
+    func testLitePackageFailsClosedBelowMemoryGate() async throws {
         let fixture = try makeFixture()
         defer { try? FileManager.default.removeItem(at: fixture.root) }
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
-            verifier: AcceptingVerifier(),
-            appVersion: "1.2.0",
-            expectedPolicyVersion: "1.0.0"
-        )
-        let snapshot = await registry.resolve(
+        let snapshot = await registry(for: fixture.root).resolve(
             cachedEntitlements: [],
             device: DeviceSnapshot(
-                physicalMemoryBytes: 4_000_000_000,
+                physicalMemoryBytes: 3_000_000_000,
                 freeStorageBytes: 20_000_000_000,
                 thermalCondition: .nominal,
                 isLowPowerMode: false
             )
         )
 
-        XCTAssertEqual(snapshot.installedTiers, [.essential])
+        XCTAssertEqual(snapshot.installedTiers, [])
         XCTAssertEqual(
             snapshot.issues,
-            [.deviceIneligible(packageID: "model.field", tier: .field)]
+            [.deviceIneligible(packageID: "model.lite", tier: .lite)]
         )
     }
 
-    func testLitePackageActivatesOnIPhone13ClassMemory() async throws {
-        let fixture = try makeFixture(tier: .lite)
+    func testExpertPackageRemainsValidationLocked() async throws {
+        let fixture = try makeFixture(rawTier: ModelTier.expert.rawValue)
         defer { try? FileManager.default.removeItem(at: fixture.root) }
-        let registry = ActivePackRegistry(
-            rootDirectory: fixture.root,
+        let snapshot = await registry(for: fixture.root).resolve(
+            cachedEntitlements: [],
+            device: capableDevice()
+        )
+
+        XCTAssertEqual(snapshot.installedTiers, [])
+        XCTAssertEqual(
+            snapshot.issues,
+            [.deviceIneligible(packageID: "model.vision_expert", tier: .expert)]
+        )
+    }
+
+    func testLegacyFieldPackageIsRejected() async throws {
+        let fixture = try makeFixture(rawTier: "field")
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let snapshot = await registry(for: fixture.root).resolve(
+            cachedEntitlements: [],
+            device: capableDevice()
+        )
+
+        XCTAssertEqual(snapshot.installedTiers, [])
+        XCTAssertEqual(snapshot.issues, [.invalidModelTier(packageID: "model.field")])
+    }
+
+    private func registry(for root: URL) -> ActivePackRegistry {
+        ActivePackRegistry(
+            rootDirectory: root,
             verifier: AcceptingVerifier(),
             appVersion: "1.2.0",
             expectedPolicyVersion: "1.0.0"
         )
-        let snapshot = await registry.resolve(
-            cachedEntitlements: [],
-            device: DeviceSnapshot(
-                physicalMemoryBytes: 4_000_000_000,
-                freeStorageBytes: 20_000_000_000,
-                thermalCondition: .nominal,
-                isLowPowerMode: false
-            )
-        )
-
-        XCTAssertEqual(snapshot.models.map(\.id), ["model.lite@1.0.0"])
-        XCTAssertEqual(snapshot.installedTiers, [.essential, .lite])
-        XCTAssertTrue(snapshot.issues.isEmpty)
     }
 
     private func makeFixture(
         policyVersion: String = "1.0.0",
         productID: String? = nil,
         recalled: Bool = false,
-        tier: ModelTier = .field
+        rawTier: String = ModelTier.lite.rawValue
     ) throws -> (root: URL, packageDirectory: URL) {
-        let packageID = "model.\(tier.rawValue)"
+        let packageID = "model.\(rawTier)"
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(
             "TrailGuardActivePack-\(UUID().uuidString)",
             isDirectory: true
@@ -165,22 +145,15 @@ final class ActivePackRegistryTests: XCTestCase {
         let packageDirectory = root
             .appendingPathComponent("packages", isDirectory: true)
             .appendingPathComponent("\(packageID)@1.0.0", isDirectory: true)
-        try FileManager.default.createDirectory(
-            at: packageDirectory,
-            withIntermediateDirectories: true
-        )
-        try Data("model".utf8).write(
-            to: packageDirectory.appendingPathComponent("model.gguf")
-        )
+        try FileManager.default.createDirectory(at: packageDirectory, withIntermediateDirectories: true)
+        try Data("model".utf8).write(to: packageDirectory.appendingPathComponent("model.gguf"))
 
         var metadata = [
-            "model_tier": tier.rawValue,
+            "model_tier": rawTier,
             "model_path": "model.gguf",
             "policy_version": policyVersion,
         ]
-        if let productID {
-            metadata["product_id"] = productID
-        }
+        if let productID { metadata["product_id"] = productID }
         let manifest = PackageManifest(
             packageID: packageID,
             version: "1.0.0",
@@ -188,7 +161,7 @@ final class ActivePackRegistryTests: XCTestCase {
             createdAt: "2026-07-23T00:00:00Z",
             minimumAppVersion: "1.0.0",
             licenseIdentifier: "Test-Only",
-            displayName: "Field test model",
+            displayName: "Test model",
             artifacts: [
                 PackageArtifact(
                     path: "model.gguf",
@@ -198,29 +171,22 @@ final class ActivePackRegistryTests: XCTestCase {
             ],
             metadata: metadata
         )
-        let envelope = SignedPackageEnvelope(
-            manifest: manifest,
-            keyID: "test",
-            signature: ""
-        )
-        try JSONEncoder.trailGuard.encode(envelope).write(
-            to: packageDirectory.appendingPathComponent("envelope.json")
-        )
+        try JSONEncoder.trailGuard.encode(
+            SignedPackageEnvelope(manifest: manifest, keyID: "test", signature: "")
+        ).write(to: packageDirectory.appendingPathComponent("envelope.json"))
 
         let record = InstalledPackageVersion(
             packageID: packageID,
             version: "1.0.0",
             kind: .model,
-            displayName: "Field test model",
+            displayName: "Test model",
             installedAt: "2026-07-23T00:00:00Z",
             directoryName: "\(packageID)@1.0.0"
         )
         let index = PackageActivationIndex(
             activeVersions: [packageID: "1.0.0"],
             installed: [record],
-            recalledVersions: recalled
-                ? [packageID: ["1.0.0"]]
-                : [:]
+            recalledVersions: recalled ? [packageID: ["1.0.0"]] : [:]
         )
         try JSONEncoder.trailGuard.encode(index).write(
             to: root.appendingPathComponent("activation-index.json")
@@ -228,9 +194,18 @@ final class ActivePackRegistryTests: XCTestCase {
         return (root, packageDirectory)
     }
 
+    private func iPhone13ClassDevice() -> DeviceSnapshot {
+        DeviceSnapshot(
+            physicalMemoryBytes: 4_000_000_000,
+            freeStorageBytes: 20_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: false
+        )
+    }
+
     private func capableDevice() -> DeviceSnapshot {
         DeviceSnapshot(
-            physicalMemoryBytes: 8_000_000_000,
+            physicalMemoryBytes: 12_000_000_000,
             freeStorageBytes: 20_000_000_000,
             thermalCondition: .nominal,
             isLowPowerMode: false
@@ -239,8 +214,5 @@ final class ActivePackRegistryTests: XCTestCase {
 }
 
 private struct AcceptingVerifier: PackageEnvelopeVerifying {
-    func verify(
-        envelope: SignedPackageEnvelope,
-        packageDirectory: URL
-    ) throws {}
+    func verify(envelope: SignedPackageEnvelope, packageDirectory: URL) throws {}
 }

@@ -5,7 +5,6 @@ struct ChatView: View {
     @EnvironmentObject private var model: AppModel
     @State private var draft = ""
     @State private var photoItem: PhotosPickerItem?
-    @State private var showEmergencyHelp = false
     @FocusState private var composerIsFocused: Bool
 
     private let starters = [
@@ -15,31 +14,17 @@ struct ChatView: View {
     ]
 
     var body: some View {
-        VStack(spacing: 0) {
-            trustStrip
-            messages
-            composer
+        Group {
+            if model.canUseAsk {
+                VStack(spacing: 0) {
+                    messages
+                    composer
+                }
+            } else {
+                modelRequired
+            }
         }
         .navigationTitle("Ask TrailGuard")
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    showEmergencyHelp = true
-                } label: {
-                    Label("Emergency", systemImage: "sos")
-                        .foregroundStyle(.red)
-                }
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Clear", action: model.resetConversation)
-                    .disabled(model.messages.isEmpty)
-            }
-        }
-        .alert("Immediate danger?", isPresented: $showEmergencyHelp) {
-            Button("Close", role: .cancel) {}
-        } message: {
-            Text("Use iPhone Emergency SOS or call the emergency number for your location. Do not wait for a chatbot response.")
-        }
         .onChange(of: photoItem) { _, item in
             Task {
                 guard let data = try? await item?.loadTransferable(type: Data.self) else { return }
@@ -48,31 +33,21 @@ struct ChatView: View {
         }
     }
 
-    private var trustStrip: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "checkmark.shield.fill")
-                .foregroundStyle(.green)
-            VStack(alignment: .leading, spacing: 1) {
-                Text("Offline · reviewed sources")
-                    .font(.subheadline.weight(.semibold))
-                Text("Emergency rules run before the model")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+    private var modelRequired: some View {
+        ContentUnavailableView {
+            Label("Offline model required", systemImage: "cpu")
+        } description: {
+            Text("Install Lite in Tools to use Ask. The Manual and Maps remain available without a model.")
+        } actions: {
+            Button {
+                model.selectedTab = .tools
+            } label: {
+                Label("Set up models", systemImage: "arrow.down.circle.fill")
             }
-            Spacer(minLength: 8)
-            Image(systemName: "lock.fill")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-        .frame(maxWidth: .infinity)
-        .background(.thinMaterial)
-        .overlay(alignment: .bottom) { Divider() }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(
-            "Offline assistant using reviewed sources. Emergency safety rules run before the model."
-        )
+        .accessibilityIdentifier("chat.modelRequired")
     }
 
     private var messages: some View {
@@ -89,7 +64,7 @@ struct ChatView: View {
                     if model.isThinking {
                         HStack(spacing: 10) {
                             ProgressView()
-                            Text("Checking safety and offline sources…")
+                            Text("Thinking offline…")
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -125,12 +100,14 @@ struct ChatView: View {
             }
 
             HStack(alignment: .bottom, spacing: 10) {
-                PhotosPicker(selection: $photoItem, matching: .images) {
-                    Image(systemName: "camera.fill")
-                        .frame(width: 40, height: 40)
-                        .background(.quaternary, in: Circle())
+                if model.canAttachPhoto {
+                    PhotosPicker(selection: $photoItem, matching: .images) {
+                        Image(systemName: "camera.fill")
+                            .frame(width: 40, height: 40)
+                            .background(.quaternary, in: Circle())
+                    }
+                    .accessibilityLabel("Attach photo")
                 }
-                .accessibilityLabel("Attach photo")
 
                 TextField("Describe the situation…", text: $draft, axis: .vertical)
                     .lineLimit(1...5)
@@ -189,9 +166,6 @@ private struct WelcomeCard: View {
                 }
                 .buttonStyle(.bordered)
             }
-            Label("In immediate danger, use Emergency SOS.", systemImage: "sos")
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -204,6 +178,7 @@ private struct WelcomeCard: View {
 }
 
 private struct MessageBubble: View {
+    @EnvironmentObject private var model: AppModel
     let message: ChatMessage
 
     private var visibleNotices: [String] {
@@ -223,13 +198,12 @@ private struct MessageBubble: View {
                     .font(.body)
                     .lineSpacing(3)
                     .textSelection(.enabled)
+                    .accessibilityIdentifier(
+                        message.role == .user ? "chat.question" : "chat.answer"
+                    )
 
                 if let answer = message.answer {
-                    if answer.usedDeterministicOverride {
-                        Label("Safety rule — model bypassed", systemImage: "shield.fill")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.red)
-                    } else if let tier = answer.modelTier {
+                    if let tier = answer.modelTier {
                         Label(
                             tier.displayName,
                             systemImage: answer.visionWasUsed ? "eye.fill" : "cpu"
@@ -238,22 +212,34 @@ private struct MessageBubble: View {
                         .foregroundStyle(.secondary)
                     }
 
-                    if !answer.sources.isEmpty {
-                        DisclosureGroup("Offline sources (\(answer.sources.count))") {
-                            ForEach(Array(answer.sources.enumerated()), id: \.element.id) { index, source in
-                                VStack(alignment: .leading, spacing: 3) {
-                                    Text("[\(index + 1)] \(source.title)")
-                                        .font(.caption.weight(.semibold))
-                                    Text("\(source.organization) · \(source.revision)")
-                                        .font(.caption2)
-                                        .foregroundStyle(.secondary)
+                    if !answer.manualReferences.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("More in Field Manual")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                            ForEach(answer.manualReferences) { reference in
+                                Button {
+                                    model.openManual(reference)
+                                } label: {
+                                    HStack(alignment: .firstTextBaseline) {
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text(reference.sectionTitle)
+                                                .font(.subheadline.weight(.semibold))
+                                            Text("\(reference.chapterTitle) · \(reference.pageLabel)")
+                                                .font(.caption)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        Spacer(minLength: 8)
+                                        Image(systemName: "arrow.right.circle.fill")
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.top, 5)
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("chat.manual-link")
                             }
                         }
-                        .font(.caption)
-                        .tint(.accentColor)
+                        .padding(.top, 4)
                     }
 
                     ForEach(visibleNotices, id: \.self) { notice in

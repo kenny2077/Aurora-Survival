@@ -236,7 +236,7 @@ struct TrailGuardPackCheck {
         let runtime = ActiveModelRuntimeResolver().resolve(activePacks: snapshot)
         let expectedID = "\(envelope.manifest.packageID)@\(envelope.manifest.version)"
         guard snapshot.models.map(\.id) == [expectedID],
-              snapshot.installedTiers == [.essential, .lite],
+              snapshot.installedTiers == [.lite],
               snapshot.issues.isEmpty,
               runtime.descriptors[.lite] != nil,
               runtime.issues.isEmpty else {

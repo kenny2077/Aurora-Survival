@@ -56,11 +56,13 @@ public actor LlamaSession {
     public func complete(
         systemPrompt: String,
         userPrompt: String,
-        maximumOutputTokens: Int
+        maximumOutputTokens: Int,
+        evidenceCount: Int
     ) throws -> LlamaSessionCompletion {
         guard let handle,
               maximumOutputTokens > 0,
-              maximumOutputTokens <= Int(Int32.max)
+              maximumOutputTokens <= Int(Int32.max),
+              (0...2).contains(evidenceCount)
         else {
             throw LlamaSessionError.invalidConfiguration
         }
@@ -76,6 +78,7 @@ public actor LlamaSession {
                     system,
                     user,
                     Int32(maximumOutputTokens),
+                    Int32(evidenceCount),
                     &firstTokenMicroseconds,
                     &totalMicroseconds,
                     &generatedTokenCount,

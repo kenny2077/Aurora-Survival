@@ -1,104 +1,78 @@
 # TrailGuard architecture
 
 Binding decisions are recorded in `Docs/ADR/`. Distribution and runtime data
-contracts are independently versioned in `Schemas/`; changing one axis does not
-silently change another.
+contracts are independently versioned in `Schemas/`.
 
 ## Product invariant
 
-The model interprets and explains; it does not define truth or authorize a
-hazardous action. Safety rules, reviewed procedures, source metadata, and
-release gates are independent of model tier.
+TrailGuard is a fully offline assistant with four product areas: Ask, Manual,
+Maps, and Tools. Ask requires a usable signed local model. A survival question
+may use at most two local Manual excerpts, and a successful evidence selection
+links directly to the same detailed content. Chat does not expose
+publisher/source lists.
 
-## Runtime sequence
+## Lite Chat runtime
 
-1. The app accepts a text question and, optionally, a photo.
-2. Apple Vision performs local OCR. OCR text is marked as fallible observation.
-3. `SafetyEngine` examines the question and OCR for critical patterns.
-4. A critical match returns a fixed card and ends the pipeline.
-5. `RetrievalEngine` searches only articles with `reviewed == true`.
-6. `ModelRouter` selects the best installed tier permitted by current device
-   memory, free storage, thermal state, and power mode.
-7. The selected model receives numbered evidence through
-   `GroundedPromptBuilder`.
-8. Citation-text models pass `CitationPolicy`. Grounded-JSON models pass
-   `GroundedResponseCodec`, which resolves only installed evidence, procedure,
-   step, and warning identifiers.
-9. Failure at steps 6–8 returns a deterministic extractive answer.
+1. The app accepts a message. Photo input is exposed only for an approved,
+   active Expert vision runtime.
+2. `SurvivalKnowledgeRetriever` searches bundled `survival_knowledge.sqlite`
+   with weighted FTS5 and returns at most two answer-ready candidates.
+3. `ModelRouter` selects Lite or Expert from preference, trust, runtime,
+   memory, storage, thermal state, and power mode. Expert degrades to Lite.
+4. `GroundedPromptBuilder` supplies recent conversation plus any candidates to
+   Gemma. Unsupported high-risk procedures produce an insufficient-evidence
+   response rather than invented steps.
+5. Gemma returns `{"a":"answer","e":[1]}`. `a` is displayed naturally;
+   validated `e` indexes become zero, one, or two manual destinations.
+6. With no usable model, Ask shows model setup and does not synthesize an
+   extractive answer. Manual and Maps remain available.
+
+There is no separate hazard-rule or model-bypass stage in Lite Chat.
+
+## Field Manual
+
+The bundled database is the shared knowledge layer for retrieval and reading:
+
+- 10 direct wilderness chapters and exactly 70 concise action lessons;
+- 1,050 weighted FTS5 passage records with answer and reference text;
+- 12 official/primary guidance sources with review and locator metadata;
+- exact stable passage anchors from chat into the Manual tab;
+- reviewed redirects or retirement states for all 828 old chunk IDs;
+- a generated 10-card emergency fallback if integrity or checksum fails.
+
+`tools/build_survival_knowledge.py` deterministically compiles committed reviewed
+JSON into the read-only database, checksum, and fallback. CI and
+`tools/validate.py` verify source structure, safety lint, hash, schema counts,
+FTS coverage, source relationships, legacy dispositions, and the balanced
+200-query retrieval fixture.
 
 ## Boundaries
 
-| Component | May do | Must not do |
-| --- | --- | --- |
-| Safety engine | Stop generation; issue fixed immediate actions | Diagnose a condition |
-| Retrieval | Rank approved local evidence | Retrieve draft or unapproved content |
-| Text model | Rephrase and organize evidence | Add unsupported facts |
-| Vision model | Describe visible features and uncertainty | Declare a part safe or prescribe a repair by sight alone |
-| Medical pack | Layperson first aid and escalation | Surgery, invasive treatment, diagnosis, prescriptions |
-| Vehicle pack | Read-only inspection and owner-manual procedures | ECU writes, safety-system bypass, unsupported lift points |
+| Component | Responsibility |
+| --- | --- |
+| SQLite corpus | Offline survival retrieval and detailed manual content |
+| Gemma | Normal conversation and natural RAG answer wording |
+| Answer envelope | Select only the excerpts actually used |
+| Manual navigation | Resolve selected chunks to chapter, section, page, and anchor |
+| Expert vision | Add approved local multimodal observations to the prompt |
+| Package system | Verify hashes/signatures before activating downloads |
+| Maps | Browse and manage signed offline map packages independently of models |
 
-## Model adapters
+## Model adapter
 
-`LocalLanguageModel` is the stable core protocol. Its output mode distinguishes
-legacy citation text from typed grounded JSON. `ClosureBackedLanguageModel`
-adapts a runtime by accepting two prompts and returning text. A production
-llama.cpp adapter should:
+`LocalLanguageModel` remains the stable core protocol. The llama.cpp adapter:
 
-- embed a pinned llama.cpp build as an XCFramework;
-- load only signed, hash-verified model packages;
-- keep all prompts, images, and output on device;
-- bind Qwen's language GGUF and multimodal projector as one atomic package;
-- constrain image resolution before the vision encoder;
-- stream tokens with cancellation;
-- unload on memory warning, serious heat, backgrounding, or Low Power Mode;
-- expose measured memory, first-token latency, generation rate, and temperature;
-- return grounded JSON to the evidence/procedure validator.
+- embeds checksum-pinned llama.cpp as an XCFramework;
+- loads only signed, hash-verified model packages;
+- keeps prompts, OCR, images, and output on device;
+- applies the model chat template and compact answer/evidence grammar;
+- streams with cancellation and reports latency, throughput, memory, and heat;
+- unloads under memory pressure, serious heat, backgrounding, or Low Power Mode.
 
-The adapter must not bypass `IncidentAssistant`.
+## Navigation, delivery, commerce, and privacy
 
-## Data packs
-
-The starter JSON is a development fixture, not a production corpus. Production
-packs need:
-
-- a signed manifest, semantic version, locale, jurisdiction, and expiration;
-- one source record per procedure;
-- author, reviewer, review date, and change rationale;
-- explicit contraindications and escalation thresholds;
-- automated schema, broken-link, duplicate, and citation tests;
-- domain-owner approval independent of app release;
-- rollback to the prior signed version.
-
-Vehicle procedures must be keyed by make, model, year, powertrain, market, and
-document revision. Generic guidance cannot supply torque values, jack points,
-fluid types, fuse assignments, high-voltage isolation, or towing modes.
-
-## Maps and OBD
-
-The dependency-free integration boundaries are part of the vertical slice.
-
-- `FileBackedOfflineMapRuntime` opens only a locally installed pack that passes
-  coverage, freshness, detail, file, and routing checks. MapLibre rendering and
-  licensed regional artifacts remain external release inputs.
-- `ReadOnlyOBDSession` rejects non-allowlisted commands before transport.
-  `OBDObservationStore` persists raw response, timestamp, adapter identity,
-  exact vehicle, parsed codes, and evidence sources. CoreBluetooth hardware
-  remains a physical-device gate.
-
-## Startup, delivery, and commerce
-
-- App startup loads `EmergencyCoreStore`; missing or corrupt active data is
-  atomically restored from the bundled reviewed core.
-- `PackageDownloadCoordinator` denies transfer in incident mode, uses strict
-  HTTP byte ranges, resumes partial artifacts, and passes completed content
-  through signature/hash verification before activation.
-- StoreKit verification is converted into an on-device `EntitlementLedger`.
-  Only verified purchase, renewal, restore, or family-sharing events activate
-  optional installed packs; refunds and revocations deactivate them.
-
-## Privacy
-
-The MVP has no analytics or network client. Production download services must
-separate model/map/package transfer from incident content. Questions, photos,
-location, health information, and vehicle identifiers stay on device unless the
-user explicitly performs an SOS or export action.
+Each tab owns an independent `NavigationStack`. Maps presents only map packages;
+Tools presents only the Lite and Expert model packages. Signed package delivery
+and StoreKit entitlement caching remain independent of chat. Incident questions,
+photos, location, and health information stay on device. Network operations are
+limited to explicit Preparation-mode downloads and denied in Incident Mode.

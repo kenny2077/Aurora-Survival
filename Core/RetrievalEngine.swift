@@ -4,7 +4,6 @@ public protocol EvidenceRetrieving: Sendable {
     func search(
         query: String,
         domain: KnowledgeDomain?,
-        vehicle: VehicleProfile?,
         limit: Int
     ) -> [RetrievedPassage]
 }
@@ -19,7 +18,6 @@ public struct RankFusingRetriever: EvidenceRetrieving, Sendable {
     public func search(
         query: String,
         domain: KnowledgeDomain? = nil,
-        vehicle: VehicleProfile? = nil,
         limit: Int = 4
     ) -> [RetrievedPassage] {
         var fused: [String: RetrievedPassage] = [:]
@@ -27,7 +25,6 @@ public struct RankFusingRetriever: EvidenceRetrieving, Sendable {
             let results = source.search(
                 query: query,
                 domain: domain,
-                vehicle: vehicle,
                 limit: limit
             )
             for (rank, passage) in results.enumerated() {
@@ -67,7 +64,6 @@ public struct RetrievalEngine: EvidenceRetrieving, Sendable {
     public func search(
         query: String,
         domain: KnowledgeDomain? = nil,
-        vehicle: VehicleProfile? = nil,
         limit: Int = 4
     ) -> [RetrievedPassage] {
         let queryTokens = Self.tokens(in: query)
@@ -75,13 +71,6 @@ public struct RetrievalEngine: EvidenceRetrieving, Sendable {
 
         return articles
             .filter { domain == nil || $0.domain == domain }
-            .filter { article in
-                guard let applicability = article.vehicleApplicability else {
-                    return true
-                }
-                guard let vehicle else { return false }
-                return applicability.matches(vehicle)
-            }
             .compactMap { article -> RetrievedPassage? in
                 let titleTokens = Self.tokens(in: article.title)
                 let bodyTokens = Self.tokens(in: article.searchableText)

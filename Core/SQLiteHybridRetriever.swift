@@ -82,7 +82,6 @@ public struct SQLiteHybridRetriever: EvidenceRetrieving, Sendable {
     public func search(
         query: String,
         domain: KnowledgeDomain? = nil,
-        vehicle: VehicleProfile? = nil,
         limit: Int = 4
     ) -> [RetrievedPassage] {
         #if canImport(SQLite3)
@@ -100,8 +99,7 @@ public struct SQLiteHybridRetriever: EvidenceRetrieving, Sendable {
             let lexical = (try? lexicalRows(
                 pack: pack,
                 ftsQuery: ftsQuery,
-                domain: domain,
-                vehicle: vehicle
+                domain: domain
             )) ?? []
             for (offset, row) in lexical.enumerated() {
                 var candidate = fused[row.article.id]
@@ -114,8 +112,7 @@ public struct SQLiteHybridRetriever: EvidenceRetrieving, Sendable {
                let dense = try? denseRows(
                    pack: pack,
                    queryVector: queryVector,
-                   domain: domain,
-                   vehicle: vehicle
+                   domain: domain
                ) {
                 for (offset, row) in dense.enumerated() {
                     var candidate = fused[row.article.id]
@@ -248,8 +245,7 @@ private extension SQLiteHybridRetriever {
     func lexicalRows(
         pack: Pack,
         ftsQuery: String,
-        domain: KnowledgeDomain?,
-        vehicle: VehicleProfile?
+        domain: KnowledgeDomain?
     ) throws -> [RankedRow] {
         let sql = """
         SELECT e.evidence_id, e.title, e.summary, e.steps_json,
@@ -266,16 +262,14 @@ private extension SQLiteHybridRetriever {
             pack: pack,
             sql: sql,
             binding: ftsQuery,
-            domain: domain,
-            vehicle: vehicle
+            domain: domain
         )
     }
 
     func denseRows(
         pack: Pack,
         queryVector: [Float],
-        domain: KnowledgeDomain?,
-        vehicle: VehicleProfile?
+        domain: KnowledgeDomain?
     ) throws -> [RankedRow] {
         let sql = """
         SELECT evidence_id, title, summary, steps_json, warnings_json,
@@ -289,8 +283,7 @@ private extension SQLiteHybridRetriever {
             pack: pack,
             sql: sql,
             binding: nil,
-            domain: domain,
-            vehicle: vehicle
+            domain: domain
         )
         .compactMap { row in
             guard row.vectorDimensions == queryVector.count,
@@ -321,8 +314,7 @@ private extension SQLiteHybridRetriever {
         pack: Pack,
         sql: String,
         binding: String?,
-        domain: KnowledgeDomain?,
-        vehicle: VehicleProfile?
+        domain: KnowledgeDomain?
     ) throws -> [RankedRow] {
         let metadata = try readMetadata(pack: pack)
         if let domain, metadata.domain != domain {
@@ -361,8 +353,7 @@ private extension SQLiteHybridRetriever {
         while sqlite3_step(statement) == SQLITE_ROW {
             if let row = decodeRow(
                 statement,
-                domain: metadata.domain,
-                vehicle: vehicle
+                domain: metadata.domain
             ) {
                 result.append(row)
             }
@@ -372,8 +363,7 @@ private extension SQLiteHybridRetriever {
 
     func decodeRow(
         _ statement: OpaquePointer,
-        domain: KnowledgeDomain,
-        vehicle: VehicleProfile?
+        domain: KnowledgeDomain
     ) -> RankedRow? {
         let level = columnText(statement, index: 8)
         guard filter.allowedAnswerLevels.contains(level) else {
@@ -383,9 +373,7 @@ private extension SQLiteHybridRetriever {
             columnText(statement, index: 7).utf8
         )
         if !applicabilityMatches(
-            applicabilityData,
-            domain: domain,
-            vehicle: vehicle
+            applicabilityData
         ) {
             return nil
         }
@@ -395,16 +383,6 @@ private extension SQLiteHybridRetriever {
               let source = sourceReference(columnText(statement, index: 6))
         else { return nil }
 
-        let applicability: VehicleApplicability?
-        if domain == .vehicle {
-            applicability = try? JSONDecoder().decode(
-                VehicleApplicability.self,
-                from: applicabilityData
-            )
-            guard applicability != nil else { return nil }
-        } else {
-            applicability = nil
-        }
         return RankedRow(
             article: KnowledgeArticle(
                 id: columnText(statement, index: 0),
@@ -415,8 +393,7 @@ private extension SQLiteHybridRetriever {
                 warnings: warnings,
                 keywords: keywords,
                 source: source,
-                reviewed: true,
-                vehicleApplicability: applicability
+                reviewed: true
             ),
             vectorOffset: Int(sqlite3_column_int64(statement, 9)),
             vectorDimensions: Int(sqlite3_column_int(statement, 10)),
@@ -425,9 +402,7 @@ private extension SQLiteHybridRetriever {
     }
 
     func applicabilityMatches(
-        _ data: Data,
-        domain: KnowledgeDomain,
-        vehicle: VehicleProfile?
+        _ data: Data
     ) -> Bool {
         guard let object = try? JSONSerialization.jsonObject(with: data),
               let dictionary = object as? [String: Any]
@@ -438,14 +413,7 @@ private extension SQLiteHybridRetriever {
                     == .orderedSame
             else { return false }
         }
-        guard domain == .vehicle else { return true }
-        guard let vehicle,
-              let applicability = try? JSONDecoder().decode(
-                  VehicleApplicability.self,
-                  from: data
-              )
-        else { return false }
-        return applicability.matches(vehicle)
+        return true
     }
 
     func stringArray(_ value: String) -> [String]? {
