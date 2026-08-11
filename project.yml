@@ -7,8 +7,16 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    TARGETED_DEVICE_FAMILY: "1"
+    TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+packages:
+  MapLibre:
+    url: https://github.com/maplibre/maplibre-gl-native-distribution
+    exactVersion: 6.26.0
+  AuroraLlamaRuntime:
+    path: Runtime/AuroraLlamaRuntime
 targets:
   Aurora:
     type: application
@@ -16,23 +24,40 @@ targets:
     sources:
       - path: App
       - path: Core
-    resources:
       - path: Resources
+        buildPhase: resources
     info:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Aurora
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
         NSPhotoLibraryUsageDescription: "Attach a photo for fully offline text recognition and optional on-device visual assistance."
         NSCameraUsageDescription: "Take a photo for fully offline text recognition and optional on-device visual assistance."
+        NSLocalNetworkUsageDescription: "Connect to your trusted Aurora package host to download signed offline models, guides, and maps during preparation."
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
         UIRequiresFullScreen: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.Aurora
+        DEVELOPMENT_TEAM: AL8BCFV85N
         ASSETCATALOG_COMPILER_APPICON_NAME: ""
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+      configs:
+        Release:
+          EXCLUDED_SOURCE_FILE_NAMES: development_trusted_package_keys.json
+    dependencies:
+      - package: MapLibre
+      - package: AuroraLlamaRuntime
   AuroraTests:
     type: bundle.unit-test
     platform: iOS
@@ -40,13 +65,27 @@ targets:
       - path: Tests
         excludes:
           - Fixtures
-    resources:
       - path: Tests/Fixtures
+        buildPhase: resources
     dependencies:
       - target: Aurora
     settings:
       base:
+        GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.example.AuroraTests
+        DEVELOPMENT_TEAM: AL8BCFV85N
+  AuroraUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: Aurora
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.AuroraUITests
+        DEVELOPMENT_TEAM: AL8BCFV85N
 schemes:
   Aurora:
     build:
@@ -56,3 +95,4 @@ schemes:
     test:
       targets:
         - AuroraTests
+        - AuroraUITests

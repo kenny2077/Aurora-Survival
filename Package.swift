@@ -8,12 +8,21 @@ let package = Package(
         .macOS(.v14)
     ],
     products: [
-        .library(name: "AuroraCore", targets: ["AuroraCore"])
+        .library(name: "AuroraCore", targets: ["AuroraCore"]),
+        .executable(
+            name: "trailguard-pack-check",
+            targets: ["AuroraPackCheck"]
+        )
     ],
     targets: [
         .target(
             name: "AuroraCore",
             path: "Core"
+        ),
+        .executableTarget(
+            name: "AuroraPackCheck",
+            dependencies: ["AuroraCore"],
+            path: "tools/pack-check"
         ),
         .testTarget(
             name: "AuroraCoreTests",

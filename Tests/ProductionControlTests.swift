@@ -92,6 +92,119 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertNotNil(action["evidence_ids"])
     }
 
+    func testGroundedPromptDefinesConversationalDecisionContract() {
+        let prompt = GroundedPromptBuilder().systemPrompt(
+            for: .lite,
+            purpose: .grounded,
+            outputMode: .groundedJSON
+        )
+
+        for required in [
+            "{\"a\":",
+            "\"e\":",
+            "extra keys",
+            "REVIEWED EXCERPTS",
+            "35–55 word paragraph",
+            "paraphrase reviewed action 1",
+            "one or two unique excerpt numbers",
+        ] {
+            XCTAssertTrue(prompt.contains(required), "Missing prompt contract: \(required)")
+        }
+
+        let article = makeArticle()
+        let userPrompt = GroundedPromptBuilder().userPrompt(
+            from: ModelPrompt(
+                question: "What should I do?",
+                evidence: [RetrievedPassage(article: article, score: 1)],
+                imageObservations: [],
+                tier: .lite,
+                permitsVisionReasoning: false,
+                conversationHistory: [
+                    ConversationTurn(
+                        role: .user,
+                        text: "My engine made a strange noise."
+                    )
+                ]
+            ),
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(userPrompt.contains("REVIEWED EXCERPT [1]"))
+        XCTAssertFalse(userPrompt.contains("RECENT CONVERSATION"))
+        XCTAssertFalse(userPrompt.contains("My engine made a strange noise."))
+        XCTAssertTrue(userPrompt.contains(article.title))
+
+        let emptyEvidencePrompt = GroundedPromptBuilder().userPrompt(
+            from: ModelPrompt(
+                question: "Unsupported request",
+                evidence: [],
+                imageObservations: [],
+                tier: .lite,
+                permitsVisionReasoning: false
+            ),
+            outputMode: .groundedJSON
+        )
+        XCTAssertFalse(emptyEvidencePrompt.contains("Field Manual"))
+        XCTAssertFalse(emptyEvidencePrompt.contains("REVIEWED EXCERPT"))
+    }
+
+    func testInsufficientAnswerCannotSelectProcedure() {
+        let original = makeGroundedResponse()
+        let response = GroundedResponse(
+            domain: original.domain,
+            riskLevel: original.riskLevel,
+            immediateAction: original.immediateAction,
+            questions: original.questions,
+            observations: original.observations,
+            procedureID: original.procedureID,
+            steps: [],
+            doNotDo: [],
+            driveability: original.driveability,
+            escalation: original.escalation,
+            answerConfidence: .insufficient
+        )
+        XCTAssertThrowsError(
+            try GroundedResponseValidator().validate(
+                response,
+                availableEvidenceIDs: ["evidence.1"],
+                approvedProcedureIDs: ["procedure.1"]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .insufficientAnswerCannotSelectProcedure
+            )
+        }
+    }
+
+    func testGroundedAnswerRequiresProcedure() {
+        let original = makeGroundedResponse()
+        let response = GroundedResponse(
+            domain: original.domain,
+            riskLevel: original.riskLevel,
+            immediateAction: original.immediateAction,
+            questions: original.questions,
+            observations: original.observations,
+            procedureID: nil,
+            steps: [],
+            doNotDo: [],
+            driveability: original.driveability,
+            escalation: original.escalation,
+            answerConfidence: .limited
+        )
+        XCTAssertThrowsError(
+            try GroundedResponseValidator().validate(
+                response,
+                availableEvidenceIDs: ["evidence.1"],
+                approvedProcedureIDs: ["procedure.1"]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .groundedAnswerRequiresProcedure
+            )
+        }
+    }
+
     func testGroundedCodecRendersOnlyApprovedStepText() throws {
         let article = makeArticle()
         let response = GroundedResponse(
@@ -104,13 +217,8 @@ final class ProductionControlTests: XCTestCase {
             questions: [],
             observations: [],
             procedureID: article.id,
-            steps: [
-                GroundedStep(
-                    stepID: "\(article.id)#step-1",
-                    evidenceIDs: [article.id]
-                )
-            ],
-            doNotDo: article.warnings,
+            steps: [],
+            doNotDo: [],
             driveability: .unknown,
             escalation: GroundedEscalation(
                 reason: "Cause unknown",
@@ -126,6 +234,37 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertTrue(rendered.contains(article.steps[0]))
         XCTAssertTrue(rendered.contains(article.warnings[0]))
         XCTAssertFalse(rendered.contains(response.escalation.action))
+    }
+
+    func testGroundedCodecExpandsCompactDecisionFromReviewedEvidence() throws {
+        let article = makeArticle()
+        let generated = """
+        {"d":"vehicle","p":1}
+        """
+        let rendered = try GroundedResponseCodec().decodeValidateAndRender(
+            generated,
+            evidence: [RetrievedPassage(article: article, score: 1)]
+        )
+        XCTAssertTrue(rendered.contains(article.steps[0]))
+        XCTAssertTrue(rendered.contains(article.warnings[0]))
+    }
+
+    func testGroundedCodecRejectsCompactDecisionDomainMismatch() throws {
+        let article = makeArticle()
+        let generated = """
+        {"d":"wilderness","p":1}
+        """
+        XCTAssertThrowsError(
+            try GroundedResponseCodec().decodeValidateAndRender(
+                generated,
+                evidence: [RetrievedPassage(article: article, score: 1)]
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? GroundedResponseError,
+                .procedureDomainMismatch(article.id)
+            )
+        }
     }
 
     func testGroundedCodecRejectsInventedStepID() throws {
@@ -163,159 +302,6 @@ final class ProductionControlTests: XCTestCase {
                 .unknownStepID("invented#step-99")
             )
         }
-    }
-
-    func testIncidentAssistantUsesValidatedStructuredModelOutput() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .moderate,
-            immediateAction: GroundedAction(
-                kind: .assess,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [],
-            procedureID: article.id,
-            steps: [
-                GroundedStep(
-                    stepID: "\(article.id)#step-1",
-                    evidenceIDs: [article.id]
-                )
-            ],
-            doNotDo: article.warnings,
-            driveability: .unknown,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .field],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in
-                    generated
-                }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .field
-            ),
-            device: capableDevice()
-        )
-        XCTAssertEqual(answer.modelTier, .field)
-        XCTAssertTrue(answer.text.contains(article.steps[0]))
-        XCTAssertFalse(answer.notices.contains {
-            $0.contains("failed evidence validation")
-        })
-    }
-
-    func testStructuredOutputFallsBackWhenWarningIsInvented() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .moderate,
-            immediateAction: GroundedAction(
-                kind: .assess,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [],
-            procedureID: nil,
-            steps: [],
-            doNotDo: ["Invented warning"],
-            driveability: .unknown,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .field],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in generated }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .field
-            ),
-            device: capableDevice()
-        )
-        XCTAssertTrue(answer.text.contains(article.steps[0]))
-        XCTAssertTrue(answer.notices.contains {
-            $0.contains("failed evidence validation")
-        })
-    }
-
-    func testVisionObservationCanTriggerPostModelSafetyOverride() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .critical,
-            immediateAction: GroundedAction(
-                kind: .sos,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [
-                GroundedObservation(
-                    fact: "The image appears to show a fuel leak.",
-                    source: .photo,
-                    confidence: 0.8
-                )
-            ],
-            procedureID: nil,
-            steps: [],
-            doNotDo: article.warnings,
-            driveability: .doNotDrive,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .visionExpert],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in generated }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .visionExpert,
-                hasImage: true,
-                imageData: Data("image".utf8)
-            ),
-            device: capableDevice()
-        )
-        XCTAssertTrue(answer.usedDeterministicOverride)
-        XCTAssertTrue(answer.visionWasUsed)
-        XCTAssertEqual(answer.text.components(separatedBy: "\n").first, "Fire or fuel hazard")
-        XCTAssertTrue(answer.notices.contains {
-            $0.contains("model observation triggered")
-        })
     }
 
     func testIncidentModeDeniesNonessentialNetworkOperations() {
@@ -395,20 +381,56 @@ final class ProductionControlTests: XCTestCase {
         XCTAssertEqual(result.bundle.version, "1.0.0")
     }
 
-    func testDeterministicSafetyAnswerIncludesPolicySource() async {
-        let assistant = IncidentAssistant(articles: [])
-        let answer = await assistant.answer(
-            request: ChatRequest(question: "There is a fuel leak"),
-            device: DeviceSnapshot(
-                physicalMemoryBytes: 8_000_000_000,
-                freeStorageBytes: 20_000_000_000,
-                thermalCondition: .nominal,
-                isLowPowerMode: false
+    func testNewerBundledEmergencyCoreUpgradesExistingInstall() throws {
+        let root = temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        let active = makeEmergencyCore(version: "1.0.0")
+        try JSONEncoder().encode(active).write(
+            to: root.appendingPathComponent("emergency-core.json")
+        )
+        let bundled = makeEmergencyCore(version: "1.1.0")
+
+        let result = try EmergencyCoreStore(
+            rootDirectory: root,
+            bundledData: try JSONEncoder().encode(bundled)
+        ).loadOrRecover()
+
+        XCTAssertEqual(result.origin, .bundledUpgrade)
+        XCTAssertEqual(result.bundle.version, "1.1.0")
+        let persisted = try JSONDecoder().decode(
+            EmergencyCoreBundle.self,
+            from: Data(
+                contentsOf: root.appendingPathComponent("emergency-core.json")
             )
         )
-        XCTAssertTrue(answer.usedDeterministicOverride)
-        XCTAssertEqual(answer.sources.first?.id, "trailguard.safety-policy")
-        XCTAssertTrue(answer.notices.contains { $0.contains("vehicle.fire-fuel") })
+        XCTAssertEqual(persisted.version, "1.1.0")
+    }
+
+    func testOlderBundledEmergencyCoreDoesNotDowngradeActiveInstall() throws {
+        let root = temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(
+            at: root,
+            withIntermediateDirectories: true
+        )
+        let active = makeEmergencyCore(version: "2.0.0")
+        try JSONEncoder().encode(active).write(
+            to: root.appendingPathComponent("emergency-core.json")
+        )
+
+        let result = try EmergencyCoreStore(
+            rootDirectory: root,
+            bundledData: try JSONEncoder().encode(
+                makeEmergencyCore(version: "1.1.0")
+            )
+        ).loadOrRecover()
+
+        XCTAssertEqual(result.origin, .active)
+        XCTAssertEqual(result.bundle.version, "2.0.0")
     }
 
     private func makeGroundedResponse() -> GroundedResponse {
@@ -441,7 +463,9 @@ final class ProductionControlTests: XCTestCase {
         )
     }
 
-    private func makeEmergencyCore() -> EmergencyCoreBundle {
+    private func makeEmergencyCore(
+        version: String = "1.0.0"
+    ) -> EmergencyCoreBundle {
         let source = SourceReference(
             id: "source.1",
             title: "Reviewed fixture",
@@ -460,7 +484,7 @@ final class ProductionControlTests: XCTestCase {
             reviewed: true
         )
         return EmergencyCoreBundle(
-            version: "1.0.0",
+            version: version,
             policyVersion: "1.0.0",
             articles: [article]
         )

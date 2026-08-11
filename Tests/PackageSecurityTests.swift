@@ -153,7 +153,7 @@ final class PackageSecurityTests: XCTestCase {
         let secondStaging = first.root.appendingPathComponent("stage-v2", isDirectory: true)
         let second = try makeSignedPackage(
             staging: secondStaging,
-            packageID: "model.field",
+            packageID: "model.lite",
             version: "2.0.0",
             content: Data("v2".utf8),
             keyID: first.envelope.keyID,
@@ -165,12 +165,12 @@ final class PackageSecurityTests: XCTestCase {
         )
 
         var index = try await installer.index()
-        XCTAssertEqual(index.activeVersions["model.field"], "2.0.0")
+        XCTAssertEqual(index.activeVersions["model.lite"], "2.0.0")
 
-        let rolledBack = try await installer.rollback(packageID: "model.field")
+        let rolledBack = try await installer.rollback(packageID: "model.lite")
         XCTAssertEqual(rolledBack, "1.0.0")
         index = try await installer.index()
-        XCTAssertEqual(index.activeVersions["model.field"], "1.0.0")
+        XCTAssertEqual(index.activeVersions["model.lite"], "1.0.0")
     }
 
     func testCannotDeleteActiveVersion() async throws {
@@ -186,7 +186,7 @@ final class PackageSecurityTests: XCTestCase {
         )
 
         do {
-            try await installer.removeInactive(packageID: "model.field", version: "1.0.0")
+            try await installer.removeInactive(packageID: "model.lite", version: "1.0.0")
             XCTFail("Expected active-version deletion to be blocked")
         } catch {
             XCTAssertEqual(error as? PackageInstallError, .cannotRollback)
@@ -209,7 +209,7 @@ final class PackageSecurityTests: XCTestCase {
         let secondStaging = first.root.appendingPathComponent("stage-v2", isDirectory: true)
         let second = try makeSignedPackage(
             staging: secondStaging,
-            packageID: "model.field",
+            packageID: "model.lite",
             version: "2.0.0",
             content: Data("v2".utf8),
             keyID: first.envelope.keyID,
@@ -221,16 +221,16 @@ final class PackageSecurityTests: XCTestCase {
         )
 
         let replacement = try await installer.recall(
-            packageID: "model.field",
+            packageID: "model.lite",
             version: "2.0.0"
         )
         XCTAssertEqual(replacement, "1.0.0")
         let index = try await installer.index()
-        XCTAssertEqual(index.activeVersions["model.field"], "1.0.0")
-        XCTAssertTrue(index.recalledVersions["model.field"]?.contains("2.0.0") == true)
+        XCTAssertEqual(index.activeVersions["model.lite"], "1.0.0")
+        XCTAssertTrue(index.recalledVersions["model.lite"]?.contains("2.0.0") == true)
 
         do {
-            try await installer.activate(packageID: "model.field", version: "2.0.0")
+            try await installer.activate(packageID: "model.lite", version: "2.0.0")
             XCTFail("Expected recalled package activation to fail")
         } catch {
             XCTAssertEqual(error as? PackageInstallError, .recalledPackage)
@@ -260,7 +260,7 @@ final class PackageSecurityTests: XCTestCase {
         let keyID = "test-key"
         let envelope = try makeSignedPackage(
             staging: staging,
-            packageID: "model.field",
+            packageID: "model.lite",
             version: version,
             content: content,
             keyID: keyID,

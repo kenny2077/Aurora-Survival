@@ -18,7 +18,6 @@ public enum ImmediateActionKind: String, Codable, Sendable {
 public enum ObservationSource: String, Codable, Sendable {
     case user
     case photo
-    case obd
     case sensor
 }
 
@@ -160,8 +159,35 @@ public enum GroundedResponseError: Error, Equatable {
     case stepsRequireProcedure
     case supportedAnswerRequiresEvidence
     case highRiskCannotContinue
+    case insufficientAnswerCannotSelectProcedure
+    case groundedAnswerRequiresProcedure
     case unknownStepID(String)
     case unsupportedWarning(String)
+    case procedureDomainMismatch(String)
+    case unknownEvidenceIndex(Int)
+    case invalidConversationalAnswer
+    case invalidConversationalEvidence
+    case invalidFollowUp
+    case procedureRequiresCitedEvidence
+}
+
+public struct ConversationalGroundedResponse: Equatable, Sendable {
+    public let answer: String
+    public let evidenceIDs: [String]
+    public let procedureID: String?
+    public let followUp: String?
+
+    public init(
+        answer: String,
+        evidenceIDs: [String],
+        procedureID: String?,
+        followUp: String?
+    ) {
+        self.answer = answer
+        self.evidenceIDs = evidenceIDs
+        self.procedureID = procedureID
+        self.followUp = followUp
+    }
 }
 
 public struct GroundedResponseValidator: Sendable {
@@ -213,6 +239,21 @@ public struct GroundedResponseValidator: Sendable {
         if [.critical, .high].contains(response.riskLevel),
            response.immediateAction.kind == .continue {
             throw GroundedResponseError.highRiskCannotContinue
+        }
+
+        if response.answerConfidence == .insufficient,
+           response.procedureID != nil || !response.steps.isEmpty {
+            throw GroundedResponseError.insufficientAnswerCannotSelectProcedure
+        }
+
+        if [.limited, .supported].contains(response.answerConfidence),
+           response.procedureID == nil {
+            throw GroundedResponseError.groundedAnswerRequiresProcedure
+        }
+
+        if let procedureID = response.procedureID,
+           !approvedProcedureIDs.contains(procedureID) {
+            throw GroundedResponseError.unapprovedProcedure(procedureID)
         }
     }
 }

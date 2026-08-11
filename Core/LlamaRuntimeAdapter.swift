@@ -1,6 +1,9 @@
 import Foundation
 
 public struct LlamaRuntimeConfiguration: Equatable, Sendable {
+    public static let liteContextTokens = 2_048
+    public static let liteMaximumOutputTokens = 160
+
     public let modelURL: URL
     public let visionProjectorURL: URL?
     public let contextTokens: Int
@@ -20,6 +23,18 @@ public struct LlamaRuntimeConfiguration: Equatable, Sendable {
         self.maximumOutputTokens = maximumOutputTokens
         self.threadCount = threadCount
     }
+
+    public static func lite(
+        modelURL: URL,
+        threadCount: Int
+    ) -> LlamaRuntimeConfiguration {
+        LlamaRuntimeConfiguration(
+            modelURL: modelURL,
+            contextTokens: liteContextTokens,
+            maximumOutputTokens: liteMaximumOutputTokens,
+            threadCount: threadCount
+        )
+    }
 }
 
 public protocol LlamaRuntimeBackend: Sendable {
@@ -28,9 +43,38 @@ public protocol LlamaRuntimeBackend: Sendable {
         systemPrompt: String,
         userPrompt: String,
         imageData: Data?,
-        maximumOutputTokens: Int
-    ) async throws -> String
+        maximumOutputTokens: Int,
+        evidenceCount: Int
+    ) async throws -> LlamaCompletionResult
     func unload() async
+}
+
+public struct LlamaCompletionMetrics: Equatable, Sendable {
+    public let firstTokenMilliseconds: Int
+    public let totalMilliseconds: Int
+    public let generatedTokenCount: Int
+    public let coldStart: Bool
+
+    public var tokensPerSecond: Double {
+        let decodeMilliseconds = totalMilliseconds - firstTokenMilliseconds
+        if generatedTokenCount > 1, decodeMilliseconds > 0 {
+            return Double(generatedTokenCount - 1) * 1_000
+                / Double(decodeMilliseconds)
+        }
+        guard totalMilliseconds > 0 else { return 0 }
+        return Double(generatedTokenCount) * 1_000
+            / Double(totalMilliseconds)
+    }
+}
+
+public struct LlamaCompletionResult: Equatable, Sendable {
+    public let text: String
+    public let metrics: LlamaCompletionMetrics
+
+    public init(text: String, metrics: LlamaCompletionMetrics) {
+        self.text = text
+        self.metrics = metrics
+    }
 }
 
 public enum LlamaAdapterError: Error, Equatable {
@@ -50,17 +94,21 @@ public actor LlamaLanguageModel: LocalLanguageModel {
 
     private let backend: any LlamaRuntimeBackend
     private let configuration: LlamaRuntimeConfiguration
+    private let metricsSink: (@Sendable (LlamaCompletionMetrics) async -> Void)?
+    private let completionSink: (@Sendable (String) async -> Void)?
     private var loaded = false
 
     public init(
         tier: ModelTier,
         configuration: LlamaRuntimeConfiguration,
-        backend: any LlamaRuntimeBackend
+        backend: any LlamaRuntimeBackend,
+        metricsSink: (@Sendable (LlamaCompletionMetrics) async -> Void)? = nil,
+        completionSink: (@Sendable (String) async -> Void)? = nil
     ) throws {
         guard FileManager.default.fileExists(atPath: configuration.modelURL.path) else {
             throw LlamaAdapterError.modelFileMissing
         }
-        if tier == .visionExpert {
+        if tier == .expert {
             guard let projector = configuration.visionProjectorURL else {
                 throw LlamaAdapterError.projectorRequiredForVisionTier
             }
@@ -73,20 +121,28 @@ public actor LlamaLanguageModel: LocalLanguageModel {
         self.tier = tier
         self.configuration = configuration
         self.backend = backend
+        self.metricsSink = metricsSink
+        self.completionSink = completionSink
     }
 
     public func generate(prompt: ModelPrompt) async throws -> String {
         if prompt.permitsVisionReasoning && prompt.imageData == nil {
             throw LlamaAdapterError.imageRequiredForVisionRequest
         }
-        if !loaded {
+        let wasColdStart = !loaded
+        var loadMilliseconds = 0
+        if wasColdStart {
+            let loadStarted = Date()
             try await backend.load(configuration: configuration)
+            loadMilliseconds = Int(
+                Date().timeIntervalSince(loadStarted) * 1_000
+            )
             loaded = true
         }
         let builder = GroundedPromptBuilder()
-        return try await backend.complete(
+        let completion = try await backend.complete(
             systemPrompt: builder.systemPrompt(
-                for: tier,
+                for: prompt,
                 outputMode: outputMode
             ),
             userPrompt: builder.userPrompt(
@@ -94,8 +150,22 @@ public actor LlamaLanguageModel: LocalLanguageModel {
                 outputMode: outputMode
             ),
             imageData: prompt.permitsVisionReasoning ? prompt.imageData : nil,
-            maximumOutputTokens: configuration.maximumOutputTokens
+            maximumOutputTokens: configuration.maximumOutputTokens,
+            evidenceCount: prompt.purpose == .grounded
+                ? prompt.evidence.count
+                : 0
         )
+        await completionSink?(completion.text)
+        let metrics = LlamaCompletionMetrics(
+            firstTokenMilliseconds: completion.metrics.firstTokenMilliseconds
+                + loadMilliseconds,
+            totalMilliseconds: completion.metrics.totalMilliseconds
+                + loadMilliseconds,
+            generatedTokenCount: completion.metrics.generatedTokenCount,
+            coldStart: wasColdStart
+        )
+        await metricsSink?(metrics)
+        return completion.text
     }
 
     public func unload() async {

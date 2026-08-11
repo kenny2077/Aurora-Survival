@@ -1,6 +1,60 @@
 import Foundation
 
-public struct RetrievalEngine: Sendable {
+public protocol EvidenceRetrieving: Sendable {
+    func search(
+        query: String,
+        domain: KnowledgeDomain?,
+        limit: Int
+    ) -> [RetrievedPassage]
+}
+
+public struct RankFusingRetriever: EvidenceRetrieving, Sendable {
+    private let sources: [any EvidenceRetrieving]
+
+    public init(sources: [any EvidenceRetrieving]) {
+        self.sources = sources
+    }
+
+    public func search(
+        query: String,
+        domain: KnowledgeDomain? = nil,
+        limit: Int = 4
+    ) -> [RetrievedPassage] {
+        var fused: [String: RetrievedPassage] = [:]
+        for source in sources {
+            let results = source.search(
+                query: query,
+                domain: domain,
+                limit: limit
+            )
+            for (rank, passage) in results.enumerated() {
+                let contribution = 1.0 / Double(60 + rank + 1)
+                if let existing = fused[passage.article.id] {
+                    fused[passage.article.id] = RetrievedPassage(
+                        article: existing.article,
+                        score: existing.score + contribution
+                    )
+                } else {
+                    fused[passage.article.id] = RetrievedPassage(
+                        article: passage.article,
+                        score: contribution
+                    )
+                }
+            }
+        }
+        return fused.values
+            .sorted {
+                if $0.score == $1.score {
+                    return $0.article.id < $1.article.id
+                }
+                return $0.score > $1.score
+            }
+            .prefix(max(1, limit))
+            .map { $0 }
+    }
+}
+
+public struct RetrievalEngine: EvidenceRetrieving, Sendable {
     private let articles: [KnowledgeArticle]
 
     public init(articles: [KnowledgeArticle]) {
@@ -10,7 +64,6 @@ public struct RetrievalEngine: Sendable {
     public func search(
         query: String,
         domain: KnowledgeDomain? = nil,
-        vehicle: VehicleProfile? = nil,
         limit: Int = 4
     ) -> [RetrievedPassage] {
         let queryTokens = Self.tokens(in: query)
@@ -18,13 +71,6 @@ public struct RetrievalEngine: Sendable {
 
         return articles
             .filter { domain == nil || $0.domain == domain }
-            .filter { article in
-                guard let applicability = article.vehicleApplicability else {
-                    return true
-                }
-                guard let vehicle else { return false }
-                return applicability.matches(vehicle)
-            }
             .compactMap { article -> RetrievedPassage? in
                 let titleTokens = Self.tokens(in: article.title)
                 let bodyTokens = Self.tokens(in: article.searchableText)

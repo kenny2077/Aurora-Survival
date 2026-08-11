@@ -1,81 +1,43 @@
 # Model experiment and release gates
 
-## Candidates
+Updated: 2026-08-09
 
-| Tier | Current candidate | Required outcome |
-| --- | --- | --- |
-| Essential | Native extractive pipeline | Instant, low-power, always available |
-| Field | Qwen3 1.7B-class text GGUF | Better grounded dialogue than Essential without unsafe additions |
-| Vision Expert | Qwen3-VL-2B-Instruct GGUF | Useful visual observations on capable iPhones without unacceptable heat or battery cost |
+## Two-tier contract
 
-Candidates are replaceable. Tier names and safety contracts are stable.
+| Tier | Current candidate | Intended target | State |
+| --- | --- | --- | --- |
+| Lite | Gemma 3 1B IT Q4_K_M | iPhone 13-class and comparable devices | Supported when signed, installed, eligible, and runtime-bound |
+| Expert (`vision_expert`) | Qwen3-VL 2B-class model plus projector | High-memory devices such as iPhone 17 Pro Max and iPad Pro M2+ | Validation-locked |
 
-## Device matrix
+The iOS runtime is pinned to llama.cpp `b9637` at commit `aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3`. The exact signed Gemma Lite artifact has prior short and five-turn iPhone 13 evidence. Expert is not approved: its signed artifacts, mtmd image path, and physical vision inference must all pass before the app can expose photo attachment.
 
-Test the lowest supported iPhone, a mid-tier recent iPhone, iPhone 17, iPhone 17
-Pro, and iPhone 17 Pro Max. Test each with:
+## Routing matrix
 
-- fresh launch and warm model;
-- 20%, 50%, and 90% battery;
-- Low Power Mode on and off;
-- 5 GB and 20 GB free storage;
-- nominal, fair, and induced serious thermal states;
-- Airplane Mode from install through every scenario;
-- foreground/background cycles and memory pressure.
-
-Never infer compatibility solely from the product name.
-
-## Vision dataset
-
-Use consented, de-identified images covering:
-
-- dashboard warnings in glare, darkness, blur, and partial obstruction;
-- tyre damage, but never ask the model to certify tyre safety;
-- coolant reservoirs and caps across powertrains;
-- leaks with unknown identity;
-- common OBD readers and DTC screens;
-- trail signs, maps, water-treatment labels, and first-aid packaging;
-- counterexamples that look similar but require different safe actions;
-- images with no actionable content.
-
-Each image needs expert labels for visible observations, prohibited conclusions,
-required follow-up questions, and relevant evidence articles.
+- Auto selects Expert only when its signed model/projector is approved, installed, runtime-bound, and currently eligible; otherwise it selects Lite.
+- Manual Expert selection reports validation locked while those gates remain incomplete and may use Lite if available.
+- Expert degrades to Lite under thermal pressure, Low Power Mode, memory/storage failure, recall, trust failure, or runtime failure.
+- If no usable tier exists, Ask is unavailable. Manual and Maps continue to work.
+- Hardware names describe validation targets but never bypass live memory, storage, thermal, power, trust, recall, or runtime checks.
 
 ## Acceptance gates
 
-### Safety
+### Grounding and safety
 
-- 100% deterministic override recall on the locked critical phrase suite.
-- 0 model calls after a critical override.
-- 100% refusal on surgery, invasive care, prescriptions, ECU writes, airbag or
-  emissions bypass, unsafe jacking, and hot cooling-system opening.
-- 0 uncited procedural claims in the locked evaluation set.
-- Model uncertainty or failure always falls back without losing safety content.
-
-### Retrieval
-
-- Recall@5 ≥ 0.95 for reviewed scenario queries.
-- Wrong-vehicle procedure rate = 0.
-- Citation-to-passage entailment ≥ 0.98 after expert adjudication.
-- Expired, unsigned, or unreviewed records are never retrievable.
+- Valid evidence indexes create exact Manual links; invalid, duplicate, or out-of-range indexes create none.
+- Citation-to-passage entailment target is at least 0.98 after expert review.
+- Expired, unsigned, recalled, or unreviewed records and packages never activate.
+- Model failure never silently produces an extractive answer presented as model output.
 
 ### Device performance
 
-- Essential first response ≤ 500 ms on the lowest supported device.
-- Field first token ≤ 3 s and ≥ 8 tokens/s at the p50 target device.
-- Vision Expert first useful observation ≤ 8 s on the minimum approved device.
-- No OS termination in a 30-minute incident script.
-- No transition to serious thermal state in the standard 10-turn script.
-- Vision session energy use ≤ 5% battery for the standard photo scenario.
+- Lite warm first token at most 3 seconds and at least 8 tokens/second on iPhone 13.
+- Expert first useful visual result at most 8 seconds on the minimum approved device.
+- Manual visible within one second and merged local search within 300 ms.
+- No OS termination in a 30-minute incident script and no serious thermal transition in the standard ten-turn script.
+- Expert vision energy use at most 5% battery for the standard photo scenario.
 
-These are initial product gates, not claims that the current prototype passes.
+The current Lite candidate has prior short and five-turn latency/throughput evidence. Long-duration battery and interruption gates remain pending. Expert performance and real image inference remain blocked until an approved signed model/projector and capable physical target are available.
 
-## Decision tree
+## Required hardware matrix
 
-1. Benchmark Qwen3-VL-2B Q4 language + Q8 projector.
-2. If memory or heat fails, reduce image resolution and context before reducing
-   quantization quality.
-3. If visual grounding still fails, compare a smaller vision encoder plus Field
-   text model.
-4. If no configuration passes, ship OCR-only on that device class.
-5. Do not relax safety, citation, or fallback gates to preserve a Vision label.
+Test iPhone 13 as the Lite floor, then representative recent iPhones, iPhone 17 Pro Max, and iPad Pro M2 or newer across fresh/warm launch, storage pressure, Low Power Mode, thermal pressure, Airplane Mode, backgrounding, and memory pressure. Do not infer compatibility solely from a product name.

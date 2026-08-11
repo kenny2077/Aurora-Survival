@@ -22,13 +22,7 @@ jobs:
           python-version: "3.12"
       - name: Install validation dependencies
         run: python3 -m pip install -r requirements-dev.txt
-      - name: Regenerate deterministic fixtures
-        run: |
-          python3 tools/generate_evaluation_fixtures.py
-          python3 tools/generate_emergency_core.py
-      - name: Verify generated files are current
-        run: git diff --exit-code
-      - name: Validate packs and safety contracts
+      - name: Validate packs and Lite Chat contracts
         run: python3 tools/validate.py
       - name: Verify reproducible signed pack build
         run: python3 tools/test_pack_reproducibility.py

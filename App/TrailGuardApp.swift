@@ -9,6 +9,11 @@ struct AuroraApp: App {
             RootView()
                 .environmentObject(appModel)
                 .tint(Color("SignalOrange"))
+                .task {
+                    await appModel.refreshActivePacks()
+                    await appModel.loadDebugOCRFixtureIfPresent()
+                    await appModel.runDebugPhysicalInferenceIfRequested()
+                }
         }
     }
 }

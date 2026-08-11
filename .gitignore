@@ -2,6 +2,9 @@
 .build/
 .swiftpm/
 DerivedData/
+.trailguard/
+App/Info.plist
+Aurora.xcodeproj/
 *.xcuserstate
 xcuserdata/
 review/

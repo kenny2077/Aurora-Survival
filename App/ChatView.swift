@@ -5,7 +5,7 @@ struct ChatView: View {
     @EnvironmentObject private var model: AppModel
     @State private var draft = ""
     @State private var photoItem: PhotosPickerItem?
-    @State private var showEmergencyHelp = false
+    @FocusState private var composerIsFocused: Bool
 
     private let starters = [
         "My car will not start",
@@ -14,31 +14,17 @@ struct ChatView: View {
     ]
 
     var body: some View {
-        VStack(spacing: 0) {
-            prototypeBanner
-            messages
-            composer
-        }
-        .navigationTitle("Aurora")
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    showEmergencyHelp = true
-                } label: {
-                    Label("Emergency", systemImage: "sos")
-                        .foregroundStyle(.red)
+        Group {
+            if model.canUseAsk {
+                VStack(spacing: 0) {
+                    messages
+                    composer
                 }
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Clear", action: model.resetConversation)
-                    .disabled(model.messages.isEmpty)
+            } else {
+                modelRequired
             }
         }
-        .alert("Immediate danger?", isPresented: $showEmergencyHelp) {
-            Button("Close", role: .cancel) {}
-        } message: {
-            Text("Use iPhone Emergency SOS or call the emergency number for your location. Do not wait for a chatbot response.")
-        }
+        .navigationTitle("Ask Aurora")
         .onChange(of: photoItem) { _, item in
             Task {
                 guard let data = try? await item?.loadTransferable(type: Data.self) else { return }
@@ -47,23 +33,27 @@ struct ChatView: View {
         }
     }
 
-    private var prototypeBanner: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Image(systemName: "exclamationmark.shield.fill")
-            Text("Engineering prototype — not yet clinically or mechanically certified.")
-                .font(.caption)
+    private var modelRequired: some View {
+        ContentUnavailableView {
+            Label("Offline model required", systemImage: "cpu")
+        } description: {
+            Text("Install Lite in Tools to use Ask. The Manual and Maps remain available without a model.")
+        } actions: {
+            Button {
+                model.selectedTab = .tools
+            } label: {
+                Label("Set up models", systemImage: "arrow.down.circle.fill")
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
-        .foregroundStyle(.black)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .frame(maxWidth: .infinity)
-        .background(Color.yellow.opacity(0.85))
+        .accessibilityIdentifier("chat.modelRequired")
     }
 
     private var messages: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(spacing: 14) {
+                VStack(spacing: 14) {
                     if model.messages.isEmpty {
                         WelcomeCard(starters: starters) { draft = $0 }
                     }
@@ -72,15 +62,21 @@ struct ChatView: View {
                             .id(message.id)
                     }
                     if model.isThinking {
-                        ProgressView("Checking safety and offline sources…")
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        HStack(spacing: 10) {
+                            ProgressView()
+                            Text("Thinking offline…")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 4)
                     }
                 }
                 .padding()
             }
             .onChange(of: model.messages.count) {
                 guard let last = model.messages.last else { return }
-                withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
+                proxy.scrollTo(last.id, anchor: .bottom)
             }
         }
     }
@@ -104,29 +100,42 @@ struct ChatView: View {
             }
 
             HStack(alignment: .bottom, spacing: 10) {
-                PhotosPicker(selection: $photoItem, matching: .images) {
-                    Image(systemName: "camera.fill")
-                        .frame(width: 36, height: 36)
+                if model.canAttachPhoto {
+                    PhotosPicker(selection: $photoItem, matching: .images) {
+                        Image(systemName: "camera.fill")
+                            .frame(width: 40, height: 40)
+                            .background(.quaternary, in: Circle())
+                    }
+                    .accessibilityLabel("Attach photo")
                 }
-                .accessibilityLabel("Attach photo")
 
                 TextField("Describe the situation…", text: $draft, axis: .vertical)
                     .lineLimit(1...5)
-                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 10)
+                    .background(.background, in: RoundedRectangle(cornerRadius: 18))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(.quaternary, lineWidth: 1)
+                    }
+                    .focused($composerIsFocused)
+                    .accessibilityIdentifier("chat.composer")
 
                 Button {
                     let outgoing = draft
                     draft = ""
+                    composerIsFocused = false
                     Task { await model.send(outgoing) }
                 } label: {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 32))
+                        .font(.system(size: 36))
                 }
                 .disabled(draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || model.isThinking)
                 .accessibilityLabel("Send")
+                .accessibilityIdentifier("chat.send")
             }
             .padding(.horizontal)
-            .padding(.bottom, 8)
+            .padding(.bottom, 10)
         }
         .padding(.top, 8)
         .background(.bar)
@@ -139,69 +148,127 @@ private struct WelcomeCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Label("Offline incident assistant", systemImage: "mountain.2.fill")
+            Label("Your offline field companion", systemImage: "mountain.2.fill")
                 .font(.title2.bold())
-            Text("Ask about vehicle trouble, wilderness basics, navigation, or layperson first aid. Safety rules run before the model.")
+            Text("Chat naturally about water, fire, shelter, navigation, first aid, or vehicle trouble. Answers connect to the reviewed manual on this device.")
                 .foregroundStyle(.secondary)
             ForEach(starters, id: \.self) { starter in
-                Button(starter) { choose(starter) }
-                    .buttonStyle(.bordered)
+                Button {
+                    choose(starter)
+                } label: {
+                    HStack {
+                        Text(starter)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.bordered)
             }
         }
-        .padding()
+        .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 22))
+        .overlay {
+            RoundedRectangle(cornerRadius: 22)
+                .stroke(.quaternary, lineWidth: 1)
+        }
     }
 }
 
 private struct MessageBubble: View {
+    @EnvironmentObject private var model: AppModel
     let message: ChatMessage
 
+    private var visibleNotices: [String] {
+        guard let answer = message.answer else { return [] }
+        return answer.notices.filter {
+            !$0.localizedCaseInsensitiveContains("is available for this incident")
+        }
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(message.text)
-                .textSelection(.enabled)
+        HStack(alignment: .top, spacing: 0) {
+            if message.role == .user {
+                Spacer(minLength: 48)
+            }
+            VStack(alignment: .leading, spacing: 12) {
+                Text(message.text)
+                    .font(.body)
+                    .lineSpacing(3)
+                    .textSelection(.enabled)
+                    .accessibilityIdentifier(
+                        message.role == .user ? "chat.question" : "chat.answer"
+                    )
 
-            if let answer = message.answer {
-                if answer.usedDeterministicOverride {
-                    Label("Safety rule — model bypassed", systemImage: "shield.fill")
-                        .font(.caption.bold())
-                        .foregroundStyle(.red)
-                } else if let tier = answer.modelTier {
-                    Label(tier.displayName, systemImage: answer.visionWasUsed ? "eye.fill" : "text.bubble.fill")
-                        .font(.caption)
+                if let answer = message.answer {
+                    if let tier = answer.modelTier {
+                        Label(
+                            tier.displayName,
+                            systemImage: answer.visionWasUsed ? "eye.fill" : "cpu"
+                        )
+                        .font(.caption.weight(.medium))
                         .foregroundStyle(.secondary)
-                }
-
-                if !answer.sources.isEmpty {
-                    DisclosureGroup("Offline sources (\(answer.sources.count))") {
-                        ForEach(Array(answer.sources.enumerated()), id: \.element.id) { index, source in
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("[\(index + 1)] \(source.title)")
-                                    .font(.caption.bold())
-                                Text("\(source.organization) · \(source.revision)")
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 4)
-                        }
                     }
-                    .font(.caption)
-                }
 
-                ForEach(answer.notices, id: \.self) { notice in
-                    Text(notice)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                    if !answer.manualReferences.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("More in Field Manual")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                            ForEach(answer.manualReferences) { reference in
+                                Button {
+                                    model.openManual(reference)
+                                } label: {
+                                    HStack(alignment: .firstTextBaseline) {
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text(reference.sectionTitle)
+                                                .font(.subheadline.weight(.semibold))
+                                            Text("\(reference.chapterTitle) · \(reference.pageLabel)")
+                                                .font(.caption)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        Spacer(minLength: 8)
+                                        Image(systemName: "arrow.right.circle.fill")
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("chat.manual-link")
+                            }
+                        }
+                        .padding(.top, 4)
+                    }
+
+                    ForEach(visibleNotices, id: \.self) { notice in
+                        Text(notice)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 13)
+            .frame(maxWidth: message.role == .user ? 560 : .infinity, alignment: .leading)
+            .background(
+                message.role == .user
+                    ? Color.accentColor.opacity(0.12)
+                    : Color.secondary.opacity(0.08),
+                in: RoundedRectangle(cornerRadius: 20)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.quaternary, lineWidth: message.role == .user ? 0 : 1)
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier(
+                message.role == .user ? "chat.message.user" : "chat.message.assistant"
+            )
+            if message.role != .user {
+                Spacer(minLength: 20)
+            }
         }
-        .padding(12)
-        .frame(maxWidth: .infinity, alignment: message.role == .user ? .trailing : .leading)
-        .background(
-            message.role == .user ? Color.accentColor.opacity(0.14) : Color.secondary.opacity(0.10),
-            in: RoundedRectangle(cornerRadius: 16)
-        )
     }
 }

@@ -1,58 +1,130 @@
 import Foundation
 
 public struct ModelRouter: Sendable {
-    public static let minimumVisionMemory: UInt64 = 7_500_000_000
-    public static let minimumVisionStorage: Int64 = 3_500_000_000
-    public static let minimumFieldMemory: UInt64 = 5_000_000_000
+    public static let minimumExpertMemory: UInt64 = 7_500_000_000
+    public static let minimumExpertStorage: Int64 = 3_500_000_000
+    public static let minimumLiteMemory: UInt64 = 3_500_000_000
 
     public init() {}
 
     public func route(
-        requested: ModelTier,
+        preference: ModelSelectionPreference,
         installed: Set<ModelTier>,
+        expertValidated: Bool = false,
         device: DeviceSnapshot
     ) -> ModelRoutingDecision {
-        let fallback = installed.contains(.field) && device.physicalMemoryBytes >= Self.minimumFieldMemory
-            ? ModelTier.field
-            : .essential
+        let requested = preference.requestedTier
+        let liteIsEligible = installed.contains(.lite)
+            && ineligibilityReasons(for: .lite, device: device).isEmpty
+        let expertReasons = ineligibilityReasons(for: .expert, device: device)
+        let expertIsEligible = expertValidated
+            && installed.contains(.expert)
+            && expertReasons.isEmpty
 
-        guard installed.contains(requested) else {
+        if requested == .expert && !expertValidated {
             return ModelRoutingDecision(
-                requested: requested,
-                selected: installed.contains(fallback) ? fallback : .essential,
+                requested: .expert,
+                selected: liteIsEligible ? .lite : nil,
                 canAnalyzeImage: false,
-                explanation: "\(requested.displayName) is not installed; using the best available text tier."
+                availability: .validationLocked,
+                explanation: liteIsEligible
+                    ? "Expert validation is pending; using Lite."
+                    : "Expert validation is pending. Install Lite to use Ask."
             )
         }
 
-        if requested == .visionExpert {
-            let thermalOK = device.thermalCondition == .nominal || device.thermalCondition == .fair
-            let eligible = device.physicalMemoryBytes >= Self.minimumVisionMemory
-                && device.freeStorageBytes >= Self.minimumVisionStorage
-                && thermalOK
-                && !device.isLowPowerMode
-
-            guard eligible else {
-                let reasons = [
-                    device.physicalMemoryBytes < Self.minimumVisionMemory ? "memory" : nil,
-                    device.freeStorageBytes < Self.minimumVisionStorage ? "free storage" : nil,
-                    !thermalOK ? "thermal state" : nil,
-                    device.isLowPowerMode ? "Low Power Mode" : nil
-                ].compactMap { $0 }
-                return ModelRoutingDecision(
-                    requested: requested,
-                    selected: installed.contains(fallback) ? fallback : .essential,
-                    canAnalyzeImage: false,
-                    explanation: "Vision paused because of \(reasons.joined(separator: ", ")); using text plus OCR."
-                )
-            }
+        let selected: ModelTier?
+        switch preference {
+        case .automatic:
+            selected = expertIsEligible ? .expert : (liteIsEligible ? .lite : nil)
+        case .lite:
+            selected = liteIsEligible ? .lite : nil
+        case .expert:
+            selected = expertIsEligible ? .expert : (liteIsEligible ? .lite : nil)
         }
 
+        if let selected {
+            return ModelRoutingDecision(
+                requested: requested,
+                selected: selected,
+                canAnalyzeImage: selected.supportsVision,
+                availability: .ready,
+                explanation: explanation(
+                    preference: preference,
+                    selected: selected
+                )
+            )
+        }
+
+        let requestedReasons = requested.map {
+            ineligibilityReasons(for: $0, device: device)
+        } ?? []
         return ModelRoutingDecision(
             requested: requested,
-            selected: requested,
-            canAnalyzeImage: requested.supportsVision,
-            explanation: "\(requested.displayName) is available for this incident."
+            selected: nil,
+            canAnalyzeImage: false,
+            availability: requestedReasons.isEmpty ? .missing : .temporarilyIneligible,
+            explanation: requestedReasons.isEmpty
+                ? "Install Lite in Tools to use Ask."
+                : "The selected model is paused because of \(requestedReasons.joined(separator: ", "))."
         )
+    }
+
+    public func route(
+        requested: ModelTier,
+        installed: Set<ModelTier>,
+        expertValidated: Bool = false,
+        device: DeviceSnapshot
+    ) -> ModelRoutingDecision {
+        route(
+            preference: requested == .lite ? .lite : .expert,
+            installed: installed,
+            expertValidated: expertValidated,
+            device: device
+        )
+    }
+
+    private func explanation(
+        preference: ModelSelectionPreference,
+        selected: ModelTier
+    ) -> String {
+        if preference == .automatic {
+            return "Auto selected \(selected.displayName) for this device."
+        }
+        if preference.requestedTier != selected {
+            return "The preferred tier is unavailable; using \(selected.displayName)."
+        }
+        return "\(selected.displayName) is ready offline."
+    }
+
+    private func ineligibilityReasons(
+        for tier: ModelTier,
+        device: DeviceSnapshot
+    ) -> [String] {
+        var reasons: [String] = []
+        let minimumMemory: UInt64
+        switch tier {
+        case .lite:
+            minimumMemory = Self.minimumLiteMemory
+        case .expert:
+            minimumMemory = Self.minimumExpertMemory
+        }
+        if device.physicalMemoryBytes < minimumMemory {
+            reasons.append("memory")
+        }
+        if tier == .expert,
+           device.freeStorageBytes < Self.minimumExpertStorage {
+            reasons.append("free storage")
+        }
+        if tier == .expert {
+            if device.thermalCondition != .nominal
+                && device.thermalCondition != .fair {
+                reasons.append("thermal state")
+            }
+            if device.isLowPowerMode {
+                reasons.append("Low Power Mode")
+            }
+        }
+        return reasons
     }
 }
