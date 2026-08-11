@@ -54,7 +54,6 @@ struct DownloadCenterView: View {
             }
 
             if showsCatalogConnection {
-                intelligenceSection
                 Section("Safety boundary") {
                     Label(
                         "Every download is signed, hash verified, and atomically activated. Partial or tampered files never become active.",
@@ -144,19 +143,6 @@ struct DownloadCenterView: View {
         }
     }
 
-    private var intelligenceSection: some View {
-        Section("Preferred intelligence") {
-            Picker("Model tier", selection: $model.preferredTier) {
-                ForEach(ModelTier.allCases, id: \.self) { tier in
-                    Text(tier.displayName).tag(tier)
-                }
-            }
-            .accessibilityIdentifier("download.modelTier")
-            Text(model.installedTierSummary)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-    }
 }
 
 struct PackageDownloadCard: View {

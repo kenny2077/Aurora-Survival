@@ -107,27 +107,24 @@ public struct AccessibilityAuditSnapshot: Codable, Equatable, Sendable {
 }
 
 public struct VirtualReleaseScenario: Codable, Equatable, Sendable {
-    public let deterministicSafetyPasses: Bool
+    public let survivalCorpusIsReady: Bool
     public let bundledCoreRecovers: Bool
     public let installedMapIsReady: Bool
-    public let obdWritesAreBlocked: Bool
     public let installedEntitlementsWorkOffline: Bool
     public let accessibility: AccessibilityAuditSnapshot
     public let incidentModeNetworkIsContained: Bool
 
     public init(
-        deterministicSafetyPasses: Bool,
+        survivalCorpusIsReady: Bool,
         bundledCoreRecovers: Bool,
         installedMapIsReady: Bool,
-        obdWritesAreBlocked: Bool,
         installedEntitlementsWorkOffline: Bool,
         accessibility: AccessibilityAuditSnapshot,
         incidentModeNetworkIsContained: Bool
     ) {
-        self.deterministicSafetyPasses = deterministicSafetyPasses
+        self.survivalCorpusIsReady = survivalCorpusIsReady
         self.bundledCoreRecovers = bundledCoreRecovers
         self.installedMapIsReady = installedMapIsReady
-        self.obdWritesAreBlocked = obdWritesAreBlocked
         self.installedEntitlementsWorkOffline = installedEntitlementsWorkOffline
         self.accessibility = accessibility
         self.incidentModeNetworkIsContained = incidentModeNetworkIsContained
@@ -135,10 +132,9 @@ public struct VirtualReleaseScenario: Codable, Equatable, Sendable {
 }
 
 public enum VirtualReleaseIssue: String, Codable, Hashable, Sendable {
-    case safetyRegression
+    case survivalCorpusUnavailable
     case emergencyCoreUnavailable
     case mapUnavailable
-    case obdWriteNotBlocked
     case offlineEntitlementFailure
     case accessibilityContractFailure
     case incidentNetworkLeak
@@ -149,10 +145,11 @@ public struct VirtualReleaseEvaluator: Sendable {
 
     public func evaluate(_ scenario: VirtualReleaseScenario) -> [VirtualReleaseIssue] {
         var issues: [VirtualReleaseIssue] = []
-        if !scenario.deterministicSafetyPasses { issues.append(.safetyRegression) }
+        if !scenario.survivalCorpusIsReady {
+            issues.append(.survivalCorpusUnavailable)
+        }
         if !scenario.bundledCoreRecovers { issues.append(.emergencyCoreUnavailable) }
         if !scenario.installedMapIsReady { issues.append(.mapUnavailable) }
-        if !scenario.obdWritesAreBlocked { issues.append(.obdWriteNotBlocked) }
         if !scenario.installedEntitlementsWorkOffline {
             issues.append(.offlineEntitlementFailure)
         }

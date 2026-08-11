@@ -95,20 +95,18 @@ final class ProductionControlTests: XCTestCase {
     func testGroundedPromptDefinesConversationalDecisionContract() {
         let prompt = GroundedPromptBuilder().systemPrompt(
             for: .lite,
+            purpose: .grounded,
             outputMode: .groundedJSON
         )
 
         for required in [
             "{\"a\":",
             "\"e\":",
-            "\"p\":",
-            "\"q\":",
-            "four keys in that order",
             "extra keys",
-            "natural conversational answer",
-            "EVIDENCE number",
-            "NO REVIEWED",
-            "reviewed procedure",
+            "REVIEWED EXCERPTS",
+            "35–55 word paragraph",
+            "paraphrase reviewed action 1",
+            "one or two unique excerpt numbers",
         ] {
             XCTAssertTrue(prompt.contains(required), "Missing prompt contract: \(required)")
         }
@@ -130,11 +128,10 @@ final class ProductionControlTests: XCTestCase {
             ),
             outputMode: .groundedJSON
         )
-        XCTAssertTrue(userPrompt.contains("Domain: vehicle"))
-        XCTAssertTrue(userPrompt.contains("RECENT CONVERSATION"))
-        XCTAssertTrue(userPrompt.contains("My engine made a strange noise."))
-        XCTAssertTrue(userPrompt.contains("Reviewed steps:"))
-        XCTAssertTrue(userPrompt.contains("Reviewed warnings:"))
+        XCTAssertTrue(userPrompt.contains("REVIEWED EXCERPT [1]"))
+        XCTAssertFalse(userPrompt.contains("RECENT CONVERSATION"))
+        XCTAssertFalse(userPrompt.contains("My engine made a strange noise."))
+        XCTAssertTrue(userPrompt.contains(article.title))
 
         let emptyEvidencePrompt = GroundedPromptBuilder().userPrompt(
             from: ModelPrompt(
@@ -146,7 +143,8 @@ final class ProductionControlTests: XCTestCase {
             ),
             outputMode: .groundedJSON
         )
-        XCTAssertTrue(emptyEvidencePrompt.contains("NO REVIEWED EVIDENCE"))
+        XCTAssertFalse(emptyEvidencePrompt.contains("Field Manual"))
+        XCTAssertFalse(emptyEvidencePrompt.contains("REVIEWED EXCERPT"))
     }
 
     func testInsufficientAnswerCannotSelectProcedure() {
@@ -306,159 +304,6 @@ final class ProductionControlTests: XCTestCase {
         }
     }
 
-    func testIncidentAssistantUsesValidatedStructuredModelOutput() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .moderate,
-            immediateAction: GroundedAction(
-                kind: .assess,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [],
-            procedureID: article.id,
-            steps: [
-                GroundedStep(
-                    stepID: "\(article.id)#step-1",
-                    evidenceIDs: [article.id]
-                )
-            ],
-            doNotDo: article.warnings,
-            driveability: .unknown,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .field],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in
-                    generated
-                }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .field
-            ),
-            device: capableDevice()
-        )
-        XCTAssertEqual(answer.modelTier, .field)
-        XCTAssertTrue(answer.text.contains(article.steps[0]))
-        XCTAssertFalse(answer.notices.contains {
-            $0.contains("failed evidence validation")
-        })
-    }
-
-    func testStructuredOutputFallsBackWhenWarningIsInvented() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .moderate,
-            immediateAction: GroundedAction(
-                kind: .assess,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [],
-            procedureID: nil,
-            steps: [],
-            doNotDo: ["Invented warning"],
-            driveability: .unknown,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .supported
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .field],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in generated }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .field
-            ),
-            device: capableDevice()
-        )
-        XCTAssertTrue(answer.text.contains(article.steps[0]))
-        XCTAssertTrue(answer.notices.contains {
-            $0.contains("failed evidence validation")
-        })
-    }
-
-    func testVisionObservationCanTriggerPostModelSafetyOverride() async throws {
-        let article = makeArticle()
-        let response = GroundedResponse(
-            domain: .vehicle,
-            riskLevel: .critical,
-            immediateAction: GroundedAction(
-                kind: .sos,
-                evidenceIDs: [article.id]
-            ),
-            questions: [],
-            observations: [
-                GroundedObservation(
-                    fact: "The image appears to show a fuel leak.",
-                    source: .photo,
-                    confidence: 0.8
-                )
-            ],
-            procedureID: article.id,
-            steps: [],
-            doNotDo: article.warnings,
-            driveability: .doNotDrive,
-            escalation: GroundedEscalation(reason: "", action: ""),
-            answerConfidence: .limited
-        )
-        let generated = String(
-            decoding: try JSONEncoder().encode(response),
-            as: UTF8.self
-        )
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.essential, .visionExpert],
-            modelProvider: { tier in
-                ClosureBackedLanguageModel(
-                    tier: tier,
-                    outputMode: .groundedJSON
-                ) { _, _ in generated }
-            }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "fixture engine inspection",
-                preferredTier: .visionExpert,
-                hasImage: true,
-                imageData: Data("image".utf8)
-            ),
-            device: capableDevice()
-        )
-        XCTAssertTrue(answer.usedDeterministicOverride)
-        XCTAssertTrue(answer.visionWasUsed)
-        XCTAssertEqual(answer.text.components(separatedBy: "\n").first, "Fire or fuel hazard")
-        XCTAssertTrue(answer.notices.contains {
-            $0.contains("model observation triggered")
-        })
-    }
-
     func testIncidentModeDeniesNonessentialNetworkOperations() {
         let policy = IncidentNetworkPolicy(incidentModeEnabled: true)
         XCTAssertTrue(policy.permits(.emergencyContact))
@@ -586,22 +431,6 @@ final class ProductionControlTests: XCTestCase {
 
         XCTAssertEqual(result.origin, .active)
         XCTAssertEqual(result.bundle.version, "2.0.0")
-    }
-
-    func testDeterministicSafetyAnswerIncludesPolicySource() async {
-        let assistant = IncidentAssistant(articles: [])
-        let answer = await assistant.answer(
-            request: ChatRequest(question: "There is a fuel leak"),
-            device: DeviceSnapshot(
-                physicalMemoryBytes: 8_000_000_000,
-                freeStorageBytes: 20_000_000_000,
-                thermalCondition: .nominal,
-                isLowPowerMode: false
-            )
-        )
-        XCTAssertTrue(answer.usedDeterministicOverride)
-        XCTAssertEqual(answer.sources.first?.id, "trailguard.safety-policy")
-        XCTAssertTrue(answer.notices.contains { $0.contains("vehicle.fire-fuel") })
     }
 
     private func makeGroundedResponse() -> GroundedResponse {

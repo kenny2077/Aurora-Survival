@@ -21,17 +21,18 @@ struct MapPackView: View {
             } else {
                 DownloadCenterView(
                     kindFilter: .map,
-                    showsCatalogConnection: false
+                    showsCatalogConnection: true
                 )
             }
         }
         .navigationTitle("Offline Maps")
+        .accessibilityIdentifier("maps.home")
         .toolbar {
             if !model.offlineMaps.isEmpty {
                 NavigationLink {
                     DownloadCenterView(
                         kindFilter: .map,
-                        showsCatalogConnection: false
+                        showsCatalogConnection: true
                     )
                 } label: {
                     Label("Manage map downloads", systemImage: "arrow.down.circle")

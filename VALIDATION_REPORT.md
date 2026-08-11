@@ -1,70 +1,37 @@
 # Validation report
 
-Date: 2026-08-02
-Milestone: signed offline product system and Gemma Lite physical verification
+Date: 2026-08-11
+Milestone: Aurora 1.0.0 release freeze
 
 ## Current result
 
-Aurora passes its structural validator and all 112 Swift tests. The exact
-signed Gemma 3 1B IT Q4_K_M artifact is installed and active on a physical base
-iPhone 13 together with reviewed guides and both Minnesota map sizes.
-
-The model is an explanation/evidence-selection layer. Deterministic safety,
-package verification, evidence allowlists, citations, and Essential fallback
-remain authoritative.
-
-## Automated gates
-
-- Eight reviewed starter articles and eight signed source records validate.
-- All 120 locked incident cases execute through `IncidentAssistant`.
-- All 30 map/asset cases execute through map readiness.
-- Twelve safety/refusal cases preserve safety-before-model behavior.
-- Package envelopes reject invalid signatures, hashes, sizes, paths,
-  compatibility, recalls, entitlements, and unsupported runtime configuration.
-- SQLite FTS/vector packs build reproducibly and fail closed on corrupt or
-  inapplicable evidence.
-- The signed six-product catalog supports strict resumable downloads and atomic
-  installation for Gemma, three reviewed guides, and two offline maps.
-- The app and isolated llama.cpp bridge build for generic iOS Simulator and
-  signed arm64 iOS device targets.
-- Release resources exclude the development trust key.
-
-Run:
-
-```bash
-python3 tools/validate.py
-/tmp/trailguard-dev-venv/bin/python tools/test_pack_reproducibility.py
-swift test
-```
-
-## Physical iPhone 13 gates
+Aurora passes repository validation, all 135 Swift tests, the production
+Gemma prompt/grammar contract check, a generic simulator test build, and a newly
+signed arm64 build for the connected iPhone 13. The user also reports successful
+manual physical-iPhone testing across several prompts and scenarios.
 
 | Gate | Result | Evidence |
 | --- | --- | --- |
-| Grounded signed Gemma answer | Pass: 2.67 s cold TTFT, 14.0 tok/s, 9 tokens, nominal | `/tmp/AuroraGemmaDeterministicSafetyPhysical.xcresult` |
-| Deterministic fuel-hazard bypass | Pass; no native run | `/tmp/AuroraGemmaSafetyBypassPhysical.xcresult` |
-| Apple Vision OCR safety path | Pass | `/tmp/AuroraOCRSafetyPhysical.xcresult` |
-| Twin Cities Scout rendering | Pass | `/tmp/AuroraTwinCitiesPhysicalUnlocked8.xcresult` |
-| Minnesota guide/map rendering | Pass | `/tmp/AuroraMinnesotaGuidePhysical.xcresult` |
-| Model/guide/map coexistence | Pass | `/tmp/AuroraGemmaSafetyCoexistencePhysical.xcresult` |
-| Five consecutive grounded answers | Pass: final warm TTFT 1.35 s, 15.4 tok/s, thermal fair; no fallback/termination | `/tmp/AuroraGemmaSustainedWarmPolicyPhysical.xcresult` |
-| Optimized validation build | Pass: 2.46 s cold TTFT, 14.4 tok/s, thermal fair | `/tmp/AuroraGemmaOptimizedPhysical.xcresult` |
+| Deterministic knowledge validation | Pass: 10 chapters, 70 lessons, 1,050 passages, 12 primary sources, 828 legacy dispositions | `python3 tools/validate.py` |
+| Swift package suite | Pass, 135/135 | `swift test` |
+| 200-query retrieval benchmark | Pass: ≥90% overall and ≥95% critical top-two recall gates | `SurvivalKnowledgeTests` |
+| Native Gemma contract | Pass: 2,048-token context, 160-token output, grounded and unlinked grammars | `python3 tools/native_llama_lite_eval.py --contract-only` |
+| Generic simulator test build | Pass | `/tmp/AuroraRelease100Simulator` |
+| Signed iPhone 13 build | Pass: Apple Development arm64 build | `/tmp/AuroraRelease100Physical` |
+| Focused simulator journeys | Pass, 6/6 across corrected final runs | `/tmp/AuroraKnowledgeSimulator-20260809-1827.xcresult`; `/tmp/AuroraKnowledgeSimulatorManual-20260809-1829.xcresult` |
+| Physical iPhone 13 shell and Manual | Pass, 2/2 | `/tmp/AuroraKnowledgePhysicalShellManual-20260809-1847.xcresult` |
+| Physical iPhone 13 Lite exact citation | Pass, 1/1 | `/tmp/AuroraKnowledgePhysicalFinal-20260809-1846.xcresult` |
 
-Every generative answer in these gates uses the exact
-`8ccc5cd1f1b3602548715ae25a66ed73fd5dc68a210412eea643eb20eb75a135`
-artifact and renders exactly one reviewed offline source. The optimized build
-retains Debug only for non-shipping development trust; production trust is not
-weakened.
+The database checksum, schema mismatch, emergency fallback, lesson structure, safety lint, source attribution, legacy redirects/retirements, exact Manual anchors, prompt limits, typo handling, and plain-language water retrieval all have automated coverage.
 
-## Remaining limitations
+## Open gates
 
-No true Airplane Mode or Low Power Mode physical pass is claimed yet. A stopped
-or unavailable catalog host is useful offline evidence but is not equivalent to
-turning the device radios off. The 20–30 minute battery/memory/interruption run,
-VoiceOver/largest Dynamic Type walkthrough, external OBD hardware, production
-keys/hosting, App Store configuration, and independent legal/safety/privacy
-sign-offs also remain open.
+- The interrupted automated 40-case physical Lite stress matrix is not release
+  evidence; no aggregate usefulness, repair-rate, or current-contract thermal
+  claim is made from its partial report.
+- Independent content, medical, legal, licensing, and accessibility SME approval.
+- Physical signpost evidence for Manual under one second and local search p95 below 300 ms; functional and development-Mac latency gates pass.
+- True Airplane Mode, Low Power Mode, sustained battery/memory/thermal tests, and full VoiceOver traversal.
+- Physical M2 iPad Pro and iPhone 17 Pro Max acceptance; Expert vision remains validation-locked.
 
-GitHub Actions cannot currently start because GitHub reports an account-level
-billing/spending-limit issue; local validation is green but does not replace
-the missing hosted CI record.
+See `Docs/FIELD_MANUAL_PROGRESS_REPORT.md` for migration details, UI findings, source-review status, and blockers.

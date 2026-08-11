@@ -9,6 +9,8 @@ settings:
     SWIFT_VERSION: "5.9"
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
 packages:
   MapLibre:
     url: https://github.com/maplibre/maplibre-gl-native-distribution
@@ -28,6 +30,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Aurora
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
         NSPhotoLibraryUsageDescription: "Attach a photo for fully offline text recognition and optional on-device visual assistance."
         NSCameraUsageDescription: "Take a photo for fully offline text recognition and optional on-device visual assistance."

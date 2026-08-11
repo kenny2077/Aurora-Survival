@@ -18,7 +18,6 @@ public enum ImmediateActionKind: String, Codable, Sendable {
 public enum ObservationSource: String, Codable, Sendable {
     case user
     case photo
-    case obd
     case sensor
 }
 
@@ -167,6 +166,7 @@ public enum GroundedResponseError: Error, Equatable {
     case procedureDomainMismatch(String)
     case unknownEvidenceIndex(Int)
     case invalidConversationalAnswer
+    case invalidConversationalEvidence
     case invalidFollowUp
     case procedureRequiresCitedEvidence
 }

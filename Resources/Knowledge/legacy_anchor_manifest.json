@@ -1,0 +1,4973 @@
+{
+  "anchors": [
+    {
+      "legacyChunkID": "meateater-2020-food-0134",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0135",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0136",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0137",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0138",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0139",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0140",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0141",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0142",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0143",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0144",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0145",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0146",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0147",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0148",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0149",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0150",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0151",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0152",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0153",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0154",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0155",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0156",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0157",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0158",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0159",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0160",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0161",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0162",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0163",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0164",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0165",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0166",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0167",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0168",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0169",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0170",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0171",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0172",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0173",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0174",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0175",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0176",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0177",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0178",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0179",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0180",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0181",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0182",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0183",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0184",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0185",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0186",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0187",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0188",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0189",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0190",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0191",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0192",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0193",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0194",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0195",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0196",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0197",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0198",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0199",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0200",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0201",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0202",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0203",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0204",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0205",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0206",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0207",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0208",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0209",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0210",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0211",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0212",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0213",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0214",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0215",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0216",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0217",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0218",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0219",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0220",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0221",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0222",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0223",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0224",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0225",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0226",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0227",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0228",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0229",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0230",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0231",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0232",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0233",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0234",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0235",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0236",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0237",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0238",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0239",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0240",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0241",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0242",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0243",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0244",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0245",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0246",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0247",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0248",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0249",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0250",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0251",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0252",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0253",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0254",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0255",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0256",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0257",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0258",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0259",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0260",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0261",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0262",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0263",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0264",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0265",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0266",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0267",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0268",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0269",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0270",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0271",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0272",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0273",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0274",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0275",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0276",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0277",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0278",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0279",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0280",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0281",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0282",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0283",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0284",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0285",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0286",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0287",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0288",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0289",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0290",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0291",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0292",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0293",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0294",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0295",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0296",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0297",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0298",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0299",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0300",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0301",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0302",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0303",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0304",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0305",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0306",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0307",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0308",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0309",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0310",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0311",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0312",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0313",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0314",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0315",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0316",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0317",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0318",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0319",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0320",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0321",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-food-0322",
+      "note": "Updated conservative food guidance.",
+      "replacementLessonID": "food-energy",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0684",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0685",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0686",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0687",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0688",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0689",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0690",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0691",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0692",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0693",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0694",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0695",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0696",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0697",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0698",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0699",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0700",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0701",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0702",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0703",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0704",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0705",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0706",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0707",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0708",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0709",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0710",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0711",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0712",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0713",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0714",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0715",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0716",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0717",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0718",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0719",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0720",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0721",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0722",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0723",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0724",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0725",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0726",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0727",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0728",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0729",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-dehydration",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0730",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-dehydration",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0731",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0732",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0733",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0734",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0735",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0736",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0737",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-dehydration",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0738",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-dehydration",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0739",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0740",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0741",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0742",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0743",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0744",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-cold",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0745",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0746",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0747",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0748",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0749",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0750",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0751",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0752",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0753",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0754",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0755",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0756",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0757",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0758",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0759",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0760",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0761",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0762",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0763",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0764",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0765",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0766",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0767",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0768",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0769",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0770",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0771",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0772",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0773",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0774",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0775",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0776",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0777",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0778",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0779",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0780",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0781",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0782",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0783",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0784",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0785",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0786",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0787",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0788",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0789",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0790",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0791",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0792",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0793",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0794",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0795",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0796",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0797",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0798",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0799",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0800",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0801",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0802",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0803",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0804",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0805",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0806",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0807",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0808",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0809",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0810",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0811",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0812",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0813",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0814",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0815",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0816",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-medical-and-safety-0817",
+      "note": "Updated first-aid guidance.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0536",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0537",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0538",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0539",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0540",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0541",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0542",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0543",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0544",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0545",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0546",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0547",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0548",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0549",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0550",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0551",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0552",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0553",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0554",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0555",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0556",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0557",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0558",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0559",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0560",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0561",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0562",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0563",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0564",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0565",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0566",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0567",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0568",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0569",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0570",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0571",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0572",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0573",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0574",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0575",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0576",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0577",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0578",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0579",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0580",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0581",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0582",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0583",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0584",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0585",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0586",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0587",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0588",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0589",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0590",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0591",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0592",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0593",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0594",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0595",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0596",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0597",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0598",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0599",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0600",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0601",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0602",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0603",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0604",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0605",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0606",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0607",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0608",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0609",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0610",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0611",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0612",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0613",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0614",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0615",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0616",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0617",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0618",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0619",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0620",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0621",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0622",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0623",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0624",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0625",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0626",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0627",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0628",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0629",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0630",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0631",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0632",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0633",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0634",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0635",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0636",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0637",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0638",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0639",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0640",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0641",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0642",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0643",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0644",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0645",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0646",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0647",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0648",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0649",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0650",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0651",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0652",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0653",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0654",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0655",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0656",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0657",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0658",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0659",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0660",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0661",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0662",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0663",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0664",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0665",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "signal-mirror-light",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0666",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0667",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0668",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0669",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0670",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0671",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0672",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0673",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0674",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0675",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0676",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0677",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0678",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0679",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0680",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0681",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0682",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-navigation-and-wilderness-travel-0683",
+      "note": "Updated navigation guidance.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0446",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0447",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0448",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0449",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0450",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0451",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0452",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0453",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0454",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0455",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0456",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0457",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0458",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0459",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0460",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0461",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0462",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0463",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0464",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0465",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0466",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0467",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0468",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0469",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0470",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0471",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0472",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0473",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0474",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0475",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0476",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0477",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0478",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0479",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0480",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0481",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0482",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0483",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0484",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0485",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0486",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0487",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0488",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0489",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0490",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0491",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0492",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0493",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0494",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0495",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0496",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0497",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0498",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0499",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0500",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0501",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0502",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0503",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0504",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0505",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0506",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0507",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0508",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0509",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0510",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0511",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0512",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0513",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0514",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0515",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0516",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0517",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0518",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0519",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0520",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0521",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0522",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0523",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0524",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0525",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0526",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0527",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0528",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0529",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0530",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0531",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0532",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0533",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0534",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-shelter-and-warmth-0535",
+      "note": "Updated shelter and warmth guidance.",
+      "replacementLessonID": "shelter-site",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0818",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0819",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0820",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0821",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0822",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0823",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0824",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0825",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0826",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0827",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-some-parting-thoughts-0828",
+      "note": "Updated core survival guidance.",
+      "replacementLessonID": "basics-first-night",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0001",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0002",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0003",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0004",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0005",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0006",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0007",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0008",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0009",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-the-surprising-dangers-of-s-mores-0010",
+      "note": "Unrelated cooking anecdote retired from the survival course.",
+      "replacementLessonID": "basics-stop",
+      "status": "retired"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0323",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0324",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0325",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0326",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0327",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0328",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0329",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0330",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0331",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0332",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0333",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0334",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0335",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0336",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "food-unknown-plants",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0337",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0338",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0339",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0340",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0341",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0342",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0343",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0344",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0345",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0346",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0347",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0348",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0349",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0350",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "fire-decision",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0351",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0352",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0353",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0354",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0355",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0356",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0357",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0358",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0359",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0360",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0361",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0362",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0363",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0364",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0365",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0366",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0367",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0368",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0369",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0370",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0371",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0372",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0373",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0374",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0375",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0376",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "first-aid-assessment",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0377",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0378",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0379",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0380",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0381",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0382",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0383",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0384",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0385",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0386",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0387",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0388",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0389",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0390",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0391",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0392",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0393",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0394",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0395",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0396",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0397",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0398",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0399",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0400",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0401",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0402",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0403",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0404",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0405",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0406",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0407",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0408",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0409",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0410",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0411",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0412",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0413",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0414",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0415",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0416",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0417",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0418",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0419",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0420",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0421",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0422",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0423",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0424",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0425",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0426",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0427",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0428",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0429",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0430",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0431",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0432",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0433",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0434",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0435",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0436",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0437",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0438",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0439",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0440",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0441",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0442",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0443",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0444",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-things-that-bite-maul-sting-or-make-you-sick-0445",
+      "note": "Updated wildlife guidance.",
+      "replacementLessonID": "weather-wildlife-large-animals",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0079",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0080",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0081",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0082",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0083",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0084",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0085",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0086",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0087",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0088",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0089",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0090",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0091",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0092",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0093",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0094",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0095",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0096",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0097",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0098",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0099",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0100",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0101",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0102",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0103",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0104",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0105",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0106",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0107",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0108",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0109",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0110",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0111",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0112",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0113",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-boil",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0114",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0115",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0116",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0117",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0118",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0119",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0120",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "navigation-stop-mark",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0121",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0122",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0123",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0124",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0125",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0126",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0127",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0128",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0129",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0130",
+      "note": "Updated reviewed guidance for this topic.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0131",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0132",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-water-0133",
+      "note": "Updated water-source guidance.",
+      "replacementLessonID": "water-choose-source",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0011",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0012",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0013",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0014",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0015",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0016",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0017",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0018",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0019",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0020",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0021",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0022",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0023",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0024",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0025",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0026",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0027",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0028",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0029",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0030",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0031",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0032",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0033",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0034",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0035",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0036",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0037",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0038",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0039",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0040",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0041",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0042",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0043",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0044",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0045",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0046",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0047",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0048",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0049",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0050",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0051",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0052",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0053",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0054",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0055",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0056",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0057",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0058",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0059",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0060",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0061",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0062",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0063",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0064",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0065",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0066",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0067",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0068",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0069",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0070",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0071",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0072",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0073",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0074",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0075",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0076",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0077",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    },
+    {
+      "legacyChunkID": "meateater-2020-what-to-pack-and-wear-0078",
+      "note": "Updated gear and preparation guidance.",
+      "replacementLessonID": "basics-inventory",
+      "status": "redirected"
+    }
+  ],
+  "schemaVersion": 1
+}

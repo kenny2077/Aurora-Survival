@@ -24,7 +24,8 @@ public actor LlamaXCFrameworkBackend: LlamaRuntimeBackend {
         systemPrompt: String,
         userPrompt: String,
         imageData: Data?,
-        maximumOutputTokens: Int
+        maximumOutputTokens: Int,
+        evidenceCount: Int
     ) async throws -> LlamaCompletionResult {
         guard imageData == nil else {
             throw LlamaXCFrameworkBackendError.imageInputNotImplemented
@@ -35,7 +36,8 @@ public actor LlamaXCFrameworkBackend: LlamaRuntimeBackend {
         let completion = try await session.complete(
             systemPrompt: systemPrompt,
             userPrompt: userPrompt,
-            maximumOutputTokens: maximumOutputTokens
+            maximumOutputTokens: maximumOutputTokens,
+            evidenceCount: evidenceCount
         )
         return LlamaCompletionResult(
             text: completion.text,

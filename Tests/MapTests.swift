@@ -7,7 +7,7 @@ import XCTest
 @testable import Aurora
 #endif
 
-final class MapAndOBDTests: XCTestCase {
+final class MapTests: XCTestCase {
     func testBoundsContainTripCoordinate() {
         let bounds = GeoBounds(
             southWest: GeoCoordinate(latitude: 35, longitude: -120),
@@ -165,7 +165,7 @@ final class MapAndOBDTests: XCTestCase {
                 models: [],
                 knowledge: [],
                 maps: [active],
-                installedTiers: [.essential],
+                installedTiers: [],
                 issues: []
             )
         )
@@ -200,7 +200,7 @@ final class MapAndOBDTests: XCTestCase {
                         directory: URL(fileURLWithPath: "/tmp/package")
                     )
                 ],
-                installedTiers: [.essential],
+                installedTiers: [],
                 issues: []
             )
         )
@@ -240,55 +240,4 @@ final class MapAndOBDTests: XCTestCase {
         XCTAssertFalse(String(decoding: data, as: UTF8.self).contains("http"))
     }
 
-    func testOBDPolicyAllowsOnlyReadCommands() throws {
-        let policy = OBDCommandPolicy()
-        XCTAssertEqual(try policy.validate("01 0C\r"), "010C")
-        XCTAssertEqual(try policy.validate("03"), "03")
-        XCTAssertThrowsError(try policy.validate("04"))
-        XCTAssertThrowsError(try policy.validate("2E1234"))
-        XCTAssertThrowsError(try policy.validate("AT SH 7E0"))
-    }
-
-    func testOBDParserDecodesDiagnosticTroubleCodes() throws {
-        let codes = try ELM327Parser().diagnosticTroubleCodes(
-            from: "43 01 33 C1 23 00 00\r>"
-        )
-        XCTAssertEqual(codes.map(\.code), ["P0133", "U0123"])
-    }
-
-    func testOBDParserDecodesRPMAndCoolant() throws {
-        let parser = ELM327Parser()
-        XCTAssertEqual(
-            try parser.scalarValue(from: "41 0C 1A F8\r>", pid: 0x0C),
-            1726,
-            accuracy: 0.01
-        )
-        XCTAssertEqual(
-            try parser.scalarValue(from: "41 05 7B\r>", pid: 0x05),
-            83,
-            accuracy: 0.01
-        )
-    }
-
-    func testReadOnlySessionRejectsRawClearCommandBeforeTransport() async {
-        let transport = RecordingOBDTransport()
-        let session = ReadOnlyOBDSession(transport: transport)
-        do {
-            _ = try await session.executeRaw("04")
-            XCTFail("Expected command rejection")
-        } catch {
-            XCTAssertEqual(error as? OBDPolicyError, .commandNotAllowed("04"))
-        }
-        let calls = await transport.commands
-        XCTAssertTrue(calls.isEmpty)
-    }
-}
-
-private actor RecordingOBDTransport: OBDTransport {
-    private(set) var commands: [String] = []
-
-    func exchange(command: String) async throws -> String {
-        commands.append(command)
-        return "OK\r>"
-    }
 }

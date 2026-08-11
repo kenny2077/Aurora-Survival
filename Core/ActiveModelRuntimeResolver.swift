@@ -67,8 +67,7 @@ public struct ActiveModelRuntimeResolver: Sendable {
         for package in activePacks.models {
             let packageID = package.manifest.packageID
             guard let rawTier = package.manifest.metadata["model_tier"],
-                  let tier = ModelTier(rawValue: rawTier),
-                  tier != .essential else {
+                  let tier = ModelTier(rawValue: rawTier) else {
                 issues.append(.invalidTier(packageID: packageID))
                 continue
             }

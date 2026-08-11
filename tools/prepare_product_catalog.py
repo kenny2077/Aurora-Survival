@@ -468,7 +468,7 @@ def main() -> None:
     )
     args.root.mkdir(parents=True, exist_ok=True)
 
-    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.0.0"
+    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.1.0"
     if not (model / "envelope.json").is_file():
         raise FileNotFoundError(f"Verified Lite package is missing: {model}")
     knowledge = prepare_knowledge_packages(args.root, args.private_key)
@@ -501,7 +501,7 @@ def main() -> None:
         catalog_entry(
             model,
             "Gemma 3 1B Lite release candidate for the iPhone 13 physical bake-off.",
-            {"tier": "lite"},
+            {"model_tier": "lite"},
         )
     ]
     summaries = {

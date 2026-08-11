@@ -1,64 +1,33 @@
 # Implementation status
 
-Updated: 2026-08-02
+Updated: 2026-08-09
 
 ## Implemented and verified
 
-- Universal SwiftUI iPhone/iPad application with Essential, Lite, Field, and
-  Vision Expert routing contracts
-- Deterministic critical-hazard overrides before retrieval or model execution
-- Reviewed offline cards, compiled SQLite FTS/vector retrieval, citations, OCR,
-  and fail-closed Essential fallback
-- Ed25519-signed package/catalog verification, exact hashes and sizes, strict
-  HTTP range resume, staging, atomic activation, rollback, recall, and cleanup
-- Download Center preparation/incident mode boundary for models, reviewed
-  guides, Twin Cities Scout, and Minnesota Statewide Field
-- Local MapLibre rendering from verified offline artifacts with no network tile
-  fallback and visible attribution
-- StoreKit entitlement boundary, vehicle applicability, read-only OBD policy,
-  zero-power trip sheet, readiness, status, and privacy disclosures
-- Pinned llama.cpp `b9637` Metal runtime with the exact signed Gemma 3 1B IT
-  Q4_K_M artifact, 2,048-token context, 128-token cap, and bounded grounded JSON
-- Fresh inference context per answer while retaining verified model weights;
-  repeated answers remain visible in the accessibility tree
-- 120 locked incident cases, 30 map/asset cases, 12 safety cases, structural
-  validation, reproducible pack checks, and 112 passing Swift tests
+- Universal iPhone/iPad shell with independent **Ask · Manual · Maps · Tools** navigation roots.
+- Exactly two customer-facing model tiers: Lite and Expert (`vision_expert` wire value), plus Auto/Lite/Expert preference and legacy preference migration.
+- No-model Ask setup state, Lite-only text/photo policy, Expert validation lock, and Expert-to-Lite degradation under eligibility or runtime failure.
+- Unified wilderness Manual database with 10 direct chapters, exactly 70 reviewed action cards, 1,050 weighted FTS5 passages, a generated emergency fallback, and exact stable chat links.
+- All 828 former corpus IDs have an explicit reviewed redirect or retired-passage disposition; the former single-book database and presentation overlay are no longer shipped.
+- Dedicated Maps browser/download manager and focused Tools model center with prominent Lite/Expert cards and signed-catalog controls.
+- Signed package/catalog verification, exact hashes and sizes, strict range resume, staging, atomic activation, rollback, recall, cached entitlements, and Incident-mode network denial.
+- Pinned llama.cpp `b9637` runtime and supported Gemma 3 1B Lite artifact.
+- Retired readiness, trip sheet, vehicle profile/applicability, OBD, standalone status, duplicate model settings, in-app SOS, and chat Clear controls removed from product state and navigation.
+- Repository validator passes; 107 Swift tests pass, including the balanced 200-query recall benchmark; the generic simulator app build passes.
 
-## Physical iPhone 13 evidence
+## Current hardware position
 
-- Signed build, install, launch, and package activation under Kaiyi Guo
-  Personal Team
-- Grounded Lite response with one signed citation
-- Deterministic fuel-hazard bypass with no native model run
-- Real Apple Vision OCR feeding the safety override
-- Reviewed guide plus Twin Cities and Minnesota offline map rendering
-- Five-answer sustained session with no fallback or termination; final warm
-  TTFT 1.35 s, 15.4 tok/s, thermal fair
-- Explicitly optimized physical validation build; cold TTFT 2.46 s and
-  14.4 tok/s at thermal fair
+- iPhone 13 is the Lite acceptance target.
+- iPad Pro M2 and iPhone 17 Pro Max are Expert target classes, but names do not override live capability checks.
+- Expert remains validation-locked because the native backend does not yet accept image input through an approved mtmd model/projector integration.
+- Existing physical Gemma Lite performance evidence remains relevant to the artifact/runtime, but each changed product flow is rerun and recorded in `FIELD_MANUAL_PROGRESS_REPORT.md`.
 
-See `VALIDATION_REPORT.md` and `Docs/LITE_MODEL_HANDOFF.md` for evidence paths
-and the exact artifact identity.
+## Remaining before release
 
-## Remaining before a release claim
+1. Approved signed Expert model and projector, mtmd runtime binding, and real vision acceptance on target hardware.
+2. iPhone 17 Pro Max physical inference evidence; that hardware is not currently available.
+3. True Airplane Mode and Low Power Mode journeys, plus sustained battery, memory-pressure, thermal, and interruption coverage.
+4. Full VoiceOver traversal and production trust/hosting/App Store configuration.
+5. Human safety, accessibility, legal, licensing, localization, and publication review.
 
-1. True Airplane Mode cold termination/relaunch and Low Power Mode fallback.
-2. Twenty- to thirty-minute battery, memory-pressure, background/foreground,
-   camera, and interruption coverage.
-3. VoiceOver and largest Dynamic Type physical walkthroughs on supported form
-   factors.
-4. Production trust keys, authenticated hosting, App Store products, and
-   production provisioning. Personal Team testing is development evidence only.
-5. Human review of Gemma terms/Notice, map/content licenses, privacy, safety,
-   accessibility, and publication materials.
-6. External OBD BLE hardware and licensed vehicle-specific manual packs.
-7. GitHub Actions execution after the account billing/spending-limit block is
-   resolved.
-
-## Deliberately unavailable
-
-- Cloud chat, analytics, background tracking, network access in Incident Mode,
-  model-authored safety procedures, invasive medical guidance, OBD writes, and
-  generative vision are outside the product contract.
-- Qwen3 1.7B is a hidden challenger and Phi-3.5 Mini is experimental/rejected;
-  neither is the iPhone 13 release Lite recommendation.
+Cloud inference, accounts, analytics, background tracking, duplicate SOS, vehicle diagnostics, and destructive cleanup of retired local files are outside the product contract.

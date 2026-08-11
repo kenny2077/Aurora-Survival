@@ -58,11 +58,11 @@ public struct ActivePackSnapshot: Equatable, Sendable {
         self.issues = issues
     }
 
-    public static let essentialOnly = ActivePackSnapshot(
+    public static let noModels = ActivePackSnapshot(
         models: [],
         knowledge: [],
         maps: [],
-        installedTiers: [.essential],
+        installedTiers: [],
         issues: []
     )
 }
@@ -70,7 +70,7 @@ public struct ActivePackSnapshot: Equatable, Sendable {
 /// Re-verifies the active package set at launch. A package is exposed to the
 /// runtime only after its activation record, signature/hash envelope,
 /// entitlement, policy version, app version, review state, recall state, and
-/// device gate all agree. Any failure leaves Essential available.
+/// device gate all agree. A failure leaves Ask unavailable unless Lite remains.
 public actor ActivePackRegistry {
     private let rootDirectory: URL
     private let verifier: any PackageEnvelopeVerifying
@@ -110,7 +110,7 @@ public actor ActivePackRegistry {
                 models: [],
                 knowledge: [],
                 maps: [],
-                installedTiers: [.essential],
+                installedTiers: [],
                 issues: [.invalidActivationIndex]
             )
         }
@@ -118,7 +118,7 @@ public actor ActivePackRegistry {
         var models: [ResolvedActivePackage] = []
         var knowledge: [ResolvedActivePackage] = []
         var maps: [ResolvedActivePackage] = []
-        var installedTiers: Set<ModelTier> = [.essential]
+        var installedTiers: Set<ModelTier> = []
         var issues: [ActivePackIssue] = []
 
         for packageID in index.activeVersions.keys.sorted() {
@@ -236,15 +236,15 @@ public actor ActivePackRegistry {
             switch manifest.kind {
             case .model:
                 guard let rawTier = manifest.metadata["model_tier"],
-                      let tier = ModelTier(rawValue: rawTier),
-                      tier != .essential
+                      let tier = ModelTier(rawValue: rawTier)
                 else {
                     issues.append(.invalidModelTier(packageID: packageID))
                     continue
                 }
                 let route = router.route(
                     requested: tier,
-                    installed: [.essential, tier],
+                    installed: [tier],
+                    expertValidated: false,
                     device: device
                 )
                 guard route.selected == tier else {

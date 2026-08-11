@@ -35,7 +35,7 @@ Updated: 2026-07-31
 - The iPhone 13 Lite gate remains first token at or below three seconds and at
   least eight generated tokens per second, with no OS termination or serious
   thermal transition during the standard sustained script.
-- Essential, the emergency core, safety overrides, reviewed retrieval, and
+- Model-required Ask, the SQLite Field Manual, survival retrieval, and
   citations remain available when any optional download is absent or fails.
 - Private keys and model/map artifacts remain outside Git. Public licenses,
   attribution, manifests, schemas, and verification evidence are retained.

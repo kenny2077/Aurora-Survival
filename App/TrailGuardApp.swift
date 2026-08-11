@@ -12,6 +12,7 @@ struct AuroraApp: App {
                 .task {
                     await appModel.refreshActivePacks()
                     await appModel.loadDebugOCRFixtureIfPresent()
+                    await appModel.runDebugPhysicalInferenceIfRequested()
                 }
         }
     }

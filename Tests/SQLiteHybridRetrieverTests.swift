@@ -51,64 +51,6 @@ final class SQLiteHybridRetrieverTests: XCTestCase {
         XCTAssertEqual(results.map(\.article.id), ["nearest", "orthogonal"])
     }
 
-    func testVehicleApplicabilityRequiresExactProfile() throws {
-        let applicability = """
-        {
-          "makes": ["Toyota"],
-          "models": ["4Runner"],
-          "yearFrom": 2020,
-          "yearThrough": 2024,
-          "markets": ["US"],
-          "powertrains": ["gasoline"],
-          "documentIDs": ["toyota-4runner-2023-us"],
-          "jurisdiction": "US"
-        }
-        """
-        let fixture = try makeFixture(
-            domain: .vehicle,
-            records: [
-                Record(
-                    id: "jack-point",
-                    title: "Documented jack point",
-                    applicabilityJSON: applicability
-                )
-            ]
-        )
-        defer { fixture.remove() }
-        let retriever = try retriever(fixture, jurisdiction: "US")
-        let wrongVehicle = VehicleProfile(
-            make: "Ford",
-            model: "Bronco",
-            modelYear: 2023,
-            market: "US",
-            powertrain: .gasoline
-        )
-        let exactVehicle = VehicleProfile(
-            make: "Toyota",
-            model: "4Runner",
-            modelYear: 2023,
-            market: "US",
-            powertrain: .gasoline,
-            documentID: "toyota-4runner-2023-us"
-        )
-
-        XCTAssertTrue(
-            retriever.search(
-                query: "jack point",
-                domain: .vehicle,
-                vehicle: wrongVehicle
-            ).isEmpty
-        )
-        XCTAssertEqual(
-            retriever.search(
-                query: "jack point",
-                domain: .vehicle,
-                vehicle: exactVehicle
-            ).map(\.article.id),
-            ["jack-point"]
-        )
-    }
-
     func testRequiredJurisdictionRejectsUnscopedRecord() throws {
         let fixture = try makeFixture(
             records: [
@@ -138,7 +80,7 @@ final class SQLiteHybridRetrieverTests: XCTestCase {
             models: [],
             knowledge: [fixture.package],
             maps: [],
-            installedTiers: [.essential, .field],
+            installedTiers: [.lite],
             issues: []
         )
 
@@ -149,7 +91,7 @@ final class SQLiteHybridRetrieverTests: XCTestCase {
         let signalIDs = await resolution.assistant.search("signal").map(\.id)
 
         XCTAssertTrue(resolution.usesCompiledKnowledge)
-        XCTAssertEqual(resolution.runtimeTiers, [.essential])
+        XCTAssertEqual(resolution.runtimeTiers, [])
         XCTAssertEqual(waterIDs, ["compiled-water"])
         XCTAssertEqual(signalIDs, ["bundled-signal"])
     }
@@ -167,7 +109,7 @@ final class SQLiteHybridRetrieverTests: XCTestCase {
             models: [],
             knowledge: [fixture.package],
             maps: [],
-            installedTiers: [.essential],
+            installedTiers: [],
             issues: []
         )
 
@@ -450,7 +392,6 @@ private struct StaticRetriever: EvidenceRetrieving {
     func search(
         query: String,
         domain: KnowledgeDomain?,
-        vehicle: VehicleProfile?,
         limit: Int
     ) -> [RetrievedPassage] {
         articles.prefix(limit).enumerated().map {

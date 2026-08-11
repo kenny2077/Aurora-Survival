@@ -115,7 +115,7 @@ def build(args: argparse.Namespace) -> None:
                 "license_review": "development_only_pending_release_review",
                 "model_family": "gemma3",
                 "model_identity": MODEL_IDENTITY,
-                "maximum_output_tokens": "128",
+                "maximum_output_tokens": "160",
                 "model_path": f"weights/{MODEL_FILENAME}",
                 "model_tier": "lite",
                 "policy_version": "deterministic-policy-v1",

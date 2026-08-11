@@ -230,6 +230,7 @@ char * tg_llama_session_complete(
     const char * system_prompt,
     const char * user_prompt,
     int32_t maximum_output_tokens,
+    int32_t evidence_count,
     int64_t * first_token_microseconds_out,
     int64_t * total_microseconds_out,
     int32_t * generated_token_count_out,
@@ -324,7 +325,11 @@ char * tg_llama_session_complete(
     );
     llama_sampler * grammar = llama_sampler_init_grammar(
         session.vocab,
-        kGroundedResponseGrammar,
+        evidence_count <= 0
+            ? kUnlinkedResponseGrammar
+            : evidence_count == 1
+                ? kSingleEvidenceResponseGrammar
+                : kGroundedResponseGrammar,
         "root"
     );
     llama_sampler * greedy = llama_sampler_init_greedy();
@@ -338,7 +343,7 @@ char * tg_llama_session_complete(
         if (greedy != nullptr) {
             llama_sampler_free(greedy);
         }
-        set_error(error_out, "The deterministic sampler could not be created.");
+        set_error(error_out, "The answer sampler could not be created.");
         return nullptr;
     }
     llama_sampler_chain_add(sampler, grammar);

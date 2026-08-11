@@ -21,6 +21,7 @@ char * tg_llama_session_complete(
     const char * system_prompt,
     const char * user_prompt,
     int32_t maximum_output_tokens,
+    int32_t evidence_count,
     int64_t * first_token_microseconds_out,
     int64_t * total_microseconds_out,
     int32_t * generated_token_count_out,

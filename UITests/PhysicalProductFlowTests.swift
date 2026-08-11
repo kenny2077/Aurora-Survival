@@ -1,5 +1,4 @@
 import XCTest
-import UIKit
 
 final class PhysicalProductFlowTests: XCTestCase {
     private let catalogURL = "http://192.168.3.51:8765/catalog.json"
@@ -8,775 +7,388 @@ final class PhysicalProductFlowTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testTwinCitiesDownloadAndOfflineMapOpen() throws {
-        let app = launchPreparedApp()
-        let package = scrollToPackage(
-            "package.map.twin-cities@1.0.0",
-            in: app
-        )
-        let download = package.buttons["Download"]
-        if download.exists {
-            download.tap()
-        }
-        XCTAssertTrue(
-            package.staticTexts["Installed & active"]
-                .waitForExistence(timeout: 300)
-        )
-
-        openOfflineMaps(in: app)
-        let canvas = app.otherElements["offline.map.canvas"]
-        XCTAssertTrue(canvas.waitForExistence(timeout: 30))
-        XCTAssertTrue(canvas.label.contains("Twin Cities"))
-
-        keepScreenshot(named: "iPhone 13 Twin Cities offline map", app: app)
-    }
-
-    func testMinnesotaAndReviewedGuideDownload() throws {
-        let app = launchPreparedApp()
-
-        let guide = scrollToPackage(
-            "package.knowledge.wilderness.starter@1.0.0",
-            in: app
-        )
-        if guide.buttons["Download"].exists {
-            guide.buttons["Download"].tap()
-        }
-        XCTAssertTrue(
-            guide.staticTexts["Installed & active"]
-                .waitForExistence(timeout: 60)
-        )
-
-        let minnesota = scrollToPackage(
-            "package.map.minnesota@1.0.0",
-            in: app
-        )
-        if minnesota.buttons["Download"].exists {
-            minnesota.buttons["Download"].tap()
-        }
-        XCTAssertTrue(
-            minnesota.staticTexts["Installed & active"]
-                .waitForExistence(timeout: 300)
-        )
-
-        app.tabBars.buttons["Guide"].tap()
-        XCTAssertTrue(
-            app.staticTexts["Make backcountry water safer"]
-                .waitForExistence(timeout: 20)
-        )
-
-        openOfflineMaps(in: app)
-        let minnesotaPicker = app.buttons["Minnesota"]
-        XCTAssertTrue(minnesotaPicker.waitForExistence(timeout: 20))
-        minnesotaPicker.tap()
-        let canvas = app.otherElements["offline.map.canvas"]
-        expectation(
-            for: NSPredicate(format: "label CONTAINS %@", "Minnesota"),
-            evaluatedWith: canvas
-        )
-        waitForExpectations(timeout: 30)
-        keepScreenshot(named: "iPhone 13 Minnesota offline map", app: app)
-    }
-
-    func testInstalledProductsOpenWithCatalogUnavailable() throws {
+    func testFourTabShellAndFocusedModelCenter() throws {
         let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
-        app.tabBars.buttons["Status"].tap()
-        let activeLite = app.staticTexts.matching(
-            NSPredicate(
-                format: "label CONTAINS %@",
-                "Lite active"
-            )
-        ).firstMatch
+        for tab in ["Ask", "Manual", "Maps", "Tools"] {
+            XCTAssertTrue(tabButton(tab, in: app).exists)
+        }
         XCTAssertTrue(
-            activeLite.waitForExistence(timeout: 30)
-        )
-
-        app.tabBars.buttons["Guide"].tap()
-        XCTAssertTrue(
-            app.staticTexts["Make backcountry water safer"]
+            app.descendants(matching: .any)["chat.modelRequired"]
                 .waitForExistence(timeout: 20)
         )
+        XCTAssertFalse(app.buttons["Emergency"].exists)
+        XCTAssertFalse(app.buttons["Clear"].exists)
 
-        openOfflineMaps(in: app)
-        let minnesotaPicker = app.buttons["Minnesota"]
-        XCTAssertTrue(minnesotaPicker.waitForExistence(timeout: 20))
-        minnesotaPicker.tap()
-        let canvas = app.otherElements["offline.map.canvas"]
-        expectation(
-            for: NSPredicate(format: "label CONTAINS %@", "Minnesota"),
-            evaluatedWith: canvas
+        openTools(in: app)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.tier.lite"]
+                .waitForExistence(timeout: 10)
         )
-        waitForExpectations(timeout: 30)
-        keepScreenshot(
-            named: "iPhone 13 installed products without catalog host",
-            app: app
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.tier.vision_expert"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.buttons["Validation pending"].exists)
+        for retired in [
+            "Offline readiness", "Trip sheet", "Vehicle profile",
+            "Read-only OBD", "System status",
+        ] {
+            XCTAssertFalse(app.staticTexts[retired].exists)
+        }
+        keepScreenshot(named: "Four-tab focused model center", app: app)
+    }
+
+    func testModelRequiredActionOpensTools() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+
+        let setup = app.buttons["Set up models"]
+        XCTAssertTrue(setup.waitForExistence(timeout: 20))
+        setup.tap()
+
+        XCTAssertTrue(tabButton("Tools", in: app).isSelected)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.modelHero"]
+                .waitForExistence(timeout: 10)
         )
     }
 
-    func testLargestDynamicTypeCoreFlow() throws {
+    func testManualCourseAndUnifiedReferenceRemainAvailableWithoutModel() throws {
         let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+
+        openManual(in: app)
+        XCTAssertFalse(app.staticTexts["Start here"].exists)
+        let chapter = app.staticTexts["Survival Basics"].firstMatch
+        XCTAssertTrue(chapter.waitForExistence(timeout: 10))
+        chapter.tap()
+        let lesson = app.staticTexts["Stop and Control Panic"].firstMatch
+        XCTAssertTrue(lesson.waitForExistence(timeout: 10))
+        lesson.tap()
+        XCTAssertTrue(
+            app.navigationBars["Stop and Control Panic"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.staticTexts["Do this now"].exists)
+        XCTAssertTrue(app.staticTexts["Critical warnings"].exists)
+
+        app.terminate()
+        app.launch()
+        openManual(in: app)
+        let search = app.searchFields.firstMatch
+        XCTAssertTrue(search.waitForExistence(timeout: 10))
+        search.tap()
+        search.typeText("water purifier boiling")
+        let result = app.staticTexts["Boil Water Correctly"].firstMatch
+        XCTAssertTrue(result.waitForExistence(timeout: 20))
+        result.tap()
+        XCTAssertTrue(
+            app.navigationBars["Boil Water Correctly"]
+                .waitForExistence(timeout: 20)
+        )
+    }
+
+    func testMapsIsDirectFourthProductArea() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+
+        openMaps(in: app)
+        XCTAssertTrue(tabButton("Maps", in: app).isSelected)
+        XCTAssertTrue(app.navigationBars["Offline Maps"].waitForExistence(timeout: 20))
+        XCTAssertTrue(
+            app.descendants(matching: .any)["maps.home"]
+                .waitForExistence(timeout: 10)
+        )
+        let setup = app.textFields["Signed catalog URL"]
+        let manage = app.buttons["Manage map downloads"]
+        XCTAssertTrue(setup.exists || manage.exists)
+        keepScreenshot(named: "Dedicated Maps tab", app: app)
+    }
+
+    func testManualTenChaptersAndNoResultsAtLargestType() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launchArguments += [
+            "-AppleInterfaceStyle", "Dark",
+            "-UIPreferredContentSizeCategoryName",
+            "UICTContentSizeCategoryAccessibilityExtraExtraExtraLarge",
+        ]
+        app.launch()
+        openManual(in: app)
+
+        let chapters = [
+            "Survival Basics", "Find and Treat Water", "Start a Fire",
+            "Build a Shelter", "Find Food Safely", "Navigate When Lost",
+            "Signal for Rescue", "Wilderness First Aid",
+            "Weather and Wildlife", "Car Breakdown",
+        ]
+        for title in chapters {
+            for _ in 0..<12 where !app.staticTexts[title].exists {
+                app.swipeUp()
+            }
+            XCTAssertTrue(app.staticTexts[title].exists, "Missing chapter: \(title)")
+        }
+
+        let search = app.searchFields.firstMatch
+        XCTAssertTrue(search.exists)
+        search.tap()
+        search.typeText("qxvplm zznort")
+        XCTAssertTrue(
+            app.descendants(matching: .any)["manual.search.no-results"]
+                .waitForExistence(timeout: 10)
+        )
+        keepScreenshot(named: "Ten chapter Manual dark largest type", app: app)
+    }
+
+    func testModelCenterDarkModeAndLargestDynamicType() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launchArguments += [
+            "-AppleInterfaceStyle", "Dark",
             "-UIPreferredContentSizeCategoryName",
             "UICTContentSizeCategoryAccessibilityExtraExtraExtraLarge",
         ]
         app.launch()
 
-        app.tabBars.buttons["Guide"].tap()
-        XCTAssertTrue(
-            app.staticTexts["Make backcountry water safer"]
-                .waitForExistence(timeout: 20)
-        )
-
-        app.tabBars.buttons["Ask"].tap()
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        composer.tap()
-        composer.typeText("There is a fuel leak under my car.")
-        app.buttons["chat.send"].tap()
-
-        let response = app.descendants(matching: .any)[
-            "chat.message.assistant"
-        ]
-        XCTAssertTrue(response.waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(format: "label CONTAINS %@", "Fire or fuel hazard")
-            ).firstMatch.exists
-        )
-
-        app.tabBars.buttons["Status"].tap()
-        XCTAssertTrue(
-            app.descendants(matching: .any)["status.modelMetrics"]
-                .waitForExistence(timeout: 10)
-        )
-
-        app.tabBars.buttons["Downloads"].tap()
-        XCTAssertTrue(app.switches["download.mode"].waitForExistence(timeout: 10))
-        keepScreenshot(named: "iPhone 13 largest Dynamic Type", app: app)
-    }
-
-    func testAirplaneModeColdRelaunch() throws {
-        let app = launchLiteIncidentApp()
-        app.terminate()
-        app.launch()
-
-        app.tabBars.buttons["Status"].tap()
-        let activeLite = app.staticTexts.matching(
-            NSPredicate(format: "label CONTAINS %@", "Lite active")
-        ).firstMatch
-        XCTAssertTrue(activeLite.waitForExistence(timeout: 30))
-
-        app.tabBars.buttons["Guide"].tap()
-        XCTAssertTrue(
-            app.staticTexts["Make backcountry water safer"]
-                .waitForExistence(timeout: 20)
-        )
-
-        openOfflineMaps(in: app)
-        let minnesota = app.buttons["Minnesota"]
-        XCTAssertTrue(minnesota.waitForExistence(timeout: 20))
-        minnesota.tap()
-        let canvas = app.otherElements["offline.map.canvas"]
-        expectation(
-            for: NSPredicate(format: "label CONTAINS %@", "Minnesota"),
-            evaluatedWith: canvas
-        )
-        waitForExpectations(timeout: 30)
-
-        app.tabBars.buttons["Ask"].tap()
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        composer.tap()
-        composer.typeText("How do I make water safer?")
-        app.buttons["chat.send"].tap()
-        let response = app.descendants(matching: .any)[
-            "chat.message.assistant"
-        ]
-        XCTAssertTrue(response.waitForExistence(timeout: 180))
-        XCTAssertTrue(response.staticTexts["Lite"].exists)
-        XCTAssertTrue(response.staticTexts["Offline sources (1)"].exists)
-        keepScreenshot(named: "iPhone 13 Airplane Mode cold relaunch", app: app)
-    }
-
-    func testLowPowerModeFallsBackToEssential() throws {
-        let app = XCUIApplication()
-        app.launch()
-        app.tabBars.buttons["Status"].tap()
-
-        let condition = app.descendants(matching: .any)[
-            "status.deviceCondition"
-        ]
-        XCTAssertTrue(condition.waitForExistence(timeout: 10))
-        XCTAssertTrue(condition.label.contains("Low Power Mode"))
-
-        let tiers = app.descendants(matching: .any)["status.modelTiers"]
-        XCTAssertTrue(tiers.waitForExistence(timeout: 10))
-        XCTAssertTrue(tiers.label.contains("Essential active"))
-        XCTAssertFalse(tiers.label.contains("Lite"))
-
-        app.tabBars.buttons["Ask"].tap()
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        composer.tap()
-        composer.typeText("How do I make water safer?")
-        app.buttons["chat.send"].tap()
-        let response = app.descendants(matching: .any)[
-            "chat.message.assistant"
-        ]
-        XCTAssertTrue(response.waitForExistence(timeout: 20))
-        XCTAssertTrue(response.staticTexts["Essential"].exists)
-        XCTAssertTrue(response.staticTexts["Offline sources (1)"].exists)
-        keepScreenshot(named: "iPhone 13 Low Power Mode fallback", app: app)
-    }
-
-    func testSafetyRuleBypassesInstalledLiteModel() throws {
-        let app = XCUIApplication()
-        app.launch()
-
-        app.tabBars.buttons["Ask"].tap()
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        composer.tap()
-        composer.typeText("There is a fuel leak under my car.")
-        app.buttons["chat.send"].tap()
-
-        let response = app.descendants(matching: .any)[
-            "chat.message.assistant"
-        ]
-        XCTAssertTrue(response.waitForExistence(timeout: 10))
-        keepScreenshot(named: "iPhone 13 deterministic safety bypass", app: app)
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Fire or fuel hazard"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Safety rule — model bypassed"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertFalse(response.staticTexts["Lite"].exists)
-
-        app.tabBars.buttons["Status"].tap()
-        let nativeMetrics = app.descendants(matching: .any)[
-            "status.modelMetrics"
-        ]
-        XCTAssertTrue(nativeMetrics.waitForExistence(timeout: 10))
-        XCTAssertTrue(nativeMetrics.label.contains("No native model run recorded"))
-    }
-
-    func testOnDeviceOCRTriggersSafetyOverride() throws {
-        let renderer = UIGraphicsImageRenderer(
-            size: CGSize(width: 1_000, height: 300)
-        )
-        let imageData = renderer.pngData { context in
-            UIColor.white.setFill()
-            context.fill(CGRect(x: 0, y: 0, width: 1_000, height: 300))
-            ("FUEL LEAK" as NSString).draw(
-                at: CGPoint(x: 70, y: 80),
-                withAttributes: [
-                    .font: UIFont.boldSystemFont(ofSize: 110),
-                    .foregroundColor: UIColor.black,
-                ]
-            )
+        openTools(in: app)
+        XCTAssertTrue(app.staticTexts["Offline intelligence"].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.staticTexts["Lite"].exists)
+        for _ in 0..<5 where !app.staticTexts["Expert"].exists {
+            app.swipeUp()
         }
+        XCTAssertTrue(app.staticTexts["Expert"].exists)
+        keepScreenshot(named: "Model center dark largest type", app: app)
+    }
 
+    func testPhysicalInstalledLiteChatAndExactManualLink() throws {
         let app = XCUIApplication()
-        app.launchEnvironment[
-            "TRAILGUARD_DEBUG_OCR_FIXTURE_BASE64"
-        ] = imageData.base64EncodedString()
         app.launch()
-        app.tabBars.buttons["Ask"].tap()
-
-        let ocrStatus = app.staticTexts.matching(
-            NSPredicate(format: "label CONTAINS %@", "text lines found")
-        ).firstMatch
-        XCTAssertTrue(ocrStatus.waitForExistence(timeout: 30))
 
         let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        composer.tap()
-        composer.typeText("What should I do?")
-        app.buttons["chat.send"].tap()
-
-        let response = app.descendants(matching: .any)[
-            "chat.message.assistant"
-        ]
-        XCTAssertTrue(response.waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Fire or fuel hazard"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Safety rule — model bypassed"
-                )
-            ).firstMatch.exists
-        )
-        keepScreenshot(named: "iPhone 13 Vision OCR safety override", app: app)
-    }
-
-    func testLiteModelDownloadResumesAndActivates() throws {
-        let app = launchPreparedApp()
-        let model = scrollToPackage(
-            "package.model.lite.gemma3-1b-q4km@1.0.0",
-            in: app
-        )
-        if model.buttons["Download"].exists {
-            model.buttons["Download"].tap()
-        } else if model.buttons["Resume"].exists {
-            model.buttons["Resume"].tap()
+        guard composer.waitForExistence(timeout: 30) else {
+            throw XCTSkip("A validated Lite package is not installed on this destination.")
         }
-        XCTAssertTrue(
-            model.staticTexts["Installed & active"]
-                .waitForExistence(timeout: 1_200)
+        XCTAssertFalse(app.buttons["Attach photo"].exists)
+        XCTAssertFalse(app.buttons["Emergency"].exists)
+        XCTAssertFalse(app.buttons["Clear"].exists)
+        XCTAssertFalse(app.staticTexts["Fully offline · Gemma + Field Manual"].exists)
+        XCTAssertFalse(
+            app.staticTexts["Manual context is used for relevant survival questions"].exists
         )
-        app.tabBars.buttons["Status"].tap()
-        XCTAssertTrue(
-            app.staticTexts.matching(
-                NSPredicate(format: "label CONTAINS %@", "Lite active")
-            ).firstMatch.waitForExistence(timeout: 30)
-        )
-        keepScreenshot(named: "iPhone 13 Lite model active", app: app)
-    }
 
-    func testLiteOnDeviceGroundedResponse() throws {
-        let app = launchLiteIncidentApp()
-
-        app.tabBars.buttons["Ask"].tap()
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
         composer.tap()
-        composer.typeText("How do I make water safer?")
-
-        let started = Date()
+        composer.typeText("Where can I find water?")
         app.buttons["chat.send"].tap()
         let response = app.descendants(matching: .any)["chat.message.assistant"]
         XCTAssertTrue(response.waitForExistence(timeout: 180))
-        let elapsedMilliseconds = Int(Date().timeIntervalSince(started) * 1_000)
-        keepScreenshot(named: "iPhone 13 Lite grounded response", app: app)
-
         XCTAssertTrue(response.staticTexts["Lite"].exists)
-        XCTAssertTrue(response.staticTexts["Offline sources (1)"].exists)
-        XCTAssertFalse(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "local model was unavailable"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertFalse(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "failed evidence validation"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Prefer moving water"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            response.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "rolling boil for 1 minute"
-                )
-            ).firstMatch.exists
-        )
-
-        let metrics = XCTAttachment(
-            string: "{\"completionMilliseconds\":\(elapsedMilliseconds),\"tier\":\"lite\",\"network\":\"incident-mode\"}"
-        )
-        metrics.name = "iPhone 13 Lite completion measurement"
-        metrics.lifetime = .keepAlways
-        add(metrics)
-
-        app.tabBars.buttons["Status"].tap()
-        let nativeMetrics = app.descendants(matching: .any)[
-            "status.modelMetrics"
-        ]
-        XCTAssertTrue(nativeMetrics.waitForExistence(timeout: 10))
-        XCTAssertTrue(nativeMetrics.label.contains("First token"))
-        let nativeAttachment = XCTAttachment(string: nativeMetrics.label)
-        nativeAttachment.name = "iPhone 13 native llama metrics"
-        nativeAttachment.lifetime = .keepAlways
-        add(nativeAttachment)
-        keepScreenshot(named: "iPhone 13 native llama metrics", app: app)
+        let manualLink = response.buttons["chat.manual-link"]
+        XCTAssertTrue(manualLink.waitForExistence(timeout: 10))
+        let citedTitle = manualLink.staticTexts.firstMatch.label
+        XCTAssertFalse(citedTitle.isEmpty)
+        manualLink.tap()
+        XCTAssertTrue(tabButton("Manual", in: app).isSelected)
+        XCTAssertTrue(app.navigationBars[citedTitle].waitForExistence(timeout: 20))
+        keepScreenshot(named: "Lite exact Manual link after redesign", app: app)
     }
 
-    func testLiteConversationalFollowUp() throws {
-        let app = launchLiteIncidentApp()
-        app.tabBars.buttons["Ask"].tap()
+    func testPhysicalLiteIncidentFallbackDoesNotReuseWaterContext() throws {
+        let app = XCUIApplication()
+        app.launch()
 
         let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
+        guard composer.waitForExistence(timeout: 30) else {
+            throw XCTSkip("A validated Lite package is not installed on this destination.")
+        }
+        composer.tap()
+        composer.typeText("Where can I find water?")
+        app.buttons["chat.send"].tap()
         let responses = app.descendants(matching: .any).matching(
             identifier: "chat.message.assistant"
         )
+        XCTAssertTrue(responses.firstMatch.waitForExistence(timeout: 180))
 
         composer.tap()
-        composer.typeText("How do I make stream water safer?")
-        app.buttons["chat.send"].tap()
-        let first = responses.element(boundBy: 0)
-        XCTAssertTrue(first.waitForExistence(timeout: 180))
-        XCTAssertTrue(first.staticTexts["Lite"].exists)
-        XCTAssertTrue(
-            first.staticTexts.matching(
-                NSPredicate(format: "label BEGINSWITH %@", "Offline sources (")
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            first.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "rolling boil for 1 minute"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            first.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "Cloth prefiltering removes sediment only"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertFalse(
-            first.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "failed evidence validation"
-                )
-            ).firstMatch.exists
-        )
-
-        composer.tap()
-        composer.typeText("What if I do not have a filter?")
+        composer.typeText("How are you doing?")
         app.buttons["chat.send"].tap()
         let second = responses.element(boundBy: 1)
         XCTAssertTrue(second.waitForExistence(timeout: 180))
-        XCTAssertTrue(second.staticTexts["Lite"].exists)
-        XCTAssertTrue(
-            second.staticTexts.matching(
-                NSPredicate(format: "label BEGINSWITH %@", "Offline sources (")
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(
-            second.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "rolling boil for 1 minute"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertFalse(
-            second.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "failed evidence validation"
-                )
-            ).firstMatch.exists
-        )
-        XCTAssertFalse(
-            second.staticTexts.matching(
-                NSPredicate(
-                    format: "label CONTAINS %@",
-                    "local model was unavailable"
-                )
-            ).firstMatch.exists
-        )
-        let firstTranscript = first.staticTexts.allElementsBoundByIndex
-            .map(\.label)
-            .joined(separator: "\n")
-        let secondTranscript = second.staticTexts.allElementsBoundByIndex
-            .map(\.label)
-            .joined(separator: "\n")
-        let evidence = XCTAttachment(
-            string: "FIRST\n\(firstTranscript)\n\nFOLLOW-UP\n\(secondTranscript)"
-        )
-        evidence.name = "iPhone 13 conversational survival RAG transcript"
-        evidence.lifetime = .keepAlways
-        add(evidence)
-        keepScreenshot(
-            named: "iPhone 13 conversational survival follow-up",
-            app: app
-        )
+        XCTAssertFalse(second.buttons["chat.manual-link"].exists)
+        let fallbackWords = second.staticTexts["chat.answer"].label
+            .split(whereSeparator: \.isWhitespace).count
+        XCTAssertTrue((24...75).contains(fallbackWords))
+        for leaked in [
+            "Do not invent steps",
+            "citation markers",
+            "Lite couldn’t run right now",
+        ] {
+            XCTAssertFalse(second.staticTexts.matching(NSPredicate(
+                format: "label CONTAINS[c] %@", leaked
+            )).firstMatch.exists)
+        }
+        keepScreenshot(named: "Lite stateless incident fallback", app: app)
     }
 
-    func testLiteSustainedWarmRuns() throws {
-        let app = launchLiteIncidentApp()
-        app.tabBars.buttons["Ask"].tap()
+    func testPhysicalLiteDatabaseFirstGroundedAndFallbackCases() throws {
+        let app = XCUIApplication()
+        app.launch()
 
         let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
+        guard composer.waitForExistence(timeout: 30) else {
+            throw XCTSkip("A validated 160-token Lite package is not installed.")
+        }
         let responses = app.descendants(matching: .any).matching(
             identifier: "chat.message.assistant"
         )
-        var completionMilliseconds: [Int] = []
-
-        for run in 0..<5 {
+        for question in [
+            "Flat tire",
+            "How to stop the bleed",
+            "Where can I find water?",
+            "I am lost on a trail. What should I do?",
+            "A bear is nearby. What should I do?",
+        ] {
+            let index = responses.count
             composer.tap()
-            composer.typeText("How do I make water safer?")
-            let started = Date()
+            composer.typeText(question)
             app.buttons["chat.send"].tap()
-
-            let response = responses.element(boundBy: run)
-            XCTAssertTrue(response.waitForExistence(timeout: 180))
-            completionMilliseconds.append(
-                Int(Date().timeIntervalSince(started) * 1_000)
-            )
-            XCTAssertTrue(response.staticTexts["Lite"].exists)
-            XCTAssertTrue(response.staticTexts["Offline sources (1)"].exists)
+            let response = responses.element(boundBy: index)
+            XCTAssertTrue(response.waitForExistence(timeout: 180), question)
+            let text = response.staticTexts["chat.answer"].label
+            let words = text.split(whereSeparator: \.isWhitespace).count
+            XCTAssertTrue((22...70).contains(words), "\(question): \(text)")
             XCTAssertTrue(
-                response.staticTexts.matching(
-                    NSPredicate(
-                        format: "label CONTAINS %@",
-                        "Prefer moving water"
-                    )
-                ).firstMatch.exists
-            )
-            XCTAssertFalse(
-                response.staticTexts.matching(
-                    NSPredicate(
-                        format: "label CONTAINS %@",
-                        "local model was unavailable"
-                    )
-                ).firstMatch.exists
-            )
-            XCTAssertFalse(
-                response.staticTexts.matching(
-                    NSPredicate(
-                        format: "label CONTAINS %@",
-                        "failed evidence validation"
-                    )
-                ).firstMatch.exists
+                response.buttons["chat.manual-link"].waitForExistence(timeout: 10),
+                question
             )
         }
 
-        app.tabBars.buttons["Status"].tap()
-        let nativeMetrics = app.descendants(matching: .any)[
-            "status.modelMetrics"
-        ]
-        XCTAssertTrue(nativeMetrics.waitForExistence(timeout: 10))
-
-        let evidence = XCTAttachment(
-            string: "completions_ms=\(completionMilliseconds)\n\(nativeMetrics.label)"
-        )
-        evidence.name = "iPhone 13 five-run warm inference evidence"
-        evidence.lifetime = .keepAlways
-        add(evidence)
-
-        XCTAssertFalse(nativeMetrics.label.contains("cold"))
-        XCTAssertTrue(
-            nativeMetrics.label.contains("thermal nominal")
-                || nativeMetrics.label.contains("thermal fair")
-        )
-
-        let rateField = nativeMetrics.label.components(
-            separatedBy: " · "
-        ).first { $0.hasSuffix("tok/s") }
-        let rate = rateField.flatMap {
-            Double($0.replacingOccurrences(of: " tok/s", with: ""))
-        }
-        XCTAssertNotNil(rate)
-        XCTAssertGreaterThanOrEqual(rate ?? 0, 8)
-
-        keepScreenshot(named: "iPhone 13 sustained warm metrics", app: app)
-    }
-
-    func testLiteTwentyMinuteIncidentRun() throws {
-        executionTimeAllowance = 1_500
-        let app = launchLiteIncidentApp()
-        app.tabBars.buttons["Ask"].tap()
-
-        let composer = app.textFields["chat.composer"]
-        XCTAssertTrue(composer.waitForExistence(timeout: 10))
-        let responses = app.descendants(matching: .any).matching(
-            identifier: "chat.message.assistant"
-        )
-        let started = Date()
-        let requiredDuration: TimeInterval = 20 * 60
-        var runCount = 0
-        var completionMilliseconds: [Int] = []
-
-        while Date().timeIntervalSince(started) < requiredDuration {
+        for question in [
+            "Hi",
+            "How to fix my car",
+            "I’m drunk",
+            "I dropped my phone",
+            "I feel anxious",
+        ] {
+            let index = responses.count
             composer.tap()
-            composer.typeText("How do I make water safer?")
-            let runStarted = Date()
+            composer.typeText(question)
             app.buttons["chat.send"].tap()
-
-            let response = responses.element(boundBy: runCount)
-            XCTAssertTrue(response.waitForExistence(timeout: 180))
-            completionMilliseconds.append(
-                Int(Date().timeIntervalSince(runStarted) * 1_000)
-            )
-            XCTAssertTrue(response.staticTexts["Lite"].exists)
-            XCTAssertTrue(response.staticTexts["Offline sources (1)"].exists)
-            XCTAssertTrue(
-                response.staticTexts.matching(
-                    NSPredicate(
-                        format: "label CONTAINS %@",
-                        "Prefer moving water"
-                    )
-                ).firstMatch.exists
-            )
-            runCount += 1
-
-            let remaining = requiredDuration
-                - Date().timeIntervalSince(started)
-            if remaining > 0 {
-                RunLoop.current.run(
-                    until: Date().addingTimeInterval(min(25, remaining))
-                )
+            let response = responses.element(boundBy: index)
+            XCTAssertTrue(response.waitForExistence(timeout: 180), question)
+            let text = response.staticTexts["chat.answer"].label
+            let words = text.split(whereSeparator: \.isWhitespace).count
+            XCTAssertTrue((24...75).contains(words), "\(question): \(text)")
+            XCTAssertFalse(response.buttons["chat.manual-link"].exists, question)
+            XCTAssertFalse(text.localizedCaseInsensitiveContains("REVIEWED EXCERPT"))
+            if question == "I’m drunk" {
+                XCTAssertFalse(text.localizedCaseInsensitiveContains("I’m feeling"))
+            }
+            if question == "How to fix my car" {
+                XCTAssertFalse(text.localizedCaseInsensitiveContains("snow"))
             }
         }
+        keepScreenshot(named: "Lite database-first grounded and fallback", app: app)
+    }
 
-        app.tabBars.buttons["Status"].tap()
-        let nativeMetrics = app.descendants(matching: .any)[
-            "status.modelMetrics"
-        ]
-        XCTAssertTrue(nativeMetrics.waitForExistence(timeout: 10))
-        XCTAssertTrue(
-            nativeMetrics.label.contains("thermal nominal")
-                || nativeMetrics.label.contains("thermal fair")
-        )
-        let rateField = nativeMetrics.label.components(
-            separatedBy: " · "
-        ).first { $0.hasSuffix("tok/s") }
-        let rate = rateField.flatMap {
-            Double($0.replacingOccurrences(of: " tok/s", with: ""))
+    func testPhysicalLiteGenericCarRequestUsesIncidentFallback() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let composer = app.textFields["chat.composer"]
+        guard composer.waitForExistence(timeout: 30) else {
+            throw XCTSkip("A validated 160-token Lite package is not installed.")
         }
-        XCTAssertGreaterThanOrEqual(rate ?? 0, 8)
+        composer.tap()
+        composer.typeText("How to fix my car")
+        app.buttons["chat.send"].tap()
+        let response = app.descendants(matching: .any)["chat.message.assistant"]
+        XCTAssertTrue(response.waitForExistence(timeout: 180))
+        let text = response.staticTexts["chat.answer"].label
+        XCTAssertTrue((24...75).contains(text.split(whereSeparator: \.isWhitespace).count), text)
+        XCTAssertFalse(response.buttons["chat.manual-link"].exists)
+        XCTAssertFalse(text.localizedCaseInsensitiveContains("snow"))
+    }
 
-        let evidence = XCTAttachment(
-            string: [
-                "duration_s=\(Int(Date().timeIntervalSince(started)))",
-                "runs=\(runCount)",
-                "completions_ms=\(completionMilliseconds)",
-                nativeMetrics.label,
-            ].joined(separator: "\n")
+    func testPreparedCatalogSeparatesModelsAndMaps() throws {
+        let app = launchPreparedApp()
+        openTools(in: app)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.tier.lite"]
+                .waitForExistence(timeout: 10)
         )
-        evidence.name = "iPhone 13 twenty-minute incident evidence"
-        evidence.lifetime = .keepAlways
-        add(evidence)
-        keepScreenshot(named: "iPhone 13 twenty-minute incident", app: app)
+        XCTAssertFalse(app.staticTexts["Offline maps"].exists)
+
+        openMaps(in: app)
+        XCTAssertTrue(app.navigationBars["Offline Maps"].waitForExistence(timeout: 20))
+        keepScreenshot(named: "Separated model and map downloads", app: app)
+    }
+
+    func testPhysicalInstallLatestLiteFromPreparedCatalog() throws {
+        let app = launchPreparedApp()
+        let download = app.buttons["Download Lite"]
+        if download.waitForExistence(timeout: 10) {
+            download.tap()
+        }
+        XCTAssertTrue(
+            app.buttons["Use Lite"].waitForExistence(timeout: 900),
+            "The signed Lite package did not finish installing."
+        )
     }
 
     private func launchPreparedApp() -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["TRAILGUARD_CATALOG_URL"] = catalogURL
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
+        openTools(in: app)
 
-        app.tabBars.buttons["Downloads"].tap()
+        let access = app.buttons["Download access"]
+        XCTAssertTrue(access.waitForExistence(timeout: 10))
+        access.tap()
         let mode = app.switches["download.mode"]
         XCTAssertTrue(mode.waitForExistence(timeout: 10))
         if mode.value as? String != "1" {
-            mode.coordinate(
-                withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)
-            ).tap()
+            mode.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
         }
-        expectation(
-            for: NSPredicate(format: "label == %@", "Preparation mode"),
-            evaluatedWith: mode
-        )
-        waitForExpectations(timeout: 5)
-
         let verify = app.buttons["catalog.verify"]
         XCTAssertTrue(verify.waitForExistence(timeout: 10))
-        XCTAssertTrue(verify.isEnabled)
         verify.tap()
-        let catalogStatus = app.staticTexts["catalog.status"]
-        XCTAssertTrue(catalogStatus.waitForExistence(timeout: 30))
+        let status = app.staticTexts["catalog.status"]
+        XCTAssertTrue(status.waitForExistence(timeout: 30))
         expectation(
-            for: NSPredicate(
-                format: "label CONTAINS %@",
-                "Verified catalog · 6 downloads"
-            ),
-            evaluatedWith: catalogStatus
+            for: NSPredicate(format: "label CONTAINS %@", "Verified catalog"),
+            evaluatedWith: status
         )
         waitForExpectations(timeout: 30)
         return app
     }
 
-    private func launchLiteIncidentApp() -> XCUIApplication {
-        let app = XCUIApplication()
-        app.launch()
-
-        app.tabBars.buttons["Status"].tap()
-        let activeLite = app.staticTexts.matching(
-            NSPredicate(format: "label CONTAINS %@", "Lite active")
-        ).firstMatch
-        XCTAssertTrue(activeLite.waitForExistence(timeout: 30))
-
-        app.tabBars.buttons["Downloads"].tap()
-        let mode = app.switches["download.mode"]
-        XCTAssertTrue(mode.waitForExistence(timeout: 10))
-        if mode.value as? String == "1" {
-            mode.coordinate(
-                withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)
-            ).tap()
-        }
-        expectation(
-            for: NSPredicate(format: "label == %@", "Incident mode"),
-            evaluatedWith: mode
+    private func openManual(in app: XCUIApplication) {
+        let tab = tabButton("Manual", in: app)
+        XCTAssertTrue(tab.waitForExistence(timeout: 10))
+        tab.tap()
+        XCTAssertTrue(
+            app.staticTexts["Wilderness Survival"]
+                .waitForExistence(timeout: 20)
         )
-        waitForExpectations(timeout: 5)
-
-        let tierPicker = app.descendants(matching: .any)["download.modelTier"]
-        for _ in 0..<10 where !tierPicker.exists {
-            app.swipeUp()
-        }
-        XCTAssertTrue(tierPicker.waitForExistence(timeout: 10))
-        if !(tierPicker.value as? String ?? "").contains("Lite") {
-            tierPicker.tap()
-            XCTAssertTrue(app.buttons["Lite"].waitForExistence(timeout: 10))
-            app.buttons["Lite"].tap()
-        }
-        return app
     }
 
-    private func scrollToPackage(
-        _ identifier: String,
-        in app: XCUIApplication
-    ) -> XCUIElement {
-        let package = app.descendants(matching: .any)[
-            identifier
-        ]
-        for _ in 0..<6 where !package.exists {
-            app.swipeUp()
-        }
-        XCTAssertTrue(package.waitForExistence(timeout: 10))
-        return package
+    private func openMaps(in app: XCUIApplication) {
+        let tab = tabButton("Maps", in: app)
+        XCTAssertTrue(tab.waitForExistence(timeout: 10))
+        tab.tap()
     }
 
-    private func openOfflineMaps(in app: XCUIApplication) {
-        app.tabBars.buttons["Ready"].tap()
-        let offlineMaps = app.buttons["Offline map packs"]
-        for _ in 0..<4 where !offlineMaps.exists {
-            app.swipeUp()
-        }
-        XCTAssertTrue(offlineMaps.waitForExistence(timeout: 10))
-        offlineMaps.tap()
+    private func openTools(in app: XCUIApplication) {
+        let tab = tabButton("Tools", in: app)
+        XCTAssertTrue(tab.waitForExistence(timeout: 10))
+        tab.tap()
     }
 
     private func keepScreenshot(named name: String, app: XCUIApplication) {
@@ -784,5 +396,10 @@ final class PhysicalProductFlowTests: XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+    }
+
+    private func tabButton(_ label: String, in app: XCUIApplication) -> XCUIElement {
+        let phoneTab = app.tabBars.buttons[label]
+        return phoneTab.exists ? phoneTab : app.buttons[label].firstMatch
     }
 }

@@ -8,50 +8,6 @@ import XCTest
 #endif
 
 final class GoldMatrixExecutionTests: XCTestCase {
-    func testAll120GoldIncidentsExerciseExpectedControlPath() async throws {
-        let cases: [GoldIncidentCase] = try fixture(named: "gold_incidents")
-        XCTAssertEqual(cases.count, 120)
-        let articles = cases.map(makeArticle)
-        let assistant = IncidentAssistant(
-            articles: articles,
-            installedTiers: [.essential]
-        )
-
-        for testCase in cases {
-            let answer = await assistant.answer(
-                request: ChatRequest(
-                    question: testCase.input,
-                    domain: testCase.domain,
-                    preferredTier: .essential,
-                    imageObservations: testCase.inputChannel == "ocr_observation"
-                        ? [testCase.input]
-                        : []
-                ),
-                device: device(for: testCase.deviceCondition)
-            )
-            let expectsOverride = [
-                "deterministic_override",
-                "refuse_and_escalate",
-            ].contains(testCase.expectedControl)
-            XCTAssertEqual(
-                answer.usedDeterministicOverride,
-                expectsOverride,
-                "Unexpected path for \(testCase.id)"
-            )
-            if expectsOverride {
-                XCTAssertFalse(
-                    answer.notices.filter { $0.hasPrefix("Policy:") }.isEmpty,
-                    "Missing policy for \(testCase.id)"
-                )
-            } else {
-                XCTAssertFalse(
-                    answer.sources.isEmpty,
-                    "Missing reviewed evidence for \(testCase.id)"
-                )
-            }
-        }
-    }
-
     func testAll30MapAssetCasesExerciseReadinessResult() throws {
         let cases: [MapAssetCase] = try fixture(named: "map_asset_cases")
         XCTAssertEqual(cases.count, 30)

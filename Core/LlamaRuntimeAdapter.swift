@@ -2,7 +2,7 @@ import Foundation
 
 public struct LlamaRuntimeConfiguration: Equatable, Sendable {
     public static let liteContextTokens = 2_048
-    public static let liteMaximumOutputTokens = 128
+    public static let liteMaximumOutputTokens = 160
 
     public let modelURL: URL
     public let visionProjectorURL: URL?
@@ -43,7 +43,8 @@ public protocol LlamaRuntimeBackend: Sendable {
         systemPrompt: String,
         userPrompt: String,
         imageData: Data?,
-        maximumOutputTokens: Int
+        maximumOutputTokens: Int,
+        evidenceCount: Int
     ) async throws -> LlamaCompletionResult
     func unload() async
 }
@@ -94,18 +95,20 @@ public actor LlamaLanguageModel: LocalLanguageModel {
     private let backend: any LlamaRuntimeBackend
     private let configuration: LlamaRuntimeConfiguration
     private let metricsSink: (@Sendable (LlamaCompletionMetrics) async -> Void)?
+    private let completionSink: (@Sendable (String) async -> Void)?
     private var loaded = false
 
     public init(
         tier: ModelTier,
         configuration: LlamaRuntimeConfiguration,
         backend: any LlamaRuntimeBackend,
-        metricsSink: (@Sendable (LlamaCompletionMetrics) async -> Void)? = nil
+        metricsSink: (@Sendable (LlamaCompletionMetrics) async -> Void)? = nil,
+        completionSink: (@Sendable (String) async -> Void)? = nil
     ) throws {
         guard FileManager.default.fileExists(atPath: configuration.modelURL.path) else {
             throw LlamaAdapterError.modelFileMissing
         }
-        if tier == .visionExpert {
+        if tier == .expert {
             guard let projector = configuration.visionProjectorURL else {
                 throw LlamaAdapterError.projectorRequiredForVisionTier
             }
@@ -119,6 +122,7 @@ public actor LlamaLanguageModel: LocalLanguageModel {
         self.configuration = configuration
         self.backend = backend
         self.metricsSink = metricsSink
+        self.completionSink = completionSink
     }
 
     public func generate(prompt: ModelPrompt) async throws -> String {
@@ -138,7 +142,7 @@ public actor LlamaLanguageModel: LocalLanguageModel {
         let builder = GroundedPromptBuilder()
         let completion = try await backend.complete(
             systemPrompt: builder.systemPrompt(
-                for: tier,
+                for: prompt,
                 outputMode: outputMode
             ),
             userPrompt: builder.userPrompt(
@@ -146,8 +150,12 @@ public actor LlamaLanguageModel: LocalLanguageModel {
                 outputMode: outputMode
             ),
             imageData: prompt.permitsVisionReasoning ? prompt.imageData : nil,
-            maximumOutputTokens: configuration.maximumOutputTokens
+            maximumOutputTokens: configuration.maximumOutputTokens,
+            evidenceCount: prompt.purpose == .grounded
+                ? prompt.evidence.count
+                : 0
         )
+        await completionSink?(completion.text)
         let metrics = LlamaCompletionMetrics(
             firstTokenMilliseconds: completion.metrics.firstTokenMilliseconds
                 + loadMilliseconds,
