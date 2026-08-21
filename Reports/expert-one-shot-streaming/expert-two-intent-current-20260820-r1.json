@@ -1,0 +1,2202 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values and goals while also being open-minded and willing to learn from others. Consider getting involved in activities you enjoy or exploring new experiences that can help you meet people who share similar passions. Being respectful of different perspectives and cultures is key when forming relationships. Additionally, it’s essential to maintain a healthy balance between personal growth and relationship development.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4078,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 244,
+      "first_visible_text_milliseconds" : 1121,
+      "generated_tokens" : 99,
+      "generation_milliseconds" : 3168,
+      "grounding_reason" : "general_question",
+      "id" : "intent-01-dating",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3816797472,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1551911648,
+      "post_available_memory_bytes" : 3820418360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321817272,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values and goals while also being open-minded and willing to learn from others. Consider getting involved in activities you enjoy or exploring new experiences that can help you meet people who share similar passions. Being respectful of different perspectives and cultures is key when forming relationships. Additionally, it’s essential to maintain a healthy balance between personal growth and relationship development.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values and goals while also being open-minded and willing to learn from others. Consider getting involved in activities you enjoy or exploring new experiences that can help you meet people who share similar passions. Being respectful of different perspectives and cultures is key when forming relationships. Additionally, it’s essential to maintain a healthy balance between personal growth and relationship development.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 82,
+      "stream_deltas" : [
+        "Getting",
+        " ",
+        "a ",
+        "girlfriend ",
+        "involves ",
+        "building ",
+        "connections ",
+        "through ",
+        "shared ",
+        "interests, ",
+        "mutual ",
+        "respect, ",
+        "and ",
+        "genuine ",
+        "communication. ",
+        "It's ",
+        "important ",
+        "to ",
+        "be ",
+        "honest ",
+        "about ",
+        "your ",
+        "values ",
+        "and ",
+        "goals ",
+        "while ",
+        "also ",
+        "being ",
+        "open-minded ",
+        "and ",
+        "willing ",
+        "to ",
+        "learn ",
+        "from ",
+        "others. ",
+        "Consider ",
+        "getting ",
+        "involved ",
+        "in ",
+        "activities ",
+        "you ",
+        "enjoy ",
+        "or ",
+        "exploring ",
+        "new ",
+        "experiences ",
+        "that ",
+        "can ",
+        "help ",
+        "you ",
+        "meet ",
+        "people ",
+        "who ",
+        "share ",
+        "similar ",
+        "passions. ",
+        "Being ",
+        "respectful ",
+        "of ",
+        "different ",
+        "perspectives ",
+        "and ",
+        "cultures ",
+        "is ",
+        "key ",
+        "when ",
+        "forming ",
+        "relationships. ",
+        "Additionally, ",
+        "it’s ",
+        "essential ",
+        "to ",
+        "maintain ",
+        "a ",
+        "healthy ",
+        "balance ",
+        "between ",
+        "personal ",
+        "growth ",
+        "and ",
+        "relationship ",
+        "development."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.515731874145004,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 81
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1880,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1039,
+      "generated_tokens" : 29,
+      "generation_milliseconds" : 1064,
+      "grounding_reason" : "general_question",
+      "id" : "intent-02-live-weather",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3803313464,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1565395656,
+      "post_available_memory_bytes" : 3819386168,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3849566288,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 20,
+      "stream_deltas" : [
+        "I",
+        " ",
+        "cannot ",
+        "retrieve ",
+        "the ",
+        "current ",
+        "weather ",
+        "information. ",
+        "Please ",
+        "check ",
+        "a ",
+        "reliable ",
+        "weather ",
+        "source ",
+        "for ",
+        "the ",
+        "most ",
+        "up-to-date",
+        " ",
+        "details."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.104750304506702,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 18
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Hey, what's up? I'm just here to help with your questions. Let me know if you need anything specific.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1981,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1036,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 1128,
+      "grounding_reason" : "general_question",
+      "id" : "intent-03-conversation",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3799397688,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1569311432,
+      "post_available_memory_bytes" : 3815994680,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3848353872,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Hey, what's up? I'm just here to help with your questions. Let me know if you need anything specific.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"Hey, what's up? I'm just here to help with your questions. Let me know if you need anything specific.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 20,
+      "stream_deltas" : [
+        "Hey",
+        ", ",
+        "what's ",
+        "up? ",
+        "I'm ",
+        "just ",
+        "here ",
+        "to ",
+        "help ",
+        "with ",
+        "your ",
+        "questions. ",
+        "Let ",
+        "me ",
+        "know ",
+        "if ",
+        "you ",
+        "need ",
+        "anything ",
+        "specific."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.898305084745765,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 19
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Paris is the capital of France.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1482,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1044,
+      "generated_tokens" : 14,
+      "generation_milliseconds" : 609,
+      "grounding_reason" : "general_question",
+      "id" : "intent-04-general-knowledge",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3798742328,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1569966792,
+      "post_available_memory_bytes" : 3815994680,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3844913232,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Paris is the capital of France.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"Paris is the capital of France.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 7,
+      "stream_deltas" : [
+        "Paris",
+        " ",
+        "is ",
+        "the ",
+        "capital ",
+        "of ",
+        "France."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.519125683060111,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 6
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "To fix a Swift optional-unwrapping compiler error, you need to ensure that you're not trying to unwrap an optional value without first checking if it's nil. In Swift, the `!` operator is used for force unwrapping and should only be applied when you are certain the optional contains a valid value. If you encounter this type of error in your code, make sure to use safe unwrapping with `.map()` or `.filter()` methods instead of direct unwrapping. For example: `let result = someOptional?.someMethod()`. This approach avoids potential runtime crashes and ensures that the optional is properly handled",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5035,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 244,
+      "first_visible_text_milliseconds" : 1033,
+      "generated_tokens" : 134,
+      "generation_milliseconds" : 4224,
+      "grounding_reason" : "general_question",
+      "id" : "intent-05-software",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3798676792,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1570032328,
+      "post_available_memory_bytes" : 3814339896,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3844913232,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"To fix a Swift optional-unwrapping compiler error, you need to ensure that you're not trying to unwrap an optional value without first checking if it's nil. In Swift, the `!` operator is used for force unwrapping and should only be applied when you are certain the optional contains a valid value. If you encounter this type of error in your code, make sure to use safe unwrapping with `.map()` or `.filter()` methods instead of direct unwrapping. For example: `let result = someOptional?.someMethod()`. This approach avoids potential runtime crashes and ensures that the optional is properly handled\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"To fix a Swift optional-unwrapping compiler error, you need to ensure that you're not trying to unwrap an optional value without first checking if it's nil. In Swift, the `!` operator is used for force unwrapping and should only be applied when you are certain the optional contains a valid value. If you encounter this type of error in your code, make sure to use safe unwrapping with `.map()` or `.filter()` methods instead of direct unwrapping. For example: `let result = someOptional?.someMethod()`. This approach avoids potential runtime crashes and ensures that the optional is properly handled\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 107,
+      "stream_deltas" : [
+        "To",
+        " ",
+        "fix ",
+        "a ",
+        "Swift ",
+        "optional-unwr",
+        "apping ",
+        "compiler ",
+        "error, ",
+        "you ",
+        "need ",
+        "to ",
+        "ensure ",
+        "that ",
+        "you're ",
+        "not ",
+        "trying ",
+        "to ",
+        "unwrap ",
+        "an ",
+        "optional ",
+        "value ",
+        "without ",
+        "first ",
+        "checking ",
+        "if ",
+        "it's ",
+        "nil. ",
+        "In ",
+        "Swift, ",
+        "the ",
+        "`!`",
+        " ",
+        "operator ",
+        "is ",
+        "used ",
+        "for ",
+        "force ",
+        "unwrapping",
+        " ",
+        "and ",
+        "should ",
+        "only ",
+        "be ",
+        "applied ",
+        "when ",
+        "you ",
+        "are ",
+        "certain ",
+        "the ",
+        "optional ",
+        "contains ",
+        "a ",
+        "valid ",
+        "value. ",
+        "If ",
+        "you ",
+        "encounter ",
+        "this ",
+        "type ",
+        "of ",
+        "error ",
+        "in ",
+        "your ",
+        "code, ",
+        "make ",
+        "sure ",
+        "to ",
+        "use ",
+        "safe ",
+        "unwrapping",
+        " ",
+        "with ",
+        "`.map()`",
+        " ",
+        "or ",
+        "`.filter()`",
+        " ",
+        "methods ",
+        "instead ",
+        "of ",
+        "direct ",
+        "unwrapping",
+        ". ",
+        "For ",
+        "example: ",
+        "`let ",
+        "result ",
+        "= ",
+        "someOptional?.",
+        "someMethod",
+        "()`.",
+        " ",
+        "This ",
+        "approach ",
+        "avoids ",
+        "potential ",
+        "runtime ",
+        "crashes ",
+        "and ",
+        "ensures ",
+        "that ",
+        "the ",
+        "optional ",
+        "is ",
+        "properly ",
+        "handled"
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.417085427135682,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 96
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "A cold email can be a useful tool for getting a job, especially when you're applying to positions that are not in your current network. It's important to tailor the message to each recipient and include relevant details about your qualifications or experience. However, it’s also worth noting that some employers may view cold emails as less professional than other forms of communication, so it's essential to be respectful and concise. If you're unsure whether a cold email is appropriate for a particular job, I recommend reaching out to the hiring manager directly first.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4429,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1034,
+      "generated_tokens" : 114,
+      "generation_milliseconds" : 3625,
+      "grounding_reason" : "general_question",
+      "id" : "intent-06-lexical-collision",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3797841208,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1570867912,
+      "post_available_memory_bytes" : 3813750072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3843242064,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"A cold email can be a useful tool for getting a job, especially when you're applying to positions that are not in your current network. It's important to tailor the message to each recipient and include relevant details about your qualifications or experience. However, it’s also worth noting that some employers may view cold emails as less professional than other forms of communication, so it's essential to be respectful and concise. If you're unsure whether a cold email is appropriate for a particular job, I recommend reaching out to the hiring manager directly first.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"A cold email can be a useful tool for getting a job, especially when you're applying to positions that are not in your current network. It's important to tailor the message to each recipient and include relevant details about your qualifications or experience. However, it’s also worth noting that some employers may view cold emails as less professional than other forms of communication, so it's essential to be respectful and concise. If you're unsure whether a cold email is appropriate for a particular job, I recommend reaching out to the hiring manager directly first.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 95,
+      "stream_deltas" : [
+        "A",
+        " ",
+        "cold ",
+        "email ",
+        "can ",
+        "be ",
+        "a ",
+        "useful ",
+        "tool ",
+        "for ",
+        "getting ",
+        "a ",
+        "job, ",
+        "especially ",
+        "when ",
+        "you're ",
+        "applying ",
+        "to ",
+        "positions ",
+        "that ",
+        "are ",
+        "not ",
+        "in ",
+        "your ",
+        "current ",
+        "network. ",
+        "It's ",
+        "important ",
+        "to ",
+        "tailor ",
+        "the ",
+        "message ",
+        "to ",
+        "each ",
+        "recipient ",
+        "and ",
+        "include ",
+        "relevant ",
+        "details ",
+        "about ",
+        "your ",
+        "qualifications ",
+        "or ",
+        "experience. ",
+        "However, ",
+        "it’s ",
+        "also ",
+        "worth ",
+        "noting ",
+        "that ",
+        "some ",
+        "employers ",
+        "may ",
+        "view ",
+        "cold ",
+        "emails ",
+        "as ",
+        "less ",
+        "professional ",
+        "than ",
+        "other ",
+        "forms ",
+        "of ",
+        "communication, ",
+        "so ",
+        "it's ",
+        "essential ",
+        "to ",
+        "be ",
+        "respectful ",
+        "and ",
+        "concise. ",
+        "If ",
+        "you're ",
+        "unsure ",
+        "whether ",
+        "a ",
+        "cold ",
+        "email ",
+        "is ",
+        "appropriate ",
+        "for ",
+        "a ",
+        "particular ",
+        "job, ",
+        "I ",
+        "recommend ",
+        "reaching ",
+        "out ",
+        "to ",
+        "the ",
+        "hiring ",
+        "manager ",
+        "directly ",
+        "first."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.412182140745124,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 94
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-cold-snow-scenario"
+        ],
+        [
+          "weather-wildlife-cold-scenario"
+        ]
+      ],
+      "answer" : "Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7017,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1696,
+      "first_visible_text_milliseconds" : 2832,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 6099,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-07-snow",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3796350240,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1572358880,
+      "post_available_memory_bytes" : 3820696840,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3842652240,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Choose a site away from avalanche paths, cornices, tree wells, and drifting snow.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Mark the entrance, keep tools inside, and clear vents as snow falls.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.\",\n      \"e\": [6]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Choose a site away from avalanche paths, cornices, tree wells, and drifting snow.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Mark the entrance, keep tools inside, and clear vents as snow falls.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "car-stay-walk",
+        "shelter-cold-snow",
+        "shelter-overnight",
+        "car-stuck",
+        "basics-stay-or-move",
+        "food-energy",
+        "car-ev-hybrid",
+        "weather-wildlife-cold"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        2,
+        3,
+        7,
+        6,
+        4,
+        5
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.024393442622950821,
+        0.022629032258064515,
+        0.02137301587301587,
+        0.021124999999999998,
+        0.020205882352941178,
+        0.018425373134328359,
+        0.017384615384615387,
+        0.017151515151515154
+      ],
+      "retrieval_context_milliseconds" : 20.272970199584961,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        2,
+        3
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "shelter-cold-snow-scenario",
+        "shelter-overnight-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "nws-heat-cold",
+        "nws-lightning",
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 61,
+      "stream_deltas" : [
+        "Choose",
+        " ",
+        "a ",
+        "site ",
+        "away ",
+        "from ",
+        "avalanche ",
+        "paths, ",
+        "cornices,",
+        " ",
+        "tree ",
+        "wells, ",
+        "and ",
+        "drifting ",
+        "snow.",
+        " ",
+        "Use ",
+        "a ",
+        "tent, ",
+        "snow ",
+        "trench, ",
+        "or ",
+        "snow ",
+        "structure ",
+        "only ",
+        "if ",
+        "you ",
+        "know ",
+        "it ",
+        "can ",
+        "remain ",
+        "stable ",
+        "and ",
+        "ventilated.",
+        " ",
+        "Mark ",
+        "the ",
+        "entrance, ",
+        "keep ",
+        "tools ",
+        "inside, ",
+        "and ",
+        "clear ",
+        "vents ",
+        "as ",
+        "snow ",
+        "falls.",
+        " ",
+        "Recheck ",
+        "anchors, ",
+        "drainage, ",
+        "ventilation, ",
+        "warmth, ",
+        "and ",
+        "hazards ",
+        "before ",
+        "sleep ",
+        "and ",
+        "after ",
+        "weather ",
+        "changes."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.386327503974563,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 56
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply immediate firm pressure to the wound with a clean cloth or gauze. Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5104,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1743,
+      "first_visible_text_milliseconds" : 2894,
+      "generated_tokens" : 82,
+      "generation_milliseconds" : 4144,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-08-bleeding",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3792106712,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1576602408,
+      "post_available_memory_bytes" : 3828856096,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3847911456,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.\",\n      \"e\": [4, 5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.\",\n      \"e\": [4, 5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "car-stay-walk",
+        "food-low-risk",
+        "first-aid-shock",
+        "first-aid-wounds-burns",
+        "food-unknown-plants",
+        "shelter-debris",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        5,
+        1,
+        3,
+        2,
+        6,
+        4,
+        17
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        3,
+        4,
+        3,
+        4,
+        2,
+        3,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.026893442622950819,
+        0.025151515151515154,
+        0.020129032258064516,
+        0.020125000000000001,
+        0.019873015873015872,
+        0.018425373134328359,
+        0.018384615384615385,
+        0.018320512820512821
+      ],
+      "retrieval_context_milliseconds" : 33.363938331604004,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "stream_delta_count" : 31,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "immediate ",
+        "firm ",
+        "pressure ",
+        "to ",
+        "the ",
+        "wound ",
+        "with ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        ".",
+        " ",
+        "Do ",
+        "not ",
+        "loosen ",
+        "the ",
+        "tourniqu",
+        "et ",
+        "after ",
+        "application; ",
+        "obtain ",
+        "emergency ",
+        "evacuation ",
+        "as ",
+        "quickly ",
+        "as ",
+        "possible."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.735943356934612,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 27
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ],
+        [
+          "basics-first-night-scenario"
+        ]
+      ],
+      "answer" : "Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6307,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1557,
+      "first_visible_text_milliseconds" : 2699,
+      "generated_tokens" : 129,
+      "generation_milliseconds" : 5332,
+      "grounding_reason" : "resolved_history",
+      "id" : "intent-09-survival-followup",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3800528088,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1568181032,
+      "post_available_memory_bytes" : 3828315424,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3856119840,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Do not keep walking simply to feel productive.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Do not keep walking simply to feel productive.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 1,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stop",
+        "navigation-backtrack",
+        "fire-decision",
+        "navigation-terrain",
+        "weather-wildlife-flood",
+        "car-tire",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.021393442622950821,
+        0.021129032258064517,
+        0.018373015873015871,
+        0.018124999999999999,
+        0.016384615384615386,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015705882352941177
+      ],
+      "retrieval_context_milliseconds" : 10.265946388244629,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 50,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "as ",
+        "soon ",
+        "as ",
+        "landmarks, ",
+        "trail, ",
+        "or ",
+        "position ",
+        "stop ",
+        "matching ",
+        "expectations.",
+        " ",
+        "Mark ",
+        "the ",
+        "spot ",
+        "without ",
+        "damaging ",
+        "the ",
+        "environment ",
+        "and ",
+        "record ",
+        "time ",
+        "and ",
+        "direction ",
+        "of ",
+        "travel.",
+        " ",
+        "Review ",
+        "the ",
+        "last ",
+        "certain ",
+        "point, ",
+        "recent ",
+        "turns, ",
+        "terrain, ",
+        "distance, ",
+        "and ",
+        "elevation ",
+        "before ",
+        "moving.",
+        " ",
+        "Do ",
+        "not ",
+        "keep ",
+        "walking ",
+        "simply ",
+        "to ",
+        "feel ",
+        "productive."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.907284768211923,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 46
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away. Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle. Use only the owner's approved towing method and tell responders if the battery was submerged or damaged. If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 8180,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1575,
+      "first_visible_text_milliseconds" : 2729,
+      "generated_tokens" : 179,
+      "generation_milliseconds" : 7181,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-10-survival-no-evidence",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3799774424,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1568934696,
+      "post_available_memory_bytes" : 3828249888,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3855595552,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use only the owner's approved towing method and tell responders if the battery was submerged or damaged.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use only the owner's approved towing method and tell responders if the battery was submerged or damaged.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "car-stay-walk",
+        "car-stay-walk",
+        "car-ev-hybrid",
+        "fire-decision",
+        "navigation-stop-mark",
+        "food-low-risk",
+        "basics-inventory",
+        "car-jump"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        4,
+        5,
+        8,
+        2,
+        9,
+        3
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.01989344262295082,
+        0.019129032258064515,
+        0.017884615384615384,
+        0.017651515151515151,
+        0.016992753623188406,
+        0.016873015873015873,
+        0.016785714285714286,
+        0.016625000000000001
+      ],
+      "retrieval_context_milliseconds" : 20.681023597717285,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        3
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "car-ev-hybrid-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "stream_delta_count" : 87,
+      "stream_deltas" : [
+        "After",
+        " ",
+        "a ",
+        "crash, ",
+        "flood, ",
+        "fire, ",
+        "battery ",
+        "warning, ",
+        "unusual ",
+        "heat, ",
+        "popping, ",
+        "smoke, ",
+        "or ",
+        "sweet\/sol",
+        "vent ",
+        "odor, ",
+        "switch ",
+        "off ",
+        "if ",
+        "safe ",
+        "and ",
+        "move ",
+        "away.",
+        " ",
+        "Call ",
+        "emergency ",
+        "services, ",
+        "identify ",
+        "the ",
+        "vehicle ",
+        "as ",
+        "electric ",
+        "or ",
+        "hybrid, ",
+        "and ",
+        "display ",
+        "a ",
+        "bright ",
+        "signal ",
+        "without ",
+        "returning ",
+        "to ",
+        "a ",
+        "dangerous ",
+        "vehicle.",
+        " ",
+        "Use ",
+        "only ",
+        "the ",
+        "owner's ",
+        "approved ",
+        "towing ",
+        "method ",
+        "and ",
+        "tell ",
+        "responders ",
+        "if ",
+        "the ",
+        "battery ",
+        "was ",
+        "submerged ",
+        "or ",
+        "damaged.",
+        " ",
+        "If ",
+        "the ",
+        "vehicle ",
+        "is ",
+        "undamaged ",
+        "and ",
+        "used ",
+        "as ",
+        "shelter, ",
+        "clear ",
+        "snow ",
+        "from ",
+        "the ",
+        "exhaust, ",
+        "conserve ",
+        "power, ",
+        "ventilate ",
+        "safely, ",
+        "and ",
+        "keep ",
+        "an ",
+        "exit ",
+        "usable."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.751694612914733,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 82
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5305826368,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325651128,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "146473929fa93f03005348f8c53378c7464dcdefc37f1872ef3e370e5e382d74",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-one-shot-streaming",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-two-intent-current-20260820-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325634744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3820418360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 4267,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3819386168,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 6280,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3815994680,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8395,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3815994680,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10013,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3814339896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 15179,
+      "phase" : "after_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3813750072,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 19738,
+      "phase" : "after_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3820696840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 26905,
+      "phase" : "after_6",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828856096,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 32177,
+      "phase" : "after_7",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828315424,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 38629,
+      "phase" : "after_8",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828249888,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 46966,
+      "phase" : "after_9",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3855775776,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 47056,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3859134496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 52226,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4844813040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57417,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5301386304,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 62550,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 67941,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 73101,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 78226,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 83347,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 88532,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93642,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305908288,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98769,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305908288,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 104185,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305891904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 109354,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305891904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114525,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305891904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119655,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305891904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124774,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305891904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 129905,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 135114,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140435,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305859136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 145785,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305826368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 150973,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305826368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 156381,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305826368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 161797,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305826368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 167098,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5305826368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 172446,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

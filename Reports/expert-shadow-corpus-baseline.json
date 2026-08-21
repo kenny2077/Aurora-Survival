@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "frozenAt": "2026-08-12",
+  "litePassages": 1050,
+  "expertScenarios": 70,
+  "expertClaims": 354,
+  "expertClaimKinds": {
+    "action": 212,
+    "applicability": 70,
+    "contraindication": 69,
+    "escalation": 3,
+    "rationale": 0
+  },
+  "expertTextCases": 700,
+  "expertVisionCases": 120,
+  "candidateRecallGatePassed": true,
+  "latestPhysicalDiagnostic": "expert-rag-v2-diagnostic-score-coverage-fixed.json",
+  "latestPhysicalCases": 12,
+  "latestPhysicalRoutePasses": 2,
+  "latestPhysicalInitialThermal": "nominal",
+  "latestPhysicalFinalThermal": "serious",
+  "observedPrimaryFailure": "correct candidates retrieved; planning and claim-validation/repair behavior failed"
+}

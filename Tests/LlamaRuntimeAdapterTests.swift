@@ -109,6 +109,68 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
         XCTAssertEqual(loadCount, 1)
     }
 
+    func testExpertContextProfileChangeReloadsNativeContext() async throws {
+        let fixture = try makeFiles(includeProjector: true)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let backend = RecordingLlamaBackend()
+        let model = try LlamaLanguageModel(
+            tier: .expert,
+            configuration: .expert(
+                modelURL: fixture.model,
+                visionProjectorURL: try XCTUnwrap(fixture.projector),
+                profile: .full,
+                threadCount: 4
+            ),
+            backend: backend
+        )
+
+        for profile in [ExpertContextProfile.full, .balanced, .constrained] {
+            _ = try await model.generate(prompt: ModelPrompt(
+                question: "Give safe text-only guidance.",
+                evidence: [],
+                imageObservations: [],
+                tier: .expert,
+                permitsVisionReasoning: false,
+                expertContextProfile: profile
+            ))
+        }
+
+        let loadedContexts = await backend.loadedContexts
+        let unloadCount = await backend.unloadCount
+        XCTAssertEqual(loadedContexts, [8_192, 6_144, 4_096])
+        XCTAssertEqual(unloadCount, 2)
+    }
+
+    func testExpertRuntimeFailureUnloadsBeforeReturningFailure() async throws {
+        let fixture = try makeFiles(includeProjector: true)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let backend = RecordingLlamaBackend()
+        await backend.setShouldFail(true)
+        let model = try LlamaLanguageModel(
+            tier: .expert,
+            configuration: .expert(
+                modelURL: fixture.model,
+                visionProjectorURL: try XCTUnwrap(fixture.projector),
+                profile: .constrained,
+                threadCount: 4
+            ),
+            backend: backend
+        )
+
+        await XCTAssertThrowsErrorAsync {
+            _ = try await model.generate(prompt: ModelPrompt(
+                question: "What now?",
+                evidence: [],
+                imageObservations: [],
+                tier: .expert,
+                permitsVisionReasoning: false,
+                expertContextProfile: .constrained
+            ))
+        }
+        let unloadCount = await backend.unloadCount
+        XCTAssertEqual(unloadCount, 1)
+    }
+
     func testBackendLoadsOnlyOnceUntilUnload() async throws {
         let fixture = try makeFiles(includeProjector: false)
         defer { try? FileManager.default.removeItem(at: fixture.root) }
@@ -173,6 +235,58 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
         XCTAssertEqual(groundedEvidenceCount, 1)
     }
 
+    func testExpertIntentUsesDedicatedGrammarMode() async throws {
+        let fixture = try makeFiles(includeProjector: true)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let backend = RecordingLlamaBackend()
+        let model = try LlamaLanguageModel(
+            tier: .expert,
+            configuration: .expert(
+                modelURL: fixture.model,
+                visionProjectorURL: try XCTUnwrap(fixture.projector),
+                profile: .constrained,
+                threadCount: 2
+            ),
+            backend: backend
+        )
+
+        _ = try await model.generate(prompt: ModelPrompt(
+            question: "What should I do?",
+            evidence: [],
+            imageObservations: [],
+            tier: .expert,
+            permitsVisionReasoning: false,
+            purpose: .expertIntent
+        ))
+        let grammarMode = await backend.lastGrammarMode
+        XCTAssertEqual(grammarMode, .expertIntent)
+
+        _ = try await model.generate(prompt: ModelPrompt(
+            question: "What condition is visible?",
+            evidence: [],
+            imageObservations: [],
+            tier: .expert,
+            permitsVisionReasoning: false,
+            purpose: .clarification
+        ))
+        let clarificationGrammar = await backend.lastGrammarMode
+        XCTAssertEqual(clarificationGrammar, .expertClarification)
+
+        _ = try await model.generate(prompt: ModelPrompt(
+            question: "What is in this photo?",
+            evidence: [],
+            imageData: Data("image".utf8),
+            imageObservations: [],
+            tier: .expert,
+            permitsVisionReasoning: true,
+            purpose: .nativeVisionAnswer
+        ))
+        let visionGrammar = await backend.lastGrammarMode
+        let imageWasForwarded = await backend.imageWasForwarded
+        XCTAssertEqual(visionGrammar, .responseEnvelope)
+        XCTAssertTrue(imageWasForwarded)
+    }
+
     private struct Files {
         let root: URL
         let model: URL
@@ -220,22 +334,32 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
 
 private actor RecordingLlamaBackend: LlamaRuntimeBackend {
     private(set) var loadCount = 0
+    private(set) var unloadCount = 0
+    private(set) var loadedContexts: [Int] = []
     private(set) var imageWasForwarded = false
     private(set) var lastEvidenceCount = 0
+    private(set) var lastGrammarMode: LlamaGrammarMode = .responseEnvelope
+    private var shouldFail = false
 
     func load(configuration: LlamaRuntimeConfiguration) async throws {
         loadCount += 1
+        loadedContexts.append(configuration.contextTokens)
     }
+
+    func setShouldFail(_ value: Bool) { shouldFail = value }
 
     func complete(
         systemPrompt: String,
         userPrompt: String,
         imageData: Data?,
         maximumOutputTokens: Int,
-        evidenceCount: Int
+        evidenceCount: Int,
+        grammarMode: LlamaGrammarMode
     ) async throws -> LlamaCompletionResult {
+        if shouldFail { throw ModelFailure.unavailable }
         imageWasForwarded = imageData != nil
         lastEvidenceCount = evidenceCount
+        lastGrammarMode = grammarMode
         return LlamaCompletionResult(
             text: "No evidence available.",
             metrics: LlamaCompletionMetrics(
@@ -247,5 +371,16 @@ private actor RecordingLlamaBackend: LlamaRuntimeBackend {
         )
     }
 
-    func unload() async {}
+    func unload() async { unloadCount += 1 }
+}
+
+private func XCTAssertThrowsErrorAsync(
+    _ expression: () async throws -> Void,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) async {
+    do {
+        try await expression()
+        XCTFail("Expected async expression to throw", file: file, line: line)
+    } catch {}
 }

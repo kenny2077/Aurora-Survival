@@ -1,0 +1,116 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 14550,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2834,
+      "generated_tokens" : 127,
+      "generation_milliseconds" : 6558,
+      "id" : "TG-V020-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3709318288,
+      "peak_physical_footprint_bytes" : 1659390832,
+      "post_available_memory_bytes" : 3731502224,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328141472,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"{\\\"e\\\":[1,2]}\\\"} 1. The trail sign indicates the path leads to Refuge du Col du Palet and Refuge-porte de Rosel, with the latter being 1620m and the former 10m. 2. The terrain is a mix of grassy slopes and a rocky ridge, with the path following a clear trail. 3. The path is safe and well-marked, but the route is not isolated. 4. The path is not a game trail, and the terrain is not dense. 5. The path is not a stream or valley, and the route\" ,\"e\":[1,2]}",
+        "{\"a\":\"answer\\\",\\\"e\\\":[1]} 1. Follow the trail marked on the signpost to the left, as it leads to the Refuge du Col du Palet. 2. The path is on a gentle slope, and the terrain is open, so there is no immediate danger. 3. The route is safe and well-marked, so continue forward. 4. Do not backtrack unless the trail is clearly known and safe. 5. The warning is that streams and valleys can lead into cliffs, so be cautious. 6. If the trail becomes too陡\", \"e\":[1]} "
+      ],
+      "retrieval_context_milliseconds" : 7.4390172958374023,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.834586466165412,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 14008,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3214,
+      "generated_tokens" : 120,
+      "generation_milliseconds" : 6787,
+      "id" : "TG-V017-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3678368864,
+      "peak_physical_footprint_bytes" : 1690340256,
+      "post_available_memory_bytes" : 3749147720,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3731502224,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"stop\\n\\nYou are in a wilderness area with a BCParks sign. The sign shows a tent, a restroom, and a bear trap. The bear trap is a hazard. You must not approach the bear trap. The bear trap is a danger. You must not approach the bear trap. The bear trap is a danger. You must not approach the bear trap. The bear trap is a danger. You must not approach the bear trap. The bear trap is a danger. You must not approach the bear trap. The bear is \",\"e\":[1,2]}",
+        "{\"a\":\"answer\\\",\\\"e\\\":[1]} 1. Blow the whistle three strong blasts, pause, and listen for a response. 2. Move to a safe opening or ridge if the signal improves. 3. Keep the whistle attached to clothing. 4. Do not blow continuously until exhausted or unable to hear a reply. 5. Do not light a signal fire during a ban, extreme fire weather, or where sparks can escape. 6. Do not use smoke or fire unless safe and conditions allow. 7. If wind rises or \",\"e\":[2]}"
+      ],
+      "retrieval_context_milliseconds" : 4.2029619216918945,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.305345647914919,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 13460,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3266,
+      "generated_tokens" : 119,
+      "generation_milliseconds" : 6803,
+      "id" : "TG-V005-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3727127624,
+      "peak_physical_footprint_bytes" : 1641532344,
+      "post_available_memory_bytes" : 3742266440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3749147720,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The image shows a small tick on a person's hand. This is a confirmed tick bite, which is a serious health risk. The person should not handle the tick or attempt to remove it with their fingers. Immediate action is required: remove the tick using a sterilized tool, then clean the bite area with antiseptic. The person should be monitored for symptoms of infection, and if they develop fever, chills, or worsening pain, they should seek care\", \"e\":[1,2]}",
+        "{\"a\":\"answer\\\",\\\"e\\\":[1]}  The image shows a small tick on a person's hand. This is a tick, not a bite. The tick is not yet attached to the person. The person should not be treated for shock or given food or drink. The tick is not a venomous animal, so there is no need to use epinephrine or apply ice. The person should not be moved or walked unnecessarily. The tick is not a poison, so there is no need to contact poison control. The person should\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 5.787968635559082,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.361605880689851,
+      "word_count" : 10
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3742266440,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328157856,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-smoke",
+  "run_id" : "retained-smoke-diagnostic",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

@@ -63,11 +63,13 @@ public struct PackageVerifier: Sendable {
             throw PackageVerificationError.invalidKeyValidityWindow
         }
         let validUntil = trustedKey.validUntil.flatMap(formatter.date)
-        let currentDate = now()
-        if currentDate < validFrom {
+        guard let signedAt = formatter.date(from: manifest.createdAt) else {
+            throw PackageVerificationError.invalidPackageIdentity
+        }
+        if signedAt < validFrom {
             throw PackageVerificationError.signingKeyNotCurrentlyValid
         }
-        if let validUntil, currentDate > validUntil {
+        if let validUntil, signedAt > validUntil {
             throw PackageVerificationError.signingKeyNotCurrentlyValid
         }
         guard let publicKeyData = Data(base64Encoded: trustedKey.publicKeyBase64),
@@ -101,13 +103,28 @@ public struct PackageVerifier: Sendable {
                 throw PackageVerificationError.byteCountMismatch(artifact.path)
             }
 
-            let data = try Data(contentsOf: fileURL, options: [.mappedIfSafe])
-            let digest = SHA256.hash(data: data)
-            let actualHash = digest.map { String(format: "%02x", $0) }.joined()
+            let actualHash = try Self.streamingSHA256(fileURL)
             guard actualHash == artifact.sha256 else {
                 throw PackageVerificationError.checksumMismatch(artifact.path)
             }
         }
+    }
+
+    private static func streamingSHA256(_ url: URL) throws -> String {
+        guard let stream = InputStream(url: url) else {
+            throw PackageVerificationError.artifactIsNotRegularFile(url.lastPathComponent)
+        }
+        stream.open()
+        defer { stream.close() }
+        var hasher = SHA256()
+        var buffer = [UInt8](repeating: 0, count: 1_048_576)
+        while stream.hasBytesAvailable {
+            let count = stream.read(&buffer, maxLength: buffer.count)
+            if count < 0 { throw stream.streamError ?? URLError(.cannotOpenFile) }
+            if count == 0 { break }
+            hasher.update(data: Data(buffer[0..<count]))
+        }
+        return hasher.finalize().map { String(format: "%02x", $0) }.joined()
     }
 
     public static func safeArtifactURL(path: String, root: URL) throws -> URL {

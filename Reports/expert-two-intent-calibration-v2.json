@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "createdAt": "2026-08-20",
+  "dataset": "Tests/Fixtures/expert_direct_rag_holdout.json",
+  "datasetAuthorship": "separately_authored_internal_pre_release_reviewed",
+  "intentTypes": ["general_question", "survival_question"],
+  "caseCount": 160,
+  "survivalPositiveCount": 80,
+  "hardNegativeCount": 80,
+  "hardNegativeCategoryMinimum": 10,
+  "strongDenseSimilarityThreshold": 0.68,
+  "moderateDenseSimilarityThreshold": 0.58,
+  "selectionRule": "exact multiword alignment, strong cosine alignment, or moderate cosine plus at least two meaningful lexical concepts; rank and discovery never authorize evidence",
+  "lexicalCandidateRecall": {
+    "topEightOverall": 1.0,
+    "critical": 1.0
+  },
+  "forcedHardNegativeEligibility": {
+    "falsePositiveCount": 0,
+    "precision": 1.0
+  },
+  "physicalDenseSpotCheck": {
+    "device": "M2 iPad",
+    "positiveTopScores": [0.7865362763, 0.6893486381, 0.7378590107],
+    "hardNegativeTopScore": 0.6371029615,
+    "hardNegative": "unfamiliar solar-still membrane repair versus EV/hybrid evidence"
+  },
+  "status": "passes_static_gate_and_physical_spot_check_full_dense_holdout_pending",
+  "notes": [
+    "General intent skips retrieval in production; forced hard-negative retrieval is retained as defense in depth.",
+    "Current and live-information requests cannot use offline survival evidence.",
+    "The M2 iPad spot check separated three expected positives from the observed dense false positive; the frozen 160-case production-BGE run is still required before release.",
+    "Independent wilderness, medical, product, and legal review remains a release blocker."
+  ]
+}

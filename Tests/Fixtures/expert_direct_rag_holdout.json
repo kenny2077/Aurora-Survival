@@ -1,0 +1,1447 @@
+{
+  "schemaVersion": 2,
+  "authorship": "Separately authored and internally reviewed two-intent calibration and frozen holdout; not generated from canonical lesson wording.",
+  "reviewStatus": "internal_pre_release_reviewed_external_review_pending",
+  "cases": [
+    {
+      "id": "survival-001",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The dashboard dims and the starter clicks once but my car will not crank.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-002",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "My vehicle will not start and the lights fade when I turn the key.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-003",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The engine does not turn over even though the dash initially lights up.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-004",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I hear a single click from the car and then nothing happens.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-005",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "My car cranks briefly and immediately stops starting.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-006",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "The starter clicks repeatedly and the headlights look weak.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-007",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The vehicle is in Park but pressing Start only dims the instruments.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-008",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "What safe checks should I make first when a car will not start?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "car-no-start-triage",
+      "critical": true
+    },
+    {
+      "id": "survival-009",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How long must collected creek water boil before it is safe to drink?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-010",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I have a pot and fire; explain how to boil questionable water.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-011",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Does water need a rolling boil at high elevation?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-012",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "How should I disinfect stream water by boiling it?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-013",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The filter failed, so what boiling procedure should I use?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-014",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "How long do I keep cloudy collected water at a boil?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-015",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I need the correct boil time for untreated wilderness water.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-016",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "After reaching a rolling boil, when can collected water be removed from heat?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "water-boil-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-017",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "A deep leg wound is bleeding through the cloth and will not stop.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-018",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Someone has severe external bleeding after a fall.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-019",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Blood is soaking through the dressing on a large cut.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-020",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "How do I control life-threatening bleeding while help is coming?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-021",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "A hiking partner has a deep cut with continuous heavy blood loss.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-022",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Firm pressure has not stopped the bleeding from an arm wound.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-023",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What should I do first for uncontrolled bleeding in the wilderness?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-024",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "There is rapid blood loss from a traumatic leg injury.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-bleeding-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-025",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How do I stay warm overnight if I am stranded in snow?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-026",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I need shelter from wind and snow before dark.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-027",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What kind of emergency shelter helps in deep cold?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-028",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I am stuck outside in freezing weather and need overnight protection.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-029",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How should I insulate a snow shelter while keeping ventilation?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-030",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "The ground is frozen and wind is stripping away heat.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-031",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What should I prioritize when sheltering in cold snow?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-032",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I have to build a safe cold-weather shelter with limited gear.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "shelter-cold-snow-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-033",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I am lost on a marked trail with two hours of daylight left.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-034",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I am lost and cannot identify my location after leaving the marked route.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-035",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "After realizing I am lost outdoors, how do I stop and mark my last known point?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-036",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I lost the trail and need to avoid making the search area larger.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-037",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Should I keep walking when I am uncertain where the route is?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-038",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I am lost and disoriented in the woods and do not know which direction is camp.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-039",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How should I mark my last known point after getting lost?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-040",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "My navigation failed and darkness is approaching.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "navigation-stop-mark-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-041",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I hear thunder while I am above the tree line.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-042",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Lightning is approaching while I am on an exposed ridge.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-043",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What should hikers do when lightning and a thunderstorm develop nearby?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-044",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I see lightning and have no substantial building nearby.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-045",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How do I reduce lightning risk in open mountain terrain?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-046",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Thunder is getting louder while our group is near isolated trees.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-047",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "We are caught outside during an electrical storm.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-048",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "What is the safest immediate action when lightning threatens a hike?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "weather-wildlife-lightning-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-049",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How should I fish safely from the riverbank?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-050",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Explain a basic hook-and-line setup for catching food.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-051",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I have a rod, line, hook, and bait at a stable bank.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-052",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "What safety checks matter before fishing for survival food?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-053",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How do I land and handle a fish hygienically at camp?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-054",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Describe safe basic bank fishing without entering the water.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-055",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How should a beginner present bait from a riverbank?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-056",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I need a low-risk way to fish with suitable gear.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-fishing-basics",
+      "critical": true
+    },
+    {
+      "id": "survival-057",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Can I eat an unknown wild mushroom if animals bit it?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-058",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I found unfamiliar berries and do not know the species.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-059",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Is a plant safe to eat because birds are eating it?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-060",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Should I taste a wild mushroom to identify whether it is edible?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-061",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I cannot positively identify this wild plant as food.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-062",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Are animal bite marks evidence that a mushroom is safe for humans?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-063",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What should I do with unknown fungi when I need food?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-064",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I found a plant that resembles an edible one but I am uncertain.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "food-unknown-plants-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-065",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The campfire looks out but the ashes are still hot.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-066",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "How do I make sure a wilderness fire is completely extinguished?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-067",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Coals remain warm under ash after I poured water.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-068",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "What should I check before leaving a used fire ring?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-069",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "The wind is increasing and I need to put the fire out fully.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-070",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "How should I extinguish a campfire and verify that hidden embers are cool?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-071",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "Can I leave camp when the fire bed is warm to the touch?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-072",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "I need to extinguish every coal before breaking camp.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "fire-extinguish-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-073",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "I am soaked, shivering hard, and becoming clumsy.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-074",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "A hiker is confused and losing coordination in the cold.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-075",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "What should I do for suspected hypothermia outdoors?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-076",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "Someone's shivering is fading even though they are still very cold.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-077",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "We need to warm a wet person after prolonged cold exposure.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-078",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "A partner may have hypothermia and is pale, exhausted, and stumbling in freezing rain.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-079",
+      "split": "calibration",
+      "category": "survival_positive",
+      "query": "How do I respond when cold exposure affects speech and movement?",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "survival-080",
+      "split": "holdout",
+      "category": "survival_positive",
+      "query": "The person is cold, drowsy, and no longer shivering normally.",
+      "expectedIntent": "survival_question",
+      "expectedScenarioID": "first-aid-cold-scenario",
+      "critical": true
+    },
+    {
+      "id": "general-001",
+      "split": "calibration",
+      "category": "dating",
+      "query": "How to get a girlfriend",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-002",
+      "split": "holdout",
+      "category": "dating",
+      "query": "What makes a good first date?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-003",
+      "split": "calibration",
+      "category": "dating",
+      "query": "How should I ask someone out respectfully?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-004",
+      "split": "holdout",
+      "category": "dating",
+      "query": "What can I say after a difficult breakup?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-005",
+      "split": "calibration",
+      "category": "dating",
+      "query": "How do I improve communication in a relationship?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-006",
+      "split": "holdout",
+      "category": "dating",
+      "query": "Suggest an anniversary gift for my partner.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-007",
+      "split": "calibration",
+      "category": "dating",
+      "query": "How can I meet people who share my interests?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-008",
+      "split": "holdout",
+      "category": "dating",
+      "query": "What are healthy boundaries while dating?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-009",
+      "split": "calibration",
+      "category": "dating",
+      "query": "How do I write a friendly dating profile?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-010",
+      "split": "holdout",
+      "category": "dating",
+      "query": "Should I tell my friend that I like them?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-011",
+      "split": "calibration",
+      "category": "general_knowledge",
+      "query": "What is the capital of France?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-012",
+      "split": "holdout",
+      "category": "general_knowledge",
+      "query": "Why is the sky blue?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-013",
+      "split": "calibration",
+      "category": "general_knowledge",
+      "query": "Who wrote Pride and Prejudice?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-014",
+      "split": "holdout",
+      "category": "general_knowledge",
+      "query": "Explain how compound interest works.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-015",
+      "split": "calibration",
+      "category": "general_knowledge",
+      "query": "What is photosynthesis?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-016",
+      "split": "holdout",
+      "category": "general_knowledge",
+      "query": "Why do tides change during the day?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-017",
+      "split": "calibration",
+      "category": "general_knowledge",
+      "query": "Give me a short history of the Roman Empire.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-018",
+      "split": "holdout",
+      "category": "general_knowledge",
+      "query": "What is the difference between mass and weight?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-019",
+      "split": "calibration",
+      "category": "general_knowledge",
+      "query": "How does a parliamentary government work?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-020",
+      "split": "holdout",
+      "category": "general_knowledge",
+      "query": "Explain the basic rules of chess.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-021",
+      "split": "calibration",
+      "category": "software",
+      "query": "How do I fix a Swift optional-unwrapping error?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-022",
+      "split": "holdout",
+      "category": "software",
+      "query": "Why is my laptop slow after an update?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-023",
+      "split": "calibration",
+      "category": "software",
+      "query": "Explain dependency injection in software.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-024",
+      "split": "holdout",
+      "category": "software",
+      "query": "How can I center a view in SwiftUI?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-025",
+      "split": "calibration",
+      "category": "software",
+      "query": "My car icon is missing from the navigation app.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-026",
+      "split": "holdout",
+      "category": "software",
+      "query": "Why does this weather widget show stale data?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-027",
+      "split": "calibration",
+      "category": "software",
+      "query": "How do I recover an unsaved spreadsheet?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-028",
+      "split": "holdout",
+      "category": "software",
+      "query": "Write a regular expression for an email address.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-029",
+      "split": "calibration",
+      "category": "software",
+      "query": "What does a fire symbol mean in this computer game?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-030",
+      "split": "holdout",
+      "category": "software",
+      "query": "How should I structure an SQLite migration?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-031",
+      "split": "calibration",
+      "category": "live_information",
+      "query": "How's the weather today?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-032",
+      "split": "holdout",
+      "category": "live_information",
+      "query": "What is the current Bitcoin price?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-033",
+      "split": "calibration",
+      "category": "live_information",
+      "query": "Who won the game last night?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-034",
+      "split": "holdout",
+      "category": "live_information",
+      "query": "What movies are playing near me now?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-035",
+      "split": "calibration",
+      "category": "live_information",
+      "query": "Is my train running on time today?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-036",
+      "split": "holdout",
+      "category": "live_information",
+      "query": "What is the latest national news?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-037",
+      "split": "calibration",
+      "category": "live_information",
+      "query": "How heavy is traffic on my route right now?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-038",
+      "split": "holdout",
+      "category": "live_information",
+      "query": "Which restaurants nearby are open tonight?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-039",
+      "split": "calibration",
+      "category": "live_information",
+      "query": "What time does the next flight depart?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-040",
+      "split": "holdout",
+      "category": "live_information",
+      "query": "Is there a fire ban in my county today?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-041",
+      "split": "calibration",
+      "category": "conversation",
+      "query": "What's up, bro?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-042",
+      "split": "holdout",
+      "category": "conversation",
+      "query": "Hi, how are you doing?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-043",
+      "split": "calibration",
+      "category": "conversation",
+      "query": "Thanks for your help.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-044",
+      "split": "holdout",
+      "category": "conversation",
+      "query": "Tell me a joke.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-045",
+      "split": "calibration",
+      "category": "conversation",
+      "query": "Good morning.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-046",
+      "split": "holdout",
+      "category": "conversation",
+      "query": "What have you been thinking about?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-047",
+      "split": "calibration",
+      "category": "conversation",
+      "query": "Can we chat for a while?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-048",
+      "split": "holdout",
+      "category": "conversation",
+      "query": "That sounds interesting.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-049",
+      "split": "calibration",
+      "category": "conversation",
+      "query": "Okay, I understand.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-050",
+      "split": "holdout",
+      "category": "conversation",
+      "query": "What can you do?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-051",
+      "split": "calibration",
+      "category": "lexical_collision",
+      "query": "Can a cold email help me get a job?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-052",
+      "split": "holdout",
+      "category": "lexical_collision",
+      "query": "How do I make my writing flow like water?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-053",
+      "split": "calibration",
+      "category": "lexical_collision",
+      "query": "Recommend a movie about a car breakdown.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-054",
+      "split": "holdout",
+      "category": "lexical_collision",
+      "query": "How can I fish for compliments less often?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-055",
+      "split": "calibration",
+      "category": "lexical_collision",
+      "query": "What does fire symbolize in poetry?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-056",
+      "split": "holdout",
+      "category": "lexical_collision",
+      "query": "Help me map out a study schedule.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-057",
+      "split": "calibration",
+      "category": "lexical_collision",
+      "query": "How do I signal interest on a dating app?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-058",
+      "split": "holdout",
+      "category": "lexical_collision",
+      "query": "What is a shelter tax deduction?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-059",
+      "split": "calibration",
+      "category": "lexical_collision",
+      "query": "Why did the software crash after I clicked Start?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-060",
+      "split": "holdout",
+      "category": "lexical_collision",
+      "query": "How do I navigate office politics?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": true
+    },
+    {
+      "id": "general-061",
+      "split": "calibration",
+      "category": "creative",
+      "query": "Write a story about getting lost in space.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-062",
+      "split": "holdout",
+      "category": "creative",
+      "query": "Create a poem about snow and fire.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-063",
+      "split": "calibration",
+      "category": "creative",
+      "query": "Invent a fictional mushroom kingdom.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-064",
+      "split": "holdout",
+      "category": "creative",
+      "query": "Write dialogue between a fish and a compass.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-065",
+      "split": "calibration",
+      "category": "creative",
+      "query": "Outline a movie about wilderness rescue.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-066",
+      "split": "holdout",
+      "category": "creative",
+      "query": "Give me names for a weather-themed band.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-067",
+      "split": "calibration",
+      "category": "creative",
+      "query": "Write a song about a broken car.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-068",
+      "split": "holdout",
+      "category": "creative",
+      "query": "Describe a fantasy map with rivers.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-069",
+      "split": "calibration",
+      "category": "creative",
+      "query": "Create a bedtime story set in a shelter.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-070",
+      "split": "holdout",
+      "category": "creative",
+      "query": "Write a comedy scene about boiling water.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-071",
+      "split": "calibration",
+      "category": "ordinary_how_to",
+      "query": "How do I make pasta for dinner?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-072",
+      "split": "holdout",
+      "category": "ordinary_how_to",
+      "query": "What exercises build stronger legs?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-073",
+      "split": "calibration",
+      "category": "ordinary_how_to",
+      "query": "How can I organize my apartment?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-074",
+      "split": "holdout",
+      "category": "ordinary_how_to",
+      "query": "What should I wear to a job interview?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-075",
+      "split": "calibration",
+      "category": "ordinary_how_to",
+      "query": "How do I clean a coffee maker?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-076",
+      "split": "holdout",
+      "category": "ordinary_how_to",
+      "query": "Suggest a weekly study routine.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-077",
+      "split": "calibration",
+      "category": "ordinary_how_to",
+      "query": "How can I take better portrait photos?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-078",
+      "split": "holdout",
+      "category": "ordinary_how_to",
+      "query": "What is a good way to learn Spanish?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-079",
+      "split": "calibration",
+      "category": "ordinary_how_to",
+      "query": "How do I choose a bicycle helmet?",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    },
+    {
+      "id": "general-080",
+      "split": "holdout",
+      "category": "ordinary_how_to",
+      "query": "Help me plan a birthday party.",
+      "expectedIntent": "general_question",
+      "expectedScenarioID": null,
+      "critical": false
+    }
+  ]
+}

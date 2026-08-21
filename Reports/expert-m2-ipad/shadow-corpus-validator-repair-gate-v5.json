@@ -1,0 +1,304 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "none",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 13776,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "water-collect-prefilter",
+        "water-boil"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 944,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 4132,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "water-collect-prefilter-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3821729080,
+      "peak_physical_footprint_bytes" : 1546980040,
+      "post_available_memory_bytes" : 3831117112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325634744,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.\"\n}",
+        "{ \"s\": [ { \"a\": \"Bring the cloudy water to a rolling boil for 1 minute, then let it cool and store in a clean container without touching the inside of the cap.\", \"e\": [1] }, { \"a\": \"Pour off the clearer layer or pass through a coffee filter to remove sediment before boiling.\", \"e\": [2] }, { \"a\": \"Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination; therefore, do not use this method for contaminated water sources.\", \"e\": [1] } ] }",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring clear water to a rolling boil for 1 minute.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Above 6,500 feet (about 1,980 metres), boil for 3 minutes.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Let it cool and store in a clean, covered container without touching the inside of the cap.\",\n      \"e\": [1]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "water-collect-prefilter",
+        "signal-smoke-fire",
+        "signal-ground",
+        "food-low-risk",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_scores" : [
+        3.6861290322580644,
+        2.7863934426229506,
+        1.8353846153846152,
+        1.8349253731343282,
+        1.584705882352941,
+        1.5150000000000001,
+        1.4400000000000002,
+        1.3199999999999998
+      ],
+      "retrieval_context_milliseconds" : 8.87298583984375,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 34.818067754077795,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Build a small fire on stable ground away from people, shelter, roots, and spreading fuel. Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 7700,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 685,
+      "generated_tokens" : 83,
+      "generation_milliseconds" : 3050,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-site-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-site"
+      ],
+      "minimum_available_memory_bytes" : 3815929120,
+      "peak_physical_footprint_bytes" : 1552780000,
+      "post_available_memory_bytes" : 3851859256,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3860838456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches.\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Build a small fire on stable ground away from people, shelter, roots, and spreading fuel.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.\",\n      \"e\": [1]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire",
+        "basics-stay-or-move",
+        "car-ev-hybrid",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0913934426229499,
+        0.71999999999999997,
+        0.61612903225806448,
+        0.43562499999999998,
+        0.39742537313432835,
+        0.35999999999999999,
+        0.13587301587301587,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 5.6020021438598633,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "fire-site"
+      ],
+      "tokens_per_second" : 34.672304439746298,
+      "word_count" : 31
+    },
+    {
+      "answer" : "Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel. Collect enough dry material in increasing sizes before striking the first spark.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 12068,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 910,
+      "generated_tokens" : 74,
+      "generation_milliseconds" : 3015,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-site-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3828151584,
+      "peak_physical_footprint_bytes" : 1540557536,
+      "post_available_memory_bytes" : 3848631608,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3881793592,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Build a fire on stable ground away from people, shelter, roots, and low branches.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Use dry sticks in increasing sizes to create the smallest useful fire.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Avoid building near peat or deep duff, as these are contraindicated for fires.\",\n      \"e\": [1]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Collect enough dry material in increasing sizes before striking the first spark.\",\n      \"e\": [2]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-materials",
+        "signal-smoke-fire",
+        "fire-wet",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        3.0913934426229508,
+        2.7161290322580647,
+        1.1058730158730157,
+        1.035625,
+        0.95999999999999996,
+        0.85538461538461541,
+        0.73492537313432837,
+        0.63765151515151519
+      ],
+      "retrieval_context_milliseconds" : 7.5519084930419922,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "tokens_per_second" : 34.679334916864605,
+      "word_count" : 28
+    },
+    {
+      "answer" : "Attend the fire continuously and leave it cold enough to touch. Burn fuel down, spread coals, add water, stir, and repeat until no heat remains. Use soil only when water is unavailable and keep checking for heat below the surface. Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces. Never sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.",
+      "clarification_target" : "",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 13075,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 707,
+      "generated_tokens" : 172,
+      "generation_milliseconds" : 5642,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-extinguish-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "minimum_available_memory_bytes" : 3832952096,
+      "peak_physical_footprint_bytes" : 1535757024,
+      "post_available_memory_bytes" : 3854480696,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876878392,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"ordinary\",\n  \"r\": \"low\",\n  \"e\": [],\n  \"c\": \"not_needed\",\n  \"q\": \"\"\n}",
+        "{ \"s\": [ {\"a\": \"Turn off the fire and let it cool to touch before leaving camp.\", \"e\": [1] } , {\"a\": \"Do not use soil when water is available, but only if necessary for extinguishing a small flame in dry conditions.\", \"e\": [1] }, {\"a\": \"Never sleep with an open flame or any source of heat within the shelter.\", \"e\": [1] }] }",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Attend the fire continuously and leave it cold enough to touch.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Use soil only when water is unavailable and keep checking for heat below the surface.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Never sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\",\n      \"e\": [1]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-extinguish",
+        "first-aid-cold",
+        "shelter-cold-snow",
+        "weather-wildlife-wildfire",
+        "navigation-stop-mark",
+        "signal-communication",
+        "car-overheat",
+        "fire-decision"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.7353846153846153,
+        0.67500000000000004,
+        0.55562500000000004,
+        0.43612903225806449,
+        0.43587301587301586,
+        0.31515151515151513,
+        0.26250000000000001
+      ],
+      "retrieval_context_milliseconds" : 9.6039772033691406,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "fire-extinguish"
+      ],
+      "tokens_per_second" : 34.650455927051674,
+      "word_count" : 70
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 4,
+  "final_available_memory_bytes" : 4841028336,
+  "final_battery_level" : 1,
+  "final_thermal" : "serious",
+  "initial_available_memory_bytes" : 5327912120,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-rag-diagnostic",
+  "run_id" : "shadow-corpus-validator-repair-gate-v5",
+  "schema_version" : 1,
+  "terminal_failure" : "thermal_serious"
+}

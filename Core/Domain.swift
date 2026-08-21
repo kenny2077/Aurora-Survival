@@ -250,17 +250,20 @@ public enum ThermalCondition: String, Codable, Sendable {
 
 public struct DeviceSnapshot: Equatable, Sendable {
     public let physicalMemoryBytes: UInt64
+    public let availableMemoryBytes: UInt64?
     public let freeStorageBytes: Int64
     public let thermalCondition: ThermalCondition
     public let isLowPowerMode: Bool
 
     public init(
         physicalMemoryBytes: UInt64,
+        availableMemoryBytes: UInt64? = nil,
         freeStorageBytes: Int64,
         thermalCondition: ThermalCondition,
         isLowPowerMode: Bool
     ) {
         self.physicalMemoryBytes = physicalMemoryBytes
+        self.availableMemoryBytes = availableMemoryBytes
         self.freeStorageBytes = freeStorageBytes
         self.thermalCondition = thermalCondition
         self.isLowPowerMode = isLowPowerMode
@@ -325,10 +328,79 @@ public struct ConversationTurn: Equatable, Sendable {
 
     public let role: Role
     public let text: String
+    public let evidenceIDs: [String]
 
-    public init(role: Role, text: String) {
+    public init(
+        role: Role,
+        text: String,
+        evidenceIDs: [String] = []
+    ) {
         self.role = role
         self.text = text
+        self.evidenceIDs = evidenceIDs
+    }
+}
+
+public enum AnswerSupportStatus: String, Codable, Equatable, Sendable {
+    case supported
+    case partiallySupported = "partially_supported"
+    case unsupported
+}
+
+public enum AnswerCoverageStatus: String, Codable, Equatable, Sendable {
+    case complete
+    case partial
+    case insufficient
+}
+
+public struct AnswerSentenceCitation: Codable, Equatable, Hashable, Sendable,
+    Identifiable {
+    public let sentence: Int
+    public let sourceIDs: [String]
+
+    public var id: String { "\(sentence):\(sourceIDs.joined(separator: ","))" }
+
+    public init(sentence: Int, sourceIDs: [String]) {
+        self.sentence = sentence
+        self.sourceIDs = sourceIDs
+    }
+}
+
+public struct AnswerSourceCard: Codable, Equatable, Hashable, Sendable,
+    Identifiable {
+    public let id: String
+    public let title: String
+    public let organization: String?
+    public let url: String?
+    public let locator: String
+    public let publishedAt: String
+    public let updatedAt: String
+    public let reviewedAt: String
+    public let jurisdiction: String
+    public let reviewStatus: String
+
+    public init(
+        id: String,
+        title: String,
+        organization: String? = nil,
+        url: String?,
+        locator: String,
+        publishedAt: String,
+        updatedAt: String,
+        reviewedAt: String,
+        jurisdiction: String,
+        reviewStatus: String
+    ) {
+        self.id = id
+        self.title = title
+        self.organization = organization
+        self.url = url
+        self.locator = locator
+        self.publishedAt = publishedAt
+        self.updatedAt = updatedAt
+        self.reviewedAt = reviewedAt
+        self.jurisdiction = jurisdiction
+        self.reviewStatus = reviewStatus
     }
 }
 
@@ -341,6 +413,17 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
     public let modelTier: ModelTier?
     public let visionWasUsed: Bool
     public let notices: [String]
+    public let verificationStatus: AnswerVerificationStatus?
+    public let verificationIssues: [AnswerVerificationIssue]
+    public let retrievalWasDegraded: Bool
+    public let corroboratingSourceCount: Int
+    public let supportStatus: AnswerSupportStatus?
+    public let coverageStatus: AnswerCoverageStatus?
+    public let sentenceCitations: [AnswerSentenceCitation]
+    public let sourceCards: [AnswerSourceCard]
+    public let evidenceIDs: [String]
+    public let expertIntent: ExpertTurnIntent?
+    public let expertRetrievalStatus: ExpertRetrievalStatus?
 
     public init(
         id: UUID = UUID(),
@@ -350,7 +433,18 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
         manualReferences: [ManualReference] = [],
         modelTier: ModelTier?,
         visionWasUsed: Bool,
-        notices: [String]
+        notices: [String],
+        verificationStatus: AnswerVerificationStatus? = nil,
+        verificationIssues: [AnswerVerificationIssue] = [],
+        retrievalWasDegraded: Bool = false,
+        corroboratingSourceCount: Int = 0,
+        supportStatus: AnswerSupportStatus? = nil,
+        coverageStatus: AnswerCoverageStatus? = nil,
+        sentenceCitations: [AnswerSentenceCitation] = [],
+        sourceCards: [AnswerSourceCard] = [],
+        evidenceIDs: [String] = [],
+        expertIntent: ExpertTurnIntent? = nil,
+        expertRetrievalStatus: ExpertRetrievalStatus? = nil
     ) {
         self.id = id
         self.text = text
@@ -360,5 +454,49 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
         self.modelTier = modelTier
         self.visionWasUsed = visionWasUsed
         self.notices = notices
+        self.verificationStatus = verificationStatus
+        self.verificationIssues = verificationIssues
+        self.retrievalWasDegraded = retrievalWasDegraded
+        self.corroboratingSourceCount = corroboratingSourceCount
+        self.supportStatus = supportStatus
+        self.coverageStatus = coverageStatus
+        self.sentenceCitations = sentenceCitations
+        self.sourceCards = sourceCards
+        self.evidenceIDs = evidenceIDs
+        self.expertIntent = expertIntent
+        self.expertRetrievalStatus = expertRetrievalStatus
+    }
+}
+
+public enum ExpertRetrievalStatus: String, Codable, Equatable, Sendable {
+    case acceptedEvidence = "accepted_evidence"
+    case noRelevantEvidence = "no_relevant_evidence"
+}
+
+public enum AnswerVerificationStatus: String, Codable, Equatable, Sendable {
+    case verified
+    case partiallyVerified = "partially_verified"
+    case unverified
+
+    public var displayName: String {
+        switch self {
+        case .verified: return "Verified against reviewed guidance"
+        case .partiallyVerified: return "Partially verified"
+        case .unverified: return "Unverified model draft"
+        }
+    }
+}
+
+public struct AnswerVerificationIssue: Codable, Equatable, Hashable, Sendable, Identifiable {
+    public let sentence: Int?
+    public let code: String
+    public let message: String
+
+    public var id: String { "\(sentence ?? 0):\(code):\(message)" }
+
+    public init(sentence: Int? = nil, code: String, message: String) {
+        self.sentence = sentence
+        self.code = code
+        self.message = message
     }
 }

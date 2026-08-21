@@ -1,0 +1,41 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "59b53dcc44f50584047df7c2a43122baea709a392263fe36c4ead008c048ef26  survival_knowledge.sqlite",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "id" : "vision_expert-install",
+      "installed" : true,
+      "memory_profile_status" : "retained",
+      "package_id" : "model.expert.qwen3vl-2b-q4km-q8",
+      "version" : "0.2.0-dev"
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 2,
+  "final_available_memory_bytes" : 5323046048,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5346966808,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "acfa6d1cbd474c614c91c9c4be000c02ed085e06031bed944fbb85e52b2c0b91",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-install",
+  "nominal_settle_seconds" : 60,
+  "run_id" : "expert-vector-rag-install-v1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+
+  ]
+}

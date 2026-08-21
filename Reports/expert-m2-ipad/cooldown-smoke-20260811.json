@@ -1,0 +1,121 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 13107,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "first_token_milliseconds" : 1536,
+      "generated_tokens" : 135,
+      "generation_milliseconds" : 5988,
+      "id" : "TG-V003-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3739497664,
+      "peak_physical_footprint_bytes" : 1629211456,
+      "post_available_memory_bytes" : 3763172544,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325552800,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The mushroom shown is a type of fungus, likely an edible species like shiitake or morel. It has a glossy surface and appears to be growing on wood in the wild. However, it's not safe for consumption because its appearance may indicate contamination or that it was collected from an unsafe source. The warning states that smoke, color, smell, or a brief sear does not prove meat or fish is safe. Since this mushroom has no clear indication of being cooked and there are no signs of spoilage, you should stop collecting and eating it immediately to avoid illness. You must ensure the fungus was collected from a known, low-risk source before consuming it.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The mushroom shown is a type of fungus, likely an edible species like shiitake or morel. It has a glossy brown cap with a dark center and appears to be growing on wood in the wild. The key concern is that it may have been contaminated by chemicals from its environment or stored improperly. You should not eat this mushroom because it's unsafe due to potential contamination, especially if you're cooking it. If you are unsure about the source of the fungus, stop eating and discard it immediately. This warning applies only when there’s no clear evidence that the mushroom is safe for consumption after proper handling and preparation.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.7119340896606445,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.09883198562444,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 20000,
+      "elapsed_milliseconds" : 16377,
+      "expected_manual_lessons" : [
+        "weather-wildlife-snakes-insects"
+      ],
+      "first_token_milliseconds" : 3179,
+      "generated_tokens" : 119,
+      "generation_milliseconds" : 7129,
+      "id" : "TG-V004-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3706696824,
+      "peak_physical_footprint_bytes" : 1661995912,
+      "post_available_memory_bytes" : 3727013008,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4318574912,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The snake is non-venomous and appears to be a harmless species, so you can move it with a stick. However, the warning in REVIEWED EXCERPT [1] states not to move on a guess or separate a group without a clear rescue reason. The current observation shows no signs of aggression, but since this is an outdoor setting and there are no other people nearby, moving the snake with a stick is acceptable as long? As it's non-venomous and you're in a safe environment. You should move the snake carefully to avoid injury or stress on its body. The warning from REVIEWED EXCERPT [1] applies here because there are no clear rescue reasons, so moving without confirmation could be risky.\",\"e\":[1]}",
+        "{\"a\":\"The snake is non-venomous, so you can move it with a stick. Stay near the last known route unless remaining creates more danger or a safe destination is close. If moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a rescue reason. The sun's position indicates general direction; compare this with terrain and map to support navigation. This snake appears non-venomous based on its appearance in the image, but it is still dangerous due to potential movement risk.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.4009170532226562,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.873417721518987,
+      "word_count" : 10
+    },
+    {
+      "answer" : "The water source is a muddy, contaminated puddle with visible foam and debris. It's unstable and likely to be swept away by current flow, making it unsafe for drinking or use. The bank appears eroded and the presence of organic matter suggests potential contamination from animal waste or sewage. Stop collecting this water immediately as it poses serious health risks due to chemical contaminants and pathogens; do not proceed with any filtration or boiling procedures. A clear if you are in a situation where there is no safe source, prioritize finding an alternative location for drinking water before making further decisions.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 20000,
+      "elapsed_milliseconds" : 7570,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 3228,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 7428,
+      "id" : "TG-V006-observation-grounded",
+      "manual_lessons" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3706893384,
+      "peak_physical_footprint_bytes" : 1661815736,
+      "post_available_memory_bytes" : 3710809160,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4741511776,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water source is a muddy, contaminated puddle with visible foam and debris. It's unstable and likely to be swept away by current flow, making it unsafe for drinking or use. The bank appears eroded and the presence of organic matter suggests potential contamination from animal waste or sewage. Stop collecting this water immediately as it poses serious health risks due to chemical contaminants and pathogens; do not proceed with any filtration or boiling procedures. A clear warning: if you are in a situation where there is no safe source, prioritize finding an alternative location for drinking water before making further decisions.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.8220367431640625,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.761904761904763,
+      "word_count" : 101
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 1,
+  "final_available_memory_bytes" : 3756144480,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5327731872,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 20,
+  "mode" : "expert-smoke",
+  "run_id" : "cooldown-smoke-20260811",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

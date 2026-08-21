@@ -1,0 +1,1217 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Avoid hazards above, below, and around the site before building. Use this order, and reassess after any major change. Move away from flood channels, unstable slopes, cliff edges, exposed ridges, roads, and avalanche paths. Check for dead trees, hanging branches, loose rock, rising-water marks, wildlife trails, and fire spread. Choose natural wind protection with drainage and enough visibility for signals. Do not choose the lowest flat ground during rain or shelter beneath a dead tree.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "shelter-site"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-061",
+      "manual_lessons" : [
+        "shelter-site"
+      ],
+      "minimum_available_memory_bytes" : 5324536968,
+      "peak_physical_footprint_bytes" : 44172152,
+      "post_available_memory_bytes" : 5324536968,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325880456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-site",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        15.926393442622949,
+        1.2761290322580645
+      ],
+      "retrieval_context_milliseconds" : 8.0710649490356445,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-site",
+      "word_count" : 75
+    },
+    {
+      "answer" : "Avoid hazards above, below, and around the site before building. Use this order, and reassess after any major change. Move away from flood channels, unstable slopes, cliff edges, exposed ridges, roads, and avalanche paths. Check for dead trees, hanging branches, loose rock, rising-water marks, wildlife trails, and fire spread. Choose natural wind protection with drainage and enough visibility for signals. Do not choose the lowest flat ground during rain or shelter beneath a dead tree.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 100,
+      "expected_manual_lessons" : [
+        "shelter-site"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-062",
+      "manual_lessons" : [
+        "shelter-site"
+      ],
+      "minimum_available_memory_bytes" : 5324405896,
+      "peak_physical_footprint_bytes" : 44303224,
+      "post_available_memory_bytes" : 5324405896,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324536968,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-site",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        1.926393442622951,
+        1.2761290322580645
+      ],
+      "retrieval_context_milliseconds" : 8.8030099868774414,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-site",
+      "word_count" : 75
+    },
+    {
+      "answer" : "Avoid hazards above, below, and around the site before building. Use this order, and reassess after any major change. Move away from flood channels, unstable slopes, cliff edges, exposed ridges, roads, and avalanche paths. Check for dead trees, hanging branches, loose rock, rising-water marks, wildlife trails, and fire spread. Choose natural wind protection with drainage and enough visibility for signals. Do not choose the lowest flat ground during rain or shelter beneath a dead tree.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-site"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-063",
+      "manual_lessons" : [
+        "shelter-site"
+      ],
+      "minimum_available_memory_bytes" : 5324094600,
+      "peak_physical_footprint_bytes" : 44614520,
+      "post_available_memory_bytes" : 5324291208,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324094600,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-site",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        7.2563934426229508,
+        0.70612903225806445
+      ],
+      "retrieval_context_milliseconds" : 7.5839757919311523,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-site",
+      "word_count" : 75
+    },
+    {
+      "answer" : "Avoid hazards above, below, and around the site before building. Use this order, and reassess after any major change. Move away from flood channels, unstable slopes, cliff edges, exposed ridges, roads, and avalanche paths. Check for dead trees, hanging branches, loose rock, rising-water marks, wildlife trails, and fire spread. Choose natural wind protection with drainage and enough visibility for signals. Do not choose the lowest flat ground during rain or shelter beneath a dead tree.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-site"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-064",
+      "manual_lessons" : [
+        "shelter-site"
+      ],
+      "minimum_available_memory_bytes" : 5323668616,
+      "peak_physical_footprint_bytes" : 45040504,
+      "post_available_memory_bytes" : 5323668616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324291208,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-site",
+        "weather-wildlife-snakes-insects"
+      ],
+      "retrieval_candidate_scores" : [
+        9.4263934426229508,
+        0.82612903225806456
+      ],
+      "retrieval_context_milliseconds" : 10.73300838470459,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-site",
+      "word_count" : 75
+    },
+    {
+      "answer" : "Put dry insulation beneath the body before making the shelter larger or more comfortable. Use this order, and reassess after any major change. Use a sleeping pad, pack, spare clothing, dry vegetation where legal, or other dry material. Build insulation thicker than it looks necessary because body weight compresses it. Keep wet clothing and bare skin away from cold ground and replace crushed material as needed. Do not use toxic plants, thorny material, or wet insulation against skin.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-065",
+      "manual_lessons" : [
+        "shelter-ground"
+      ],
+      "minimum_available_memory_bytes" : 5324045448,
+      "peak_physical_footprint_bytes" : 44663672,
+      "post_available_memory_bytes" : 5324045448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323521160,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        15.156393442622951,
+        0.58562500000000006
+      ],
+      "retrieval_context_milliseconds" : 7.8240633010864258,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-ground",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Put dry insulation beneath the body before making the shelter larger or more comfortable. Use this order, and reassess after any major change. Use a sleeping pad, pack, spare clothing, dry vegetation where legal, or other dry material. Build insulation thicker than it looks necessary because body weight compresses it. Keep wet clothing and bare skin away from cold ground and replace crushed material as needed. Do not use toxic plants, thorny material, or wet insulation against skin.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-066",
+      "manual_lessons" : [
+        "shelter-ground"
+      ],
+      "minimum_available_memory_bytes" : 5324176520,
+      "peak_physical_footprint_bytes" : 44532600,
+      "post_available_memory_bytes" : 5324176520,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324225672,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        1.156393442622951,
+        0.58538461538461539
+      ],
+      "retrieval_context_milliseconds" : 7.8780651092529297,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-ground",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Put dry insulation beneath the body before making the shelter larger or more comfortable. Use this order, and reassess after any major change. Use a sleeping pad, pack, spare clothing, dry vegetation where legal, or other dry material. Build insulation thicker than it looks necessary because body weight compresses it. Keep wet clothing and bare skin away from cold ground and replace crushed material as needed. Do not use toxic plants, thorny material, or wet insulation against skin.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-067",
+      "manual_lessons" : [
+        "shelter-ground"
+      ],
+      "minimum_available_memory_bytes" : 5323799688,
+      "peak_physical_footprint_bytes" : 44909432,
+      "post_available_memory_bytes" : 5323799688,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324160136,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        7.0063934426229508,
+        0.80587301587301585
+      ],
+      "retrieval_context_milliseconds" : 7.7520608901977539,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-ground",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Put dry insulation beneath the body before making the shelter larger or more comfortable. Use this order, and reassess after any major change. Use a sleeping pad, pack, spare clothing, dry vegetation where legal, or other dry material. Build insulation thicker than it looks necessary because body weight compresses it. Keep wet clothing and bare skin away from cold ground and replace crushed material as needed. Do not use toxic plants, thorny material, or wet insulation against skin.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-068",
+      "manual_lessons" : [
+        "shelter-ground"
+      ],
+      "minimum_available_memory_bytes" : 5324061832,
+      "peak_physical_footprint_bytes" : 44647288,
+      "post_available_memory_bytes" : 5324061832,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324192904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229488,
+        1.0658730158730159
+      ],
+      "retrieval_context_milliseconds" : 8.7929964065551758,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-ground",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area. Use this order, and reassess after any major change. Choose solid anchors and run a ridgeline or supported edge without damaging trees. Angle the tarp steeply enough to shed rain and lower the windward side. Stake or weight corners, keep fabric away from flame, and add ground insulation. Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-069",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 5324045448,
+      "peak_physical_footprint_bytes" : 44663672,
+      "post_available_memory_bytes" : 5324127368,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324045448,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        1.2561290322580645
+      ],
+      "retrieval_context_milliseconds" : 8.9620351791381836,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area. Use this order, and reassess after any major change. Choose solid anchors and run a ridgeline or supported edge without damaging trees. Angle the tarp steeply enough to shed rain and lower the windward side. Stake or weight corners, keep fabric away from flame, and add ground insulation. Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-070",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 5323685000,
+      "peak_physical_footprint_bytes" : 45024120,
+      "post_available_memory_bytes" : 5323685000,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324094600,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        1.8263934426229509,
+        1.2558730158730158
+      ],
+      "retrieval_context_milliseconds" : 9.6720457077026367,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area. Use this order, and reassess after any major change. Choose solid anchors and run a ridgeline or supported edge without damaging trees. Angle the tarp steeply enough to shed rain and lower the windward side. Stake or weight corners, keep fabric away from flame, and add ground insulation. Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-071",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 5324029064,
+      "peak_physical_footprint_bytes" : 44680056,
+      "post_available_memory_bytes" : 5324078216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324061832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3681967213114756,
+        0.12806451612903225
+      ],
+      "retrieval_context_milliseconds" : 8.9750289916992188,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Pitch a small stable roof that blocks the main wind and sheds water away from the sleeping area. Use this order, and reassess after any major change. Choose solid anchors and run a ridgeline or supported edge without damaging trees. Angle the tarp steeply enough to shed rain and lower the windward side. Stake or weight corners, keep fabric away from flame, and add ground insulation. Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-072",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 5324029064,
+      "peak_physical_footprint_bytes" : 44680056,
+      "post_available_memory_bytes" : 5324029064,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324061832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.60806451612903223
+      ],
+      "retrieval_context_milliseconds" : 10.100007057189941,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Use a strong frame and deep dry insulation when no carried shelter is available. Use this order, and reassess after any major change. Choose a stable ridge pole and supports that cannot roll or collapse. Make the enclosed space only large enough for the body and add a thick layer of dry debris over the frame. Add a deep dry bed, block the entrance partly, and test the structure gently before entering. Do not cut live vegetation or build where debris collection is prohibited; never use an unstable log as the main support.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "shelter-debris"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-073",
+      "manual_lessons" : [
+        "shelter-debris"
+      ],
+      "minimum_available_memory_bytes" : 5324045448,
+      "peak_physical_footprint_bytes" : 44663672,
+      "post_available_memory_bytes" : 5324209288,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324061832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-debris",
+        "shelter-tarp"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.36806451612903224
+      ],
+      "retrieval_context_milliseconds" : 9.365081787109375,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-debris",
+      "word_count" : 93
+    },
+    {
+      "answer" : "Use a strong frame and deep dry insulation when no carried shelter is available. Use this order, and reassess after any major change. Choose a stable ridge pole and supports that cannot roll or collapse. Make the enclosed space only large enough for the body and add a thick layer of dry debris over the frame. Add a deep dry bed, block the entrance partly, and test the structure gently before entering. Do not cut live vegetation or build where debris collection is prohibited; never use an unstable log as the main support.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-debris"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-074",
+      "manual_lessons" : [
+        "shelter-debris"
+      ],
+      "minimum_available_memory_bytes" : 5323930760,
+      "peak_physical_footprint_bytes" : 44778360,
+      "post_available_memory_bytes" : 5323930760,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323947144,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-debris",
+        "shelter-tarp"
+      ],
+      "retrieval_candidate_scores" : [
+        0.24819672131147541,
+        0.24793650793650793
+      ],
+      "retrieval_context_milliseconds" : 10.071992874145508,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-debris",
+      "word_count" : 93
+    },
+    {
+      "answer" : "Use a strong frame and deep dry insulation when no carried shelter is available. Use this order, and reassess after any major change. Choose a stable ridge pole and supports that cannot roll or collapse. Make the enclosed space only large enough for the body and add a thick layer of dry debris over the frame. Add a deep dry bed, block the entrance partly, and test the structure gently before entering. Do not cut live vegetation or build where debris collection is prohibited; never use an unstable log as the main support.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "shelter-debris"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-075",
+      "manual_lessons" : [
+        "shelter-debris"
+      ],
+      "minimum_available_memory_bytes" : 5323914376,
+      "peak_physical_footprint_bytes" : 44794744,
+      "post_available_memory_bytes" : 5323914376,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323914376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2481967213114755
+      ],
+      "retrieval_context_milliseconds" : 2.035975456237793,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-debris",
+      "word_count" : 93
+    },
+    {
+      "answer" : "Use a strong frame and deep dry insulation when no carried shelter is available. Use this order, and reassess after any major change. Choose a stable ridge pole and supports that cannot roll or collapse. Make the enclosed space only large enough for the body and add a thick layer of dry debris over the frame. Add a deep dry bed, block the entrance partly, and test the structure gently before entering. Do not cut live vegetation or build where debris collection is prohibited; never use an unstable log as the main support.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-debris"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-076",
+      "manual_lessons" : [
+        "shelter-debris"
+      ],
+      "minimum_available_memory_bytes" : 5323635848,
+      "peak_physical_footprint_bytes" : 45073272,
+      "post_available_memory_bytes" : 5323635848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324209288,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-debris",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.72806451612903222
+      ],
+      "retrieval_context_milliseconds" : 13.079047203063965,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-debris",
+      "word_count" : 93
+    },
+    {
+      "answer" : "Block wind, stay dry, insulate deeply, and keep ventilation open. Use this order, and reassess after any major change. Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Snow shelters can collapse or trap carbon monoxide; never use a flame or stove without designed ventilation.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-077",
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "minimum_available_memory_bytes" : 5323897992,
+      "peak_physical_footprint_bytes" : 44811128,
+      "post_available_memory_bytes" : 5324094600,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323914376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "weather-wildlife-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 9.5010995864868164,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-cold-snow",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Block wind, stay dry, insulate deeply, and keep ventilation open. Use this order, and reassess after any major change. Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Snow shelters can collapse or trap carbon monoxide; never use a flame or stove without designed ventilation.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-078",
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "minimum_available_memory_bytes" : 5323881608,
+      "peak_physical_footprint_bytes" : 44827512,
+      "post_available_memory_bytes" : 5323881608,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323914376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "weather-wildlife-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        2.8681967213114752,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 10.245919227600098,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-cold-snow",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Block wind, stay dry, insulate deeply, and keep ventilation open. Use this order, and reassess after any major change. Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Snow shelters can collapse or trap carbon monoxide; never use a flame or stove without designed ventilation.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-079",
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "minimum_available_memory_bytes" : 5323865224,
+      "peak_physical_footprint_bytes" : 44843896,
+      "post_available_memory_bytes" : 5323865224,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323865224,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2481967213114755,
+        0.36757575757575756
+      ],
+      "retrieval_context_milliseconds" : 10.064005851745605,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-cold-snow",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Block wind, stay dry, insulate deeply, and keep ventilation open. Use this order, and reassess after any major change. Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Snow shelters can collapse or trap carbon monoxide; never use a flame or stove without designed ventilation.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-080",
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "minimum_available_memory_bytes" : 5323537544,
+      "peak_physical_footprint_bytes" : 45171576,
+      "post_available_memory_bytes" : 5323537544,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323865224,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "weather-wildlife-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.48806451612903223
+      ],
+      "retrieval_context_milliseconds" : 9.1660022735595703,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-cold-snow",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Protect warmth, water, signaling, and rescue chances before spending energy to find food. Use this order, and reassess after any major change. Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Healthy adults can usually tolerate short food gaps better than dehydration, exposure, or injury.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-energy"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-081",
+      "manual_lessons" : [
+        "food-energy"
+      ],
+      "minimum_available_memory_bytes" : 5323750536,
+      "peak_physical_footprint_bytes" : 44958584,
+      "post_available_memory_bytes" : 5323750536,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323881608,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        14.728196721311477,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 9.81903076171875,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-energy",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Protect warmth, water, signaling, and rescue chances before spending energy to find food. Use this order, and reassess after any major change. Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Healthy adults can usually tolerate short food gaps better than dehydration, exposure, or injury.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-energy"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-082",
+      "manual_lessons" : [
+        "food-energy"
+      ],
+      "minimum_available_memory_bytes" : 5323717768,
+      "peak_physical_footprint_bytes" : 44991352,
+      "post_available_memory_bytes" : 5323734152,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323717768,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        0.72819672131147539,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 7.8949928283691406,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-energy",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Protect warmth, water, signaling, and rescue chances before spending energy to find food. Use this order, and reassess after any major change. Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Healthy adults can usually tolerate short food gaps better than dehydration, exposure, or injury.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "food-energy"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-083",
+      "manual_lessons" : [
+        "food-energy"
+      ],
+      "minimum_available_memory_bytes" : 5323373704,
+      "peak_physical_footprint_bytes" : 45335416,
+      "post_available_memory_bytes" : 5323373704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323734152,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "food-cook"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3681967213114756,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 7.6280832290649414,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-energy",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Protect warmth, water, signaling, and rescue chances before spending energy to find food. Use this order, and reassess after any major change. Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Healthy adults can usually tolerate short food gaps better than dehydration, exposure, or injury.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "food-energy"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-084",
+      "manual_lessons" : [
+        "food-energy"
+      ],
+      "minimum_available_memory_bytes" : 5323668616,
+      "peak_physical_footprint_bytes" : 45040504,
+      "post_available_memory_bytes" : 5323668616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323685000,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "water-locate"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.60806451612903223
+      ],
+      "retrieval_context_milliseconds" : 9.570002555847168,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-energy",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Protect existing calories and use them to support warmth, decisions, and necessary work. Use this order, and reassess after any major change. Count food and separate an emergency reserve. Eat small planned amounts during necessary activity instead of finishing easy snacks early. Keep food dry, sealed, and protected from animals and contamination. Do not restrict food from children, people with diabetes, or anyone with a medical need without appropriate guidance.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-085",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 5323652232,
+      "peak_physical_footprint_bytes" : 45056888,
+      "post_available_memory_bytes" : 5323652232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323652232,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 7.0379972457885742,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "word_count" : 70
+    },
+    {
+      "answer" : "Protect existing calories and use them to support warmth, decisions, and necessary work. Use this order, and reassess after any major change. Count food and separate an emergency reserve. Eat small planned amounts during necessary activity instead of finishing easy snacks early. Keep food dry, sealed, and protected from animals and contamination. Do not restrict food from children, people with diabetes, or anyone with a medical need without appropriate guidance.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-086",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 5323619464,
+      "peak_physical_footprint_bytes" : 45089656,
+      "post_available_memory_bytes" : 5323619464,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323701384,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        0.36819672131147541,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 8.17108154296875,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "word_count" : 70
+    },
+    {
+      "answer" : "Protect existing calories and use them to support warmth, decisions, and necessary work. Use this order, and reassess after any major change. Count food and separate an emergency reserve. Eat small planned amounts during necessary activity instead of finishing easy snacks early. Keep food dry, sealed, and protected from animals and contamination. Do not restrict food from children, people with diabetes, or anyone with a medical need without appropriate guidance.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-087",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 5323553928,
+      "peak_physical_footprint_bytes" : 45155192,
+      "post_available_memory_bytes" : 5323553928,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323586696,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "water-store"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2481967213114755,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 7.2749853134155273,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "word_count" : 70
+    },
+    {
+      "answer" : "Protect existing calories and use them to support warmth, decisions, and necessary work. Use this order, and reassess after any major change. Count food and separate an emergency reserve. Eat small planned amounts during necessary activity instead of finishing easy snacks early. Keep food dry, sealed, and protected from animals and contamination. Do not restrict food from children, people with diabetes, or anyone with a medical need without appropriate guidance.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-088",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 5323537544,
+      "peak_physical_footprint_bytes" : 45171576,
+      "post_available_memory_bytes" : 5323766920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323537544,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "fire-wet"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.36806451612903224
+      ],
+      "retrieval_context_milliseconds" : 10.856032371520996,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "word_count" : 70
+    },
+    {
+      "answer" : "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork. Use this order, and reassess after any major change. Use carried food or other lower-risk options first. Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty. Keep unknown material away from children and food-preparation surfaces. Aurora does not identify edible plants or mushrooms; small taste tests do not prove safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-089",
+      "manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "minimum_available_memory_bytes" : 5323488392,
+      "peak_physical_footprint_bytes" : 45220728,
+      "post_available_memory_bytes" : 5323488392,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323521160,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        14.488196721311477,
+        0.24793650793650793
+      ],
+      "retrieval_context_milliseconds" : 6.6710710525512695,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-unknown-plants",
+      "word_count" : 76
+    },
+    {
+      "answer" : "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork. Use this order, and reassess after any major change. Use carried food or other lower-risk options first. Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty. Keep unknown material away from children and food-preparation surfaces. Aurora does not identify edible plants or mushrooms; small taste tests do not prove safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-090",
+      "manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "minimum_available_memory_bytes" : 5323439240,
+      "peak_physical_footprint_bytes" : 45269880,
+      "post_available_memory_bytes" : 5323439240,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323472008,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.4881967213114754,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 7.7780485153198242,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-unknown-plants",
+      "word_count" : 76
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 5323439240,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328141448,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "accuracy-text-120-batch-3",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

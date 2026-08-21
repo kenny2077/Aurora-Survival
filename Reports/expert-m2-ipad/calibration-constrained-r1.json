@@ -1,0 +1,38 @@
+{
+  "active_pack_status" : "Install Lite to enable Ask",
+  "active_tier" : "none",
+  "cases" : [
+    {
+      "answer" : "{\"a\":\"The image shows poison ivy, a common plant that can cause a rash. The safest immediate action is to avoid touching the plant and wash the skin with soap and water as soon as possible.\",\"e\":[]}",
+      "cold_start" : true,
+      "context_tokens" : 4096,
+      "elapsed_milliseconds" : 2956,
+      "first_token_milliseconds" : 1523,
+      "generated_tokens" : 46,
+      "generation_milliseconds" : 2827,
+      "headroom_pass" : true,
+      "id" : "calibration-constrained",
+      "maximum_image_dimension" : 512,
+      "minimum_available_memory_bytes" : 4242781712,
+      "peak_physical_footprint_bytes" : 1125927408,
+      "post_available_memory_bytes" : 4285348184,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5327010976,
+      "pre_inference_thermal" : "nominal",
+      "profile" : "constrained",
+      "raw_completion_count" : 1,
+      "tokens_per_second" : 34.509202453987733
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 4285348184,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5346901224,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-calibration",
+  "run_id" : "calibration-constrained-r1",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

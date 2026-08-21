@@ -1,0 +1,1032 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "You are in a dangerous situation with an immediate threat, so stop moving and take slow breaths to calm your mind. Move only far enough to escape the danger—do not run downhill or follow water unless it's safe. Mark where you stopped and note time, weather, and location. If there is ongoing damage, treat wounds properly using clean water and a dressing; for burns, cool with running water if available. Do not use ice, grease, fuel, soil, or unverified remedies on any wound or burn. The do not run downhill or follow water unless it's safe—this could make the situation worse.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5670,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 1099,
+      "generated_tokens" : 137,
+      "generation_milliseconds" : 5542,
+      "id" : "followup-001",
+      "manual_lessons" : [
+        "basics-stop",
+        "first-aid-wounds-burns"
+      ],
+      "minimum_available_memory_bytes" : 3816273184,
+      "peak_physical_footprint_bytes" : 1552435936,
+      "post_available_memory_bytes" : 3819140384,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326011576,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You are in a dangerous situation with an immediate threat, so stop moving and take slow breaths to calm your mind. Move only far enough to escape the danger—do not run downhill or follow water unless it's safe. Mark where you stopped and note time, weather, and location. If there is ongoing damage, treat wounds properly using clean water and a dressing; for burns, cool with running water if available. Do not use ice, grease, fuel, soil, or unverified remedies on any wound or burn. The warning: do not run downhill or follow water unless it's safe—this could make the situation worse.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 16.8609619140625,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.609948233175782,
+      "word_count" : 101
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 11386,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 647,
+      "generated_tokens" : 135,
+      "generation_milliseconds" : 5025,
+      "id" : "followup-002",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3816830216,
+      "peak_physical_footprint_bytes" : 1551878904,
+      "post_available_memory_bytes" : 3838588168,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3846731808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should stop and control panic by taking slow breaths, saying what happened, moving only far enough to escape an immediate threat like traffic or fire, marking your location, t0. Note the time, weather, and last known position. If you're in a dangerous area such as near water or downhill, do not run or follow it—this could make the emergency worse. A burn is likely if there's heat exposure; cool with clean running water when possible. Do not use ice, grease, fuel, soil, or unverified remedies on wounds or burns. If you're in a situation where your location is uncertain and panic increases risk, stop moving immediately to assess safety before continuing.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should stop and control panic by taking slow breaths, saying what happened, moving only far enough to escape an immediate threat like traffic or fire, marking your location, t0. Note the time, weather, and last known position. Do not run downhill or follow water unless it's safe. If you're in a dangerous situation, stop immediately if there’s no clear path out—escalate by calling emergency services right away. This is based on Excerpt [1] for stopping panic and Excerpt [2] for wound care. Always avoid putting ice, grease, fuel, or unverified remedies on burns or wounds.\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 27.223944664001465,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.607583371402466,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Stop immediately if you are hypothermic or frostbitten. Move to a sheltered, dry area and remove wet clothing. Warm the core with wrapped packs or body heat—do not rub frostbite or use direct fire. If symptoms persist, evacuate for serious cases. Do not eat unfamiliar food or consume anything that may cause further harm. You must stop before you risk refreezing tissue or worsening injury.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4221,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 1144,
+      "generated_tokens" : 94,
+      "generation_milliseconds" : 4111,
+      "id" : "followup-003",
+      "manual_lessons" : [
+        "first-aid-cold",
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3829495048,
+      "peak_physical_footprint_bytes" : 1539214072,
+      "post_available_memory_bytes" : 3843749128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877451808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Stop immediately if you are hypothermic or frostbitten. Move to a sheltered, dry area and remove wet clothing. Warm the core with wrapped packs or body heat—do not rub frostbite or use direct fire. If symptoms persist, evacuate for serious cases. Do not eat unfamiliar food or consume anything that may cause further harm. You must stop before you risk refreezing tissue or worsening injury.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.857100486755371,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 31.344792719919109,
+      "word_count" : 65
+    },
+    {
+      "answer" : "You should stop moving immediately to think clearly and avoid making the emergency worse. Take slow breaths, say what happened out loud, and move only far enough to escape an immediate threat like traffic or falling rock. Mark your stopping point with a sign or note the time, weather, and last known location. Do not run downhill or follow water unless it’s safe. If you’re in danger of being caught by rising water, stop moving now and wait for help. This is critical because if you move too far without assessing risk, the emergency could grow larger.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10027,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 122,
+      "generation_milliseconds" : 4551,
+      "id" : "followup-004",
+      "manual_lessons" : [
+        "basics-stop",
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3824858400,
+      "peak_physical_footprint_bytes" : 1543850720,
+      "post_available_memory_bytes" : 3844977928,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3871078432,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should stop moving immediately and take slow breaths to calm your mind. Assess the situation by noting where you are, what’s around you, and whether there's an immediate threat like falling rock or rising water. Mark your location with a stone or flag and record time, weather, and last known position. Do not run downhill or follow water unless it is safe. If you're in danger of being caught in traffic or near fire, stop now to avoid making the emergency worse. You must gather tinder, kindling, and fuel before starting any fire—this includes dry materials from nearby trees that are legal for collection.\",\"e\":[1,2]}",
+        "{\"a\":\"You should stop moving immediately to think clearly and avoid making the emergency worse. Take slow breaths, say what happened out loud, and move only far enough to escape an immediate threat like traffic or falling rock. Mark your stopping point with a sign or note the time, weather, and last known location. Do not run downhill or follow water unless it’s safe. If you’re in danger of being caught by rising water, stop moving now and wait for help. This is critical because if you move too far without assessing risk, the emergency could grow larger.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 22.388935089111328,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.687293938625412,
+      "word_count" : 97
+    },
+    {
+      "answer" : "You must stop and assess the immediate danger before any movement. Check for traffic, fire, unstable terrain, weather, water, wildlife, or falling objects—these are all potential threats in your current environment. Look for signs of severe bleeding, breathing issues, confusion, or inability to move safely. If you find a life-threatening situation, do not enter the area to recover gear; instead, prioritize safety and evacuate immediately. The warning is: Do not enter a dangerous area to recover replaceable gear. Clarifying question: Is there any visible threat in your current location that requires immediate attention?",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5043,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 815,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 4894,
+      "id" : "followup-005",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 3826349320,
+      "peak_physical_footprint_bytes" : 1542359800,
+      "post_available_memory_bytes" : 3850663152,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3872241672,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You must stop and assess the immediate danger before any movement. Check for traffic, fire, unstable terrain, weather, water, wildlife, or falling objects—these are all potential threats in your current environment. Look for signs of severe bleeding, breathing issues, confusion, or inability to move safely. If you find a life-threatening situation, do not enter the area to recover gear; instead, prioritize safety and evacuate immediately. The warning is: Do not enter a dangerous area to recover replaceable gear. Clarifying question: Is there any visible threat in your current location that requires immediate attention?\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 19.291043281555176,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.644765873988721,
+      "word_count" : 93
+    },
+    {
+      "answer" : "You must immediately assess for danger and injuries. Check for traffic, fire, unstable terrain, weather, water, wildlife, or falling objects—these are the top threats. Look for breathing issues, severe bleeding, confusion, or inability to move safely. If any of these signs appear, stop work and evacuate. Do not enter a dangerous area to recover replaceable gear. The only safe action is to report all observations immediately.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 3971,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 854,
+      "generated_tokens" : 94,
+      "generation_milliseconds" : 3811,
+      "id" : "followup-006",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 3839046920,
+      "peak_physical_footprint_bytes" : 1529662200,
+      "post_available_memory_bytes" : 3849893128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5285280808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You must immediately assess for danger and injuries. Check for traffic, fire, unstable terrain, weather, water, wildlife, or falling objects—these are the top threats. Look for breathing issues, severe bleeding, confusion, or inability to move safely. If any of these signs appear, stop work and evacuate. Do not enter a dangerous area to recover replaceable gear. The only safe action is to report all observations immediately.\" ,\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 14.419078826904297,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 31.450794724382821,
+      "word_count" : 66
+    },
+    {
+      "answer" : "Stop and call for help immediately. Check the patient’s responsiveness, open airway, and assess breathing—do not delay CPR if needed. The scene is safe with no immediate threats; proceed only after confirming safety. If gasping occurs or there's severe bleeding, begin CPR using AED prompts when available. Do not enter a dangerous area to recover gear. Ensure the patient’s condition improves before moving forward.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 3997,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 961,
+      "generated_tokens" : 93,
+      "generation_milliseconds" : 3893,
+      "id" : "followup-007",
+      "manual_lessons" : [
+        "first-aid-assessment",
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 3831051528,
+      "peak_physical_footprint_bytes" : 1537657592,
+      "post_available_memory_bytes" : 3850581256,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877173256,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Stop and call for help immediately. Check the patient’s responsiveness, open airway, and assess breathing—do not delay CPR if needed. The scene is safe with no immediate threats; proceed only after confirming safety. If gasping occurs or there's severe bleeding, begin CPR using AED prompts when available. Do not enter a dangerous area to recover gear. Ensure the patient’s condition improves before moving forward.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 14.903068542480469,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 31.377899045020463,
+      "word_count" : 64
+    },
+    {
+      "answer" : "The first step is to check for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Look for breathing issues, severe bleeding, confusion, or inability to move safely. Control the most urgent threat by taking action immediately, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear; instead, stop and assess before proceeding. If there is uncontrolled life-threatening limb bleeding, apply firm pressure with gauze until trained personnel are available. Use tourniquets only when properly equipped and documented.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10057,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 609,
+      "generated_tokens" : 134,
+      "generation_milliseconds" : 4970,
+      "id" : "followup-008",
+      "manual_lessons" : [
+        "basics-danger-injury",
+        "first-aid-bleeding"
+      ],
+      "minimum_available_memory_bytes" : 3831657664,
+      "peak_physical_footprint_bytes" : 1537051456,
+      "post_available_memory_bytes" : 3863655640,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877845000,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You must first assess for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Check breathing, severe bleeding, confusion, and safe movement—prioritize the most urgent threat. If you find a danger such as active fire or uncontrolled bleeding, stop immediately and do not enter the area to recover gear. Use Review Excerpt [1] for hazard identification and Review Excerpt [2] for controlling life-threatening limb bleeding if applicable. Confirm your assessment before proceeding with comfort or travel actions.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The first step is to check for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Look for breathing issues, severe bleeding, confusion, or inability to move safely. Control the most urgent threat by taking action immediately, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear; instead, stop and assess before proceeding. If there is uncontrolled life-threatening limb bleeding, apply firm pressure with gauze until trained personnel are available. Use tourniquets only when properly equipped and documented.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 19.700050354003906,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.497592295345104,
+      "word_count" : 95
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10645,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 609,
+      "generated_tokens" : 130,
+      "generation_milliseconds" : 4839,
+      "id" : "followup-009",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3837342936,
+      "peak_physical_footprint_bytes" : 1531366184,
+      "post_available_memory_bytes" : 3856495832,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883071472,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should immediately empty your pockets and packs into a controlled area to avoid losing equipment. Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items for safe handling. Protect the most critical supplies from rain or damage—especially food and medical gear—and do not scatter them in darkness or bad weather. Stop if you are unsure about your route or if any item is damaged or wet; otherwise proceed with caution to avoid getting lost or injured. You must use only low-risk procurement methods, such as stationary options near camp, and never eat unfamiliar animals or plants without proper identification. Clarify the location of your current supplies before continuing.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The first step is to empty all pockets and packs in a controlled area, separating dry insulation from first aid, water treatment, light, ignition, navigation, and communication. Protect the most critical items like medical supplies and signaling devices from rain or damage. Do not scatter equipment during dark or bad weather—this could lead to loss of vital gear. Use only low-risk procurement methods for food; avoid eating unfamiliar animals or plants. Stop if you encounter darkness, fatigue, or adverse weather conditions before continuing. Always prioritize safety by using legal, safe practices and avoiding risky activities like climbing or swimming unless necessary.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.257000923156738,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.49645390070922,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should empty your pockets and packs in a controlled area, separate items into categories (dry insulation, first aid, water treatment, etc. ), protect critical gear from rain or damage, and avoid scattering equipment during dark or bad weather. You must not eat unfamiliar animals, shellfish, insects, or plants—this is dangerous and could lead to illness or loss of life. If you're in a low-risk environment with safe access, fish only where legal and use appropriate gear; mark your route, limit time, and stop before fatigue or worsening conditions. Stop if weather worsens or darkness approaches. Clarifying question: Is there any specific item missing from the inventory that needs attention?",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5925,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 973,
+      "generated_tokens" : 147,
+      "generation_milliseconds" : 5779,
+      "id" : "followup-010",
+      "manual_lessons" : [
+        "basics-inventory",
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3845715160,
+      "peak_physical_footprint_bytes" : 1522993960,
+      "post_available_memory_bytes" : 3855856832,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883710472,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should empty your pockets and packs in a controlled area, separate items into categories (dry insulation, first aid, water treatment, etc. ), protect critical gear from rain or damage, and avoid scattering equipment during dark or bad weather. You must not eat unfamiliar animals, shellfish, insects, or plants—this is dangerous and could lead to illness or loss of life. If you're in a low-risk environment with safe access, fish only where legal and use appropriate gear; mark your route, limit time, and stop before fatigue or worsening conditions. Stop if weather worsens or darkness approaches. Clarifying question: Is there any specific item missing from the inventory that needs attention?\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 14.76597785949707,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.378693300041615,
+      "word_count" : 110
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 10157,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 133,
+      "generation_milliseconds" : 4937,
+      "id" : "followup-011",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3850401008,
+      "peak_physical_footprint_bytes" : 1518308112,
+      "post_available_memory_bytes" : 3854431496,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5318278232,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should check your inventory and ensure you have all essential gear, including food, water, first aid, and signaling items. Review your current supplies to avoid losing critical equipment in bad weather or darkness. Make sure no unfamiliar animals or plants are consumed—this is a key safety rule from [1]. Stop if you find any unmarked or unknown wildlife near the campsite; it could be dangerous. If possible, mark your route and limit time before dark or fatigue sets in. Use only low-risk procurement methods as per [2] to avoid injury or getting lost.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should gather food using only stationary, safe methods you know and can perform without injury or getting lost. Check your inventory to ensure all essential items are accounted for and protected from damage. Mark your route, limit time, and stop before weather, darkness, or fatigue worsen. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them. If you find a new food source, do not consume it without first confirming its safety with the review of [1] and [2]. Stop if you are in danger from wildlife or weather; escalate only after exhausting all safe options.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 16.348958015441895,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.492030492030491,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10637,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 5465,
+      "id" : "followup-012",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3835557104,
+      "peak_physical_footprint_bytes" : 1533152016,
+      "post_available_memory_bytes" : 3859428592,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3881973768,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You must immediately empty your pockets and packs in a controlled area, separate items into categories (dry insulation, first aid, water treatment, etc. ), protect critical gear from rain or damage, and prioritize shelter setup with light sources before dark sets in—do not wait until night to assess conditions. If you find flooding, debris, or lack of insulation during inspection, stop immediately and re-evaluate the site. Ensure all tools are within reach; if any item is lost or damaged, report it right away. Use only [1] and [2], no other references.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should immediately empty all pockets and packs in one controlled place to avoid losing equipment. Separate items into categories—dry insulation, first aid, water treatment, light, ignition, navigation, and communication—and protect the most critical ones from rain or damage. Do not scatter gear while searching in darkness or bad weather; this could lead to loss of vital supplies. After organizing your inventory, prioritize shelter, warmth, water, and signals before dark sets in. If you find that a site floods, sheds branches, or lacks insulation during inspection, do not wait—immediately move to a safer location with better conditions. This process must be completed quickly so no time is lost when the night falls.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 18.725037574768066,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.265596046942559,
+      "word_count" : 10
+    },
+    {
+      "answer" : "The immediate threat is severe bleeding and breathing compromise, so prioritize those first. Treat the most life-threatening condition now—stop any further blood loss or oxygen deprivation by applying pressure to major vessels and using a tourniquet if needed. If possible, use an emergency airway device like a bag-valve-mask for ventilation. A do not delay treatment of bleeding unless it is confirmed that you are in the field with no access to medical help; otherwise, escalate immediately. The next step after treating life-threatening conditions is securing water and signaling if available. If there’s no immediate source of clean drinking water or signal equipment, wait for a safe location before moving forward.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5586,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 815,
+      "generated_tokens" : 143,
+      "generation_milliseconds" : 5492,
+      "id" : "followup-013",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 3831821528,
+      "peak_physical_footprint_bytes" : 1536887592,
+      "post_available_memory_bytes" : 3859002608,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887642608,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The immediate threat is severe bleeding and breathing compromise, so prioritize those first. Treat the most life-threatening condition now—stop any further blood loss or oxygen deprivation by applying pressure to major vessels and using a tourniquet if needed. If possible, use an emergency airway device like a bag-valve-mask for ventilation. A warning: do not delay treatment of bleeding unless it is confirmed that you are in the field with no access to medical help; otherwise, escalate immediately. The next step after treating life-threatening conditions is securing water and signaling if available. If there’s no immediate source of clean drinking water or signal equipment, wait for a safe location before moving forward.\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 14.355897903442383,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.361342741073337,
+      "word_count" : 110
+    },
+    {
+      "answer" : "You must prioritize conditions based on immediate threats, not fixed rules. First, treat breathing and severe bleeding as the highest priority. Next, prevent dangerous heat loss, fire, or traffic exposure. Then secure water, signaling, navigation, and food according to current needs. The list must change if the threat changes—this is a critical safety rule. You should stop any action that doesn’t address immediate threats.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 3760,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 806,
+      "generated_tokens" : 89,
+      "generation_milliseconds" : 3631,
+      "id" : "followup-014",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 3830936792,
+      "peak_physical_footprint_bytes" : 1537772328,
+      "post_available_memory_bytes" : 3859100888,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886233584,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You must prioritize conditions based on immediate threats, not fixed rules. First, treat breathing and severe bleeding as the highest priority. Next, prevent dangerous heat loss, fire, or traffic exposure. Then secure water, signaling, navigation, and food according to current needs. The list must change if the threat changes—this is a critical safety rule. You should stop any action that doesn’t address immediate threats.\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 14.067888259887695,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 31.150442477876105,
+      "word_count" : 64
+    },
+    {
+      "answer" : "The immediate threat is severe bleeding and breathing compromise, so treat those first. Heat loss from exposed body parts must be prevented by covering the torso and extremities with dry materials to avoid hypothermia. Water access is critical for survival in this environment; ensure it’s available before moving forward. The current condition requires prioritizing life-saving measures over other tasks. A if bleeding stops but breathing remains compromised, do not delay treatment—this could lead to fatality. Stop condition: if the person shows no signs of improvement after 10 minutes of focused care, evacuate immediately and seek medical help.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5119,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 812,
+      "generated_tokens" : 129,
+      "generation_milliseconds" : 5023,
+      "id" : "followup-015",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 3830904024,
+      "peak_physical_footprint_bytes" : 1537805096,
+      "post_available_memory_bytes" : 3858969816,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886413808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The immediate threat is severe bleeding and breathing compromise, so treat those first. Heat loss from exposed body parts must be prevented by covering the torso and extremities with dry materials to avoid hypothermia. Water access is critical for survival in this environment; ensure it’s available before moving forward. The current condition requires prioritizing life-saving measures over other tasks. A warning: if bleeding stops but breathing remains compromised, do not delay treatment—this could lead to fatality. Stop condition: if the person shows no signs of improvement after 10 minutes of focused care, evacuate immediately and seek medical help.\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 14.149904251098633,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.39658038470672,
+      "word_count" : 97
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 8522,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 605,
+      "generated_tokens" : 123,
+      "generation_milliseconds" : 4590,
+      "id" : "followup-016",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3853219080,
+      "peak_physical_footprint_bytes" : 1515490040,
+      "post_available_memory_bytes" : 3857200416,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5306301504,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You must stop and assess the immediate threat. Check for traffic, fire, unstable terrain, or wildlife—these are top priorities per [2]. If breathing is compromised or severe bleeding occurs, treat those first. The current condition requires you to prioritize life-threatening threats over comfort or travel. A memorized priority list may need adjustment if a new danger emerges. Confirm the threat level before proceeding.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The next action is to treat breathing and severe bleeding first, as per the priority list in [1]. This ensures immediate life-saving measures are taken. After addressing these issues, check for traffic, fire, or unstable terrain—potential threats listed in [2]—before moving on. A warning: do not enter a dangerous area to recover replaceable gear; it could worsen injuries and delay response. If the threat is confirmed as severe, escalate immediately by calling emergency services. Stop if any person shows signs of distress or if you are unable to move safely.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 16.335964202880859,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.614805520702635,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should stay near the last known route unless remaining creates more danger or a known safe destination is close. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. The do not move on a guess or separate a group without a clear rescue reason. You must confirm the situation before making any decision. Is there anyone who knows your route?",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4421,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 887,
+      "generated_tokens" : 106,
+      "generation_milliseconds" : 4292,
+      "id" : "followup-017",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 3838113008,
+      "peak_physical_footprint_bytes" : 1530596112,
+      "post_available_memory_bytes" : 3856184584,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3884546080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should stay near the last known route unless remaining creates more danger or a known safe destination is close. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. The warning: do not move on a guess or separate a group without a clear rescue reason. You must confirm the situation before making any decision. Is there anyone who knows your route?\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 17.161965370178223,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.837004405286343,
+      "word_count" : 84
+    },
+    {
+      "answer" : "You should assess whether anyone knows your route and if searchers are likely, as staying near the last known path is safer unless there's a clear rescue reason. Compare risks like terrain, distance, daylight, weather, injury certainty, and potential danger to decide. If you stay, make shelter and signals; if moving, leave a note and mark direction and time. Do not move on a guess or separate without a clear rescue reason—this could endanger your group. Clarify the situation with current facts before making decisions.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4712,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 866,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 4543,
+      "id" : "followup-018",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 3837703408,
+      "peak_physical_footprint_bytes" : 1531005712,
+      "post_available_memory_bytes" : 3856463112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883726880,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should assess whether anyone knows your route and if searchers are likely, as staying near the last known path is safer unless there's a clear rescue reason. Compare risks like terrain, distance, daylight, weather, injury certainty, and potential danger to decide. If you stay, make shelter and signals; if moving, leave a note and mark direction and time. Do not move on a guess or separate without a clear rescue reason—this could endanger your group. Clarify the situation with current facts before making decisions.\" ,\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 14.523029327392578,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.459613815610552,
+      "word_count" : 85
+    },
+    {
+      "answer" : "You should stay put unless you have a clear rescue reason. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a note and mark direction and time. The terrain may be hazardous without confirmation of the situation, so do not move on a guess or separate a group without a clear rescue reason. You must stay near your last known route unless it becomes more dangerous or you find a safe destination close by. Stop any movement until further notice is confirmed.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4754,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 813,
+      "generated_tokens" : 119,
+      "generation_milliseconds" : 4660,
+      "id" : "followup-019",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 3837768944,
+      "peak_physical_footprint_bytes" : 1530940176,
+      "post_available_memory_bytes" : 3856512288,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883694112,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should stay put unless you have a clear rescue reason. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a note and mark direction and time. The terrain may be hazardous without confirmation of the situation, so do not move on a guess or separate a group without a clear rescue reason. You must stay near your last known route unless it becomes more dangerous or you find a safe destination close by. Stop any movement until further notice is confirmed.\" ,\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 17.893075942993164,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.67325188458539,
+      "word_count" : 97
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason. The vehicle’s condition must be assessed: check warning lights, fuel level, and occupants’ status. Avoid walking into unknown distance, heat, cold, flood, or darkness unless you have a safe destination and route.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9377,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 649,
+      "generated_tokens" : 128,
+      "generation_milliseconds" : 4815,
+      "id" : "followup-020",
+      "manual_lessons" : [
+        "basics-stay-or-move",
+        "car-stay-walk"
+      ],
+      "minimum_available_memory_bytes" : 3837719792,
+      "peak_physical_footprint_bytes" : 1530989328,
+      "post_available_memory_bytes" : 3867784480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883776032,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Stay near the last known route unless a new danger or safe destination is close. Check if anyone knows your route and whether searchers are likely—this affects decision safety. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate without a rescue reason. Confirm the vehicle’s condition: check warning lights, fuel level, and occupants’ status. Use [1] to assess risk vs remaining danger.\",\"e\":[1,2]}",
+        "{\"a\":\"Stay near the last known route unless remaining creates more danger or a known safe destination is close. Check if anyone knows your route and whether searchers are likely—this is critical for safety. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason. The vehicle’s condition must be assessed: check warning lights, fuel level, and occupants’ status. Avoid walking into unknown distance, heat, cold, flood, or darkness unless you have a safe destination and route.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 17.611980438232422,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.484877580412867,
+      "word_count" : 97
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 10139,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 606,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 4709,
+      "id" : "followup-021",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3838915824,
+      "peak_physical_footprint_bytes" : 1529793296,
+      "post_available_memory_bytes" : 3849073928,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5301976080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration now, as symptoms like thirst, dark urine, dizziness, and weakness are present. Rest in shade, loosen layers, and drink safe water slowly to avoid overloading the system. Stop if gathering food consumes more than 10% of your available resources or you're already dehydrated; otherwise, prioritize hydration first. Warning: Do not force fluids into someone who is confused or unable to swallow—this could cause harm. Clarifying question: Is there a chance for rescue within 30 minutes? If yes, proceed with caution and avoid overexertion.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen layers, and drink safe water slowly to avoid worsening symptoms. If confusion, collapse, seizure, or inability to drink occurs, treat as emergency—call for help immediately. Do not force fluids into anyone who is unresponsive or unable to swallow; this could cause harm. Stop if gathering food consumes valuable resources like water, warmth, navigation certainty, or signaling time. Prioritize safety and avoid overexertion in the heat.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.586018562316895,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.465513039239582,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10852,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 613,
+      "generated_tokens" : 140,
+      "generation_milliseconds" : 5213,
+      "id" : "followup-022",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3803460800,
+      "peak_physical_footprint_bytes" : 1565248320,
+      "post_available_memory_bytes" : 3848484032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876354080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration by noticing symptoms like thirst, dry mouth, dark urine, dizziness, or weakness. Rest in shade and drink safe water in small amounts to prevent further loss of fluids. If you experience confusion, collapse, seizure, or can’t drink safely, treat as an emergency. Stop drinking if someone is not alert or cannot swallow. Boil water properly using the method from [2] for safety at altitude above 6,500 feet (1,980 m). Ensure it cools and stays in a clean container without touching the cap to avoid contamination.\",\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing symptoms like thirst, dry mouth, dark urine, dizziness, or weakness. Rest in shade and drink safe water in small amounts to avoid worsening the condition. If you experience confusion, collapse, seizure, or can’t drink safely, treat it as an emergency. Do not force fluids into someone who is unresponsive or unable to swallow—this could cause harm. Stop if symptoms worsen; escalate only when there’s no improvement after 15 minutes of rest and fluid intake. Always use boiling water correctly per [2] for safe drinking at high altitudes, but never boil contaminated sources like fuel or chemicals.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 23.811936378479004,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.217391304347824,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8710,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 606,
+      "generated_tokens" : 116,
+      "generation_milliseconds" : 4364,
+      "id" : "followup-023",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3829740760,
+      "peak_physical_footprint_bytes" : 1538968360,
+      "post_available_memory_bytes" : 3853743320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876042760,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration signs like thirst, dry mouth, dark urine, dizziness, and weakness. Rest in shade, loosen layers, and drink safe water slowly. If confusion or collapse occurs, treat as emergency—do not force fluids if unable to swallow. Stop gathering food if it risks losing warmth, water, or navigation certainty. Dehydration is a priority; do not delay until you're fully alert.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing thirst, dry mouth, headache, dark urine, dizziness, weakness, or reduced coordination. Rest in shade and drink safe water in small amounts to avoid worsening symptoms. If confusion, collapse, seizure, or inability to drink occurs, treat as an emergency. Do not force fluids into someone who is unresponsive or unable to swallow. Stop if gathering food consumes valuable resources like water, warmth, navigation certainty, or signaling time. Prioritize hydration and safety over food collection unless rescue conditions are favorable.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 23.239970207214355,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.601383714741885,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9133,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 618,
+      "generated_tokens" : 145,
+      "generation_milliseconds" : 5414,
+      "id" : "followup-024",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3829511360,
+      "peak_physical_footprint_bytes" : 1539197760,
+      "post_available_memory_bytes" : 3852874944,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876026352,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Stop if you are not fully alert or cannot swallow. Rest in shade, loosen layers, and drink safe water slowly. Monitor for confusion, shivering, or signs of hypothermia. If weakness or dizziness persists, treat as emergency. Do not force fluids into anyone who is unresponsive. Stay warm and avoid cold exposure until you are stable.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The user should recognize dehydration signs like thirst, dry mouth, and dark urine (Excerpt [1]) to reduce exertion and replace safe fluids before weakness or confusion worsens. Prioritize rest in shade, loosen layers, and drink small amounts of water—do not force fluid into anyone who is unresponsive or unable to swallow (Excerpt [1]). If confusion, collapse, seizure, or inability to drink occurs, treat as an emergency. Stop if the person shows signs of severe hypothermia from cold exposure, such as shivering that stops while still cold (Excerpt [2]), and do not delay treatment. Always follow these steps before worsening symptoms occur.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 21.454095840454102,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.025020850708923,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10617,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 139,
+      "generation_milliseconds" : 5145,
+      "id" : "followup-025",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3833869504,
+      "peak_physical_footprint_bytes" : 1534839616,
+      "post_available_memory_bytes" : 3853022424,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3880220632,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should prioritize locating water using the methods in [1], focusing on valleys, drainage lines, springs, and green vegetation. Listen for flowing sounds and assess terrain convergence to avoid random wandering. Travel during cooler hours and leave markers if needed—this is critical when searching for a source. Avoid steep ravines or fast-moving areas as they increase risk of injury or entrapment. Stop if gathering food consumes water, warmth, navigation certainty, or signaling time; otherwise, proceed only with high-return methods. A clear warning: do not enter unstable banks or caves—these are dangerous and may lead to fatal outcomes.\" ,\"e\":[1]}",
+        "{\"a\":\"The first priority is to locate likely water using the methods in [1], focusing on valleys, drainage lines, springs, and green vegetation. Travel during cooler hours and use markers if needed. Avoid steep ravines, unstable banks, caves, or fast-moving streams—these are dangerous. If you find a potential source, assess whether food gathering is worth it by checking rescue time, weather, health, daylight, and available supplies in [2]. Stop if the search consumes water, warmth, navigation certainty, or signaling time. Do not enter any area where there’s no clear path to safety or where conditions are too risky for a return trip.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.868902206420898,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.416574829182277,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should check maps, look for valleys and drainage lines, listen for flowing water, and search low-lying areas near green vegetation. Travel during cooler hours and leave markers if needed. Avoid steep ravines, unstable banks, or fast-moving streams to prevent injury. If you find a potential source, confirm it by checking the terrain and animal movement before entering. Stop immediately if you encounter signs of instability or rapid water flow that could lead to drowning. Boiling is not required unless you have confirmed clean water; ensure your container remains sealed during storage.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5030,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 1020,
+      "generated_tokens" : 121,
+      "generation_milliseconds" : 4933,
+      "id" : "followup-026",
+      "manual_lessons" : [
+        "water-locate",
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3855512840,
+      "peak_physical_footprint_bytes" : 1513196280,
+      "post_available_memory_bytes" : 3863852320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328059504,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check maps, look for valleys and drainage lines, listen for flowing water, and search low-lying areas near green vegetation. Travel during cooler hours and leave markers if needed. Avoid steep ravines, unstable banks, or fast-moving streams to prevent injury. If you find a potential source, confirm it by checking the terrain and animal movement before entering. Stop immediately if you encounter signs of instability or rapid water flow that could lead to drowning. Boiling is not required unless you have confirmed clean water; ensure your container remains sealed during storage.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 18.808960914611816,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.667007411193456,
+      "word_count" : 92
+    },
+    {
+      "answer" : "You should check for water sources nearby, such as rivers or lakes, and ensure you have a safe drinking source. Make sure to drink only from clean containers.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1668,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 454,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1516,
+      "id" : "followup-027",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836278024,
+      "peak_physical_footprint_bytes" : 1532431096,
+      "post_available_memory_bytes" : 3861001480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891411000,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check for water sources nearby, such as rivers or lakes, and ensure you have a safe drinking source. Make sure to drink only from clean containers.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.003992080688477,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 35.781544256120526,
+      "word_count" : 28
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9342,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 610,
+      "generated_tokens" : 121,
+      "generation_milliseconds" : 4607,
+      "id" : "followup-028",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3789108488,
+      "peak_physical_footprint_bytes" : 1579600632,
+      "post_available_memory_bytes" : 3792942344,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3890509856,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should prioritize locating water first, as it is the most critical need. Use EXCERPT [1] to search for sources in valleys and along drainage lines, avoiding steep ravines or unstable banks. Check for signs of animal movement and listen for flowing sounds—this will help you find a reliable source without wasting energy. Stop if gathering food consumes water, warmth, or navigation certainty; otherwise, proceed only with high-return methods. Remember: do not enter fast-moving streams or caves unless absolutely necessary.\" ,\"e\":[1]}",
+        "{\"a\":\"The first priority is to locate likely water sources using the methods in [1], focusing on valleys, drainage lines, springs, and low-lying areas. Avoid entering steep ravines or unstable banks as warned in [1]. Travel during cooler hours and use markers if needed. If a search takes you away from shelter, ensure it’s within your energy limits. Stop gathering food if it consumes water, warmth, navigation certainty, or signaling time—especially when rescue chances are low. Do not enter fast-moving streams unless absolutely necessary; prioritize safety over speed.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 18.540024757385254,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.022516887665748,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should collect water from a stable, upstream source that is not contaminated by fuel sheen, chemical smell, or industrial runoff. Avoid crossing in deep or swift water and ensure the bank is solid to prevent being swept away. Boiling and filters are insufficient for chemically unsafe water; use only certified purification methods if needed. Stop immediately if you see signs of contamination such as algae, dead animals, or mine drainage. Always cross with a sturdy pole when safe—turn back if visibility is poor or the path becomes too dangerous.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5016,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 1051,
+      "generated_tokens" : 117,
+      "generation_milliseconds" : 4920,
+      "id" : "followup-029",
+      "manual_lessons" : [
+        "water-choose-source",
+        "navigation-travel-crossing"
+      ],
+      "minimum_available_memory_bytes" : 3763107080,
+      "peak_physical_footprint_bytes" : 1605602040,
+      "post_available_memory_bytes" : 3813618952,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3820451896,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should collect water from a stable, upstream source that is not contaminated by fuel sheen, chemical smell, or industrial runoff. Avoid crossing in deep or swift water and ensure the bank is solid to prevent being swept away. Boiling and filters are insufficient for chemically unsafe water; use only certified purification methods if needed. Stop immediately if you see signs of contamination such as algae, dead animals, or mine drainage. Always cross with a sturdy pole when safe—turn back if visibility is poor or the path becomes too dangerous.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 17.12799072265625,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.981907469630396,
+      "word_count" : 90
+    },
+    {
+      "answer" : "You should prioritize a known safe supply of water, then collect it from upstream sources away from camps, livestock, roads, or waste. Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff. Collect only where the bank is stable and you cannot be swept into the water. Boiling and filters are insufficient for chemically contaminated or salty water—this could make it unsafe to drink. Stop collecting if any of these signs appear: fuel sheen, chemical smell, algae blooms, dead animals, or contamination from industrial runoff. Clarifying question: Is there a known safe source available now?",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5737,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 1140,
+      "generated_tokens" : 137,
+      "generation_milliseconds" : 5624,
+      "id" : "followup-030",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 3799233800,
+      "peak_physical_footprint_bytes" : 1569475320,
+      "post_available_memory_bytes" : 3812881696,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3846191136,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should prioritize a known safe supply of water, then collect it from upstream sources away from camps, livestock, roads, or waste. Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff. Collect only where the bank is stable and you cannot be swept into the water. Boiling and filters are insufficient for chemically contaminated or salty water—this could make it unsafe to drink. Stop collecting if any of these signs appear: fuel sheen, chemical smell, algae blooms, dead animals, or contamination from industrial runoff. Clarifying question: Is there a known safe source available now?\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 25.114059448242188,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.330062444246209,
+      "word_count" : 101
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3840407584,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328387256,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "multiturn-batch-1-paced-v2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

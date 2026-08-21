@@ -1,0 +1,24 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+      "embedding_sha256": "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [],
+    "fixture_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "mode": "expert-install",
+    "output_path": "/workspace/aurora-survival/Reports/expert-m2-ipad/expert-direct-rag-install-0.3.0-r2.json",
+    "profile": null,
+    "report_name": "expert-physical-report-expert-direct-rag-install-0.3.0-r2-expert-install.json",
+    "run_id": "expert-direct-rag-install-0.3.0-r2",
+    "schema_version": 2
+  },
+  "signature": "f03762e2c72b6e4737744a3b791845c21fb7f3d037f19b9a29175f320c91a42b",
+  "signature_algorithm": "HMAC-SHA256"
+}

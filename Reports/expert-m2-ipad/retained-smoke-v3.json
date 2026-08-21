@@ -1,0 +1,116 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 12189,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "first_token_milliseconds" : 1544,
+      "generated_tokens" : 143,
+      "generation_milliseconds" : 6204,
+      "id" : "TG-V003-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3744396408,
+      "peak_physical_footprint_bytes" : 1624312712,
+      "post_available_memory_bytes" : 3771315320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328239752,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The mushroom shown is a type of fungus, likely a bracket fungus, which is not safe to eat. It has a dark, wet appearance and is growing on a tree, which is a sign of potential contamination. It is not safe to eat, and cooking it will not make it safe. The mushroom is not a food source, and eating it could lead to illness. The mushroom is not safe to eat, and cooking it will not make it safe. The mushroom is not a food source, and eating it could lead to illness.\",\"e\":[1,2]}",
+        "{\"a\":\"The mushroom shown is a type of fungus, likely a species of Lentinula, which is a known edible mushroom. It is not a meat or fish, so it is safe to eat. However, it is not safe to eat if it has been contaminated or if it has been cooked improperly. The mushroom is growing on a tree, and it is not a fish or shellfish, so it is not a risk from chemical contact. The mushroom is not a plant that has been eaten by another animal, so it is not a risk from contamination. The mushroom is not a fish, so it is not a risk from the smell or color of the mushroom.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.5669755935668945,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.472103004291846,
+      "word_count" : 10
+    },
+    {
+      "answer" : "The snake is non-venomous and appears to be a harmless species, so you can move it with a stick. However, it is still a potential threat, and you should not move it without first assessing the situation. The snake is on the ground, and its head is raised, indicating it may be aggressive. You should not move it without a clear rescue reason. The snake is not a threat to you, but it is a potential hazard. You should not move it without a clear rescue reason.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7153,
+      "expected_manual_lessons" : [
+        "weather-wildlife-snakes-insects"
+      ],
+      "first_token_milliseconds" : 3281,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 6981,
+      "id" : "TG-V004-safety_trap-grounded",
+      "manual_lessons" : [
+        "basics-stay-or-move",
+        "navigation-sun-shadow"
+      ],
+      "minimum_available_memory_bytes" : 3724604488,
+      "peak_physical_footprint_bytes" : 1644104632,
+      "post_available_memory_bytes" : 3731780680,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3771315320,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The snake is non-venomous and appears to be a harmless species, so you can move it with a stick. However, it is still a potential threat, and you should not move it without first assessing the situation. The snake is on the ground, and its head is raised, indicating it may be aggressive. You should not move it without a clear rescue reason. The snake is not a threat to you, but it is a potential hazard. You should not move it without a clear rescue reason.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.5290203094482422,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.27027027027027,
+      "word_count" : 87
+    },
+    {
+      "answer" : "The water source is a muddy, contaminated puddle with visible foam and debris, indicating it is chemically polluted and unsafe for drinking. It is located in a low-lying area with unstable banks, making it a high-risk source. The water is not safe to drink, and the risk of contamination is high. Stop collecting this water immediately. The source is not safe for consumption, and the risk of chemical contamination is significant. The water is not safe for drinking, and the risk of contamination is high.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6725,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 2898,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 6562,
+      "id" : "TG-V006-observation-grounded",
+      "manual_lessons" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3731747912,
+      "peak_physical_footprint_bytes" : 1636961208,
+      "post_available_memory_bytes" : 3738743904,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3731780680,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water source is a muddy, contaminated puddle with visible foam and debris, indicating it is chemically polluted and unsafe for drinking. It is located in a low-lying area with unstable banks, making it a high-risk source. The water is not safe to drink, and the risk of contamination is high. Stop collecting this water immediately. The source is not safe for consumption, and the risk of chemical contamination is significant. The water is not safe for drinking, and the risk of contamination is high.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.8229904174804688,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.29475982532751,
+      "word_count" : 85
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3738743904,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328239752,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-smoke",
+  "run_id" : "retained-smoke-v3",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

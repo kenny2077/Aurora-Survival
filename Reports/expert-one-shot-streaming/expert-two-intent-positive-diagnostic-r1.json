@@ -1,0 +1,942 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-cold-snow-scenario"
+        ],
+        [
+          "weather-wildlife-cold-scenario"
+        ]
+      ],
+      "answer" : "Choose a site away from avalanche paths, cornices, tree wells, and drifting snow. Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls. Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7093,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1693,
+      "first_visible_text_milliseconds" : 2888,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 6116,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-07-snow",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3810669760,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1558039360,
+      "post_available_memory_bytes" : 3813881024,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322243256,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Choose a site away from avalanche paths, cornices, tree wells, and drifting snow.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Mark the entrance, keep tools inside, and clear vents as snow falls.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.\",\n      \"e\": [6]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Choose a site away from avalanche paths, cornices, tree wells, and drifting snow.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Use a tent, snow trench, or snow structure only if you know it can remain stable and ventilated.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Mark the entrance, keep tools inside, and clear vents as snow falls.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Recheck anchors, drainage, ventilation, warmth, and hazards before sleep and after weather changes.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        1,
+        31,
+        29,
+        7,
+        18,
+        24,
+        62
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.78653627634048462,
+        0.77972263097763062,
+        0.66429793834686279,
+        0.66751682758331299,
+        0.7534254789352417,
+        0.69830721616744995,
+        0.67851626873016357,
+        0.62304186820983887
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "shelter-overnight",
+        "car-stay-walk",
+        "first-aid-cold",
+        "weather-wildlife-cold",
+        "fire-extinguish",
+        "basics-first-night",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        1,
+        2,
+        0,
+        9,
+        5,
+        10,
+        8,
+        19
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        2,
+        3,
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.041422474881015338,
+        0.037502048131080386,
+        0.035263007840342128,
+        0.032396825396825396,
+        0.031857397504456327,
+        0.03004918650325801,
+        0.028757459505541347,
+        0.021630081300813009
+      ],
+      "retrieval_context_milliseconds" : 0.065922737121582031,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "shelter-cold-snow-scenario",
+        "shelter-overnight-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "nws-heat-cold",
+        "nws-lightning",
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 61,
+      "stream_deltas" : [
+        "Choose",
+        " ",
+        "a ",
+        "site ",
+        "away ",
+        "from ",
+        "avalanche ",
+        "paths, ",
+        "cornices,",
+        " ",
+        "tree ",
+        "wells, ",
+        "and ",
+        "drifting ",
+        "snow.",
+        " ",
+        "Use ",
+        "a ",
+        "tent, ",
+        "snow ",
+        "trench, ",
+        "or ",
+        "snow ",
+        "structure ",
+        "only ",
+        "if ",
+        "you ",
+        "know ",
+        "it ",
+        "can ",
+        "remain ",
+        "stable ",
+        "and ",
+        "ventilated.",
+        " ",
+        "Mark ",
+        "the ",
+        "entrance, ",
+        "keep ",
+        "tools ",
+        "inside, ",
+        "and ",
+        "clear ",
+        "vents ",
+        "as ",
+        "snow ",
+        "falls.",
+        " ",
+        "Recheck ",
+        "anchors, ",
+        "drainage, ",
+        "ventilation, ",
+        "warmth, ",
+        "and ",
+        "hazards ",
+        "before ",
+        "sleep ",
+        "and ",
+        "after ",
+        "weather ",
+        "changes."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.23536061496722,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 56
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply immediate firm pressure to the wound with a clean cloth or gauze. Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5059,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1740,
+      "first_visible_text_milliseconds" : 2894,
+      "generated_tokens" : 82,
+      "generation_milliseconds" : 4128,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-08-bleeding",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3793073344,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1575635776,
+      "post_available_memory_bytes" : 3823137984,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3841554416,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.\",\n      \"e\": [4, 5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.\",\n      \"e\": [4, 5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        15,
+        6,
+        17,
+        62,
+        20,
+        14,
+        36
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.68934863805770874,
+        0.57568460702896118,
+        0.6427617073059082,
+        0.57293432950973511,
+        0.51240003108978271,
+        0.57030808925628662,
+        0.57568931579589844,
+        0.54795187711715698
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "first-aid-shock",
+        "first-aid-wounds-burns",
+        "basics-stop",
+        "car-stay-walk",
+        "first-aid-cold",
+        "first-aid-heat",
+        "basics-priorities"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        3,
+        2,
+        18,
+        5,
+        22,
+        21,
+        15
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        3,
+        4,
+        2,
+        3,
+        2,
+        2,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.048445335950126997,
+        0.036941345441067461,
+        0.034798389007344235,
+        0.033378740668614085,
+        0.033281596452328165,
+        0.032393871783430013,
+        0.028794278069362973,
+        0.028092173087357567
+      ],
+      "retrieval_context_milliseconds" : 0.036954879760742188,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "stream_delta_count" : 31,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "immediate ",
+        "firm ",
+        "pressure ",
+        "to ",
+        "the ",
+        "wound ",
+        "with ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        ".",
+        " ",
+        "Do ",
+        "not ",
+        "loosen ",
+        "the ",
+        "tourniqu",
+        "et ",
+        "after ",
+        "application; ",
+        "obtain ",
+        "emergency ",
+        "evacuation ",
+        "as ",
+        "quickly ",
+        "as ",
+        "possible."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.91959798994975,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 27
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ],
+        [
+          "basics-first-night-scenario"
+        ]
+      ],
+      "answer" : "Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6215,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1554,
+      "first_visible_text_milliseconds" : 2695,
+      "generated_tokens" : 129,
+      "generation_milliseconds" : 5286,
+      "grounding_reason" : "resolved_history",
+      "id" : "intent-09-survival-followup",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3794482344,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1574226776,
+      "post_available_memory_bytes" : 3826300120,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3850549232,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Do not keep walking simply to feel productive.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Do not keep walking simply to feel productive.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 1,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        5,
+        45,
+        16,
+        37,
+        20,
+        29,
+        61
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.73785901069641113,
+        0.6805456280708313,
+        0.56316715478897095,
+        0.6117977499961853,
+        0.57173377275466919,
+        0.60097527503967285,
+        0.58898764848709106,
+        0.54592448472976685
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "navigation-backtrack",
+        "basics-stop",
+        "navigation-compass",
+        "navigation-terrain",
+        "navigation-travel-crossing",
+        "navigation-map",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        2,
+        1,
+        11,
+        4,
+        14,
+        12,
+        13
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.037786885245901639,
+        0.033524531024531026,
+        0.030562994522215458,
+        0.026875901875901876,
+        0.026588697017268445,
+        0.025679012345679014,
+        0.024809741248097414,
+        0.021710234824988926
+      ],
+      "retrieval_context_milliseconds" : 0.046014785766601562,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 50,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "as ",
+        "soon ",
+        "as ",
+        "landmarks, ",
+        "trail, ",
+        "or ",
+        "position ",
+        "stop ",
+        "matching ",
+        "expectations.",
+        " ",
+        "Mark ",
+        "the ",
+        "spot ",
+        "without ",
+        "damaging ",
+        "the ",
+        "environment ",
+        "and ",
+        "record ",
+        "time ",
+        "and ",
+        "direction ",
+        "of ",
+        "travel.",
+        " ",
+        "Review ",
+        "the ",
+        "last ",
+        "certain ",
+        "point, ",
+        "recent ",
+        "turns, ",
+        "terrain, ",
+        "distance, ",
+        "and ",
+        "elevation ",
+        "before ",
+        "moving.",
+        " ",
+        "Do ",
+        "not ",
+        "keep ",
+        "walking ",
+        "simply ",
+        "to ",
+        "feel ",
+        "productive."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.29796355841372,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 46
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5310987304,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5326011576,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "214c02081968bc7fedf77c28e5a3225ba46d621eca6226c475040d9a5cffa55a",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-one-shot-streaming",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-two-intent-positive-diagnostic-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5326011576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3814159552,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 7280,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3823285440,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 12478,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3826300120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18825,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3853842440,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18913,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3857135624,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 24274,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3857119240,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29426,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4850170584,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 34841,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5306711080,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40213,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45569,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50905,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56276,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61654,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66931,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311020072,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 72278,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311003688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77596,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311003688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82954,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311003688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 88100,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310987304,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93274,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311052840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98432,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 103546,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 108674,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 113964,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119277,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124586,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311003688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 129761,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311003688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 134874,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310987304,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140273,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310987304,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 145430,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

@@ -1,0 +1,1215 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork. Use this order, and reassess after any major change. Use carried food or other lower-risk options first. Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty. Keep unknown material away from children and food-preparation surfaces. Aurora does not identify edible plants or mushrooms; small taste tests do not prove safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-091",
+      "manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "minimum_available_memory_bytes" : 5325372576,
+      "peak_physical_footprint_bytes" : 43336544,
+      "post_available_memory_bytes" : 5325356192,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328223392,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2481967213114755,
+        0.12806451612903225
+      ],
+      "retrieval_context_milliseconds" : 7.9710483551025391,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-unknown-plants",
+      "word_count" : 76
+    },
+    {
+      "answer" : "Eat wild plants or mushrooms only when identification is certain from prior expert knowledge, not from text or guesswork. Use this order, and reassess after any major change. Use carried food or other lower-risk options first. Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty. Keep unknown material away from children and food-preparation surfaces. Aurora does not identify edible plants or mushrooms; small taste tests do not prove safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-092",
+      "manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "minimum_available_memory_bytes" : 5324946592,
+      "peak_physical_footprint_bytes" : 43762528,
+      "post_available_memory_bytes" : 5324946592,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325356192,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.60806451612903223
+      ],
+      "retrieval_context_milliseconds" : 17.122030258178711,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-unknown-plants",
+      "word_count" : 76
+    },
+    {
+      "answer" : "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost. Use this order, and reassess after any major change. Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons. Fish only where legal and only if you have suitable gear and safe access to the bank. Mark your route, limit time, and stop before weather, darkness, or fatigue worsens. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-093",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 5324176520,
+      "peak_physical_footprint_bytes" : 44532600,
+      "post_available_memory_bytes" : 5324389512,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324340360,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        14.608196721311476,
+        0.36793650793650789
+      ],
+      "retrieval_context_milliseconds" : 10.007977485656738,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "word_count" : 86
+    },
+    {
+      "answer" : "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost. Use this order, and reassess after any major change. Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons. Fish only where legal and only if you have suitable gear and safe access to the bank. Mark your route, limit time, and stop before weather, darkness, or fatigue worsens. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 100,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-094",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 5324356744,
+      "peak_physical_footprint_bytes" : 44352376,
+      "post_available_memory_bytes" : 5324356744,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324389512,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        0.6081967213114754,
+        0.36793650793650789
+      ],
+      "retrieval_context_milliseconds" : 10.061025619506836,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "word_count" : 86
+    },
+    {
+      "answer" : "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost. Use this order, and reassess after any major change. Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons. Fish only where legal and only if you have suitable gear and safe access to the bank. Mark your route, limit time, and stop before weather, darkness, or fatigue worsens. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-095",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 5324127368,
+      "peak_physical_footprint_bytes" : 44581752,
+      "post_available_memory_bytes" : 5324127368,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324143752,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2481967213114755
+      ],
+      "retrieval_context_milliseconds" : 1.9350051879882812,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "word_count" : 86
+    },
+    {
+      "answer" : "Gather food only with methods you already know, can use legally, and can perform without injury or getting lost. Use this order, and reassess after any major change. Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons. Fish only where legal and only if you have suitable gear and safe access to the bank. Mark your route, limit time, and stop before weather, darkness, or fatigue worsens. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 100,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-096",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 5324242056,
+      "peak_physical_footprint_bytes" : 44467064,
+      "post_available_memory_bytes" : 5324422280,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324307592,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.72793650793650788
+      ],
+      "retrieval_context_milliseconds" : 23.535013198852539,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "word_count" : 86
+    },
+    {
+      "answer" : "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean. Use this order, and reassess after any major change. Wash or sanitize hands and keep raw material away from ready-to-eat food. Cook animal food thoroughly through the center using a thermometer when available. Discard food with unsafe storage, chemical contact, spoilage, or uncertain origin. Smoke, color, smell, or a brief sear does not prove meat or fish is safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-097",
+      "manual_lessons" : [
+        "food-cook"
+      ],
+      "minimum_available_memory_bytes" : 5324209288,
+      "peak_physical_footprint_bytes" : 44499832,
+      "post_available_memory_bytes" : 5324209288,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324258440,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife"
+      ],
+      "retrieval_candidate_scores" : [
+        14.608196721311476,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 10.123014450073242,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-cook",
+      "word_count" : 73
+    },
+    {
+      "answer" : "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean. Use this order, and reassess after any major change. Wash or sanitize hands and keep raw material away from ready-to-eat food. Cook animal food thoroughly through the center using a thermometer when available. Discard food with unsafe storage, chemical contact, spoilage, or uncertain origin. Smoke, color, smell, or a brief sear does not prove meat or fish is safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-098",
+      "manual_lessons" : [
+        "food-cook"
+      ],
+      "minimum_available_memory_bytes" : 5324176520,
+      "peak_physical_footprint_bytes" : 44532600,
+      "post_available_memory_bytes" : 5324373128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324192904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife"
+      ],
+      "retrieval_candidate_scores" : [
+        0.6081967213114754,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 10.183930397033691,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-cook",
+      "word_count" : 73
+    },
+    {
+      "answer" : "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean. Use this order, and reassess after any major change. Wash or sanitize hands and keep raw material away from ready-to-eat food. Cook animal food thoroughly through the center using a thermometer when available. Discard food with unsafe storage, chemical contact, spoilage, or uncertain origin. Smoke, color, smell, or a brief sear does not prove meat or fish is safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 102,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-099",
+      "manual_lessons" : [
+        "food-cook"
+      ],
+      "minimum_available_memory_bytes" : 5324160136,
+      "peak_physical_footprint_bytes" : 44548984,
+      "post_available_memory_bytes" : 5324192904,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324192904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3681967213114756,
+        0.24806451612903224
+      ],
+      "retrieval_context_milliseconds" : 7.1679353713989258,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-cook",
+      "word_count" : 73
+    },
+    {
+      "answer" : "Prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean. Use this order, and reassess after any major change. Wash or sanitize hands and keep raw material away from ready-to-eat food. Cook animal food thoroughly through the center using a thermometer when available. Discard food with unsafe storage, chemical contact, spoilage, or uncertain origin. Smoke, color, smell, or a brief sear does not prove meat or fish is safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-100",
+      "manual_lessons" : [
+        "food-cook"
+      ],
+      "minimum_available_memory_bytes" : 5324127368,
+      "peak_physical_footprint_bytes" : 44581752,
+      "post_available_memory_bytes" : 5324143752,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324143752,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.36793650793650789
+      ],
+      "retrieval_context_milliseconds" : 8.6150169372558594,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-cook",
+      "word_count" : 73
+    },
+    {
+      "answer" : "Prevent the search area from growing while you reconstruct where navigation failed. Use this order, and reassess after any major change. Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-101",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 5324029064,
+      "peak_physical_footprint_bytes" : 44680056,
+      "post_available_memory_bytes" : 5324029064,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324160136,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        16.866393442622954,
+        1.0961290322580646
+      ],
+      "retrieval_context_milliseconds" : 11.435985565185547,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "word_count" : 67
+    },
+    {
+      "answer" : "Prevent the search area from growing while you reconstruct where navigation failed. Use this order, and reassess after any major change. Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-102",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 5323537544,
+      "peak_physical_footprint_bytes" : 45171576,
+      "post_available_memory_bytes" : 5323537544,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323996296,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        2.8663934426229507,
+        1.0961290322580646
+      ],
+      "retrieval_context_milliseconds" : 9.9670886993408203,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "word_count" : 67
+    },
+    {
+      "answer" : "Prevent the search area from growing while you reconstruct where navigation failed. Use this order, and reassess after any major change. Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-103",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 5323816072,
+      "peak_physical_footprint_bytes" : 44893048,
+      "post_available_memory_bytes" : 5323816072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323816072,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stop"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3363934426229509,
+        6.3361290322580652
+      ],
+      "retrieval_context_milliseconds" : 8.9210271835327148,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "word_count" : 67
+    },
+    {
+      "answer" : "Prevent the search area from growing while you reconstruct where navigation failed. Use this order, and reassess after any major change. Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Do not keep walking simply to feel productive.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-104",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 5323701384,
+      "peak_physical_footprint_bytes" : 45007736,
+      "post_available_memory_bytes" : 5323701384,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323766920,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-inventory"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0963934426229507,
+        0.92587301587301596
+      ],
+      "retrieval_context_milliseconds" : 11.60895824432373,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "word_count" : 67
+    },
+    {
+      "answer" : "Turn the map to match the ground before choosing a route. Use this order, and reassess after any major change. Identify north, contour lines, water, roads, trails, and major landmarks. Rotate the map until mapped features line up with the same features around you. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-105",
+      "manual_lessons" : [
+        "navigation-map"
+      ],
+      "minimum_available_memory_bytes" : 5323308168,
+      "peak_physical_footprint_bytes" : 45400952,
+      "post_available_memory_bytes" : 5323308168,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323701384,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        15.256393442622951,
+        0.235625
+      ],
+      "retrieval_context_milliseconds" : 5.4879188537597656,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-map",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Turn the map to match the ground before choosing a route. Use this order, and reassess after any major change. Identify north, contour lines, water, roads, trails, and major landmarks. Rotate the map until mapped features line up with the same features around you. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-106",
+      "manual_lessons" : [
+        "navigation-map"
+      ],
+      "minimum_available_memory_bytes" : 5323652232,
+      "peak_physical_footprint_bytes" : 45056888,
+      "post_available_memory_bytes" : 5323652232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323717768,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        1.2563934426229508,
+        0.23538461538461539
+      ],
+      "retrieval_context_milliseconds" : 6.9350004196166992,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-map",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Turn the map to match the ground before choosing a route. Use this order, and reassess after any major change. Identify north, contour lines, water, roads, trails, and major landmarks. Rotate the map until mapped features line up with the same features around you. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-107",
+      "manual_lessons" : [
+        "navigation-map"
+      ],
+      "minimum_available_memory_bytes" : 5323652232,
+      "peak_physical_footprint_bytes" : 45056888,
+      "post_available_memory_bytes" : 5323701384,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323652232,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        15.256393442622951,
+        0.235625
+      ],
+      "retrieval_context_milliseconds" : 5.4830312728881836,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-map",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Turn the map to match the ground before choosing a route. Use this order, and reassess after any major change. Identify north, contour lines, water, roads, trails, and major landmarks. Rotate the map until mapped features line up with the same features around you. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-108",
+      "manual_lessons" : [
+        "navigation-map"
+      ],
+      "minimum_available_memory_bytes" : 5323603080,
+      "peak_physical_footprint_bytes" : 45106040,
+      "post_available_memory_bytes" : 5323816072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323603080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        9.4063934426229494,
+        0.67587301587301596
+      ],
+      "retrieval_context_milliseconds" : 8.85009765625,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-map",
+      "word_count" : 78
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Use this order, and reassess after any major change. Keep the compass level and away from vehicles, speakers, magnets, and large metal objects. Set or read the bearing using the map and account for local declination when precision matters. Choose a visible landmark on the bearing, walk to it, and recheck. A precise bearing toward the wrong destination is still wrong; verify with terrain and map.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-109",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 5323570312,
+      "peak_physical_footprint_bytes" : 45138808,
+      "post_available_memory_bytes" : 5323603080,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323603080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        14.586393442622949,
+        0.33612903225806451
+      ],
+      "retrieval_context_milliseconds" : 8.6500644683837891,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Use this order, and reassess after any major change. Keep the compass level and away from vehicles, speakers, magnets, and large metal objects. Set or read the bearing using the map and account for local declination when precision matters. Choose a visible landmark on the bearing, walk to it, and recheck. A precise bearing toward the wrong destination is still wrong; verify with terrain and map.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-110",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 5323586696,
+      "peak_physical_footprint_bytes" : 45122424,
+      "post_available_memory_bytes" : 5323603080,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323586696,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        0.5863934426229509,
+        0.33587301587301588
+      ],
+      "retrieval_context_milliseconds" : 8.0850124359130859,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Use this order, and reassess after any major change. Keep the compass level and away from vehicles, speakers, magnets, and large metal objects. Set or read the bearing using the map and account for local declination when precision matters. Choose a visible landmark on the bearing, walk to it, and recheck. A precise bearing toward the wrong destination is still wrong; verify with terrain and map.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-111",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 5323553928,
+      "peak_physical_footprint_bytes" : 45155192,
+      "post_available_memory_bytes" : 5323586696,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323586696,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        6.5863934426229509,
+        0.33612903225806451
+      ],
+      "retrieval_context_milliseconds" : 3.2440423965454102,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Use this order, and reassess after any major change. Keep the compass level and away from vehicles, speakers, magnets, and large metal objects. Set or read the bearing using the map and account for local declination when precision matters. Choose a visible landmark on the bearing, walk to it, and recheck. A precise bearing toward the wrong destination is still wrong; verify with terrain and map.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-112",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 5323472008,
+      "peak_physical_footprint_bytes" : 45237112,
+      "post_available_memory_bytes" : 5323472008,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323553928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        9.4063934426229494,
+        1.0961290322580646
+      ],
+      "retrieval_context_milliseconds" : 9.0769529342651367,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Match ridges, valleys, slopes, water, and human features to the map continuously. Use this order, and reassess after any major change. Look for the shape and direction of large features before relying on small details. Use handrails such as a trail, ridge, or shoreline and identify a catching feature beyond the destination. Check that elevation, distance, and travel time agree with the expected route. Streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-113",
+      "manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "minimum_available_memory_bytes" : 5323439240,
+      "peak_physical_footprint_bytes" : 45269880,
+      "post_available_memory_bytes" : 5323685000,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323439240,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        0.35587301587301584
+      ],
+      "retrieval_context_milliseconds" : 8.273005485534668,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-terrain",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Match ridges, valleys, slopes, water, and human features to the map continuously. Use this order, and reassess after any major change. Look for the shape and direction of large features before relying on small details. Use handrails such as a trail, ridge, or shoreline and identify a catching feature beyond the destination. Check that elevation, distance, and travel time agree with the expected route. Streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-114",
+      "manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "minimum_available_memory_bytes" : 5323439240,
+      "peak_physical_footprint_bytes" : 45269880,
+      "post_available_memory_bytes" : 5323439240,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323472008,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        1.8263934426229509,
+        0.35562499999999997
+      ],
+      "retrieval_context_milliseconds" : 8.7159872055053711,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-terrain",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Match ridges, valleys, slopes, water, and human features to the map continuously. Use this order, and reassess after any major change. Look for the shape and direction of large features before relying on small details. Use handrails such as a trail, ridge, or shoreline and identify a catching feature beyond the destination. Check that elevation, distance, and travel time agree with the expected route. Streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 100,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-115",
+      "manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "minimum_available_memory_bytes" : 5323422856,
+      "peak_physical_footprint_bytes" : 45286264,
+      "post_available_memory_bytes" : 5323422856,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323439240,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        7.0063934426229508,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 7.3679685592651367,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-terrain",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Match ridges, valleys, slopes, water, and human features to the map continuously. Use this order, and reassess after any major change. Look for the shape and direction of large features before relying on small details. Use handrails such as a trail, ridge, or shoreline and identify a catching feature beyond the destination. Check that elevation, distance, and travel time agree with the expected route. Streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-116",
+      "manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "minimum_available_memory_bytes" : 5323472008,
+      "peak_physical_footprint_bytes" : 45237112,
+      "post_available_memory_bytes" : 5323537544,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323504776,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-map"
+      ],
+      "retrieval_candidate_scores" : [
+        9.1963934426229503,
+        1.0461290322580645
+      ],
+      "retrieval_context_milliseconds" : 9.4980001449584961,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-terrain",
+      "word_count" : 79
+    },
+    {
+      "answer" : "Return only when the route behind you is known, short, and safer than staying. Use this order, and reassess after any major change. Confirm recognizable footprints, markers, junctions, or terrain before committing. Mark progress and turn around immediately if the track becomes uncertain. Preserve enough daylight and energy to return to shelter and signals. Do not follow isolated footprints or game trails as proof of the correct route.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-117",
+      "manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "minimum_available_memory_bytes" : 5322980488,
+      "peak_physical_footprint_bytes" : 45728632,
+      "post_available_memory_bytes" : 5322980488,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323537544,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack",
+        "navigation-travel-crossing"
+      ],
+      "retrieval_candidate_scores" : [
+        15.156393442622951,
+        0.58612903225806456
+      ],
+      "retrieval_context_milliseconds" : 6.7909955978393555,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-backtrack",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Return only when the route behind you is known, short, and safer than staying. Use this order, and reassess after any major change. Confirm recognizable footprints, markers, junctions, or terrain before committing. Mark progress and turn around immediately if the track becomes uncertain. Preserve enough daylight and energy to return to shelter and signals. Do not follow isolated footprints or game trails as proof of the correct route.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-118",
+      "manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "minimum_available_memory_bytes" : 5322980488,
+      "peak_physical_footprint_bytes" : 45728632,
+      "post_available_memory_bytes" : 5323013256,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322980488,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack",
+        "navigation-travel-crossing"
+      ],
+      "retrieval_candidate_scores" : [
+        1.156393442622951,
+        0.58587301587301588
+      ],
+      "retrieval_context_milliseconds" : 7.5919628143310547,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-backtrack",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Return only when the route behind you is known, short, and safer than staying. Use this order, and reassess after any major change. Confirm recognizable footprints, markers, junctions, or terrain before committing. Mark progress and turn around immediately if the track becomes uncertain. Preserve enough daylight and energy to return to shelter and signals. Do not follow isolated footprints or game trails as proof of the correct route.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-119",
+      "manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "minimum_available_memory_bytes" : 5322964104,
+      "peak_physical_footprint_bytes" : 45745016,
+      "post_available_memory_bytes" : 5322964104,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323013256,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        6.5863934426229509
+      ],
+      "retrieval_context_milliseconds" : 2.061009407043457,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-backtrack",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Return only when the route behind you is known, short, and safer than staying. Use this order, and reassess after any major change. Confirm recognizable footprints, markers, junctions, or terrain before committing. Mark progress and turn around immediately if the track becomes uncertain. Preserve enough daylight and energy to return to shelter and signals. Do not follow isolated footprints or game trails as proof of the correct route.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-120",
+      "manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "minimum_available_memory_bytes" : 5323259016,
+      "peak_physical_footprint_bytes" : 45450104,
+      "post_available_memory_bytes" : 5323259016,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323324552,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229488,
+        0.82515151515151519
+      ],
+      "retrieval_context_milliseconds" : 9.6460580825805664,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-backtrack",
+      "word_count" : 68
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 5323259016,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328272544,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "accuracy-text-120-batch-4",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

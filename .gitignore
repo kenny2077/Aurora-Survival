@@ -10,3 +10,4 @@ xcuserdata/
 review/
 __pycache__/
 *.pyc
+Runtime/AuroraLlamaRuntime/Artifacts/

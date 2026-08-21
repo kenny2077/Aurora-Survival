@@ -24,7 +24,8 @@ public struct GroundedResponseCodec: Sendable {
         _ generated: String,
         evidence: [RetrievedPassage],
         purpose: ModelPromptPurpose? = nil,
-        question: String? = nil
+        question: String? = nil,
+        tier: ModelTier = .lite
     ) throws -> ConversationalGroundedResponse {
         guard let json = Self.jsonObjectData(in: generated) else {
             throw GroundedResponseCodecError.noJSONObject
@@ -44,11 +45,6 @@ public struct GroundedResponseCodec: Sendable {
                 with: "$1",
                 options: .regularExpression
             )
-            .replacingOccurrences(
-                of: #"\bWARNING:\s*"#,
-                with: "",
-                options: [.regularExpression, .caseInsensitive]
-            )
             .replacingOccurrences(of: ".,", with: ".")
             .replacingOccurrences(of: "!,", with: "!")
             .replacingOccurrences(of: "?,", with: "?")
@@ -58,6 +54,13 @@ public struct GroundedResponseCodec: Sendable {
                 options: .regularExpression
             )
             .trimmingCharacters(in: .whitespacesAndNewlines)
+        if tier != .expert {
+            answer = answer.replacingOccurrences(
+                of: #"\bWARNING:\s*"#,
+                with: "",
+                options: [.regularExpression, .caseInsensitive]
+            )
+        }
         if answer.hasSuffix(".,") || answer.hasSuffix("!,")
                 || answer.hasSuffix("?,") || answer.hasSuffix("…,") {
             answer.removeLast()
@@ -66,11 +69,12 @@ public struct GroundedResponseCodec: Sendable {
         guard Self.isUsableConversationalAnswer(
             answer,
             purpose: effectivePurpose,
-            question: question
+            question: question,
+            tier: tier
         ) else {
             throw GroundedResponseError.invalidConversationalAnswer
         }
-        if effectivePurpose == .grounded {
+        if effectivePurpose == .grounded, tier != .expert {
             let lowercasedAnswer = answer.lowercased()
             guard !evidence.contains(where: {
                 lowercasedAnswer.contains($0.article.title.lowercased())
@@ -90,6 +94,10 @@ public struct GroundedResponseCodec: Sendable {
               Set(indexes).count == indexes.count,
               (effectivePurpose == .grounded ? !indexes.isEmpty : indexes.isEmpty)
         else {
+            throw GroundedResponseError.invalidConversationalEvidence
+        }
+        if tier == .expert, effectivePurpose == .grounded,
+           indexes != [1] {
             throw GroundedResponseError.invalidConversationalEvidence
         }
         let evidenceIDs = try indexes.map { index -> String in
@@ -201,10 +209,11 @@ public struct GroundedResponseCodec: Sendable {
     private static func isUsableConversationalAnswer(
         _ answer: String,
         purpose: ModelPromptPurpose,
-        question: String?
+        question: String?,
+        tier: ModelTier
     ) -> Bool {
         guard !answer.isEmpty,
-              answer.count <= 440,
+              answer.count <= (tier == .expert ? 900 : 440),
               let last = answer.last,
               ".!?…".contains(last)
         else {
@@ -218,16 +227,19 @@ public struct GroundedResponseCodec: Sendable {
             !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }.count
         switch purpose {
-        case .ordinary:
+        case .ordinary, .nativeVisionAnswer:
             break
         case .grounded:
-            guard (28...70).contains(wordCount),
-                  (2...4).contains(sentenceCount),
+            let wordRange = tier == .expert ? 45...95 : 28...70
+            let sentenceRange = tier == .expert ? 2...5 : 2...4
+            guard wordRange.contains(wordCount),
+                  sentenceRange.contains(sentenceCount),
                   Self.hasWarningOrStopCondition(answer) else {
                 return false
             }
         case .clarification:
-            guard (18...45).contains(wordCount),
+            let wordRange = tier == .expert ? 25...60 : 18...45
+            guard wordRange.contains(wordCount),
                   Self.isClarificationRequest(answer) else {
                 return false
             }
@@ -243,6 +255,8 @@ public struct GroundedResponseCodec: Sendable {
                   Self.isIncidentIntakeRequest(answer) else {
                 return false
             }
+        case .expertIntent:
+            return false
         }
 
         let structuralMarkers = ["FIELD MANUAL", "USER MESSAGE"]
@@ -255,30 +269,39 @@ public struct GroundedResponseCodec: Sendable {
             "sample an unknown", "drink untreated water", "induce vomiting",
             "make yourself vomit", "touch a live wire", "touch the live wire",
             "pour water on an electrical", "drive yourself while impaired",
+            "can move it with a stick", "can be moved with a stick safely",
+            "likely an edible species", "looks and smells normal, it's likely safe to eat",
+            "not infected yet", "remove it using tweezers or a magnet",
+            "burn the tick", "smother the tick",
         ]
         guard !unsafeInstructions.contains(where: {
             Self.containsAffirmativeInstruction(lowercased, phrase: $0)
         }) else {
             return false
         }
+        return !containsControlLeakage(answer)
+    }
+
+    static func containsControlLeakage(_ answer: String) -> Bool {
+        let lowercased = answer.lowercased()
         let leakedInstructions = [
-            "actions:",
-            "goal:",
-            "reviewed excerpt",
-            "title:",
-            "return exactly",
-            "citation markers",
-            "do not invent steps",
-            "source names",
-            "page numbers inside",
-            "no markdown",
-            "extra keys",
-            "\"a\":",
-            "\"e\":",
-            "[1]",
-            "[2]",
+            "actions:", "cited claim", "citation markers", "do not invent steps",
+            "evidence-index", "evidence index", "extra keys", "goal:",
+            "internal correction", "no markdown", "no procedures",
+            "output must be", "page numbers inside", "response check",
+            "return exactly", "return valid json", "reviewed evidence records",
+            "reviewed excerpt", "scenario id", "schema", "selected reviewed", "source names",
+            "title:", "valid json", "\"a\":", "\"e\":", "\"s\":",
+            "e=[]",
         ]
-        return !leakedInstructions.contains { lowercased.contains($0) }
+        if leakedInstructions.contains(where: lowercased.contains) { return true }
+        if answer.range(of: #"\[\d+\]"#, options: .regularExpression) != nil {
+            return true
+        }
+        return answer.range(
+            of: #"[;,:]\s+[?!.](?:\s|$)"#,
+            options: .regularExpression
+        ) != nil
     }
 
     private static func impersonatesUser(
@@ -317,13 +340,17 @@ public struct GroundedResponseCodec: Sendable {
         return !userTerms.isDisjoint(with: responseTerms)
     }
 
-    private static func hasWarningOrStopCondition(_ answer: String) -> Bool {
+    static func hasExplicitSafetyLimit(_ answer: String) -> Bool {
         let lowercased = answer.lowercased()
         let signals = [
             "avoid", "caution", "danger", "do not", "don't", "emergency",
             "hazard", "never", "risk", "stop", "threat", "unsafe", "warning",
         ]
         return signals.contains(where: lowercased.contains)
+    }
+
+    private static func hasWarningOrStopCondition(_ answer: String) -> Bool {
+        hasExplicitSafetyLimit(answer)
     }
 
     private static func containsAffirmativeInstruction(

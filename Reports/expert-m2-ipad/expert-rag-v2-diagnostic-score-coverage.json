@@ -1,0 +1,20 @@
+{
+  "active_pack_status" : "No model ready · 1 package issue(s)",
+  "active_tier" : "none",
+  "cases" : [
+
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 4,
+  "final_available_memory_bytes" : 5346524416,
+  "final_battery_level" : 1,
+  "final_thermal" : "serious",
+  "initial_available_memory_bytes" : 5346573568,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "serious",
+  "minimum_cooldown_seconds" : 30,
+  "mode" : "expert-rag-diagnostic",
+  "run_id" : "expert-rag-v2-diagnostic-score-coverage",
+  "schema_version" : 1,
+  "terminal_failure" : "unavailable"
+}

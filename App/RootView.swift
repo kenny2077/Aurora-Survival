@@ -10,14 +10,34 @@ enum AppTab: String, Hashable {
 struct RootView: View {
     @EnvironmentObject private var model: AppModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.scenePhase) private var scenePhase
 
     @ViewBuilder
     var body: some View {
-        if #available(iOS 18.0, *), horizontalSizeClass == .regular {
-            tabs
-                .tabViewStyle(.tabBarOnly)
-        } else {
-            tabs
+        Group {
+            if model.hasAcceptedRiskAcknowledgement {
+                ZStack {
+                    if horizontalSizeClass == .regular {
+                        tabs
+                            .tabViewStyle(.tabBarOnly)
+                    } else {
+                        tabs
+                    }
+#if DEBUG
+                    if let status = model.debugPhysicalStatus {
+                        PhysicalBenchmarkOverlay(status: status) {
+                            model.stopDebugPhysicalBenchmark()
+                        }
+                    }
+#endif
+                }
+            } else {
+                RiskAcknowledgementView()
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            model.refreshPhotoAuthorizationStatus()
         }
     }
 
@@ -41,3 +61,51 @@ struct RootView: View {
         }
     }
 }
+
+#if DEBUG
+private struct PhysicalBenchmarkOverlay: View {
+    let status: PhysicalBenchmarkStatus
+    let stop: () -> Void
+
+    var body: some View {
+        VStack(spacing: AuroraDesign.Space.lg) {
+            ProgressView()
+                .controlSize(.large)
+            Text("Aurora Expert validation")
+                .font(.title2.weight(.semibold))
+            Text(status.phase.capitalized)
+                .foregroundStyle(.secondary)
+            if status.totalCases > 0 {
+                ProgressView(
+                    value: Double(status.completedCases),
+                    total: Double(status.totalCases)
+                )
+                Text("Case \(min(status.completedCases + 1, status.totalCases)) of \(status.totalCases)")
+                    .font(.subheadline.monospacedDigit())
+            }
+            Grid(horizontalSpacing: 24, verticalSpacing: 8) {
+                GridRow { Text("Thermal"); Text(status.thermal.rawValue.capitalized) }
+                GridRow { Text("Battery"); Text(status.batteryLevel.formatted(.percent)) }
+                if let memory = status.availableMemoryBytes {
+                    GridRow { Text("Memory free"); Text(ByteCountFormatter.string(fromByteCount: Int64(memory), countStyle: .memory)) }
+                }
+                if let seconds = status.cooldownSecondsRemaining {
+                    GridRow { Text("Cooldown"); Text("\(seconds)s") }
+                }
+            }
+            .font(.subheadline)
+            Button("Stop validation", role: .destructive, action: stop)
+                .buttonStyle(.bordered)
+                .frame(minHeight: 44)
+        }
+        .padding(AuroraDesign.Space.xl)
+        .frame(maxWidth: 440)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: AuroraDesign.Radius.prominent))
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(uiColor: .systemBackground).opacity(0.96))
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("expert.physical.status")
+    }
+}
+#endif

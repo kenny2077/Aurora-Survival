@@ -1,0 +1,115 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 14818,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2839,
+      "generated_tokens" : 155,
+      "generation_milliseconds" : 7995,
+      "id" : "TG-V020-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3706156176,
+      "peak_physical_footprint_bytes" : 1662552944,
+      "post_available_memory_bytes" : 3733304464,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328387256,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The trail sign indicates the path leads to Refuge du Col du Palet and Refuge-porte de Rosel. The terrain is a mix of grassy slopes and a visible ridge. The path is clear and follows a known route. The warning in Review Excerpt [1] applies: streams and valleys can lead into dangerous areas. The path is safe and the route is well-defined. The user should follow the sign and proceed.\",\"e\":[1,2]}",
+        "{\"a\":\"The trail sign indicates the path leads to Refuge du Col du Palet at 10,180 m, with a 1620 m elevation gain. The terrain is rugged and steep, with a visible ridge and a valley below. The path is narrow and follows a natural slope, but the area is remote and lacks human presence. The warning in excerpt [2] states not to follow isolated footprints or game trails as proof of the correct route. The route is not safe for a solo hiker, and the path is not clearly marked. The warning in excerpt [1] states that streams and valleys can lead into cliffs, waterfalls, canyons, and dense terrain rather than safety.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.3920488357543945,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.868114817688131,
+      "word_count" : 10
+    },
+    {
+      "answer" : "The sign shows a tent, restroom, and a bear trap. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6798,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3321,
+      "generated_tokens" : 96,
+      "generation_milliseconds" : 6441,
+      "id" : "TG-V017-practical_action-grounded",
+      "manual_lessons" : [
+        "signal-smoke-fire"
+      ],
+      "minimum_available_memory_bytes" : 3687445576,
+      "peak_physical_footprint_bytes" : 1681263544,
+      "post_available_memory_bytes" : 3746509920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3733320848,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The sign shows a tent, restroom, and a bear trap. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it. The bear trap is a hazard, so you must stop and avoid it.\",\"e\":[2]}"
+      ],
+      "retrieval_context_milliseconds" : 2.6279687881469727,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.448717948717949,
+      "word_count" : 75
+    },
+    {
+      "answer" : "The image shows a small tick on a person's hand. This is a hazard, so you must stop and avoid it. The tick is a potential vector for disease, so you must treat it immediately. You must use the treatment protocol for shock, which includes laying the person in a safe position, controlling bleeding, and monitoring breathing. The warning is that do not give food or drink to someone with reduced alertness, vomiting, or likely surgery. The tick is a hazard, so you must stop and avoid it.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7515,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3491,
+      "generated_tokens" : 114,
+      "generation_milliseconds" : 7245,
+      "id" : "TG-V005-safety_trap-grounded",
+      "manual_lessons" : [
+        "first-aid-shock",
+        "first-aid-bites-allergy"
+      ],
+      "minimum_available_memory_bytes" : 3739726944,
+      "peak_physical_footprint_bytes" : 1628982176,
+      "post_available_memory_bytes" : 3750196320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3746509920,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The image shows a small tick on a person's hand. This is a hazard, so you must stop and avoid it. The tick is a potential vector for disease, so you must treat it immediately. You must use the treatment protocol for shock, which includes laying the person in a safe position, controlling bleeding, and monitoring breathing. The warning is that do not give food or drink to someone with reduced alertness, vomiting, or likely surgery. The tick is a hazard, so you must stop and avoid it.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 5.8510303497314453,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.101225359616411,
+      "word_count" : 88
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3750196320,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328387256,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-smoke",
+  "run_id" : "retained-smoke-grammar-v2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

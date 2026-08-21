@@ -1,0 +1,1007 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "b418879062275cb85fe0f186af81cb8203d1fe077559f50ee8550999095e7ce5  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "When lost, use the STOP method: Stop and assess your situation. Identify what you are missing or not seeing—your location, direction, time, etc.—and determine if it's safe to proceed. If there is a risk of getting separated from others or being in danger, stop moving until help arrives. Use available resources like GPS devices, cell phones, maps, and communication tools to stay connected with emergency services. Always prioritize safety and avoid making decisions without proper information.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4197,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1180,
+      "generated_tokens" : 101,
+      "generation_milliseconds" : 3234,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-09-stop-lost",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3815650544,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1553058576,
+      "post_available_memory_bytes" : 3818878192,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321260192,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"When lost, use the STOP method: Stop and assess your situation. Identify what you are missing or not seeing—your location, direction, time, etc.—and determine if it's safe to proceed. If there is a risk of getting separated from others or being in danger, stop moving until help arrives. Use available resources like GPS devices, cell phones, maps, and communication tools to stay connected with emergency services. Always prioritize safety and avoid making decisions without proper information.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"When lost, use the STOP method: Stop and assess your situation. Identify what you are missing or not seeing—your location, direction, time, etc.—and determine if it's safe to proceed. If there is a risk of getting separated from others or being in danger, stop moving until help arrives. Use available resources like GPS devices, cell phones, maps, and communication tools to stay connected with emergency services. Always prioritize safety and avoid making decisions without proper information.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 79,
+      "stream_deltas" : [
+        "When",
+        " ",
+        "lost, ",
+        "use ",
+        "the ",
+        "STOP ",
+        "method: ",
+        "Stop ",
+        "and ",
+        "assess ",
+        "your ",
+        "situation. ",
+        "Identify ",
+        "what ",
+        "you ",
+        "are ",
+        "missing ",
+        "or ",
+        "not ",
+        "seeing—your",
+        " ",
+        "location, ",
+        "direction, ",
+        "time, ",
+        "etc.—and",
+        " ",
+        "determine ",
+        "if ",
+        "it's ",
+        "safe ",
+        "to ",
+        "proceed. ",
+        "If ",
+        "there ",
+        "is ",
+        "a ",
+        "risk ",
+        "of ",
+        "getting ",
+        "separated ",
+        "from ",
+        "others ",
+        "or ",
+        "being ",
+        "in ",
+        "danger, ",
+        "stop ",
+        "moving ",
+        "until ",
+        "help ",
+        "arrives. ",
+        "Use ",
+        "available ",
+        "resources ",
+        "like ",
+        "GPS ",
+        "devices, ",
+        "cell ",
+        "phones, ",
+        "maps, ",
+        "and ",
+        "communication ",
+        "tools ",
+        "to ",
+        "stay ",
+        "connected ",
+        "with ",
+        "emergency ",
+        "services. ",
+        "Always ",
+        "prioritize ",
+        "safety ",
+        "and ",
+        "avoid ",
+        "making ",
+        "decisions ",
+        "without ",
+        "proper ",
+        "information."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.433634236041456,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 76
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-compass-scenario"
+        ]
+      ],
+      "answer" : "Take and follow a compass bearing. Follow the direction indicated by your compass to navigate toward your intended destination.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1899,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "first_visible_text_milliseconds" : 1089,
+      "generated_tokens" : 27,
+      "generation_milliseconds" : 1006,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-10-compass-bearing",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3801543920,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1567165200,
+      "post_available_memory_bytes" : 3817534704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3848042504,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Take and follow a compass bearing. Follow the direction indicated by your compass to navigate toward your intended destination.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"Take and follow a compass bearing. Follow the direction indicated by your compass to navigate toward your intended destination.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 20,
+      "stream_deltas" : [
+        "Take",
+        " ",
+        "and ",
+        "follow ",
+        "a ",
+        "compass ",
+        "bearing. ",
+        "Follow ",
+        "the ",
+        "direction ",
+        "indicated ",
+        "by ",
+        "your ",
+        "compass ",
+        "to ",
+        "navigate ",
+        "toward ",
+        "your ",
+        "intended ",
+        "destination."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.076015727391876,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 19
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Observe the complete plant. Check: leaves; stem; flowers; roots; seeds. Confirm Identification. Use regional field guides; expert knowledge; previous training.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5578,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1698,
+      "first_visible_text_milliseconds" : 2851,
+      "generated_tokens" : 107,
+      "generation_milliseconds" : 4638,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-11-mushroom",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3797464304,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1571244816,
+      "post_available_memory_bytes" : 3814880448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3846535176,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Confirm Identification.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Use regional field guides; expert knowledge; previous training.\",\n      \"e\": [10]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Confirm Identification.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Use regional field guides; expert knowledge; previous training.\",\n      \"e\": [10]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        16,
+        40,
+        47,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81452631950378418,
+        0.67410272359848022,
+        0.60441386699676514,
+        0.59238934516906738,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-energy",
+        "basics-stay-or-move",
+        "fire-decision",
+        "car-stay-walk",
+        "car-overheat",
+        "car-stay-walk",
+        "car-scene"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        3,
+        4,
+        2,
+        1,
+        5,
+        6,
+        7
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        3,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.048286885245901641,
+        0.043644064269064267,
+        0.034285605483625289,
+        0.034132275132275132,
+        0.026129032258064518,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015705882352941177
+      ],
+      "retrieval_context_milliseconds" : 0.25296211242675781,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-unknown-plants-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 24,
+      "stream_deltas" : [
+        "Ob",
+        "serve ",
+        "the ",
+        "complete ",
+        "plant.",
+        " ",
+        "Check: ",
+        "leaves; ",
+        "stem; ",
+        "flowers; ",
+        "roots; ",
+        "seeds.",
+        " ",
+        "Confirm ",
+        "Identification.",
+        " ",
+        "Use ",
+        "regional ",
+        "field ",
+        "guides; ",
+        "expert ",
+        "knowledge; ",
+        "previous ",
+        "training."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 36.054421768707485,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 20
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Catch fish using appropriate gear and ensure the location is safe, legal, and productive. Keep raw meat clean; tools clean; and separate from cooked food to prevent illness. Cook fish thoroughly by placing it near controlled heat and rotating regularly until fully done. Avoid undercooked animal products to prevent foodborne illness; ensure clean equipment and proper handling of the catch.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7569,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1922,
+      "first_visible_text_milliseconds" : 3059,
+      "generated_tokens" : 160,
+      "generation_milliseconds" : 6653,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-12-fish",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3784783040,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1583926080,
+      "post_available_memory_bytes" : 3828872408,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3842488280,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Catch fish using appropriate gear and ensure the location is safe, legal, and productive.\",\n      \"e\": [14, 25]\n    },\n    {\n      \"a\": \"Keep raw meat clean; tools clean; and separate from cooked food to prevent illness.\",\n      \"e\": [1, 3, 6]\n    },\n    {\n      \"a\": \"Cook fish thoroughly by placing it near controlled heat and rotating regularly until fully done.\",\n      \"e\": [4, 7]\n    },\n    {\n      \"a\": \"Avoid undercooked animal products to prevent foodborne illness; ensure clean equipment and proper handling of the catch.\",\n      \"e\": [27]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Catch fish using appropriate gear and ensure the location is safe, legal, and productive.\",\n      \"e\": [14, 25]\n    },\n    {\n      \"a\": \"Keep raw meat clean; tools clean; and separate from cooked food to prevent illness.\",\n      \"e\": [1, 3, 6]\n    },\n    {\n      \"a\": \"Cook fish thoroughly by placing it near controlled heat and rotating regularly until fully done.\",\n      \"e\": [4, 7]\n    },\n    {\n      \"a\": \"Avoid undercooked animal products to prevent foodborne illness; ensure clean equipment and proper handling of the catch.\",\n      \"e\": [27]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        2,
+        1,
+        5,
+        39,
+        59,
+        54,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.74818742275238037,
+        0.78996604681015015,
+        0.73133039474487305,
+        0.65158414840698242,
+        0.62358599901199341,
+        0.62555837631225586,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-low-risk",
+        "food-low-risk",
+        "food-energy",
+        "",
+        "food-carried",
+        "navigation-backtrack",
+        "navigation-travel-crossing"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        1,
+        0,
+        2,
+        19,
+        12,
+        18,
+        5,
+        6
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.047017870915890519,
+        0.044522474881015336,
+        0.034524531024531027,
+        0.022499999999999999,
+        0.022031963470319632,
+        0.021353880022014309,
+        0.019651515151515152,
+        0.019425373134328357
+      ],
+      "retrieval_context_milliseconds" : 0.035047531127929688,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-cook-scenario",
+        "food-fishing-basics"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 64,
+      "stream_deltas" : [
+        "Catch",
+        " ",
+        "fish ",
+        "using ",
+        "appropriate ",
+        "gear ",
+        "and ",
+        "ensure ",
+        "the ",
+        "location ",
+        "is ",
+        "safe, ",
+        "legal, ",
+        "and ",
+        "productive.",
+        " ",
+        "Keep ",
+        "raw ",
+        "meat ",
+        "clean; ",
+        "tools ",
+        "clean; ",
+        "and ",
+        "separate ",
+        "from ",
+        "cooked ",
+        "food ",
+        "to ",
+        "prevent ",
+        "illness.",
+        " ",
+        "Cook ",
+        "fish ",
+        "thoroughly ",
+        "by ",
+        "placing ",
+        "it ",
+        "near ",
+        "controlled ",
+        "heat ",
+        "and ",
+        "rotating ",
+        "regularly ",
+        "until ",
+        "fully ",
+        "done.",
+        " ",
+        "Avoid ",
+        "undercooked ",
+        "animal ",
+        "products ",
+        "to ",
+        "prevent ",
+        "foodborne ",
+        "illness; ",
+        "ensure ",
+        "clean ",
+        "equipment ",
+        "and ",
+        "proper ",
+        "handling ",
+        "of ",
+        "the ",
+        "catch."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.608116677235259,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 60
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5307399208,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325110432,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "dc487ddf284beeab4bcd9106221b4c43a17401987ac1838e47eb3d23f168735b",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "survival-manual-2026-v3-focus-a-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325094048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 85,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3818878192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 4407,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3817534704,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 6436,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3815027904,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 12148,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828872408,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 19849,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3856414704,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 19938,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4348262768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 25339,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5301320744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 30446,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307612200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 35628,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307612200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40753,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307612200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45874,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307612200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51002,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307595816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56347,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307595816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61542,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307595816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66751,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307595816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 71924,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307595816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77336,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307579432,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82518,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307546664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87652,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307546664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 92998,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307546664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98359,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307546664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 103697,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307513896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 108888,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307530280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114284,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307530280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119694,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307530280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 125098,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307530280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130465,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307464744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 135648,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307399208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140797,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5307399208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 146143,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

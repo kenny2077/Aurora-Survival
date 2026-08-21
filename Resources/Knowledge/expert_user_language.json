@@ -1,0 +1,496 @@
+{
+  "reviewStatus": "internal_pre_release",
+  "scenarios": [
+    {
+      "aliases": [
+        "I realized I may be lost and panic is making me rush downhill.",
+        "panicking after losing the trail"
+      ],
+      "scenarioID": "basics-stop-scenario"
+    },
+    {
+      "aliases": [
+        "We just had an accident outdoors and I need to check the scene and the injured person.",
+        "initial danger and injury check"
+      ],
+      "scenarioID": "basics-danger-injury-scenario"
+    },
+    {
+      "aliases": [
+        "Our packs got dumped in the rain and we need to sort what still works.",
+        "organize wet emergency gear"
+      ],
+      "scenarioID": "basics-inventory-scenario"
+    },
+    {
+      "aliases": [
+        "Several things are going wrong at once and I cannot tell what to handle first.",
+        "choose the most urgent survival need"
+      ],
+      "scenarioID": "basics-priorities-scenario"
+    },
+    {
+      "aliases": [
+        "Nobody knows whether we should wait here or try to reach a road before dark.",
+        "wait for rescue or move"
+      ],
+      "scenarioID": "basics-stay-or-move-scenario"
+    },
+    {
+      "aliases": [
+        "Darkness is close and our group is disorganized with no overnight plan.",
+        "prepare for an unexpected night outside"
+      ],
+      "scenarioID": "basics-first-night-scenario"
+    },
+    {
+      "aliases": [
+        "My partner is dizzy, very thirsty, and getting clumsy in the heat.",
+        "possible dehydration outdoors"
+      ],
+      "scenarioID": "water-dehydration-scenario"
+    },
+    {
+      "aliases": [
+        "Our bottles are nearly empty and we need to search for water without wandering blindly.",
+        "look for a water source"
+      ],
+      "scenarioID": "water-locate-scenario"
+    },
+    {
+      "aliases": [
+        "There are several pools nearby and one is close to livestock and a road.",
+        "choose between questionable water sources"
+      ],
+      "scenarioID": "water-choose-source-scenario"
+    },
+    {
+      "aliases": [
+        "The only water we found is cloudy and full of visible sediment.",
+        "remove dirt before water treatment"
+      ],
+      "scenarioID": "water-collect-prefilter-scenario"
+    },
+    {
+      "aliases": [
+        "I have a pot and fire but need to make this clear stream water safer.",
+        "treat water by boiling"
+      ],
+      "scenarioID": "water-boil-scenario"
+    },
+    {
+      "aliases": [
+        "I have a filter and disinfectant but do not know how to combine them safely.",
+        "filter or disinfect collected water"
+      ],
+      "scenarioID": "water-filter-disinfect-scenario"
+    },
+    {
+      "aliases": [
+        "We treated water and now need to keep it clean while rationing our effort.",
+        "protect treated drinking water"
+      ],
+      "scenarioID": "water-store-scenario"
+    },
+    {
+      "aliases": [
+        "The forest is dry and windy, and I am unsure whether lighting any fire is responsible.",
+        "decide if conditions permit a fire"
+      ],
+      "scenarioID": "fire-decision-scenario"
+    },
+    {
+      "aliases": [
+        "I need to pick a campfire spot near roots, grass, and low branches.",
+        "select ground for a small fire"
+      ],
+      "scenarioID": "fire-site-scenario"
+    },
+    {
+      "aliases": [
+        "I keep striking sparks but gathered only large damp sticks.",
+        "prepare tinder and progressively larger fuel"
+      ],
+      "scenarioID": "fire-materials-scenario"
+    },
+    {
+      "aliases": [
+        "Wind keeps blowing out my lighter before the tinder catches.",
+        "light prepared tinder in wind"
+      ],
+      "scenarioID": "fire-ignition-scenario"
+    },
+    {
+      "aliases": [
+        "The flame starts and then dies whenever I pile on more wood.",
+        "feed a small fire without smothering it"
+      ],
+      "scenarioID": "fire-build-feed-scenario"
+    },
+    {
+      "aliases": [
+        "Everything outside is soaked after hours of rain but we still need controlled heat.",
+        "find dry inner wood in wet weather"
+      ],
+      "scenarioID": "fire-wet-scenario"
+    },
+    {
+      "aliases": [
+        "We are leaving camp and the coals still feel warm under the ash.",
+        "make a campfire fully cold"
+      ],
+      "scenarioID": "fire-extinguish-scenario"
+    },
+    {
+      "aliases": [
+        "We need a sleeping place but the flat ground is below loose rock beside a drainage.",
+        "avoid hazards when placing shelter"
+      ],
+      "scenarioID": "shelter-site-scenario"
+    },
+    {
+      "aliases": [
+        "My sleeping bag is losing warmth directly into the cold ground.",
+        "insulate a sleeper from the ground"
+      ],
+      "scenarioID": "shelter-ground-scenario"
+    },
+    {
+      "aliases": [
+        "I have a tarp and cord but wind-driven rain is reaching our sleeping area.",
+        "pitch a stable rain tarp"
+      ],
+      "scenarioID": "shelter-tarp-scenario"
+    },
+    {
+      "aliases": [
+        "We have no tent and need an emergency shelter from forest debris.",
+        "make a debris shelter"
+      ],
+      "scenarioID": "shelter-debris-scenario"
+    },
+    {
+      "aliases": [
+        "Snow and wind are stripping heat from us and we need protected shelter.",
+        "cold weather snow shelter"
+      ],
+      "scenarioID": "shelter-cold-snow-scenario"
+    },
+    {
+      "aliases": [
+        "There is no shade and the sun and hot wind are making the shelter unbearable.",
+        "shelter from heat sun or rain"
+      ],
+      "scenarioID": "shelter-heat-rain-scenario"
+    },
+    {
+      "aliases": [
+        "Our improvised shelter worked at dusk but is sagging as weather worsens overnight.",
+        "maintain an emergency shelter overnight"
+      ],
+      "scenarioID": "shelter-overnight-scenario"
+    },
+    {
+      "aliases": [
+        "We are stranded but searching for food may cost more energy than it returns.",
+        "decide whether gathering food is worthwhile"
+      ],
+      "scenarioID": "food-energy-scenario"
+    },
+    {
+      "aliases": [
+        "We have a small amount of packed food and do not know how to manage it for the group.",
+        "manage carried rations"
+      ],
+      "scenarioID": "food-carried-scenario"
+    },
+    {
+      "aliases": [
+        "Someone found unfamiliar berries and mushrooms and wants to taste-test them.",
+        "unknown wild plants or fungi"
+      ],
+      "scenarioID": "food-unknown-plants-scenario"
+    },
+    {
+      "aliases": [
+        "We need food but only want options that do not require guessing species or taking major risks.",
+        "lower-risk emergency food procurement"
+      ],
+      "scenarioID": "food-low-risk-scenario"
+    },
+    {
+      "aliases": [
+        "Raw food and dirty utensils are sharing the same camp preparation area.",
+        "prevent illness while cooking outdoors"
+      ],
+      "scenarioID": "food-cook-scenario"
+    },
+    {
+      "aliases": [
+        "Food smells and scraps are attracting animals close to where we sleep.",
+        "store food away from wildlife"
+      ],
+      "scenarioID": "food-wildlife-scenario"
+    },
+    {
+      "aliases": [
+        "The trail vanished and our group is still walking without marking the last certain point.",
+        "mark the last known location"
+      ],
+      "scenarioID": "navigation-stop-mark-scenario"
+    },
+    {
+      "aliases": [
+        "The map is open but it does not match the direction of the valley around me.",
+        "orient a paper map to terrain"
+      ],
+      "scenarioID": "navigation-map-scenario"
+    },
+    {
+      "aliases": [
+        "I have a compass bearing but no confirmed destination in that direction.",
+        "use a compass without inventing a route"
+      ],
+      "scenarioID": "navigation-compass-scenario"
+    },
+    {
+      "aliases": [
+        "The ridges and streams around us do not seem to match where we think we are.",
+        "compare terrain and landmarks with the map"
+      ],
+      "scenarioID": "navigation-terrain-scenario"
+    },
+    {
+      "aliases": [
+        "We may need to reverse our route before fading light erases familiar landmarks.",
+        "return along a known route safely"
+      ],
+      "scenarioID": "navigation-backtrack-scenario"
+    },
+    {
+      "aliases": [
+        "My compass is gone and I only have the sun as a rough direction clue.",
+        "use sun or shadow only as a rough aid"
+      ],
+      "scenarioID": "navigation-sun-shadow-scenario"
+    },
+    {
+      "aliases": [
+        "The apparent shortcut crosses fast water and steep unstable ground.",
+        "judge hazardous travel and water crossing"
+      ],
+      "scenarioID": "navigation-travel-crossing-scenario"
+    },
+    {
+      "aliases": [
+        "My phone has a weak intermittent signal and little battery while we wait for rescue.",
+        "send useful emergency information"
+      ],
+      "scenarioID": "signal-communication-scenario"
+    },
+    {
+      "aliases": [
+        "Searchers may be nearby but shouting is exhausting me.",
+        "use a whistle to attract rescuers"
+      ],
+      "scenarioID": "signal-whistle-scenario"
+    },
+    {
+      "aliases": [
+        "An aircraft is visible in daylight and I have a mirror and flashlight.",
+        "signal with reflected light"
+      ],
+      "scenarioID": "signal-mirror-light-scenario"
+    },
+    {
+      "aliases": [
+        "We need rescuers overhead to notice our position in an open area.",
+        "make a large visible ground signal"
+      ],
+      "scenarioID": "signal-ground-scenario"
+    },
+    {
+      "aliases": [
+        "We want smoke to attract attention but fire conditions may be unsafe.",
+        "use smoke as a rescue signal"
+      ],
+      "scenarioID": "signal-smoke-fire-scenario"
+    },
+    {
+      "aliases": [
+        "Constant signaling is draining batteries and energy with no searchers in sight.",
+        "schedule repeated rescue signals"
+      ],
+      "scenarioID": "signal-schedule-scenario"
+    },
+    {
+      "aliases": [
+        "A person collapsed after an outdoor accident and I need to assess immediate life threats.",
+        "initial patient and breathing assessment"
+      ],
+      "scenarioID": "first-aid-assessment-scenario"
+    },
+    {
+      "aliases": [
+        "Blood is soaking through clothing after a deep cut and help is far away.",
+        "control severe external bleeding"
+      ],
+      "scenarioID": "first-aid-bleeding-scenario"
+    },
+    {
+      "aliases": [
+        "The injured person is pale, weak, and deteriorating after blood loss.",
+        "support someone showing shock signs"
+      ],
+      "scenarioID": "first-aid-shock-scenario"
+    },
+    {
+      "aliases": [
+        "A camp accident left an open wound and a fresh burn that need basic care.",
+        "care for a wound or burn"
+      ],
+      "scenarioID": "first-aid-wounds-burns-scenario"
+    },
+    {
+      "aliases": [
+        "A fall caused severe limb pain and there may also be a back injury.",
+        "stabilize a suspected fracture or spine injury"
+      ],
+      "scenarioID": "first-aid-fracture-spine-scenario"
+    },
+    {
+      "aliases": [
+        "A hiker is confused and very hot after strenuous travel in the sun.",
+        "respond to serious heat illness"
+      ],
+      "scenarioID": "first-aid-heat-scenario"
+    },
+    {
+      "aliases": [
+        "A wet hiker is shivering badly and becoming slow and confused.",
+        "respond to hypothermia or frostbite"
+      ],
+      "scenarioID": "first-aid-cold-scenario"
+    },
+    {
+      "aliases": [
+        "A sting was followed by swelling and trouble breathing far from immediate help.",
+        "bite sting or severe allergic reaction"
+      ],
+      "scenarioID": "first-aid-bites-allergy-scenario"
+    },
+    {
+      "aliases": [
+        "Thunder is close while our group is exposed on a ridge.",
+        "reduce lightning exposure"
+      ],
+      "scenarioID": "weather-wildlife-lightning-scenario"
+    },
+    {
+      "aliases": [
+        "Wind and falling temperature are cooling our wet group faster than expected.",
+        "survive rapidly worsening cold"
+      ],
+      "scenarioID": "weather-wildlife-cold-scenario"
+    },
+    {
+      "aliases": [
+        "Extreme heat is building and the route offers almost no shade.",
+        "reduce dangerous heat exposure"
+      ],
+      "scenarioID": "weather-wildlife-heat-scenario"
+    },
+    {
+      "aliases": [
+        "Heavy rain is falling upstream while we are in a narrow drainage.",
+        "escape flash flood terrain"
+      ],
+      "scenarioID": "weather-wildlife-flood-scenario"
+    },
+    {
+      "aliases": [
+        "Smoke and flames are spreading toward our route through dense fuel.",
+        "move away from wildfire and smoke"
+      ],
+      "scenarioID": "weather-wildlife-wildfire-scenario"
+    },
+    {
+      "aliases": [
+        "Strong wind is breaking branches and destabilizing our exposed camp.",
+        "handle damaging wind and storm hazards"
+      ],
+      "scenarioID": "weather-wildlife-wind-storm-scenario"
+    },
+    {
+      "aliases": [
+        "A bear is close to our group and has noticed us.",
+        "respond to a nearby large animal"
+      ],
+      "scenarioID": "weather-wildlife-large-animals-scenario"
+    },
+    {
+      "aliases": [
+        "A snake or stinging insects are close to camp supplies and sleeping areas.",
+        "avoid snake insect and food-raid contact"
+      ],
+      "scenarioID": "weather-wildlife-snakes-insects-scenario"
+    },
+    {
+      "aliases": [
+        "Our vehicle stopped beside moving traffic after a collision.",
+        "secure a roadside breakdown scene"
+      ],
+      "scenarioID": "car-scene-scenario"
+    },
+    {
+      "aliases": [
+        "The car is disabled in a remote area and we are debating whether to walk away.",
+        "stay with a disabled vehicle or leave"
+      ],
+      "scenarioID": "car-stay-walk-scenario"
+    },
+    {
+      "aliases": [
+        "A tire is flat on uneven roadside ground and traffic is passing nearby.",
+        "change a tire without an unstable jack"
+      ],
+      "scenarioID": "car-tire-scenario"
+    },
+    {
+      "aliases": [
+        "The starter battery is dead and another vehicle is available for a jump.",
+        "perform a basic twelve-volt jump start"
+      ],
+      "scenarioID": "car-jump-scenario"
+    },
+    {
+      "aliases": [
+        "One electrical accessory stopped working and I suspect a blown fuse.",
+        "inspect a basic vehicle fuse safely"
+      ],
+      "scenarioID": "car-fuse-scenario"
+    },
+    {
+      "aliases": [
+        "The temperature warning came on and steam is visible from under the hood.",
+        "respond to an overheating vehicle"
+      ],
+      "scenarioID": "car-overheat-scenario"
+    },
+    {
+      "aliases": [
+        "The tires are spinning deeper into snow and mud each time we accelerate.",
+        "free a vehicle stuck in soft ground"
+      ],
+      "scenarioID": "car-stuck-scenario"
+    },
+    {
+      "aliases": [
+        "A crashed electric vehicle has damaged high-voltage components and unusual heat.",
+        "keep clear of damaged EV high voltage systems"
+      ],
+      "scenarioID": "car-ev-hybrid-scenario"
+    }
+  ],
+  "schemaVersion": 1
+}

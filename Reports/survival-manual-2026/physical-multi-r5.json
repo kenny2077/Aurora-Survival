@@ -1,0 +1,577 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "e3794285082b4442275ed724a6c158dad095f1128ef053acb5d88f7c626676cc  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario",
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Move into shelter immediately to prevent further heat loss and reduce shivering. Add dry layers, protect the body core, and block wind while staying warm before coordination worsens. Eat available food, drink safe fluids, and monitor for signs of confusion or fading shivering to prevent hypothermia. Do not wait until dark to check the site for flooding, branches, or lack of insulation; do so before darkness removes safe options.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7589,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1696,
+      "first_visible_text_milliseconds" : 2958,
+      "generated_tokens" : 160,
+      "generation_milliseconds" : 6543,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-20-multi",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3808621760,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1560087360,
+      "post_available_memory_bytes" : 3808441536,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321129072,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Move into shelter immediately to prevent further heat loss and reduce shivering.\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Add dry layers, protect the body core, and block wind while staying warm before coordination worsens.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Eat available food, drink safe fluids, and monitor for signs of confusion or fading shivering to prevent hypothermia.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Do not wait until dark to check the site for flooding, branches, or lack of insulation; do so before darkness removes safe options.\",\n      \"e\": [18]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Move into shelter immediately to prevent further heat loss and reduce shivering.\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Add dry layers, protect the body core, and block wind while staying warm before coordination worsens.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Eat available food, drink safe fluids, and monitor for signs of confusion or fading shivering to prevent hypothermia.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Do not wait until dark to check the site for flooding, branches, or lack of insulation; do so before darkness removes safe options.\",\n      \"e\": [18]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        6,
+        9,
+        38,
+        51,
+        5,
+        62,
+        30,
+        24,
+        32,
+        34,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.71979814767837524,
+        0.69359707832336426,
+        0.68186992406845093,
+        0.65019416809082031,
+        0.63862037658691406,
+        0.69420790672302246,
+        0.63435584306716919,
+        0.65756183862686157,
+        0.6625104546546936,
+        0.65744662284851074,
+        0.65633893013000488,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-cold",
+        "first-aid-cold",
+        "basics-first-night",
+        "shelter-heat-rain",
+        "",
+        "shelter-overnight",
+        "",
+        "car-stay-walk",
+        "",
+        "weather-wildlife-heat",
+        "shelter-cold-snow",
+        "fire-wet",
+        "basics-inventory",
+        "navigation-stop-mark",
+        "",
+        "fire-decision"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        1,
+        0,
+        3,
+        13,
+        4,
+        25,
+        5,
+        11,
+        12,
+        7,
+        9,
+        2,
+        2,
+        7,
+        2,
+        10
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        4,
+        4,
+        2,
+        2,
+        1,
+        5,
+        4,
+        1,
+        1,
+        1,
+        3,
+        7,
+        3,
+        3,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.040385378106821794,
+        0.039818815757279177,
+        0.032410714285714286,
+        0.027463798976842459,
+        0.027440379795642955,
+        0.026779422128259338,
+        0.026424453595185308,
+        0.025877899877899881,
+        0.025463336019339242,
+        0.025458570524984188,
+        0.024812030075187969,
+        0.018373015873015871,
+        0.017873015873015874,
+        0.017205882352941175,
+        0.016873015873015873,
+        0.016584507042253522
+      ],
+      "retrieval_context_milliseconds" : 0.40102005004882812,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        3,
+        2,
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "basics-first-night-scenario",
+        "first-aid-cold-scenario",
+        "weather-wildlife-cold-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026",
+        "nws-heat-cold",
+        "nws-lightning",
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 74,
+      "stream_deltas" : [
+        "Move",
+        " ",
+        "into ",
+        "shelter ",
+        "immediately ",
+        "to ",
+        "prevent ",
+        "further ",
+        "heat ",
+        "loss ",
+        "and ",
+        "reduce ",
+        "shivering.",
+        " ",
+        "Add ",
+        "dry ",
+        "layers, ",
+        "protect ",
+        "the ",
+        "body ",
+        "core, ",
+        "and ",
+        "block ",
+        "wind ",
+        "while ",
+        "staying ",
+        "warm ",
+        "before ",
+        "coordination ",
+        "worsens.",
+        " ",
+        "Eat ",
+        "available ",
+        "food, ",
+        "drink ",
+        "safe ",
+        "fluids, ",
+        "and ",
+        "monitor ",
+        "for ",
+        "signs ",
+        "of ",
+        "confusion ",
+        "or ",
+        "fading ",
+        "shivering ",
+        "to ",
+        "prevent ",
+        "hypothermia",
+        ".",
+        " ",
+        "Do ",
+        "not ",
+        "wait ",
+        "until ",
+        "dark ",
+        "to ",
+        "check ",
+        "the ",
+        "site ",
+        "for ",
+        "flooding, ",
+        "branches, ",
+        "or ",
+        "lack ",
+        "of ",
+        "insulation; ",
+        "do ",
+        "so ",
+        "before ",
+        "darkness ",
+        "removes ",
+        "safe ",
+        "options."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.803796162574791,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 69
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5304859664,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5324864648,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "f7d94bec5352625ac567040932fd49541e15a4d30af5d1928c3d62147c35b9d2",
+  "maximum_thermal_wait_seconds" : 120,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 5,
+  "run_id" : "survival-manual-2026-v3-multi-r5",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5324848264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 64,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321161840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5384,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3808441536,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 13078,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3836540960,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 13177,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3839834144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18587,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4815731368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23936,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5298912272,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29232,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304843280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 34653,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304843280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40031,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304892432,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45389,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304876048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50727,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304941584,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56094,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304925200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61418,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304925200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66781,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304925200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 72114,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304908816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77468,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304908816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82785,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304892432,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 88082,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304908816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93512,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304908816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98887,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304892432,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 104230,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304892432,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 109648,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304876048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114953,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304859664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 120245,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304859664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 125675,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304859664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 131031,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304859664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 136370,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5304859664,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 141726,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

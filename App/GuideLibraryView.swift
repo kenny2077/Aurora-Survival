@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GuideLibraryView: View {
     @EnvironmentObject private var model: AppModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private var isSearching: Bool {
         !model.libraryQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -115,11 +116,18 @@ struct GuideLibraryView: View {
             Text("Chapters")
                 .font(.title2.bold())
                 .accessibilityAddTraits(.isHeader)
-            ForEach(model.manualCourseChapters) { chapter in
-                NavigationLink(value: ManualRoute.chapter(chapter.id)) {
-                    ManualChapterCard(chapter: chapter)
+            LazyVGrid(
+                columns: dynamicTypeSize.isAccessibilitySize
+                    ? [GridItem(.flexible())]
+                    : [GridItem(.adaptive(minimum: 320), spacing: AuroraDesign.Space.md)],
+                spacing: AuroraDesign.Space.md
+            ) {
+                ForEach(model.manualCourseChapters) { chapter in
+                    NavigationLink(value: ManualRoute.chapter(chapter.id)) {
+                        ManualChapterCard(chapter: chapter)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
         }
     }

@@ -8,6 +8,7 @@ import json
 import pathlib
 import re
 import sqlite3
+import struct
 import sys
 
 
@@ -22,6 +23,21 @@ SURVIVAL_SOURCE = ROOT / "Resources" / "Knowledge" / "survival_knowledge_source.
 SURVIVAL_FALLBACK = ROOT / "Resources" / "Knowledge" / "survival_fallback.json"
 LEGACY_ANCHORS = ROOT / "Resources" / "Knowledge" / "legacy_anchor_manifest.json"
 RETRIEVAL_BENCHMARK = ROOT / "Tests" / "Fixtures" / "survival_retrieval_benchmark.json"
+EXPERT_RAG_BENCHMARK = ROOT / "Tests" / "Fixtures" / "expert_rag_benchmark.json"
+EXPERT_USER_LANGUAGE = (
+    ROOT / "Resources" / "Knowledge" / "expert_user_language.json"
+)
+EXPERT_SHADOW_CORPUS = (
+    ROOT / "Resources" / "Knowledge" / "expert_shadow_corpus.json"
+)
+EXPERT_CORPUS_V3 = ROOT / "Resources" / "Knowledge" / "expert_corpus_v3.json"
+EXPERT_CORPUS_V3_REPORT = (
+    ROOT / "Reports" / "survival-manual-2026" / "corpus-import-report.json"
+)
+EXPERT_VECTOR_ROOT = ROOT / "Resources" / "ExpertVectors"
+SURVIVAL_MANUAL_2026_CASES = (
+    ROOT / "Tests" / "Fixtures" / "survival_manual_2026_cases.json"
+)
 LLAMA_RUNTIME_PACKAGE = ROOT / "Runtime" / "AuroraLlamaRuntime" / "Package.swift"
 LLAMA_GRAMMAR_HEADER = (
     ROOT
@@ -83,6 +99,60 @@ def validate_survival_knowledge() -> tuple[int, int, int, int]:
     fallback = json.loads(SURVIVAL_FALLBACK.read_text(encoding="utf-8"))
     legacy = json.loads(LEGACY_ANCHORS.read_text(encoding="utf-8")).get("anchors", [])
     benchmark = json.loads(RETRIEVAL_BENCHMARK.read_text(encoding="utf-8"))
+    expert_benchmark = json.loads(
+        EXPERT_RAG_BENCHMARK.read_text(encoding="utf-8")
+    )
+    expert_user_language = json.loads(
+        EXPERT_USER_LANGUAGE.read_text(encoding="utf-8")
+    )
+    expert_shadow_corpus = json.loads(
+        EXPERT_SHADOW_CORPUS.read_text(encoding="utf-8")
+    )
+    corpus_v3 = json.loads(EXPERT_CORPUS_V3.read_text(encoding="utf-8"))
+    corpus_v3_report = json.loads(
+        EXPERT_CORPUS_V3_REPORT.read_text(encoding="utf-8")
+    )
+    manual_cases = json.loads(
+        SURVIVAL_MANUAL_2026_CASES.read_text(encoding="utf-8")
+    )
+    if corpus_v3.get("schemaVersion") != 3:
+        fail("Expert corpus-v3 schema is unsupported")
+    if manual_cases.get("schemaVersion") != 3 or len(manual_cases.get("cases", [])) != 20:
+        fail("Survival Manual 2026 must retain exactly 20 end-to-end cases")
+    if len({item.get("id") for item in manual_cases["cases"]}) != 20:
+        fail("Survival Manual 2026 case IDs must be unique")
+    corpus_documents = {item["id"]: item for item in corpus_v3.get("documents", [])}
+    for document_id, document in corpus_documents.items():
+        folder = ROOT / "Resources" / "Knowledge" / "CorpusSources" / document_id
+        manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+        source_path = folder / manifest["sourceFilename"]
+        if hashlib.sha256(source_path.read_bytes()).hexdigest() != document["sourceSHA256"]:
+            fail(f"corpus-v3 original source hash mismatch: {document_id}")
+    chunks = corpus_v3.get("chunks", [])
+    chunk_ids = {item.get("id") for item in chunks}
+    if len(chunk_ids) != len(chunks) or None in chunk_ids:
+        fail("corpus-v3 canonical chunk IDs must be unique")
+    for chunk in chunks:
+        normalized = " ".join(re.findall(
+            r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)?", chunk["text"].lower()
+        ))
+        if hashlib.sha256(normalized.encode()).hexdigest() != chunk["normalizedSHA256"]:
+            fail(f"corpus-v3 normalized hash mismatch: {chunk['id']}")
+        if not 1 <= chunk.get("tokenEstimate", 0) <= 500:
+            fail(f"corpus-v3 chunk boundary invalid: {chunk['id']}")
+        if not chunk.get("sectionPath") or not chunk.get("locator"):
+            fail(f"corpus-v3 chunk locator missing: {chunk['id']}")
+    aliases = corpus_v3.get("duplicateAliases", [])
+    if any(item.get("canonicalChunkID") not in chunk_ids for item in aliases):
+        fail("corpus-v3 duplicate alias references a noncanonical chunk")
+    claims = corpus_v3.get("claims", [])
+    located_claims = {item.get("claimID") for item in corpus_v3.get("claimSources", [])}
+    if located_claims != {item.get("id") for item in claims}:
+        fail("corpus-v3 claims require exact source locators")
+    if any(item.get("status") == "unresolved" for item in corpus_v3.get("conflicts", [])):
+        fail("corpus-v3 contains an unresolved conflict")
+    if corpus_v3_report.get("canonicalChunkCount") != len(chunks):
+        fail("corpus-v3 import report is stale")
     expected_titles = [
         "Survival Basics", "Find and Treat Water", "Start a Fire",
         "Build a Shelter", "Find Food Safely", "Navigate When Lost",
@@ -105,6 +175,59 @@ def validate_survival_knowledge() -> tuple[int, int, int, int]:
         chapter_balance[chapter] = chapter_balance.get(chapter, 0) + 1
     if set(chapter_balance.values()) != {20} or len(chapter_balance) != 10:
         fail("retrieval benchmark must contain 20 queries per chapter")
+    if len(expert_benchmark) != 700:
+        fail("Expert RAG benchmark must contain exactly 700 cases")
+    expert_ids = [item.get("id") for item in expert_benchmark]
+    if len(set(expert_ids)) != 700 or any(not item for item in expert_ids):
+        fail("Expert RAG benchmark IDs must be present and unique")
+    dispositions = {
+        value: sum(
+            item.get("expectedDisposition") == value
+            for item in expert_benchmark
+        )
+        for value in ("grounded", "clarify", "ordinary")
+    }
+    if dispositions != {"grounded": 560, "clarify": 70, "ordinary": 70}:
+        fail("Expert RAG benchmark disposition balance is invalid")
+    required_case_types = {
+        "direct", "noisy_text", "observable_cue", "follow_up", "correction",
+        "adversarial_history", "noisy_ocr", "multi_topic",
+        "insufficient_evidence", "low_risk",
+    }
+    case_types = {item.get("caseType") for item in expert_benchmark}
+    if case_types != required_case_types:
+        fail("Expert RAG benchmark case taxonomy is incomplete")
+    if sum(item.get("caseType") == "multi_topic" for item in expert_benchmark) != 70:
+        fail("Expert RAG benchmark must contain 70 multi-topic incidents")
+    expected_scenarios = {f"{item['id']}-scenario" for item in source["lessons"]}
+    benchmark_scenarios = {
+        scenario_id
+        for item in expert_benchmark
+        for scenario_id in item.get("acceptableScenarioIDs", [])
+    }
+    if benchmark_scenarios != expected_scenarios:
+        fail("Expert RAG benchmark must cover every reviewed scenario")
+    language_records = expert_user_language.get("scenarios", [])
+    language_scenarios = {item.get("scenarioID") for item in language_records}
+    if expert_user_language.get("schemaVersion") != 1:
+        fail("Expert user-language schema is unsupported")
+    if language_scenarios != expected_scenarios or len(language_records) != 70:
+        fail("Expert user-language aliases must cover every reviewed scenario")
+    if any(not item.get("aliases") for item in language_records):
+        fail("Expert user-language alias records cannot be empty")
+    source_phrases = {
+        value.strip().lower()
+        for lesson in source["lessons"]
+        for value in [
+            lesson["title"], lesson["goal"],
+            *lesson["actions"], *lesson["warnings"],
+        ]
+    }
+    if any(
+        item.get("query", "").strip().lower() in source_phrases
+        for item in expert_benchmark
+    ):
+        fail("Expert benchmark queries must not copy canonical source phrases")
 
     for lesson in source["lessons"]:
         if not 3 <= len(lesson.get("actions", [])) <= 6:
@@ -134,9 +257,44 @@ def validate_survival_knowledge() -> tuple[int, int, int, int]:
             "SELECT COUNT(*) FROM passages WHERE lower(reference_text) LIKE '%repair the traction battery%' "
             "OR lower(reference_text) LIKE '%identify this mushroom%'"
         ).fetchone()[0]
+        expert_scenario_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_scenarios"
+        ).fetchone()[0]
+        expert_claim_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_claims"
+        ).fetchone()[0]
+        expert_indexed_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_scenarios_fts"
+        ).fetchone()[0]
+        expert_missing_sources = connection.execute(
+            "SELECT COUNT(*) FROM expert_claims c WHERE NOT EXISTS ("
+            "SELECT 1 FROM expert_claim_sources cs WHERE cs.claim_id=c.claim_id)"
+        ).fetchone()[0]
+        expert_corpus_version = connection.execute(
+            "SELECT value FROM metadata WHERE key='expert_corpus_version'"
+        ).fetchone()[0]
+        expert_document_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_source_documents"
+        ).fetchone()[0]
+        expert_chunk_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_source_chunks"
+        ).fetchone()[0]
+        expert_chunk_indexed_count = connection.execute(
+            "SELECT COUNT(*) FROM expert_source_chunks_fts"
+        ).fetchone()[0]
+        unlicensed_shipping_chunks = connection.execute(
+            "SELECT COUNT(*) FROM expert_source_chunks c "
+            "JOIN expert_source_documents d ON d.document_id=c.document_id "
+            "WHERE d.redistribution_class IN ('linked_metadata_only','development_only')"
+        ).fetchone()[0]
+        unsafe_promotions = connection.execute(
+            "SELECT COUNT(*) FROM expert_claim_promotions "
+            "WHERE status='human_approved' AND (critic_review_id LIKE 'pending%' "
+            "OR human_reviewer_id IS NULL)"
+        ).fetchone()[0]
     finally:
         connection.close()
-    if (schema_version, chapter_count, lesson_count) != (1, 10, 70):
+    if (schema_version, chapter_count, lesson_count) != (3, 10, 70):
         fail("survival knowledge schema/chapter/lesson contract is invalid")
     if passage_count < 1_000 or passage_count != indexed_count:
         fail("survival knowledge needs at least 1,000 fully indexed passages")
@@ -146,6 +304,66 @@ def validate_survival_knowledge() -> tuple[int, int, int, int]:
         fail("answer-ready passages must not exceed 120 words")
     if prohibited:
         fail("survival knowledge contains prohibited plant or vehicle guidance")
+    expected_expert_scenarios = len(
+        {f"{item['id']}-scenario" for item in source["lessons"]}
+        | {item["id"] for item in source.get("expertSupplementalScenarios", [])}
+        | {item["id"] for item in corpus_v3.get("scenarios", [])}
+    )
+    if (expert_scenario_count, expert_indexed_count) != (
+        expected_expert_scenarios, expected_expert_scenarios,
+    ):
+        fail("Expert scenario records must all be indexed")
+    if expert_claim_count < 500 or expert_missing_sources:
+        fail("Expert claims need complete source-level traceability")
+    if expert_shadow_corpus.get("schemaVersion") != 1:
+        fail("Expert shadow corpus schema is unsupported")
+    if expert_corpus_version != expert_shadow_corpus.get("corpusVersion"):
+        fail("Expert shadow corpus metadata version is stale")
+    if expert_document_count != (
+        len(expert_shadow_corpus.get("documents", []))
+        + len(corpus_v3.get("documents", []))
+    ):
+        fail("Expert source documents are not deterministically built")
+    if expert_chunk_count != (
+        len(expert_shadow_corpus.get("chunks", []))
+        + len(corpus_v3.get("chunks", []))
+    ):
+        fail("Expert source chunks are not deterministically built")
+    if expert_chunk_count != expert_chunk_indexed_count:
+        fail("Expert source chunks must all be indexed")
+    if unlicensed_shipping_chunks:
+        fail("linked-only or development-only source text cannot ship")
+    if unsafe_promotions:
+        fail("Expert claims cannot promote without critic and human approval")
+    vector_count = 0
+    for manifest_path in sorted(EXPERT_VECTOR_ROOT.glob("*/expert-vector-index.json")):
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        shard = manifest_path.parent
+        if manifest.get("schemaVersion") != 3 or manifest.get("dimensions") != 384:
+            fail(f"Expert vector shard contract is invalid: {shard.name}")
+        records_data = (shard / manifest["recordsPath"]).read_bytes()
+        vector_data = (shard / manifest["vectorPath"]).read_bytes()
+        metadata_data = (shard / manifest["metadataPath"]).read_bytes()
+        if hashlib.sha256(records_data).hexdigest() != manifest["recordsSHA256"]:
+            fail(f"Expert record map checksum mismatch: {shard.name}")
+        if hashlib.sha256(vector_data).hexdigest() != manifest["vectorSHA256"]:
+            fail(f"Expert vector checksum mismatch: {shard.name}")
+        if hashlib.sha256(metadata_data).hexdigest() != manifest["metadataSHA256"]:
+            fail(f"Expert vector metadata checksum mismatch: {shard.name}")
+        records = json.loads(records_data)
+        if len(records) != manifest["vectorCount"]:
+            fail(f"Expert vector record mapping mismatch: {shard.name}")
+        expected_bytes = len(records) * 384 * 2
+        if len(vector_data) != expected_bytes:
+            fail(f"Expert vector byte count mismatch: {shard.name}")
+        for offset in range(0, len(vector_data), 384 * 2):
+            vector = struct.unpack_from("<384e", vector_data, offset)
+            norm = sum(float(value) * float(value) for value in vector) ** 0.5
+            if not 0.98 <= norm <= 1.02:
+                fail(f"Expert vector is nonfinite or not normalized: {shard.name}")
+        vector_count += len(records)
+    if vector_count != expert_scenario_count + expert_claim_count + expert_chunk_count:
+        fail("Expert vector count does not match canonical database records")
     return chapter_count, lesson_count, passage_count, source_count
 
 
@@ -227,7 +445,7 @@ def validate_contracts() -> None:
         fail("retired safety routing is still connected to Lite Chat")
 
     tools_view = (ROOT / "App" / "ToolsView.swift").read_text(encoding="utf-8")
-    for contract in ("Offline intelligence", "tools.tier", "Validation pending"):
+    for contract in ("Offline setup", "tools.tier", "Validation pending"):
         if contract not in tools_view:
             fail(f"focused model center is missing: {contract}")
 

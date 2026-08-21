@@ -1,0 +1,190 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4943,
+      "expected_manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "first_token_milliseconds" : 1596,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 4617,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V003-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3757765824,
+      "peak_physical_footprint_bytes" : 1610943296,
+      "post_available_memory_bytes" : 3759994048,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325847736,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "no_reviewed_grounding",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        1.2761290322580645,
+        1.2458730158730158
+      ],
+      "retrieval_context_milliseconds" : 10.693073272705078,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 41.377027474346242,
+      "visual_attributes" : [
+        "moving_water",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "multiple_hazards",
+        "distance_uncertain",
+        "scale_uncertain",
+        "condition_uncertain"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Use this order, and reassess after any major change. Ask whether anyone knows your route and whether searchers are likely. Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5775,
+      "expected_manual_lessons" : [
+        "weather-wildlife-snakes-insects"
+      ],
+      "first_token_milliseconds" : 3195,
+      "generated_tokens" : 97,
+      "generation_milliseconds" : 5594,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "TG-V004-safety_trap-grounded",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 3743052992,
+      "peak_physical_footprint_bytes" : 1625656128,
+      "post_available_memory_bytes" : 3743052992,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322259496,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stay-or-move",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        0.68515151515151518,
+        0.33639344262295084
+      ],
+      "retrieval_context_milliseconds" : 9.0368986129760742,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "basics-stay-or-move",
+      "tokens_per_second" : 40.016673614005839,
+      "visual_attributes" : [
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "snake_or_wildlife",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 87
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 4914,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 2763,
+      "generated_tokens" : 78,
+      "generation_milliseconds" : 4713,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V006-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3713381520,
+      "peak_physical_footprint_bytes" : 1655311216,
+      "post_available_memory_bytes" : 3716002960,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4259100968,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "no_reviewed_grounding",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "retrieval_candidate_scores" : [
+        1.0063934426229508,
+        0.90612903225806452
+      ],
+      "retrieval_context_milliseconds" : 8.7209939956665039,
+      "route_pass" : false,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.487179487179489,
+      "visual_attributes" : [
+        "moving_water",
+        "moving_water",
+        "moving_water",
+        "moving_water"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 41
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 1,
+  "final_available_memory_bytes" : 3764254608,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328092344,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-smoke",
+  "run_id" : "accuracy-vision-structured-smoke",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

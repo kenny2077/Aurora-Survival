@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "aurora-package-primary-2026",
+    "publicKeyBase64": "0JuL/hvL2m6VH3aC1Ov8PHZk2g1oteNj8OPVbY0JZtk=",
+    "validFrom": "2026-08-13T00:00:00Z",
+    "validUntil": "2031-08-13T00:00:00Z"
+  },
+  {
+    "id": "aurora-package-recovery-2026",
+    "publicKeyBase64": "LsfekIu7LX5WNJnf5eisXqr4/pF3t09cH5qCzHV2Mjc=",
+    "validFrom": "2026-08-13T00:00:00Z",
+    "validUntil": "2031-08-13T00:00:00Z"
+  }
+]

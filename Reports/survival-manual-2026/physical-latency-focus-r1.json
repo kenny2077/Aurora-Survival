@@ -1,0 +1,906 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "e3794285082b4442275ed724a6c158dad095f1128ef053acb5d88f7c626676cc  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Bring water to a rolling boil. Allow settling or filter through clean material. Heat water to a rolling boil for at least one minute at normal elevations; three minutes above approximately 6,500 feet (2,000 meters). Protect collected water using clean containers and sealed bottles.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6766,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1694,
+      "first_visible_text_milliseconds" : 2961,
+      "generated_tokens" : 138,
+      "generation_milliseconds" : 5713,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-14-boil-collected",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3807196400,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1561512720,
+      "post_available_memory_bytes" : 3810309360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321702608,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat water to a rolling boil for at least one minute at normal elevations; three minutes above approximately 6,500 feet (2,000 meters).\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Protect collected water using clean containers and sealed bottles.\",\n      \"e\": [12]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat water to a rolling boil for at least one minute at normal elevations; three minutes above approximately 6,500 feet (2,000 meters).\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Protect collected water using clean containers and sealed bottles.\",\n      \"e\": [12]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        15,
+        19,
+        60,
+        63,
+        18,
+        32,
+        54,
+        43,
+        52,
+        56,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.79833114147186279,
+        0.70542967319488525,
+        0.67438989877700806,
+        0.6252368688583374,
+        0.62400084733963013,
+        0.67796355485916138,
+        0.64993739128112793,
+        0.63087940216064453,
+        0.63846302032470703,
+        0.63246524333953857,
+        0.62782132625579834,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "",
+        "water-store",
+        "water-filter-disinfect",
+        "",
+        "water-collect-prefilter",
+        "water-choose-source",
+        "",
+        "fire-extinguish",
+        "weather-wildlife-heat",
+        "car-overheat",
+        "water-locate",
+        "navigation-travel-crossing",
+        "",
+        "basics-stop",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        8,
+        4,
+        2,
+        9,
+        6,
+        10,
+        24,
+        22,
+        34,
+        11,
+        12,
+        3,
+        5,
+        14
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.045974385245901639,
+        0.039870260328239954,
+        0.036774804905239683,
+        0.033508169103623649,
+        0.03168753200204813,
+        0.031443942133815551,
+        0.028178061306371367,
+        0.023780159216166566,
+        0.022380090497737558,
+        0.021897750293208233,
+        0.020073324336482234,
+        0.019388888888888886,
+        0.018198630136986301,
+        0.017625000000000002,
+        0.017151515151515154,
+        0.015833333333333335
+      ],
+      "retrieval_context_milliseconds" : 0.5359649658203125,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        3
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "water-boil-scenario",
+        "water-store-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 53,
+      "stream_deltas" : [
+        "Bring",
+        " ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil.",
+        " ",
+        "Allow ",
+        "settling ",
+        "or ",
+        "filter ",
+        "through ",
+        "clean ",
+        "material.",
+        " ",
+        "Heat ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil ",
+        "for ",
+        "at ",
+        "least ",
+        "one ",
+        "minute ",
+        "at ",
+        "normal ",
+        "elevations;",
+        " ",
+        "three ",
+        "minutes ",
+        "above ",
+        "approximately ",
+        "6,",
+        "50",
+        "0 ",
+        "feet ",
+        "(2,",
+        "00",
+        "0 ",
+        "meters).",
+        " ",
+        "Protect ",
+        "collected ",
+        "water ",
+        "using ",
+        "clean ",
+        "containers ",
+        "and ",
+        "sealed ",
+        "bottles."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.088081612341377,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 44
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure. Tighten the dressing until there is no further blood flow and maintain firm pressure with continued application of pressure. Secure the dressing while maintaining pressure to prevent rebleeding or loss of control during transport. Do not stop bleeding until medical professionals take over; leave in place and monitor for signs of worsening condition.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7895,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1650,
+      "first_visible_text_milliseconds" : 2819,
+      "generated_tokens" : 176,
+      "generation_milliseconds" : 6942,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-15-deep-cut",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3789010112,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1579699008,
+      "post_available_memory_bytes" : 3819173032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3837933576,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure.\",\n      \"e\": [2, 4]\n    },\n    {\n      \"a\": \"Tighten the dressing until there is no further blood flow and maintain firm pressure with continued application of pressure.\",\n      \"e\": [3, 5]\n    },\n    {\n      \"a\": \"Secure the dressing while maintaining pressure to prevent rebleeding or loss of control during transport.\",\n      \"e\": [6, 7]\n    },\n    {\n      \"a\": \"Do not stop bleeding until medical professionals take over; leave in place and monitor for signs of worsening condition.\",\n      \"e\": [8, 9]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure.\",\n      \"e\": [2, 4]\n    },\n    {\n      \"a\": \"Tighten the dressing until there is no further blood flow and maintain firm pressure with continued application of pressure.\",\n      \"e\": [3, 5]\n    },\n    {\n      \"a\": \"Secure the dressing while maintaining pressure to prevent rebleeding or loss of control during transport.\",\n      \"e\": [6, 7]\n    },\n    {\n      \"a\": \"Do not stop bleeding until medical professionals take over; leave in place and monitor for signs of worsening condition.\",\n      \"e\": [8, 9]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        1,
+        4,
+        15,
+        21,
+        18,
+        null,
+        43,
+        60,
+        61,
+        19,
+        48,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.65814208984375,
+        0.63680529594421387,
+        0.57941502332687378,
+        0.55241870880126953,
+        0.56462669372558594,
+        null,
+        0.53280770778656006,
+        0.51789140701293945,
+        0.51749700307846069,
+        0.5584753155708313,
+        0.52904230356216431,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "",
+        "first-aid-wounds-burns",
+        "basics-stop",
+        "first-aid-shock",
+        "car-stay-walk",
+        "basics-priorities",
+        "first-aid-heat",
+        "first-aid-cold",
+        "",
+        "weather-wildlife-cold",
+        "navigation-stop-mark",
+        "basics-danger-injury",
+        "car-scene",
+        "food-low-risk",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        9,
+        1,
+        14,
+        10,
+        3,
+        11,
+        17,
+        18,
+        64,
+        42,
+        13,
+        8,
+        15,
+        4,
+        5
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        2,
+        2,
+        2,
+        1,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.04902247488101534,
+        0.03497296124927704,
+        0.031286926994906622,
+        0.031028455284552843,
+        0.027742734890354788,
+        0.025625000000000002,
+        0.025504273504273506,
+        0.022084975630430177,
+        0.021854949159576677,
+        0.021500000000000002,
+        0.019883049790683175,
+        0.018013513513513515,
+        0.017992753623188407,
+        0.017657894736842105,
+        0.017384615384615387,
+        0.017151515151515154
+      ],
+      "retrieval_context_milliseconds" : 0.049948692321777344,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario",
+        "sm26-first-aid-core-principles"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 87,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "direct ",
+        "pressure ",
+        "to ",
+        "the ",
+        "wound ",
+        "using ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        " ",
+        "for ",
+        "severe ",
+        "bleeding ",
+        "from ",
+        "an ",
+        "arm ",
+        "or ",
+        "leg ",
+        "that ",
+        "cannot ",
+        "be ",
+        "controlled ",
+        "by ",
+        "direct ",
+        "pressure.",
+        " ",
+        "Tighten",
+        " ",
+        "the ",
+        "dressing ",
+        "until ",
+        "there ",
+        "is ",
+        "no ",
+        "further ",
+        "blood ",
+        "flow ",
+        "and ",
+        "maintain ",
+        "firm ",
+        "pressure ",
+        "with ",
+        "continued ",
+        "application ",
+        "of ",
+        "pressure.",
+        " ",
+        "Secure ",
+        "the ",
+        "dressing ",
+        "while ",
+        "maintaining ",
+        "pressure ",
+        "to ",
+        "prevent ",
+        "rebleeding",
+        " ",
+        "or ",
+        "loss ",
+        "of ",
+        "control ",
+        "during ",
+        "transport.",
+        " ",
+        "Do ",
+        "not ",
+        "stop ",
+        "bleeding ",
+        "until ",
+        "medical ",
+        "professionals ",
+        "take ",
+        "over; ",
+        "leave ",
+        "in ",
+        "place ",
+        "and ",
+        "monitor ",
+        "for ",
+        "signs ",
+        "of ",
+        "worsening ",
+        "condition."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.06878306878307,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 80
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5311036456,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325225168,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "177db8a0835bfe0b2005070716907c592f1b76007f6a9d9c44c26bbb50323431",
+  "maximum_thermal_wait_seconds" : 120,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 5,
+  "run_id" : "survival-manual-2026-v3-latency-focus-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325225168,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 67,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321882832,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5473,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3810555120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 12348,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3819173032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 20387,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3846928344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 20475,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3850237912,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 25557,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4809734776,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 30672,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5289327632,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 35779,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311118376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41150,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311118376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 46488,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311118376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51651,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311101992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56757,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311101992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 62008,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311085608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 67170,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311085608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 72465,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311085608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77583,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311085608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82824,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311085608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87960,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311069224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93365,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311069224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98729,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311069224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 104102,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311069224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 109477,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311052840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114847,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311052840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 120184,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 125551,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130914,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 136274,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 141668,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5311036456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 147045,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

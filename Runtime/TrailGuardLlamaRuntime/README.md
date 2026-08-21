@@ -1,5 +1,10 @@
 # Aurora llama.cpp runtime
 
+The default dependency is the official text-only llama.cpp `b9637` binary.
+Expert vision requires the local mtmd-capable XCFramework produced by
+`../../tools/build_mtmd_xcframework.sh`; the bridge checks for its pinned mtmd
+symbols dynamically and fails closed when they are absent.
+
 This package isolates Aurora's optional native inference dependency from
 the dependency-free core package.
 

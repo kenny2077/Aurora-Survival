@@ -1,0 +1,423 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "7f56e116899840b5b1544f07c76459b2966140c2090ee45fd37a779098b5538d  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Observe the complete plant. Check: leaves; stem; flowers; roots; seeds.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4630,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1793,
+      "first_visible_text_milliseconds" : 3045,
+      "generated_tokens" : 66,
+      "generation_milliseconds" : 3587,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-11-mushroom",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3813242072,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1555467048,
+      "post_available_memory_bytes" : 3812914392,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321096376,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [3, 4]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [3, 4]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        18,
+        42,
+        49,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81984800100326538,
+        0.67977648973464966,
+        0.60441386699676514,
+        0.59238934516906738,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-energy",
+        "basics-stay-or-move",
+        "fire-decision",
+        "car-stay-walk",
+        "car-overheat",
+        "car-stay-walk",
+        "car-scene"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        3,
+        4,
+        2,
+        1,
+        5,
+        6,
+        7
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        3,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.048286885245901641,
+        0.043267795749335834,
+        0.034093353248693059,
+        0.03396392496392496,
+        0.026129032258064518,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015705882352941177
+      ],
+      "retrieval_context_milliseconds" : 0.21493434906005859,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-unknown-plants-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 12,
+      "stream_deltas" : [
+        "Ob",
+        "serve ",
+        "the ",
+        "complete ",
+        "plant.",
+        " ",
+        "Check: ",
+        "leaves; ",
+        "stem; ",
+        "flowers; ",
+        "roots; ",
+        "seeds."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 36.231884057971016,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5313133656,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5324831928,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "561387d7a4d6028a6d2fa43ccf0bed6679c3a5f11a5365a995007152ede9c692",
+  "maximum_thermal_wait_seconds" : 120,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 5,
+  "run_id" : "survival-manual-2026-v3-mushroom-r2",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5324864696,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 86,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321211064,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5228,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3812914392,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 9966,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3840538584,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10062,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3843880920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 15353,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4826446528,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 20563,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5295422528,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 25897,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313264728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31101,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313215576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 36239,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313231960,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41457,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313215576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 46656,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313215576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51761,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313215576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57119,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313199192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 62233,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313199192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 67399,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313199192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 72587,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313199192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77817,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313199192,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 83210,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 88503,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93759,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 99161,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 104320,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 109538,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313150040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114725,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313133656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 120105,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313133656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 125528,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313133656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130878,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313133656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 136225,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

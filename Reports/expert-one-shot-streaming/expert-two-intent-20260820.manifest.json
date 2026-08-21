@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+      "embedding_sha256": "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [
+      "intent-01-dating",
+      "intent-02-live-weather",
+      "intent-03-conversation",
+      "intent-04-general-knowledge",
+      "intent-05-software",
+      "intent-06-lexical-collision",
+      "intent-07-snow",
+      "intent-08-bleeding",
+      "intent-09-survival-followup",
+      "intent-10-survival-no-evidence"
+    ],
+    "fixture_sha256": "17dce66532d3edcd8a544f0e6a4f02dc99593d6434b5b8b0750c9b3724630ee7",
+    "mode": "expert-one-shot-streaming",
+    "output_path": "/workspace/aurora-survival/Reports/expert-one-shot-streaming/expert-two-intent-20260820.json",
+    "profile": null,
+    "report_name": "expert-physical-report-expert-one-shot-streaming-batch-1-r1-expert-one-shot-streaming.json",
+    "run_id": "expert-one-shot-streaming-batch-1-r1",
+    "schema_version": 2
+  },
+  "signature": "f987f93dac73a780ceff614b8b495d97034f0b9fa4ae03c837f321eb45642206",
+  "signature_algorithm": "HMAC-SHA256"
+}

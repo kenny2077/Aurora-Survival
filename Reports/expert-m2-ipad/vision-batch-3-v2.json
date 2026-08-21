@@ -1,0 +1,971 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "No, the plants looking healthy does not mean the water is potable. It could still be contaminated and unsafe to drink due to other pollutants or pathogens.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 4190,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3043,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 4110,
+      "id" : "TG-V008-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3714856152,
+      "peak_physical_footprint_bytes" : 1653852968,
+      "post_available_memory_bytes" : 3718903000,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326109880,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the plants looking healthy does not mean the water is potable. It could still be contaminated and unsafe to drink due to other pollutants or pathogens.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 34.676663542642927,
+      "word_count" : 27
+    },
+    {
+      "answer" : "The water is contaminated with algae and has a chemical smell, making it unsafe for drinking. It's not safe to use even if the source appears clear or moving upstream from camps. The bank is unstable and could be swept into by current, so avoid this location. Stop collecting here as it poses serious health risks due to contamination. A safer water source might exist nearby but must first be located through proper search methods before any collection begins.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7081,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3561,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 6812,
+      "id" : "TG-V008-practical_action-grounded",
+      "manual_lessons" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3721016488,
+      "peak_physical_footprint_bytes" : 1647692632,
+      "post_available_memory_bytes" : 3729372328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3766876144,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water is contaminated with algae and has a chemical smell, making it unsafe for drinking. It's not safe to use even if the source appears clear or moving upstream from camps. The bank is unstable and could be swept into by current, so avoid this location. Stop collecting here as it poses serious health risks due to contamination. A safer water source might exist nearby but must first be located through proper search methods before any collection begins.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 10.20205020904541,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.836973239003385,
+      "word_count" : 79
+    },
+    {
+      "answer" : "A man is using a metal grill to cook over an open fire in a dry, rocky area with rocks and debris around the cooking setup.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 3872,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2676,
+      "generated_tokens" : 35,
+      "generation_milliseconds" : 3743,
+      "id" : "TG-V012-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3728995472,
+      "peak_physical_footprint_bytes" : 1639713648,
+      "post_available_memory_bytes" : 3732567184,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3774674928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A man is using a metal grill to cook over an open fire in a dry, rocky area with rocks and debris around the cooking setup.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.865042174320525,
+      "word_count" : 26
+    },
+    {
+      "answer" : "It has six legs and a body structure typical of insects, not plant parts like leaves or stems. It's also on the leaf but is clearly an insect.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5759,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4456,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 5679,
+      "id" : "TG-V002-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3710153848,
+      "peak_physical_footprint_bytes" : 1658555272,
+      "post_available_memory_bytes" : 3710153848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3779606464,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"It has six legs and a body structure typical of insects, not plant parts like leaves or stems. It's also on the leaf but is clearly an insect.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : false,
+      "tokens_per_second" : 31.07113654946852,
+      "word_count" : 28
+    },
+    {
+      "answer" : "The water source is a muddy, contaminated puddle with visible foam and debris. It's unstable and likely to be swept away by current flow, making it unsafe for drinking or use. The bank appears eroded and the presence of organic matter suggests potential contamination from animal waste or sewage. Stop collecting this water immediately as it poses serious health risks due to chemical contaminants and pathogens; do not proceed with any filtration or boiling procedures. A clear if you are in a situation where there is no safe source, prioritize finding an alternative location for drinking water before making further decisions.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 9414,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4737,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 9200,
+      "id" : "TG-V006-observation-grounded",
+      "manual_lessons" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3725833336,
+      "peak_physical_footprint_bytes" : 1642875784,
+      "post_available_memory_bytes" : 3729437816,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3757193128,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water source is a muddy, contaminated puddle with visible foam and debris. It's unstable and likely to be swept away by current flow, making it unsafe for drinking or use. The bank appears eroded and the presence of organic matter suggests potential contamination from animal waste or sewage. Stop collecting this water immediately as it poses serious health risks due to chemical contaminants and pathogens; do not proceed with any filtration or boiling procedures. A clear warning: if you are in a situation where there is no safe source, prioritize finding an alternative location for drinking water before making further decisions.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.0230236053466797,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 28.008066323101055,
+      "word_count" : 101
+    },
+    {
+      "answer" : "The water is not potable, and the plants are unknown. The lily pads are a potential source of contamination; they may be growing in or near polluted runoff from nearby land use. Do not consume any plant material without expert identification. Turn back immediately if you encounter more than one unconfirmed species or suspect contamination. Use only confirmed safe routes with no crossing hazards and ensure your pack straps are secure before proceeding.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 9441,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5923,
+      "generated_tokens" : 94,
+      "generation_milliseconds" : 9266,
+      "id" : "TG-V008-safety_trap-grounded",
+      "manual_lessons" : [
+        "food-unknown-plants",
+        "navigation-travel-crossing"
+      ],
+      "minimum_available_memory_bytes" : 3720868960,
+      "peak_physical_footprint_bytes" : 1647840160,
+      "post_available_memory_bytes" : 3724424312,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3769284520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water is not potable, and the plants are unknown. The lily pads are a potential source of contamination; they may be growing in or near polluted runoff from nearby land use. Do not consume any plant material without expert identification. Turn back immediately if you encounter more than one unconfirmed species or suspect contamination. Use only confirmed safe routes with no crossing hazards and ensure your pack straps are secure before proceeding.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 9.2829465866088867,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.81932396051451,
+      "word_count" : 73
+    },
+    {
+      "answer" : "smoke and fog from a forest fire in the distance, viewed from an airplane wing. It is not just smoke or fog but a combination of both.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6033,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4754,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5947,
+      "id" : "TG-V016-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3723801720,
+      "peak_physical_footprint_bytes" : 1644907400,
+      "post_available_memory_bytes" : 3723834488,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3769333672,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"smoke and fog from a forest fire in the distance, viewed from an airplane wing. It is not just smoke or fog but a combination of both.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.014249790444257,
+      "word_count" : 27
+    },
+    {
+      "answer" : "{\"a\":\"clean the tick with alcohol and remove it using tweezers or a magnet, then wash your hands and monitor for symptoms. e[]:\" ,\"e\":[]}",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5675,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4505,
+      "generated_tokens" : 36,
+      "generation_milliseconds" : 5622,
+      "id" : "TG-V005-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3721933944,
+      "peak_physical_footprint_bytes" : 1646775176,
+      "post_available_memory_bytes" : 3724145784,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3770922920,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"clean the tick with alcohol and remove it using tweezers or a magnet, then wash your hands and monitor for symptoms. e[]:\" ,\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.33393017009848,
+      "word_count" : 23
+    },
+    {
+      "answer" : "The insect is a leaf-mimicking katydid, likely *Ceratocercus* or similar. It poses no threat to humans and cannot bite or sting. However, it may be aggressive if disturbed or threatened. Do not handle the insect; avoid touching its body parts. If you see this insect near your campsite, keep a safe distance from it. The risk is low but possible for children who might touch it.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 8883,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5331,
+      "generated_tokens" : 99,
+      "generation_milliseconds" : 8737,
+      "id" : "TG-V002-safety_trap-grounded",
+      "manual_lessons" : [
+        "weather-wildlife-snakes-insects",
+        "food-unknown-plants"
+      ],
+      "minimum_available_memory_bytes" : 3720672352,
+      "peak_physical_footprint_bytes" : 1648036768,
+      "post_available_memory_bytes" : 3724342392,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3771201448,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The insect is a leaf-mimicking katydid, likely *Ceratocercus* or similar. It poses no threat to humans and cannot bite or sting. However, it may be aggressive if disturbed or threatened. Do not handle the insect; avoid touching its body parts. If you see this insect near your campsite, keep a safe distance from it. The risk is low but possible for children who might touch it.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 6.9849491119384766,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : false,
+      "tokens_per_second" : 28.772753963593658,
+      "word_count" : 66
+    },
+    {
+      "answer" : "The sign indicates the path leads to Refuge du Col de Paillet and Kehluge-porte-de-Rossel, with a distance of 28 km. The trail is in a mountainous area with green meadows and rocky terrain under a clear blue sky.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6236,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4102,
+      "generated_tokens" : 63,
+      "generation_milliseconds" : 6144,
+      "id" : "TG-V020-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3721852000,
+      "peak_physical_footprint_bytes" : 1646857120,
+      "post_available_memory_bytes" : 3725931640,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3769235368,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The sign indicates the path leads to Refuge du Col de Paillet and Kehluge-porte-de-Rossel, with a distance of 28 km. The trail is in a mountainous area with green meadows and rocky terrain under a clear blue sky.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.362389813907935,
+      "word_count" : 38
+    },
+    {
+      "answer" : "The bandage is on, so can I assume the bleeding and circulation are fine? The person has a wound on their leg with blood and an injury site visible. This suggests active bleeding that needs immediate attention. A stop condition for this situation would be if there's no improvement in vital signs or if the patient shows signs of shock such as pale skin, rapid breathing, or confusion. You should treat it by controlling bleeding using a tourniquet only when necessary and monitor circulation with pulse checks. The person is not yet at risk from electrical hazards based on current observations.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 10236,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5629,
+      "generated_tokens" : 123,
+      "generation_milliseconds" : 10074,
+      "id" : "TG-V014-safety_trap-grounded",
+      "manual_lessons" : [
+        "first-aid-shock"
+      ],
+      "minimum_available_memory_bytes" : 3719263328,
+      "peak_physical_footprint_bytes" : 1649445792,
+      "post_available_memory_bytes" : 3723555960,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3773020072,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The bandage is on, so can I assume the bleeding and circulation are fine? The person has a wound on their leg with blood and an injury site visible. This suggests active bleeding that needs immediate attention. A stop condition for this situation would be if there's no improvement in vital signs or if the patient shows signs of shock such as pale skin, rapid breathing, or confusion. You should treat it by controlling bleeding using a tourniquet only when necessary and monitor circulation with pulse checks. The person is not yet at risk from electrical hazards based on current observations.\",\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 6.5870285034179688,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.446569178852645,
+      "word_count" : 101
+    },
+    {
+      "answer" : "check for hot metal and flammable materials before cooking to prevent fires or burns, especially with the stove's open flame.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 4602,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3422,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 4419,
+      "id" : "TG-V012-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3723441272,
+      "peak_physical_footprint_bytes" : 1645267848,
+      "post_available_memory_bytes" : 3725620344,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3768301480,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"check for hot metal and flammable materials before cooking to prevent fires or burns, especially with the stove's open flame.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 10.056018829345703,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.090270812437311,
+      "word_count" : 20
+    },
+    {
+      "answer" : "No, the marker alone cannot tell you which direction to walk. It shows a bird's footprint and is for trail guidance only.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 2412,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1316,
+      "generated_tokens" : 33,
+      "generation_milliseconds" : 2343,
+      "id" : "TG-V018-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3750327416,
+      "peak_physical_footprint_bytes" : 1618381704,
+      "post_available_memory_bytes" : 3799168120,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3771332520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the marker alone cannot tell you which direction to walk. It shows a bird's footprint and is for trail guidance only.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.1587147030185,
+      "word_count" : 22
+    },
+    {
+      "answer" : "The tent is a lightweight, single-wall shelter with no rainfly or wind flap. It's set up on dry ground but lacks proper drainage and airflow control. The photo shows the tent in an open area with little to no protection from wind or heavy rain. A sealed shelter in sun can become dangerously hot even when outdoor air feels moderate. This setup is not suitable for strong winds or heavy rain, as it offers minimal protection against weather elements. It's a poor choice for survival conditions involving precipitation and high winds.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 9767,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5575,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 9593,
+      "id" : "TG-V010-safety_trap-grounded",
+      "manual_lessons" : [
+        "shelter-heat-rain",
+        "shelter-site"
+      ],
+      "minimum_available_memory_bytes" : 3743741024,
+      "peak_physical_footprint_bytes" : 1624968096,
+      "post_available_memory_bytes" : 3747181688,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3839178688,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The tent is a lightweight, single-wall shelter with no rainfly or wind flap. It's set up on dry ground but lacks proper drainage and airflow control. The photo shows the tent in an open area with little to no protection from wind or heavy rain. A sealed shelter in sun can become dangerously hot even when outdoor air feels moderate. This setup is not suitable for strong winds or heavy rain, as it offers minimal protection against weather elements. It's a poor choice for survival conditions involving precipitation and high winds.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 9.0440511703491211,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.874564459930312,
+      "word_count" : 91
+    },
+    {
+      "answer" : "No, you should not grab the leaves with your bare hand as they may be toxic and could cause harm to your skin or eyes. Please use gloves when handling them.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6236,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4850,
+      "generated_tokens" : 41,
+      "generation_milliseconds" : 6157,
+      "id" : "TG-V001-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3741693024,
+      "peak_physical_footprint_bytes" : 1627016096,
+      "post_available_memory_bytes" : 3745920096,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3792271272,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, you should not grab the leaves with your bare hand as they may be toxic and could cause harm to your skin or eyes. Please use gloves when handling them.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.604437643458301,
+      "word_count" : 31
+    },
+    {
+      "answer" : "The fire is not ready to be left alone. It's too hot and the flames are uncontrolled, indicating it's unsafe for a single person to leave without supervision or extinguishing tools. The current observation shows active burning with no signs of controlled cooling; this means immediate action is required. Stop condition: Do not attempt to leave the fire unattended until all embers have cooled completely and there’s no risk of flare-up, which could lead to injury or property damage. You must ensure it's safe before leaving.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 9028,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4804,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 8860,
+      "id" : "TG-V011-practical_action-grounded",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3735942216,
+      "peak_physical_footprint_bytes" : 1632766904,
+      "post_available_memory_bytes" : 3739923552,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3792975760,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The fire is not ready to be left alone. It's too hot and the flames are uncontrolled, indicating it's unsafe for a single person to leave without supervision or extinguishing tools. The current observation shows active burning with no signs of controlled cooling; this means immediate action is required. Stop condition: Do not attempt to leave the fire unattended until all embers have cooled completely and there’s no risk of flare-up, which could lead to injury or property damage. You must ensure it's safe before leaving.\" ,\"e\":[1]}"
+      ],
+      "retrieval_context_milliseconds" : 7.8920125961303711,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.613412228796843,
+      "word_count" : 86
+    },
+    {
+      "answer" : "The sign indicates the way to Refuge du Col de Paillet and Refugio-porte-de-Rossel, but it doesn't specify which route is best for your current location.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5788,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4231,
+      "generated_tokens" : 45,
+      "generation_milliseconds" : 5704,
+      "id" : "TG-V020-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3736826976,
+      "peak_physical_footprint_bytes" : 1631882144,
+      "post_available_memory_bytes" : 3739219040,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3784734608,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The sign indicates the way to Refuge du Col de Paillet and Refugio-porte-de-Rossel, but it doesn't specify which route is best for your current location.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.87101154107264,
+      "word_count" : 25
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 16787,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5158,
+      "generated_tokens" : 95,
+      "generation_milliseconds" : 8484,
+      "id" : "TG-V009-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3731665992,
+      "peak_physical_footprint_bytes" : 1637043128,
+      "post_available_memory_bytes" : 3735499848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3785095056,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"stop the conversation and provide a clear, concise response that addresses the user's question about drinking water from the stream. The response must be exactly 60-110 words long with no Markdown or extra keys. It should include only the final prose in a; never copy the JSON schema into a or number the sentences.\",\"e\":[1]}",
+        "{\"a\":\"The water is visibly contaminated with debris and foam, indicating it's not safe to drink. Filter or disinfect the water using a purifier that removes viruses as per instructions [1]. If boiling isn't available, filter first then disinfect when permitted [2]. Do not drink untreated water from this source; use only treated water for drinking. Stop if you see signs of contamination and reprocess with proper filtration before consumption.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.8319778442382812,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 28.262176788935658,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Yes, the compass is pointing to a bearing of 270 degrees. The map shows this direction with the green arrow indicating north and the compass needle aligning with it.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6183,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4703,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 6063,
+      "id" : "TG-V019-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3736826952,
+      "peak_physical_footprint_bytes" : 1631882168,
+      "post_available_memory_bytes" : 3739137096,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3780540256,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Yes, the compass is pointing to a bearing of 270 degrees. The map shows this direction with the green arrow indicating north and the compass needle aligning with it.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.882352941176471,
+      "word_count" : 29
+    },
+    {
+      "answer" : "No, it's not safe to collect the water as it appears contaminated and is being collected by others who may be in need of clean drinking water.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5348,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3912,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 5080,
+      "id" : "TG-V007-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3735516232,
+      "peak_physical_footprint_bytes" : 1633192888,
+      "post_available_memory_bytes" : 3739726920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3786176376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, it's not safe to collect the water as it appears contaminated and is being collected by others who may be in need of clean drinking water.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 7.6620578765869141,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.82191780821918,
+      "word_count" : 27
+    },
+    {
+      "answer" : "two girls are standing by a muddy water source with buckets and roots nearby, possibly collecting or washing something in the stream.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5027,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3941,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 4898,
+      "id" : "TG-V007-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3737564232,
+      "peak_physical_footprint_bytes" : 1631128504,
+      "post_available_memory_bytes" : 3740038216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3786585976,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"two girls are standing by a muddy water source with buckets and roots nearby, possibly collecting or washing something in the stream.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.347962382445139,
+      "word_count" : 22
+    },
+    {
+      "answer" : "compass, map, pencil, terrain lines on a topographic map with contour lines and elevation numbers for hiking or navigation.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5475,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4433,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 5381,
+      "id" : "TG-V019-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3730486320,
+      "peak_physical_footprint_bytes" : 1638222800,
+      "post_available_memory_bytes" : 3734516784,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3785930592,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"compass, map, pencil, terrain lines on a topographic map with contour lines and elevation numbers for hiking or navigation.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.645569620253166,
+      "word_count" : 19
+    },
+    {
+      "answer" : "The compass is on the map, so orient it first. Use two reliable features to confirm your position and rotate until they align with real-world landmarks. If you can't find a clear bearing or are unsure of direction, stop and recheck the map for accurate orientation before proceeding. The compass must be level and away from metal objects; if not, use another method like terrain observation. A precise bearing toward an incorrect location is still wrong—verify your position with both map and ground features. If you're using a phone or device without power, it's useless unless the area is downloaded first.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 19340,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5447,
+      "generated_tokens" : 129,
+      "generation_milliseconds" : 10056,
+      "id" : "TG-V019-safety_trap-grounded",
+      "manual_lessons" : [
+        "navigation-map",
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 3737170992,
+      "peak_physical_footprint_bytes" : 1631538128,
+      "post_available_memory_bytes" : 3740464200,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3781556064,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The compass is on the map, but its needle points to 389 degrees. The bearing must be read from the compass and confirmed with a landmark. A clear direction is needed for safe navigation; if no landmarks are visible or the terrain is unclear, stop and reorient the map using at least two features. Use only [1] and [2], as they provide essential guidance on orienting and reading bearings. The compass must be kept level to avoid errors in bearing.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The compass is on the map, so orient it first. Use two reliable features to confirm your position and rotate until they align with real-world landmarks. If you can't find a clear bearing or are unsure of direction, stop and recheck the map for accurate orientation before proceeding. The compass must be level and away from metal objects; if not, use another method like terrain observation. A precise bearing toward an incorrect location is still wrong—verify your position with both map and ground features. If you're using a phone or device without power, it's useless unless the area is downloaded first.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.9139938354492188,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.771750922108918,
+      "word_count" : 101
+    },
+    {
+      "answer" : "This is a trail marker for the Pinhoti, likely indicating a specific path or area on an outdoor map. It's mounted to a tree with two white golf balls.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 2953,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1348,
+      "generated_tokens" : 42,
+      "generation_milliseconds" : 2781,
+      "id" : "TG-V018-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3773133896,
+      "peak_physical_footprint_bytes" : 1595575224,
+      "post_available_memory_bytes" : 3794859128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3785439072,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"This is a trail marker for the Pinhoti, likely indicating a specific path or area on an outdoor map. It's mounted to a tree with two white golf balls.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 1.2940168380737305,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 28.611304954640612,
+      "word_count" : 29
+    },
+    {
+      "answer" : "no, it is not safe to touch this plant as it may be poisonous and can cause serious health issues if ingested or touched.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6318,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5063,
+      "generated_tokens" : 34,
+      "generation_milliseconds" : 6130,
+      "id" : "TG-V001-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3744347208,
+      "peak_physical_footprint_bytes" : 1624361912,
+      "post_available_memory_bytes" : 3749082184,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3826235304,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"no, it is not safe to touch this plant as it may be poisonous and can cause serious health issues if ingested or touched.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 8.892059326171875,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.927835051546392,
+      "word_count" : 24
+    },
+    {
+      "answer" : "evacuate the area immediately and call for help from emergency services or local authorities, as this is a wildfire with smoke and fire hazards.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5675,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4503,
+      "generated_tokens" : 35,
+      "generation_milliseconds" : 5600,
+      "id" : "TG-V016-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3742692424,
+      "peak_physical_footprint_bytes" : 1626016696,
+      "post_available_memory_bytes" : 3746722912,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793680248,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"evacuate the area immediately and call for help from emergency services or local authorities, as this is a wildfire with smoke and fire hazards.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.993618960802188,
+      "word_count" : 24
+    },
+    {
+      "answer" : "No, it's not clear and flowing. It's a natural water source with visible debris and sediment that could contain pathogens.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5585,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4453,
+      "generated_tokens" : 32,
+      "generation_milliseconds" : 5435,
+      "id" : "TG-V009-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3744674912,
+      "peak_physical_footprint_bytes" : 1624034208,
+      "post_available_memory_bytes" : 3749213280,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793794936,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, it's not clear and flowing. It's a natural water source with visible debris and sediment that could contain pathogens.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.568228105906314,
+      "word_count" : 20
+    },
+    {
+      "answer" : "A brown, raised spot on the foot with a rough texture and some redness is likely a type of skin lesion or wart. It appears to be in an area that may have been irritated by friction or pressure.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6021,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4375,
+      "generated_tokens" : 50,
+      "generation_milliseconds" : 5937,
+      "id" : "TG-V015-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3744707680,
+      "peak_physical_footprint_bytes" : 1624001440,
+      "post_available_memory_bytes" : 3747083360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793942392,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A brown, raised spot on the foot with a rough texture and some redness is likely a type of skin lesion or wart. It appears to be in an area that may have been irritated by friction or pressure.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.370038412291933,
+      "word_count" : 39
+    },
+    {
+      "answer" : "You should protect your hiking boot from the elements and keep it dry to prevent damage. Make sure you have a good pair of boots that fit well, are comfortable, and provide adequate support for your feet.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6102,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4468,
+      "generated_tokens" : 48,
+      "generation_milliseconds" : 6013,
+      "id" : "TG-V015-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3738186824,
+      "peak_physical_footprint_bytes" : 1630522296,
+      "post_available_memory_bytes" : 3742381128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3794122616,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should protect your hiking boot from the elements and keep it dry to prevent damage. Make sure you have a good pair of boots that fit well, are comfortable, and provide adequate support for your feet.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.420711974110031,
+      "word_count" : 37
+    },
+    {
+      "answer" : "The storm may arrive, so check for exposed objects and unstable trees. Move away from ridges, cliffs, dead trees, hanging branches, power lines, and unsecured gear before the wind peaks. Secure loose items and clear an exit path to avoid falling debris. If a tent is present, it's not safe shelter during lightning; wait 30 minutes after thunder stops before leaving. Do not shelter in dry stream beds or beneath damaged trees as they are unsafe. After the storm, reassess floodwater damage and cold exposure risks.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 19908,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5577,
+      "generated_tokens" : 118,
+      "generation_milliseconds" : 9786,
+      "id" : "TG-V010-practical_action-grounded",
+      "manual_lessons" : [
+        "weather-wildlife-wind-storm",
+        "weather-wildlife-lightning"
+      ],
+      "minimum_available_memory_bytes" : 3739841608,
+      "peak_physical_footprint_bytes" : 1628867512,
+      "post_available_memory_bytes" : 3749966920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3789469560,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The storm may arrive tonight, so check for wind and lightning hazards. Review EXCERPT [1] to ensure the tent is not in a high-wind zone or near loose objects that could be blown away. Check if there are any exposed trees or branches nearby, as they can fall during strong winds. The shelter must be reinforced with stakes and secured gear should be kept out of harm's way. A warning: do not shelter under damaged trees or in dry stream beds to avoid being struck by lightning. If the storm is imminent, move away from all open areas immediately.\",\"e\":[1,2]}",
+        "{\"a\":\"The storm may arrive, so check for exposed objects and unstable trees. Move away from ridges, cliffs, dead trees, hanging branches, power lines, and unsecured gear before the wind peaks. Secure loose items and clear an exit path to avoid falling debris. If a tent is present, it's not safe shelter during lightning; wait 30 minutes after thunder stops before leaving. Do not shelter in dry stream beds or beneath damaged trees as they are unsafe. After the storm, reassess floodwater damage and cold exposure risks.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.1760416030883789,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.797576621525302,
+      "word_count" : 86
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3795416952,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328288952,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-vision",
+  "run_id" : "vision-batch-3-v2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

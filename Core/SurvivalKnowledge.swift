@@ -20,6 +20,8 @@ public struct SurvivalKnowledgeIntegrity: Equatable, Sendable {
     public let indexedPassageCount: Int
     public let sourceCount: Int
     public let legacyAnchorCount: Int
+    public let expertScenarioCount: Int
+    public let expertClaimCount: Int
 }
 
 public enum ManualTheme: String, Codable, Hashable, Sendable {
@@ -218,7 +220,7 @@ public struct SurvivalKnowledgeStore: SurvivalKnowledgeReading, Sendable {
         }
         self.databaseURL = databaseURL
         let result = try integrity()
-        guard result.schemaVersion == 1 else {
+        guard result.schemaVersion == 3 else {
             throw SurvivalKnowledgeError.unsupportedSchema(result.schemaVersion)
         }
         guard result.chapterCount == 10,
@@ -226,7 +228,9 @@ public struct SurvivalKnowledgeStore: SurvivalKnowledgeReading, Sendable {
               result.passageCount >= 1_000,
               result.passageCount == result.indexedPassageCount,
               result.sourceCount > 0,
-              result.legacyAnchorCount == 828
+              result.legacyAnchorCount == 828,
+              result.expertScenarioCount >= 96,
+              result.expertClaimCount >= 500
         else {
             throw SurvivalKnowledgeError.invalidDatabase(databaseURL.path)
         }
@@ -246,7 +250,9 @@ public struct SurvivalKnowledgeStore: SurvivalKnowledgeReading, Sendable {
             passageCount: try scalar(database, "SELECT COUNT(*) FROM passages"),
             indexedPassageCount: try scalar(database, "SELECT COUNT(*) FROM passages_fts"),
             sourceCount: try scalar(database, "SELECT COUNT(*) FROM sources"),
-            legacyAnchorCount: try scalar(database, "SELECT COUNT(*) FROM legacy_anchors")
+            legacyAnchorCount: try scalar(database, "SELECT COUNT(*) FROM legacy_anchors"),
+            expertScenarioCount: try scalar(database, "SELECT COUNT(*) FROM expert_scenarios"),
+            expertClaimCount: try scalar(database, "SELECT COUNT(*) FROM expert_claims")
         )
         #else
         throw SurvivalKnowledgeError.sqliteUnavailable
@@ -413,7 +419,259 @@ public struct SurvivalKnowledgeStore: SurvivalKnowledgeReading, Sendable {
         return candidates.filter { seenLessons.insert($0.lessonID).inserted }
             .prefix(max(1, min(limit, 100))).map { $0 }
     }
+
+    public func searchExpertEvidence(
+        query: String,
+        domain: KnowledgeDomain? = nil,
+        limit: Int = 8
+    ) -> [RetrievedEvidenceScenario] {
+        let expertGenericTerms: Set<String> = [
+            "about", "action", "find", "get", "go", "have", "identify",
+            "make", "need", "now", "problem", "safe", "safety", "take",
+            "that", "use",
+        ]
+        let normalized = Self.normalizedTerms(query)
+        let filtered = normalized.filter { !expertGenericTerms.contains($0) }
+        let terms = filtered.isEmpty ? normalized : filtered
+        guard !terms.isEmpty else { return [] }
+        let initial = runExpertSearch(
+            terms: terms,
+            domain: domain,
+            limit: max(8, min(limit, 128)),
+            prefix: false
+        )
+        return (initial.isEmpty
+            ? runExpertSearch(
+                terms: terms,
+                domain: domain,
+                limit: max(8, min(limit, 128)),
+                prefix: true
+              )
+            : initial
+        ).prefix(max(1, min(limit, 128))).map { $0 }
+    }
+
+    public func expertScenario(id: String) -> EvidenceScenarioRecord? {
+        #if canImport(SQLite3)
+        guard let database = try? open() else { return nil }
+        defer { sqlite3_close(database) }
+        return expertScenario(id: id, database: database)
+        #else
+        return nil
+        #endif
+    }
+
+    public func expertSources(ids: [String]) -> [SurvivalSource] {
+        #if canImport(SQLite3)
+        let uniqueIDs = Array(Set(ids)).sorted()
+        guard !uniqueIDs.isEmpty, let database = try? open() else { return [] }
+        defer { sqlite3_close(database) }
+        let placeholders = uniqueIDs.map { _ in "?" }.joined(separator: ",")
+        let sql = """
+        SELECT source_id, title, organization, url, published_at, updated_at,
+               reviewed_at, locator, jurisdiction, license_status, review_level
+        FROM sources WHERE source_id IN (\(placeholders))
+        ORDER BY organization, title, source_id
+        """
+        guard let statement = try? prepare(database, sql) else { return [] }
+        defer { sqlite3_finalize(statement) }
+        for (offset, id) in uniqueIDs.enumerated() {
+            guard bind(id, to: statement, index: Int32(offset + 1)) else {
+                return []
+            }
+        }
+        var result: [SurvivalSource] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            result.append(SurvivalSource(
+                id: text(statement, 0), title: text(statement, 1),
+                organization: text(statement, 2), url: text(statement, 3),
+                publishedAt: text(statement, 4), updatedAt: text(statement, 5),
+                reviewedAt: text(statement, 6), locator: text(statement, 7),
+                jurisdiction: text(statement, 8), licenseStatus: text(statement, 9),
+                reviewLevel: text(statement, 10)
+            ))
+        }
+        return result
+        #else
+        return []
+        #endif
+    }
+
+    public func searchExpertCorpus(
+        query: String,
+        domain: KnowledgeDomain? = nil,
+        limit: Int = 8
+    ) -> [ExpertCorpusCandidate] {
+        #if canImport(SQLite3)
+        let terms = Self.normalizedTerms(query)
+        guard !terms.isEmpty, let database = try? open() else { return [] }
+        defer { sqlite3_close(database) }
+        let allowed = Self.chapterIDs(for: domain)
+        let placeholders = allowed.map { _ in "?" }.joined(separator: ",")
+        let domainClause = allowed.isEmpty
+            ? ""
+            : " AND s.chapter_id IN (\(placeholders))"
+        let sql = """
+        SELECT s.scenario_id, ch.chunk_id, d.authority_tier,
+               bm25(expert_source_chunks_fts, 8, 3, 4)
+        FROM expert_source_chunks_fts
+        JOIN expert_source_chunks ch
+          ON ch.rowid=expert_source_chunks_fts.rowid
+        JOIN expert_source_documents d ON d.document_id=ch.document_id
+        JOIN expert_chunk_scenarios cs ON cs.chunk_id=ch.chunk_id
+        JOIN expert_scenarios s ON s.scenario_id=cs.scenario_id
+        WHERE expert_source_chunks_fts MATCH ?
+          AND d.redistribution_class NOT IN ('linked_metadata_only','development_only')
+          AND d.superseded_by_document_id IS NULL
+          AND s.review_status IN ('primary-source-verified','humanApproved')\(domainClause)
+        ORDER BY bm25(expert_source_chunks_fts, 8, 3, 4),
+                 CASE d.authority_tier
+                   WHEN 'authority' THEN 0 WHEN 'corroboration' THEN 1 ELSE 2
+                 END,
+                 s.scenario_id, ch.chunk_id
+        LIMIT ?
+        """
+        guard let statement = try? prepare(database, sql) else { return [] }
+        defer { sqlite3_finalize(statement) }
+        let queryText = Self.ftsQuery(terms, prefix: false)
+        guard bind(queryText, to: statement, index: 1) else { return [] }
+        var bindIndex: Int32 = 2
+        for chapterID in allowed {
+            guard bind(chapterID, to: statement, index: bindIndex) else {
+                return []
+            }
+            bindIndex += 1
+        }
+        guard sqlite3_bind_int(
+            statement,
+            bindIndex,
+            Int32(max(1, min(limit * 4, 64)))
+        ) == SQLITE_OK else { return [] }
+        var grouped: [String: (
+            scenario: EvidenceScenarioRecord,
+            chunks: Set<String>,
+            score: Double,
+            authority: ExpertSourceAuthorityTier
+        )] = [:]
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let scenarioID = text(statement, 0)
+            guard let scenario = grouped[scenarioID]?.scenario
+                    ?? expertScenario(id: scenarioID, database: database),
+                  let authority = ExpertSourceAuthorityTier(
+                    rawValue: text(statement, 2)
+                  )
+            else { continue }
+            var item = grouped[scenarioID] ?? (
+                scenario, [], 0, authority
+            )
+            item.chunks.insert(text(statement, 1))
+            item.score += max(0, -sqlite3_column_double(statement, 3))
+            if authority == .authority { item.authority = .authority }
+            else if authority == .corroboration,
+                    item.authority == .discovery {
+                item.authority = .corroboration
+            }
+            grouped[scenarioID] = item
+        }
+        return grouped.values.map {
+            ExpertCorpusCandidate(
+                scenario: $0.scenario,
+                chunkIDs: Array($0.chunks).sorted(),
+                score: $0.score,
+                authorityTier: $0.authority
+            )
+        }.sorted {
+            if $0.score == $1.score { return $0.scenarioID < $1.scenarioID }
+            return $0.score > $1.score
+        }.prefix(max(1, min(limit, 128))).map { $0 }
+        #else
+        return []
+        #endif
+    }
+
+    public func expertSourceDocuments() -> [ExpertSourceDocument] {
+        #if canImport(SQLite3)
+        guard let database = try? open(), let statement = try? prepare(
+            database,
+            """
+            SELECT document_id, title, organization, url, authority_tier,
+                   redistribution_class, jurisdiction, published_at,
+                   updated_at, reviewed_at, license_evidence, content_hash,
+                   superseded_by_document_id
+            FROM expert_source_documents ORDER BY document_id
+            """
+        ) else { return [] }
+        defer { sqlite3_finalize(statement); sqlite3_close(database) }
+        var result: [ExpertSourceDocument] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            guard let authority = ExpertSourceAuthorityTier(
+                rawValue: text(statement, 4)
+            ), let redistribution = ExpertRedistributionClass(
+                rawValue: text(statement, 5)
+            ) else { continue }
+            let superseded = sqlite3_column_type(statement, 12) == SQLITE_NULL
+                ? nil : text(statement, 12)
+            result.append(ExpertSourceDocument(
+                id: text(statement, 0), title: text(statement, 1),
+                organization: text(statement, 2), url: text(statement, 3),
+                authorityTier: authority,
+                redistributionClass: redistribution,
+                jurisdiction: text(statement, 6), publishedAt: text(statement, 7),
+                updatedAt: text(statement, 8), reviewedAt: text(statement, 9),
+                licenseEvidence: text(statement, 10),
+                contentHash: text(statement, 11),
+                supersededByDocumentID: superseded
+            ))
+        }
+        return result
+        #else
+        return []
+        #endif
+    }
+
+    public func expertClaimPromotions() -> [ExpertClaimPromotionRecord] {
+        #if canImport(SQLite3)
+        guard let database = try? open(), let statement = try? prepare(
+            database,
+            """
+            SELECT promotion_id, scenario_id, kind, text,
+                   source_document_ids_json, source_locators_json,
+                   benchmark_gap_ids_json, status, extractor_review_id,
+                   critic_review_id, human_reviewer_id
+            FROM expert_claim_promotions ORDER BY promotion_id
+            """
+        ) else { return [] }
+        defer { sqlite3_finalize(statement); sqlite3_close(database) }
+        let strings: (String) -> [String] = {
+            (try? JSONDecoder().decode([String].self, from: Data($0.utf8))) ?? []
+        }
+        var result: [ExpertClaimPromotionRecord] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            guard let kind = ReviewedClaimKind(rawValue: text(statement, 2)),
+                  let status = ExpertClaimPromotionStatus(
+                    rawValue: text(statement, 7)
+                  ) else { continue }
+            let reviewer = sqlite3_column_type(statement, 10) == SQLITE_NULL
+                ? nil : text(statement, 10)
+            result.append(ExpertClaimPromotionRecord(
+                id: text(statement, 0), scenarioID: text(statement, 1),
+                kind: kind, text: text(statement, 3),
+                sourceDocumentIDs: strings(text(statement, 4)),
+                sourceLocators: strings(text(statement, 5)),
+                benchmarkGapIDs: strings(text(statement, 6)), status: status,
+                extractorReviewID: text(statement, 8),
+                criticReviewID: text(statement, 9), humanReviewerID: reviewer
+            ))
+        }
+        return result
+        #else
+        return []
+        #endif
+    }
 }
+
+extension SurvivalKnowledgeStore: ExpertEvidenceRetrieving {}
+extension SurvivalKnowledgeStore: ExpertCorpusReading {}
 
 public struct SurvivalKnowledgeRetriever: EvidenceRetrieving, Sendable {
     private let store: SurvivalKnowledgeStore
@@ -427,7 +685,7 @@ public struct SurvivalKnowledgeRetriever: EvidenceRetrieving, Sendable {
         domain: KnowledgeDomain? = nil,
         limit: Int = 2
     ) -> [RetrievedPassage] {
-        store.searchPassages(query, domain: domain, limit: min(2, max(1, limit)))
+        store.searchPassages(query, domain: domain, limit: min(100, max(1, limit)))
             .map { passage in
                 let lesson = store.lesson(id: passage.lessonID)
                 let source = passage.sources.first
@@ -701,6 +959,189 @@ private extension SurvivalKnowledgeStore {
         #else
         return []
         #endif
+    }
+
+    func runExpertSearch(
+        terms: [String],
+        domain: KnowledgeDomain?,
+        limit: Int,
+        prefix: Bool
+    ) -> [RetrievedEvidenceScenario] {
+        guard let database = try? open() else { return [] }
+        defer { sqlite3_close(database) }
+        let allowed = Self.chapterIDs(for: domain)
+        let placeholders = allowed.map { _ in "?" }.joined(separator: ",")
+        let domainClause = allowed.isEmpty
+            ? ""
+            : " AND s.chapter_id IN (\(placeholders))"
+        let sql = """
+        SELECT s.scenario_id,
+               bm25(expert_scenarios_fts, 0, 3, 12, 9, 11, 7, 8)
+        FROM expert_scenarios_fts
+        JOIN expert_scenarios s
+          ON s.scenario_id=expert_scenarios_fts.scenario_id
+        WHERE expert_scenarios_fts MATCH ?
+          AND s.review_status IN ('primary-source-verified','humanApproved')\(domainClause)
+        ORDER BY bm25(expert_scenarios_fts, 0, 3, 12, 9, 11, 7, 8),
+                 s.scenario_id
+        LIMIT ?
+        """
+        guard let statement = try? prepare(database, sql) else { return [] }
+        defer { sqlite3_finalize(statement) }
+        guard bind(Self.ftsQuery(terms, prefix: prefix), to: statement, index: 1)
+        else { return [] }
+        var bindIndex: Int32 = 2
+        for chapterID in allowed {
+            guard bind(chapterID, to: statement, index: bindIndex) else {
+                return []
+            }
+            bindIndex += 1
+        }
+        guard sqlite3_bind_int(
+            statement,
+            bindIndex,
+            Int32(max(1, min(limit, 80)))
+        ) == SQLITE_OK else { return [] }
+        var result: [RetrievedEvidenceScenario] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            guard let scenario = expertScenario(
+                id: text(statement, 0),
+                database: database
+            ) else { continue }
+            result.append(RetrievedEvidenceScenario(
+                scenario: scenario,
+                score: -sqlite3_column_double(statement, 1)
+            ))
+        }
+        return result
+    }
+
+    func expertScenario(
+        id: String,
+        database: OpaquePointer
+    ) -> EvidenceScenarioRecord? {
+        let sql = """
+        SELECT s.scenario_id, s.lesson_id, s.chapter_id, c.chapter_no,
+               c.title, s.title, s.applicability, s.observable_cues_json,
+               s.prerequisites_json, s.risk_class, s.jurisdiction, s.units,
+               s.related_scenario_ids_json, s.reviewed_at,
+               l.document_id, l.chunk_id, l.section_path, l.locator
+        FROM expert_scenarios s
+        JOIN chapters c ON c.chapter_id=s.chapter_id
+        LEFT JOIN corpus_scenario_locators l ON l.scenario_id=s.scenario_id
+        WHERE s.scenario_id=?
+        """
+        guard let statement = try? prepare(database, sql) else { return nil }
+        defer { sqlite3_finalize(statement) }
+        guard bind(id, to: statement, index: 1),
+              sqlite3_step(statement) == SQLITE_ROW,
+              let riskClass = ExpertRiskClass(rawValue: text(statement, 9))
+        else { return nil }
+        let decodeStrings: (String) -> [String] = { value in
+            (try? JSONDecoder().decode([String].self, from: Data(value.utf8))) ?? []
+        }
+        let scenarioID = text(statement, 0)
+        let lessonID = sqlite3_column_type(statement, 1) == SQLITE_NULL
+            ? "" : text(statement, 1)
+        let reviewedAt = text(statement, 13)
+        let evidenceLocator: ExpertEvidenceLocator? =
+            sqlite3_column_type(statement, 14) == SQLITE_NULL ? nil
+            : ExpertEvidenceLocator(
+                documentID: text(statement, 14),
+                chunkID: text(statement, 15),
+                sectionPath: text(statement, 16),
+                locator: text(statement, 17)
+            )
+        return EvidenceScenarioRecord(
+            id: scenarioID,
+            lessonID: lessonID,
+            chapterID: text(statement, 2),
+            title: text(statement, 5),
+            applicability: text(statement, 6),
+            observableCues: decodeStrings(text(statement, 7)),
+            prerequisites: decodeStrings(text(statement, 8)),
+            riskClass: riskClass,
+            jurisdiction: text(statement, 10),
+            units: text(statement, 11),
+            relatedScenarioIDs: decodeStrings(text(statement, 12)),
+            claims: expertClaims(scenarioID: scenarioID, database: database),
+            manualReference: lessonID.isEmpty ? nil : ManualReference(
+                passageID: "\(lessonID)-p01",
+                lessonID: lessonID,
+                chapterID: text(statement, 2),
+                chapterNumber: int(statement, 3),
+                chapterTitle: text(statement, 4),
+                sectionTitle: text(statement, 5),
+                sourceLabel: "Reviewed \(reviewedAt)"
+            ),
+            evidenceLocator: evidenceLocator
+        )
+    }
+
+    func expertClaims(
+        scenarioID: String,
+        database: OpaquePointer
+    ) -> [ReviewedClaim] {
+        let sql = """
+        SELECT claim_id, kind, text, applicability, requirement_class
+        FROM expert_claims
+        WHERE scenario_id=?
+        ORDER BY display_order
+        """
+        guard let statement = try? prepare(database, sql) else { return [] }
+        defer { sqlite3_finalize(statement) }
+        guard bind(scenarioID, to: statement, index: 1) else { return [] }
+        var result: [ReviewedClaim] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let claimID = text(statement, 0)
+            guard let kind = ReviewedClaimKind(rawValue: text(statement, 1))
+            else { continue }
+            let sourceSQL = """
+            SELECT source_id, locator FROM expert_claim_sources
+            WHERE claim_id=? ORDER BY source_id
+            """
+            guard let sourceStatement = try? prepare(database, sourceSQL) else {
+                continue
+            }
+            var sourceIDs: [String] = []
+            var locators: [String] = []
+            if bind(claimID, to: sourceStatement, index: 1) {
+                while sqlite3_step(sourceStatement) == SQLITE_ROW {
+                    sourceIDs.append(text(sourceStatement, 0))
+                    locators.append(text(sourceStatement, 1))
+                }
+            }
+            sqlite3_finalize(sourceStatement)
+            let numericSQL = """
+            SELECT token FROM expert_numeric_facts
+            WHERE claim_id=? ORDER BY token
+            """
+            var facts: [AllowedNumericFact] = []
+            if let numericStatement = try? prepare(database, numericSQL) {
+                if bind(claimID, to: numericStatement, index: 1) {
+                    while sqlite3_step(numericStatement) == SQLITE_ROW {
+                        facts.append(AllowedNumericFact(
+                            token: text(numericStatement, 0),
+                            sourceClaimID: claimID
+                        ))
+                    }
+                }
+                sqlite3_finalize(numericStatement)
+            }
+            result.append(ReviewedClaim(
+                id: claimID,
+                kind: kind,
+                text: text(statement, 2),
+                applicability: text(statement, 3),
+                requirementClass: ReviewedClaimRequirementClass(
+                    rawValue: text(statement, 4)
+                ),
+                sourceIDs: sourceIDs,
+                sourceLocators: locators,
+                allowedNumericFacts: facts
+            ))
+        }
+        return result
     }
 
     func passage(id: String) -> SurvivalPassage? {

@@ -1,0 +1,859 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The only water we found is cloudy and full of visible sediment. I have a pot and fire but need to make this clear stream water safer.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 8262,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "water-collect-prefilter",
+        "water-boil"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 209,
+      "generated_tokens" : 76,
+      "generation_milliseconds" : 2504,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "water-collect-prefilter-08",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3811718408,
+      "peak_physical_footprint_bytes" : 1556990712,
+      "post_available_memory_bytes" : 3817731336,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325274296,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The only water we found is cloudy and full of visible sediment. I have a pot and fire but need to make this clear stream water safer.\"\n}",
+        "{\"a\":\"Avoid using the water until it is filtered or treated; confirm if the sediment level affects safety and clarity of the stream water before use. Is there any visible debris in the water that could be affecting its safety?\",\"e\":[]}",
+        "{\"a\":\"avoid using the pot and fire to boil water without filtering it first for safety in a stream with sediment, as this may not remove all contaminants. The best practice is to use a filter or purification method before drinking any water from streams that are cloudy and contain visible sediment, especially if you're unsure about its quality; ensure proper filtration or,?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "water-collect-prefilter",
+        "signal-smoke-fire",
+        "signal-ground",
+        "food-low-risk",
+        "water-filter-disinfect",
+        "navigation-compass",
+        "first-aid-fracture-spine"
+      ],
+      "retrieval_candidate_scores" : [
+        3.6861290322580644,
+        2.7863934426229506,
+        1.8353846153846152,
+        1.8349253731343282,
+        1.584705882352941,
+        1.2858730158730158,
+        0.73515151515151511,
+        0.43562499999999998
+      ],
+      "retrieval_context_milliseconds" : 4.9079656600952148,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.679738562091501,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Avoid fire near roots, grass, and low branches as they may be flammable or create a risk of ember spread. What is the exact distance from any dry vegetation to the campfire site?",
+      "clarification_target" : "The request asks to pick a campfire spot near roots, grass, and low branches. The scenario that best matches this is Candidate [1], which addresses fire site, a",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 5652,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 281,
+      "generated_tokens" : 46,
+      "generation_milliseconds" : 1634,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-site-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3797906648,
+      "peak_physical_footprint_bytes" : 1570802472,
+      "post_available_memory_bytes" : 3840521504,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3845175328,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The request asks to pick a campfire spot near roots, grass, and low branches. The scenario that best matches this is Candidate [1], which addresses fire site, a\"\n}",
+        "{\"a\":\"Avoid fire near roots, grass, and low branches as they may be flammable or create a risk of ember spread. What is the exact distance from any dry vegetation to the campfire site?\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "shelter-site",
+        "fire-extinguish",
+        "car-ev-hybrid",
+        "navigation-stop-mark",
+        "food-unknown-plants",
+        "weather-wildlife-wildfire",
+        "car-scene"
+      ],
+      "retrieval_candidate_scores" : [
+        8.7163934426229499,
+        0.43562499999999998,
+        0.31612903225806449,
+        0.13587301587301587,
+        0.13538461538461538,
+        0.13515151515151513,
+        0.13492537313432834,
+        0.13470588235294118
+      ],
+      "retrieval_context_milliseconds" : 6.0060024261474609,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.259423503325941,
+      "word_count" : 33
+    },
+    {
+      "answer" : "Avoid using the area near roots, grass, and low branches as it may be flammable or obstructed. What is the exact distance from the nearest tree trunk to where you plan to light your fire?",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 5623,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 318,
+      "generated_tokens" : 48,
+      "generation_milliseconds" : 1738,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-site-08",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3812357336,
+      "peak_physical_footprint_bytes" : 1556351784,
+      "post_available_memory_bytes" : 3841455392,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3870455840,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.\"\n}",
+        "{\"a\":\"Avoid using the area near roots, grass, and low branches as it may be flammable or obstructed. What is the exact distance from the nearest tree trunk to where you plan to light your fire?\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-materials",
+        "signal-smoke-fire",
+        "fire-wet",
+        "shelter-site",
+        "fire-extinguish",
+        "car-ev-hybrid",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        2.7163934426229508,
+        2.7161290322580647,
+        1.1058730158730157,
+        1.035625,
+        0.73492537313432837,
+        0.55538461538461537,
+        0.55470588235294116,
+        0.37515151515151512
+      ],
+      "retrieval_context_milliseconds" : 4.3250322341918945,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.098591549295776,
+      "word_count" : 35
+    },
+    {
+      "answer" : "avoid using unverified sources for medical advice or diagnosis without clinical context. Please confirm the patient's condition and consult a healthcare provider before making any decisions based on this information, as it may not be accurate or safe to proceed with self-diagnosis or treatment without proper?",
+      "clarification_target" : "The scenario involves leaving camp with warm coals under ash, indicating a fire that may still be active. The request is to determine the appropriate action in ",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 9484,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 196,
+      "generated_tokens" : 60,
+      "generation_milliseconds" : 1991,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-extinguish-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3815011544,
+      "peak_physical_footprint_bytes" : 1553697576,
+      "post_available_memory_bytes" : 3848434976,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3870619680,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [],\n  \"c\": \"insufficient\",\n  \"q\": \"The scenario involves leaving camp with warm coals under ash, indicating a fire that may still be active. The request is to determine the appropriate action in \"\n}",
+        "{\"a\":\"Avoid any further use of the fire until it has cooled completely; is the fire still active or have you checked for embers in the ash pile after leaving camp today, and if so, are they visible to your eyes now as a potential hazard before moving on safely away from the area with a. e:[]}  # This response contains an error because of incorrect formatting and missing proper structure; it should be corrected according to instructions provided above for accurate output format only when valid input is g?\" ,\"e\":[]}",
+        "{\"a\":\"avoid using unverified sources for medical advice or diagnosis without clinical context. Please confirm the patient's condition and consult a healthcare provider before making any decisions based on this information, as it may not be accurate or safe to proceed with self-diagnosis or treatment without proper?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-extinguish",
+        "navigation-stop-mark",
+        "signal-communication",
+        "weather-wildlife-wildfire",
+        "car-overheat",
+        "first-aid-cold",
+        "fire-materials",
+        "weather-wildlife-lightning"
+      ],
+      "retrieval_candidate_scores" : [
+        8.7163934426229499,
+        0.43612903225806449,
+        0.43587301587301586,
+        0.31562499999999999,
+        0.31515151515151513,
+        0.13538461538461538,
+        0.13492537313432834,
+        0.13470588235294118
+      ],
+      "retrieval_context_milliseconds" : 3.8360357284545898,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.869080779944291,
+      "word_count" : 46
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The patient collapsed after an outdoor accident. I need to assess immediate life threats.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 30000,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 7225,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-assessment"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 196,
+      "generated_tokens" : 54,
+      "generation_milliseconds" : 1804,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-assessment-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3827004680,
+      "peak_physical_footprint_bytes" : 1541704440,
+      "post_available_memory_bytes" : 3844158752,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4332681584,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The patient collapsed after an outdoor accident. I need to assess immediate life threats.\"\n}",
+        "{\"a\":\"Avoid any patient with suspected spinal injury from moving or lifting; confirm the presence of a spinal immobilization device before handling. Is there an observable sign of spinal trauma, such as deformity, inability to move, or visible fracture?\",\"e\":[]}",
+        "{\"a\":\"avoid hypothermia and ensure airway patency first, then assess for cardiac arrest or respiratory failure with a pulse oximeter and ECG if available. Ask: Is the patient breathing adequately at 10 breaths per minute?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-assessment",
+        "basics-danger-injury",
+        "first-aid-bleeding",
+        "basics-priorities",
+        "car-scene",
+        "first-aid-bites-allergy",
+        "first-aid-fracture-spine",
+        "weather-wildlife-lightning"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229506,
+        1.3961290322580644,
+        0.55587301587301585,
+        0.55562500000000004,
+        0.43515151515151512,
+        0.43470588235294116,
+        0.37538461538461537,
+        0.25492537313432834
+      ],
+      "retrieval_context_milliseconds" : 3.7750005722045898,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.960199004975124,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The scenario involves a deep cut with blood soaking through clothing and help is far away. The request asks for guidance on how to respond, but the provided CAs",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 7458,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bleeding"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 196,
+      "generated_tokens" : 61,
+      "generation_milliseconds" : 2021,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bleeding-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3827447048,
+      "peak_physical_footprint_bytes" : 1541262072,
+      "post_available_memory_bytes" : 3849975048,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3873847328,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The scenario involves a deep cut with blood soaking through clothing and help is far away. The request asks for guidance on how to respond, but the provided CAs\" }\n",
+        "{\"a\":\"Avoid covering the wound with wet or dirty clothing; assess for signs of infection. Is there any visible swelling, redness, or warmth at the site?\",\"e\":[]}",
+        "{\"a\":\"avoid contamination of the wound with blood and clothing while transporting to medical care. Please confirm that the patient is not in a vehicle or location where they could be exposed to other people, as this may increase risk for transmission of infection from contaminated materials such as clothing or blood?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "first-aid-bites-allergy",
+        "first-aid-shock",
+        "weather-wildlife-wildfire",
+        "basics-stop",
+        "first-aid-assessment",
+        "shelter-debris",
+        "weather-wildlife-heat"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.85612903225806447,
+        0.61562499999999998,
+        0.6147058823529411,
+        0.43515151515151512,
+        0.43492537313432833,
+        0.25587301587301586,
+        0.25538461538461538
+      ],
+      "retrieval_context_milliseconds" : 5.6059360504150391,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.876712328767127,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The scenario describes a patient with severe bleeding, pale coloration, weakness, and deterioration after blood loss. The injured person is soaked in blood from",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 10006,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bleeding",
+        "first-aid-shock"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 215,
+      "generated_tokens" : 69,
+      "generation_milliseconds" : 2293,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bleeding-08",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3827791064,
+      "peak_physical_footprint_bytes" : 1540918056,
+      "post_available_memory_bytes" : 3849450784,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879696416,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [],\n  \"c\": \"insufficient\",\n  \"q\": \"The scenario describes a patient with severe bleeding, pale coloration, weakness, and deterioration after blood loss. The injured person is soaked in blood from\" }\n",
+        "{\"a\":\"Avoid moving the patient to prevent further bleeding; is there any visible sign of active hemorrhage or swelling at the wound site that could indicate increased blood loss risk, such as a pulsating vessel or rapid oozing from the cut area, which might suggest ongoing internal ble. e:[]}  # Note: The response contains an error in formatting and logic - it's not correct to say there is no observable condition; instead, we should ask for one specific observable that would change safety action based *?\"\n\n    \t, \"e\": []}",
+        "{\"a\":\"avoid rapid movement or handling of the injured person to prevent further injury and ensure safe transport if help is far away. The patient may be in shock, so avoid direct pressure on wounds unless necessary for bleeding control, as this could worsen circulation issues and delay response time when emergency services arrive later, especially with?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "first-aid-shock",
+        "first-aid-bites-allergy",
+        "first-aid-assessment",
+        "basics-danger-injury",
+        "first-aid-fracture-spine",
+        "first-aid-heat",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        3.0163934426229506,
+        2.4161290322580644,
+        0.97587301587301578,
+        0.7353846153846153,
+        0.73515151515151511,
+        0.67562499999999992,
+        0.55492537313432844,
+        0.25470588235294117
+      ],
+      "retrieval_context_milliseconds" : 3.9830207824707031,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.723772858517805,
+      "word_count" : 14
+    },
+    {
+      "answer" : "avoid exposure to allergens or irritants that may trigger anaphylaxis after a sting, as it can lead to severe reactions and life-threatening symptoms like difficulty breathing. The patient should be evaluated for possible allergic reaction with immediate medical attention required if there are signs of respiratory distress or swelling; prompt treatment is essential in such cases—do not delay in?",
+      "clarification_target" : "A sting was followed by swelling and trouble breathing far from immediate help.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 7341,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bites-allergy"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 195,
+      "generated_tokens" : 78,
+      "generation_milliseconds" : 2555,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bites-allergy-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3823547608,
+      "peak_physical_footprint_bytes" : 1545161512,
+      "post_available_memory_bytes" : 3845469448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879303200,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"A sting was followed by swelling and trouble breathing far from immediate help.\"\n}",
+        "{\"a\":\"Avoid contact with the area of swelling and seek emergency help immediately. Is there any visible change in breathing or skin color that might indicate a worsening reaction?\",\"e\":[]}",
+        "{\"a\":\"avoid exposure to allergens or irritants that may trigger anaphylaxis after a sting, as it can lead to severe reactions and life-threatening symptoms like difficulty breathing. The patient should be evaluated for possible allergic reaction with immediate medical attention required if there are signs of respiratory distress or swelling; prompt treatment is essential in such cases—do not delay in?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bites-allergy",
+        "first-aid-assessment",
+        "first-aid-bleeding",
+        "basics-danger-injury",
+        "basics-stop",
+        "basics-priorities",
+        "car-ev-hybrid",
+        "first-aid-wounds-burns"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.85612903225806447,
+        0.73587301587301579,
+        0.43538461538461537,
+        0.25562499999999999,
+        0.25515151515151513,
+        0.13492537313432834,
+        0.13470588235294118
+      ],
+      "retrieval_context_milliseconds" : 3.9410591125488281,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 32.627118644067799,
+      "word_count" : 59
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "A crashed electric vehicle has damaged high-voltage components and unusual heat.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 30000,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 6278,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "car-ev-hybrid"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "inappropriate_clarification",
+      "first_token_milliseconds" : 191,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 1253,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "car-ev-hybrid-01",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3846960440,
+      "peak_physical_footprint_bytes" : 1521748680,
+      "post_available_memory_bytes" : 3857233208,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5299616880,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [],\n  \"c\": \"insufficient\",\n  \"q\": \"A crashed electric vehicle has damaged high-voltage components and unusual heat.\"\n}",
+        "{\"a\":\"Avoid contact with the vehicle's high-voltage components and do not approach the area until it is confirmed safe. Is there any visible electrical discharge or smoke near the damaged area?\",\"e\":[]}",
+        "{\"a\":\"avoid grounding high-voltage components without proper isolation and verification of circuit integrity. Is the vehicle's electrical system properly isolated before any repair work begins?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-ev-hybrid",
+        "car-jump",
+        "weather-wildlife-heat",
+        "car-scene",
+        "car-fuse",
+        "weather-wildlife-wind-storm",
+        "signal-communication",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.79612903225806453,
+        0.68492537313432833,
+        0.67587301587301574,
+        0.67562499999999992,
+        0.43538461538461537,
+        0.31470588235294117,
+        0.13515151515151513
+      ],
+      "retrieval_context_milliseconds" : 3.9390325546264648,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.898305084745765,
+      "word_count" : 14
+    },
+    {
+      "answer" : "avoid using unverified observations in fire response without confirmation of condition or cause. question: what specific signs or symptoms indicate potential hazards that may not be immediately visible but could affect safety?",
+      "clarification_target" : "I cannot observe or describe the condition in a fire situation, but I need to determine whether it is safe to use smoke or fire. The scenario may involve an un-",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "insufficient",
+      "elapsed_milliseconds" : 9141,
+      "expected_disposition" : "clarify",
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 1454,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "insufficient-015",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3839243528,
+      "peak_physical_footprint_bytes" : 1529465592,
+      "post_available_memory_bytes" : 3855135984,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883563064,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I cannot observe or describe the condition in a fire situation, but I need to determine whether it is safe to use smoke or fire. The scenario may involve an un-\"\n}",
+        "{\"a\":\"Avoid using smoke or fire until you can confirm the condition is safe; what observable sign indicates a potential hazard in this situation that could change your decision to use it safely, such as increased heat, visible flames, or smoke color and density for immediate assessment. e:[]}  # Note: The response contains an error due to incorrect formatting of JSON output with extra keys and missing proper structure; the correct format should be a single key-value pair where 'a' is the answer string (?\" ,\"e\":[]}\n\n   ",
+        "{\"a\":\"avoid using unverified observations in fire response without confirmation of condition or cause. question: what specific signs or symptoms indicate potential hazards that may not be immediately visible but could affect safety?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "signal-smoke-fire",
+        "fire-wet",
+        "basics-priorities",
+        "navigation-backtrack",
+        "signal-whistle",
+        "navigation-compass",
+        "weather-wildlife-flood",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        1.1656249999999999,
+        0.9853846153846153,
+        0.73639344262295081,
+        0.61587301587301591,
+        0.61492537313432838,
+        0.43515151515151512,
+        0.25612903225806449,
+        0.13470588235294118
+      ],
+      "retrieval_context_milliseconds" : 3.8930177688598633,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.280507131537242,
+      "word_count" : 32
+    },
+    {
+      "answer" : "A practical weekend hike checklist includes the following items:1. Weather Check2. Route Planning3. Gear and Equipment4. Food and Water5. First Aid Kit6. Navigation Tools7. Emergency Contact8. Personal Items (e.g. sunscreen, insect repellent)9. Communication Devices10. Safety Measures11. Time Management12. Rest Areas13. Wildlife Awareness14. Leave No Trace Principles15. Hike Duration and Distance16. Altitude Considerations17. Emergency Plan18. Personal Health Notes (e.g. allergies, medical conditions)19. Trail Conditions Check20. Final Review of All Items.",
+      "clarification_target" : "",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "not_needed",
+      "elapsed_milliseconds" : 7147,
+      "expected_disposition" : "ordinary",
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_risk_class" : "low",
+      "failure_category" : null,
+      "first_token_milliseconds" : 156,
+      "generated_tokens" : 142,
+      "generation_milliseconds" : 4334,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "ordinary-015",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3831510232,
+      "peak_physical_footprint_bytes" : 1537198888,
+      "post_available_memory_bytes" : 3849991384,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3885086752,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"ordinary\",\n  \"r\": \"low\",\n  \"e\": [],\n  \"c\": \"not_needed\",\n  \"q\": \"\"\n}",
+        "{\"a\":\"A practical weekend hike checklist includes the following items:1. Weather Check2. Route Planning3. Gear and Equipment4. Food and Water5. First Aid Kit6. Navigation Tools7. Emergency Contact8. Personal Items (e.g., sunscreen, insect repellent)9. Communication Devices10. Safety Measures11. Time Management12. Rest Areas13. Wildlife Awareness14. Leave No Trace Principles15. Hike Duration and Distance16. Altitude Considerations17. Emergency Plan18. Personal Health Notes (e.g., allergies, medical conditions)19. Trail Conditions Check20. Final Review of All Items.\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bites-allergy",
+        "car-stay-walk",
+        "signal-whistle",
+        "basics-stop",
+        "navigation-map",
+        "first-aid-bleeding",
+        "food-carried",
+        "signal-communication"
+      ],
+      "retrieval_candidate_scores" : [
+        0.43515151515151512,
+        0.43470588235294116,
+        0.31587301587301586,
+        0.31562499999999999,
+        0.31538461538461537,
+        0.31492537313432833,
+        0.13639344262295081,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 3.3689737319946289,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.748204882719001,
+      "word_count" : 69
+    },
+    {
+      "answer" : "Avoid leaving notes unorganized; ensure all details are clearly documented before departure. What specific information is missing from your current planning note that could affect the safety or effectiveness of your camping trip?",
+      "clarification_target" : "",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "not_needed",
+      "elapsed_milliseconds" : 6808,
+      "expected_disposition" : "ordinary",
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_risk_class" : "low",
+      "failure_category" : null,
+      "first_token_milliseconds" : 243,
+      "generated_tokens" : 44,
+      "generation_milliseconds" : 1539,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "ordinary-030",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3833853168,
+      "peak_physical_footprint_bytes" : 1534855952,
+      "post_available_memory_bytes" : 3855463688,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879843872,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"ordinary\",\n  \"r\": \"low\",\n  \"e\": [],\n  \"c\": \"not_needed\",\n  \"q\": \"\"\n}",
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"5\"\n}",
+        "{\"a\":\"Avoid leaving notes unorganized; ensure all details are clearly documented before departure. What specific information is missing from your current planning note that could affect the safety or effectiveness of your camping trip?\",\"e\":[]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "basics-first-night",
+        "basics-inventory",
+        "fire-extinguish",
+        "water-collect-prefilter",
+        "navigation-backtrack",
+        "fire-ignition",
+        "fire-materials",
+        "weather-wildlife-lightning"
+      ],
+      "retrieval_candidate_scores" : [
+        0.68639344262295077,
+        0.31612903225806449,
+        0.31587301587301586,
+        0.31515151515151513,
+        0.31492537313432833,
+        0.31470588235294117,
+        0.25562499999999999,
+        0.25538461538461538
+      ],
+      "retrieval_context_milliseconds" : 3.7970542907714844,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 33.179012345679013,
+      "word_count" : 33
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 4,
+  "final_available_memory_bytes" : 3885578272,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5327469752,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 30,
+  "mode" : "expert-rag-diagnostic",
+  "run_id" : "expert-rag-v2-diagnostic",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

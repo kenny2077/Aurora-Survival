@@ -1,4 +1,172 @@
 {
+  "expertPolicy": {
+    "criticalLessonIDs": [
+      "car-ev-hybrid",
+      "first-aid-assessment",
+      "first-aid-bites-allergy",
+      "first-aid-bleeding",
+      "first-aid-cold",
+      "first-aid-heat",
+      "first-aid-shock",
+      "weather-wildlife-flood",
+      "weather-wildlife-wildfire"
+    ],
+    "lowRiskLessonIDs": [
+      "basics-inventory",
+      "food-carried",
+      "signal-schedule"
+    ]
+  },
+  "expertSupplementalScenarios": [
+    {
+      "applicability": "A parked conventional gasoline or diesel vehicle does not start and there is no immediate crash, fire, fuel, or electrical hazard.",
+      "chapterID": "car",
+      "id": "car-no-start-triage",
+      "independentApprovalStatus": "pending-release-review",
+      "jurisdiction": "global",
+      "lessonID": "car-stay-walk",
+      "observableCues": [
+        "my car will not start",
+        "car will not start",
+        "car won't start",
+        "car wont start",
+        "vehicle will not start",
+        "engine will not start",
+        "no start",
+        "clicks but won't start",
+        "cranks but won't start"
+      ],
+      "prerequisites": [
+        "Vehicle is stationary in a safe location.",
+        "This scenario excludes EV or hybrid high-voltage diagnosis and repair."
+      ],
+      "relatedScenarioIDs": [
+        "car-stay-walk-scenario",
+        "car-jump-scenario",
+        "car-ev-hybrid-scenario"
+      ],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-15",
+      "reviewerID": "trailguard-content-review-2026-08-15",
+      "riskClass": "high",
+      "title": "Car Will Not Start: Safe Triage",
+      "units": "dual",
+      "claims": [
+        {
+          "applicability": "Before one controlled start attempt.",
+          "kind": "action",
+          "requirementClass": "immediate_action",
+          "sourceLocators": [{"locator": "California Commercial Driver's Handbook, Section 2, Step 3: Get in and Start the Engine", "sourceID": "ca-dmv-engine-start"}],
+          "text": "Set the parking brake; select Park or Neutral for an automatic, or fully depress the clutch and select Neutral for a manual vehicle."
+        },
+        {
+          "applicability": "Before one controlled start attempt.",
+          "kind": "action",
+          "requirementClass": "immediate_action",
+          "sourceLocators": [{"locator": "California Commercial Driver's Handbook, Section 2, Steps 3–4: start engine, listen, and turn off unneeded lights", "sourceID": "ca-dmv-engine-start"}],
+          "text": "Turn off unneeded lights and accessories, make one controlled start attempt, and listen for unusual noises."
+        },
+        {
+          "applicability": "During the controlled attempt.",
+          "kind": "action",
+          "requirementClass": "observation",
+          "sourceLocators": [{"locator": "California Commercial Driver's Handbook, Section 2, Step 3: warning lights, ammeter or voltmeter, and unusual noises", "sourceID": "ca-dmv-engine-start"}],
+          "text": "Observe whether the dash lights normally or dims, whether there is a click, whether the engine cranks, and whether it starts then stops; report those observations instead of guessing a diagnosis."
+        },
+        {
+          "applicability": "After the observation step when no immediate hazard is present.",
+          "kind": "action",
+          "requirementClass": "follow_up",
+          "sourceLocators": [
+            {"locator": "Vehicle kit and stranded-traveler guidance", "sourceID": "ready-vehicle"},
+            {"locator": "Electric and Hybrid Vehicles: owner-manual, damaged-battery, towing, fire, and flood guidance", "sourceID": "nhtsa-ev-safety"}
+          ],
+          "text": "Use the vehicle owner's manual for immobilizer, key, jump-start, and model-specific steps; treat EV and hybrid propulsion systems as model-specific and do not touch orange high-voltage components."
+        },
+        {
+          "applicability": "At any time during triage.",
+          "kind": "contraindication",
+          "requirementClass": "stop_condition",
+          "sourceLocators": [
+            {"locator": "California Commercial Driver's Handbook, Section 2: leaks, damaged wiring, warning lights, and unusual noises", "sourceID": "ca-dmv-engine-start"},
+            {"locator": "Damaged battery, towing, fire, and flood guidance", "sourceID": "nhtsa-ev-safety"}
+          ],
+          "text": "Stop attempts, move people away when safe, and seek roadside or emergency help for smoke, fuel smell, unusual heat, leaking fluid, impact damage, damaged wiring, or a swollen, leaking, frozen, or damaged battery."
+        },
+        {
+          "applicability": "When the controlled attempt does not start the vehicle.",
+          "kind": "contraindication",
+          "requirementClass": "stop_condition",
+          "sourceLocators": [{"locator": "Vehicle kit and stranded-traveler guidance", "sourceID": "ready-vehicle"}],
+          "text": "Do not keep cranking repeatedly; preserve battery power and arrange model-appropriate assistance after recording the observations."
+        }
+      ]
+    },
+    {
+      "applicability": "A person has suitable fishing gear, safe bank access, and legal permission, and fishing will not displace higher-priority shelter, water, signaling, or rescue work.",
+      "chapterID": "food",
+      "id": "food-fishing-basics",
+      "independentApprovalStatus": "pending-release-review",
+      "jurisdiction": "global",
+      "lessonID": "food-low-risk",
+      "observableCues": ["how to fish", "how can i fish", "fishing basics", "catch a fish", "hook and line", "fish for food"],
+      "prerequisites": [
+        "The user already has suitable hook-and-line gear.",
+        "Local law, access rules, species rules, and consumption advisories are known."
+      ],
+      "relatedScenarioIDs": ["food-low-risk-scenario", "food-cook-scenario"],
+      "reviewStatus": "primary-source-verified",
+      "reviewedAt": "2026-08-15",
+      "reviewerID": "trailguard-content-review-2026-08-15",
+      "riskClass": "high",
+      "title": "Basic Hook-and-Line Fishing from a Safe Bank",
+      "units": "dual",
+      "claims": [
+        {
+          "applicability": "Before preparing or casting fishing gear.",
+          "kind": "applicability",
+          "requirementClass": "context",
+          "sourceLocators": [{"locator": "ATP 3-50.21, Chapter 7, Food Procurement: fishing methods and safety considerations", "sourceID": "army-atp-survival"}],
+          "text": "Fish only where access and harvest are legal, from stable ground, with suitable gear and enough daylight, weather margin, energy, and time to return safely."
+        },
+        {
+          "applicability": "When suitable hook-and-line gear and legal bait are available.",
+          "kind": "action",
+          "requirementClass": "immediate_action",
+          "sourceLocators": [{"locator": "ATP 3-50.21, Chapter 7, Food Procurement: hook-and-line fishing", "sourceID": "army-atp-survival"}],
+          "text": "Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended."
+        },
+        {
+          "applicability": "While presenting and retrieving the line.",
+          "kind": "action",
+          "requirementClass": "immediate_action",
+          "sourceLocators": [{"locator": "ATP 3-50.21, Chapter 7, Food Procurement: hook-and-line placement and fish habitat", "sourceID": "army-atp-survival"}],
+          "text": "Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water."
+        },
+        {
+          "applicability": "After landing a fish that the user already knows is legal and safe to retain.",
+          "kind": "action",
+          "requirementClass": "follow_up",
+          "sourceLocators": [{"locator": "Safe Minimum Internal Temperature Chart: Clean, Separate, Cook, Chill; Fish and Shellfish", "sourceID": "usda-fish-temperature"}],
+          "text": "Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F (62.8 °C) at the thickest part when a food thermometer is available."
+        },
+        {
+          "applicability": "At any time during fishing.",
+          "kind": "contraindication",
+          "requirementClass": "stop_condition",
+          "sourceLocators": [{"locator": "ATP 3-50.21, Chapter 7, Food Procurement: procurement safety and energy tradeoffs", "sourceID": "army-atp-survival"}],
+          "text": "Stop for worsening weather, darkness, fatigue, strong current, unstable banks, submerged hazards, lost-route risk, or if fishing consumes water, warmth, signaling time, or rescue opportunity."
+        },
+        {
+          "applicability": "Whenever species, legality, or safe handling is uncertain.",
+          "kind": "contraindication",
+          "requirementClass": "stop_condition",
+          "sourceLocators": [{"locator": "ATP 3-50.21, Chapter 7, Food Procurement: fishing", "sourceID": "army-atp-survival"}],
+          "text": "Do not rely on Aurora for species identification or jurisdiction-specific permission, and do not improvise weapons or enter the water to obtain fish."
+        }
+      ]
+    }
+  ],
   "chapters": [
     {
       "id": "basics",
@@ -2367,6 +2535,44 @@
       ],
       "chapterID": "first-aid",
       "goal": "End exposure, support breathing, use prescribed emergency medicine, and seek expert help.",
+      "expertClaims": [
+        {
+          "kind": "applicability",
+          "text": "Use the matching response for anaphylaxis, poisoning, or a bite or sting without mixing procedures between them.",
+          "applicability": "A bite, sting, allergy, poison, chemical, or contaminated-area exposure is reported.",
+          "requirementClass": "context"
+        },
+        {
+          "kind": "action",
+          "text": "Move away from the animal, insects, plant, chemical, or contaminated area without creating another injury.",
+          "applicability": "The exposure source or contaminated area remains an immediate hazard.",
+          "requirementClass": "conditional_action"
+        },
+        {
+          "kind": "action",
+          "text": "Help the person use their prescribed epinephrine immediately.",
+          "applicability": "The person has anaphylaxis and prescribed epinephrine is available.",
+          "requirementClass": "immediate_action"
+        },
+        {
+          "kind": "escalation",
+          "text": "Activate emergency response immediately for anaphylaxis.",
+          "applicability": "Anaphylaxis is reported or suspected from observable symptoms.",
+          "requirementClass": "escalation"
+        },
+        {
+          "kind": "action",
+          "text": "Preserve the container or description and contact the local poison service when communication exists.",
+          "applicability": "A possible poisoning is reported.",
+          "requirementClass": "conditional_action"
+        },
+        {
+          "kind": "contraindication",
+          "text": "Do not cut or suck a snakebite, apply ice or an electric shock, or make the person walk unnecessarily.",
+          "applicability": "A snakebite is reported.",
+          "requirementClass": "contraindication"
+        }
+      ],
       "hazardTags": [],
       "id": "first-aid-bites-allergy",
       "jurisdiction": "global",
@@ -3240,6 +3446,32 @@
       "title": "Electric and Hybrid Vehicles: Battery, Charging and Safety",
       "updatedAt": "current-page",
       "url": "https://www.nhtsa.gov/vehicle-safety/electric-and-hybrid-vehicles"
+    },
+    {
+      "id": "ca-dmv-engine-start",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Commercial Driver's Handbook, Section 2, Step 3: Start the Engine and Inspect Inside the Cab",
+      "organization": "California Department of Motor Vehicles",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-15",
+      "title": "Commercial Driver's Handbook: Driving Safely",
+      "updatedAt": "current-page-2026-08-15",
+      "url": "https://www.dmv.ca.gov/portal/handbook/commercial-driver-handbook/section-2-driving-safely/"
+    },
+    {
+      "id": "usda-fish-temperature",
+      "jurisdiction": "global-core-us-source",
+      "licenseStatus": "us-government-public-domain",
+      "locator": "Safe Minimum Internal Temperature Chart: Clean, Separate, Cook, Chill; Fish and Shellfish",
+      "organization": "U.S. Department of Agriculture Food Safety and Inspection Service",
+      "publishedAt": "not-stated",
+      "reviewLevel": "primary-source-verified",
+      "reviewedAt": "2026-08-15",
+      "title": "Safe Minimum Internal Temperature Chart",
+      "updatedAt": "current-page-2026-08-15",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart"
     }
   ]
 }

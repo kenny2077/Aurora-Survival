@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "run_id": "20260820-short-r1",
+  "rubric": [
+    "direct_relevance",
+    "actionability_and_completeness",
+    "reviewed_evidence_use",
+    "safety_limits_and_uncertainty",
+    "natural_readable_prose"
+  ],
+  "maximum_score_per_case": 10,
+  "cases": [
+    {
+      "tier": "vision_expert",
+      "id": "comparison-car-no-start",
+      "scores": [2, 1, 1, 1, 2],
+      "total": 7,
+      "automatic_failure": false,
+      "assessment": "Relevant and readable with correct routing, but it repeats observations already supplied, weakly attributes a possible ignition diagnosis, and omits several first checks and explicit smoke, fuel-smell, heat, and leak stop conditions."
+    },
+    {
+      "tier": "vision_expert",
+      "id": "comparison-water-boil",
+      "scores": [1, 1, 1, 1, 1],
+      "total": 5,
+      "automatic_failure": false,
+      "assessment": "The altitude-specific three-minute value is correct, but the visible answer omits the ordinary one-minute boiling duration requested by the user and adds less relevant water-conservation material."
+    },
+    {
+      "tier": "vision_expert",
+      "id": "comparison-lost-trail",
+      "scores": [2, 2, 1, 2, 2],
+      "total": 9,
+      "automatic_failure": false,
+      "assessment": "Strong prioritized STOP-style guidance, correct retrieval, and a useful condition on backtracking; weak semantic support correctly prevents a fully verified label."
+    },
+    {
+      "tier": "lite",
+      "id": "comparison-car-no-start",
+      "scores": [0, 0, 0, 0, 0],
+      "total": 0,
+      "automatic_failure": true,
+      "automatic_failure_reasons": ["terminal_model_format_fallback"],
+      "assessment": "Both generations failed the Lite response contract, so the user received only the retry message."
+    },
+    {
+      "tier": "lite",
+      "id": "comparison-water-boil",
+      "scores": [2, 2, 2, 2, 2],
+      "total": 10,
+      "automatic_failure": false,
+      "assessment": "Directly gives the correct one-minute rolling-boil duration, safe cooling and storage, a contamination warning, and the correct Manual lesson with concise prose."
+    },
+    {
+      "tier": "lite",
+      "id": "comparison-lost-trail",
+      "scores": [1, 1, 0, 0, 2],
+      "total": 4,
+      "automatic_failure": false,
+      "assessment": "Readable but generic and ungrounded; it omits stopping and marking the last known point and could encourage movement without a known safe route."
+    }
+  ],
+  "summary": {
+    "expert_quality_total": 21,
+    "expert_quality_maximum": 30,
+    "lite_quality_total": 14,
+    "lite_quality_maximum": 30,
+    "expert_route_passes": 3,
+    "lite_route_passes": 1,
+    "expert_repair_cases": 3,
+    "lite_repair_cases": 2,
+    "expert_average_elapsed_milliseconds": 12546.33,
+    "lite_average_elapsed_milliseconds": 3500.33,
+    "incorrect_verification_badges": 0,
+    "incorrect_numeric_guidance": 0,
+    "visible_prompt_or_json_leakage": 0,
+    "recommendation": "Expert is currently more dependable across varied core prompts, while Lite is much faster and can be excellent on a clean retrieval hit. Neither tier is consistently reliable enough to treat this single smoke run as a release gate."
+  }
+}

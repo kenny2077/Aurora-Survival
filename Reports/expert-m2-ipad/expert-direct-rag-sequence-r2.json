@@ -1,0 +1,767 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "car-no-start-triage"
+        ]
+      ],
+      "answer" : "Expert returned an unreadable draft. Retry this question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "insufficient",
+      "elapsed_milliseconds" : 20430,
+      "expected_manual_lessons" : [
+        "car-stay-walk"
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1946,
+      "generated_tokens" : 256,
+      "generation_milliseconds" : 10015,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "direct-car-no-start",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3803133048,
+      "peak_physical_footprint_bytes" : 1565559688,
+      "post_available_memory_bytes" : 3829036152,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322488944,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Set the parking brake; select Park or Neutral for an automatic, or fully depress the clutch and select Neutral for a manual vehicle.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Turn off unneeded lights and accessories, make one controlled start attempt, and listen for unusual noises.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Observe whether the dash lights normally or dims, whether there is a click, whether the engine cranks, and whether it starts then stops; report those observations instead of guessing a diagnosis.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use the vehicle owner's manual for immobilizer, key, jump-start, and model-specific steps; treat EV and hybrid propulsion systems as model-specific and do not touch orange high-voltage components.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Stop attempts, move people away when safe, and seek roadside or emergency help for smoke, fuel smell, unusual heat, leaking fluid, impact damage, damaged wiring, or a swollen, leaking, frozen, or damaged battery.\",\n      \"e\": [5]\n    }\n ",
+        "{\n  \"s\": [\n    {\n      \"a\": \"When a vehicle will not start, first set the parking brake and select Park or Neutral for an automatic car, or fully depress the clutch and select Neutral for a manual vehicle before attempting to start.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Before making one controlled start attempt, turn off unneeded lights and accessories, listen for unusual noises during the process, observe whether dash lights dim or stay on, if there is a click, engine cranking, or sth.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"During the controlled attempt, carefully check for any signs of smoke, fuel smell, leaking fluid, impact damage, damaged wiring, swollen battery, or frozen components; report these observations instead of guessing a fix.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"After observing and noting all details without immediate hazard, use the owner’s manual for immobilizer, key, jump-start steps, and model-specific procedures.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"If no start occurs after observation or if there is a risk of further damage, stop attempts immediately, move"
+      ],
+      "repair_count" : 1,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-stay-walk",
+        "car-stay-walk",
+        "fire-wet",
+        "car-jump",
+        "first-aid-assessment",
+        "car-stuck",
+        "car-ev-hybrid",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.096393442622950826,
+        0.022129032258064514,
+        0.020425373134328358,
+        0.020373015873015873,
+        0.018205882352941176,
+        0.017884615384615384,
+        0.017651515151515151,
+        0.017625000000000002
+      ],
+      "retrieval_context_milliseconds" : 22.912979125976562,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "support_status" : "unsupported",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.602429049448507,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 8
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Hi, I'm Aurora Expert. I can help with your query.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 848,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 164,
+      "generated_tokens" : 21,
+      "generation_milliseconds" : 731,
+      "grounding_reason" : "standalone_conversation",
+      "id" : "direct-greeting-hi",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3823416440,
+      "peak_physical_footprint_bytes" : 1545292680,
+      "post_available_memory_bytes" : 3823301752,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3828970616,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Hi, I'm Aurora Expert. I can help with your query.\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "standalone_conversation",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-ev-hybrid",
+        "car-fuse",
+        "first-aid-heat",
+        "weather-wildlife-wind-storm",
+        "first-aid-cold",
+        "weather-wildlife-flood",
+        "signal-ground",
+        "car-scene"
+      ],
+      "retrieval_candidate_scores" : [
+        0.016393442622950821,
+        0.016129032258064516,
+        0.015873015873015872,
+        0.015625,
+        0.015384615384615385,
+        0.015151515151515152,
+        0.014925373134328358,
+        0.014705882352941176
+      ],
+      "retrieval_context_milliseconds" : 6.0300827026367188,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.273368606701943,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Wassup! I'm Aurora Expert, your offline assistant. How can I help you today?",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1047,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 161,
+      "generated_tokens" : 28,
+      "generation_milliseconds" : 932,
+      "grounding_reason" : "standalone_conversation",
+      "id" : "direct-greeting-wassup",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3822548088,
+      "peak_physical_footprint_bytes" : 1546161032,
+      "post_available_memory_bytes" : 3822482552,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3823301752,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Wassup! I'm Aurora Expert, your offline assistant. How can I help you today?\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "standalone_conversation",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_context_milliseconds" : 1.8030405044555664,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.019455252918291,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 13
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-low-risk-scenario"
+        ]
+      ],
+      "answer" : "Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Gather food only with methods you already know, can use legally, and can perform without injury or getting lost. Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "partial",
+      "elapsed_milliseconds" : 14219,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1801,
+      "generated_tokens" : 173,
+      "generation_milliseconds" : 6833,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "direct-find-food",
+      "manual_lessons" : [
+        "food-energy",
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3796464760,
+      "peak_physical_footprint_bytes" : 1572244360,
+      "post_available_memory_bytes" : 3830084728,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3853645736,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Estimate likely rescue time, weather, health, daylight, and food already available.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Choose only methods with a high chance of return and low injury risk.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Stop if gathering consumes water, warmth, navigation certainty, or signaling time.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Gather food only with methods you already know, can use legally, and can perform without injury or getting lost.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Prefer stationary, close-to-camp options that do not require dangerous climbing, swimming, or weapons.\",\n      \"e\": [7]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"When gathering food, prioritize methods that are safe and low-risk to avoid injury or getting lost.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Choose only established techniques with proven success in your environment.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Stop if collecting food consumes water, warmth, navigation certainty, or signaling time.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Mark your route and limit gathering to avoid weather, darkness, or fatigue worsening.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Do not eat unfamiliar animals, shellfish, insects, or plants simply because another animal ate them.\",\n      \"e\": [10]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "food-cook",
+        "food-wildlife",
+        "food-carried",
+        "weather-wildlife-snakes-insects",
+        "food-low-risk",
+        "food-low-risk",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        0.095625000000000002,
+        0.020893442622950821,
+        0.020629032258064516,
+        0.020373015873015873,
+        0.019651515151515152,
+        0.017884615384615384,
+        0.017425373134328358,
+        0.015705882352941177
+      ],
+      "retrieval_context_milliseconds" : 5.4299831390380859,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "food-energy",
+        "food-low-risk"
+      ],
+      "selected_scenario_ids" : [
+        "food-energy-p01",
+        "food-low-risk-p01"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "support_status" : "unsupported",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.181240063593002,
+      "verification_issue_codes" : [
+        "incomplete_evidence"
+      ],
+      "verification_status" : "unverified",
+      "word_count" : 67
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended. Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water. Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F (62.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "partial",
+      "elapsed_milliseconds" : 14819,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2069,
+      "generated_tokens" : 179,
+      "generation_milliseconds" : 7597,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "direct-fishing-followup",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3827004536,
+      "peak_physical_footprint_bytes" : 1541704584,
+      "post_available_memory_bytes" : 3836540024,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3830084728,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F (62.\"\n      ,\n      \"e\": [4]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"When fishing from a safe bank with legal access and suitable gear, use the method described in claim [2] to secure line to a rod or handline, attach appropriate equipment, add locally permitted bait, and keep the line in.\",\n      \"e\": [\n        1,\n        3\n      ]\n    },\n    {\n      \"a\": \"Presenting bait from a stable bank near cover without wading or entering water is required under claim [3], ensuring steady retrieval and safe landing.\",\n      \"e\": [\n        2,\n        4\n      ]\n    },\n    {\n      \"a\": \"After catching fish, keep hands, tools, and food away from raw contamination; cook retained fish to 145 °F (62.\",\"e\": [4]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-cook",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.096393442622950826,
+        0.017129032258064517,
+        0.016873015873015873
+      ],
+      "retrieval_context_milliseconds" : 2.4510622024536133,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "food-low-risk"
+      ],
+      "selected_scenario_ids" : [
+        "food-low-risk-p01"
+      ],
+      "sentence_citation_count" : 3,
+      "source_card_ids" : [
+        "usda-fish-temperature",
+        "army-atp-survival"
+      ],
+      "support_status" : "unsupported",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.199710564399425,
+      "verification_issue_codes" : [
+        "incomplete_evidence"
+      ],
+      "verification_status" : "unverified",
+      "word_count" : 80
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5318769608,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5326109832,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "1ff376555a9169523f9c9b8e314b97f5d9d2be98cdd6c3478e9c9fe4573f3756",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 0,
+  "mode" : "expert-direct-rag",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-direct-rag-sequence-r2",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5326077064,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 69,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322456176,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5468,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322505328,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10803,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 15928,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 21218,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 26469,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31586,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322456176,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 36693,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41860,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 47033,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 52279,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322439792,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57469,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322472560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 62660,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3829036152,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 83232,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3823301752,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 84188,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3822482552,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 85333,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3830084728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 99698,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3836540024,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114619,
+      "phase" : "after_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3864098728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114713,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4812831328,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119976,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5284461488,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 125273,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318835144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130580,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318835144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 135734,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318835144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140942,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318835144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 146287,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318835144,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 151473,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318802376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 156646,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318818760,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 161775,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318818760,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 167105,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318818760,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 172530,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318802376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 177742,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318802376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 183065,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318785992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 188465,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318769608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 193659,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318769608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 198942,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318753224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 204348,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318769608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 209715,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318753224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 215042,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318753224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 220465,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318736840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 225637,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318802376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 231040,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318785992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 236468,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5318769608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 241680,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

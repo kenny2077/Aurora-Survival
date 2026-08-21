@@ -2,7 +2,7 @@ name: Aurora
 options:
   bundleIdPrefix: com.example
   deploymentTarget:
-    iOS: "17.0"
+    iOS: "26.0"
   createIntermediateGroups: true
 settings:
   base:
@@ -25,16 +25,22 @@ targets:
       - path: App
       - path: Core
       - path: Resources
+        excludes:
+          - ExpertVectors
+        buildPhase: resources
+      - path: Resources/ExpertVectors
+        type: folder
         buildPhase: resources
     info:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Aurora
+        CFBundleName: Aurora Offline AI
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
-        NSPhotoLibraryUsageDescription: "Attach a photo for fully offline text recognition and optional on-device visual assistance."
-        NSCameraUsageDescription: "Take a photo for fully offline text recognition and optional on-device visual assistance."
+        NSPhotoLibraryUsageDescription: "Choose an existing photo or save a photo you take before attaching it for fully offline visual assistance."
+        NSCameraUsageDescription: "Take a photo, save it to your Photo Library, and attach it for fully offline visual assistance."
         NSLocalNetworkUsageDescription: "Connect to your trusted Aurora package host to download signed offline models, guides, and maps during preparation."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
@@ -50,7 +56,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.Aurora
         DEVELOPMENT_TEAM: AL8BCFV85N
-        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
       configs:
         Release:

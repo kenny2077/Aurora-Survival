@@ -1,0 +1,23 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "59b53dcc44f50584047df7c2a43122baea709a392263fe36c4ead008c048ef26  survival_knowledge.sqlite",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [],
+    "fixture_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "mode": "expert-install",
+    "output_path": "/workspace/aurora-survival/Reports/expert-m2-ipad/expert-vector-rag-install-v1.json",
+    "profile": null,
+    "report_name": "expert-physical-report-expert-vector-rag-install-v1-expert-install.json",
+    "run_id": "expert-vector-rag-install-v1",
+    "schema_version": 2
+  },
+  "signature": "6af6575f07d3f40bfc32eeb4e0c3e7b9cfbd8a7927427ce93be6a2305f043e09",
+  "signature_algorithm": "HMAC-SHA256"
+}

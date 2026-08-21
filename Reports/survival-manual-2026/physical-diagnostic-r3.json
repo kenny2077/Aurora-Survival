@@ -1,0 +1,491 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "b418879062275cb85fe0f186af81cb8203d1fe077559f50ee8550999095e7ce5  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-wet-scenario"
+        ]
+      ],
+      "answer" : "Build a fire in wet conditions by searching under larger branches, inside dead wood, and beneath natural cover to locate dry inner material. Use the method of splitting large wood, removing wet outer layers, and using dry internal material for efficient burning. Create a dry platform by preparing the area with sufficient space above the fire to ensure airflow and avoid smothering. Use bark, small sticks, or dry wood as fuel for controlled burning in wet conditions.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7965,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1977,
+      "first_visible_text_milliseconds" : 3171,
+      "generated_tokens" : 165,
+      "generation_milliseconds" : 6986,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-01-wet-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3812603096,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1556106024,
+      "post_available_memory_bytes" : 3816256728,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321342136,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Build a fire in wet conditions by searching under larger branches, inside dead wood, and beneath natural cover to locate dry inner material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Use the method of splitting large wood, removing wet outer layers, and using dry internal material for efficient burning.\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Create a dry platform by preparing the area with sufficient space above the fire to ensure airflow and avoid smothering.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Use bark, small sticks, or dry wood as fuel for controlled burning in wet conditions.\",\n      \"e\": [10]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Build a fire in wet conditions by searching under larger branches, inside dead wood, and beneath natural cover to locate dry inner material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Use the method of splitting large wood, removing wet outer layers, and using dry internal material for efficient burning.\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Create a dry platform by preparing the area with sufficient space above the fire to ensure airflow and avoid smothering.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Use bark, small sticks, or dry wood as fuel for controlled burning in wet conditions.\",\n      \"e\": [10]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        17,
+        20,
+        18,
+        51,
+        28,
+        62,
+        52
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.83848685026168823,
+        0.73339039087295532,
+        0.72109425067901611,
+        0.72584950923919678,
+        0.67226314544677734,
+        0.70557093620300293,
+        0.66087239980697632,
+        0.67104274034500122
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "fire-wet",
+        "fire-build-feed",
+        "fire-decision",
+        "",
+        "signal-smoke-fire",
+        "",
+        "",
+        "fire-materials"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        11,
+        9,
+        2,
+        6,
+        25,
+        12,
+        28
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.051638236597252994,
+        0.038846619754514485,
+        0.036956662115264265,
+        0.036579945019818441,
+        0.033523509780291089,
+        0.030100768743234925,
+        0.029078711437799311,
+        0.022585512578303667
+      ],
+      "retrieval_context_milliseconds" : 0.45192241668701172,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "fire-wet-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 82,
+      "stream_deltas" : [
+        "Build",
+        " ",
+        "a ",
+        "fire ",
+        "in ",
+        "wet ",
+        "conditions ",
+        "by ",
+        "searching ",
+        "under ",
+        "larger ",
+        "branches, ",
+        "inside ",
+        "dead ",
+        "wood, ",
+        "and ",
+        "beneath ",
+        "natural ",
+        "cover ",
+        "to ",
+        "locate ",
+        "dry ",
+        "inner ",
+        "material.",
+        " ",
+        "Use ",
+        "the ",
+        "method ",
+        "of ",
+        "splitting ",
+        "large ",
+        "wood, ",
+        "removing ",
+        "wet ",
+        "outer ",
+        "layers, ",
+        "and ",
+        "using ",
+        "dry ",
+        "internal ",
+        "material ",
+        "for ",
+        "efficient ",
+        "burning.",
+        " ",
+        "Create ",
+        "a ",
+        "dry ",
+        "platform ",
+        "by ",
+        "preparing ",
+        "the ",
+        "area ",
+        "with ",
+        "sufficient ",
+        "space ",
+        "above ",
+        "the ",
+        "fire ",
+        "to ",
+        "ensure ",
+        "airflow ",
+        "and ",
+        "avoid ",
+        "smothering",
+        ".",
+        " ",
+        "Use ",
+        "bark, ",
+        "small ",
+        "sticks, ",
+        "or ",
+        "dry ",
+        "wood ",
+        "as ",
+        "fuel ",
+        "for ",
+        "controlled ",
+        "burning ",
+        "in ",
+        "wet ",
+        "conditions."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.7410660810541,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 77
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5312134232,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325192376,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "410b5eed27f156cec64afdcab2aceafd04432cf49913351a32824b693149f661",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "survival-manual-2026-v3-diagnostic-r3",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325192376,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 64,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3816256728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8151,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3843946504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8244,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4300470616,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 13366,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5263866920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18727,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23894,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312248920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29015,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312248920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 34429,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312216152,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 39804,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312232536,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45128,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312216152,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50498,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312199768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 55839,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312199768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61021,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312199768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66220,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 71455,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 76799,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 81984,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87170,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312183384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 92327,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312167000,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 97623,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312167000,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 102802,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312134232,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 107900,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312150616,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 113120,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312150616,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 118227,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312134232,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 123462,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312117848,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 128827,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5312134232,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 134213,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

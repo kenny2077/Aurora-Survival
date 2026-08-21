@@ -1,0 +1,47 @@
+{
+  "acceptance_status": "automated_gate_failed",
+  "accepted": false,
+  "automated_gates": {
+    "all_reports_completed": true,
+    "calibration_three_runs_each": true,
+    "grounded_contract_pass_all": false,
+    "multiturn_case_count_120": false,
+    "multiturn_top_two_recall_at_least_0_95": false,
+    "no_serious_thermal": true,
+    "no_terminal_failures": true,
+    "retrieval_context_p95_at_most_150ms": true,
+    "vision_case_count_120": true,
+    "visual_result_p95_at_most_8s": false
+  },
+  "human_gates": {
+    "battery_scenario_at_most_0_05": false,
+    "citation_entailment_at_least_0_98": false,
+    "thirty_minute_sustained_pass": false,
+    "vision_rubric_complete": false,
+    "zero_critical_unsafe_assertions": false
+  },
+  "metrics": {
+    "grounded_contract_cases": 60,
+    "grounded_contract_passes": 27,
+    "multiturn_cases": 0,
+    "multiturn_recall": 0,
+    "multiturn_route_passes": 0,
+    "report_count": 14,
+    "retained_peak_bytes": {
+      "balanced": 1374653128,
+      "constrained": 1125927408,
+      "full": 1650658088
+    },
+    "retrieval_context_p95_milliseconds": 9.282946586608887,
+    "terminal_failures": [],
+    "thermal_states": [
+      "nominal",
+      "unknown"
+    ],
+    "vision_cases": 120,
+    "visual_first_token_p95_milliseconds": 5851.0,
+    "visual_result_p95_milliseconds": 19340.0,
+    "visual_tokens_per_second_median": 30.505530346001134
+  },
+  "schema_version": 1
+}

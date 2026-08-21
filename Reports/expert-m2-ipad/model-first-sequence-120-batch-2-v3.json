@@ -1,0 +1,1578 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Collect water from a stable, non-sweeping source upstream of camps, livestock, roads, or waste. Avoid areas with fuel sheen, chemical odors, toxic algae, dead animals, mine drainage, or industrial runoff. Ensure the bank is solid and you are not at risk of being carried away. Boiling and filters won’t make chemically contaminated water safe; use only a tested purification method if needed. Stop collecting from any source with visible contamination or signs of recent pollution.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5665,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 682,
+      "generated_tokens" : 106,
+      "generation_milliseconds" : 4172,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-031",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 3817108672,
+      "peak_physical_footprint_bytes" : 1551600448,
+      "post_available_memory_bytes" : 3820156096,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326224520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Collect water from a stable, non-sweeping source upstream of camps, livestock, roads, or waste. Avoid areas with fuel sheen, chemical odors, toxic algae, dead animals, mine drainage, or industrial runoff. Ensure the bank is solid and you are not at risk of being carried away. Boiling and filters won’t make chemically contaminated water safe; use only a tested purification method if needed. Stop collecting from any source with visible contamination or signs of recent pollution.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-locate",
+        "first-aid-wounds-burns",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2563934426229508,
+        0.25587301587301586,
+        0.25562499999999999,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 9.3010663986206055,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-choose-source",
+      "tokens_per_second" : 30.085959885386821,
+      "word_count" : 75
+    },
+    {
+      "answer" : "You should collect water from a stable, uncontaminated source upstream of camps, livestock, roads, or waste. Avoid areas with fuel sheen, chemical odors, toxic algae, dead animals, mine drainage, or industrial runoff. Ensure the bank is solid and you are not at risk of being swept into the water. Boiling and filters alone cannot make chemically contaminated or salty water safe—use only a known safe supply if available. If in doubt, stop collecting and seek another source immediately.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5759,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 109,
+      "generation_milliseconds" : 4275,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-032",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 3800855720,
+      "peak_physical_footprint_bytes" : 1567853400,
+      "post_available_memory_bytes" : 3835737280,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3847780312,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"You should collect water from a stable, uncontaminated source upstream of camps, livestock, roads, or waste. Avoid areas with fuel sheen, chemical odors, toxic algae, dead animals, mine drainage, or industrial runoff. Ensure the bank is solid and you are not at risk of being swept into the water. Boiling and filters alone cannot make chemically contaminated or salty water safe—use only a known safe supply if available. If in doubt, stop collecting and seek another source immediately.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "first-aid-wounds-burns",
+        "shelter-debris",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        8.9763934426229515,
+        0.25587301587301586,
+        0.25538461538461538,
+        0.25515151515151513
+      ],
+      "retrieval_context_milliseconds" : 11.407971382141113,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-choose-source",
+      "tokens_per_second" : 30.066815144766146,
+      "word_count" : 78
+    },
+    {
+      "answer" : "Remove cloudy water from a clean container and let it settle. Pour off the clearer layer or use a clean cloth to filter out particles, but do not assume this removes pathogens. Keep dirty containers and hands away from the opening of the filtered water. If you're unsure about safety, stop and recheck your source for contamination risks. This process only reduces sediment; ensure no disease-causing organisms are present by testing or using a reliable method.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5215,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 646,
+      "generated_tokens" : 96,
+      "generation_milliseconds" : 3790,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-033",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "minimum_available_memory_bytes" : 3817288872,
+      "peak_physical_footprint_bytes" : 1551420248,
+      "post_available_memory_bytes" : 3851170984,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3863263192,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Remove cloudy water from a clean container and let it settle. Pour off the clearer layer or use a clean cloth to filter out particles, but do not assume this removes pathogens. Keep dirty containers and hands away from the opening of the filtered water. If you're unsure about safety, stop and recheck your source for contamination risks. This process only reduces sediment; ensure no disease-causing organisms are present by testing or using a reliable method.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-collect-prefilter",
+        "basics-first-night",
+        "water-choose-source",
+        "fire-materials"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25562499999999999,
+        0.25515151515151513,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 10.236978530883789,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-collect-prefilter",
+      "tokens_per_second" : 30.216284987277355,
+      "word_count" : 76
+    },
+    {
+      "answer" : "Remove cloudy water in a clean container, let it settle, then pour off the clearer layer or filter through a cloth. This prevents sediment from entering treatment systems but does not guarantee removal of pathogens. Do not use dirty containers near the opening; cap them immediately after handling. Stop if you see visible particles that could contaminate the system. Always follow this procedure to avoid spreading contaminants and ensure safe water.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4987,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 646,
+      "generated_tokens" : 89,
+      "generation_milliseconds" : 3550,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-034",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "minimum_available_memory_bytes" : 3823039656,
+      "peak_physical_footprint_bytes" : 1545669464,
+      "post_available_memory_bytes" : 3849204880,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3878451160,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Remove cloudy water in a clean container, let it settle, then pour off the clearer layer or filter through a cloth. This prevents sediment from entering treatment systems but does not guarantee removal of pathogens. Do not use dirty containers near the opening; cap them immediately after handling. Stop if you see visible particles that could contaminate the system. Always follow this procedure to avoid spreading contaminants and ensure safe water.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-collect-prefilter",
+        "fire-materials",
+        "water-boil",
+        "basics-first-night"
+      ],
+      "retrieval_candidate_scores" : [
+        10.756393442622951,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 10.486006736755371,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-collect-prefilter",
+      "tokens_per_second" : 30.303030303030305,
+      "word_count" : 71
+    },
+    {
+      "answer" : "Pour cloudy water into a clean container to allow sediment to settle. Use a coffee filter or cloth to remove particles from the clearer layer, then discard the dirty material. Do not use contaminated containers or hands near the opening. Stop if you see visible pathogens in the filtered water; it is unsafe and requires further treatment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9047,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 74,
+      "generation_milliseconds" : 2959,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-035",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "minimum_available_memory_bytes" : 3830527144,
+      "peak_physical_footprint_bytes" : 1538181976,
+      "post_available_memory_bytes" : 3854218432,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876567000,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Remove sediment from cloudy water by letting it settle in a clean container, then pour off the clearer layer or filter through a cloth. Do not use this method to treat contaminated water—this only removes particles and does not eliminate pathogens like bacteria or viruses. If you're unsure about safety, stop immediately and recheck your source for contamination. Always keep dirty containers and hands away from the clean-water opening and cap. This process is effective but must be done carefully; if it's unclear whether the water is safe after prefiltering, do not proceed to further treatment.\",\"e\":[1]}",
+        "{ \"a\": \"Pour cloudy water into a clean container to allow sediment to settle. Use a coffee filter or cloth to remove particles from the clearer layer, then discard the dirty material. Do not use contaminated containers or hands near the opening. Stop if you see visible pathogens in the filtered water; it is unsafe and requires further treatment.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-collect-prefilter",
+        "water-boil",
+        "signal-whistle",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1363934426229507,
+        0.016129032258064516,
+        0.015873015873015872,
+        0.015625
+      ],
+      "retrieval_context_milliseconds" : 8.8769197463989258,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-collect-prefilter",
+      "tokens_per_second" : 31.037414965986393,
+      "word_count" : 57
+    },
+    {
+      "answer" : "Pour cloudy water into a clean container to allow sediment to settle, then carefully remove the clearer layer using a clean cloth or coffee filter. Do not use dirty containers or hands near the opening; keep them away from the cap and outlet. This process removes particles but does not guarantee removal of pathogens—ensure it's done in a safe environment with proper hygiene.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 4829,
+      "expected_manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "first_token_milliseconds" : 647,
+      "generated_tokens" : 82,
+      "generation_milliseconds" : 3304,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-036",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-collect-prefilter"
+      ],
+      "minimum_available_memory_bytes" : 3837949120,
+      "peak_physical_footprint_bytes" : 1530760000,
+      "post_available_memory_bytes" : 3848729792,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5284264928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{ \"a\": \"Pour cloudy water into a clean container to allow sediment to settle, then carefully remove the clearer layer using a clean cloth or coffee filter. Do not use dirty containers or hands near the opening; keep them away from the cap and outlet. This process removes particles but does not guarantee removal of pathogens—ensure it's done in a safe environment with proper hygiene.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-collect-prefilter",
+        "car-overheat",
+        "water-boil",
+        "shelter-tarp"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.61515151515151512,
+        0.49612903225806448,
+        0.37587301587301586
+      ],
+      "retrieval_context_milliseconds" : 9.9420547485351562,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-collect-prefilter",
+      "tokens_per_second" : 30.485509973654498,
+      "word_count" : 63
+    },
+    {
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination. Stop if water is contaminated; do not use it.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5211,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 692,
+      "generated_tokens" : 92,
+      "generation_milliseconds" : 3682,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-037",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3829953704,
+      "peak_physical_footprint_bytes" : 1538755416,
+      "post_available_memory_bytes" : 3850106048,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3875993560,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination. Stop if water is contaminated; do not use it.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "shelter-tarp",
+        "navigation-terrain"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 11.033892631530762,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-boil",
+      "tokens_per_second" : 30.434782608695652,
+      "word_count" : 58
+    },
+    {
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), extend boiling time to 3 minutes. Let it cool and store in a clean, covered container without touching the cap interior. Boiling does not remove contaminants such as fuel, toxic chemicals, salt, or radioactive materials—do not rely on this method for safety.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5267,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 685,
+      "generated_tokens" : 94,
+      "generation_milliseconds" : 3730,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-038",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3831280808,
+      "peak_physical_footprint_bytes" : 1537428312,
+      "post_available_memory_bytes" : 3850253480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877369816,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), extend boiling time to 3 minutes. Let it cool and store in a clean, covered container without touching the cap interior. Boiling does not remove contaminants such as fuel, toxic chemicals, salt, or radioactive materials—do not rely on this method for safety.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "shelter-tarp",
+        "navigation-terrain"
+      ],
+      "retrieval_candidate_scores" : [
+        10.996393442622951,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 10.569930076599121,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-boil",
+      "tokens_per_second" : 30.541871921182267,
+      "word_count" : 58
+    },
+    {
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination. Stop if water is contaminated; do not use it.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5182,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 92,
+      "generation_milliseconds" : 3675,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-039",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3839472808,
+      "peak_physical_footprint_bytes" : 1529236312,
+      "post_available_memory_bytes" : 3855201448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877517272,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination. Stop if water is contaminated; do not use it.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "shelter-tarp",
+        "navigation-terrain"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2563934426229508,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 10.600924491882324,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-boil",
+      "tokens_per_second" : 30.424607154797727,
+      "word_count" : 58
+    },
+    {
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), extend boiling time to 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination; do not use this method for contaminated water.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5227,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 687,
+      "generated_tokens" : 95,
+      "generation_milliseconds" : 3765,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-040",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3826824360,
+      "peak_physical_footprint_bytes" : 1541884760,
+      "post_available_memory_bytes" : 3850253480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882514416,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), extend boiling time to 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination; do not use this method for contaminated water.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-stop-mark",
+        "signal-ground",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        11.516393442622951,
+        0.25587301587301586,
+        0.25562499999999999,
+        0.25515151515151513
+      ],
+      "retrieval_context_milliseconds" : 11.626958847045898,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-boil",
+      "tokens_per_second" : 30.539311241065626,
+      "word_count" : 59
+    },
+    {
+      "answer" : "The user is assessing fire safety, and the current condition involves a potential risk of wildfire spread due to dry fuel and wind. The immediate action is to stop any fire use until all conditions are met for safe ignition. Check wind speed, overhead fuels, escape routes, local restrictions, and ensure a stove or insulation can meet needs before proceeding. Prepare water or an extinguishing method first. If the user cannot confirm these factors safely, do not light the fire.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5484,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 685,
+      "generated_tokens" : 100,
+      "generation_milliseconds" : 3970,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-041",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-decision"
+      ],
+      "minimum_available_memory_bytes" : 3849450664,
+      "peak_physical_footprint_bytes" : 1519258456,
+      "post_available_memory_bytes" : 3852874920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5311249400,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The user is assessing fire safety, and the current condition involves a potential risk of wildfire spread due to dry fuel and wind. The immediate action is to stop any fire use until all conditions are met for safe ignition. Check wind speed, overhead fuels, escape routes, local restrictions, and ensure a stove or insulation can meet needs before proceeding. Prepare water or an extinguishing method first. If the user cannot confirm these factors safely, do not light the fire.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "basics-stay-or-move",
+        "food-energy",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        1.1561290322580646,
+        1.1558730158730159,
+        1.1556250000000001
+      ],
+      "retrieval_context_milliseconds" : 10.23101806640625,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-decision",
+      "tokens_per_second" : 30.136986301369863,
+      "word_count" : 80
+    },
+    {
+      "answer" : "You must assess whether fire is safe by checking wind, dryness, overhead fuel, escape routes, local restrictions, and if a stove or insulation can meet the need. Choose only small, attended fires that are fully controlled. Prepare water, soil, or another extinguishing method before ignition. Never light a fire during a ban or where wind and dry fuel can carry sparks beyond control. If any of these conditions are met, stop immediately.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5360,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 685,
+      "generated_tokens" : 96,
+      "generation_milliseconds" : 3828,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-042",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-decision"
+      ],
+      "minimum_available_memory_bytes" : 3822482600,
+      "peak_physical_footprint_bytes" : 1546226520,
+      "post_available_memory_bytes" : 3848074408,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3880171504,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"You must assess whether fire is safe by checking wind, dryness, overhead fuel, escape routes, local restrictions, and if a stove or insulation can meet the need. Choose only small, attended fires that are fully controlled. Prepare water, soil, or another extinguishing method before ignition. Never light a fire during a ban or where wind and dry fuel can carry sparks beyond control. If any of these conditions are met, stop immediately.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "basics-stay-or-move",
+        "food-energy",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        12.326393442622949,
+        1.1561290322580646,
+        1.1558730158730159,
+        1.1556250000000001
+      ],
+      "retrieval_context_milliseconds" : 9.3380212783813477,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-decision",
+      "tokens_per_second" : 30.225898822780781,
+      "word_count" : 72
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8620,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 647,
+      "generated_tokens" : 101,
+      "generation_milliseconds" : 3886,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-043",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3819812008,
+      "peak_physical_footprint_bytes" : 1548897112,
+      "post_available_memory_bytes" : 3843404968,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3875354608,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The fire ban prohibits all fires, so no fire can be lit. Any attempt to start a fire is unsafe and illegal under current conditions. You must wait until the ban lifts or you are in an area where it's safe to burn. If you need heat or cooking, use alternative methods like electric stoves or heating pads instead of starting a fire.\",\"e\":[1]}",
+        "{ \"a\": \"answer\\\", \\\"e\\\": [1] }  \/\/ This is the final answer with only the selected lesson applied. The response must be plain prose, under 85 words, and begin with an action. It should include prioritized actions, rationale, a warning, stop condition or escalation as per the review. Only use the information from the reviewed lesson [1]. Do not mention any numbers other than what is allowed (none).\" ,\"e\": [1] }"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "signal-smoke-fire",
+        "fire-build-feed",
+        "fire-site"
+      ],
+      "retrieval_candidate_scores" : [
+        7.1063934426229514,
+        0.90612903225806452,
+        0.68587301587301597,
+        0.58562500000000006
+      ],
+      "retrieval_context_milliseconds" : 7.7530145645141602,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 30.873726458783576,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Light a fire only if it can remain small, attended, and fully controlled; ensure wind, dryness, fuel, escape routes, local restrictions are checked. Prepare water or extinguishing method before ignition. Never light a fire during a ban or where sparks could be carried beyond control.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4357,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 686,
+      "generated_tokens" : 69,
+      "generation_milliseconds" : 2882,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-044",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-decision"
+      ],
+      "minimum_available_memory_bytes" : 3824170152,
+      "peak_physical_footprint_bytes" : 1544538968,
+      "post_available_memory_bytes" : 3844863144,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3870685144,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{ \"a\": \"Light a fire only if it can remain small, attended, and fully controlled; ensure wind, dryness, fuel, escape routes, local restrictions are checked. Prepare water or extinguishing method before ignition. Never light a fire during a ban or where sparks could be carried beyond control.\" ,\"e\":[1] }"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "signal-smoke-fire",
+        "weather-wildlife-wildfire",
+        "fire-extinguish"
+      ],
+      "retrieval_candidate_scores" : [
+        10.06639344262295,
+        2.1458730158730157,
+        1.7961290322580645,
+        1.1456249999999999
+      ],
+      "retrieval_context_milliseconds" : 11.331081390380859,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-decision",
+      "tokens_per_second" : 30.965391621129324,
+      "word_count" : 45
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9053,
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "first_token_milliseconds" : 788,
+      "generated_tokens" : 81,
+      "generation_milliseconds" : 3458,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-045",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3826021544,
+      "peak_physical_footprint_bytes" : 1542687576,
+      "post_available_memory_bytes" : 3849958568,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3872143320,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Build a fire on stable ground away from people, shelter, roots, and spreading fuel. Clear loose fuel to mineral soil at least 10 meters from the site. Check above for branches and around for roots, peat, dry grass, tents, vehicles, or fuel containers. Do not build near peat, deep duff, inside a tent, or beneath low branches. If any of these are present, stop immediately as it is unsafe to use that area.\",\"e\":[1]}",
+        "{ \"a\": \"Build a fire on flat, stable ground away from people and fuel sources. Clear loose vegetation to mineral soil at least 10 meters from the site. Check above for branches and around for roots or tents. Do not build near peat, deep duff, or under low branches. If you see any of these hazards, stop immediately.\", \"e\": [1] }"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "shelter-site",
+        "signal-smoke-fire",
+        "basics-first-night"
+      ],
+      "retrieval_candidate_scores" : [
+        15.72639344262295,
+        1.3761290322580644,
+        0.80538461538461537,
+        0.35587301587301584
+      ],
+      "retrieval_context_milliseconds" : 8.0239772796630859,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 29.962546816479399,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 8620,
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "first_token_milliseconds" : 647,
+      "generated_tokens" : 79,
+      "generation_milliseconds" : 3138,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-046",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3846223016,
+      "peak_physical_footprint_bytes" : 1522486104,
+      "post_available_memory_bytes" : 3850187944,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5294537720,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"Build a fire on stable ground away from people, shelter, roots, and spreading fuel. Clear loose fuel to mineral soil at least 10 meters from the fire site. Check above for branches and around for roots, peat, dry grass, tents, vehicles, or fuel containers. Do not build near peat, deep duff, inside a tent, or beneath low branches. If you find any of these hazards, stop building immediately.\" ,\"e\":[1]}",
+        "{ \"a\": \"Build a fire on stable ground away from people, shelter, roots, and fuel. Clear loose fuel to mineral soil at least 10 meters from the site. Check above for branches and around for roots or peat. Do not build near tents, vehicles, or low branches. Stop if you find any of these hazards.\" , \"e\": [1] }"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "shelter-site",
+        "signal-smoke-fire",
+        "basics-first-night"
+      ],
+      "retrieval_candidate_scores" : [
+        12.22639344262295,
+        1.3761290322580644,
+        0.80538461538461537,
+        0.35587301587301584
+      ],
+      "retrieval_context_milliseconds" : 9.386897087097168,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 31.312725812926537,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8950,
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "first_token_milliseconds" : 647,
+      "generated_tokens" : 79,
+      "generation_milliseconds" : 3139,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-047",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3821728936,
+      "peak_physical_footprint_bytes" : 1546980184,
+      "post_available_memory_bytes" : 3850826944,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877566448,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Build a fire on stable ground away from people, shelter, roots, and spreading fuel. Clear loose fuel to mineral soil at least 3 feet from the base of the structure for safety in wind conditions. Check above and around for branches, peat, dry grass, tents, vehicles, or fuel containers before starting. Do not build near peat, deep duff, roots, inside a tent, or beneath low branches. If any of these are present, stop immediately as it is unsafe to use the area.\",\"e\":[1]}",
+        "{ \"a\": \"Build a fire on stable ground away from people, shelter, roots, and fuel. Clear loose fuel to mineral soil at least 10 meters from the site. Check above for branches and around for roots or peat. Do not build near tents, vehicles, or low branches. Stop if you find any of these hazards.\" , \"e\": [1] }"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "shelter-site",
+        "basics-first-night",
+        "signal-smoke-fire"
+      ],
+      "retrieval_candidate_scores" : [
+        6.5863934426229509,
+        0.58587301587301588,
+        0.235625,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 7.8039169311523438,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 31.300160513643661,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel. Clear loose fuel to mineral soil for a safe distance suited to wind and conditions. Check above and around for branches, roots, peat, dry grass, tents, vehicles, or fuel containers. Do not build near peat, deep duff, inside a tent, or beneath low branches. If the fire is too close to people, shelter, or spreading fuel, stop immediately.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5729,
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "first_token_milliseconds" : 686,
+      "generated_tokens" : 105,
+      "generation_milliseconds" : 4141,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-048",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-site"
+      ],
+      "minimum_available_memory_bytes" : 3822171304,
+      "peak_physical_footprint_bytes" : 1546537816,
+      "post_available_memory_bytes" : 3845534888,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3878172632,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel. Clear loose fuel to mineral soil for a safe distance suited to wind and conditions. Check above and around for branches, roots, peat, dry grass, tents, vehicles, or fuel containers. Do not build near peat, deep duff, inside a tent, or beneath low branches. If the fire is too close to people, shelter, or spreading fuel, stop immediately.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "car-ev-hybrid",
+        "shelter-tarp",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        9.9663934426229499,
+        1.1461290322580644,
+        1.0458730158730158,
+        0.99538461538461531
+      ],
+      "retrieval_context_milliseconds" : 8.9069604873657227,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-site",
+      "tokens_per_second" : 30.101302460202604,
+      "word_count" : 74
+    },
+    {
+      "answer" : "gather tinder, kindling, and fuel in increasing sizes while ensuring each type burns well before adding the next. Start with fine dry tinder to catch a spark, then add pencil-thin kindling, followed by finger-thick sticks, and finally larger fuel only after all smaller pieces are consumed. Keep a protected reserve of dry material ready for emergencies. Do not collect from live trees or areas where local rules prohibit it. Stop if the fire is unattended or any part of the wood begins to burn too quickly.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5798,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 682,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 4371,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-049",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3826775208,
+      "peak_physical_footprint_bytes" : 1541933912,
+      "post_available_memory_bytes" : 3845813440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3872815064,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"gather tinder, kindling, and fuel in increasing sizes while ensuring each type burns well before adding the next. Start with fine dry tinder to catch a spark, then add pencil-thin kindling, followed by finger-thick sticks, and finally larger fuel only after all smaller pieces are consumed. Keep a protected reserve of dry material ready for emergencies. Do not collect from live trees or areas where local rules prohibit it. Stop if the fire is unattended or any part of the wood begins to burn too quickly.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "fire-wet",
+        "fire-build-feed",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        16.296393442622954,
+        0.67562500000000003,
+        0.47612903225806447,
+        0.47587301587301584
+      ],
+      "retrieval_context_milliseconds" : 7.0099830627441406,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-materials",
+      "tokens_per_second" : 30.089455136893466,
+      "word_count" : 86
+    },
+    {
+      "answer" : "gather tinder, kindling, and fuel in increasing sizes starting with fine dry tinder that catches a flame or spark. Add pencil-thin kindling, then finger-thick sticks, then larger fuel only after each size burns well. Keep a protected reserve of dry material to avoid leaving the fire unattended. Do not strip live trees or collect material where local rules prohibit it.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5564,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 1007,
+      "generated_tokens" : 86,
+      "generation_milliseconds" : 3985,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-050",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3827119272,
+      "peak_physical_footprint_bytes" : 1541589848,
+      "post_available_memory_bytes" : 3850876096,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3873109976,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"gather tinder, kindling, and fuel in increasing sizes starting with fine dry tinder that catches a flame or spark. Add pencil-thin kindling, then finger-thick sticks, then larger fuel only after each size burns well. Keep a protected reserve of dry material to avoid leaving the fire unattended. Do not strip live trees or collect material where local rules prohibit it.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "fire-wet",
+        "fire-build-feed",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        12.796393442622952,
+        0.67562500000000003,
+        0.47612903225806447,
+        0.47587301587301584
+      ],
+      "retrieval_context_milliseconds" : 7.6720714569091797,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-materials",
+      "tokens_per_second" : 28.542646071188717,
+      "word_count" : 60
+    },
+    {
+      "answer" : "The user is now aware that the fire problem involves more than just water, and they are likely dealing with a dry material issue. Prioritize gathering fine dry tinder first to catch a spark, then add progressively larger kindling in order of burn quality. Keep a protected reserve for safety and avoid leaving the fire unattended. Do not collect from prohibited areas or strip live trees; this is critical to prevent wildfires. Stop if any tree is being stripped or material collected violates local rules.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5585,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 681,
+      "generated_tokens" : 104,
+      "generation_milliseconds" : 4102,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-051",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3844830376,
+      "peak_physical_footprint_bytes" : 1523878744,
+      "post_available_memory_bytes" : 3859166376,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5327518760,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The user is now aware that the fire problem involves more than just water, and they are likely dealing with a dry material issue. Prioritize gathering fine dry tinder first to catch a spark, then add progressively larger kindling in order of burn quality. Keep a protected reserve for safety and avoid leaving the fire unattended. Do not collect from prohibited areas or strip live trees; this is critical to prevent wildfires. Stop if any tree is being stripped or material collected violates local rules.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "fire-wet",
+        "fire-ignition",
+        "fire-build-feed"
+      ],
+      "retrieval_candidate_scores" : [
+        6.5863934426229509,
+        0.33612903225806451,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 6.6620111465454102,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-materials",
+      "tokens_per_second" : 30.108155510084771,
+      "word_count" : 85
+    },
+    {
+      "answer" : "Start by gathering dry tinder in increasing sizes—begin with fine material like flint or paper, then add pencil-thin kindling, followed by finger-thick sticks. Keep a protected reserve and ensure each size burns well before adding larger fuel. Do not strip live trees or collect near prohibited areas; this is critical for safety.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4601,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 77,
+      "generation_milliseconds" : 3167,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-052",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3840341136,
+      "peak_physical_footprint_bytes" : 1528367984,
+      "post_available_memory_bytes" : 3875583144,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886495680,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"Start by gathering dry tinder in increasing sizes—begin with fine material like flint or paper, then add pencil-thin kindling, followed by finger-thick sticks. Keep a protected reserve and ensure each size burns well before adding larger fuel. Do not strip live trees or collect near prohibited areas; this is critical for safety.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "basics-first-night",
+        "water-collect-prefilter",
+        "shelter-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        12.31639344262295,
+        0.94612903225806444,
+        0.70538461538461528,
+        0.47587301587301584
+      ],
+      "retrieval_context_milliseconds" : 8.5929632186889648,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-materials",
+      "tokens_per_second" : 30.595813204508858,
+      "word_count" : 52
+    },
+    {
+      "answer" : "Move the burning tinder into the fire lay and add fuel gradually, ensuring airflow is preserved. Use your body to block wind while maintaining a safe distance from flames. Avoid spilling liquid fuel onto a flame or improvising with batteries unless designed for it. Stop if any fluid leaks near the flame.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4395,
+      "expected_manual_lessons" : [
+        "fire-ignition"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 70,
+      "generation_milliseconds" : 2906,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-053",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-ignition"
+      ],
+      "minimum_available_memory_bytes" : 3839784080,
+      "peak_physical_footprint_bytes" : 1528925040,
+      "post_available_memory_bytes" : 3863114920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3895310272,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{ \"a\": \"Move the burning tinder into the fire lay and add fuel gradually, ensuring airflow is preserved. Use your body to block wind while maintaining a safe distance from flames. Avoid spilling liquid fuel onto a flame or improvising with batteries unless designed for it. Stop if any fluid leaks near the flame.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-ignition",
+        "basics-inventory",
+        "signal-smoke-fire",
+        "food-cook"
+      ],
+      "retrieval_candidate_scores" : [
+        15.72639344262295,
+        0.25612903225806449,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 8.3429813385009766,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-ignition",
+      "tokens_per_second" : 31.039136302294196,
+      "word_count" : 52
+    },
+    {
+      "answer" : "Move the burning tinder into the fire lay and add fuel gradually. Keep your body or a barrier in place to block wind while preserving airflow. Do not spill liquid fuel onto a flame, as this can cause an explosion. Stop if you see flames spreading too quickly.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4180,
+      "expected_manual_lessons" : [
+        "fire-ignition"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 64,
+      "generation_milliseconds" : 2701,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-054",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "fire-ignition"
+      ],
+      "minimum_available_memory_bytes" : 3834836112,
+      "peak_physical_footprint_bytes" : 1533873008,
+      "post_available_memory_bytes" : 3863164024,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3890411456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{ \"a\": \"Move the burning tinder into the fire lay and add fuel gradually. Keep your body or a barrier in place to block wind while preserving airflow. Do not spill liquid fuel onto a flame, as this can cause an explosion. Stop if you see flames spreading too quickly.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-ignition",
+        "basics-inventory",
+        "signal-smoke-fire",
+        "food-cook"
+      ],
+      "retrieval_candidate_scores" : [
+        12.22639344262295,
+        0.25612903225806449,
+        0.135625,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 8.6259841918945312,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-ignition",
+      "tokens_per_second" : 31.219028741328046,
+      "word_count" : 48
+    },
+    {
+      "answer" : "The tinder is now exposed to wind, so block it with your body or a barrier while preserving airflow. Move the burning tinder into the fire lay and add fuel gradually. Do not spill liquid fuel onto a flame; use only dry kindling for ignition. If the flame flickers too much, stop adding fuel immediately. This method ensures safe, reliable lighting without using batteries.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4444,
+      "expected_manual_lessons" : [
+        "fire-ignition"
+      ],
+      "first_token_milliseconds" : 682,
+      "generated_tokens" : 84,
+      "generation_milliseconds" : 3399,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-055",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-ignition"
+      ],
+      "minimum_available_memory_bytes" : 3834836112,
+      "peak_physical_footprint_bytes" : 1533873008,
+      "post_available_memory_bytes" : 3863065720,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3890460608,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The tinder is now exposed to wind, so block it with your body or a barrier while preserving airflow. Move the burning tinder into the fire lay and add fuel gradually. Do not spill liquid fuel onto a flame; use only dry kindling for ignition. If the flame flickers too much, stop adding fuel immediately. This method ensures safe, reliable lighting without using batteries.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3363934426229509
+      ],
+      "retrieval_context_milliseconds" : 2.1100044250488281,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-ignition",
+      "tokens_per_second" : 30.5483989694516,
+      "word_count" : 64
+    },
+    {
+      "answer" : "Shield the tinder and use the simplest reliable ignition method you already know. Prepare your bundle of kindling and tinder, block wind with a barrier while preserving airflow, then move the burning tinder into the fire lay and add fuel gradually. Do not spill liquid fuel onto a flame or improvise with batteries unless designed for it. Stop if flames are too hot or sparks fly—this indicates unsafe conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5072,
+      "expected_manual_lessons" : [
+        "fire-ignition"
+      ],
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 87,
+      "generation_milliseconds" : 3539,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-056",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "fire-ignition"
+      ],
+      "minimum_available_memory_bytes" : 3845452968,
+      "peak_physical_footprint_bytes" : 1523256152,
+      "post_available_memory_bytes" : 3859903632,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324635152,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Shield the tinder and use the simplest reliable ignition method you already know. Prepare your bundle of kindling and tinder, block wind with a barrier while preserving airflow, then move the burning tinder into the fire lay and add fuel gradually. Do not spill liquid fuel onto a flame or improvise with batteries unless designed for it. Stop if flames are too hot or sparks fly—this indicates unsafe conditions.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-ignition",
+        "basics-inventory",
+        "fire-wet",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        9.54639344262295,
+        0.82587301587301587,
+        0.55538461538461537,
+        0.37612903225806449
+      ],
+      "retrieval_context_milliseconds" : 11.139988899230957,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-ignition",
+      "tokens_per_second" : 30.122591943957968,
+      "word_count" : 69
+    },
+    {
+      "answer" : "Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area; this indicates smothering risk.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5223,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 93,
+      "generation_milliseconds" : 3752,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-057",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "minimum_available_memory_bytes" : 3841143952,
+      "peak_physical_footprint_bytes" : 1527565168,
+      "post_available_memory_bytes" : 3877713064,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887249344,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area; this indicates smothering risk.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-site",
+        "fire-wet",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        0.80587301587301585,
+        0.70515151515151508,
+        0.68470588235294116
+      ],
+      "retrieval_context_milliseconds" : 9.8000764846801758,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-build-feed",
+      "tokens_per_second" : 29.977191267513849,
+      "word_count" : 69
+    },
+    {
+      "answer" : "Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5022,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 87,
+      "generation_milliseconds" : 3531,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-058",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "minimum_available_memory_bytes" : 3835868304,
+      "peak_physical_footprint_bytes" : 1532840816,
+      "post_available_memory_bytes" : 3859199144,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891509184,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-site",
+        "fire-wet",
+        "weather-wildlife-large-animals"
+      ],
+      "retrieval_candidate_scores" : [
+        12.326393442622949,
+        0.80562500000000004,
+        0.70492537313432835,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 10.105013847351074,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-build-feed",
+      "tokens_per_second" : 30.207235686687742,
+      "word_count" : 65
+    },
+    {
+      "answer" : "The fire is now larger than needed, consuming fuel rapidly and risking smothering. Stop adding wood; instead, build a loose teepee with kindling around the tinder to keep airflow open. Keep flames small and controlled as you add only a few pieces at a time. A large fire increases risk of wind-driven spread and makes it harder to extinguish or shelter from wind—this is why you must stop before fuel runs out. The warning is that if the flame grows too big, the fire will smother itself and become dangerous.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5959,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 683,
+      "generated_tokens" : 116,
+      "generation_milliseconds" : 4529,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-059",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "minimum_available_memory_bytes" : 3840390288,
+      "peak_physical_footprint_bytes" : 1528318832,
+      "post_available_memory_bytes" : 3859051688,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886495680,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The fire is now larger than needed, consuming fuel rapidly and risking smothering. Stop adding wood; instead, build a loose teepee with kindling around the tinder to keep airflow open. Keep flames small and controlled as you add only a few pieces at a time. A large fire increases risk of wind-driven spread and makes it harder to extinguish or shelter from wind—this is why you must stop before fuel runs out. The warning is that if the flame grows too big, the fire will smother itself and become dangerous.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-decision",
+        "fire-site",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        7.0063934426229508,
+        0.68538461538461548,
+        0.58562500000000006,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 7.2450637817382812,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-build-feed",
+      "tokens_per_second" : 29.901196047841914,
+      "word_count" : 90
+    },
+    {
+      "answer" : "Keep the fire small and maintain open airflow. Add fuel only when needed, one piece at a time as the flame grows. This prevents smothering and ensures controlled burning. Stop if flames flicker or smoke increases—this indicates poor air flow or too much fuel being added. Always keep the fire no larger than necessary for your purpose.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4612,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 76,
+      "generation_milliseconds" : 3140,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-060",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "minimum_available_memory_bytes" : 3840259216,
+      "peak_physical_footprint_bytes" : 1528449904,
+      "post_available_memory_bytes" : 3863950504,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886348224,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Keep the fire small and maintain open airflow. Add fuel only when needed, one piece at a time as the flame grows. This prevents smothering and ensures controlled burning. Stop if flames flicker or smoke increases—this indicates poor air flow or too much fuel being added. Always keep the fire no larger than necessary for your purpose.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-materials",
+        "fire-extinguish",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229488,
+        1.2858730158730158,
+        0.93612903225806443,
+        0.91492537313432842
+      ],
+      "retrieval_context_milliseconds" : 10.491013526916504,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-build-feed",
+      "tokens_per_second" : 30.537459283387623,
+      "word_count" : 57
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3891443648,
+  "final_battery_level" : 0.89999997615814209,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328370824,
+  "initial_battery_level" : 0.89999997615814209,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "model-first-sequence-120-batch-2-v3",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

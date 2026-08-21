@@ -8,7 +8,7 @@ struct AuroraApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(appModel)
-                .tint(Color("SignalOrange"))
+                .tint(Color.accentColor)
                 .task {
                     await appModel.refreshActivePacks()
                     await appModel.loadDebugOCRFixtureIfPresent()

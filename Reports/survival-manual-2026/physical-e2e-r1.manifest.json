@@ -1,0 +1,45 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "b418879062275cb85fe0f186af81cb8203d1fe077559f50ee8550999095e7ce5  survival_knowledge.sqlite",
+      "embedding_sha256": "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [
+      "sm26-01-wet-fire",
+      "sm26-02-extinguish-fire",
+      "sm26-03-boil-elevation",
+      "sm26-04-solar-still",
+      "sm26-05-a-frame",
+      "sm26-06-snow-shelter",
+      "sm26-07-leg-bleeding",
+      "sm26-08-hypothermia",
+      "sm26-09-stop-lost",
+      "sm26-10-compass-bearing",
+      "sm26-11-mushroom",
+      "sm26-12-fish",
+      "sm26-13-start-fire",
+      "sm26-14-boil-collected",
+      "sm26-15-deep-cut",
+      "sm26-16-marked-trail",
+      "sm26-17-dating",
+      "sm26-18-weather",
+      "sm26-19-device-repair",
+      "sm26-20-multi"
+    ],
+    "fixture_sha256": "047c6c5eb3e93893d97925269412eeaca6d14da7fadc7bd80386886b17be9074",
+    "mode": "expert-survival-manual-2026",
+    "output_path": "/workspace/aurora-survival/Reports/survival-manual-2026/physical-e2e-r1.json",
+    "profile": null,
+    "report_name": "expert-physical-report-survival-manual-2026-v3-e2e-r1-expert-survival-manual-2026.json",
+    "run_id": "survival-manual-2026-v3-e2e-r1",
+    "schema_version": 2
+  },
+  "signature": "167913aa98b3dca3671cf1b50aa420477f5dfb8f19d885108e5e852eeffc1149",
+  "signature_algorithm": "HMAC-SHA256"
+}

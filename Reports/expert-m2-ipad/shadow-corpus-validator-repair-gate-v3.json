@@ -1,0 +1,585 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "none",
+  "cases" : [
+    {
+      "answer" : "Bring cloudy water to a rolling boil for 1 minute. Let the cloudy water settle in a clean container. Pour off the clearer layer or pass it through a coffee filter.",
+      "clarification_target" : "The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 7747,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "water-collect-prefilter",
+        "water-boil"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 945,
+      "generated_tokens" : 60,
+      "generation_milliseconds" : 2681,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "water-collect-prefilter-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-boil",
+        "water-collect-prefilter"
+      ],
+      "minimum_available_memory_bytes" : 3822859528,
+      "peak_physical_footprint_bytes" : 1545849592,
+      "post_available_memory_bytes" : 3822318856,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325503672,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.\"\n}",
+        "{\"s\":[{\"a\":\"Bring cloudy water to a rolling boil for 1 minute.\",\"e\":[1]},{\"a\":\"Let the cloudy water settle in a clean container.\",\"e\":[2]},{\"a\":\"Pour off the clearer layer or pass it through a coffee filter.\",\"e\":[2]}]}\n\n"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "water-collect-prefilter",
+        "signal-smoke-fire",
+        "signal-ground",
+        "food-low-risk",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_scores" : [
+        3.6861290322580644,
+        2.7863934426229506,
+        1.8353846153846152,
+        1.8349253731343282,
+        1.584705882352941,
+        1.5150000000000001,
+        1.4400000000000002,
+        1.3199999999999998
+      ],
+      "retrieval_context_milliseconds" : 8.8510513305664062,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+        "water-boil",
+        "water-collect-prefilter"
+      ],
+      "tokens_per_second" : 33.986175115207374,
+      "word_count" : 31
+    },
+    {
+      "answer" : "Build the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel. Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 7245,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 61,
+      "generation_milliseconds" : 2541,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-site-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-site"
+      ],
+      "minimum_available_memory_bytes" : 3807442184,
+      "peak_physical_footprint_bytes" : 1561266936,
+      "post_available_memory_bytes" : 3849876768,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3852187680,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches.\"\n}",
+        "{\"s\":[{\"a\":\"Build the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel.\",\"e\":[1]},{\"a\":\"Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.\",\"e\":[1]}]}\n\n"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire",
+        "basics-stay-or-move",
+        "car-ev-hybrid",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0913934426229499,
+        0.71999999999999997,
+        0.61612903225806448,
+        0.43562499999999998,
+        0.39742537313432835,
+        0.35999999999999999,
+        0.13587301587301587,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 5.601048469543457,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "fire-site"
+      ],
+      "tokens_per_second" : 32.310177705977381,
+      "word_count" : 32
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 11483,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 909,
+      "generated_tokens" : 28,
+      "generation_milliseconds" : 1613,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-site-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3824121096,
+      "peak_physical_footprint_bytes" : 1544588024,
+      "post_available_memory_bytes" : 3848549688,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879843872,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.\"\n}",
+        "{\"s\":[{\"a\":\"Build a small fire on flat, stable ground away from people, roots, and low branches.\",\"e\":[1]},{\"a\":\"Use dry wood in increasing sizes to start the fire safely before striking sparks.\",\"e\":[2]},{\"a\":\"Do not build near peat or under low branches; keep fuel clear of root zones for safety.\",\"e\":[1]},{\"a\":\"Avoid building on roots, deep duff, or beneath low branches as they pose a high risk.\",\"e\":[1]},{\"a\":\"Keep dry tinder and gather enough material to avoid leaving the fire unattended.\",\"e\":[2]}]}",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1]},{\"a\":\"Direct field guidance.\",\"e\":[2]}]}\n\n  "
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-materials",
+        "signal-smoke-fire",
+        "fire-wet",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        3.0913934426229508,
+        2.7161290322580647,
+        1.1058730158730157,
+        1.035625,
+        0.95999999999999996,
+        0.85538461538461541,
+        0.73492537313432837,
+        0.63765151515151519
+      ],
+      "retrieval_context_milliseconds" : 6.8449974060058594,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 38.352272727272727,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 10747,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 682,
+      "generated_tokens" : 136,
+      "generation_milliseconds" : 4506,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-extinguish-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3824710920,
+      "peak_physical_footprint_bytes" : 1543998200,
+      "post_available_memory_bytes" : 3851842872,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3878254648,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"ordinary\",\n  \"r\": \"low\",\n  \"e\": [],\n  \"c\": \"not_needed\",\n  \"q\": \"\"\n}",
+        "{\"s\":[{\"a\":\"Move the coals to a safe distance and extinguish them using water or soil.\",\"e\":[1]},{\"a\":\"Do not sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\",\"e\":[1]}]}",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1]}\n  ,{ \"a\": \"Attend the fire continuously and leave it cold enough to touch.\",\n    \"e\": [1] },\n  { \"a\": \"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains.\",\n    \"e\": [1] },\n  { \"a\": \"Use soil only when water is unavailable and keep checking for heat below the surface.\",\n    \"e\": [1] },\n  { \"a\": \"Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces.\",\n    \"e\": [1] }]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-extinguish",
+        "first-aid-cold",
+        "shelter-cold-snow",
+        "weather-wildlife-wildfire",
+        "navigation-stop-mark",
+        "signal-communication",
+        "car-overheat",
+        "fire-decision"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.7353846153846153,
+        0.67500000000000004,
+        0.55562500000000004,
+        0.43612903225806449,
+        0.43587301587301586,
+        0.31515151515151513,
+        0.26250000000000001
+      ],
+      "retrieval_context_milliseconds" : 5.4719448089599609,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 35.303347280334727,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The patient has collapsed after an outdoor accident. I need to assess immediate life threats.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 13401,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-assessment"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 4920,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-assessment-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3835884784,
+      "peak_physical_footprint_bytes" : 1532824336,
+      "post_available_memory_bytes" : 3842290976,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5283150912,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The patient has collapsed after an outdoor accident. I need to assess immediate life threats.\"\n}",
+        "{\"s\":[{\"a\":\"Immediate field guidance.\",\"e\":[1]}\n  ,{ \"a\": \"Ensure the scene is safe, check responsiveness and normal breathing, and begin appropriate emergency response.\", \"e\": [1]}\n  , { \"a\": \"Call or send for help; begin CPR and use an AED when indicated by current training and device prompts.\", \"e\": [1]}\n  ,{ \"a\": \"Gasping is not normal breathing; do not delay emergency activation for a long examination.\", \"e\": [1]}]}\n\n ",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1]}\n  ,{ \"a\": \"Make the scene safe, check responsiveness and normal breathing, and start the appropriate emergency response.\",\n    \"e\": [1] } ,\n   { \"a\": \"Check for danger before touching the person and use protective barriers when available.\",\n    \"e\": [1] },\n   { \"a\": \"Check responsiveness, open the airway as trained, and look for normal breathing and severe bleeding.\",\n    \"e\": [1] },\n   { \"a\": \"Call or send for help; begin CPR and use an AED when indicated by current training and the device prompts.\",\n    \"e\": [1] } ]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-assessment",
+        "basics-danger-injury",
+        "basics-priorities",
+        "basics-inventory",
+        "first-aid-bleeding",
+        "first-aid-shock",
+        "basics-stop",
+        "first-aid-heat"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229506,
+        1.3961290322580644,
+        0.93062500000000004,
+        0.89999999999999991,
+        0.79587301587301584,
+        0.79090909090909089,
+        0.71999999999999997,
+        0.62624999999999997
+      ],
+      "retrieval_context_milliseconds" : 7.8510046005249023,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 34.702549575070819,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "A deep cut with blood soaking through clothing and help far away requires immediate control of bleeding. The scenario involves severe hemorrhage, possibly life-",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 12260,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bleeding"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 681,
+      "generated_tokens" : 156,
+      "generation_milliseconds" : 5229,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bleeding-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3825480944,
+      "peak_physical_footprint_bytes" : 1543228176,
+      "post_available_memory_bytes" : 3846731040,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3871979552,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"A deep cut with blood soaking through clothing and help far away requires immediate control of bleeding. The scenario involves severe hemorrhage, possibly life-\"\n}",
+        "{\"s\":[{\"a\":\"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\"e\":[1]},{\"a\":\"Maintain continuous pressure without lifting the pad to check for bleeding.\",\"e\":[1]}]}\n\n",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1]}\n  ,{ \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze, and do not lift it repeatedly.\", \"e\": [1] },\n    { \"a\": \"For uncontrolled life-threatening limb bleeding, apply a commercial tourniquet according to training and record the time.\", \"e\": [1] },\n      { \"a\": \"Do not loosen a tourniquet after application; obtain emergency evacuation as quickly as possible.\", \"e\": [1] },\n        { \"a\": \"Exposure of the wound is required, but do not use untrained personnel or improvised materials for bleeding control.\", \"e\": [1] }]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "weather-wildlife-wildfire",
+        "first-aid-bites-allergy",
+        "first-aid-cold",
+        "first-aid-heat",
+        "first-aid-shock",
+        "fire-site",
+        "basics-stop"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.91470588235294104,
+        0.85612903225806447,
+        0.71999999999999997,
+        0.63428571428571434,
+        0.61562499999999998,
+        0.46499999999999997,
+        0.43515151515151512
+      ],
+      "retrieval_context_milliseconds" : 6.771087646484375,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 34.080914687774843,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The scenario describes a deep cut with blood soaking through clothing, the person is pale, weak, and deteriorating after blood loss. The injured individual may,",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 13342,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bleeding",
+        "first-aid-shock"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 916,
+      "generated_tokens" : 151,
+      "generation_milliseconds" : 5250,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bleeding-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3820467440,
+      "peak_physical_footprint_bytes" : 1548241680,
+      "post_available_memory_bytes" : 3849434400,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876468792,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The scenario describes a deep cut with blood soaking through clothing, the person is pale, weak, and deteriorating after blood loss. The injured individual may,\"\n}",
+        "{\"s\":[{\"a\":\"Immediate firm pressure on the wound with gauze is required.\",\"e\":[1]},{\"a\":\"Maintain continuous pressure without lifting the pad to check for bleeding.\",\"e\":[1]},{\"a\":\"For uncontrolled life-threatening limb bleeding, apply a tourniquet and record time.\",\"e\":[1]}]}\n\n",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1,2]}\n  ,{ \"a\": \"Apply immediate firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped.\",\n    \"e\": [1] },\n  { \"a\": \"Expose the wound and press firmly with gauze or clean cloth.\",\n    \"e\": [2] },\n  { \"a\": \"Maintain pressure and add material without repeatedly lifting the first pad to check.\",\n    \"e\": [1] },\n  { \"a\": \"For uncontrolled life-threatening limb bleeding, apply a commercial tourniquet according to training and record the time.\",\n    \"e\": [1] }\n  ]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "first-aid-shock",
+        "first-aid-heat",
+        "first-aid-bites-allergy",
+        "weather-wildlife-wildfire",
+        "first-aid-assessment",
+        "basics-danger-injury",
+        "first-aid-fracture-spine"
+      ],
+      "retrieval_candidate_scores" : [
+        3.0163934426229506,
+        2.4161290322580644,
+        1.1549253731343283,
+        0.97587301587301578,
+        0.81428571428571428,
+        0.7353846153846153,
+        0.73515151515151511,
+        0.67562499999999992
+      ],
+      "retrieval_context_milliseconds" : 7.6270103454589844,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 34.610059990770651,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "A sting was followed by swelling and trouble breathing far from immediate help.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 13591,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "first-aid-bites-allergy"
+      ],
+      "expected_risk_class" : "critical",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 899,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 5696,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "first-aid-bites-allergy-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3821384944,
+      "peak_physical_footprint_bytes" : 1547324176,
+      "post_available_memory_bytes" : 3847976224,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877222456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"critical\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"A sting was followed by swelling and trouble breathing far from immediate help.\"\n}",
+        "{\"s\":[{\"a\":\"Move away from the animal, insects, plant, chemical, or contaminated area without creating another injury.\",\"e\":[1]},{\"a\":\"For anaphylaxis, help use prescribed epinephrine immediately and activate emergency response.\",\"e\":[1]}]}\n\n",
+        "{\"s\":[{\"a\":\"Direct field guidance.\",\"e\":[1]}\n  ,{ \"a\": \"Move away from the animal, insects, plant, chemical, or contaminated area without creating another injury.\", \"e\": [1] },\n  { \"a\": \"For anaphylaxis, help use prescribed epinephrine immediately and activate emergency response.\", \"e\": [1] },\n  { \"a\": \"For poisoning, preserve the container or description and contact the local poison service when communication exists.\", \"e\": [1] },\n  { \"a\": \"Do not cut or suck a snakebite, apply ice or an electric shock, or make the person walk unnecessarily.\", \"e\": [1] }]}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bites-allergy",
+        "first-aid-assessment",
+        "first-aid-bleeding",
+        "basics-priorities",
+        "basics-inventory",
+        "basics-stop",
+        "basics-danger-injury",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.85612903225806447,
+        0.73587301587301579,
+        0.63015151515151513,
+        0.59999999999999998,
+        0.55562500000000004,
+        0.43538461538461537,
+        0.35999999999999999
+      ],
+      "retrieval_context_milliseconds" : 6.5639019012451172,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "tokens_per_second" : 30.644152595372109,
+      "word_count" : 14
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 4,
+  "final_available_memory_bytes" : 5285887016,
+  "final_battery_level" : 1,
+  "final_thermal" : "serious",
+  "initial_available_memory_bytes" : 5327764664,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-rag-diagnostic",
+  "run_id" : "shadow-corpus-validator-repair-gate-v3",
+  "schema_version" : 1,
+  "terminal_failure" : "thermal_serious"
+}

@@ -1,0 +1,110 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 2,
+  "final_available_memory_bytes" : 5325946040,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5327797432,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-thermal-probe",
+  "nominal_settle_seconds" : 60,
+  "run_id" : "thermal-probe-before-full-matrix",
+  "schema_version" : 1,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5327781048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325946040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5196,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10419,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 15781,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 20960,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 26188,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31506,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325929656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 36781,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325946040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41915,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325946040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 47133,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325946040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 52350,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5325946040,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57689,
+      "phase" : "thermal_probe",
+      "state" : "nominal"
+    }
+  ]
+}

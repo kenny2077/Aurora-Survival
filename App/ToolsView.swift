@@ -11,13 +11,54 @@ struct ToolsView: View {
                 selection
                 tierCard(.lite)
                 tierCard(.expert)
+                photoPrivacy
+#if DEBUG
                 downloadAccess
+#endif
             }
             .padding()
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .navigationTitle("Tools")
         .accessibilityIdentifier("tools.home")
+    }
+
+    private var photoPrivacy: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("Photo privacy", systemImage: "photo.on.rectangle.angled")
+                .font(.headline)
+            Text("Access: \(model.photoAuthorizationStatus.displayName)")
+                .font(.subheadline)
+            Text("Aurora never enumerates albums or scans the Photo Library in the background. Only an image you select is copied into the current draft.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            switch model.photoAuthorizationStatus {
+            case .notDetermined:
+                Button("Choose photo access") {
+                    Task { await model.requestPhotoLibraryAccess() }
+                }
+                .buttonStyle(.bordered)
+            case .limited:
+                Button("Manage Selected Photos") {
+                    model.manageSelectedPhotos()
+                }
+                .buttonStyle(.bordered)
+            case .denied, .restricted:
+                Button("Open Settings") { model.openPhotoSettings() }
+                    .buttonStyle(.bordered)
+            case .authorized:
+                EmptyView()
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            Color(uiColor: .secondarySystemGroupedBackground),
+            in: RoundedRectangle(cornerRadius: 18)
+        )
+        .accessibilityIdentifier("tools.photoPrivacy")
     }
 
     private var hero: some View {
@@ -37,7 +78,7 @@ struct ToolsView: View {
                     .padding(.vertical, 6)
                     .background(.white.opacity(0.18), in: Capsule())
             }
-            Text("Offline intelligence")
+            Text("Offline setup")
                 .font(.largeTitle.bold())
                 .foregroundStyle(.white)
                 .accessibilityAddTraits(.isHeader)
@@ -51,7 +92,7 @@ struct ToolsView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             LinearGradient(
-                colors: [Color.green.opacity(0.92), Color.teal.opacity(0.78)],
+                colors: [AuroraDesign.spruce, AuroraDesign.river.opacity(0.82)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             ),
@@ -77,7 +118,7 @@ struct ToolsView: View {
                 Button("Lite") { model.modelSelection = .lite }
                     .disabled(!model.runtimeTiers.contains(.lite))
                 Button("Expert") { model.modelSelection = .expert }
-                    .disabled(true)
+                    .disabled(model.availability(for: .expert) != .ready)
             } label: {
                 Label(model.modelSelection.displayName, systemImage: "slider.horizontal.3")
                     .font(.subheadline.bold())
@@ -93,14 +134,15 @@ struct ToolsView: View {
         let entry = model.modelCatalogEntries.first {
             $0.metadata["model_tier"] == tier.rawValue
         }
+        let tierColor = tier == .lite ? AuroraDesign.river : Color.indigo
         return VStack(alignment: .leading, spacing: 15) {
             HStack(alignment: .top, spacing: 14) {
                 Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
                     .font(.title2.weight(.semibold))
-                    .foregroundStyle(tier == .lite ? .blue : .purple)
+                    .foregroundStyle(tierColor)
                     .frame(width: 48, height: 48)
                     .background(
-                        (tier == .lite ? Color.blue : Color.purple).opacity(0.12),
+                        tierColor.opacity(0.12),
                         in: RoundedRectangle(cornerRadius: 14)
                     )
                     .accessibilityHidden(true)
@@ -122,14 +164,23 @@ struct ToolsView: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            if tier == .expert {
+            if tier == .expert && model.availability(for: .expert) != .ready {
                 Label("Signed model and vision projector validation pending", systemImage: "lock.shield.fill")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.purple)
+                    .foregroundStyle(AuroraDesign.aurora)
                 Button("Validation pending") {}
                     .buttonStyle(.borderedProminent)
                     .disabled(true)
                     .frame(maxWidth: .infinity)
+            } else if tier == .expert {
+                Label("Enabled for local manual testing", systemImage: "checkmark.shield.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.indigo)
+                Button("Use Expert") {
+                    model.modelSelection = .expert
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(maxWidth: .infinity)
             } else if let entry {
                 modelAction(for: entry)
             } else {
@@ -147,7 +198,7 @@ struct ToolsView: View {
         .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22))
         .overlay {
             RoundedRectangle(cornerRadius: 22)
-                .stroke(tier == .lite ? Color.blue.opacity(0.22) : Color.purple.opacity(0.22))
+                .stroke(tierColor.opacity(0.22))
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tools.tier.\(tier.rawValue)")
@@ -159,9 +210,12 @@ struct ToolsView: View {
     ) -> some View {
         let label: String
         let color: Color
-        if tier == .expert {
+        if tier == .expert && model.availability(for: .expert) != .ready {
             label = "PENDING"
             color = .purple
+        } else if tier == .expert {
+            label = model.activeTier == .expert ? "ACTIVE" : "READY"
+            color = .indigo
         } else if model.activeTier == tier {
             label = "ACTIVE"
             color = .green

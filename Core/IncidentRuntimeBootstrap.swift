@@ -46,7 +46,10 @@ public struct IncidentRuntimeBootstrap: Sendable {
     public func resolve(
         activePacks: ActivePackSnapshot,
         availableModelTiers: Set<ModelTier> = [],
-        embeddingProvider: (any QueryEmbeddingProvider)? = nil
+        expertContextAssembler: ExpertContextAssembler? = nil,
+        embeddingProvider: (any QueryEmbeddingProvider)? = nil,
+        expertEmbeddingProvider: (any ExpertQueryEmbeddingProvider)? = nil,
+        expertVectorIndex: ShardedExpertVectorIndex? = nil
     ) -> IncidentRuntimeResolution {
         let bundled = RetrievalEngine(articles: bundledArticles)
         let retrieval: any EvidenceRetrieving
@@ -80,6 +83,11 @@ public struct IncidentRuntimeBootstrap: Sendable {
             articles: bundledArticles,
             installedTiers: runtimeTiers,
             retrieval: retrieval,
+            expertEvidenceRetrieval: survivalKnowledge,
+            expertValidated: runtimeTiers.contains(.expert),
+            expertContextAssembler: expertContextAssembler,
+            expertEmbeddingProvider: expertEmbeddingProvider,
+            expertVectorIndex: expertVectorIndex,
             modelProvider: modelProvider
         )
         return IncidentRuntimeResolution(

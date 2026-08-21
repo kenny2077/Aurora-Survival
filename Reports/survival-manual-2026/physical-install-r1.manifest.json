@@ -1,0 +1,24 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "b418879062275cb85fe0f186af81cb8203d1fe077559f50ee8550999095e7ce5  survival_knowledge.sqlite",
+      "embedding_sha256": "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [],
+    "fixture_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "mode": "expert-install",
+    "output_path": "/workspace/aurora-survival/Reports/survival-manual-2026/physical-install-r1.json",
+    "profile": null,
+    "report_name": "expert-physical-report-survival-manual-2026-v3-install-r1-expert-install.json",
+    "run_id": "survival-manual-2026-v3-install-r1",
+    "schema_version": 2
+  },
+  "signature": "448dd3d34dee01bf84d2a295bbda14379e2769f6752d701ae26328907ccde708",
+  "signature_algorithm": "HMAC-SHA256"
+}

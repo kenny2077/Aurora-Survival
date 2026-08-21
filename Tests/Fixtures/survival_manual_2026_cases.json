@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 3,
+  "corpusVersion": "survival-manual-2026.1",
+  "cases": [
+    {
+      "id": "sm26-01-wet-fire",
+      "question": "Build a fire in wet conditions.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "fire-wet-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-02-extinguish-fire",
+      "question": "Extinguish a campfire completely.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "fire-extinguish-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-03-boil-elevation",
+      "question": "Boil stream water at high elevation.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "water-boil-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-04-solar-still",
+      "question": "Explain solar-still limitations.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "sm26-water-solar-still"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-05-a-frame",
+      "question": "Build an A-frame tarp shelter.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "shelter-tarp-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-06-snow-shelter",
+      "question": "Use a snow shelter safely with ventilation.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "shelter-cold-snow-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-07-leg-bleeding",
+      "question": "Control life-threatening leg bleeding.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "first-aid-bleeding-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-08-hypothermia",
+      "question": "Respond to hypothermia signs.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "first-aid-cold-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-09-stop-lost",
+      "question": "Apply the STOP method when lost.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "navigation-stop-mark-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-10-compass-bearing",
+      "question": "Take and follow a compass bearing.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "navigation-compass-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-11-mushroom",
+      "question": "Decide whether an unknown mushroom is edible.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "food-unknown-plants-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-12-fish",
+      "question": "Catch, process, and cook a fish safely.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "food-fishing-basics"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-13-start-fire",
+      "question": "How do I start a fire?",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "fire-build-feed-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-14-boil-collected",
+      "question": "How long should I boil collected water?",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "water-boil-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-15-deep-cut",
+      "question": "A deep cut will not stop bleeding.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "first-aid-bleeding-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-16-marked-trail",
+      "question": "I am lost on a marked trail.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "navigation-stop-mark-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-17-dating",
+      "question": "How do I get a girlfriend?",
+      "expectedIntent": "generalQuestion",
+      "expectedScenarioIDs": [],
+      "expectSources": false,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-18-weather",
+      "question": "How’s the weather today?",
+      "expectedIntent": "generalQuestion",
+      "expectedScenarioIDs": [],
+      "expectSources": false,
+      "expectNoRelevantEvidence": false
+    },
+    {
+      "id": "sm26-19-device-repair",
+      "question": "How do I repair an unfamiliar survival-device model?",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [],
+      "expectSources": false,
+      "expectNoRelevantEvidence": true
+    },
+    {
+      "id": "sm26-20-multi",
+      "question": "I am soaked, shivering, lost, and nearing darkness.",
+      "expectedIntent": "survivalQuestion",
+      "expectedScenarioIDs": [
+        "first-aid-cold-scenario",
+        "navigation-stop-mark-scenario"
+      ],
+      "expectSources": true,
+      "expectNoRelevantEvidence": false
+    }
+  ]
+}
+

@@ -1,0 +1,1022 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Stop and Control Panic is a helpful strategy for managing anxiety. Focus on deep breathing, counting steps, or using grounding techniques to calm your mind.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1577,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 513,
+      "generated_tokens" : 36,
+      "generation_milliseconds" : 1496,
+      "id" : "followup-001",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3825612088,
+      "peak_physical_footprint_bytes" : 1543097032,
+      "post_available_memory_bytes" : 3829183824,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326109904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Stop and Control Panic is a helpful strategy for managing anxiety. Focus on deep breathing, counting steps, or using grounding techniques to calm your mind.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 16.052961349487305,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.605289928789418,
+      "word_count" : 25
+    },
+    {
+      "answer" : "You should focus on managing your anxiety through deep breathing, mindfulness, and gradual exposure to situations that trigger panic. Practice these techniques regularly for better control.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1587,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 454,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 1458,
+      "id" : "followup-002",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3809015096,
+      "peak_physical_footprint_bytes" : 1559694024,
+      "post_available_memory_bytes" : 3825464656,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3858348112,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should focus on managing your anxiety through deep breathing, mindfulness, and gradual exposure to situations that trigger panic. Practice these techniques regularly for better control.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 15.964984893798828,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.856573705179279,
+      "word_count" : 26
+    },
+    {
+      "answer" : "Stop what you're doing and think about your options now. Consider the situation carefully before making a decision. You might want to pause, reflect, or ask for help if needed.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1707,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 452,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 1629,
+      "id" : "followup-003",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3808326968,
+      "peak_physical_footprint_bytes" : 1560382152,
+      "post_available_memory_bytes" : 3824989520,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3854448720,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Stop what you're doing and think about your options now. Consider the situation carefully before making a decision. You might want to pause, reflect, or ask for help if needed.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 16.149997711181641,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.683942225998301,
+      "word_count" : 30
+    },
+    {
+      "answer" : "You should stop moving immediately to think clearly and avoid making the emergency worse. Take slow breaths, say what happened out loud, and move only far enough to escape an immediate threat like traffic or falling rock. Mark your stopping point with a sign or note the time, weather, and last known location. Do not run downhill or follow water unless it’s safe. If you’re in danger of being caught by rising water, stop moving now and wait for help. This is critical because if you move too far without assessing risk, the emergency could grow larger.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10003,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 122,
+      "generation_milliseconds" : 4534,
+      "id" : "followup-004",
+      "manual_lessons" : [
+        "basics-stop",
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3806442808,
+      "peak_physical_footprint_bytes" : 1562266312,
+      "post_available_memory_bytes" : 3841455416,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3853891664,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should stop moving immediately and take slow breaths to calm your mind. Assess the situation by noting where you are, what’s around you, and whether there's an immediate threat like falling rock or rising water. Mark your location with a stone or flag and record time, weather, and last known position. Do not run downhill or follow water unless it is safe. If you're in danger of being caught in traffic or near fire, stop now to avoid making the emergency worse. You must gather tinder, kindling, and fuel before starting any fire—this includes dry materials from nearby trees that are legal for collection.\",\"e\":[1,2]}",
+        "{\"a\":\"You should stop moving immediately to think clearly and avoid making the emergency worse. Take slow breaths, say what happened out loud, and move only far enough to escape an immediate threat like traffic or falling rock. Mark your stopping point with a sign or note the time, weather, and last known location. Do not run downhill or follow water unless it’s safe. If you’re in danger of being caught by rising water, stop moving now and wait for help. This is critical because if you move too far without assessing risk, the emergency could grow larger.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 16.376018524169922,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.820173204279165,
+      "word_count" : 97
+    },
+    {
+      "answer" : "You should assess the situation, ensure safety, and report any injuries or dangers to a supervisor immediately. Make sure you follow all procedures for handling hazardous materials safely.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1600,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 455,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1521,
+      "id" : "followup-005",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3813569824,
+      "peak_physical_footprint_bytes" : 1555139296,
+      "post_available_memory_bytes" : 3847910712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3868833848,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should assess the situation, ensure safety, and report any injuries or dangers to a supervisor immediately. Make sure you follow all procedures for handling hazardous materials safely.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.393925666809082,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.647279549718576,
+      "word_count" : 28
+    },
+    {
+      "answer" : "You should check for danger and injuries now, assess the situation, call emergency services if needed, and follow safety procedures.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 1407,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 499,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 1330,
+      "id" : "followup-006",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3849794872,
+      "peak_physical_footprint_bytes" : 1518914248,
+      "post_available_memory_bytes" : 3851760952,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5312478320,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check for danger and injuries now, assess the situation, call emergency services if needed, and follow safety procedures.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.260053634643555,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.101083032490976,
+      "word_count" : 20
+    },
+    {
+      "answer" : "You should address the assessment now to improve your performance and get feedback for future improvement. Make sure you review it carefully and take action based on what’s needed.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1590,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 452,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1510,
+      "id" : "followup-007",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3834410248,
+      "peak_physical_footprint_bytes" : 1534298872,
+      "post_available_memory_bytes" : 3846763760,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3880712248,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should address the assessment now to improve your performance and get feedback for future improvement. Make sure you review it carefully and take action based on what’s needed.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.782071113586426,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.916824196597354,
+      "word_count" : 29
+    },
+    {
+      "answer" : "The first step is to check for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Look for breathing issues, severe bleeding, confusion, or inability to move safely. Control the most urgent threat by taking action immediately, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear; instead, stop and assess before proceeding. If there is uncontrolled life-threatening limb bleeding, apply firm pressure with gauze until trained personnel are available. Use tourniquets only when properly equipped and documented.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10056,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 134,
+      "generation_milliseconds" : 4975,
+      "id" : "followup-008",
+      "manual_lessons" : [
+        "basics-danger-injury",
+        "first-aid-bleeding"
+      ],
+      "minimum_available_memory_bytes" : 3829036296,
+      "peak_physical_footprint_bytes" : 1539672824,
+      "post_available_memory_bytes" : 3860542704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3875715128,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You must first assess for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Check breathing, severe bleeding, confusion, and safe movement—prioritize the most urgent threat. If you find a danger such as active fire or uncontrolled bleeding, stop immediately and do not enter the area to recover gear. Use Review Excerpt [1] for hazard identification and Review Excerpt [2] for controlling life-threatening limb bleeding if applicable. Confirm your assessment before proceeding with comfort or travel actions.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The first step is to check for immediate threats and life-threatening injuries, including traffic, fire, unstable terrain, weather, water, wildlife, or falling objects. Look for breathing issues, severe bleeding, confusion, or inability to move safely. Control the most urgent threat by taking action immediately, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear; instead, stop and assess before proceeding. If there is uncontrolled life-threatening limb bleeding, apply firm pressure with gauze until trained personnel are available. Use tourniquets only when properly equipped and documented.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.923023223876953,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.45569040531257,
+      "word_count" : 95
+    },
+    {
+      "answer" : "You should check your inventory and update it with the current items you have, including any new additions or removals. Make sure to record everything for accurate tracking.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1598,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 453,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1518,
+      "id" : "followup-009",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3829265624,
+      "peak_physical_footprint_bytes" : 1539443496,
+      "post_available_memory_bytes" : 3852104920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3884398600,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check your inventory and update it with the current items you have, including any new additions or removals. Make sure to record everything for accurate tracking.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.91999626159668,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.68075117370892,
+      "word_count" : 28
+    },
+    {
+      "answer" : "You should check your inventory and take action based on the current situation, such as restocking or managing stock levels.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1369,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 454,
+      "generated_tokens" : 30,
+      "generation_milliseconds" : 1253,
+      "id" : "followup-010",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3825906880,
+      "peak_physical_footprint_bytes" : 1542802240,
+      "post_available_memory_bytes" : 3852727512,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3881498632,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check your inventory and take action based on the current situation, such as restocking or managing stock levels.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.842987060546875,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.295369211514391,
+      "word_count" : 20
+    },
+    {
+      "answer" : "You should consider using a gear system to organize your items and improve efficiency in daily tasks. Make sure it's compatible with the current tools you're working on.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 1698,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 503,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1565,
+      "id" : "followup-011",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3851662576,
+      "peak_physical_footprint_bytes" : 1517046544,
+      "post_available_memory_bytes" : 3855660296,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5319867480,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should consider using a gear system to organize your items and improve efficiency in daily tasks. Make sure it's compatible with the current tools you're working on.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 15.574932098388672,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.781544256120526,
+      "word_count" : 28
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10620,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 5440,
+      "id" : "followup-012",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836851416,
+      "peak_physical_footprint_bytes" : 1531857704,
+      "post_available_memory_bytes" : 3862082800,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3884791864,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You must immediately empty your pockets and packs in a controlled area, separate items into categories (dry insulation, first aid, water treatment, etc. ), protect critical gear from rain or damage, and prioritize shelter setup with light sources before dark sets in—do not wait until night to assess conditions. If you find flooding, debris, or lack of insulation during inspection, stop immediately and re-evaluate the site. Ensure all tools are within reach; if any item is lost or damaged, report it right away. Use only [1] and [2], no other references.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should immediately empty all pockets and packs in one controlled place to avoid losing equipment. Separate items into categories—dry insulation, first aid, water treatment, light, ignition, navigation, and communication—and protect the most critical ones from rain or damage. Do not scatter gear while searching in darkness or bad weather; this could lead to loss of vital supplies. After organizing your inventory, prioritize shelter, warmth, water, and signals before dark sets in. If you find that a site floods, sheds branches, or lacks insulation during inspection, do not wait—immediately move to a safer location with better conditions. This process must be completed quickly so no time is lost when the night falls.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.53797721862793,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 30.422185430463575,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should assess your current conditions, identify priorities based on urgency and impact, and take action accordingly.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1267,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 456,
+      "generated_tokens" : 27,
+      "generation_milliseconds" : 1172,
+      "id" : "followup-013",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3833722072,
+      "peak_physical_footprint_bytes" : 1534987048,
+      "post_available_memory_bytes" : 3861656792,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3889412104,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should assess your current conditions, identify priorities based on urgency and impact, and take action accordingly.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.137029647827148,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.312849162011176,
+      "word_count" : 17
+    },
+    {
+      "answer" : "You should set priorities for conditions by identifying what's most urgent and focus on addressing the highest priority issues first.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1357,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 443,
+      "generated_tokens" : 29,
+      "generation_milliseconds" : 1217,
+      "id" : "followup-014",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3840144600,
+      "peak_physical_footprint_bytes" : 1528564520,
+      "post_available_memory_bytes" : 3855135960,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3888773128,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should set priorities for conditions by identifying what's most urgent and focus on addressing the highest priority issues first.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.254927635192871,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.175710594315248,
+      "word_count" : 20
+    },
+    {
+      "answer" : "You should focus on setting clear priorities based on your goals and available resources now. Make a list of tasks, rank them by importance, and start with the most urgent ones.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1680,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 451,
+      "generated_tokens" : 42,
+      "generation_milliseconds" : 1604,
+      "id" : "followup-015",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3837899992,
+      "peak_physical_footprint_bytes" : 1530809128,
+      "post_available_memory_bytes" : 3855037680,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3884120072,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should focus on setting clear priorities based on your goals and available resources now. Make a list of tasks, rank them by importance, and start with the most urgent ones.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.509916305541992,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.559410234171729,
+      "word_count" : 31
+    },
+    {
+      "answer" : "You should assess the situation and take immediate steps to ensure your safety, avoiding any actions that could increase risk.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 1367,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "first_token_milliseconds" : 529,
+      "generated_tokens" : 29,
+      "generation_milliseconds" : 1293,
+      "id" : "followup-016",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3853989080,
+      "peak_physical_footprint_bytes" : 1514720040,
+      "post_available_memory_bytes" : 3853890776,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5291064312,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should assess the situation and take immediate steps to ensure your safety, avoiding any actions that could increase risk.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 15.779018402099609,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.64921465968586,
+      "word_count" : 20
+    },
+    {
+      "answer" : "You should decide whether to stay or move based on your current situation and priorities. Consider factors like stability, resources, and personal goals before making a decision.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1572,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 447,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 1473,
+      "id" : "followup-017",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836687600,
+      "peak_physical_footprint_bytes" : 1532021520,
+      "post_available_memory_bytes" : 3853710576,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882956808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should decide whether to stay or move based on your current situation and priorities. Consider factors like stability, resources, and personal goals before making a decision.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.624953269958496,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.062378167641327,
+      "word_count" : 27
+    },
+    {
+      "answer" : "You should consider your reasons for wanting to stay or move, evaluate the pros and cons of each option, talk to family and friends, research different areas, and make a decision based on what's best for you.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8396,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 154,
+      "generated_tokens" : 49,
+      "generation_milliseconds" : 1515,
+      "id" : "followup-018",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836638448,
+      "peak_physical_footprint_bytes" : 1532070672,
+      "post_available_memory_bytes" : 3853677808,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882743816,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should consider your reasons for staying or moving and talk to someone you trust before making a decision.                                                                                                                    �",
+        "{\"a\":\"You should consider your reasons for wanting to stay or move, evaluate the pros and cons of each option, talk to family and friends, research different areas, and make a decision based on what's best for you.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.705061912536621,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.268185157972077,
+      "word_count" : 37
+    },
+    {
+      "answer" : "stay put and wait for further instructions or guidance from me, as I am your offline assistant. Please be patient while we discuss the situation.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1484,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 442,
+      "generated_tokens" : 35,
+      "generation_milliseconds" : 1384,
+      "id" : "followup-019",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3820483824,
+      "peak_physical_footprint_bytes" : 1548225296,
+      "post_available_memory_bytes" : 3853825264,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882645512,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"stay put and wait for further instructions or guidance from me, as I am your offline assistant. Please be patient while we discuss the situation.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.685988426208496,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 36.093418259023352,
+      "word_count" : 25
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Unless otherwise specified, follow that guidance.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1477,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "first_token_milliseconds" : 483,
+      "generated_tokens" : 34,
+      "generation_milliseconds" : 1401,
+      "id" : "followup-020",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836458224,
+      "peak_physical_footprint_bytes" : 1532250896,
+      "post_available_memory_bytes" : 3853563120,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882743816,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Stay near the last known route unless remaining creates more danger or a known safe destination is close. Unless otherwise specified, follow that guidance.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 15.748023986816406,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "tokens_per_second" : 35.947712418300654,
+      "word_count" : 24
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 10047,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 606,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 4672,
+      "id" : "followup-021",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3852203224,
+      "peak_physical_footprint_bytes" : 1516505896,
+      "post_available_memory_bytes" : 3856200944,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5296143352,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration now, as symptoms like thirst, dark urine, dizziness, and weakness are present. Rest in shade, loosen layers, and drink safe water slowly to avoid overloading the system. Stop if gathering food consumes more than 10% of your available resources or you're already dehydrated; otherwise, prioritize hydration first. Warning: Do not force fluids into someone who is confused or unable to swallow—this could cause harm. Clarifying question: Is there a chance for rescue within 30 minutes? If yes, proceed with caution and avoid overexertion.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen layers, and drink safe water slowly to avoid worsening symptoms. If confusion, collapse, seizure, or inability to drink occurs, treat as emergency—call for help immediately. Do not force fluids into anyone who is unresponsive or unable to swallow; this could cause harm. Stop if gathering food consumes valuable resources like water, warmth, navigation certainty, or signaling time. Prioritize safety and avoid overexertion in the heat.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 14.889955520629883,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.742744712247909,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10475,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 140,
+      "generation_milliseconds" : 5156,
+      "id" : "followup-022",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3841307888,
+      "peak_physical_footprint_bytes" : 1527401232,
+      "post_available_memory_bytes" : 3855971568,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3888396296,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration by noticing symptoms like thirst, dry mouth, dark urine, dizziness, or weakness. Rest in shade and drink safe water in small amounts to prevent further loss of fluids. If you experience confusion, collapse, seizure, or can’t drink safely, treat as an emergency. Stop drinking if someone is not alert or cannot swallow. Boil water properly using the method from [2] for safety at altitude above 6,500 feet (1,980 m). Ensure it cools and stays in a clean container without touching the cap to avoid contamination.\",\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing symptoms like thirst, dry mouth, dark urine, dizziness, or weakness. Rest in shade and drink safe water in small amounts to avoid worsening the condition. If you experience confusion, collapse, seizure, or can’t drink safely, treat it as an emergency. Do not force fluids into someone who is unresponsive or unable to swallow—this could cause harm. Stop if symptoms worsen; escalate only when there’s no improvement after 15 minutes of rest and fluid intake. Always use boiling water correctly per [2] for safe drinking at high altitudes, but never boil contaminated sources like fuel or chemicals.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.092968940734863,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.55616619037151,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8417,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 605,
+      "generated_tokens" : 116,
+      "generation_milliseconds" : 4330,
+      "id" : "followup-023",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836867848,
+      "peak_physical_footprint_bytes" : 1531841272,
+      "post_available_memory_bytes" : 3856069872,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883317280,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should recognize dehydration signs like thirst, dry mouth, dark urine, dizziness, and weakness. Rest in shade, loosen layers, and drink safe water slowly. If confusion or collapse occurs, treat as emergency—do not force fluids if unable to swallow. Stop gathering food if it risks losing warmth, water, or navigation certainty. Dehydration is a priority; do not delay until you're fully alert.\" ,\"e\":[1,2]}",
+        "{\"a\":\"You should recognize dehydration by noticing thirst, dry mouth, headache, dark urine, dizziness, weakness, or reduced coordination. Rest in shade and drink safe water in small amounts to avoid worsening symptoms. If confusion, collapse, seizure, or inability to drink occurs, treat as an emergency. Do not force fluids into someone who is unresponsive or unable to swallow. Stop if gathering food consumes valuable resources like water, warmth, navigation certainty, or signaling time. Prioritize hydration and safety over food collection unless rescue conditions are favorable.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.055060386657715,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.872483221476511,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should reduce exertion and replace safe fluids before weakness or confusion becomes severe, as it is a sign of potential dehydration.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 7906,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 155,
+      "generated_tokens" : 32,
+      "generation_milliseconds" : 1007,
+      "id" : "followup-024",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3837080840,
+      "peak_physical_footprint_bytes" : 1531628280,
+      "post_available_memory_bytes" : 3853448432,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883399200,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should reduce exertion and replace safe fluids before weakness or confusion becomes severe.                                                                                                                      �",
+        "{\"a\":\"You should reduce exertion and replace safe fluids before weakness or confusion becomes severe, as it is a sign of potential dehydration.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 16.081929206848145,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 36.3849765258216,
+      "word_count" : 22
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10506,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 139,
+      "generation_milliseconds" : 5109,
+      "id" : "followup-025",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836523760,
+      "peak_physical_footprint_bytes" : 1532185360,
+      "post_available_memory_bytes" : 3855725808,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882809352,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should prioritize locating water using the methods in [1], focusing on valleys, drainage lines, springs, and green vegetation. Listen for flowing sounds and assess terrain convergence to avoid random wandering. Travel during cooler hours and leave markers if needed—this is critical when searching for a source. Avoid steep ravines or fast-moving areas as they increase risk of injury or entrapment. Stop if gathering food consumes water, warmth, navigation certainty, or signaling time; otherwise, proceed only with high-return methods. A clear warning: do not enter unstable banks or caves—these are dangerous and may lead to fatal outcomes.\" ,\"e\":[1]}",
+        "{\"a\":\"The first priority is to locate likely water using the methods in [1], focusing on valleys, drainage lines, springs, and green vegetation. Travel during cooler hours and use markers if needed. Avoid steep ravines, unstable banks, caves, or fast-moving streams—these are dangerous. If you find a potential source, assess whether food gathering is worth it by checking rescue time, weather, health, daylight, and available supplies in [2]. Stop if the search consumes water, warmth, navigation certainty, or signaling time. Do not enter any area where there’s no clear path to safety or where conditions are too risky for a return trip.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 15.102982521057129,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.65304309195913,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should check maps, look for valleys and drainage lines, listen for flowing water, and search low-lying areas near green vegetation. Travel during cooler hours and leave markers if needed. Avoid steep ravines, unstable banks, or fast-moving streams to prevent injury. If you find a potential source, confirm it by checking the terrain and animal movement before entering. Stop immediately if you encounter signs of instability or rapid water flow that could lead to drowning. Boiling is not required unless you have confirmed clean water; ensure your container remains sealed during storage.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5006,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 1032,
+      "generated_tokens" : 121,
+      "generation_milliseconds" : 4904,
+      "id" : "followup-026",
+      "manual_lessons" : [
+        "water-locate",
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3838194928,
+      "peak_physical_footprint_bytes" : 1530514192,
+      "post_available_memory_bytes" : 3856004336,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5318179928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check maps, look for valleys and drainage lines, listen for flowing water, and search low-lying areas near green vegetation. Travel during cooler hours and leave markers if needed. Avoid steep ravines, unstable banks, or fast-moving streams to prevent injury. If you find a potential source, confirm it by checking the terrain and animal movement before entering. Stop immediately if you encounter signs of instability or rapid water flow that could lead to drowning. Boiling is not required unless you have confirmed clean water; ensure your container remains sealed during storage.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 14.999032020568848,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.991735537190081,
+      "word_count" : 92
+    },
+    {
+      "answer" : "You should check for water sources nearby, such as rivers or lakes, and ensure you have a safe drinking source. Make sure to drink only from clean containers.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1579,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 442,
+      "generated_tokens" : 39,
+      "generation_milliseconds" : 1502,
+      "id" : "followup-027",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3817223408,
+      "peak_physical_footprint_bytes" : 1551469328,
+      "post_available_memory_bytes" : 3859805448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883612192,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should check for water sources nearby, such as rivers or lakes, and ensure you have a safe drinking source. Make sure to drink only from clean containers.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.490008354187012,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 35.849056603773583,
+      "word_count" : 28
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9221,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 609,
+      "generated_tokens" : 121,
+      "generation_milliseconds" : 4517,
+      "id" : "followup-028",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3836343536,
+      "peak_physical_footprint_bytes" : 1532365584,
+      "post_available_memory_bytes" : 3856430344,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882694688,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"You should prioritize locating water first, as it is the most critical need. Use EXCERPT [1] to search for sources in valleys and along drainage lines, avoiding steep ravines or unstable banks. Check for signs of animal movement and listen for flowing sounds—this will help you find a reliable source without wasting energy. Stop if gathering food consumes water, warmth, or navigation certainty; otherwise, proceed only with high-return methods. Remember: do not enter fast-moving streams or caves unless absolutely necessary.\" ,\"e\":[1]}",
+        "{\"a\":\"The first priority is to locate likely water sources using the methods in [1], focusing on valleys, drainage lines, springs, and low-lying areas. Avoid entering steep ravines or unstable banks as warned in [1]. Travel during cooler hours and use markers if needed. If a search takes you away from shelter, ensure it’s within your energy limits. Stop gathering food if it consumes water, warmth, navigation certainty, or signaling time—especially when rescue chances are low. Do not enter fast-moving streams unless absolutely necessary; prioritize safety over speed.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 16.098976135253906,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.706243602865918,
+      "word_count" : 10
+    },
+    {
+      "answer" : "You should choose the safest source available, as it is safer and more reliable for your needs. Please confirm if you need help with that.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1478,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 453,
+      "generated_tokens" : 34,
+      "generation_milliseconds" : 1375,
+      "id" : "followup-029",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3837474056,
+      "peak_physical_footprint_bytes" : 1531235064,
+      "post_available_memory_bytes" : 3854513416,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883710520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should choose the safest source available, as it is safer and more reliable for your needs. Please confirm if you need help with that.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.873981475830078,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 35.791757049891537,
+      "word_count" : 25
+    },
+    {
+      "answer" : "You should choose the safest source by researching its reputation, checking reviews, and ensuring it's reliable and trustworthy.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 1281,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "first_token_milliseconds" : 432,
+      "generated_tokens" : 29,
+      "generation_milliseconds" : 1204,
+      "id" : "followup-030",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3837359368,
+      "peak_physical_footprint_bytes" : 1531349752,
+      "post_available_memory_bytes" : 3856856328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883579448,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should choose the safest source by researching its reputation, checking reviews, and ensuring it's reliable and trustworthy.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 14.176011085510254,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "tokens_per_second" : 36.269430051813472,
+      "word_count" : 18
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3883726904,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328387280,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "multiturn-batch-1-paced",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

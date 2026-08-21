@@ -1,0 +1,2855 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "b418879062275cb85fe0f186af81cb8203d1fe077559f50ee8550999095e7ce5  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-wet-scenario"
+        ]
+      ],
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "answer_model_call_count" : 1,
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 976,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 681,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 7,
+      "generation_milliseconds" : 835,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-01-wet-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 3826726920,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1541982200,
+      "post_available_memory_bytes" : 3826235400,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322128568,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"t\":\"survival\"}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 38.961038961038959,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-extinguish-scenario"
+        ]
+      ],
+      "answer" : "Burn fuel down, spread coals, add water, stir, and repeat until no heat remains. Avoid sleeping with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter. Avoid, Stop, Do not sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.",
+      "answer_model_call_count" : 1,
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4488,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1618,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 72,
+      "generation_milliseconds" : 4337,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-02-extinguish-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 3776689728,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1592019392,
+      "post_available_memory_bytes" : 5077186856,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3825940488,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains., Avoid sleeping with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter., Avoid, Stop, Do not sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\" , \"e\":[1]}\n",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains., Avoid sleeping with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter., Avoid, Stop, Do not sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\" , \"e\":[1]}\n"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains., Avoid sleeping with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter., Avoid, Stop, Do not sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\" , \"e\":[1]}\n",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "fire-extinguish"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.1125413755057,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 47
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Boil the water at a high elevation to ensure it reaches a rolling boil for the recommended time, avoiding any potential contamination from the environment. Boiling is crucial for removing fuel and other contaminants, requiring a full 3-minute boil at altitudes above 6,500 feet. Always heed the boiling does not remove toxic chemicals, salt, or radioactive contamination, so proceed with caution.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 10697,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 277,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 92,
+      "generation_milliseconds" : 3846,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-03-boil-elevation",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 4993562896,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 375146224,
+      "post_available_memory_bytes" : 5029181712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5076924712,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Boil the water at a high elevation to ensure it reaches a rolling boil for the recommended time, avoiding any potential contamination from the environment.\\nBoiling is crucial for removing fuel and other contaminants, requiring a full 3-minute boil at altitudes above 6,500 feet.\\nAlways heed the warning: boiling does not remove toxic chemicals, salt, or radioactive contamination, so proceed with caution.\\n\",\"e\":[1]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Boil the water,****************************************************************************************************************************************************************************************************************************************************************************************************************",
+        "{\"a\":\"Boil the water at a high elevation to ensure it reaches a rolling boil for the recommended time, avoiding any potential contamination from the environment.\\nBoiling is crucial for removing fuel and other contaminants, requiring a full 3-minute boil at altitudes above 6,500 feet.\\nAlways heed the warning: boiling does not remove toxic chemicals, salt, or radioactive contamination, so proceed with caution.\\n\",\"e\":[1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Boil the water,****************************************************************************************************************************************************************************************************************************************************************************************************************",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "water-boil"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.497338189969177,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 61
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "sm26-water-solar-still"
+        ]
+      ],
+      "answer" : "Collect water and dirt: Create a still by positioning a container upside down, with a small hole in the bottom. Allow condensation to form: Wait for water vapor to condense and drip into the container.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2298,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 190,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 52,
+      "generation_milliseconds" : 2164,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-04-solar-still",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5006653712,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 362039024,
+      "post_available_memory_bytes" : 5030279440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5028935952,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"1. Collect water and dirt: Create a still by positioning a container upside down, with a small hole in the bottom. 2. Allow condensation to form: Wait for water vapor to condense and drip into the container.\",\"e\":[]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"1. Collect water and dirt: Create a still by positioning a container upside down, with a small hole in the bottom. 2. Allow condensation to form: Wait for water vapor to condense and drip into the container.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"1. Collect water and dirt: Create a still by positioning a container upside down, with a small hole in the bottom. 2. Allow condensation to form: Wait for water vapor to condense and drip into the container.\",\"e\":[]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.835866261398177,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 35
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-tarp-scenario"
+        ]
+      ],
+      "answer" : "Choose solid anchors and run a ridgeline or supported edge without damaging trees. Ensure the tarp is stable and secure to prevent it from collapsing under wind or rain. This establishes a foundational structure for the shelter, protecting the sleeping area from the elements. Avoid sealing the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates, as this can be dangerous.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7878,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 276,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 127,
+      "generation_milliseconds" : 4669,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-05-a-frame",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 4999231760,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 369477360,
+      "post_available_memory_bytes" : 5030082832,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5030050064,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Choose solid anchors and run a ridgeline or supported edge without damaging trees. Ensure the tarp is stable and secure to prevent it from collapsing under wind or rain., This establishes a foundational structure for the shelter, protecting the sleeping area from the elements., Avoid sealing the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates, as this can be dangerous.\"\n\n \t \t \t \t \t \t \t \t \t \t, \"e\":[1]\n\t \t \t \t \t \t \t \t \t \t }\n",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Build a Tarp Shelter\\\\n1. Choose solid anchors and run a ridgeline or supported edge without damaging trees.\\\\n2. Angle the tarp steeply enough to shed rain and lower the windward side.\\nWARNING: Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.\" , \"e\":[1]}",
+        "{\"a\":\"Choose solid anchors and run a ridgeline or supported edge without damaging trees. Ensure the tarp is stable and secure to prevent it from collapsing under wind or rain., This establishes a foundational structure for the shelter, protecting the sleeping area from the elements., Avoid sealing the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates, as this can be dangerous.\"\n\n \t \t \t \t \t \t \t \t \t \t, \"e\":[1]\n\t \t \t \t \t \t \t \t \t \t }\n"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Build a Tarp Shelter\\\\n1. Choose solid anchors and run a ridgeline or supported edge without damaging trees.\\\\n2. Angle the tarp steeply enough to shed rain and lower the windward side.\\nWARNING: Do not seal the shelter so tightly that condensation, stove fumes, or carbon monoxide accumulates.\" , \"e\":[1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "shelter-tarp"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 28.681994081493286,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 63
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-cold-snow-scenario"
+        ]
+      ],
+      "answer" : "Choose a site, avoid avalanche paths, cornices, tree wells, and drifting snow, and use a snow shelter only if it’s stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls, to ensure safety and ventilation. Avoid using a flame or stove without designed ventilation, as it could lead to collapse or carbon monoxide poisoning.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 75000,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4028,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 334,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 3911,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-06-snow-shelter",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5024708904,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 344000216,
+      "post_available_memory_bytes" : 5056887080,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5158271368,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Choose a site, avoid avalanche paths, cornices, tree wells, and drifting snow, and use a snow shelter only if it’s stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls, to ensure safety and ventilation. Avoid using a flame or stove without designed ventilation, as it could lead to collapse or carbon monoxide poisoning.\",\"e\":[1]\n  \t  \t  \t  \t  \t  \t  }",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Choose a site, avoid avalanche paths, cornices, tree wells, and drifting snow, and use a snow shelter only if it’s stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls, to ensure safety and ventilation. Avoid using a flame or stove without designed ventilation, as it could lead to collapse or carbon monoxide poisoning.\",\"e\":[1]\n  \t  \t  \t  \t  \t  \t  }"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Choose a site, avoid avalanche paths, cornices, tree wells, and drifting snow, and use a snow shelter only if it’s stable and ventilated. Mark the entrance, keep tools inside, and clear vents as snow falls, to ensure safety and ventilation. Avoid using a flame or stove without designed ventilation, as it could lead to collapse or carbon monoxide poisoning.\",\"e\":[1]\n  \t  \t  \t  \t  \t  \t  }",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "shelter-cold-snow"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 27.117696393625945,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 59
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped. Avoid loosening a tourniquet after application, Stop if bleeding worsens and requires immediate medical attention.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2307,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 323,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 50,
+      "generation_milliseconds" : 2130,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-07-leg-bleeding",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "first-aid-bleeding"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5018695976,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 350013144,
+      "post_available_memory_bytes" : 5049907496,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5056690472,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Apply firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped., Avoid loosening a tourniquet after application, Stop if bleeding worsens and requires immediate medical attention.\" , \"e\": [1]\n}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Apply firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped., Avoid loosening a tourniquet after application, Stop if bleeding worsens and requires immediate medical attention.\" , \"e\": [1]\n}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Apply firm pressure and escalate to a tourniquet for life-threatening limb bleeding when trained and equipped., Avoid loosening a tourniquet after application, Stop if bleeding worsens and requires immediate medical attention.\" , \"e\": [1]\n}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "first-aid-bleeding"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 27.11676812396237,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 31
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario"
+        ]
+      ],
+      "answer" : "Move out of wind and wet, replace wet clothing, and insulate above and below. Avoid direct fire, use alcohol, or thaw tissue that may refreeze. Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2959,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 330,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 68,
+      "generation_milliseconds" : 2846,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-08-hypothermia",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "first-aid-cold"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5018859816,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 349849304,
+      "post_available_memory_bytes" : 5049874728,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5049678120,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Move out of wind and wet, replace wet clothing, and insulate above and below., Avoid direct fire, use alcohol, or thaw tissue that may refreeze., Warning: Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze.\" , \"e\": [1]\n  }",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Move out of wind and wet, replace wet clothing, and insulate above and below., Avoid direct fire, use alcohol, or thaw tissue that may refreeze., Warning: Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze.\" , \"e\": [1]\n  }"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Move out of wind and wet, replace wet clothing, and insulate above and below., Avoid direct fire, use alcohol, or thaw tissue that may refreeze., Warning: Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze.\" , \"e\": [1]\n  }",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "first-aid-cold"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.629570747217805,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 40
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Lite couldn’t form a complete answer. Try rephrasing your question.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5158,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 276,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 77,
+      "generation_milliseconds" : 3245,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-09-stop-lost",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5018564904,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 350144216,
+      "post_available_memory_bytes" : 5049973032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5049645352,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Stop and Control Panic, then move only far enough to escape an immediate threat, and mark your location with time, weather, and certainty.  This prevents further movement that could worsen the situation, ensuring a safer outcome.  Do not follow downhill or water, as these can lead to further danger, and careful observation is key to survival.\\n\",\"e\":[1]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Stop and Control Panic,\\nMove only far enough to escape an immediate threat.\\nAvoid running downhill or following water just because it appears to lead out.\" , \"e\":[1]}",
+        "{\"a\":\"Stop and Control Panic, then move only far enough to escape an immediate threat, and mark your location with time, weather, and certainty.  This prevents further movement that could worsen the situation, ensuring a safer outcome.  Do not follow downhill or water, as these can lead to further danger, and careful observation is key to survival.\\n\",\"e\":[1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Stop and Control Panic,\\nMove only far enough to escape an immediate threat.\\nAvoid running downhill or following water just because it appears to lead out.\" , \"e\":[1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.597844392051197,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-compass-scenario"
+        ]
+      ],
+      "answer" : "Lite couldn’t form a complete answer. Try rephrasing your question.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4785,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 276,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 69,
+      "generation_milliseconds" : 2897,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-10-compass-bearing",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5018581288,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 350127832,
+      "post_available_memory_bytes" : 5049989416,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5049973032,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Use a compass to hold a known direction, not to invent a destination.  Maintain a level bearing and keep it away from potential hazards like vehicles and metal objects, ensuring accurate navigation.  Always verify your bearing against a map and account for local declination for precise positioning, avoiding misdirection.\",\"e\":[1] }",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Use a Compass,\\nSet or read the bearing using the map and account for local declination when precision matters.\\nAvoid making incorrect assumptions about direction.\\n\",\"e\": [1]}",
+        "{\"a\":\"Use a compass to hold a known direction, not to invent a destination.  Maintain a level bearing and keep it away from potential hazards like vehicles and metal objects, ensuring accurate navigation.  Always verify your bearing against a map and account for local declination for precise positioning, avoiding misdirection.\",\"e\":[1] }"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Use a Compass,\\nSet or read the bearing using the map and account for local declination when precision matters.\\nAvoid making incorrect assumptions about direction.\\n\",\"e\": [1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.944296070202213,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Use carried food first, then examine closely. Avoid consuming any unknown mushrooms or plants without expert confirmation, as potential toxins could be present. Do not risk your health by consuming something you don’t know with certainty.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 75000,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2392,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 336,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 52,
+      "generation_milliseconds" : 2259,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-11-mushroom",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "food-unknown-plants"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5027936552,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 340756184,
+      "post_available_memory_bytes" : 5051480360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5168413040,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Use carried food first, then examine closely. Avoid consuming any unknown mushrooms or plants without expert confirmation, as potential toxins could be present. Do not risk your health by consuming something you don’t know with certainty.\", \"e\": [1]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Use carried food first, then examine closely. Avoid consuming any unknown mushrooms or plants without expert confirmation, as potential toxins could be present. Do not risk your health by consuming something you don’t know with certainty.\", \"e\": [1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Use carried food first, then examine closely. Avoid consuming any unknown mushrooms or plants without expert confirmation, as potential toxins could be present. Do not risk your health by consuming something you don’t know with certainty.\", \"e\": [1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "food-unknown-plants"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.521060842433698,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 36
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Lite couldn’t form a complete answer. Try rephrasing your question.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5018,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 276,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 74,
+      "generation_milliseconds" : 3117,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-12-fish",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5015206160,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 353502960,
+      "post_available_memory_bytes" : 5052725544,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5051283752,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Cook and handle food safely to prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean., Avoid, Stop, or Do not handle raw food, cooking it thoroughly, or keep hands and tools clean., Smoking, color, smell, or a brief sear does not prove meat or fish is safe.\"\n\n  ,\"e\":[1]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Wash hands and keep raw food separate from ready-to-eat food., Cook thoroughly using a thermometer when possible., Avoid discarding unsafe food items.,\", \"e\": [1]}",
+        "{\"a\":\"Cook and handle food safely to prevent illness by separating raw food, cooking thoroughly, and keeping hands and tools clean., Avoid, Stop, or Do not handle raw food, cooking it thoroughly, or keep hands and tools clean., Smoking, color, smell, or a brief sear does not prove meat or fish is safe.\"\n\n  ,\"e\":[1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Wash hands and keep raw food separate from ready-to-eat food., Cook thoroughly using a thermometer when possible., Avoid discarding unsafe food items.,\", \"e\": [1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.695177754311864,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-build-feed-scenario"
+        ]
+      ],
+      "answer" : "Start with tinder – dry leaves, twigs, or cotton balls – and gradually add kindling as the flames grow. Use a lighter or matches to ignite the base of the tinder, then carefully nurture the flames with larger pieces of wood. Be extremely cautious around sparks and flames, and never leave a fire unattended.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 3244,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 188,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 75,
+      "generation_milliseconds" : 3126,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-13-start-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5039716648,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 328992472,
+      "post_available_memory_bytes" : 5052463400,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052545320,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Start with tinder – dry leaves, twigs, or cotton balls – and gradually add kindling as the flames grow. Use a lighter or matches to ignite the base of the tinder, then carefully nurture the flames with larger pieces of wood.  **Warning:** Be extremely cautious around sparks and flames, and never leave a fire unattended.\",\"e\":[]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Start with tinder – dry leaves, twigs, or cotton balls – and gradually add kindling as the flames grow. Use a lighter or matches to ignite the base of the tinder, then carefully nurture the flames with larger pieces of wood.  **Warning:** Be extremely cautious around sparks and flames, and never leave a fire unattended.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Start with tinder – dry leaves, twigs, or cotton balls – and gradually add kindling as the flames grow. Use a lighter or matches to ignite the base of the tinder, then carefully nurture the flames with larger pieces of wood.  **Warning:** Be extremely cautious around sparks and flames, and never leave a fire unattended.\",\"e\":[]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.187202178352621,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 54
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Then, above 6,500 feet (about 1,980 metres), boil for 3 minutes. Avoid touching the inside of the cap while boiling to prevent contamination.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 3042,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 329,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 74,
+      "generation_milliseconds" : 2924,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-14-boil-collected",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5021235472,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 347473648,
+      "post_available_memory_bytes" : 5052545320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052234024,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Bring clear water to a rolling boil for 1 minute., Then, above 6,500 feet (about 1,980 metres), boil for 3 minutes., Avoid touching the inside of the cap while boiling to prevent contamination.\" , \"e\":[1]\n    \t  \t  \t  \t  \t  \t}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Bring clear water to a rolling boil for 1 minute., Then, above 6,500 feet (about 1,980 metres), boil for 3 minutes., Avoid touching the inside of the cap while boiling to prevent contamination.\" , \"e\":[1]\n    \t  \t  \t  \t  \t  \t}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Bring clear water to a rolling boil for 1 minute., Then, above 6,500 feet (about 1,980 metres), boil for 3 minutes., Avoid touching the inside of the cap while boiling to prevent contamination.\" , \"e\":[1]\n    \t  \t  \t  \t  \t  \t}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "water-boil"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 28.131021194605008,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 33
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Control bleeding, cool or clean appropriately, cover, and watch for infection or deeper injury. Avoid putting ice, grease, fuel, soil, or unverified remedies on a burn or wound. Do not put ice, grease, fuel, soil, or unverified remedies on a burn or wound.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 3112,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 349,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 68,
+      "generation_milliseconds" : 2932,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-15-deep-cut",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "first-aid-wounds-burns"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5021202704,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 347506416,
+      "post_available_memory_bytes" : 5052463400,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052545320,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Control bleeding, cool or clean appropriately, cover, and watch for infection or deeper injury., Avoid putting ice, grease, fuel, soil, or unverified remedies on a burn or wound., Do not put ice, grease, fuel, soil, or unverified remedies on a burn or wound.\" , \"e\":[1]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Control bleeding, cool or clean appropriately, cover, and watch for infection or deeper injury., Avoid putting ice, grease, fuel, soil, or unverified remedies on a burn or wound., Do not put ice, grease, fuel, soil, or unverified remedies on a burn or wound.\" , \"e\":[1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Control bleeding, cool or clean appropriately, cover, and watch for infection or deeper injury., Avoid putting ice, grease, fuel, soil, or unverified remedies on a burn or wound., Do not put ice, grease, fuel, soil, or unverified remedies on a burn or wound.\" , \"e\":[1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "first-aid-wounds-burns"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.938830816879598,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 43
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Lite couldn’t form a complete answer. Try rephrasing your question.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 75000,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6292,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 275,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 44,
+      "generation_milliseconds" : 1882,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-16-marked-trail",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5021382928,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 347326192,
+      "post_available_memory_bytes" : 5052643624,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5168036208,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Stop and Mark the Last Known Point, as it’s crucial to establish a stable position before proceeding further, to ensure accurate record-keeping of your location and avoid further disorientation\",\"e\":[1]}\n",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Stop and Mark the Last Known Point,”, “Review the last certain point, recent turns, terrain, distance, and elevation before moving.”} 1. Stop and mark the last known point, recording time and direction of travel. 2. Review the last certain point, recent turns, terrain, distance, and elevation before moving. 3. Avoid wandering aimlessly; focus on establishing a stable position. 4. Ensure your location is accurately documented before any…\",\"e\":[1]}",
+        "{\"a\":\"Stop and Mark the Last Known Point, as it’s crucial to establish a stable position before proceeding further, to ensure accurate record-keeping of your location and avoid further disorientation\",\"e\":[1]}\n"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Stop and Mark the Last Known Point,”, “Review the last certain point, recent turns, terrain, distance, and elevation before moving.”} 1. Stop and mark the last known point, recording time and direction of travel. 2. Review the last certain point, recent turns, terrain, distance, and elevation before moving. 3. Avoid wandering aimlessly; focus on establishing a stable position. 4. Ensure your location is accurately documented before any…\",\"e\":[1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.757934038581208,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "First, focus on building genuine connections through shared interests and active listening. Second, be confident and kind, expressing your appreciation for others – it’s a natural inclination to attract positive attention. Avoid overly aggressive or desperate behavior, as it can be off-putting.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2709,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 188,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 60,
+      "generation_milliseconds" : 2538,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-17-dating",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5020301608,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 348391128,
+      "post_available_memory_bytes" : 5052397864,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052627240,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"First, focus on building genuine connections through shared interests and active listening. Second, be confident and kind, expressing your appreciation for others – it’s a natural inclination to attract positive attention. Avoid overly aggressive or desperate behavior, as it can be off-putting.\",\"e\":[]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"First, focus on building genuine connections through shared interests and active listening. Second, be confident and kind, expressing your appreciation for others – it’s a natural inclination to attract positive attention. Avoid overly aggressive or desperate behavior, as it can be off-putting.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"First, focus on building genuine connections through shared interests and active listening. Second, be confident and kind, expressing your appreciation for others – it’s a natural inclination to attract positive attention. Avoid overly aggressive or desperate behavior, as it can be off-putting.\",\"e\":[]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.106382978723403,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 42
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "I see it’s currently overcast with a chance of rain. Temperatures are around 65 degrees Fahrenheit. Please take cover and stay warm. Stop condition: potential for rain and cold weather. Escalation: Be mindful of slippery surfaces due to the rain and potential for flooding.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2746,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 189,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 63,
+      "generation_milliseconds" : 2631,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-18-weather",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5020743976,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 347948760,
+      "post_available_memory_bytes" : 5052381480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052168488,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"I see it’s currently overcast with a chance of rain. Temperatures are around 65 degrees Fahrenheit. Please take cover and stay warm. Stop condition: potential for rain and cold weather. Escalation: Be mindful of slippery surfaces due to the rain and potential for flooding.\",\"e\":[]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"I see it’s currently overcast with a chance of rain. Temperatures are around 65 degrees Fahrenheit. Please take cover and stay warm. Stop condition: potential for rain and cold weather. Escalation: Be mindful of slippery surfaces due to the rain and potential for flooding.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"I see it’s currently overcast with a chance of rain. Temperatures are around 65 degrees Fahrenheit. Please take cover and stay warm. Stop condition: potential for rain and cold weather. Escalation: Be mindful of slippery surfaces due to the rain and potential for flooding.\",\"e\":[]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.389025389025388,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 44
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Start by carefully examining the device – look for obvious damage, such as broken parts or loose connections. Check the manual if available, as it might offer troubleshooting steps. Then, attempt to identify the components and follow a repair guide online or consult a specialist if needed.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2621,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 192,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 60,
+      "generation_milliseconds" : 2509,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-19-device-repair",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5032753448,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 335955672,
+      "post_available_memory_bytes" : 5052332328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052381480,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Start by carefully examining the device – look for obvious damage, such as broken parts or loose connections. Check the manual if available, as it might offer troubleshooting steps. Then, attempt to identify the components and follow a repair guide online or consult a specialist if needed.\",\"e\":[]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Start by carefully examining the device – look for obvious damage, such as broken parts or loose connections. Check the manual if available, as it might offer troubleshooting steps. Then, attempt to identify the components and follow a repair guide online or consult a specialist if needed.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Start by carefully examining the device – look for obvious damage, such as broken parts or loose connections. Check the manual if available, as it might offer troubleshooting steps. Then, attempt to identify the components and follow a repair guide online or consult a specialist if needed.\",\"e\":[]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.463962019853259,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 47
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario",
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Empty pockets and packs, ensuring nothing is lost, is crucial. Prioritize essential items like water, first aid, and navigation, safeguarding them from the elements. Avoid scattering equipment while searching in darkness, as it could lead to accidents and loss of valuable resources.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2724,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 318,
+      "first_visible_text_milliseconds" : null,
+      "generated_tokens" : 61,
+      "generation_milliseconds" : 2612,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-20-multi",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+        "basics-inventory"
+      ],
+      "maximum_stream_delta_words" : 0,
+      "minimum_available_memory_bytes" : 5026330920,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 342361816,
+      "post_available_memory_bytes" : 5052381480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5052119336,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Empty pockets and packs, ensuring nothing is lost, is crucial. Prioritize essential items like water, first aid, and navigation, safeguarding them from the elements. Avoid scattering equipment while searching in darkness, as it could lead to accidents and loss of valuable resources.\", \"e\": [1]}",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Empty pockets and packs, ensuring nothing is lost, is crucial. Prioritize essential items like water, first aid, and navigation, safeguarding them from the elements. Avoid scattering equipment while searching in darkness, as it could lead to accidents and loss of valuable resources.\", \"e\": [1]}"
+      ],
+      "raw_intent_completion" : "{\"a\":\"Empty pockets and packs, ensuring nothing is lost, is crucial. Prioritize essential items like water, first aid, and navigation, safeguarding them from the elements. Avoid scattering equipment while searching in darkness, as it could lead to accidents and loss of valuable resources.\", \"e\": [1]}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+        "basics-inventory"
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 0,
+      "stream_deltas" : [
+
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.155187445510027,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 42
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 5168019824,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325995192,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "9063dfadaefbb9cd5d01f08c01743943d88ca38d86942f43f9db664173f5ba2d",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 30,
+  "run_id" : "survival-manual-2026-v3-e2e-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325978808,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 97,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322112184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5446,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322112184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10848,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322095800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 16031,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322079416,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 21352,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322128568,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 26569,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322128568,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31950,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3826235400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 33029,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5077186856,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 37657,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5029132560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 48485,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5030279440,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50915,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5030066448,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 58927,
+      "phase" : "after_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5030082832,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 59023,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5064636688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 64294,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5111527768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 69421,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158566280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 74593,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158549896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 79785,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158549896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 85157,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158549896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 90290,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 95410,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 100534,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 105708,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 110899,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158500744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 116292,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 121433,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 126789,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 131973,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5158517128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 137296,
+      "phase" : "interval_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5056870696,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 141419,
+      "phase" : "after_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5049907496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 143862,
+      "phase" : "after_6",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5049858344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 146953,
+      "phase" : "after_7",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5049973032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 152246,
+      "phase" : "after_8",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5049989416,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 157123,
+      "phase" : "after_9",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5049973032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 157219,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5093521704,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 162607,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5139052864,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 167802,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168675184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 173059,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168675184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 178289,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168675184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 183545,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168675184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 188866,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168658800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 194290,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168658800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 199606,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168658800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 204927,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168658800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 210292,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168642416,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 215664,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168626032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 220807,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168626032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 225950,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168609648,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 231306,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168609648,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 236668,
+      "phase" : "interval_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5051480360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 239159,
+      "phase" : "after_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052725544,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 244312,
+      "phase" : "after_11",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052463400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 247690,
+      "phase" : "after_12",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052545320,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 250867,
+      "phase" : "after_13",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052463400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 254076,
+      "phase" : "after_14",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052463400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 254137,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5055510824,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 259292,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5098731816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 264504,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5138725184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 269844,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168380272,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 274995,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168380272,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 280290,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168380272,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 285399,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168363888,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 290501,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 295856,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 300996,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 306290,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 311695,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 316866,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168347504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 322212,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168331120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 327567,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168314736,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 332843,
+      "phase" : "interval_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052643624,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 339236,
+      "phase" : "after_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052397864,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 342042,
+      "phase" : "after_16",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052381480,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 344921,
+      "phase" : "after_17",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052332328,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 347634,
+      "phase" : "after_18",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052381480,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 350491,
+      "phase" : "after_19",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5052397864,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 350582,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5055330600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 355733,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5085247784,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 360842,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5128714560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 365969,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168085360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 371295,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168134512,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 376447,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168134512,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 381547,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168134512,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 386852,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168134512,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 391974,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168134512,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 397215,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168118128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 402387,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168101744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 407742,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168101744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 413073,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168101744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 418422,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168085360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 423607,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 428782,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 434028,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 439283,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 444375,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 449483,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168068976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 454872,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168052592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 460289,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168036208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 465666,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168036208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 470914,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5168019824,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 476290,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

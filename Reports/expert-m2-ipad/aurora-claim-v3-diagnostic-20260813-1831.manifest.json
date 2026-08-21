@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "59b53dcc44f50584047df7c2a43122baea709a392263fe36c4ead008c048ef26  survival_knowledge.sqlite",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [
+      "water-collect-prefilter-08",
+      "fire-site-01",
+      "fire-site-08",
+      "fire-extinguish-01",
+      "first-aid-assessment-01",
+      "first-aid-bleeding-01",
+      "first-aid-bleeding-08",
+      "first-aid-bites-allergy-01",
+      "car-ev-hybrid-01",
+      "insufficient-015",
+      "ordinary-015",
+      "ordinary-030"
+    ],
+    "fixture_sha256": "de01a51f860335b674b36734e6f615ee587d199698dd98dec19e4aa203494fc9",
+    "mode": "expert-rag-diagnostic",
+    "output_path": "/workspace/aurora-survival/Reports/expert-m2-ipad/aurora-claim-v3-diagnostic-20260813-1831.json",
+    "profile": null,
+    "report_name": "expert-physical-report-aurora-claim-v3-diagnostic-20260813-1831-expert-rag-diagnostic.json",
+    "run_id": "aurora-claim-v3-diagnostic-20260813-1831",
+    "schema_version": 2
+  },
+  "signature": "0c4d0fdbfbaf959ba5b0d8785f103b7470a35b176c1d6d624bac7d07073b1c8e",
+  "signature_algorithm": "HMAC-SHA256"
+}

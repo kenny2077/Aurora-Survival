@@ -10,6 +10,24 @@ import XCTest
 final class ConversationalRAGTests: XCTestCase {
     private let usefulWaterAnswer = "Bring the water to a rolling boil, then keep it boiling for the reviewed time. Let it cool in a clean, covered container before drinking. Avoid sources contaminated by fuel, chemicals, or toxic algae because boiling will not remove those hazards."
 
+    func testExpertGroundedContractRequiresConciseDepthAndWarning() throws {
+        let evidence = [RetrievedPassage(article: makeManualArticle(), score: 1)]
+        let answer = "Move the container away from visible fuel, chemical sheen, and algae before collecting anything. Prefer the clearest available source, filter out sediment, then bring the water to a rolling boil and keep it there for the reviewed duration. This sequence reduces biological contamination while limiting extra exposure and wasted fuel. Do not rely on boiling for chemicals or fuel; stop using that source and seek a safer supply if odor, color, or sheen remains."
+
+        XCTAssertNoThrow(try GroundedResponseCodec().decodeConversationalAndValidate(
+            "{\"a\":\"\(answer)\",\"e\":[1]}",
+            evidence: evidence,
+            purpose: .grounded,
+            tier: .expert
+        ))
+        XCTAssertThrowsError(try GroundedResponseCodec().decodeConversationalAndValidate(
+            "{\"a\":\"\(usefulWaterAnswer)\",\"e\":[1]}",
+            evidence: evidence,
+            purpose: .grounded,
+            tier: .expert
+        ))
+    }
+
     func testCodecReturnsNaturalAnswerWithoutRenderingProcedureText() throws {
         let article = makeManualArticle()
         let evidence = [RetrievedPassage(article: article, score: 1)]
@@ -90,6 +108,22 @@ final class ConversationalRAGTests: XCTestCase {
                     .invalidConversationalAnswer
                 )
             }
+        }
+    }
+
+    func testExpertAttributedCodecRejectsUnbalancedDelimiterEnding() {
+        let generated = #"{"s":[{"a":"Cook retained fish to 145 °F (62.","e":[1]},{"a":"Stop if conditions become unsafe.","e":[2]}]}"#
+
+        XCTAssertThrowsError(
+            try ExpertAttributedAnswerCodec().decodeAndValidate(
+                generated,
+                evidenceCount: 2
+            )
+        ) { error in
+            XCTAssertEqual(
+                error as? ExpertAttributedAnswerError,
+                .invalidSentence(1)
+            )
         }
     }
 
@@ -493,6 +527,31 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(rendered.contains("My engine made a strange noise."))
     }
 
+    func testExpertGroundedPromptListsOnlyReviewedNumbers() {
+        let article = makeManualArticle(
+            steps: ["Keep the site clear and stable."],
+            warnings: ["Do not use an unsafe site."]
+        )
+        let prompt = ModelPrompt(
+            question: "Where should I do this?",
+            evidence: [RetrievedPassage(article: article, score: 1)],
+            imageObservations: [],
+            tier: .expert,
+            permitsVisionReasoning: false,
+            expertEvidence: ArticleBackedExpertEvidenceRetriever(
+                retrieval: RetrievalRecorder(results: [
+                    RetrievedPassage(article: article, score: 1),
+                ])
+            ).searchExpertEvidence(query: "site", domain: nil, limit: 1),
+            purpose: .grounded
+        )
+        let rendered = GroundedPromptBuilder().userPrompt(
+            from: prompt,
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(rendered.contains("ALLOWED NUMBERS: none"))
+    }
+
     func testLeakedFirstOutputGetsOneCompactRepair() async {
         let repaired = "Hello. Describe the complete current incident, including your location, observable hazards or injuries, weather, and available equipment, so I can respond to the actual situation."
         let model = ScriptedLanguageModel(steps: [
@@ -772,6 +831,434 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
+    func testExpertRejectsUnsafeVisualCertaintyAndHandlingClaims() {
+        let codec = GroundedResponseCodec()
+        let answers = [
+            "Yes, it is non-venomous and can move it with a stick safely.",
+            "This is likely an edible species, although identification is uncertain.",
+            "The tick is not infected yet, but monitor the area for changes.",
+            "If it looks and smells normal, it's likely safe to eat.",
+        ]
+        for answer in answers {
+            XCTAssertThrowsError(
+                try codec.decodeConversationalAndValidate(
+                    "{\"a\":\"\(answer)\",\"e\":[]}",
+                    evidence: [],
+                    purpose: .ordinary,
+                    tier: .expert
+                )
+            )
+        }
+    }
+
+    func testExpertFollowupUsesHistoryToGroundReviewedEvidence() async {
+        let article = makeManualArticle(
+            id: "basics-stop",
+            title: "Stop and Control Panic",
+            chapter: "Survival Basics",
+            summary: "Stop moving long enough to think clearly and avoid making the emergency larger.",
+            keywords: ["stop", "control panic", "stop moving"],
+            steps: [
+                "Take slow breaths and say out loud what happened.",
+                "Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water.",
+                "Mark where you stopped and note the time, weather, and last place you were certain of your location.",
+            ],
+            warnings: [
+                "Do not run downhill or follow water just because it appears to lead out.",
+            ]
+        )
+        let retrieval = RetrievalRecorder(results: [
+            RetrievedPassage(article: article, score: 1),
+        ])
+        let model = ScriptedLanguageModel(steps: [
+            .output(expertAnswerJSON([
+                article.steps[0], article.steps[1], article.warnings[0],
+            ]))
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: retrieval,
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(
+                    measuredPeakBytes: [.full: 1]
+                )
+            ),
+            modelProvider: { _ in model }
+        )
+        XCTAssertTrue(IncidentAssistant.matchesExactReviewedIntent(
+            query: "Stop and Control Panic What should I do about that now?",
+            article: article
+        ))
+        XCTAssertTrue(IncidentAssistant.matchesExactReviewedIntent(
+            query: "STOP",
+            article: article
+        ))
+        XCTAssertFalse(IncidentAssistant.matchesExactReviewedIntent(
+            query: "water",
+            article: article
+        ))
+        let fireMaterials = makeManualArticle(
+            id: "fire-materials",
+            title: "Gather Tinder, Kindling, and Fuel",
+            keywords: ["tinder", "kindling", "fuel"]
+        )
+        XCTAssertTrue(IncidentAssistant.matchesExactReviewedIntent(
+            query: "tinder",
+            article: fireMaterials
+        ))
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "What should I do about that now?",
+                preferredTier: .expert,
+                conversationHistory: [
+                    ConversationTurn(role: .user, text: "Stop and Control Panic"),
+                ]
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.map(\.purpose), [.expertIntent, .grounded])
+    }
+
+    func testExpertExactHistoryMatchOverridesUnsafeOrdinaryDisposition() async {
+        let article = makeManualArticle(
+            id: "basics-stop",
+            title: "Stop and Control Panic",
+            chapter: "Survival Basics",
+            summary: "Stop moving long enough to think clearly and avoid making the emergency larger.",
+            keywords: ["stop", "control panic", "stop moving"],
+            steps: [
+                "Take slow breaths and say out loud what happened.",
+                "Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water.",
+                "Mark where you stopped and note the time, weather, and last place you were certain of your location.",
+            ],
+            warnings: ["Do not run downhill or follow water just because it appears to lead out."]
+        )
+        let model = ScriptedLanguageModel(steps: [
+            .output(expertAnswerJSON([
+                article.steps[0], article.steps[1], article.warnings[0],
+            ])),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: RetrievalRecorder(results: [
+                RetrievedPassage(article: article, score: 1),
+            ]),
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "What should I do about that now?",
+                preferredTier: .expert,
+                conversationHistory: [
+                    ConversationTurn(role: .user, text: "Stop and Control Panic"),
+                ]
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        let purposes = await model.recordedPrompts().map(\.purpose)
+        XCTAssertEqual(
+            purposes,
+            [.expertIntent, .grounded]
+        )
+    }
+
+    func testExpertStrongReviewedCoverageOverridesInventedClarificationGap() async {
+        let article = makeManualArticle(
+            id: "fire-site",
+            title: "Choose a Safe Fire Site",
+            chapter: "Start a Fire",
+            summary: "Choose a site that contains heat and keeps flame away from roots, branches, and dry vegetation.",
+            keywords: [
+                "I need to pick a campfire spot near roots, grass, and low branches.",
+                "select ground for a small fire",
+            ],
+            steps: [
+                "Use an existing fire ring where fires are permitted.",
+                "Clear loose needles, leaves, grass, and other burnable material from the immediate area.",
+                "Keep the fire small and place it on mineral soil away from roots and low branches.",
+            ],
+            warnings: [
+                "Do not light a fire when wind, restrictions, or dry fuels make containment doubtful."
+            ]
+        )
+        let model = ScriptedLanguageModel(steps: [
+            .output(expertAnswerJSON([
+                article.steps[0], article.steps[1], article.warnings[0],
+            ])),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: RetrievalRecorder(results: [
+                RetrievedPassage(article: article, score: 1),
+            ]),
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "I need to pick a campfire spot near roots, grass, and low branches.",
+                preferredTier: .expert
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        let purposes = await model.recordedPrompts().map(\.purpose)
+        XCTAssertEqual(
+            purposes,
+            [.expertIntent, .grounded]
+        )
+    }
+
+    func testExpertKeepsCleanOneShotProseWhenEnvelopeIsIncomplete() async {
+        let article = makeManualArticle()
+        let draft = "Keep the container away from the visible fuel sheen. Use a different water source."
+        let model = ScriptedLanguageModel(steps: [
+            .output("{\"a\":\"\(draft)"),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: RetrievalRecorder(results: [
+                RetrievedPassage(article: article, score: 1),
+            ]),
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(
+                    measuredPeakBytes: [.full: 1]
+                )
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: article.steps[0],
+                preferredTier: .expert
+            ),
+            device: capableExpertDevice()
+        )
+
+        XCTAssertEqual(answer?.text, draft)
+        XCTAssertNil(answer?.verificationStatus)
+        XCTAssertTrue(answer?.verificationIssues.isEmpty == true)
+        let promptCount = await model.recordedPrompts().count
+        XCTAssertEqual(promptCount, 2)
+        XCTAssertFalse(
+            answer?.text.contains("couldn’t produce a safety-validated answer")
+                ?? true
+        )
+    }
+
+    func testExpertDoesNotRunSemanticVerificationPass() async {
+        let article = makeManualArticle()
+        let attributed = expertAnswerJSON([
+            article.steps[0], article.steps[1], article.warnings[0],
+        ])
+        let model = ScriptedLanguageModel(steps: [
+            .output(attributed),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: RetrievalRecorder(results: [
+                RetrievedPassage(article: article, score: 1),
+            ]),
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(
+                    measuredPeakBytes: [.full: 1]
+                )
+            ),
+            expertEmbeddingProvider: DivergentEmbeddingProvider(),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: article.steps[0],
+                preferredTier: .expert
+            ),
+            device: capableExpertDevice()
+        )
+
+        XCTAssertNil(answer?.verificationStatus)
+        XCTAssertNil(answer?.supportStatus)
+        XCTAssertNil(answer?.coverageStatus)
+        XCTAssertTrue(answer?.verificationIssues.isEmpty == true)
+        let promptCount = await model.recordedPrompts().count
+        XCTAssertEqual(promptCount, 2)
+    }
+
+    func testExpertStandaloneTurnCannotGroundFromUnrelatedHistory() async {
+        let article = makeManualArticle()
+        let retrieval = RetrievalRecorder(results: [
+            RetrievedPassage(article: article, score: 1),
+        ])
+        let model = ScriptedLanguageModel(steps: [
+            .output("{\"a\":\"A quiet character-driven film may be a good choice tonight.\",\"e\":[]}"),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: retrieval,
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(
+                    measuredPeakBytes: [.full: 1]
+                )
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "Recommend a movie for tonight.",
+                preferredTier: .expert,
+                conversationHistory: [
+                    ConversationTurn(role: .user, text: "Earlier I asked how to boil water."),
+                ]
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.map(\.purpose), [.expertIntent, .ordinary])
+    }
+
+    func testExpertNativeVisionUsesOneImageCallAndNoRetrievalOrSources() async {
+        let retrieval = RetrievalRecorder()
+        let model = ScriptedLanguageModel(steps: [
+            .output(#"{"a":"The image is a bow-drill fire instruction diagram showing a spindle, bow, fireboard, and the sequence for producing an ember.","e":[]}"#),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: retrieval,
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "What is in the picture?",
+                preferredTier: .expert,
+                hasImage: true,
+                imageData: Data([1, 2, 3])
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        XCTAssertTrue(answer?.sources.isEmpty == true)
+        XCTAssertTrue(answer?.sourceCards.isEmpty == true)
+        XCTAssertTrue(answer?.evidenceIDs.isEmpty == true)
+        XCTAssertEqual(answer?.visionWasUsed, true)
+        XCTAssertNil(answer?.expertIntent)
+        XCTAssertNil(answer?.expertRetrievalStatus)
+        XCTAssertTrue(retrieval.queries.isEmpty)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.map(\.purpose), [.nativeVisionAnswer])
+        XCTAssertEqual(prompts.first?.imageData, Data([1, 2, 3]))
+        XCTAssertEqual(prompts.first?.permitsVisionReasoning, true)
+        XCTAssertTrue(prompts.first?.expertEvidence.isEmpty == true)
+    }
+
+    func testExpertNativeVisionKeepsCleanStreamedProseFromIncompleteEnvelope() async {
+        let model = ScriptedLanguageModel(steps: [
+            .output(#"{"a":"This most likely shows an insect resting on a leaf, although the fine species details are unclear.","e":[]"#),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            retrieval: RetrievalRecorder(),
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "Is that a leaf or an insect?",
+                preferredTier: .expert,
+                hasImage: true,
+                imageData: Data([1, 2, 3])
+            ),
+            device: DeviceSnapshot(
+                physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+                availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
+                freeStorageBytes: 20_000_000_000,
+                thermalCondition: .nominal,
+                isLowPowerMode: false
+            )
+        )
+
+        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
+        XCTAssertEqual(
+            answer?.text,
+            "This most likely shows an insect resting on a leaf, although the fine species details are unclear."
+        )
+        XCTAssertEqual(answer?.visionWasUsed, true)
+        XCTAssertTrue(answer?.sourceCards.isEmpty == true)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.map(\.purpose), [.nativeVisionAnswer])
+    }
+
     private func makeAssistant(
         retrieval: (any EvidenceRetrieving)? = nil,
         model: ScriptedLanguageModel
@@ -784,12 +1271,34 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
+    private func expertAnswerJSON(_ sentences: [String]) -> String {
+        let answer = ExpertAttributedAnswer(sentences: sentences.enumerated().map {
+            offset, text in
+            ExpertAttributedSentence(
+                text: text,
+                evidenceIndexes: [offset == sentences.count - 1 ? 5 : offset + 2]
+            )
+        })
+        return String(
+            decoding: try! JSONEncoder().encode(answer),
+            as: UTF8.self
+        )
+    }
+
     private func makeManualArticle(
         id: String = "water-1",
         title: String = "Water Purifiers",
         chapter: String = "Water",
         summary: String = "Water can be treated by bringing it to a boil.",
-        keywords: [String] = ["water", "boil", "filter"]
+        keywords: [String] = ["water", "boil", "filter"],
+        steps: [String] = [
+            "Bring clear water to a rolling boil.",
+            "Let it cool in a clean, covered container.",
+            "Keep dirty hands away from the clean-water opening.",
+        ],
+        warnings: [String] = [
+            "Do not use water contaminated by fuel or toxic chemicals."
+        ]
     ) -> KnowledgeArticle {
         let reference = ManualReference(
             chunkID: id,
@@ -804,14 +1313,8 @@ final class ConversationalRAGTests: XCTestCase {
             domain: chapter == "Water" ? .wilderness : .firstAid,
             title: reference.sectionTitle,
             summary: summary,
-            steps: [
-                "Bring clear water to a rolling boil.",
-                "Let it cool in a clean, covered container.",
-                "Keep dirty hands away from the clean-water opening.",
-            ],
-            warnings: [
-                "Do not use water contaminated by fuel or toxic chemicals."
-            ],
+            steps: steps,
+            warnings: warnings,
             keywords: keywords,
             source: SourceReference(
                 id: reference.chunkID,
@@ -827,6 +1330,16 @@ final class ConversationalRAGTests: XCTestCase {
     private func capableDevice() -> DeviceSnapshot {
         DeviceSnapshot(
             physicalMemoryBytes: 8_000_000_000,
+            freeStorageBytes: 20_000_000_000,
+            thermalCondition: .nominal,
+            isLowPowerMode: false
+        )
+    }
+
+    private func capableExpertDevice() -> DeviceSnapshot {
+        DeviceSnapshot(
+            physicalMemoryBytes: 8 * 1_024 * 1_024 * 1_024,
+            availableMemoryBytes: 4 * 1_024 * 1_024 * 1_024,
             freeStorageBytes: 20_000_000_000,
             thermalCondition: .nominal,
             isLowPowerMode: false
@@ -869,6 +1382,18 @@ private actor ScriptedLanguageModel: LocalLanguageModel {
 
     func generate(prompt: ModelPrompt) async throws -> String {
         prompts.append(prompt)
+        if prompt.tier == .expert, prompt.purpose == .expertIntent {
+            let lower = prompt.question.lowercased()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let exactGreetings: Set<String> = ["hi", "hello", "wassup"]
+            let generalTopics = [
+                "movie", "software", "girlfriend", "weather today", "what's up",
+            ]
+            let intent = exactGreetings.contains(lower)
+                || generalTopics.contains(where: lower.contains)
+                ? "general" : "survival"
+            return "{\"t\":\"\(intent)\"}"
+        }
         guard !steps.isEmpty else { throw ModelFailure.unavailable }
         switch steps.removeFirst() {
         case .output(let value):
@@ -880,5 +1405,24 @@ private actor ScriptedLanguageModel: LocalLanguageModel {
 
     func recordedPrompts() -> [ModelPrompt] {
         prompts
+    }
+}
+
+private struct DivergentEmbeddingProvider: ExpertQueryEmbeddingProvider {
+    func embedding(for query: String) async throws -> [Float] {
+        vector(at: 0)
+    }
+
+    func passageEmbedding(for text: String) async throws -> [Float] {
+        vector(at: 1)
+    }
+
+    private func vector(at index: Int) -> [Float] {
+        var value = [Float](
+            repeating: 0,
+            count: ShardedExpertVectorIndex.dimensions
+        )
+        value[index] = 1
+        return value
     }
 }

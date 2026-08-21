@@ -1,0 +1,38 @@
+{
+  "active_pack_status" : "Install Lite to enable Ask",
+  "active_tier" : "none",
+  "cases" : [
+    {
+      "answer" : "{\"a\":\"The image shows poison ivy, which is a known hazard. The safest immediate action is to avoid touching the plant and to wash the skin with soap and water as soon as possible.\",\"e\":[]}",
+      "cold_start" : true,
+      "context_tokens" : 8192,
+      "elapsed_milliseconds" : 4413,
+      "first_token_milliseconds" : 3053,
+      "generated_tokens" : 44,
+      "generation_milliseconds" : 4292,
+      "headroom_pass" : true,
+      "id" : "calibration-full",
+      "maximum_image_dimension" : 1024,
+      "minimum_available_memory_bytes" : 3721753768,
+      "peak_physical_footprint_bytes" : 1646955352,
+      "post_available_memory_bytes" : 3769710552,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5327207584,
+      "pre_inference_thermal" : "nominal",
+      "profile" : "full",
+      "raw_completion_count" : 1,
+      "tokens_per_second" : 34.705407586763521
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3769710552,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5347015960,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-calibration",
+  "run_id" : "calibration-full-r3",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

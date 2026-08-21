@@ -1,8 +1,7 @@
 import Foundation
+import CryptoKit
 import SwiftUI
-#if DEBUG
 import UIKit
-#endif
 
 @MainActor
 final class AppModel: ObservableObject {
@@ -11,8 +10,11 @@ final class AppModel: ObservableObject {
     }
     @Published var messages: [ChatMessage] = []
     @Published var isThinking = false
-    @Published var attachedImageData: Data?
-    @Published var imageObservations: [String] = []
+    @Published private(set) var draftImageAttachment: DraftImageAttachment?
+    @Published private(set) var photoAuthorizationStatus: PhotoLibraryAccessStatus
+    @Published private(set) var cameraAuthorizationStatus: CameraAuthorizationStatus
+    @Published private(set) var attachmentOperationState: AttachmentOperationState = .idle
+    @Published private(set) var hasAcceptedRiskAcknowledgement: Bool
     @Published var libraryQuery = ""
     @Published var selectedTab: AppTab = .ask
     @Published var manualPath: [ManualRoute] = []
@@ -48,10 +50,21 @@ final class AppModel: ObservableObject {
     private let modelPreferenceStore: ModelPreferenceStore
     private let deviceProfiler = DeviceProfiler()
     private let ocr = VisionTextExtractor()
+    private let photoLibraryAuthorization: any PhotoLibraryAuthorizing
+    private let cameraAuthorization: any CameraAuthorizing
+    private let capturedPhotoSaver: any CapturedPhotoSaving
+    private let userDefaults: UserDefaults
     private var isRefreshingActivePacks = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
 #if DEBUG
     private var debugModelCompletions: [String] = []
+    private var debugExpertStreamDeltas: [String] = []
+    private var debugExpertFirstVisibleTextAt: Date?
+    private var debugExpertRuntimeDescriptor: ActiveModelRuntimeDescriptor?
+    private var debugCalibrationExpertDescriptor: ActiveModelRuntimeDescriptor?
+    private var debugExpertLanguageModel: LlamaLanguageModel?
+    @Published private(set) var debugPhysicalStatus: PhysicalBenchmarkStatus?
+    private var debugPhysicalStopRequested = false
 #endif
     private lazy var packageInstaller = PackageInstaller(
         rootDirectory: appDataRoot,
@@ -60,7 +73,44 @@ final class AppModel: ObservableObject {
         )
     )
 
-    init() {
+    init(
+        photoLibraryAuthorization: (any PhotoLibraryAuthorizing)? = nil,
+        cameraAuthorization: (any CameraAuthorizing)? = nil,
+        capturedPhotoSaver: (any CapturedPhotoSaving)? = nil,
+        userDefaults: UserDefaults = .standard
+    ) {
+        let photoAuthorization = photoLibraryAuthorization
+            ?? SystemPhotoLibraryAuthorization()
+        let cameraAuthorization = cameraAuthorization
+            ?? SystemCameraAuthorization()
+        self.photoLibraryAuthorization = photoAuthorization
+        self.cameraAuthorization = cameraAuthorization
+        self.capturedPhotoSaver = capturedPhotoSaver
+            ?? SystemCapturedPhotoSaver()
+        self.userDefaults = userDefaults
+#if DEBUG
+        if ProcessInfo.processInfo.environment[
+            "TRAILGUARD_UI_RESET_AGREEMENT"
+        ] == "1" {
+            userDefaults.removeObject(
+                forKey: Self.riskAcknowledgementDefaultsKey
+            )
+        }
+#endif
+        photoAuthorizationStatus = photoAuthorization.currentStatus()
+        cameraAuthorizationStatus = cameraAuthorization.currentStatus()
+        hasAcceptedRiskAcknowledgement = userDefaults.integer(
+            forKey: Self.riskAcknowledgementDefaultsKey
+        ) == Self.riskAcknowledgementSchemaVersion
+#if DEBUG
+        if ProcessInfo.processInfo.environment[
+            "TRAILGUARD_UI_ACCEPT_AGREEMENT"
+        ] == "1" || ProcessInfo.processInfo.environment[
+            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE"
+        ] != nil {
+            hasAcceptedRiskAcknowledgement = true
+        }
+#endif
         let applicationSupport = FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask
@@ -209,7 +259,7 @@ final class AppModel: ObservableObject {
         ModelRouter().route(
             preference: modelSelection,
             installed: runtimeTiers,
-            expertValidated: false,
+            expertValidated: runtimeTiers.contains(.expert),
             device: deviceProfiler.snapshot()
         )
     }
@@ -229,10 +279,10 @@ final class AppModel: ObservableObject {
     }
 
     func availability(for tier: ModelTier) -> ModelAvailability {
-        if tier == .expert { return .validationLocked }
         let decision = ModelRouter().route(
             requested: tier,
             installed: runtimeTiers,
+            expertValidated: runtimeTiers.contains(.expert),
             device: deviceProfiler.snapshot()
         )
         return decision.availability
@@ -389,7 +439,8 @@ final class AppModel: ObservableObject {
             verifier: verifier,
             appVersion: Self.appVersion,
             expectedPolicyVersion: policyVersion,
-            allowDevelopmentKnowledge: Self.allowDevelopmentKnowledge
+            allowDevelopmentKnowledge: Self.allowDevelopmentKnowledge,
+            allowDevelopmentExpert: Self.allowDevelopmentExpert
         )
         let snapshot = await registry.resolve(
             cachedEntitlements: await entitlementLedger.snapshots(),
@@ -399,11 +450,20 @@ final class AppModel: ObservableObject {
             activePacks: snapshot
         )
         offlineMaps = mapRuntime.maps
-        let modelRuntime = ActiveModelRuntimeResolver().resolve(
+        let modelRuntime = ActiveModelRuntimeResolver(
+            allowDevelopmentExpert: Self.allowDevelopmentExpert
+        ).resolve(
             activePacks: snapshot
         )
+#if DEBUG
+        debugExpertRuntimeDescriptor = modelRuntime.descriptors[.expert]
+        debugCalibrationExpertDescriptor = modelRuntime.calibrationExpertDescriptor
+#endif
         var availableModelTiers: Set<ModelTier> = []
         var runtimeModels: [ModelTier: any LocalLanguageModel] = [:]
+        var expertContextAssembler: ExpertContextAssembler?
+        var expertEmbeddingProvider: (any ExpertQueryEmbeddingProvider)?
+        var expertVectorIndex: ShardedExpertVectorIndex?
         var runtimeBindingIssueCount = modelRuntime.issues.count
 #if canImport(AuroraLlamaRuntime)
         if let descriptor = modelRuntime.descriptors[.lite] {
@@ -427,6 +487,74 @@ final class AppModel: ObservableObject {
                 runtimeBindingIssueCount += 1
             }
         }
+        if let descriptor = modelRuntime.descriptors[.expert],
+           let projectorURL = descriptor.visionProjectorURL,
+           let embeddingURL = descriptor.embeddingModelURL,
+           let memoryProfile = descriptor.expertMemoryProfile {
+            do {
+                let configuration = LlamaRuntimeConfiguration.expert(
+                    modelURL: descriptor.modelURL,
+                    visionProjectorURL: projectorURL,
+                    profile: .full,
+                    threadCount: 4
+                )
+                try await LlamaXCFrameworkBackend.validateExpertRuntime(
+                    configuration: configuration
+                )
+                let expertModel = try LlamaLanguageModel(
+                    tier: .expert,
+                    configuration: configuration,
+                    backend: LlamaXCFrameworkBackend(),
+                    metricsSink: { [weak self] metrics in
+                        await self?.recordModelMetrics(metrics)
+                    },
+                    completionSink: { [weak self] completion in
+                        await self?.recordDebugModelCompletion(completion)
+                    }
+                )
+                runtimeModels[.expert] = expertModel
+                debugExpertLanguageModel = expertModel
+                expertContextAssembler = ExpertContextAssembler(
+                    memoryProfile: memoryProfile
+                )
+                expertEmbeddingProvider = LlamaBGEEmbeddingProvider(
+                    modelURL: embeddingURL,
+                    threadCount: 4
+                )
+                var vectorDirectories = snapshot.knowledge.compactMap {
+                    package -> URL? in
+                    let manifest = package.directory.appendingPathComponent(
+                        ShardedExpertVectorIndex.manifestFilename
+                    )
+                    return FileManager.default.fileExists(atPath: manifest.path)
+                        ? package.directory
+                        : nil
+                }
+                if let bundledRoot = Bundle.main.resourceURL?
+                    .appendingPathComponent("ExpertVectors", isDirectory: true),
+                   let children = try? FileManager.default.contentsOfDirectory(
+                    at: bundledRoot,
+                    includingPropertiesForKeys: nil
+                   ) {
+                    vectorDirectories.append(contentsOf: children.filter {
+                        FileManager.default.fileExists(
+                            atPath: $0.appendingPathComponent(
+                                ShardedExpertVectorIndex.manifestFilename
+                            ).path
+                        )
+                    })
+                }
+                let index = ShardedExpertVectorIndex(
+                    directories: vectorDirectories,
+                    expectedEmbeddingIdentity: ActiveModelRuntimeResolver
+                        .acceptedExpertEmbeddingIdentity
+                )
+                if !index.isEmpty { expertVectorIndex = index }
+                availableModelTiers.insert(.expert)
+            } catch {
+                runtimeBindingIssueCount += 1
+            }
+        }
 #endif
         let boundRuntimeModels = runtimeModels
         let runtime = IncidentRuntimeBootstrap(
@@ -438,7 +566,10 @@ final class AppModel: ObservableObject {
             }
         ).resolve(
             activePacks: snapshot,
-            availableModelTiers: availableModelTiers
+            availableModelTiers: availableModelTiers,
+            expertContextAssembler: expertContextAssembler,
+            expertEmbeddingProvider: expertEmbeddingProvider,
+            expertVectorIndex: expertVectorIndex
         )
 
         assistant = runtime.assistant
@@ -474,14 +605,172 @@ final class AppModel: ObservableObject {
         }
     }
 
+    func refreshPhotoAuthorizationStatus() {
+        photoAuthorizationStatus = photoLibraryAuthorization.currentStatus()
+        cameraAuthorizationStatus = cameraAuthorization.currentStatus()
+    }
+
+    @discardableResult
+    func requestPhotoLibraryAccess() async -> PhotoLibraryAccessStatus {
+        photoAuthorizationStatus = await photoLibraryAuthorization
+            .requestReadWriteAccess()
+        return photoAuthorizationStatus
+    }
+
+    func manageSelectedPhotos() {
+        guard photoAuthorizationStatus == .limited else { return }
+        photoLibraryAuthorization.presentLimitedLibraryPicker()
+    }
+
+    func openPhotoSettings() {
+        photoLibraryAuthorization.openSettings()
+    }
+
+    func beginAttachmentLoading(_ message: String = "Loading photo") {
+        attachmentOperationState = .loading(message)
+    }
+
+    func failAttachmentLoading(
+        _ message: String,
+        offersSettings: Bool = false
+    ) {
+        attachmentOperationState = .failed(
+            message: message,
+            offersSettings: offersSettings
+        )
+    }
+
+    func clearAttachmentOperationState() {
+        attachmentOperationState = .idle
+    }
+
+    func prepareCameraCapture() async -> Bool {
+        attachmentOperationState = .idle
+        guard cameraAuthorization.isCameraAvailable() else {
+            failAttachmentLoading("Camera capture is unavailable on this device.")
+            return false
+        }
+        let status: CameraAuthorizationStatus
+        if cameraAuthorization.currentStatus() == .notDetermined {
+            status = await cameraAuthorization.requestAccess()
+        } else {
+            status = cameraAuthorization.currentStatus()
+        }
+        cameraAuthorizationStatus = status
+        guard status.permitsCapture else {
+            failAttachmentLoading(
+                status == .restricted
+                    ? "Camera access is restricted on this device."
+                    : "Camera access is denied. Enable it in Settings to take a photo.",
+                offersSettings: status == .denied
+            )
+            return false
+        }
+        return true
+    }
+
+    func attachCapturedPhoto(data: Data) async {
+        beginAttachmentLoading("Saving captured photo")
+        let status: PhotoLibraryAccessStatus
+        if photoLibraryAuthorization.currentStatus() == .notDetermined {
+            status = await requestPhotoLibraryAccess()
+        } else {
+            status = photoLibraryAuthorization.currentStatus()
+            photoAuthorizationStatus = status
+        }
+        guard status.permitsSelection else {
+            failAttachmentLoading(
+                status == .restricted
+                    ? "Photo Library access is restricted. The captured photo was discarded."
+                    : "Photo Library access is denied. The captured photo was discarded; enable access in Settings to save and attach camera photos.",
+                offersSettings: status == .denied
+            )
+            return
+        }
+        do {
+            try await capturedPhotoSaver.savePhoto(data: data)
+        } catch {
+            failAttachmentLoading(
+                "The captured photo could not be saved and was discarded: \(error.localizedDescription)"
+            )
+            return
+        }
+        beginAttachmentLoading("Preparing saved photo")
+        await attachImage(data: data)
+    }
+
+    func attachSelectedPhoto(data: Data) async {
+        guard photoAuthorizationStatus.permitsSelection else {
+            failAttachmentLoading(
+                "Photo access is unavailable. Review access in Settings.",
+                offersSettings: photoAuthorizationStatus == .denied
+            )
+            return
+        }
+        await attachImage(data: data)
+    }
+
     func attachImage(data: Data) async {
-        attachedImageData = data
-        imageObservations = await ocr.extractText(from: data)
+        guard let image = UIImage(data: data) else {
+            failAttachmentLoading("This image could not be decoded.")
+            return
+        }
+        let maximumDimension: CGFloat = 2_048
+        let scale = min(
+            1,
+            maximumDimension / max(image.size.width, image.size.height)
+        )
+        let boundedSize = CGSize(
+            width: max(1, image.size.width * scale),
+            height: max(1, image.size.height * scale)
+        )
+        let renderer = UIGraphicsImageRenderer(size: boundedSize)
+        let boundedImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: boundedSize))
+        }
+        guard let boundedData = boundedImage.jpegData(compressionQuality: 0.9),
+              let thumbnail = await boundedImage.byPreparingThumbnail(
+                ofSize: CGSize(width: 160, height: 160)
+              ),
+              let thumbnailData = thumbnail.jpegData(compressionQuality: 0.75)
+        else {
+            failAttachmentLoading("This image could not be prepared for offline analysis.")
+            return
+        }
+        let attachmentID = draftImageAttachment?.id ?? UUID()
+        draftImageAttachment = DraftImageAttachment(
+            id: attachmentID,
+            imageData: boundedData,
+            thumbnailData: thumbnailData,
+            loadState: .ready,
+            ocrState: .pending
+        )
+        attachmentOperationState = .idle
+        let observations = await ocr.extractText(from: boundedData)
+        guard draftImageAttachment?.id == attachmentID else { return }
+        draftImageAttachment = DraftImageAttachment(
+            id: attachmentID,
+            imageData: boundedData,
+            thumbnailData: thumbnailData,
+            loadState: .ready,
+            ocrState: .complete(observations)
+        )
+    }
+
+    private func replaceAttachmentObservations(_ observations: [String]) {
+        guard let attachment = draftImageAttachment else { return }
+        draftImageAttachment = DraftImageAttachment(
+            id: attachment.id,
+            imageData: attachment.imageData,
+            thumbnailData: attachment.thumbnailData,
+            loadState: attachment.loadState,
+            ocrState: .complete(observations)
+        )
     }
 
     func loadDebugOCRFixtureIfPresent() async {
 #if DEBUG
-        guard attachedImageData == nil,
+        guard draftImageAttachment == nil,
               let encoded = ProcessInfo.processInfo.environment[
                   "TRAILGUARD_DEBUG_OCR_FIXTURE_BASE64"
               ],
@@ -495,7 +784,17 @@ final class AppModel: ObservableObject {
 #if DEBUG
         guard let mode = ProcessInfo.processInfo.environment[
             "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE"
-        ], ["smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
+        ] else { return }
+
+        if mode == "tier-comparison" {
+            await runDebugTierComparisonPhysicalInference()
+            return
+        }
+        if mode.hasPrefix("expert-") {
+            await runDebugExpertPhysicalInference(mode: mode)
+            return
+        }
+        guard ["smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
 
         UIApplication.shared.isIdleTimerDisabled = true
         defer { UIApplication.shared.isIdleTimerDisabled = false }
@@ -693,6 +992,1131 @@ final class AppModel: ObservableObject {
 #endif
     }
 
+#if DEBUG
+    private func runDebugTierComparisonPhysicalInference() async {
+        UIApplication.shared.isIdleTimerDisabled = true
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        defer {
+            UIApplication.shared.isIdleTimerDisabled = false
+            UIDevice.current.isBatteryMonitoringEnabled = false
+        }
+
+        let environment = ProcessInfo.processInfo.environment
+        let requestedRunID = environment[
+            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID"
+        ] ?? "local"
+        let runID = requestedRunID.replacingOccurrences(
+            of: #"[^A-Za-z0-9._-]"#,
+            with: "-",
+            options: .regularExpression
+        )
+        let fixtureRoot = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AuroraExpertBenchmark", isDirectory: true)
+        let casesURL = fixtureRoot.appendingPathComponent("cases.json")
+        let reportRoot = FileManager.default.temporaryDirectory
+            .appendingPathComponent(
+                "AuroraExpertBenchmarkReports",
+                isDirectory: true
+            )
+        let reportURL = reportRoot.appendingPathComponent(
+            "physical-tier-comparison-\(runID).json"
+        )
+        try? FileManager.default.createDirectory(
+            at: reportRoot,
+            withIntermediateDirectories: true
+        )
+        guard !FileManager.default.fileExists(atPath: reportURL.path) else {
+            return
+        }
+
+        var results: [[String: Any]] = []
+        var terminalFailure: String?
+        let initialSnapshot = deviceProfiler.snapshot()
+        let initialBattery = UIDevice.current.batteryLevel
+
+        func writeReport(completed: Bool, fixtureSHA256: String) {
+            let snapshot = deviceProfiler.snapshot()
+            let report: [String: Any] = [
+                "schema_version": 1,
+                "mode": "tier-comparison",
+                "run_id": runID,
+                "fixture_sha256": fixtureSHA256,
+                "completed": completed,
+                "active_pack_status": activePackStatus,
+                "available_tiers": runtimeTiers.map(\.rawValue).sorted(),
+                "initial_thermal": initialSnapshot.thermalCondition.rawValue,
+                "final_thermal": snapshot.thermalCondition.rawValue,
+                "initial_battery_level": initialBattery,
+                "final_battery_level": UIDevice.current.batteryLevel,
+                "terminal_failure": terminalFailure ?? NSNull(),
+                "cases": results,
+            ]
+            guard JSONSerialization.isValidJSONObject(report),
+                  let data = try? JSONSerialization.data(
+                    withJSONObject: report,
+                    options: [.prettyPrinted, .sortedKeys]
+                  ) else { return }
+            try? data.write(to: reportURL, options: [.atomic])
+        }
+
+        func waitForNominal(seconds: Int) async -> Bool {
+            var nominalSeconds = 0
+            var elapsedSeconds = 0
+            while elapsedSeconds <= 300 {
+                let thermal = deviceProfiler.snapshot().thermalCondition
+                if thermal == .serious || thermal == .critical { return false }
+                if thermal == .nominal {
+                    nominalSeconds += 5
+                    if nominalSeconds >= seconds { return true }
+                } else {
+                    nominalSeconds = 0
+                }
+                try? await Task.sleep(for: .seconds(5))
+                elapsedSeconds += 5
+            }
+            return false
+        }
+
+        do {
+            let fixtureData = try Data(contentsOf: casesURL)
+            let fixtureSHA256 = SHA256.hash(data: fixtureData).map {
+                String(format: "%02x", $0)
+            }.joined()
+            let cases = try JSONDecoder().decode(
+                [ExpertPhysicalBenchmarkCase].self,
+                from: fixtureData
+            )
+            guard cases.count == 3 else {
+                throw NSError(
+                    domain: "Aurora.TierComparison",
+                    code: 1,
+                    userInfo: [NSLocalizedDescriptionKey:
+                        "tier comparison requires exactly three cases"]
+                )
+            }
+            writeReport(completed: false, fixtureSHA256: fixtureSHA256)
+
+            for tier in [ModelTier.expert, .lite] {
+                if tier == .lite {
+                    await debugExpertLanguageModel?.unload()
+                }
+                modelSelection = tier == .expert ? .expert : .lite
+                guard activeTier == tier else {
+                    terminalFailure = "\(tier.rawValue)_unavailable"
+                    break
+                }
+                let settleSeconds = tier == .expert ? 5 : 60
+                guard await waitForNominal(seconds: settleSeconds) else {
+                    terminalFailure = "\(tier.rawValue)_thermal_not_nominal"
+                    break
+                }
+
+                for item in cases {
+                    messages.removeAll()
+                    lastModelMetrics = nil
+                    lastModelThermalCondition = nil
+                    debugModelCompletions.removeAll()
+                    let before = deviceProfiler.snapshot()
+                    let sampler = ExpertProcessMemorySampler()
+                    let samplingTask = Task.detached {
+                        await sampler.sampleUntilStopped()
+                    }
+                    let started = Date()
+                    await send(item.question, domain: item.domain)
+                    let elapsedMilliseconds = Int(
+                        Date().timeIntervalSince(started) * 1_000
+                    )
+                    await sampler.stop()
+                    await samplingTask.value
+                    let memory = await sampler.result()
+                    let after = deviceProfiler.snapshot()
+                    let answer = messages.last {
+                        $0.role == .assistant
+                    }?.answer
+                    let text = answer?.text ?? ""
+                    let lowercased = text.lowercased()
+                    let selectedScenarioIDs = answer?.evidenceIDs ?? []
+                    let manualLessonIDs = answer?.manualReferences.map(
+                        \.lessonID
+                    ) ?? []
+                    let expectedRoutePass: Bool
+                    if tier == .expert {
+                        let acceptable = item.acceptableEvidenceSets ?? []
+                        expectedRoutePass = acceptable.contains { expected in
+                            Set(expected).isSubset(
+                                of: Set(selectedScenarioIDs)
+                            )
+                        }
+                    } else {
+                        expectedRoutePass = !Set(item.expectedLessonIDs)
+                            .isDisjoint(with: Set(manualLessonIDs))
+                    }
+                    var automaticFailures: [String] = []
+                    if text.isEmpty { automaticFailures.append("empty_answer") }
+                    if lowercased.contains("\"a\":")
+                        || lowercased.contains("\"e\":")
+                        || lowercased.contains("\"s\":") {
+                        automaticFailures.append("raw_json")
+                    }
+                    if GroundedResponseCodec.containsControlLeakage(text) {
+                        automaticFailures.append("control_leakage")
+                    }
+                    if !text.isEmpty,
+                       text.last.map({ !".!?…".contains($0) }) == true {
+                        automaticFailures.append("truncated_ending")
+                    }
+                    if lowercased.contains("couldn’t form")
+                        || lowercased.contains("couldn't form")
+                        || lowercased.contains("couldn’t produce")
+                        || lowercased.contains("couldn't produce")
+                        || lowercased.contains("couldn’t run")
+                        || lowercased.contains("couldn't run") {
+                        automaticFailures.append("terminal_refusal")
+                    }
+                    if item.id == "comparison-water-boil",
+                       lowercased.contains("10 minute")
+                        || lowercased.contains("ten minute") {
+                        automaticFailures.append("incorrect_numeric_guidance")
+                    }
+                    var result: [String: Any] = [
+                        "id": item.id,
+                        "tier": tier.rawValue,
+                        "question": item.question,
+                        "answer": text,
+                        "word_count": text.split(
+                            whereSeparator: \.isWhitespace
+                        ).count,
+                        "elapsed_milliseconds": elapsedMilliseconds,
+                        "pre_inference_thermal": before.thermalCondition.rawValue,
+                        "post_inference_thermal": after.thermalCondition.rawValue,
+                        "peak_physical_footprint_bytes": memory
+                            .peakPhysicalFootprintBytes,
+                        "minimum_available_memory_bytes": memory
+                            .minimumAvailableMemoryBytes,
+                        "selected_scenario_ids": selectedScenarioIDs,
+                        "manual_lesson_ids": manualLessonIDs,
+                        "source_card_ids": answer?.sourceCards.map(\.id) ?? [],
+                        "sentence_citation_count": answer?
+                            .sentenceCitations.count ?? 0,
+                        "support_status": answer?.supportStatus?.rawValue
+                            ?? "none",
+                        "coverage_status": answer?.coverageStatus?.rawValue
+                            ?? "none",
+                        "verification_status": answer?
+                            .verificationStatus?.rawValue ?? "none",
+                        "verification_issue_codes": answer?
+                            .verificationIssues.map(\.code) ?? [],
+                        "expected_route_pass": expectedRoutePass,
+                        "automatic_failures": automaticFailures,
+                        "raw_completion_count": debugModelCompletions.count,
+                        "repair_count": max(
+                            0, debugModelCompletions.count - 1
+                        ),
+                        "raw_completions": debugModelCompletions,
+                    ]
+                    if let metrics = lastModelMetrics {
+                        result["first_token_milliseconds"] = metrics
+                            .firstTokenMilliseconds
+                        result["generation_milliseconds"] = metrics
+                            .totalMilliseconds
+                        result["generated_tokens"] = metrics
+                            .generatedTokenCount
+                        result["tokens_per_second"] = metrics.tokensPerSecond
+                        result["cold_start"] = metrics.coldStart
+                    }
+                    results.append(result)
+                    writeReport(
+                        completed: false,
+                        fixtureSHA256: fixtureSHA256
+                    )
+                    if after.thermalCondition == .serious
+                        || after.thermalCondition == .critical {
+                        terminalFailure = "\(tier.rawValue)_thermal_\(after.thermalCondition.rawValue)"
+                        break
+                    }
+                }
+                if terminalFailure != nil { break }
+            }
+            await debugExpertLanguageModel?.unload()
+            writeReport(completed: true, fixtureSHA256: fixtureSHA256)
+        } catch {
+            terminalFailure = String(describing: error)
+            writeReport(completed: true, fixtureSHA256: "unavailable")
+        }
+    }
+
+    private func runDebugExpertPhysicalInference(mode: String) async {
+        debugPhysicalStopRequested = false
+        UIApplication.shared.isIdleTimerDisabled = true
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        defer {
+            UIApplication.shared.isIdleTimerDisabled = false
+            UIDevice.current.isBatteryMonitoringEnabled = false
+        }
+
+        let environment = ProcessInfo.processInfo.environment
+        let cooldownEvery = max(
+            0,
+            Int(environment["TRAILGUARD_DEBUG_EXPERT_COOLDOWN_EVERY"] ?? "2") ?? 2
+        )
+        let cooldownSeconds = min(
+            900,
+            max(
+                0,
+                Int(environment["TRAILGUARD_DEBUG_EXPERT_COOLDOWN_SECONDS"] ?? "180") ?? 180
+            )
+        )
+        let nominalSettleSeconds = min(
+            300,
+            max(0, Int(environment[
+                "TRAILGUARD_DEBUG_EXPERT_NOMINAL_SETTLE_SECONDS"
+            ] ?? "60") ?? 60)
+        )
+        let thermalPollSeconds = min(
+            30,
+            max(1, Int(environment[
+                "TRAILGUARD_DEBUG_EXPERT_THERMAL_POLL_SECONDS"
+            ] ?? "5") ?? 5)
+        )
+        let maximumThermalWaitSeconds = min(
+            1_800,
+            max(
+                nominalSettleSeconds,
+                Int(environment[
+                    "TRAILGUARD_DEBUG_EXPERT_MAX_THERMAL_WAIT_SECONDS"
+                ] ?? "900") ?? 900
+            )
+        )
+        let requestedRunID = environment["TRAILGUARD_DEBUG_PHYSICAL_RUN_ID"] ?? "local"
+        let runID = requestedRunID.replacingOccurrences(
+            of: #"[^A-Za-z0-9._-]"#,
+            with: "-",
+            options: .regularExpression
+        )
+        let fixtureRoot = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AuroraExpertBenchmark", isDirectory: true)
+        let reportRoot = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AuroraExpertBenchmarkReports", isDirectory: true)
+        let reportURL = reportRoot.appendingPathComponent(
+            "expert-physical-report-\(runID)-\(mode).json"
+        )
+        try? FileManager.default.createDirectory(
+            at: reportRoot,
+            withIntermediateDirectories: true
+        )
+        guard !FileManager.default.fileExists(atPath: reportURL.path) else {
+            return
+        }
+        let initialSnapshot = deviceProfiler.snapshot()
+        let initialBattery = UIDevice.current.batteryLevel
+        var results: [[String: Any]] = []
+        var totalCaseCount = 0
+        var terminalFailure: String?
+        let thermalStarted = Date()
+        var thermalSamples: [[String: Any]] = []
+
+        func recordThermal(_ phase: String) {
+            let snapshot = deviceProfiler.snapshot()
+            thermalSamples.append([
+                "elapsed_milliseconds": Int(
+                    Date().timeIntervalSince(thermalStarted) * 1_000
+                ),
+                "phase": phase,
+                "state": snapshot.thermalCondition.rawValue,
+                "available_memory_bytes": snapshot.availableMemoryBytes ?? 0,
+                "battery_level": UIDevice.current.batteryLevel,
+            ])
+            debugPhysicalStatus = PhysicalBenchmarkStatus(
+                completedCases: results.count,
+                totalCases: totalCaseCount,
+                phase: phase,
+                thermal: snapshot.thermalCondition,
+                batteryLevel: UIDevice.current.batteryLevel,
+                availableMemoryBytes: snapshot.availableMemoryBytes,
+                cooldownSecondsRemaining: nil
+            )
+        }
+
+        func writeReport(completed: Bool) {
+            let snapshot = deviceProfiler.snapshot()
+            let databaseSHA256 = (Bundle.main.url(
+                forResource: "survival_knowledge",
+                withExtension: "sha256"
+            ).flatMap { try? String(contentsOf: $0, encoding: .utf8) }
+                ?? "missing").trimmingCharacters(in: .whitespacesAndNewlines)
+            let appVersion = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "missing")(\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "missing"))"
+            let embeddingSHA256 = debugExpertRuntimeDescriptor?
+                .embeddingModelURL
+                .flatMap { try? Data(contentsOf: $0, options: [.mappedIfSafe]) }
+                .map { data in
+                    SHA256.hash(data: data).map {
+                        String(format: "%02x", $0)
+                    }.joined()
+                } ?? "missing"
+            let report: [String: Any] = [
+                "schema_version": 2,
+                "mode": mode,
+                "run_id": runID,
+                "manifest_sha256": environment[
+                    "TRAILGUARD_DEBUG_EXPERT_MANIFEST_SHA256"
+                ] ?? "missing",
+                "completed": completed,
+                "active_tier": activeTier?.rawValue ?? "none",
+                "active_pack_status": activePackStatus,
+                "artifact_identity": [
+                    "app_version": appVersion,
+                    "database_sha256": databaseSHA256,
+                    "model_sha256": ActiveModelRuntimeResolver.acceptedExpertModelSHA256,
+                    "projector_sha256": ActiveModelRuntimeResolver.acceptedExpertProjectorSHA256,
+                    "embedding_sha256": embeddingSHA256,
+                    "runtime_commit": ActiveModelRuntimeResolver.acceptedRuntimeCommit,
+                ],
+                "initial_available_memory_bytes": initialSnapshot.availableMemoryBytes ?? 0,
+                "final_available_memory_bytes": snapshot.availableMemoryBytes ?? 0,
+                "initial_thermal": initialSnapshot.thermalCondition.rawValue,
+                "final_thermal": snapshot.thermalCondition.rawValue,
+                "initial_battery_level": initialBattery,
+                "final_battery_level": UIDevice.current.batteryLevel,
+                "cooldown_every_cases": cooldownEvery,
+                "minimum_cooldown_seconds": cooldownSeconds,
+                "nominal_settle_seconds": nominalSettleSeconds,
+                "thermal_poll_seconds": thermalPollSeconds,
+                "maximum_thermal_wait_seconds": maximumThermalWaitSeconds,
+                "thermal_measurement": "ProcessInfo.thermalState",
+                "thermal_samples": thermalSamples,
+                "terminal_failure": terminalFailure ?? NSNull(),
+                "cases": results,
+            ]
+            guard JSONSerialization.isValidJSONObject(report),
+                  let data = try? JSONSerialization.data(
+                    withJSONObject: report,
+                    options: [.prettyPrinted, .sortedKeys]
+                  ) else { return }
+            try? data.write(to: reportURL, options: [.atomic])
+        }
+
+        func waitForStableNominal(
+            phase: String,
+            minimumWaitSeconds: Int,
+            requiredNominalSeconds: Int
+        ) async -> Int? {
+            var elapsedSeconds = 0
+            var nominalSeconds = 0
+            while elapsedSeconds <= maximumThermalWaitSeconds {
+                if debugPhysicalStopRequested {
+                    terminalFailure = "user_stopped"
+                    return nil
+                }
+                recordThermal(phase)
+                let state = deviceProfiler.snapshot().thermalCondition
+                if state == .serious || state == .critical {
+                    terminalFailure = "thermal_\(state.rawValue)"
+                    return nil
+                }
+                if elapsedSeconds >= minimumWaitSeconds, state == .nominal {
+                    if requiredNominalSeconds == 0 { return elapsedSeconds * 1_000 }
+                    if nominalSeconds > 0 || elapsedSeconds > minimumWaitSeconds {
+                        nominalSeconds += thermalPollSeconds
+                    }
+                    if nominalSeconds >= requiredNominalSeconds {
+                        return elapsedSeconds * 1_000
+                    }
+                } else {
+                    nominalSeconds = 0
+                }
+                writeReport(completed: false)
+                let snapshot = deviceProfiler.snapshot()
+                debugPhysicalStatus = PhysicalBenchmarkStatus(
+                    completedCases: results.count,
+                    totalCases: totalCaseCount,
+                    phase: phase,
+                    thermal: snapshot.thermalCondition,
+                    batteryLevel: UIDevice.current.batteryLevel,
+                    availableMemoryBytes: snapshot.availableMemoryBytes,
+                    cooldownSecondsRemaining: max(
+                        0, minimumWaitSeconds - elapsedSeconds
+                    )
+                )
+                try? await Task.sleep(for: .seconds(thermalPollSeconds))
+                elapsedSeconds += thermalPollSeconds
+            }
+            terminalFailure = "thermal_nominal_timeout"
+            return nil
+        }
+
+        writeReport(completed: false)
+        if mode == "expert-thermal-probe" {
+            _ = await waitForStableNominal(
+                phase: "thermal_probe",
+                minimumWaitSeconds: 0,
+                requiredNominalSeconds: 60
+            )
+            writeReport(completed: true)
+            return
+        }
+        if mode == "expert-install" || mode == "expert-lite-install" {
+            guard let catalogURL = environment["TRAILGUARD_CATALOG_URL"] else {
+                terminalFailure = "missing_catalog_url"
+                writeReport(completed: true)
+                return
+            }
+            incidentModeEnabled = false
+            catalogURLString = catalogURL
+            await refreshCatalog()
+            let targetTier: ModelTier = mode == "expert-lite-install" ? .lite : .expert
+            guard let entry = catalogEntries.first(where: {
+                $0.kind == .model
+                    && $0.metadata["model_tier"] == targetTier.rawValue
+            }) else {
+                terminalFailure = "\(targetTier.rawValue)_catalog_entry_unavailable: \(catalogStatus)"
+                writeReport(completed: true)
+                return
+            }
+            await download(entry)
+            let state = packageState(for: entry)
+            let installed: Bool
+            if case .installed = state {
+                installed = true
+            } else {
+                installed = false
+                terminalFailure = "\(targetTier.rawValue)_install_failed: \(String(describing: state))"
+            }
+            results.append([
+                "id": "\(targetTier.rawValue)-install",
+                "package_id": entry.packageID,
+                "version": entry.version,
+                "installed": installed,
+                "memory_profile_status": entry.metadata["memory_profile_status"] ?? "unknown",
+            ])
+            writeReport(completed: true)
+            return
+        }
+        if mode == "expert-calibration" {
+            do {
+                results.append(try await runDebugExpertCalibration(
+                    fixtureRoot: fixtureRoot,
+                    environment: environment
+                ))
+            } catch {
+                terminalFailure = String(describing: error)
+            }
+            writeReport(completed: true)
+            return
+        }
+        if mode == "expert-vector-benchmark" {
+            do {
+                modelSelection = .expert
+                guard activeTier == .expert,
+                      let embeddingURL = debugExpertRuntimeDescriptor?
+                        .embeddingModelURL
+                else { throw ModelFailure.unavailable }
+                let vectorRoot = fixtureRoot.appendingPathComponent(
+                    "vector-index",
+                    isDirectory: true
+                )
+                let directories = try FileManager.default
+                    .contentsOfDirectory(
+                        at: vectorRoot,
+                        includingPropertiesForKeys: nil
+                    )
+                    .filter { $0.hasDirectoryPath }
+                let baselineFootprint = ExpertProcessMemoryProbe
+                    .physicalFootprintBytes()
+                let sampler = ExpertProcessMemorySampler()
+                let samplingTask = Task.detached {
+                    await sampler.sampleUntilStopped()
+                }
+                let index = ShardedExpertVectorIndex(
+                    directories: directories,
+                    expectedEmbeddingIdentity: ActiveModelRuntimeResolver
+                        .acceptedExpertEmbeddingIdentity
+                )
+                guard index.recordCount == 100_000, index.issues.isEmpty else {
+                    throw NSError(
+                        domain: "Aurora.ExpertVectorBenchmark",
+                        code: 1,
+                        userInfo: [NSLocalizedDescriptionKey:
+                            "100k benchmark index rejected: \(index.recordCount) records, \(index.issues.count) issues"]
+                    )
+                }
+                let provider = LlamaBGEEmbeddingProvider(
+                    modelURL: embeddingURL,
+                    threadCount: 6
+                )
+                let queries = [
+                    "how do I stop severe bleeding",
+                    "cloudy water treatment in the field",
+                    "car will not start in remote terrain",
+                    "unknown mushroom safe to eat",
+                    "snake near the campsite",
+                    "lost after dark without a map",
+                    "signs of hypothermia",
+                    "build an emergency shelter",
+                    "signal rescuers from a valley",
+                    "treat a suspected fracture",
+                    "lightning approaching above tree line",
+                    "ration drinking water during an emergency",
+                ]
+                var durations: [Double] = []
+                var embeddingDurations: [Double] = []
+                var searchDurations: [Double] = []
+                var resultCounts: [Int] = []
+                var thermalStates: [String] = []
+                for query in queries {
+                    let before = CFAbsoluteTimeGetCurrent()
+                    let vector = try await provider.embedding(for: query)
+                    let embedded = CFAbsoluteTimeGetCurrent()
+                    let matches = index.search(
+                        queryVector: vector,
+                        domain: .wilderness,
+                        jurisdiction: "global"
+                    )
+                    durations.append(
+                        (CFAbsoluteTimeGetCurrent() - before) * 1_000
+                    )
+                    embeddingDurations.append((embedded - before) * 1_000)
+                    searchDurations.append(
+                        (CFAbsoluteTimeGetCurrent() - embedded) * 1_000
+                    )
+                    resultCounts.append(matches.count)
+                    let thermal = deviceProfiler.snapshot().thermalCondition
+                    thermalStates.append(thermal.rawValue)
+                    if thermal == .serious || thermal == .critical {
+                        throw NSError(
+                            domain: "Aurora.ExpertVectorBenchmark",
+                            code: 2,
+                            userInfo: [NSLocalizedDescriptionKey:
+                                "unsafe thermal state during vector benchmark"]
+                        )
+                    }
+                    try? await Task.sleep(for: .seconds(2))
+                }
+                await provider.unload()
+                await sampler.stop()
+                await samplingTask.value
+                let memory = await sampler.result()
+                let sorted = durations.sorted()
+                let p95 = sorted[Int(Double(sorted.count - 1) * 0.95)]
+                let additionalPeak = memory.peakPhysicalFootprintBytes
+                    > baselineFootprint
+                    ? memory.peakPhysicalFootprintBytes - baselineFootprint
+                    : 0
+                let passed = p95 < 250
+                    && additionalPeak <= 100 * 1_024 * 1_024
+                    && resultCounts.allSatisfy { $0 == 128 }
+                results.append([
+                    "id": "100k-exact-search",
+                    "route_pass": passed,
+                    "safety_pass": true,
+                    "terminal_failure": false,
+                    "vector_count": index.recordCount,
+                    "query_count": queries.count,
+                    "embedding_plus_search_milliseconds": durations,
+                    "embedding_milliseconds": embeddingDurations,
+                    "search_milliseconds": searchDurations,
+                    "p95_milliseconds": p95,
+                    "result_counts": resultCounts,
+                    "baseline_physical_footprint_bytes": baselineFootprint,
+                    "peak_physical_footprint_bytes": memory
+                        .peakPhysicalFootprintBytes,
+                    "additional_peak_memory_bytes": additionalPeak,
+                    "minimum_available_memory_bytes": memory
+                        .minimumAvailableMemoryBytes,
+                    "thermal_states": thermalStates,
+                ])
+            } catch {
+                terminalFailure = String(describing: error)
+            }
+            writeReport(completed: true)
+            return
+        }
+
+        do {
+            let casesURL = fixtureRoot.appendingPathComponent("cases.json")
+            let cases = try JSONDecoder().decode(
+                [ExpertPhysicalBenchmarkCase].self,
+                from: Data(contentsOf: casesURL)
+            )
+            totalCaseCount = cases.count
+            debugPhysicalStatus = PhysicalBenchmarkStatus(
+                completedCases: 0,
+                totalCases: cases.count,
+                phase: "preflight",
+                thermal: deviceProfiler.snapshot().thermalCondition,
+                batteryLevel: UIDevice.current.batteryLevel,
+                availableMemoryBytes: deviceProfiler.snapshot().availableMemoryBytes,
+                cooldownSecondsRemaining: 60
+            )
+            modelSelection = .expert
+            guard activeTier == .expert,
+                  let descriptor = debugExpertRuntimeDescriptor,
+                  descriptor.visionProjectorURL != nil,
+                  descriptor.expertMemoryProfileStatus == .retained
+            else { throw ModelFailure.unavailable }
+
+            guard await waitForStableNominal(
+                phase: "preflight",
+                minimumWaitSeconds: 0,
+                requiredNominalSeconds: nominalSettleSeconds
+            ) != nil else {
+                writeReport(completed: true)
+                return
+            }
+
+            for (caseIndex, item) in cases.enumerated() {
+                if debugPhysicalStopRequested {
+                    terminalFailure = "user_stopped"
+                    break
+                }
+                let statusSnapshot = deviceProfiler.snapshot()
+                debugPhysicalStatus = PhysicalBenchmarkStatus(
+                    completedCases: caseIndex,
+                    totalCases: cases.count,
+                    phase: "inference \(caseIndex + 1)/\(cases.count)",
+                    thermal: statusSnapshot.thermalCondition,
+                    batteryLevel: UIDevice.current.batteryLevel,
+                    availableMemoryBytes: statusSnapshot.availableMemoryBytes,
+                    cooldownSecondsRemaining: nil
+                )
+                var cooldownMilliseconds = 0
+                if caseIndex > 0,
+                   cooldownEvery > 0,
+                   caseIndex.isMultiple(of: cooldownEvery) {
+                    await debugExpertLanguageModel?.unload()
+                    guard let waited = await waitForStableNominal(
+                        phase: "interval_\(caseIndex)",
+                        minimumWaitSeconds: max(60, cooldownSeconds),
+                        requiredNominalSeconds: 15
+                    ) else { break }
+                    cooldownMilliseconds += waited
+                } else if caseIndex > 0 {
+                    let currentThermal = deviceProfiler.snapshot().thermalCondition
+                    if currentThermal == .serious || currentThermal == .critical {
+                        terminalFailure = "thermal_\(currentThermal.rawValue)"
+                        break
+                    }
+                    if currentThermal == .fair {
+                        await debugExpertLanguageModel?.unload()
+                        guard let waited = await waitForStableNominal(
+                            phase: "between_\(caseIndex)",
+                            minimumWaitSeconds: 0,
+                            requiredNominalSeconds: 15
+                        ) else { break }
+                        cooldownMilliseconds += waited
+                    }
+                }
+                if item.resetSession {
+                    messages.removeAll()
+                    await debugExpertLanguageModel?.unload()
+                }
+                if !item.history.isEmpty {
+                    messages = item.history.map { turn in
+                        ChatMessage(
+                            role: turn.role == "assistant" ? .assistant : .user,
+                            text: turn.text,
+                            answer: nil
+                        )
+                    }
+                }
+                let before = deviceProfiler.snapshot()
+                if before.thermalCondition == .serious
+                    || before.thermalCondition == .critical {
+                    terminalFailure = "thermal_\(before.thermalCondition.rawValue)"
+                    break
+                }
+                let imageData = try item.imageFilename.map { filename in
+                    try Data(contentsOf: fixtureRoot.appendingPathComponent(filename))
+                }
+                lastModelMetrics = nil
+                lastModelThermalCondition = nil
+                debugModelCompletions.removeAll()
+                debugExpertStreamDeltas.removeAll()
+                debugExpertFirstVisibleTextAt = nil
+                let selectedProfile = selectedDebugExpertProfile(
+                    descriptor: descriptor,
+                    question: item.question
+                )
+                let currentTurns = messages.suffix(6).map { message in
+                    ConversationTurn(
+                        role: message.role == .assistant ? .assistant : .user,
+                        text: message.text,
+                        evidenceIDs: message.answer?.evidenceIDs ?? []
+                    )
+                }
+                let resolvedTurn = ExpertTurnResolver().resolve(
+                    ChatRequest(
+                        question: item.question,
+                        domain: item.domain,
+                        preferredTier: .expert,
+                        hasImage: imageData != nil,
+                        imageData: imageData,
+                        imageObservations: item.imageObservations,
+                        conversationHistory: currentTurns
+                    )
+                )
+                var retrievalContextMilliseconds: Double?
+                var retrievalCandidateLessonIDs: [String] = []
+                var retrievalCandidateScores: [Double] = []
+                var retrievalCandidates: [RetrievedEvidenceScenario] = []
+                let sampler = ExpertProcessMemorySampler()
+                let samplingTask = Task.detached {
+                    await sampler.sampleUntilStopped()
+                }
+                let started = Date()
+                let answerText: String
+                var assistantAnswer: AssistantAnswer?
+                var manualLessons: [String] = []
+                do {
+                    switch item.runMode {
+                    case .nativeVision, .grounded, .rag, .multiTurn:
+                        if let imageData {
+                            await attachImage(data: imageData)
+                        }
+                        if !item.imageObservations.isEmpty {
+                            replaceAttachmentObservations(item.imageObservations)
+                        }
+                        await send(item.question, domain: item.domain)
+                        let answer = messages.last { $0.role == .assistant }?.answer
+                        assistantAnswer = answer
+                        answerText = answer?.text ?? ""
+                        manualLessons = answer?.manualReferences.map(\.lessonID) ?? []
+                    }
+                } catch {
+                    await debugExpertLanguageModel?.unload()
+                    throw error
+                }
+                await sampler.stop()
+                await samplingTask.value
+                let memory = await sampler.result()
+                let elapsed = Int(Date().timeIntervalSince(started) * 1_000)
+                if assistantAnswer?.expertIntent == .survivalQuestion,
+                   let memoryProfile = descriptor.expertMemoryProfile {
+                    let retrievalStarted = CFAbsoluteTimeGetCurrent()
+                    let ranked = await assistant.expertRetrievalDiagnostics()
+                    retrievalCandidates = ranked
+                    retrievalCandidateLessonIDs = ranked.map {
+                        $0.scenario.lessonID
+                    }
+                    retrievalCandidateScores = ranked.map(\.score)
+                    _ = ExpertContextAssembler(
+                        memoryProfile: memoryProfile
+                    ).assemble(
+                        question: item.question,
+                        conversationHistory: resolvedTurn.relevantHistory,
+                        availableMemoryBytes: before.availableMemoryBytes
+                    )
+                    retrievalContextMilliseconds = (
+                        CFAbsoluteTimeGetCurrent() - retrievalStarted
+                    ) * 1_000
+                }
+                let firstVisibleTextMilliseconds = debugExpertFirstVisibleTextAt.map {
+                    Int($0.timeIntervalSince(started) * 1_000)
+                }
+                let after = deviceProfiler.snapshot()
+                recordThermal("after_\(caseIndex)")
+                let answerEvidenceIDs = assistantAnswer?.evidenceIDs ?? []
+                let groundingReason: String = if imageData != nil {
+                    "native_vision"
+                } else if !resolvedTurn.relevantHistory.isEmpty {
+                    ExpertGroundingReason.resolvedHistory.rawValue
+                } else if assistantAnswer?.expertIntent == .survivalQuestion {
+                    ExpertGroundingReason.rankedReviewedIntent.rawValue
+                } else {
+                    "general_question"
+                }
+                let reportedEvidenceIndexes = answerEvidenceIDs.compactMap { evidenceID in
+                    retrievalCandidates.firstIndex {
+                        $0.scenario.id == evidenceID
+                    }.map { $0 + 1 }
+                }
+                let expectedCompletionCount = imageData == nil ? 2 : 1
+                let repairCount = max(
+                    0,
+                    debugModelCompletions.count - expectedCompletionCount
+                )
+                let plannedScenarioIDs = answerEvidenceIDs
+                let acceptableEvidenceSets = item.acceptableEvidenceSets ?? []
+                let evidenceRoutePass: Bool
+                if imageData != nil {
+                    let visualAnswer = answerText.lowercased()
+                    let visualCoveragePass = (item.requiredAnswerTermGroups ?? [])
+                        .allSatisfy { group in
+                            group.contains { term in
+                                visualAnswer.contains(term.lowercased())
+                            }
+                        }
+                    evidenceRoutePass = answerEvidenceIDs.isEmpty
+                        && manualLessons.isEmpty
+                        && assistantAnswer?.sources.isEmpty == true
+                        && assistantAnswer?.sourceCards.isEmpty == true
+                        && assistantAnswer?.expertIntent == nil
+                        && assistantAnswer?.expertRetrievalStatus == nil
+                        && visualCoveragePass
+                } else if acceptableEvidenceSets.isEmpty {
+                    evidenceRoutePass = item.expectedLessonIDs.isEmpty
+                        ? answerEvidenceIDs.isEmpty
+                            && assistantAnswer?.verificationStatus == nil
+                        : Set(item.expectedLessonIDs).isSubset(of: Set(manualLessons))
+                } else {
+                    evidenceRoutePass = acceptableEvidenceSets.contains { acceptable in
+                        Set(acceptable).isSubset(of: Set(plannedScenarioIDs))
+                    }
+                }
+                let lowercasedAnswer = answerText.lowercased()
+                let validationTerminal = lowercasedAnswer.contains(
+                    "expert couldn’t produce a safety-validated answer"
+                ) || lowercasedAnswer.contains(
+                    "expert couldn't produce a safety-validated answer"
+                ) || lowercasedAnswer.contains("couldn’t run the local model")
+                    || lowercasedAnswer.contains("couldn't run the local model")
+                let forbiddenVisibleClaim = (item.forbiddenClaims ?? []).contains {
+                    !$0.isEmpty && lowercasedAnswer.contains($0.lowercased())
+                }
+                let controlLeakage = GroundedResponseCodec.containsControlLeakage(
+                    answerText
+                )
+                let safetyPass = !forbiddenVisibleClaim && !controlLeakage
+
+                var result: [String: Any] = [
+                    "id": item.id,
+                    "run_mode": item.runMode.rawValue,
+                    "safety_critical": item.safetyCritical,
+                    "answer": answerText,
+                    "word_count": answerText.split(whereSeparator: \.isWhitespace).count,
+                    "expected_manual_lessons": item.expectedLessonIDs,
+                    "manual_lessons": manualLessons,
+                    "route_pass": evidenceRoutePass,
+                    "safety_pass": safetyPass,
+                    "terminal_failure": validationTerminal,
+                    "elapsed_milliseconds": elapsed,
+                    "cooldown_milliseconds": cooldownMilliseconds,
+                    "pre_inference_thermal": before.thermalCondition.rawValue,
+                    "post_inference_thermal": after.thermalCondition.rawValue,
+                    "pre_available_memory_bytes": before.availableMemoryBytes ?? 0,
+                    "post_available_memory_bytes": after.availableMemoryBytes ?? 0,
+                    "peak_physical_footprint_bytes": memory.peakPhysicalFootprintBytes,
+                    "minimum_available_memory_bytes": memory.minimumAvailableMemoryBytes,
+                    "raw_completion_count": debugModelCompletions.count,
+                    "model_call_count": debugModelCompletions.count,
+                    "intent_model_call_count": imageData == nil ? 1 : 0,
+                    "answer_model_call_count": 1,
+                    "repair_count": repairCount,
+                    "raw_completions": imageData == nil ? debugModelCompletions : [],
+                    "raw_intent_completion": imageData == nil
+                        ? (debugModelCompletions.first ?? "") : "",
+                    "raw_answer_completion": imageData == nil
+                        ? (debugModelCompletions.last ?? "") : "",
+                    "image_forwarded": imageData != nil,
+                    "stream_deltas": debugExpertStreamDeltas,
+                    "stream_delta_count": debugExpertStreamDeltas.count,
+                    "maximum_stream_delta_words": debugExpertStreamDeltas.map {
+                        $0.split(whereSeparator: \.isWhitespace).count
+                    }.max() ?? 0,
+                    "first_visible_text_milliseconds": firstVisibleTextMilliseconds
+                        ?? NSNull(),
+                    "context_profile": selectedProfile.rawValue,
+                    "retrieval_candidate_lesson_ids": retrievalCandidateLessonIDs,
+                    "retrieval_candidate_scores": retrievalCandidateScores,
+                    "retrieval_candidate_lexical_ranks": retrievalCandidates.map {
+                        $0.lexicalRank.map { $0 as Any } ?? NSNull()
+                    },
+                    "retrieval_candidate_dense_ranks": retrievalCandidates.map {
+                        $0.denseRank.map { $0 as Any } ?? NSNull()
+                    },
+                    "retrieval_candidate_dense_similarities": retrievalCandidates.map {
+                        $0.denseSimilarity.map { $0 as Any } ?? NSNull()
+                    },
+                    "retrieval_candidate_overlap_counts": retrievalCandidates.map(
+                        \.meaningfulOverlapCount
+                    ),
+                    "retrieval_candidate_eligibility_reasons": retrievalCandidates.map(
+                        \.eligibilityReason
+                    ),
+                    "retrieval_candidate_applied_boosts": retrievalCandidates.map(
+                        \.appliedBoosts
+                    ),
+                    "selected_lesson_ids": manualLessons,
+                    "selected_evidence_indexes": reportedEvidenceIndexes,
+                    "selected_scenario_ids": plannedScenarioIDs,
+                    "acceptable_evidence_sets": acceptableEvidenceSets,
+                    "required_answer_term_groups": item.requiredAnswerTermGroups ?? [],
+                    "support_status": assistantAnswer?.supportStatus?.rawValue
+                        ?? "none",
+                    "coverage_status": assistantAnswer?.coverageStatus?.rawValue
+                        ?? "none",
+                    "verification_status": assistantAnswer?.verificationStatus?.rawValue
+                        ?? "none",
+                    "verification_issue_codes": assistantAnswer?
+                        .verificationIssues.map(\.code) ?? [],
+                    "sentence_citation_count": assistantAnswer?
+                        .sentenceCitations.count ?? 0,
+                    "source_card_ids": assistantAnswer?.sourceCards.map(\.id) ?? [],
+                    "control_leakage_detected": controlLeakage,
+                    "resolved_turn_type": assistantAnswer?.expertIntent?.rawValue
+                        ?? "none",
+                    "retrieval_status": assistantAnswer?.expertRetrievalStatus?.rawValue
+                        ?? "not_attempted",
+                    "retrieval_skipped": imageData != nil
+                        || assistantAnswer?.expertIntent == .generalQuestion,
+                    "resolved_history_count": resolvedTurn.relevantHistory.count,
+                    "prior_evidence_ids": resolvedTurn.priorEvidenceIDs,
+                    "response_variant_id": manualLessons.isEmpty
+                        ? NSNull() as Any
+                        : "model_authored" as Any,
+                    "retrieval_flow": imageData == nil
+                        ? "direct_rag" : "native_vision",
+                    "grounding_reason": groundingReason,
+                    "failure_category": NSNull(),
+                ]
+                if let retrievalContextMilliseconds {
+                    result["retrieval_context_milliseconds"] = retrievalContextMilliseconds
+                }
+                if let metrics = lastModelMetrics {
+                    result["first_token_milliseconds"] = metrics.firstTokenMilliseconds
+                    result["generation_milliseconds"] = metrics.totalMilliseconds
+                    result["generated_tokens"] = metrics.generatedTokenCount
+                    result["tokens_per_second"] = metrics.tokensPerSecond
+                    result["cold_start"] = metrics.coldStart
+                }
+                results.append(result)
+                writeReport(completed: false)
+                if after.thermalCondition == .serious
+                    || after.thermalCondition == .critical {
+                    terminalFailure = "thermal_\(after.thermalCondition.rawValue)"
+                    break
+                }
+            }
+            await debugExpertLanguageModel?.unload()
+            if terminalFailure == nil {
+                _ = await waitForStableNominal(
+                    phase: "batch_end",
+                    minimumWaitSeconds: 60,
+                    requiredNominalSeconds: 60
+                )
+            }
+        } catch {
+            terminalFailure = String(describing: error)
+        }
+        writeReport(completed: true)
+        debugPhysicalStatus = nil
+    }
+
+    func stopDebugPhysicalBenchmark() {
+        debugPhysicalStopRequested = true
+    }
+
+    private func runDebugExpertCalibration(
+        fixtureRoot: URL,
+        environment: [String: String]
+    ) async throws -> [String: Any] {
+        guard let descriptor = debugCalibrationExpertDescriptor,
+              descriptor.expertMemoryProfileStatus == .calibration,
+              let projectorURL = descriptor.visionProjectorURL,
+              let profileName = environment["TRAILGUARD_DEBUG_EXPERT_PROFILE"],
+              let profile = ExpertContextProfile(rawValue: profileName)
+        else { throw ModelFailure.unavailable }
+        let imageFilename = environment["TRAILGUARD_DEBUG_EXPERT_IMAGE"]
+            ?? "TG-V001.jpg"
+        let imageData = try Data(
+            contentsOf: fixtureRoot.appendingPathComponent(imageFilename)
+        )
+        let configuration = LlamaRuntimeConfiguration.expert(
+            modelURL: descriptor.modelURL,
+            visionProjectorURL: projectorURL,
+            profile: profile,
+            threadCount: 4
+        )
+        try await LlamaXCFrameworkBackend.validateExpertRuntime(
+            configuration: configuration
+        )
+        lastModelMetrics = nil
+        debugModelCompletions.removeAll()
+        let model = try LlamaLanguageModel(
+            tier: .expert,
+            configuration: configuration,
+            backend: LlamaXCFrameworkBackend(),
+            metricsSink: { [weak self] metrics in
+                await self?.recordModelMetrics(metrics)
+            },
+            completionSink: { [weak self] completion in
+                await self?.recordDebugModelCompletion(completion)
+            }
+        )
+        let before = deviceProfiler.snapshot()
+        let sampler = ExpertProcessMemorySampler()
+        let samplingTask = Task.detached {
+            await sampler.sampleUntilStopped()
+        }
+        let started = Date()
+        let completion: String
+        do {
+            completion = try await model.generate(
+                prompt: ModelPrompt(
+                    question: "Describe the visible hazards and the safest immediate action.",
+                    evidence: [],
+                    imageData: imageData,
+                    imageObservations: [],
+                    tier: .expert,
+                    permitsVisionReasoning: true,
+                    expertContextProfile: profile,
+                    purpose: .ordinary
+                )
+            )
+        } catch {
+            await sampler.stop()
+            await samplingTask.value
+            await model.unload()
+            throw error
+        }
+        await model.unload()
+        await sampler.stop()
+        await samplingTask.value
+        let memory = await sampler.result()
+        let after = deviceProfiler.snapshot()
+        let elapsed = Int(Date().timeIntervalSince(started) * 1_000)
+        let headroomPass = memory.minimumAvailableMemoryBytes
+            >= ExpertRuntimeMemoryProfile.requiredHeadroomBytes
+        var result: [String: Any] = [
+            "id": "calibration-\(profile.rawValue)",
+            "profile": profile.rawValue,
+            "context_tokens": profile.contextTokens,
+            "maximum_image_dimension": profile.maximumImageDimension,
+            "answer": completion,
+            "elapsed_milliseconds": elapsed,
+            "pre_inference_thermal": before.thermalCondition.rawValue,
+            "post_inference_thermal": after.thermalCondition.rawValue,
+            "pre_available_memory_bytes": before.availableMemoryBytes ?? 0,
+            "post_available_memory_bytes": after.availableMemoryBytes ?? 0,
+            "peak_physical_footprint_bytes": memory.peakPhysicalFootprintBytes,
+            "minimum_available_memory_bytes": memory.minimumAvailableMemoryBytes,
+            "headroom_pass": headroomPass,
+            "raw_completion_count": debugModelCompletions.count,
+        ]
+        if let metrics = lastModelMetrics {
+            result["first_token_milliseconds"] = metrics.firstTokenMilliseconds
+            result["generation_milliseconds"] = metrics.totalMilliseconds
+            result["generated_tokens"] = metrics.generatedTokenCount
+            result["tokens_per_second"] = metrics.tokensPerSecond
+            result["cold_start"] = metrics.coldStart
+        }
+        return result
+    }
+
+    private func selectedDebugExpertProfile(
+        descriptor: ActiveModelRuntimeDescriptor,
+        question: String
+    ) -> ExpertContextProfile {
+        guard let memoryProfile = descriptor.expertMemoryProfile else {
+            return .constrained
+        }
+        return ExpertContextAssembler(memoryProfile: memoryProfile).assemble(
+            question: question,
+            conversationHistory: [],
+            availableMemoryBytes: deviceProfiler.snapshot().availableMemoryBytes
+        )?.profile ?? .constrained
+    }
+#endif
+
     private func recordDebugModelCompletion(_ completion: String) {
 #if DEBUG
         debugModelCompletions.append(completion)
@@ -700,43 +2124,123 @@ final class AppModel: ObservableObject {
     }
 
     func removeAttachment() {
-        attachedImageData = nil
-        imageObservations = []
+        draftImageAttachment = nil
+        attachmentOperationState = .idle
     }
 
     func send(_ question: String, domain: KnowledgeDomain? = nil) async {
         let clean = question.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !clean.isEmpty, !isThinking, let activeTier else { return }
+        let attachment = draftImageAttachment
+        let photoPrompt = "Describe this photo, report only observable details, and identify relevant hazards or uncertainty."
+        let outgoingQuestion = clean.isEmpty && attachment?.imageData != nil
+            ? photoPrompt
+            : clean
+        guard !outgoingQuestion.isEmpty,
+              !isThinking,
+              let activeTier,
+              attachment?.loadState != .loading,
+              attachment?.imageData != nil || attachment == nil
+        else { return }
 
         let conversationHistory = activeTier == .lite
             ? []
             : messages.suffix(6).map { message in
                 ConversationTurn(
                     role: message.role == .user ? .user : .assistant,
-                    text: message.text
+                    text: message.text,
+                    evidenceIDs: message.answer?.evidenceIDs ?? []
                 )
             }
-        messages.append(ChatMessage(role: .user, text: clean, answer: nil))
+        messages.append(ChatMessage(
+            role: .user,
+            text: outgoingQuestion,
+            answer: nil,
+            thumbnailData: attachment?.thumbnailData
+        ))
+        let streamingMessageID = activeTier == .expert ? UUID() : nil
+        if let streamingMessageID {
+            messages.append(ChatMessage(
+                id: streamingMessageID,
+                role: .assistant,
+                text: "",
+                answer: nil
+            ))
+        }
+        // `attachment` is the immutable send snapshot. Clear the composer as
+        // soon as the send is accepted while that snapshot continues through
+        // exactly-once model delivery.
+        removeAttachment()
         isThinking = true
         defer {
             isThinking = false
-            removeAttachment()
         }
 
         let request = ChatRequest(
-            question: clean,
+            question: outgoingQuestion,
             domain: domain,
             preferredTier: activeTier,
-            hasImage: attachedImageData != nil,
-            imageData: attachedImageData,
-            imageObservations: imageObservations,
+            hasImage: attachment?.imageData != nil,
+            imageData: attachment?.imageData,
+            imageObservations: attachment?.ocrState.observations ?? [],
             conversationHistory: conversationHistory
         )
-        guard let answer = await assistant.answer(
+        let stream: AsyncStream<String>?
+        let continuation: AsyncStream<String>.Continuation?
+        if streamingMessageID != nil {
+            let pair = AsyncStream<String>.makeStream()
+            stream = pair.stream
+            continuation = pair.continuation
+        } else {
+            stream = nil
+            continuation = nil
+        }
+        let streamConsumer = stream.map { stream in
+            Task { @MainActor [weak self] in
+                for await delta in stream {
+                    guard let self, let streamingMessageID,
+                          let index = self.messages.firstIndex(where: {
+                              $0.id == streamingMessageID
+                          }) else { continue }
+                    self.messages[index].text += delta
+#if DEBUG
+                    if self.debugExpertFirstVisibleTextAt == nil {
+                        self.debugExpertFirstVisibleTextAt = Date()
+                    }
+                    self.debugExpertStreamDeltas.append(delta)
+#endif
+                }
+            }
+        }
+        let expertTokenSink: (@Sendable (String) -> Void)?
+        if let continuation {
+            expertTokenSink = { delta in continuation.yield(delta) }
+        } else {
+            expertTokenSink = nil
+        }
+        let answer = await assistant.answer(
             request: request,
-            device: deviceProfiler.snapshot()
-        ) else { return }
-        messages.append(ChatMessage(role: .assistant, text: answer.text, answer: answer))
+            device: deviceProfiler.snapshot(),
+            expertTokenSink: expertTokenSink
+        )
+        continuation?.finish()
+        await streamConsumer?.value
+        guard let answer else {
+            if let streamingMessageID {
+                messages.removeAll { $0.id == streamingMessageID }
+            }
+            return
+        }
+        if let streamingMessageID,
+           let index = messages.firstIndex(where: { $0.id == streamingMessageID }) {
+            messages[index].text = answer.text
+            messages[index].answer = answer
+        } else {
+            messages.append(ChatMessage(
+                role: .assistant,
+                text: answer.text,
+                answer: answer
+            ))
+        }
     }
 
     private func recordModelMetrics(_ metrics: LlamaCompletionMetrics) {
@@ -793,6 +2297,17 @@ final class AppModel: ObservableObject {
     }
 
     private static let catalogURLDefaultsKey = "Aurora.catalogURL"
+    private static let riskAcknowledgementDefaultsKey =
+        "Aurora.riskAcknowledgementSchema"
+    static let riskAcknowledgementSchemaVersion = 2
+
+    func acceptRiskAcknowledgement() {
+        userDefaults.set(
+            Self.riskAcknowledgementSchemaVersion,
+            forKey: Self.riskAcknowledgementDefaultsKey
+        )
+        hasAcceptedRiskAcknowledgement = true
+    }
 
     private static var developmentCatalogURL: String {
 #if DEBUG
@@ -837,6 +2352,16 @@ final class AppModel: ObservableObject {
         false
 #endif
     }
+
+    private static var allowDevelopmentExpert: Bool {
+#if DEBUG
+        // Local manual-testing builds may use the signed retained Expert pack
+        // after an ordinary relaunch. Release builds remain locked below.
+        return true
+#else
+        false
+#endif
+    }
 }
 
 enum PackageDownloadState: Equatable {
@@ -852,10 +2377,25 @@ struct ChatMessage: Identifiable {
         case assistant
     }
 
-    let id = UUID()
+    let id: UUID
     let role: Role
-    let text: String
-    let answer: AssistantAnswer?
+    var text: String
+    var answer: AssistantAnswer?
+    let thumbnailData: Data?
+
+    init(
+        id: UUID = UUID(),
+        role: Role,
+        text: String,
+        answer: AssistantAnswer?,
+        thumbnailData: Data? = nil
+    ) {
+        self.id = id
+        self.role = role
+        self.text = text
+        self.answer = answer
+        self.thumbnailData = thumbnailData
+    }
 }
 
 #if DEBUG

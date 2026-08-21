@@ -77,6 +77,7 @@ public actor ActivePackRegistry {
     private let appVersion: String
     private let expectedPolicyVersion: String
     private let allowDevelopmentKnowledge: Bool
+    private let allowDevelopmentExpert: Bool
     private let fileManager: FileManager
     private let router: ModelRouter
 
@@ -86,6 +87,7 @@ public actor ActivePackRegistry {
         appVersion: String,
         expectedPolicyVersion: String,
         allowDevelopmentKnowledge: Bool = false,
+        allowDevelopmentExpert: Bool = false,
         fileManager: FileManager = .default,
         router: ModelRouter = ModelRouter()
     ) {
@@ -94,6 +96,7 @@ public actor ActivePackRegistry {
         self.appVersion = appVersion
         self.expectedPolicyVersion = expectedPolicyVersion
         self.allowDevelopmentKnowledge = allowDevelopmentKnowledge
+        self.allowDevelopmentExpert = allowDevelopmentExpert
         self.fileManager = fileManager
         self.router = router
     }
@@ -244,7 +247,9 @@ public actor ActivePackRegistry {
                 let route = router.route(
                     requested: tier,
                     installed: [tier],
-                    expertValidated: false,
+                    expertValidated: tier == .expert
+                        ? allowDevelopmentExpert
+                        : false,
                     device: device
                 )
                 guard route.selected == tier else {

@@ -1,0 +1,18 @@
+{
+  "active_pack_status" : "Install Lite to enable Ask",
+  "active_tier" : "none",
+  "cases" : [
+
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 5347654888,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5348130024,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-install",
+  "run_id" : "calibration-install",
+  "schema_version" : 1,
+  "terminal_failure" : "expert_catalog_entry_unavailable: Catalog verification failed: The Internet connection appears to be offline."
+}

@@ -1,0 +1,24 @@
+{
+  "active_pack_status" : "Install Lite to enable Ask",
+  "active_tier" : "none",
+  "cases" : [
+    {
+      "id" : "expert-install",
+      "installed" : true,
+      "memory_profile_status" : "calibration",
+      "package_id" : "model.expert.qwen3vl-2b-q4km-q8",
+      "version" : "0.1.0-calibration"
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 5338709248,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5348212016,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-install",
+  "run_id" : "calibration-install-v6",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

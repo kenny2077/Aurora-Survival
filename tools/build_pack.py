@@ -18,8 +18,6 @@ import struct
 import tempfile
 from typing import Any
 
-from cryptography.hazmat.primitives import serialization
-
 
 def canonical_json(value: Any) -> bytes:
     return (
@@ -228,6 +226,7 @@ def build(args: argparse.Namespace) -> None:
             },
         }
 
+        from cryptography.hazmat.primitives import serialization
         private_key = serialization.load_pem_private_key(
             args.private_key.read_bytes(),
             password=None,

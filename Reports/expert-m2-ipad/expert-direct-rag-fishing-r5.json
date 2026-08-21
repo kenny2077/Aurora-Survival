@@ -1,0 +1,305 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended. Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water. Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F at the thickest part when a food thermometer is available. Fish only where access and harvest are legal, from stable ground, with suitable gear and enough daylight, weather margin, energy, and time to return safely.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "partial",
+      "elapsed_milliseconds" : 17882,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2065,
+      "generated_tokens" : 219,
+      "generation_milliseconds" : 8962,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "direct-fishing-followup",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3811882224,
+      "peak_physical_footprint_bytes" : 1556826896,
+      "post_available_memory_bytes" : 3819795720,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325913248,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F at the thickest part when a food thermometer is available.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Fish only where legal and only if you have suitable gear and safe access to the bank.\",\n      \"e\": [9]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F at the thickest part when a food thermometer is available.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Fish only where access and harvest are legal, from stable ground, with suitable gear and enough daylight, weather margin, energy, and time to return safely.\",\n      \"e\": [1]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-cook",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.096393442622950826,
+        0.017129032258064517,
+        0.016873015873015873
+      ],
+      "retrieval_context_milliseconds" : 2.5479793548583984,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "food-low-risk"
+      ],
+      "selected_scenario_ids" : [
+        "food-fishing-basics"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "usda-fish-temperature",
+        "army-atp-survival"
+      ],
+      "support_status" : "unsupported",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.60794548354357,
+      "verification_issue_codes" : [
+        "missing_safety_support"
+      ],
+      "verification_status" : "unverified",
+      "word_count" : 114
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5320801344,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325929632,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "7e40ce4707e55352aed451af81b63caad284537764a63aff0e8c5f7fc8990f48",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-direct-rag",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-direct-rag-fishing-r5",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325913248,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 69,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3819795720,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18008,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3847616544,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18104,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5302795328,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23341,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320899648,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 28665,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320899648,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 33778,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320899648,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 39024,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320883264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 44167,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320883264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 49582,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320883264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 54948,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320883264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 60145,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320883264,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 65315,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320866880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 70657,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320866880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 75932,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320866880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 81055,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320866880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 86472,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320866880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 91657,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320850496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 97021,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320850496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 102128,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320850496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 107379,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320850496,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 112653,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320834112,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 118054,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320817728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 123202,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320801344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 128505,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320801344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 133654,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320801344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 138858,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5320801344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 144139,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

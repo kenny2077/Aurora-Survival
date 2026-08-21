@@ -1,0 +1,944 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "7f56e116899840b5b1544f07c76459b2966140c2090ee45fd37a779098b5538d  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Stop moving immediately and assess your situation by asking: Where was my last known location? Check terrain, weather, water sources, shelter options, and landmarks to determine if you are in a safe area. Mark where you stopped and note the time, weather conditions, and last known location. Avoid running downhill or following water just because it appears to lead out.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7030,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1652,
+      "first_visible_text_milliseconds" : 2869,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 6025,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-09-stop-lost",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3810850008,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1557859112,
+      "post_available_memory_bytes" : 3814110424,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321424008,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately and assess your situation by asking: Where was my last known location?\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Check terrain, weather, water sources, shelter options, and landmarks to determine if you are in a safe area.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Mark where you stopped and note the time, weather conditions, and last known location.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Avoid running downhill or following water just because it appears to lead out.\",\n      \"e\": [12]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately and assess your situation by asking: Where was my last known location?\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Check terrain, weather, water sources, shelter options, and landmarks to determine if you are in a safe area.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Mark where you stopped and note the time, weather conditions, and last known location.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Avoid running downhill or following water just because it appears to lead out.\",\n      \"e\": [12]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        1,
+        7,
+        4,
+        23,
+        19,
+        34,
+        40,
+        50
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.7620006799697876,
+        0.71222680807113647,
+        0.72140514850616455,
+        0.67950814962387085,
+        0.68787264823913574,
+        0.66848582029342651,
+        0.66466248035430908,
+        0.64227312803268433
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stop",
+        "",
+        "car-scene",
+        "",
+        "navigation-backtrack",
+        "",
+        "navigation-travel-crossing"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        8,
+        4,
+        1,
+        10,
+        37,
+        35,
+        41
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        4,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.044911819143310425,
+        0.038198635976129582,
+        0.035974050046339204,
+        0.033533794162826418,
+        0.029810858393604873,
+        0.020730397422126744,
+        0.020317656765676567,
+        0.018812930577636458
+      ],
+      "retrieval_context_milliseconds" : 0.27000904083251953,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        2,
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "basics-stop-scenario",
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026",
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 64,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "moving ",
+        "immediately ",
+        "and ",
+        "assess ",
+        "your ",
+        "situation ",
+        "by ",
+        "asking: ",
+        "Where ",
+        "was ",
+        "my ",
+        "last ",
+        "known ",
+        "location?",
+        " ",
+        "Check ",
+        "terrain, ",
+        "weather, ",
+        "water ",
+        "sources, ",
+        "shelter ",
+        "options, ",
+        "and ",
+        "landmarks ",
+        "to ",
+        "determine ",
+        "if ",
+        "you ",
+        "are ",
+        "in ",
+        "a ",
+        "safe ",
+        "area.",
+        " ",
+        "Mark ",
+        "where ",
+        "you ",
+        "stopped ",
+        "and ",
+        "note ",
+        "the ",
+        "time, ",
+        "weather ",
+        "conditions, ",
+        "and ",
+        "last ",
+        "known ",
+        "location.",
+        " ",
+        "Avoid ",
+        "running ",
+        "downhill ",
+        "or ",
+        "following ",
+        "water ",
+        "just ",
+        "because ",
+        "it ",
+        "appears ",
+        "to ",
+        "lead ",
+        "out."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.615367024925682,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 60
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-compass-scenario"
+        ]
+      ],
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Points toward magnetic north. Rotate compass housing until north aligns. Read the bearing. Set your compass for the area you are traveling before relying on precise bearings.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5847,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1121,
+      "first_visible_text_milliseconds" : 2214,
+      "generated_tokens" : 140,
+      "generation_milliseconds" : 4952,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-10-compass-bearing",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3783603392,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1585105728,
+      "post_available_memory_bytes" : 3828888792,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3841423344,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Use the compass to hold a known direction, not to invent a destination.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Points toward magnetic north.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Rotate compass housing until north aligns.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Read the bearing.\",\n      \"e\": [14]\n    },\n    {\n      \"a\": \"Set your compass for the area you are traveling before relying on precise bearings.\",\n      \"e\": [15]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Use the compass to hold a known direction, not to invent a destination.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Points toward magnetic north.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Rotate compass housing until north aligns.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Read the bearing.\",\n      \"e\": [14]\n    },\n    {\n      \"a\": \"Set your compass for the area you are traveling before relying on precise bearings.\",\n      \"e\": [15]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        19,
+        18,
+        20,
+        35,
+        59,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81897068023681641,
+        0.65341776609420776,
+        0.6541060209274292,
+        0.64544177055358887,
+        0.62512397766113281,
+        0.59739416837692261,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow",
+        "",
+        "",
+        "",
+        "navigation-backtrack",
+        "water-filter-disinfect",
+        "basics-stop"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        3,
+        4,
+        2,
+        8,
+        5,
+        10
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.045786885245901639,
+        0.031129032258064515,
+        0.029283227848101265,
+        0.028730294396961065,
+        0.027289682539682537,
+        0.02382608695652174,
+        0.016151515151515153,
+        0.016084507042253521
+      ],
+      "retrieval_context_milliseconds" : 0.033974647521972656,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-compass-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 45,
+      "stream_deltas" : [
+        "Use",
+        " ",
+        "the ",
+        "compass ",
+        "to ",
+        "hold ",
+        "a ",
+        "known ",
+        "direction, ",
+        "not ",
+        "to ",
+        "invent ",
+        "a ",
+        "destination.",
+        " ",
+        "Points ",
+        "toward ",
+        "magnetic ",
+        "north.",
+        " ",
+        "Rotate ",
+        "compass ",
+        "housing ",
+        "until ",
+        "north ",
+        "aligns.",
+        " ",
+        "Read ",
+        "the ",
+        "bearing.",
+        " ",
+        "Set ",
+        "your ",
+        "compass ",
+        "for ",
+        "the ",
+        "area ",
+        "you ",
+        "are ",
+        "traveling ",
+        "before ",
+        "relying ",
+        "on ",
+        "precise ",
+        "bearings."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 36.282954842077785,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 40
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Only consume wild plants that are positively identified. Observe the complete plant. Check: leaves; stem; flowers; roots; seeds. Growth pattern is also a key feature to consider when identifying wild plants.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6111,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1797,
+      "first_visible_text_milliseconds" : 2917,
+      "generated_tokens" : 120,
+      "generation_milliseconds" : 5165,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-11-mushroom",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3798791360,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1569917760,
+      "post_available_memory_bytes" : 3829626072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3856627696,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Only consume wild plants that are positively identified.\",\n      \"e\": [10]\n    },\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Growth pattern is also a key feature to consider when identifying wild plants.\",\n      \"e\": [13]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Only consume wild plants that are positively identified.\",\n      \"e\": [10]\n    },\n    {\n      \"a\": \"Observe the complete plant.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Check: leaves; stem; flowers; roots; seeds.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Growth pattern is also a key feature to consider when identifying wild plants.\",\n      \"e\": [13]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        18,
+        42,
+        49,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81984800100326538,
+        0.67977648973464966,
+        0.60441386699676514,
+        0.59238934516906738,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-energy",
+        "basics-stay-or-move",
+        "fire-decision",
+        "car-stay-walk",
+        "car-overheat",
+        "car-stay-walk",
+        "car-scene"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        3,
+        4,
+        2,
+        1,
+        5,
+        6,
+        7
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        3,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.048286885245901641,
+        0.043267795749335834,
+        0.034093353248693059,
+        0.03396392496392496,
+        0.026129032258064518,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015705882352941177
+      ],
+      "retrieval_context_milliseconds" : 0.033020973205566406,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-unknown-plants-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 35,
+      "stream_deltas" : [
+        "Only",
+        " ",
+        "consume ",
+        "wild ",
+        "plants ",
+        "that ",
+        "are ",
+        "positively ",
+        "identified.",
+        " ",
+        "Observe ",
+        "the ",
+        "complete ",
+        "plant.",
+        " ",
+        "Check: ",
+        "leaves; ",
+        "stem; ",
+        "flowers; ",
+        "roots; ",
+        "seeds.",
+        " ",
+        "Growth ",
+        "pattern ",
+        "is ",
+        "also ",
+        "a ",
+        "key ",
+        "feature ",
+        "to ",
+        "consider ",
+        "when ",
+        "identifying ",
+        "wild ",
+        "plants."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.332541567695962,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 31
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5308726288,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5324700808,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "e60ffb66fb156fba3ec53daf778e960f1392501e49d2a08eb6b56eb93e52c5b3",
+  "maximum_thermal_wait_seconds" : 180,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 10,
+  "run_id" : "survival-manual-2026-v3-focus-routing-r2",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5324700808,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 100,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321522312,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5460,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321489544,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10593,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3814110424,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 17732,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828888792,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23722,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3829626072,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29970,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3857168392,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 30059,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4334893400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 35234,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4334827864,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40547,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5285854200,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45709,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50904,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308857360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56227,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308857360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61513,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308857360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66625,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 71783,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 76943,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82223,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87371,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308840976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 92539,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308808208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 97662,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308808208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 102779,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308791824,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 108154,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308791824,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 113519,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308791824,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 118814,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308759056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124225,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308759056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 129579,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308759056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 134945,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308759056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140312,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308759056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 145607,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308742672,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 150742,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5308726288,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 155969,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

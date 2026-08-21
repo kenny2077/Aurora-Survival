@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 struct DeviceProfiler {
     func snapshot() -> DeviceSnapshot {
@@ -17,6 +18,7 @@ struct DeviceProfiler {
 
         return DeviceSnapshot(
             physicalMemoryBytes: ProcessInfo.processInfo.physicalMemory,
+            availableMemoryBytes: UInt64(os_proc_available_memory()),
             freeStorageBytes: freeStorage,
             thermalCondition: thermal,
             isLowPowerMode: ProcessInfo.processInfo.isLowPowerModeEnabled

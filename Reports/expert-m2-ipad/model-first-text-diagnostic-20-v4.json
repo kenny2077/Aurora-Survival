@@ -1,0 +1,1063 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Take slow breaths and say out loud what happened. Stop moving until you are certain of your location, then move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out. If you are in a dangerous situation, do not attempt to escape unless there is an immediate threat that requires action.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5760,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 111,
+      "generation_milliseconds" : 4239,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-001",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "basics-stop"
+      ],
+      "minimum_available_memory_bytes" : 3821008160,
+      "peak_physical_footprint_bytes" : 1547700960,
+      "post_available_memory_bytes" : 3824104736,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326044344,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Take slow breaths and say out loud what happened. Stop moving until you are certain of your location, then move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out. If you are in a dangerous situation, do not attempt to escape unless there is an immediate threat that requires action.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "first-aid-wounds-burns",
+        "fire-build-feed",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25612903225806449,
+        0.135625,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 10.136008262634277,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stop",
+      "tokens_per_second" : 30.2863436123348,
+      "word_count" : 90
+    },
+    {
+      "answer" : "Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat first, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4377,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 72,
+      "generation_milliseconds" : 2935,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-008",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 3804525784,
+      "peak_physical_footprint_bytes" : 1564183336,
+      "post_available_memory_bytes" : 3829347520,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851515936,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat first, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-bleeding",
+        "first-aid-fracture-spine",
+        "basics-priorities"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.37612903225806449,
+        0.37562499999999999,
+        0.25587301587301586
+      ],
+      "retrieval_context_milliseconds" : 10.002017021179199,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "tokens_per_second" : 30.498281786941579,
+      "word_count" : 49
+    },
+    {
+      "answer" : "You should immediately stop any activity and rest in a shaded area, loosen your clothing to allow for better airflow, and drink safe water in small amounts. Monitor for signs of worsening dehydration such as confusion or dizziness; if you experience these symptoms, treat it as an emergency. Do not force fluids into anyone who is unresponsive or unable to swallow—this could lead to serious complications. If the person shows no improvement after drinking a few sips, seek medical help right away.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5456,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 104,
+      "generation_milliseconds" : 4041,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-021",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-dehydration"
+      ],
+      "minimum_available_memory_bytes" : 3810866392,
+      "peak_physical_footprint_bytes" : 1557842728,
+      "post_available_memory_bytes" : 3849712856,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3856906248,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"You should immediately stop any activity and rest in a shaded area, loosen your clothing to allow for better airflow, and drink safe water in small amounts. Monitor for signs of worsening dehydration such as confusion or dizziness; if you experience these symptoms, treat it as an emergency. Do not force fluids into anyone who is unresponsive or unable to swallow—this could lead to serious complications. If the person shows no improvement after drinking a few sips, seek medical help right away.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "food-energy",
+        "water-boil",
+        "signal-whistle"
+      ],
+      "retrieval_candidate_scores" : [
+        14.256393442622951,
+        0.13587301587301587,
+        0.016129032258064516,
+        0.015625
+      ],
+      "retrieval_context_milliseconds" : 9.7750425338745117,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-dehydration",
+      "tokens_per_second" : 29.994175888177054,
+      "word_count" : 82
+    },
+    {
+      "answer" : "Search for water by checking maps, valleys, drainage lines, springs, green vegetation, and animal movement. Look for converging terrain rather than random exploration. Travel during cooler hours and leave markers if the search takes you away from shelter. Avoid steep ravines, unstable banks, caves, or fast-moving water to prevent injury. Stop when a reliable source is found; do not enter hazardous areas without proper assessment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4914,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 90,
+      "generation_milliseconds" : 3539,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-025",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3830953152,
+      "peak_physical_footprint_bytes" : 1537755968,
+      "post_available_memory_bytes" : 3849794776,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876993032,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Search for water by checking maps, valleys, drainage lines, springs, green vegetation, and animal movement. Look for converging terrain rather than random exploration. Travel during cooler hours and leave markers if the search takes you away from shelter. Avoid steep ravines, unstable banks, caves, or fast-moving water to prevent injury. Stop when a reliable source is found; do not enter hazardous areas without proper assessment.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "food-energy",
+        "water-boil",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25538461538461538,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 8.793950080871582,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-locate",
+      "tokens_per_second" : 30.354706684856755,
+      "word_count" : 65
+    },
+    {
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination; if any of these are present, boiling will not make water safe. Stop condition: If you detect recontamination during storage, discard immediately.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5778,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 111,
+      "generation_milliseconds" : 4240,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-037",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes" : 3831051456,
+      "peak_physical_footprint_bytes" : 1537657664,
+      "post_available_memory_bytes" : 3850073328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3877124104,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store in a clean, covered container without touching the inside of the cap. Warning: Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination; if any of these are present, boiling will not make water safe. Stop condition: If you detect recontamination during storage, discard immediately.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "shelter-tarp",
+        "navigation-terrain"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 10.184049606323242,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-boil",
+      "tokens_per_second" : 30.2863436123348,
+      "word_count" : 71
+    },
+    {
+      "answer" : "The user is assessing fire safety and has identified a potential risk. The current condition involves the possibility of uncontrolled fires due to dry fuel, wind, and lack of proper controls. Immediate action: stop any fire use until all conditions are met. Check for local restrictions, ensure escape routes exist, verify that no stove or insulation can meet needs, prepare water or extinguishing method before ignition. Warning: Never light a fire during a ban or where wind and dry fuel can carry sparks beyond control.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5681,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 645,
+      "generated_tokens" : 107,
+      "generation_milliseconds" : 4161,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-041",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-decision"
+      ],
+      "minimum_available_memory_bytes" : 3828856096,
+      "peak_physical_footprint_bytes" : 1539853024,
+      "post_available_memory_bytes" : 3856250168,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325814872,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"The user is assessing fire safety and has identified a potential risk. The current condition involves the possibility of uncontrolled fires due to dry fuel, wind, and lack of proper controls. Immediate action: stop any fire use until all conditions are met. Check for local restrictions, ensure escape routes exist, verify that no stove or insulation can meet needs, prepare water or extinguishing method before ignition. Warning: Never light a fire during a ban or where wind and dry fuel can carry sparks beyond control.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "basics-stay-or-move",
+        "food-energy",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        1.1561290322580646,
+        1.1558730158730159,
+        1.1556250000000001
+      ],
+      "retrieval_context_milliseconds" : 11.157035827636719,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-decision",
+      "tokens_per_second" : 30.147895335608645,
+      "word_count" : 85
+    },
+    {
+      "answer" : "gather tinder, kindling, and fuel in increasing sizes until the fire is ready to burn. start with fine dry tinder that catches a spark; add pencil-thin kindling next, then finger-thick sticks, only after each size burns well. keep a protected reserve of dry material for safety. do not strip live trees or collect near prohibited areas. stop if any tree has been cut and the fire is unattended.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 9899,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 575,
+      "generated_tokens" : 93,
+      "generation_milliseconds" : 3596,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-049",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-materials"
+      ],
+      "minimum_available_memory_bytes" : 3840800032,
+      "peak_physical_footprint_bytes" : 1527909088,
+      "post_available_memory_bytes" : 3855201568,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4827364056,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"gather tinder, kindling, and fuel in increasing sizes while ensuring dry material is collected to avoid leaving the fire unattended. Start with fine dry tinder that catches a flame or spark, then add pencil-thin kindling followed by finger-thick sticks before using larger fuel only after each size burns well. Keep a protected reserve of dry materials ready for immediate use and ensure no live trees are stripped or material collected in prohibited areas. Stop if the fire is not progressing as expected with proper progression through sizes; otherwise, continue gathering until sufficient quantities are gathered to avoid leaving the fire unattended.\",\"e\":[1]}",
+        "{\"a\":\"gather tinder, kindling, and fuel in increasing sizes until the fire is ready to burn. start with fine dry tinder that catches a spark; add pencil-thin kindling next, then finger-thick sticks, only after each size burns well. keep a protected reserve of dry material for safety. do not strip live trees or collect near prohibited areas. stop if any tree has been cut and the fire is unattended.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "fire-wet",
+        "fire-build-feed",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        16.296393442622954,
+        0.67562500000000003,
+        0.47612903225806447,
+        0.47587301587301584
+      ],
+      "retrieval_context_milliseconds" : 7.9309940338134766,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-materials",
+      "tokens_per_second" : 30.453492221118836,
+      "word_count" : 68
+    },
+    {
+      "answer" : "Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area; this indicates smothering risk.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5166,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 644,
+      "generated_tokens" : 93,
+      "generation_milliseconds" : 3701,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-057",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "minimum_available_memory_bytes" : 3836409072,
+      "peak_physical_footprint_bytes" : 1532300048,
+      "post_available_memory_bytes" : 3863033120,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3882432544,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Build a loose teepee or platform of kindling around the tinder, add only a few pieces at a time as the flame strengthens, keep the fire no larger than needed for warmth, boiling, cooking, or signaling. A large fire consumes fuel quickly and is harder to control, extinguish, and shelter from wind. Stop if flames grow too high or smoke begins to fill the area; this indicates smothering risk.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-site",
+        "fire-wet",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        0.80587301587301585,
+        0.70515151515151508,
+        0.68470588235294116
+      ],
+      "retrieval_context_milliseconds" : 9.7010135650634766,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "fire-build-feed",
+      "tokens_per_second" : 30.094864245992802,
+      "word_count" : 69
+    },
+    {
+      "answer" : "Insulate From the Ground: Begin by placing a dry sleeping pad, pack, or spare clothing beneath your body to provide insulation. Use thick materials like burlap or tarps for added protection and avoid wet vegetation that could compromise warmth. Keep bare skin away from cold ground; replace crushed material if it becomes damp. Do not use toxic plants, thorny items, or wet insulation against the skin—this may cause injury or illness. Stop immediately if you notice signs of frostbite or exposure to extreme cold.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5749,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "first_token_milliseconds" : 644,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 4321,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-065",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "shelter-ground"
+      ],
+      "minimum_available_memory_bytes" : 3841373472,
+      "peak_physical_footprint_bytes" : 1527335648,
+      "post_available_memory_bytes" : 3860247840,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887429664,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Insulate From the Ground: Begin by placing a dry sleeping pad, pack, or spare clothing beneath your body to provide insulation. Use thick materials like burlap or tarps for added protection and avoid wet vegetation that could compromise warmth. Keep bare skin away from cold ground; replace crushed material if it becomes damp. Do not use toxic plants, thorny items, or wet insulation against the skin—this may cause injury or illness. Stop immediately if you notice signs of frostbite or exposure to extreme cold.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-ground",
+        "shelter-cold-snow",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        15.156393442622951,
+        0.58562500000000006,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 8.1959962844848633,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-ground",
+      "tokens_per_second" : 30.187652977971172,
+      "word_count" : 84
+    },
+    {
+      "answer" : "Build a tarp shelter by first selecting solid anchors and running a ridgeline or supported edge without damaging trees. Angle the tarp steeply to shed rain, ensuring the windward side is lower for better protection from wind. Stake or weight corners securely and keep fabric away from flame; add ground insulation to improve thermal retention. Do not seal tightly—this could trap condensation, fumes, or CO, which may cause health hazards. Stop if any anchor fails or fire risk appears.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5620,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "first_token_milliseconds" : 645,
+      "generated_tokens" : 107,
+      "generation_milliseconds" : 4150,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "correction-069",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 3832132848,
+      "peak_physical_footprint_bytes" : 1536576272,
+      "post_available_memory_bytes" : 3860919584,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887544352,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Build a tarp shelter by first selecting solid anchors and running a ridgeline or supported edge without damaging trees. Angle the tarp steeply to shed rain, ensuring the windward side is lower for better protection from wind. Stake or weight corners securely and keep fabric away from flame; add ground insulation to improve thermal retention. Do not seal tightly—this could trap condensation, fumes, or CO, which may cause health hazards. Stop if any anchor fails or fire risk appears.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris",
+        "shelter-overnight",
+        "shelter-site"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        1.2561290322580645,
+        0.68587301587301597,
+        0.68562500000000004
+      ],
+      "retrieval_context_milliseconds" : 9.1530084609985352,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "tokens_per_second" : 30.242510699001425,
+      "word_count" : 79
+    },
+    {
+      "answer" : "Begin by selecting solid anchors and running a ridgeline along the edge of the tarp shelter to avoid damaging trees. Angle the tarp steeply to shed rain, ensuring the windward side is lower for better protection from wind. Stake or weight corners securely and keep fabric away from flame; add ground insulation if possible. Do not seal tightly—this could lead to condensation buildup, stove fumes, or carbon monoxide accumulation.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 8599,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "first_token_milliseconds" : 570,
+      "generated_tokens" : 99,
+      "generation_milliseconds" : 3780,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-071",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "minimum_available_memory_bytes" : 3852088584,
+      "peak_physical_footprint_bytes" : 1516620536,
+      "post_available_memory_bytes" : 3863721224,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323324456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user is in a low-contrast, blurred environment with uncertain edge visibility. The tarp shelter must be pitched to block wind and shed water. Prioritize anchoring the tarp securely using solid stakes or weights without damaging trees. Angle the fabric steeply to prevent rain pooling on the sleeping area. Keep edges away from flame and add insulation for warmth.\"\n\n  , \"e\":[1]}",
+        "{ \"a\": \"Begin by selecting solid anchors and running a ridgeline along the edge of the tarp shelter to avoid damaging trees. Angle the tarp steeply to shed rain, ensuring the windward side is lower for better protection from wind. Stake or weight corners securely and keep fabric away from flame; add ground insulation if possible. Do not seal tightly—this could lead to condensation buildup, stove fumes, or carbon monoxide accumulation.\" ,\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris",
+        "shelter-overnight",
+        "shelter-site"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3681967213114756,
+        0.12806451612903225,
+        0.12793650793650793,
+        0.1278125
+      ],
+      "retrieval_context_milliseconds" : 8.8509321212768555,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-tarp",
+      "tokens_per_second" : 30.529595015576323,
+      "word_count" : 69
+    },
+    {
+      "answer" : "The user is in a low-contrast, blurred environment with uncertain edges and no visible shelter. The immediate action is to find a safe site away from avalanche paths, cornices, or drifting snow. Since the terrain may be unstable, use only stable structures like tents or trenches that are known to remain ventilated. Mark the entrance and keep tools inside; clear vents as snow falls. A warning: never use a flame or stove without proper ventilation—this can lead to carbon monoxide buildup and trap victims in dangerous conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5801,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "first_token_milliseconds" : 645,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 4365,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-077",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "minimum_available_memory_bytes" : 3832820952,
+      "peak_physical_footprint_bytes" : 1535888168,
+      "post_available_memory_bytes" : 3859363080,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891001352,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user is in a low-contrast, blurred environment with uncertain edges and no visible shelter. The immediate action is to find a safe site away from avalanche paths, cornices, or drifting snow. Since the terrain may be unstable, use only stable structures like tents or trenches that are known to remain ventilated. Mark the entrance and keep tools inside; clear vents as snow falls. A warning: never use a flame or stove without proper ventilation—this can lead to carbon monoxide buildup and trap victims in dangerous conditions.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "weather-wildlife-cold",
+        "shelter-overnight",
+        "shelter-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.24806451612903224,
+        0.24793650793650793,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 9.7910165786743164,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "shelter-cold-snow",
+      "tokens_per_second" : 30.107526881720432,
+      "word_count" : 87
+    },
+    {
+      "answer" : "The user should count the food and separate an emergency reserve, as it is essential to protect existing calories for warmth, decisions, and necessary work. Eat small planned amounts during activity instead of finishing easy snacks early to avoid overeating. Keep food dry, sealed, and protected from animals or contamination. Do not restrict food from children, people with diabetes, or those with medical needs without appropriate guidance. Stop if the user is unable to safely manage food intake due to a lack of resources or risk of contamination.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10176,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "first_token_milliseconds" : 570,
+      "generated_tokens" : 109,
+      "generation_milliseconds" : 4138,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-085",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 3831215296,
+      "peak_physical_footprint_bytes" : 1537493824,
+      "post_available_memory_bytes" : 3859903704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3886610440,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user has a blurred on-device OCR, low contrast image, and uncertain edge. The visible observation shows food that is not clearly distinguishable but appears to be in the context of managing carried food. Since the food is unclear, prioritize identifying safe actions based on the lesson’s guidance: count food and separate an emergency reserve. Because the image quality prevents accurate assessment, do not eat small planned amounts during necessary activity until clarity is achieved. The warning states that no restriction should be made without appropriate medical guidance—this must apply to all individuals with specific needs.\",\"e\":[1]}",
+        "{\"a\":\"The user should count the food and separate an emergency reserve, as it is essential to protect existing calories for warmth, decisions, and necessary work. Eat small planned amounts during activity instead of finishing easy snacks early to avoid overeating. Keep food dry, sealed, and protected from animals or contamination. Do not restrict food from children, people with diabetes, or those with medical needs without appropriate guidance. Stop if the user is unable to safely manage food intake due to a lack of resources or risk of contamination.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "food-unknown-plants",
+        "food-cook",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.24806451612903224,
+        0.24781249999999999,
+        0.12793650793650793
+      ],
+      "retrieval_context_milliseconds" : 7.1319341659545898,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "tokens_per_second" : 30.269058295964125,
+      "word_count" : 88
+    },
+    {
+      "answer" : "The user is in a situation where the on-device OCR shows blurred text, low contrast, and uncertain edges. The visible observation suggests that the image quality is poor, making it difficult to identify any food sources or safe locations. Since the lesson emphasizes using only known methods and avoiding unfamiliar animals, the immediate action should be to stop and assess the environment for safety. A warning must be issued: do not proceed without proper identification of edible items or access points. The user’s current situation requires a halt until clearer visual confirmation is obtained.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5899,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "first_token_milliseconds" : 646,
+      "generated_tokens" : 114,
+      "generation_milliseconds" : 4401,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-093",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3831641280,
+      "peak_physical_footprint_bytes" : 1537067840,
+      "post_available_memory_bytes" : 3854693568,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887233032,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user is in a situation where the on-device OCR shows blurred text, low contrast, and uncertain edges. The visible observation suggests that the image quality is poor, making it difficult to identify any food sources or safe locations. Since the lesson emphasizes using only known methods and avoiding unfamiliar animals, the immediate action should be to stop and assess the environment for safety. A warning must be issued: do not proceed without proper identification of edible items or access points. The user’s current situation requires a halt until clearer visual confirmation is obtained.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-energy",
+        "fire-decision",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        14.608196721311476,
+        0.36793650793650789,
+        0.36781249999999999,
+        0.36769230769230765
+      ],
+      "retrieval_context_milliseconds" : 9.1409683227539062,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "tokens_per_second" : 30.093209054593874,
+      "word_count" : 94
+    },
+    {
+      "answer" : "wash or sanitize hands and keep raw material away from ready-to-eat food. The visible observation shows blurred text, low contrast, and uncertain edges—indicating the OCR is unreliable. Since the lesson requires safe handling of raw foods, this must be addressed immediately by ensuring no contamination occurs. A warning: smoke, color, smell, or a brief sear does not prove meat or fish is safe; therefore, do not assume safety based on appearance alone. Stop if any food shows signs of spoilage or uncertain origin—discard it and reprocess the area to prevent illness.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6243,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "first_token_milliseconds" : 646,
+      "generated_tokens" : 124,
+      "generation_milliseconds" : 4752,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-100",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "food-cook"
+      ],
+      "minimum_available_memory_bytes" : 3836130496,
+      "peak_physical_footprint_bytes" : 1532578624,
+      "post_available_memory_bytes" : 3855021272,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3881990152,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"wash or sanitize hands and keep raw material away from ready-to-eat food. The visible observation shows blurred text, low contrast, and uncertain edges—indicating the OCR is unreliable. Since the lesson requires safe handling of raw foods, this must be addressed immediately by ensuring no contamination occurs. A warning: smoke, color, smell, or a brief sear does not prove meat or fish is safe; therefore, do not assume safety based on appearance alone. Stop if any food shows signs of spoilage or uncertain origin—discard it and reprocess the area to prevent illness.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife",
+        "weather-wildlife-snakes-insects",
+        "basics-inventory"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0081967213114762,
+        0.36793650793650789,
+        0.24806451612903224,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 8.6350440979003906,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-cook",
+      "tokens_per_second" : 29.956161714564054,
+      "word_count" : 91
+    },
+    {
+      "answer" : "Stop and Mark the Last Known Point. Observe that you are in a new location, so mark your last known point without damaging the environment. Record time and direction of travel before moving forward. Review recent turns, terrain, distance, and elevation to assess if navigation is still valid. Do not keep walking simply to feel productive.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 4512,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "first_token_milliseconds" : 607,
+      "generated_tokens" : 75,
+      "generation_milliseconds" : 3002,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-101",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 3861050632,
+      "peak_physical_footprint_bytes" : 1507658488,
+      "post_available_memory_bytes" : 3864737032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5319588928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Stop and Mark the Last Known Point. Observe that you are in a new location, so mark your last known point without damaging the environment. Record time and direction of travel before moving forward. Review recent turns, terrain, distance, and elevation to assess if navigation is still valid. Do not keep walking simply to feel productive.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stay-or-move",
+        "basics-stop",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        16.866393442622954,
+        3.5961290322580646,
+        0.82587301587301587,
+        0.25562499999999999
+      ],
+      "retrieval_context_milliseconds" : 11.886000633239746,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "tokens_per_second" : 30.897703549060545,
+      "word_count" : 56
+    },
+    {
+      "answer" : "Orient the map by first identifying north, contour lines, water, roads, trails, and major landmarks. Rotate the map until these features align with your surroundings. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power; otherwise, its accuracy may be compromised. Stop moving without confirming orientation or using multiple reference points.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5252,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "first_token_milliseconds" : 643,
+      "generated_tokens" : 96,
+      "generation_milliseconds" : 3769,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-105",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "navigation-map"
+      ],
+      "minimum_available_memory_bytes" : 3836572888,
+      "peak_physical_footprint_bytes" : 1532136232,
+      "post_available_memory_bytes" : 3864048904,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3892049928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Orient the map by first identifying north, contour lines, water, roads, trails, and major landmarks. Rotate the map until these features align with your surroundings. Use at least two reliable features to estimate position and confirm it as you move. A map on a phone is only useful if the correct area is downloaded and the device has power; otherwise, its accuracy may be compromised. Stop moving without confirming orientation or using multiple reference points.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-compass",
+        "navigation-terrain",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        15.256393442622951,
+        0.235625,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 5.6509971618652344,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-map",
+      "tokens_per_second" : 30.390275111964172,
+      "word_count" : 75
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination in mind. Choose a visible landmark on that bearing and walk to it; recheck after reaching. If you're unsure of your location or heading, stop and verify terrain and map before continuing.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8070,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "first_token_milliseconds" : 569,
+      "generated_tokens" : 83,
+      "generation_milliseconds" : 3240,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-109",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 3835884760,
+      "peak_physical_footprint_bytes" : 1532824360,
+      "post_available_memory_bytes" : 3864114440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891312648,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination accounted for if needed. Choose a visible landmark on that bearing and walk to it while rechecking the reading. A precise bearing toward the wrong location is still incorrect; verify terrain and map before proceeding.\",\"e\":[1]}",
+        "{\"a\":\"Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination in mind. Choose a visible landmark on that bearing and walk to it; recheck after reaching. If you're unsure of your location or heading, stop and verify terrain and map before continuing.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow",
+        "fire-ignition",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        14.586393442622949,
+        0.33612903225806451,
+        0.015873015873015872,
+        0.015625
+      ],
+      "retrieval_context_milliseconds" : 9.019017219543457,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "tokens_per_second" : 30.700112317484088,
+      "word_count" : 64
+    },
+    {
+      "answer" : "Look for the shape and direction of large features before relying on small details. Identify a catching feature beyond the destination using handrails such as a trail, ridge, or shoreline to guide your route. Check elevation, distance, and travel time against expected conditions. Be cautious near streams and valleys that may lead into cliffs or dense terrain—this could compromise safety. Stop if you encounter an unexpected change in topography or feel uncertain about the path’s stability.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5282,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "first_token_milliseconds" : 645,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 3850,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-113",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "minimum_available_memory_bytes" : 3835770072,
+      "peak_physical_footprint_bytes" : 1532939048,
+      "post_available_memory_bytes" : 3870684424,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891312648,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Look for the shape and direction of large features before relying on small details. Identify a catching feature beyond the destination using handrails such as a trail, ridge, or shoreline to guide your route. Check elevation, distance, and travel time against expected conditions. Be cautious near streams and valleys that may lead into cliffs or dense terrain—this could compromise safety. Stop if you encounter an unexpected change in topography or feel uncertain about the path’s stability.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-compass",
+        "navigation-stop-mark",
+        "navigation-map"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        0.35587301587301584,
+        0.25612903225806449,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 8.2939863204956055,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-terrain",
+      "tokens_per_second" : 30.265210608424336,
+      "word_count" : 76
+    },
+    {
+      "answer" : "Confirm that the route behind you is known, short, and safer than staying. If not, mark your progress immediately and turn around. Do not follow isolated footprints or game trails as proof of the correct route. Preserve daylight and energy to return safely. Stop if the path becomes uncertain or if there are no clear signs of a safe trail ahead.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4636,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "first_token_milliseconds" : 644,
+      "generated_tokens" : 78,
+      "generation_milliseconds" : 3150,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-120",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "minimum_available_memory_bytes" : 3842471128,
+      "peak_physical_footprint_bytes" : 1526237992,
+      "post_available_memory_bytes" : 3862902024,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3897964552,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Confirm that the route behind you is known, short, and safer than staying. If not, mark your progress immediately and turn around. Do not follow isolated footprints or game trails as proof of the correct route. Preserve daylight and energy to return safely. Stop if the path becomes uncertain or if there are no clear signs of a safe trail ahead.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack",
+        "food-low-risk",
+        "food-energy",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        9.5163934426229488,
+        0.82515151515151519,
+        0.69562499999999994,
+        0.57587301587301587
+      ],
+      "retrieval_context_milliseconds" : 10.064005851745605,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-backtrack",
+      "tokens_per_second" : 30.726256983240223,
+      "word_count" : 61
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3890395144,
+  "final_battery_level" : 0.94999998807907104,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328370872,
+  "initial_battery_level" : 0.94999998807907104,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-text-diagnostic",
+  "run_id" : "model-first-text-diagnostic-20-v4",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

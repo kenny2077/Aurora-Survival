@@ -16,7 +16,7 @@ final class SurvivalKnowledgeTests: XCTestCase {
         let store = try store()
         let integrity = try store.integrity()
 
-        XCTAssertEqual(integrity.schemaVersion, 1)
+        XCTAssertEqual(integrity.schemaVersion, 3)
         XCTAssertEqual(integrity.chapterCount, 10)
         XCTAssertEqual(integrity.lessonCount, 70)
         XCTAssertEqual(integrity.passageCount, 1_050)

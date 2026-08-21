@@ -7,6 +7,7 @@ import argparse
 import http.server
 import pathlib
 import re
+import socket
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -65,6 +66,10 @@ class RangeRequestHandler(http.server.SimpleHTTPRequestHandler):
         del self._range_bytes_remaining
 
 
+class IPv6ThreadingHTTPServer(http.server.ThreadingHTTPServer):
+    address_family = socket.AF_INET6
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--bind", default="0.0.0.0")
@@ -78,7 +83,8 @@ def main() -> None:
     handler = lambda *items, **kwargs: RangeRequestHandler(  # noqa: E731
         *items, directory=str(args.directory), **kwargs
     )
-    server = http.server.ThreadingHTTPServer((args.bind, args.port), handler)
+    server_type = IPv6ThreadingHTTPServer if ":" in args.bind else http.server.ThreadingHTTPServer
+    server = server_type((args.bind, args.port), handler)
     print(f"Serving {args.directory} on http://{args.bind}:{args.port}/catalog.json")
     server.serve_forever()
 

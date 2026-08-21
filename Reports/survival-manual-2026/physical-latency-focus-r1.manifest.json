@@ -1,0 +1,27 @@
+{
+  "manifest": {
+    "artifact_identity": {
+      "app_version": "1.0.0(1)",
+      "database_sha256": "e3794285082b4442275ed724a6c158dad095f1128ef053acb5d88f7c626676cc  survival_knowledge.sqlite",
+      "embedding_sha256": "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+      "model_sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "projector_sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "runtime_commit": "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+    },
+    "bundle_id": "com.example.Aurora",
+    "device_id": "9187C86E-BD31-5C56-9FAE-87B46FD139A5",
+    "expected_case_ids": [
+      "sm26-14-boil-collected",
+      "sm26-15-deep-cut"
+    ],
+    "fixture_sha256": "44cb3e1c8270dd3f18cd7da687dc2d6cda26ac6bcbd7f218a13823af33c71221",
+    "mode": "expert-survival-manual-2026",
+    "output_path": "/workspace/aurora-survival/Reports/survival-manual-2026/physical-latency-focus-r1.json",
+    "profile": null,
+    "report_name": "expert-physical-report-survival-manual-2026-v3-latency-focus-r1-expert-survival-manual-2026.json",
+    "run_id": "survival-manual-2026-v3-latency-focus-r1",
+    "schema_version": 2
+  },
+  "signature": "e1c2e3240cb803355f0505a96f0b0b051f11bd71d82c03928b9482cbd4fc111e",
+  "signature_algorithm": "HMAC-SHA256"
+}

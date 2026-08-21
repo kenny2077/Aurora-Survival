@@ -7,8 +7,122 @@ final class PhysicalProductFlowTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testFourTabShellAndFocusedModelCenter() throws {
+    private func makeApp(acceptAgreement: Bool = true) -> XCUIApplication {
         let app = XCUIApplication()
+        if acceptAgreement {
+            app.launchEnvironment["TRAILGUARD_UI_ACCEPT_AGREEMENT"] = "1"
+        }
+        return app
+    }
+
+    func testRiskAcknowledgementRefusalAcceptanceAndPersistence() throws {
+        let app = makeApp(acceptAgreement: false)
+        app.launchEnvironment["TRAILGUARD_UI_RESET_AGREEMENT"] = "1"
+        app.launch()
+
+        let screen = app.descendants(matching: .any)["agreement.screen"]
+        XCTAssertTrue(screen.waitForExistence(timeout: 20))
+        app.buttons["agreement.notNow"].tap()
+        XCTAssertTrue(screen.exists)
+        app.buttons["agreement.accept"].tap()
+        XCTAssertTrue(tabButton("Ask", in: app).waitForExistence(timeout: 20))
+
+        app.terminate()
+        app.launchEnvironment.removeValue(forKey: "TRAILGUARD_UI_RESET_AGREEMENT")
+        app.launch()
+        XCTAssertTrue(tabButton("Ask", in: app).waitForExistence(timeout: 20))
+        XCTAssertFalse(app.descendants(matching: .any)["agreement.screen"].exists)
+    }
+
+    func testPhotoAccessPresentsLimitedFullDenyHierarchyAndPersistsDenial() {
+        let app = makeApp()
+        app.launch()
+        openTools(in: app)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.photoPrivacy"]
+                .waitForExistence(timeout: 20)
+        )
+        let monitor = addUIInterruptionMonitor(
+            withDescription: "Photo Library authorization"
+        ) { alert in
+            let labels = Set(alert.buttons.allElementsBoundByIndex.map(\.label))
+            XCTAssertTrue(labels.contains("Select Photos…") || labels.contains("Select Photos..."))
+            XCTAssertTrue(labels.contains("Allow Full Access"))
+            XCTAssertTrue(labels.contains("Don’t Allow"))
+            alert.buttons["Don’t Allow"].tap()
+            return true
+        }
+        defer { removeUIInterruptionMonitor(monitor) }
+        app.buttons["Choose photo access"].tap()
+        app.tap()
+
+        XCTAssertTrue(app.staticTexts["Access: Denied"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Open Settings"].exists)
+    }
+
+    func testCameraAttachmentThreePhysicalJourneys() throws {
+        let app = makeApp()
+        app.launch()
+        guard app.buttons["Attach photo"].waitForExistence(timeout: 30) else {
+            throw XCTSkip("Expert is not active on this physical destination.")
+        }
+
+        let permissionMonitor = addUIInterruptionMonitor(
+            withDescription: "Camera and Photo Library authorization"
+        ) { alert in
+            for label in ["Allow Full Access", "Allow", "OK"]
+                where alert.buttons[label].exists {
+                alert.buttons[label].tap()
+                return true
+            }
+            return false
+        }
+        defer { removeUIInterruptionMonitor(permissionMonitor) }
+
+        XCTContext.runActivity(named: "1. Camera save and attach") { _ in
+            app.buttons["Attach photo"].tap()
+            XCTAssertTrue(app.buttons["Take Photo"].waitForExistence(timeout: 5))
+            XCTAssertTrue(app.buttons["Choose Existing Photo"].exists)
+            app.buttons["Take Photo"].tap()
+            app.tap()
+            captureAndUsePhoto(in: app)
+            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+            app.buttons["chat.send"].tap()
+            XCTAssertTrue(
+                app.staticTexts["Photo attached"].waitForNonExistence(timeout: 2)
+            )
+            XCTAssertTrue(app.images["Sent photo"].waitForExistence(timeout: 10))
+        }
+
+        XCTContext.runActivity(named: "2. Choose an existing photo") { _ in
+            app.buttons["Attach photo"].tap()
+            app.buttons["Choose Existing Photo"].tap()
+            selectFirstPhoto(in: app)
+            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+        }
+
+        app.terminate()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_CAPTURE_SAVE_FAILURE"] = "1"
+        app.launchEnvironment["TRAILGUARD_DEBUG_OCR_FIXTURE_BASE64"] = Self.fixturePNGBase64
+        app.launch()
+
+        XCTContext.runActivity(named: "3. Failed save discards capture") { _ in
+            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+            app.buttons["Replace"].tap()
+            app.buttons["Take Photo"].tap()
+            captureAndUsePhoto(in: app)
+            XCTAssertTrue(
+                app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "could not be saved and was discarded")
+                ).firstMatch.waitForExistence(timeout: 20)
+            )
+            XCTAssertTrue(app.staticTexts["Photo attached"].exists)
+            XCTAssertTrue(app.images["Attached photo preview"].exists)
+        }
+    }
+
+    func testFourTabShellAndFocusedModelCenter() throws {
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
@@ -42,7 +156,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testModelRequiredActionOpensTools() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
@@ -58,7 +172,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testManualCourseAndUnifiedReferenceRemainAvailableWithoutModel() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
@@ -94,7 +208,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testMapsIsDirectFourthProductArea() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
@@ -112,7 +226,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testManualTenChaptersAndNoResultsAtLargestType() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launchArguments += [
             "-AppleInterfaceStyle", "Dark",
@@ -147,7 +261,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testModelCenterDarkModeAndLargestDynamicType() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launchArguments += [
             "-AppleInterfaceStyle", "Dark",
@@ -167,7 +281,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testPhysicalInstalledLiteChatAndExactManualLink() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launch()
 
         let composer = app.textFields["chat.composer"]
@@ -199,7 +313,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testPhysicalLiteIncidentFallbackDoesNotReuseWaterContext() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launch()
 
         let composer = app.textFields["chat.composer"]
@@ -236,7 +350,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testPhysicalLiteDatabaseFirstGroundedAndFallbackCases() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launch()
 
         let composer = app.textFields["chat.composer"]
@@ -297,7 +411,7 @@ final class PhysicalProductFlowTests: XCTestCase {
     }
 
     func testPhysicalLiteGenericCarRequestUsesIncidentFallback() throws {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launch()
 
         let composer = app.textFields["chat.composer"]
@@ -341,8 +455,44 @@ final class PhysicalProductFlowTests: XCTestCase {
         )
     }
 
+    private func captureAndUsePhoto(in app: XCUIApplication) {
+        let shutterCandidates = [
+            app.buttons["PhotoCapture"],
+            app.buttons["Take Picture"],
+            app.buttons["Take Photo"],
+        ]
+        guard let shutter = shutterCandidates.first(where: {
+            $0.waitForExistence(timeout: 15)
+        }) else {
+            XCTFail("The system camera shutter did not appear.")
+            return
+        }
+        shutter.tap()
+        let usePhoto = app.buttons["Use Photo"]
+        XCTAssertTrue(usePhoto.waitForExistence(timeout: 15))
+        usePhoto.tap()
+    }
+
+    private func selectFirstPhoto(in app: XCUIApplication) {
+        let photosNavigation = app.navigationBars["Photos"]
+        _ = photosNavigation.waitForExistence(timeout: 15)
+        let photo = app.images.matching(
+            identifier: "PXGGridLayout-Info"
+        ).firstMatch
+        XCTAssertTrue(photo.waitForExistence(timeout: 10))
+        let frame = photo.frame
+        app.coordinate(withNormalizedOffset: .zero)
+            .withOffset(CGVector(dx: frame.midX, dy: frame.midY))
+            .tap()
+        let add = app.buttons["Add"]
+        if add.waitForExistence(timeout: 2) { add.tap() }
+    }
+
+    private static let fixturePNGBase64 =
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+
     private func launchPreparedApp() -> XCUIApplication {
-        let app = XCUIApplication()
+        let app = makeApp()
         app.launchEnvironment["TRAILGUARD_CATALOG_URL"] = catalogURL
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()

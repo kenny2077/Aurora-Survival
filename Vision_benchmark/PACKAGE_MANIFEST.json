@@ -1,0 +1,67 @@
+[
+  {
+    "path": "ATTRIBUTION.md",
+    "bytes": 6051,
+    "sha256": "a03de3e6e80a37b0dc08a086d2e8646f0d5c4c466330892f7376728de8febad5"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1988,
+    "sha256": "4598560b168cc383623149618c52aef9c676acc2c3d7b74e34da76c089c32377"
+  },
+  {
+    "path": "SCORING_RUBRIC.md",
+    "bytes": 2047,
+    "sha256": "d60a318c280eed1eadd126c231aad454f412a60c5b4037bc3f4654a645671e43"
+  },
+  {
+    "path": "TEST_PROTOCOL.md",
+    "bytes": 2591,
+    "sha256": "4f15018bfb456c9a4cc2cbe696076bc4a99f4dc7d9135bc1c293231065754875"
+  },
+  {
+    "path": "benchmark_cases.json",
+    "bytes": 19714,
+    "sha256": "4bdaad0ecbe775fcc9f926e78180eb0315b719c0d970a2ee08d066d39c454ef4"
+  },
+  {
+    "path": "bootstrap.sh",
+    "bytes": 71,
+    "sha256": "deebc40ecd582907ba68e2a85baa936f3e951dd2caaac1b017b99440e6589084"
+  },
+  {
+    "path": "download_images.py",
+    "bytes": 3405,
+    "sha256": "c4956414eca26ef7def8d4b4d6f491baea26848b2133d00c86689eabbb3a5c8b"
+  },
+  {
+    "path": "images/README.txt",
+    "bytes": 106,
+    "sha256": "8fd413676e5516bd7aca6418efbf16a3869fbc43468f311c7538afb8d3a6a496"
+  },
+  {
+    "path": "prompts.jsonl",
+    "bytes": 16750,
+    "sha256": "d60c42740167c55885dd9571694fa8e2d6499fe0b0f0322b293a3111e0cbf8ff"
+  },
+  {
+    "path": "results/score_template.csv",
+    "bytes": 2568,
+    "sha256": "22a658625f179fadd0170b231ab30f38f5133a2f2612e79227040542b1bfa9af"
+  },
+  {
+    "path": "sources.csv",
+    "bytes": 4432,
+    "sha256": "fca719ebeb36d3346c169a411b1828dcaf5c5f60a55eb79288988cb0a14eea66"
+  },
+  {
+    "path": "sources.json",
+    "bytes": 8022,
+    "sha256": "c9e677e156e90417584bc1949aef516bbc97e026c35321e7ce807420c62a59ea"
+  },
+  {
+    "path": "summarize_scores.py",
+    "bytes": 1344,
+    "sha256": "a7d5f6e980ae65592cdd576520eb57f9782d9b03ecea5bcab7f734776b159bdc"
+  }
+]

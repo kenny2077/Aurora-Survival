@@ -1,0 +1,104 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 14757,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2842,
+      "generated_tokens" : 127,
+      "generation_milliseconds" : 6573,
+      "id" : "TG-V020-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3719541904,
+      "peak_physical_footprint_bytes" : 1649167216,
+      "post_available_memory_bytes" : 3731944592,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328223368,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "retrieval_context_milliseconds" : 9.0910196304321289,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.771106941838646,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 14026,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3216,
+      "generated_tokens" : 120,
+      "generation_milliseconds" : 6786,
+      "id" : "TG-V017-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3679630360,
+      "peak_physical_footprint_bytes" : 1689078760,
+      "post_available_memory_bytes" : 3745625112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3731944592,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "retrieval_context_milliseconds" : 9.1150999069213867,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.333333333333336,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 13467,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3266,
+      "generated_tokens" : 119,
+      "generation_milliseconds" : 6782,
+      "id" : "TG-V005-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3726914560,
+      "peak_physical_footprint_bytes" : 1641794560,
+      "post_available_memory_bytes" : 3742381056,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3745625112,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "retrieval_context_milliseconds" : 11.991024017333984,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 33.560864618885098,
+      "word_count" : 10
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3742381056,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328223368,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-smoke",
+  "run_id" : "retained-smoke-m2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

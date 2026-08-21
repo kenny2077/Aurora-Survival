@@ -1,0 +1,527 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "59b53dcc44f50584047df7c2a43122baea709a392263fe36c4ead008c048ef26  survival_knowledge.sqlite",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-collect-prefilter-scenario",
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 15984,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "water-collect-prefilter",
+        "water-boil"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 1335,
+      "generated_tokens" : 147,
+      "generation_milliseconds" : 5582,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "water-collect-prefilter-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3821139160,
+      "peak_physical_footprint_bytes" : 1547569960,
+      "post_available_memory_bytes" : 3837654232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322882184,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"The only water we found is cloudy and full of visible sediment. Also, I have a pot and fire but need to make this clear stream water safer.\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring the cloudy water to a rolling boil for 1 minute.\",\n      \"e\": [2, 5]\n    },\n    {\n      \"a\": \"Let it cool and store in a clean, covered container without touching the inside of the cap.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Pour off the clearer layer or pass it through a coffee filter to remove sediment before treatment.\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Keep dirty collection containers and hands away from the clean-water opening and cap.\",\n      \"e\": [9]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring clear water to a rolling boil for 1 minute.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Above 6,500 feet (about 1,980 metres), boil for 3 minutes.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Let it cool and store in a clean, covered container without touching the inside of the cap.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Remove sediment before the main treatment by letting cloudy water settle or filtering through cloth.\",\n      \"e\": [7, 8]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "water-collect-prefilter",
+        "signal-smoke-fire",
+        "signal-ground",
+        "food-low-risk",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_scores" : [
+        3.6861290322580644,
+        2.7863934426229506,
+        1.8353846153846152,
+        1.8349253731343282,
+        1.584705882352941,
+        1.5150000000000001,
+        1.4400000000000002,
+        1.3199999999999998
+      ],
+      "retrieval_context_milliseconds" : 8.6870193481445312,
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "water-boil-scenario",
+        "water-collect-prefilter-scenario"
+      ],
+      "terminal_failure" : true,
+      "tokens_per_second" : 34.377207440546265,
+      "word_count" : 14
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-site-scenario"
+        ]
+      ],
+      "answer" : "Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel. Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers. Clear loose fuel to mineral soil for a safe distance suited to wind and conditions. Do not build on peat, deep duff, roots, inside a tent, or beneath low branches.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 10023,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 856,
+      "generated_tokens" : 154,
+      "generation_milliseconds" : 5349,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-site-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-site"
+      ],
+      "minimum_available_memory_bytes" : 3813504216,
+      "peak_physical_footprint_bytes" : 1555204904,
+      "post_available_memory_bytes" : 3851613400,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3867342832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches.\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Place the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Clear loose fuel to mineral soil for a safe distance suited to wind and conditions.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Do not build on peat, deep duff, roots, inside a tent, or beneath low branches.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire",
+        "basics-stay-or-move",
+        "car-ev-hybrid",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0913934426229499,
+        0.71999999999999997,
+        0.61612903225806448,
+        0.43562499999999998,
+        0.39742537313432835,
+        0.35999999999999999,
+        0.13587301587301587,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 7.0580244064331055,
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "fire-site"
+      ],
+      "selected_scenario_ids" : [
+        "fire-site-scenario"
+      ],
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.052971288671266,
+      "word_count" : 62
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-site-scenario",
+          "fire-materials-scenario"
+        ]
+      ],
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "clarification_target" : "I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 15641,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-site",
+        "fire-materials"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : "unsupported_generation",
+      "first_token_milliseconds" : 1297,
+      "generated_tokens" : 134,
+      "generation_milliseconds" : 5136,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "fire-site-08",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3823367384,
+      "peak_physical_footprint_bytes" : 1545341736,
+      "post_available_memory_bytes" : 3851351256,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879073776,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\n  \"d\": \"clarify\",\n  \"r\": \"high\",\n  \"e\": [\n    \t],\n  \"c\": \"insufficient\",\n  \"q\": \"I need to pick a campfire spot near roots, grass, and low branches. Also, I keep striking sparks but gathered only large damp sticks.\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Use the smallest useful fire on stable ground away from people, shelter, roots, and spreading fuel.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Clear loose fuel to mineral soil for a safe distance suited to wind and conditions.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Collect enough dry material in increasing sizes before striking the first spark.\",\n      \"e\": [6]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Use an existing approved fire area when available.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Clear loose fuel to mineral soil for a safe distance suited to wind and conditions.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Look above for branches and around for roots, peat, dry grass, tents, vehicles, and fuel containers.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Collect enough dry material in increasing sizes before striking the first spark.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-site",
+        "fire-materials",
+        "signal-smoke-fire",
+        "fire-wet",
+        "fire-decision",
+        "fire-extinguish",
+        "shelter-site",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        3.0913934426229508,
+        2.7161290322580647,
+        1.1058730158730157,
+        1.035625,
+        0.95999999999999996,
+        0.85538461538461541,
+        0.73492537313432837,
+        0.63765151515151519
+      ],
+      "retrieval_context_milliseconds" : 6.8299770355224609,
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "fire-site-scenario",
+        "fire-materials-scenario"
+      ],
+      "terminal_failure" : true,
+      "tokens_per_second" : 34.644438655899975,
+      "word_count" : 14
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-extinguish-scenario"
+        ]
+      ],
+      "answer" : "Burn fuel down, spread coals, add water, stir, and repeat until no heat remains. Use soil only when water is unavailable and keep checking for heat below the surface. Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces. Never sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.",
+      "clarification_target" : "",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "coverage_decision" : "sufficient_boundary_override",
+      "elapsed_milliseconds" : 9930,
+      "expected_disposition" : "grounded",
+      "expected_manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "expected_risk_class" : "high",
+      "failure_category" : null,
+      "first_token_milliseconds" : 1004,
+      "generated_tokens" : 144,
+      "generation_milliseconds" : 5233,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "fire-extinguish-01",
+      "intent_disposition" : "grounded_boundary_override",
+      "manual_lessons" : [
+        "fire-extinguish"
+      ],
+      "minimum_available_memory_bytes" : 3823744216,
+      "peak_physical_footprint_bytes" : 1544964904,
+      "post_available_memory_bytes" : 3853497560,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3879483376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\n  \"d\": \"ordinary\",\n  \"r\": \"low\",\n  \"e\": [],\n  \"c\": \"not_needed\",\n  \"q\": \"\"\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Burn fuel down, spread coals, add water, stir, and repeat until no heat remains.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Use soil only when water is unavailable and keep checking for heat below the surface.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Vent any approved stove or heater exactly as designed and keep combustion outside sleeping spaces.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Never sleep with an open flame, charcoal, stove, or engine exhaust in an enclosed shelter.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "fire-extinguish",
+        "first-aid-cold",
+        "shelter-cold-snow",
+        "weather-wildlife-wildfire",
+        "navigation-stop-mark",
+        "signal-communication",
+        "car-overheat",
+        "fire-decision"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.7353846153846153,
+        0.67500000000000004,
+        0.55562500000000004,
+        0.43612903225806449,
+        0.43587301587301586,
+        0.31515151515151513,
+        0.26250000000000001
+      ],
+      "retrieval_context_milliseconds" : 5.4908990859985352,
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+        "fire-extinguish"
+      ],
+      "selected_scenario_ids" : [
+        "fire-extinguish-scenario"
+      ],
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.814140458737292,
+      "word_count" : 59
+    }
+  ],
+  "completed" : false,
+  "cooldown_every_cases" : 4,
+  "final_available_memory_bytes" : 5322767400,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5326519432,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "cae4d57d8aa60307c63adedd99d513f5050fe8500480e9724edca7b78243a7ee",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-rag-diagnostic",
+  "nominal_settle_seconds" : 60,
+  "run_id" : "aurora-claim-v5-diagnostic-20260813-1853",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5326503048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 58,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5323111560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5199,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322980488,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10510,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322964104,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 15616,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322947720,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 20717,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322947720,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 25863,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322947720,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 31033,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322947720,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 36183,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322931336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41507,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322931336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 46747,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322914952,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51906,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322914952,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57167,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322898568,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 62511,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3837654232,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 78607,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3851613400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 88754,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3851351256,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 104518,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3853497560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114572,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3881039856,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114648,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3884316656,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119726,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4877335280,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124942,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322767400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130019,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322767400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 135429,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322767400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 140833,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322767400,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 145948,
+      "phase" : "interval_4",
+      "state" : "nominal"
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "active_pack_status": "Lite, Expert ready offline",
+  "available_tiers": [
+    "lite",
+    "vision_expert"
+  ],
+  "cases": [
+    {
+      "answer": "Check the dashboard lights and listen for a single click, as this may indicate an issue with the ignition system or battery. If no immediate hazard is present, use the owner's manual to follow model-specific steps for immobilizer, key, jump-start, and other procedures. Observe whether the dash lights dim or go out during a controlled start attempt; if there\u2019s no response after one try, stop and seek help. Do not keep cranking repeatedly\u2014this can drain battery power and may lead to further damage.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "partial",
+      "elapsed_milliseconds": 16184,
+      "expected_route_pass": true,
+      "first_token_milliseconds": 2063,
+      "generated_tokens": 178,
+      "generation_milliseconds": 7512,
+      "id": "comparison-car-no-start",
+      "manual_lesson_ids": [
+        "car-stay-walk"
+      ],
+      "minimum_available_memory_bytes": 3810096344,
+      "peak_physical_footprint_bytes": 1558612776,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "My car will not start. The dash lights are dim and I hear one click. What should I check first?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Set the parking brake; select Park or Neutral for an automatic, or fully depress the clutch and select Neutral for a manual vehicle.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Turn off unneeded lights and accessories, make one controlled start attempt, and listen for unusual noises.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Observe whether the dash lights normally or dims, whether there is a click, whether the engine cranks, and whether it starts then stops; report those observations instead of guessing a diagnosis.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use the vehicle owner's manual for immobilizer, key, jump-start, and model-specific steps; treat EV and hybrid propulsion systems as model-specific and do not touch orange high-voltage components.\",\n      \"e\": [4]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Check the dashboard lights and listen for a single click, as this may indicate an issue with the ignition system or battery.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"If no immediate hazard is present, use the owner's manual to follow model-specific steps for immobilizer, key, jump-start, and other procedures.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Observe whether the dash lights dim or go out during a controlled start attempt; if there\u2019s no response after one try, stop and seek help.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Do not keep cranking repeatedly\u2014this can drain battery power and may lead to further damage.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "repair_count": 1,
+      "selected_scenario_ids": [
+        "car-no-start-triage"
+      ],
+      "sentence_citation_count": 4,
+      "source_card_ids": [
+        "ca-dmv-engine-start",
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "support_status": "partially_supported",
+      "tier": "vision_expert",
+      "tokens_per_second": 32.48302440814828,
+      "verification_issue_codes": [
+        "weak_claim_support"
+      ],
+      "verification_status": "partially_verified",
+      "word_count": 83
+    },
+    {
+      "answer": "Bring clear water to a rolling boil for the full recommended time, then prevent recontamination. Above 6,500 feet (about 1,980 metres), boil for 3 minutes. Let it cool and store it in a clean, covered container without touching the inside of the cap. Protect treated water and reduce sweating instead of dangerously withholding water. Use clean, covered containers and keep untreated and treated water clearly separate.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "partial",
+      "elapsed_milliseconds": 10820,
+      "expected_route_pass": true,
+      "first_token_milliseconds": 1694,
+      "generated_tokens": 179,
+      "generation_milliseconds": 6943,
+      "id": "comparison-water-boil",
+      "manual_lesson_ids": [
+        "water-boil",
+        "water-store"
+      ],
+      "minimum_available_memory_bytes": 3824202968,
+      "peak_physical_footprint_bytes": 1544506152,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "How long should I boil collected stream water before drinking it?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring clear water to a rolling boil for 1 minute.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Above 6,500 feet (about 1,980 metres), boil for 3 minutes.\",\n      \"e\": [3]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring clear water to a rolling boil for the full recommended time, then prevent recontamination.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Above 6,500 feet (about 1,980 metres), boil for 3 minutes.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Let it cool and store it in a clean, covered container without touching the inside of the cap.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Protect treated water and reduce sweating instead of dangerously withholding water.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Use clean, covered containers and keep untreated and treated water clearly separate.\",\n      \"e\": [7]\n    }\n  ]\n}"
+      ],
+      "repair_count": 1,
+      "selected_scenario_ids": [
+        "water-boil-scenario",
+        "water-store-scenario"
+      ],
+      "sentence_citation_count": 5,
+      "source_card_ids": [
+        "cdc-emergency-water",
+        "cdc-backcountry-water",
+        "nws-heat-cold"
+      ],
+      "support_status": "partially_supported",
+      "tier": "vision_expert",
+      "tokens_per_second": 33.91122118498762,
+      "verification_issue_codes": [
+        "weak_claim_support"
+      ],
+      "verification_status": "partially_verified",
+      "word_count": 66
+    },
+    {
+      "answer": "Stop and mark the last known point as soon as landmarks, trail, or position stop matching expectations. Review the last certain point, recent turns, terrain, distance, and elevation before moving. Mark the spot without damaging the environment and record time and direction of travel. Return only when the route behind you is known, short, and safer than staying.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "partial",
+      "elapsed_milliseconds": 10635,
+      "expected_route_pass": true,
+      "first_token_milliseconds": 1733,
+      "generated_tokens": 143,
+      "generation_milliseconds": 5926,
+      "id": "comparison-lost-trail",
+      "manual_lesson_ids": [
+        "navigation-backtrack",
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes": 3837424856,
+      "peak_physical_footprint_bytes": 1531284264,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "I am lost on a marked trail with two hours of daylight left. What should I do first?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    }\n  ]\n}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop and mark the last known point as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Return only when the route behind you is known, short, and safer than staying.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "repair_count": 1,
+      "selected_scenario_ids": [
+        "navigation-backtrack-scenario",
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count": 4,
+      "source_card_ids": [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "support_status": "partially_supported",
+      "tier": "vision_expert",
+      "tokens_per_second": 33.86596708800381,
+      "verification_issue_codes": [
+        "weak_claim_support"
+      ],
+      "verification_status": "partially_verified",
+      "word_count": 58
+    },
+    {
+      "answer": "Lite couldn\u2019t form a complete answer. Try rephrasing your question.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "none",
+      "elapsed_milliseconds": 4763,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 297,
+      "generated_tokens": 34,
+      "generation_milliseconds": 1478,
+      "id": "comparison-car-no-start",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 5073926440,
+      "peak_physical_footprint_bytes": 294782680,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "My car will not start. The dash lights are dim and I hear one click. What should I check first?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"a\":\"Diagnose and Decide Whether to Stay,\\nCheck the battery and spark plugs.\\nAvoid walking into unknown distance, heat, cold, flood, or darkness without a clear destination and route.\" , \"e\":[1]}",
+        "{\"a\":\"First, carefully examine the dashboard lights and listen for any unusual sounds, as these could indicate a problem with the starting system.\", \"e\":[1]}\n"
+      ],
+      "repair_count": 1,
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 27.9424216765453,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 10
+    },
+    {
+      "answer": "Bring clear water to a rolling boil for 1 minute. Then, let it cool and store it in a clean, covered container. Avoid contamination with fuel, chemicals, or radioactive materials.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "none",
+      "elapsed_milliseconds": 2171,
+      "expected_route_pass": true,
+      "first_token_milliseconds": 331,
+      "generated_tokens": 50,
+      "generation_milliseconds": 2103,
+      "id": "comparison-water-boil",
+      "manual_lesson_ids": [
+        "water-boil"
+      ],
+      "minimum_available_memory_bytes": 5082970432,
+      "peak_physical_footprint_bytes": 285722304,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "How long should I boil collected stream water before drinking it?",
+      "raw_completion_count": 1,
+      "raw_completions": [
+        "{\"a\":\"Bring clear water to a rolling boil for 1 minute., Then, let it cool and store it in a clean, covered container., Avoid contamination with fuel, chemicals, or radioactive materials.\" , \"e\": [1] }"
+      ],
+      "repair_count": 0,
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 27.65237020316027,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 30
+    },
+    {
+      "answer": "Stay calm and assess your surroundings. Immediately begin checking for landmarks or a trail marker to orient yourself. Prioritize finding a safe, open area to rest and gather your thoughts.",
+      "automatic_failures": [],
+      "cold_start": false,
+      "coverage_status": "none",
+      "elapsed_milliseconds": 3567,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 178,
+      "generated_tokens": 43,
+      "generation_milliseconds": 1761,
+      "id": "comparison-lost-trail",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 5073746216,
+      "peak_physical_footprint_bytes": 294962904,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "I am lost on a marked trail with two hours of daylight left. What should I do first?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"a\":\"1. Stay put and conserve energy. 2. Assess your surroundings \u2013 look for landmarks or signs of civilization. Don\u2019t wander aimlessly, stay visible to rescuers.\",\"e\":[]}",
+        "{\"a\":\"Stay calm and assess your surroundings. Immediately begin checking for landmarks or a trail marker to orient yourself. Prioritize finding a safe, open area to rest and gather your thoughts.\", \"e\":[]}\n"
+      ],
+      "repair_count": 1,
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 26.53190145293746,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 30
+    }
+  ],
+  "completed": true,
+  "final_battery_level": 0.800000011920929,
+  "final_thermal": "nominal",
+  "fixture_sha256": "88dd483402949fba6aa8bcde5d36a9c1271fe83d88ee9bb9c4ecfbea61a9ea5b",
+  "initial_battery_level": 0.800000011920929,
+  "initial_thermal": "nominal",
+  "mode": "tier-comparison",
+  "run_id": "20260820-short-r1",
+  "schema_version": 1,
+  "terminal_failure": null
+}

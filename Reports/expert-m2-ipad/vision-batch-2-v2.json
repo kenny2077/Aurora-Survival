@@ -1,0 +1,969 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "No, the flames are large and you should not walk away now. They could be dangerous if they get out of control or spread to other areas.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 3982,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2674,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 3714,
+      "id" : "TG-V011-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3724260496,
+      "peak_physical_footprint_bytes" : 1644448624,
+      "post_available_memory_bytes" : 3724260496,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5325929656,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the flames are large and you should not walk away now. They could be dangerous if they get out of control or spread to other areas.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 8.5620880126953125,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 34.615384615384613,
+      "word_count" : 27
+    },
+    {
+      "answer" : "Don't try to pass it. It's a snake and you should avoid touching or provoking it, as snakes can be dangerous if handled improperly.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 4197,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2995,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 4025,
+      "id" : "TG-V004-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3720475816,
+      "peak_physical_footprint_bytes" : 1648233304,
+      "post_available_memory_bytes" : 3738711208,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3771332520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Don't try to pass it. It's a snake and you should avoid touching or provoking it, as snakes can be dangerous if handled improperly.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 5.0950050354003906,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 34.95145631067961,
+      "word_count" : 24
+    },
+    {
+      "answer" : "You are in a forest fire, and you're flying over it. The immediate threat is the fire itself, which poses a direct danger to your safety. You must stop any activity that could put you at risk of being caught in flames or smoke. Your priority should be to evacuate immediately if possible, as the fire is actively spreading and creating hazardous conditions. If you are not able to escape safely, signal for help right away using visual signals like a flare or light source. The warning here is: do not attempt to fly through the area; it's too dangerous.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7810,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3515,
+      "generated_tokens" : 124,
+      "generation_milliseconds" : 7637,
+      "id" : "TG-V016-practical_action-grounded",
+      "manual_lessons" : [
+        "signal-schedule",
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 3729994872,
+      "peak_physical_footprint_bytes" : 1638714248,
+      "post_available_memory_bytes" : 3741086840,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3786258392,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You are in a forest fire, and you're flying over it. The immediate threat is the fire itself, which poses a direct danger to your safety. You must stop any activity that could put you at risk of being caught in flames or smoke. Your priority should be to evacuate immediately if possible, as the fire is actively spreading and creating hazardous conditions. If you are not able to escape safely, signal for help right away using visual signals like a flare or light source. The warning here is: do not attempt to fly through the area; it's too dangerous.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.3950290679931641,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 29.839883551673946,
+      "word_count" : 100
+    },
+    {
+      "answer" : "A mushroom is growing here on a tree branch in the forest, with an orange and brown cap that has liquid inside it. It appears to be a type of fungus.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 2732,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1444,
+      "generated_tokens" : 41,
+      "generation_milliseconds" : 2610,
+      "id" : "TG-V003-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3757519968,
+      "peak_physical_footprint_bytes" : 1611189152,
+      "post_available_memory_bytes" : 3781096568,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3786028992,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A mushroom is growing here on a tree branch in the forest, with an orange and brown cap that has liquid inside it. It appears to be a type of fungus.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 2.3360252380371094,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 34.305317324185246,
+      "word_count" : 31
+    },
+    {
+      "answer" : "You have a foot injury that is likely infected. Stop hiking immediately and treat it with clean water, soap, and sterile bandages. Do not walk on the affected area or use any tools to move it. The wound may be spreading rapidly; if you see pus, swelling, or fever, seek medical help right away. This condition could lead to serious complications like sepsis or tissue death without prompt treatment.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 8547,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5095,
+      "generated_tokens" : 94,
+      "generation_milliseconds" : 8417,
+      "id" : "TG-V015-practical_action-grounded",
+      "manual_lessons" : [
+        "food-wildlife",
+        "weather-wildlife-cold"
+      ],
+      "minimum_available_memory_bytes" : 3728339992,
+      "peak_physical_footprint_bytes" : 1640369128,
+      "post_available_memory_bytes" : 3739989064,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3828037568,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You have a foot injury that is likely infected. Stop hiking immediately and treat it with clean water, soap, and sterile bandages. Do not walk on the affected area or use any tools to move it. The wound may be spreading rapidly; if you see pus, swelling, or fever, seek medical help right away. This condition could lead to serious complications like sepsis or tissue death without prompt treatment.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.8270435333251953,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.995183624322696,
+      "word_count" : 69
+    },
+    {
+      "answer" : "The water is a murky, shallow pond with lily pads and debris. It's not safe for drinking due to potential contamination from algae or chemicals in the surrounding area. The bank appears unstable and could be swept into by current, so avoid collecting near it. Stop if you see any signs of chemical runoff or dead animals. Check the water source carefully before using it; do not drink until confirmed clean. Use only safe sources like a known spring or upstream collection point.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 9635,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5720,
+      "generated_tokens" : 105,
+      "generation_milliseconds" : 9415,
+      "id" : "TG-V008-observation-grounded",
+      "manual_lessons" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 3737236552,
+      "peak_physical_footprint_bytes" : 1631472568,
+      "post_available_memory_bytes" : 3740677192,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3779868512,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The water is a murky, shallow pond with lily pads and debris. It's not safe for drinking due to potential contamination from algae or chemicals in the surrounding area. The bank appears unstable and could be swept into by current, so avoid collecting near it. Stop if you see any signs of chemical runoff or dead animals. Check the water source carefully before using it; do not drink until confirmed clean. Use only safe sources like a known spring or upstream collection point.\" ,\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 8.0430507659912109,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 28.146143437077132,
+      "word_count" : 83
+    },
+    {
+      "answer" : "No, the bandage is on but it's not a full wrap and there may be some bleeding or circulation issues. The person might need to see a doctor for proper treatment.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6223,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4792,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 6175,
+      "id" : "TG-V014-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3684004864,
+      "peak_physical_footprint_bytes" : 1684704256,
+      "post_available_memory_bytes" : 3686511616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3780507488,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the bandage is on but it's not a full wrap and there may be some bleeding or circulation issues. The person might need to see a doctor for proper treatment.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.368763557483732,
+      "word_count" : 31
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 20457,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5440,
+      "generated_tokens" : 152,
+      "generation_milliseconds" : 10960,
+      "id" : "TG-V014-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3684512768,
+      "peak_physical_footprint_bytes" : 1684196352,
+      "post_available_memory_bytes" : 3689362432,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3733518104,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The user is on a bike trip with an injury. The leg has a bandage, and there's blood at the wound site. There are no tourniquets or other emergency supplies visible in this image. A first-aid setup includes a clean cloth pad applied to the wound. Immediate action: apply firm pressure using the gauze from [1]. Stop condition: do not loosen the bandage; if bleeding continues, escalate to a tourniquet as per training and record time.\",\"e\":[1,2]}",
+        "{\"a\":\"The first-aid setup on the leg is a clean gauze pad tied with a string to secure it, indicating immediate pressure. The wound appears active and bleeding, so apply firm pressure using the gauze as directed in [2]. Do not loosen the tourniquet after application; obtain emergency evacuation quickly if uncontrolled bleeding occurs. This setup prioritizes controlling severe bleeding by maintaining constant pressure with a clean pad without lifting it to check for progress. The person is on an outdoor trail, so protect equipment from rain and damage as per [1] guidelines. Stop applying pressure or use the tourniquet immediately if there's no improvement in blood flow after 5 minutes of continuous pressure.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 9.013056755065918,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.355072463768117,
+      "word_count" : 10
+    },
+    {
+      "answer" : "snake on the path ahead, with its tongue out and coiled body resting on gravel ground. It is a type of snake that appears to be in motion or preparing to move.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6636,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5129,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 6505,
+      "id" : "TG-V004-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3687773184,
+      "peak_physical_footprint_bytes" : 1680935936,
+      "post_available_memory_bytes" : 3691951104,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3734042392,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"snake on the path ahead, with its tongue out and coiled body resting on gravel ground. It is a type of snake that appears to be in motion or preparing to move.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.523255813953487,
+      "word_count" : 32
+    },
+    {
+      "answer" : "no, it is a tick on the hand but not infected yet. It's just a small insect that may be carrying disease or parasites and needs to be checked by a doctor.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5981,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4515,
+      "generated_tokens" : 43,
+      "generation_milliseconds" : 5880,
+      "id" : "TG-V005-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3689542656,
+      "peak_physical_footprint_bytes" : 1679166464,
+      "post_available_memory_bytes" : 3693769728,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3738924824,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"no, it is a tick on the hand but not infected yet. It's just a small insect that may be carrying disease or parasites and needs to be checked by a doctor.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.76923076923077,
+      "word_count" : 32
+    },
+    {
+      "answer" : "No, you should not pop a blister like this as it can cause infection and damage to the skin. Always consult a healthcare professional for advice.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5697,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4469,
+      "generated_tokens" : 36,
+      "generation_milliseconds" : 5580,
+      "id" : "TG-V015-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3689591808,
+      "peak_physical_footprint_bytes" : 1679117312,
+      "post_available_memory_bytes" : 3693622272,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3740792600,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, you should not pop a blister like this as it can cause infection and damage to the skin. Always consult a healthcare professional for advice.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.503150315031505,
+      "word_count" : 26
+    },
+    {
+      "answer" : "A small, gray tent is set up on a dirt ground with a blue sleeping bag inside. A white sign is attached to the pole of the tent.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5656,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4420,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5604,
+      "id" : "TG-V010-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3689739264,
+      "peak_physical_footprint_bytes" : 1678969856,
+      "post_available_memory_bytes" : 3693786112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3740612376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A small, gray tent is set up on a dirt ground with a blue sleeping bag inside. A white sign is attached to the pole of the tent.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.25,
+      "word_count" : 28
+    },
+    {
+      "answer" : "The object is a large, brownish mushroom with an internal liquid-like substance. It appears to be growing on a tree branch in a forest environment. The presence of this fungus suggests it may have been exposed to moisture and could potentially be toxic or harmful if ingested. This species is not edible as it shows signs of being contaminated by water and has the potential for causing illness, especially when consumed raw. It should never be eaten without further testing and confirmation from a qualified expert in mycology. The mushroom's appearance indicates that it may have been exposed to moisture or other environmental factors which could lead to contamination.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7674,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2701,
+      "generated_tokens" : 133,
+      "generation_milliseconds" : 7529,
+      "id" : "TG-V003-safety_trap-grounded",
+      "manual_lessons" : [
+        "car-stay-walk",
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 3722261504,
+      "peak_physical_footprint_bytes" : 1646447616,
+      "post_available_memory_bytes" : 3742266416,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3740759832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The object is a large, brownish mushroom with an internal liquid-like substance. It appears to be growing on a tree branch in a forest environment. The presence of this fungus suggests it may have been exposed to moisture and could potentially be toxic or harmful if ingested. This species is not edible as it shows signs of being contaminated by water and has the potential for causing illness, especially when consumed raw. It should never be eaten without further testing and confirmation from a qualified expert in mycology. The mushroom's appearance indicates that it may have been exposed to moisture or other environmental factors which could lead to contamination.\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 7.8209638595581055,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.340513670256836,
+      "word_count" : 109
+    },
+    {
+      "answer" : "This sign shows a campground, restrooms for men and women, and an area with hanging lights. The arrow points to the right.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6195,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5068,
+      "generated_tokens" : 34,
+      "generation_milliseconds" : 6137,
+      "id" : "TG-V017-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3713365016,
+      "peak_physical_footprint_bytes" : 1655344104,
+      "post_available_memory_bytes" : 3717870616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3782162296,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"This sign shows a campground, restrooms for men and women, and an area with hanging lights. The arrow points to the right.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.869971936389149,
+      "word_count" : 22
+    },
+    {
+      "answer" : "A fire with flames and logs against a dark background, likely from a campfire or fireplace at night. It's an image of the fire burning brightly.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5252,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3887,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5068,
+      "id" : "TG-V011-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3714692144,
+      "peak_physical_footprint_bytes" : 1654016976,
+      "post_available_memory_bytes" : 3716920368,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3762567032,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A fire with flames and logs against a dark background, likely from a campfire or fireplace at night. It's an image of the fire burning brightly.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 6.7130327224731445,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.329381879762913,
+      "word_count" : 26
+    },
+    {
+      "answer" : "You should change your behavior to not be a bear and avoid feeding it at the campground, as shown by the sign with an image of a bear hanging from ropes.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5791,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4479,
+      "generated_tokens" : 40,
+      "generation_milliseconds" : 5737,
+      "id" : "TG-V017-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3711939632,
+      "peak_physical_footprint_bytes" : 1656769488,
+      "post_available_memory_bytes" : 3715953712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3763844984,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"You should change your behavior to not be a bear and avoid feeding it at the campground, as shown by the sign with an image of a bear hanging from ropes.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.001589825119236,
+      "word_count" : 31
+    },
+    {
+      "answer" : "No, it's not safe to eat without a thermometer. The red color doesn't guarantee freshness or safety. Always use a food thermometer to check the internal temperature of meat.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5952,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4453,
+      "generated_tokens" : 42,
+      "generation_milliseconds" : 5762,
+      "id" : "TG-V013-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3712496688,
+      "peak_physical_footprint_bytes" : 1656212432,
+      "post_available_memory_bytes" : 3716658224,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3762993016,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, it's not safe to eat without a thermometer. The red color doesn't guarantee freshness or safety. Always use a food thermometer to check the internal temperature of meat.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 8.7430477142333984,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.321619556913674,
+      "word_count" : 29
+    },
+    {
+      "answer" : "no, the sign indicates a bear is not close right now but shows an icon of a bear hanging from ropes in a campsite area that may be near bears.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5895,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4524,
+      "generated_tokens" : 40,
+      "generation_milliseconds" : 5774,
+      "id" : "TG-V017-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3712889904,
+      "peak_physical_footprint_bytes" : 1655819216,
+      "post_available_memory_bytes" : 3717100592,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3763500920,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"no, the sign indicates a bear is not close right now but shows an icon of a bear hanging from ropes in a campsite area that may be near bears.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.199999999999999,
+      "word_count" : 30
+    },
+    {
+      "answer" : "check for hot metal and flammable materials before cooking to prevent fires or burns, especially with the stove's open flame.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 4110,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3078,
+      "generated_tokens" : 31,
+      "generation_milliseconds" : 4029,
+      "id" : "TG-V012-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3704124464,
+      "peak_physical_footprint_bytes" : 1664568272,
+      "post_available_memory_bytes" : 3707761712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3764172664,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"check for hot metal and flammable materials before cooking to prevent fires or burns, especially with the stove's open flame.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.545741324921135,
+      "word_count" : 20
+    },
+    {
+      "answer" : "No, the flames are large and you should not walk away now. They could be dangerous if they get out of control or spread to other areas.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5081,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3866,
+      "generated_tokens" : 37,
+      "generation_milliseconds" : 5030,
+      "id" : "TG-V011-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3702125616,
+      "peak_physical_footprint_bytes" : 1666567120,
+      "post_available_memory_bytes" : 3704452144,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3754866552,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the flames are large and you should not walk away now. They could be dangerous if they get out of control or spread to other areas.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.927835051546392,
+      "word_count" : 27
+    },
+    {
+      "answer" : "no, the photo does not prove that the shelter will survive strong wind and heavy rain because it shows a tent set up in a forested area with no evidence of weather resistance or protection from elements.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6064,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4466,
+      "generated_tokens" : 47,
+      "generation_milliseconds" : 5941,
+      "id" : "TG-V010-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3702944816,
+      "peak_physical_footprint_bytes" : 1665764304,
+      "post_available_memory_bytes" : 3705254960,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3751507832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"no, the photo does not prove that the shelter will survive strong wind and heavy rain because it shows a tent set up in a forested area with no evidence of weather resistance or protection from elements.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.1864406779661,
+      "word_count" : 37
+    },
+    {
+      "answer" : "No, it's not clear and flowing. It's a natural water source with visible debris and sediment that could contain pathogens.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5561,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4426,
+      "generated_tokens" : 32,
+      "generation_milliseconds" : 5414,
+      "id" : "TG-V009-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3701191728,
+      "peak_physical_footprint_bytes" : 1667517392,
+      "post_available_memory_bytes" : 3707548720,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3752277880,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, it's not clear and flowing. It's a natural water source with visible debris and sediment that could contain pathogens.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 8.4810256958007812,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.376518218623481,
+      "word_count" : 20
+    },
+    {
+      "answer" : "A fire with flames and logs against a dark background, likely from a campfire or fireplace at night. It's an image of the fire burning brightly.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5114,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3851,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5027,
+      "id" : "TG-V011-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3702092848,
+      "peak_physical_footprint_bytes" : 1666616272,
+      "post_available_memory_bytes" : 3706221616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3752146808,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"A fire with flames and logs against a dark background, likely from a campfire or fireplace at night. It's an image of the fire burning brightly.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.462585034013607,
+      "word_count" : 26
+    },
+    {
+      "answer" : "the water is rushing over rocks and creating a white, foamy stream with people watching from the top of the steps below.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5568,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4490,
+      "generated_tokens" : 32,
+      "generation_milliseconds" : 5480,
+      "id" : "TG-V009-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3705418800,
+      "peak_physical_footprint_bytes" : 1663290320,
+      "post_available_memory_bytes" : 3707614256,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3753326456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"the water is rushing over rocks and creating a white, foamy stream with people watching from the top of the steps below.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 31.313131313131311,
+      "word_count" : 22
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 12501,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3909,
+      "generated_tokens" : 77,
+      "generation_milliseconds" : 6410,
+      "id" : "TG-V020-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3701617664,
+      "peak_physical_footprint_bytes" : 1667091456,
+      "post_available_memory_bytes" : 3705943064,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3752327032,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"Refuge-porte de Rosel 1620 818 (right) → the sign on the right of the pole with a red arrow pointing to it is the one that says Refuge du Col du Palet Th.10 la\",\"e\":[]}",
+        "{\"a\":\"Refuge du Col du Palet Th.10 la →  - Refuge-porte de Rosel 1620 818  - Refugio-Porte de Rosell 1620 818  - Refugio-Porte de Rosell 1620 818\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 9.1840028762817383,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.387844862055179,
+      "word_count" : 10
+    },
+    {
+      "answer" : "smoke and fog from a forest fire in the distance, viewed from an airplane wing. It is not just smoke or fog but a combination of both.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 6235,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4787,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5996,
+      "id" : "TG-V016-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3700438016,
+      "peak_physical_footprint_bytes" : 1668271104,
+      "post_available_memory_bytes" : 3704648704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3752785736,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"smoke and fog from a forest fire in the distance, viewed from an airplane wing. It is not just smoke or fog but a combination of both.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 6.4920186996459961,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.603804797353185,
+      "word_count" : 27
+    },
+    {
+      "answer" : "The photo shows a person with an injury on their leg, including blood and a bandage. The background is a grassy field with trees and ski lift chairs, suggesting it's outdoors in a mountainous area. I can see the person’s clothing, footwear, and part of the bike frame but cannot identify the specific location or provide details about the nature of the injury.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7640,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4708,
+      "generated_tokens" : 82,
+      "generation_milliseconds" : 7526,
+      "id" : "TG-V014-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3699274752,
+      "peak_physical_footprint_bytes" : 1669434368,
+      "post_available_memory_bytes" : 3703485440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3751507760,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"The photo shows a person with an injury on their leg, including blood and a bandage. The background is a grassy field with trees and ski lift chairs, suggesting it's outdoors in a mountainous area. I can see the person’s clothing, footwear, and part of the bike frame but cannot identify the specific location or provide details about the nature of the injury.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 28.743789921930446,
+      "word_count" : 63
+    },
+    {
+      "answer" : "Expert couldn’t form a complete answer. Try rephrasing your question.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 22517,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5655,
+      "generated_tokens" : 161,
+      "generation_milliseconds" : 11508,
+      "id" : "TG-V009-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3701191680,
+      "peak_physical_footprint_bytes" : 1667517440,
+      "post_available_memory_bytes" : 3724981296,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3750606664,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"a\":\"The water is visibly turbid and contains a significant amount of sediment, making it unsafe for consumption. It appears to be flowing rapidly over rocks with foam forming on the surface, indicating high particle load. The presence of people near the stream suggests potential contamination risks from human activity or waste. Immediate action required: stop all contact with the water source; do not drink or use it. Use only [1] and [2], but note that this is a pre-filtering step for sediment removal before further treatment, so boiling must follow to ensure safety. The warning states that prefilters remove particles but don't eliminate pathogens like bacteria or viruses.\" ,\"e\":[1,2]}",
+        "{\"a\":\"The water appears turbid and foamy, with visible white bubbles from the rushing flow over rocks. It is not clear or clean enough for safe drinking based on the prefiltering process described in [1]. The rapid movement of water suggests it may be contaminated by sediment or debris that could carry pathogens. Immediate action should be taken to stop further contamination and ensure safety, as this situation requires a full boil according to [2] before consumption. A rolling boil for 3 minutes is required above 6,500 feet (1,980 metres) but the current water flow indicates it may not meet these standards unless properly treated by boiling in[? ]a clean container without touching the cap and cooling as per instructions in [2].\",\"e\":[1,2]}"
+      ],
+      "retrieval_context_milliseconds" : 9.7360610961914062,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 27.336408679309756,
+      "word_count" : 10
+    },
+    {
+      "answer" : "No, the compass is not pointing to a specific bearing as it's on a map with no visible direction indicators. The compass needle points north and shows 389 degrees from the center of the compass rose.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 7116,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 5116,
+      "generated_tokens" : 50,
+      "generation_milliseconds" : 6724,
+      "id" : "TG-V019-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3700864000,
+      "peak_physical_footprint_bytes" : 1667845120,
+      "post_available_memory_bytes" : 3705009152,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3751868232,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"No, the compass is not pointing to a specific bearing as it's on a map with no visible direction indicators. The compass needle points north and shows 389 degrees from the center of the compass rose.\",\"e\":[]}"
+      ],
+      "retrieval_context_milliseconds" : 7.3639154434204102,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.472636815920399,
+      "word_count" : 36
+    },
+    {
+      "answer" : "This is poison ivy, a plant that can cause skin irritation. It's often found in the woods and should be avoided to stay on your trail.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "elapsed_milliseconds" : 5813,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 4561,
+      "generated_tokens" : 38,
+      "generation_milliseconds" : 5758,
+      "id" : "TG-V001-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3703927808,
+      "peak_physical_footprint_bytes" : 1664764928,
+      "post_available_memory_bytes" : 3704779776,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3751900976,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"This is poison ivy, a plant that can cause skin irritation. It's often found in the woods and should be avoided to stay on your trail.\",\"e\":[]}"
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "tokens_per_second" : 30.91060985797828,
+      "word_count" : 26
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 3751851824,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328075960,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-vision",
+  "run_id" : "vision-batch-2-v2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

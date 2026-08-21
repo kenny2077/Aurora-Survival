@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-08-15",
+  "dataset": "Tests/Fixtures/expert_direct_rag_holdout.json",
+  "datasetAuthorship": "separately_authored_internal_pre_release_reviewed",
+  "productionRecordCount": 460,
+  "capacityBenchmarkRecordCount": 100000,
+  "rrfK": 60,
+  "selectedFusedRelevanceThreshold": 0.02,
+  "selectionRule": "exact current cue or title, otherwise at least one relevant lexical or dense channel and fused score >= threshold",
+  "calibration": {
+    "caseCount": 12,
+    "correct": 12,
+    "criticalCorrect": 7,
+    "criticalTotal": 7,
+    "falsePositiveCount": 0
+  },
+  "frozenHoldout": {
+    "caseCount": 8,
+    "correct": 8,
+    "criticalCorrect": 6,
+    "criticalTotal": 6,
+    "falsePositiveCount": 0
+  },
+  "status": "passes_internal_gate_external_subject_matter_review_pending",
+  "notes": [
+    "The retained 700 cases are generated regression coverage and were not used as an independent holdout.",
+    "Dense physical-device calibration remains required after the v2 vector shard is installed.",
+    "Independent wilderness, medical, product, and legal approval remains a release blocker."
+  ]
+}

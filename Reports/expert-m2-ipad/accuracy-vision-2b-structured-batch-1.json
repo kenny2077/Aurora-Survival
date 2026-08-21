@@ -1,0 +1,1712 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 7121,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2811,
+      "generated_tokens" : 147,
+      "generation_milliseconds" : 6658,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V020-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3725325504,
+      "peak_physical_footprint_bytes" : 1643383616,
+      "post_available_memory_bytes" : 3729355968,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326077136,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        0.70587301587301576,
+        0.45639344262295084
+      ],
+      "retrieval_context_milliseconds" : 8.9789628982543945,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 37.951650636859888,
+      "visual_attributes" : [
+        "trail_or_landmark",
+        "trail_or_landmark",
+        "trail_or_landmark",
+        "trail_or_landmark"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5652,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3109,
+      "generated_tokens" : 89,
+      "generation_milliseconds" : 5322,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V017-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3729732656,
+      "peak_physical_footprint_bytes" : 1638976464,
+      "post_available_memory_bytes" : 3729732656,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3776329688,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-tire",
+        "shelter-overnight"
+      ],
+      "retrieval_candidate_scores" : [
+        0.58562500000000006,
+        0.25639344262295083
+      ],
+      "retrieval_context_milliseconds" : 8.6159706115722656,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.765024853140531,
+      "visual_attributes" : [
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "cold_exposure",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Stop heat loss, handle gently, and rewarm the body core without burning skin. Use this order, and reassess after any major change. Move out of wind and wet, replace wet clothing, and insulate above and below. Warm the chest, neck, armpits, and groin with wrapped warm packs or shared body heat. Protect frostbitten tissue from pressure and refreezing; evacuate serious cases. Do not rub frostbite, use direct fire, give alcohol, or thaw tissue that may refreeze.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6179,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3107,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 5906,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V005-safety_trap-grounded",
+      "manual_lessons" : [
+        "first-aid-cold"
+      ],
+      "minimum_available_memory_bytes" : 3730404400,
+      "peak_physical_footprint_bytes" : 1638304720,
+      "post_available_memory_bytes" : 3736400968,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3776558968,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-collect-prefilter",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        0.6038095238095238,
+        0.50459016393442624
+      ],
+      "retrieval_context_milliseconds" : 8.498072624206543,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "first-aid-cold",
+      "tokens_per_second" : 39.657020364415864,
+      "visual_attributes" : [
+        "traffic_exposure",
+        "blurred_image",
+        "low_light",
+        "damaged_vehicle"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "tick_or_insect",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 76
+    },
+    {
+      "answer" : "Use the least contaminated available source and still treat it for germs. Use this order, and reassess after any major change. Prefer a known safe supply, then clearer moving water collected upstream from camps, livestock, roads, or waste. Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff. Collect where the bank is stable and you cannot be swept into the water. Boiling and ordinary filters cannot make chemically contaminated or salty water safe.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6024,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2775,
+      "generated_tokens" : 117,
+      "generation_milliseconds" : 5849,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V006-practical_action-grounded",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 3732714544,
+      "peak_physical_footprint_bytes" : 1635994576,
+      "post_available_memory_bytes" : 3736499248,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3779721080,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "retrieval_candidate_scores" : [
+        5.6145901639344249,
+        1.1534374999999999
+      ],
+      "retrieval_context_milliseconds" : 8.813023567199707,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-choose-source",
+      "tokens_per_second" : 37.735849056603776,
+      "visual_attributes" : [
+        "moving_water",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 80
+    },
+    {
+      "answer" : "Observed broad hazard: water_source; confidence: high",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5712,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2770,
+      "generated_tokens" : 115,
+      "generation_milliseconds" : 5619,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V007-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3734500400,
+      "peak_physical_footprint_bytes" : 1634208720,
+      "post_available_memory_bytes" : 3736745008,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3778541408,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "retrieval_candidate_scores" : [
+        3.1145901639344262,
+        1.1534374999999999
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.014040014040013,
+      "visual_attributes" : [
+        "moving_water",
+        "damaged_vehicle",
+        "snow_or_ice",
+        "blurred_image"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+        "multiple_hazards",
+        "multiple_hazards",
+        "none",
+        "none"
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: water_source; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 4848,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2781,
+      "generated_tokens" : 78,
+      "generation_milliseconds" : 4729,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V006-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3722949680,
+      "peak_physical_footprint_bytes" : 1645759440,
+      "post_available_memory_bytes" : 3723113520,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5256870832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.52772073921971,
+      "visual_attributes" : [
+        "moving_water",
+        "moving_water",
+        "moving_water",
+        "moving_water"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6414,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2771,
+      "generated_tokens" : 132,
+      "generation_milliseconds" : 6138,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V020-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3708728368,
+      "peak_physical_footprint_bytes" : 1659980752,
+      "post_available_memory_bytes" : 3712857136,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3770087240,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "basics-inventory",
+        "first-aid-assessment"
+      ],
+      "retrieval_candidate_scores" : [
+        1.156393442622951,
+        0.70492537313432835
+      ],
+      "retrieval_context_milliseconds" : 18.48304271697998,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 38.90703890703891,
+      "visual_attributes" : [
+        "heavy_clothing",
+        "snow_or_ice",
+        "blurred_image",
+        "damaged_vehicle"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5446,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3102,
+      "generated_tokens" : 85,
+      "generation_milliseconds" : 5175,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V017-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3707581488,
+      "peak_physical_footprint_bytes" : 1661127632,
+      "post_available_memory_bytes" : 3711759408,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3758487368,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-large-animals",
+        "food-wildlife"
+      ],
+      "retrieval_candidate_scores" : [
+        0.43562500000000004,
+        0.33538461538461539
+      ],
+      "retrieval_context_milliseconds" : 9.4639062881469727,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.520984081041966,
+      "visual_attributes" : [
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "cold_exposure",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Create a controlled visible signal without starting a wildfire or poisoning shelter occupants. Use this order, and reassess after any major change. Prepare the site, extinguishing material, and escape path before ignition. Use three small fires or add damp green material only after a stable fire is controlled and local conditions allow. Extinguish fully if wind rises, the signal is no longer needed, or control weakens. Do not light a signal fire during a ban, extreme fire weather, or where sparks can escape.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4843,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2263,
+      "generated_tokens" : 97,
+      "generation_milliseconds" : 4672,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V012-safety_trap-grounded",
+      "manual_lessons" : [
+        "signal-smoke-fire"
+      ],
+      "minimum_available_memory_bytes" : 3699143728,
+      "peak_physical_footprint_bytes" : 1669532624,
+      "post_available_memory_bytes" : 3703075888,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3758552904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "signal-smoke-fire",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        4.3441935483870973,
+        1.4945901639344259
+      ],
+      "retrieval_context_milliseconds" : 12.35496997833252,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "signal-smoke-fire",
+      "tokens_per_second" : 39.850560398505607,
+      "visual_attributes" : [
+        "blurred_image",
+        "damaged_vehicle",
+        "traffic_exposure",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "fire_or_smoke",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 83
+    },
+    {
+      "answer" : "Reduce animal contact, inspect before reaching, and secure every food or scented item. Use this order, and reassess after any major change. Watch where hands and feet go around rocks, logs, brush, and stored gear. Wear footwear and use repellent, nets, and clothing appropriate to local disease risks. Shake out clothing and bedding and keep camp away from nests or obvious animal paths. Do not handle or attempt to kill a snake; many bites occur during handling.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5681,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3139,
+      "generated_tokens" : 97,
+      "generation_milliseconds" : 5557,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V004-safety_trap-grounded",
+      "manual_lessons" : [
+        "weather-wildlife-snakes-insects"
+      ],
+      "minimum_available_memory_bytes" : 3700061232,
+      "peak_physical_footprint_bytes" : 1668647888,
+      "post_available_memory_bytes" : 3699602480,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3747510088,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-snakes-insects",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        4.8345901639344264,
+        0.50419354838709673
+      ],
+      "retrieval_context_milliseconds" : 8.4440708160400391,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "weather-wildlife-snakes-insects",
+      "tokens_per_second" : 39.702233250620345,
+      "visual_attributes" : [
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "snake_or_wildlife",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 77
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 6700,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2774,
+      "generated_tokens" : 143,
+      "generation_milliseconds" : 6486,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V007-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3698521136,
+      "peak_physical_footprint_bytes" : 1670187984,
+      "post_available_memory_bytes" : 3702518832,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5151374112,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-scene",
+        "first-aid-fracture-spine"
+      ],
+      "retrieval_candidate_scores" : [
+        0.5863934426229509,
+        0.23587301587301587
+      ],
+      "retrieval_context_milliseconds" : 4.6160221099853516,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 38.254310344827587,
+      "visual_attributes" : [
+        "moving_water",
+        "damaged_vehicle",
+        "snow_or_ice",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4705,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1488,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 4544,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V003-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3721032752,
+      "peak_physical_footprint_bytes" : 1647676368,
+      "post_available_memory_bytes" : 3771970632,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3749410632,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        1.2761290322580645,
+        1.2458730158730158
+      ],
+      "retrieval_context_milliseconds" : 11.425018310546875,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.903141361256544,
+      "visual_attributes" : [
+        "moving_water",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "multiple_hazards",
+        "distance_uncertain",
+        "scale_uncertain",
+        "condition_uncertain"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Observed broad hazard: unknown; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6429,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3146,
+      "generated_tokens" : 127,
+      "generation_milliseconds" : 6376,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V013-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3718099944,
+      "peak_physical_footprint_bytes" : 1650609176,
+      "post_available_memory_bytes" : 3720377320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3818911632,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.009287925696597,
+      "visual_attributes" : [
+        "damaged_vehicle",
+        "snow_or_ice",
+        "blurred_image",
+        "traffic_exposure"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from fire spread and heavy smoke while avoiding steep, fuel-filled escape routes. Use this order, and reassess after any major change. Call emergency services when possible and follow official evacuation routes. Move toward a large cleared area, water edge, road, or already burned area when that is the safest reachable option. Cover nose and mouth from ash, stay low in cleaner air, and keep skin covered. Do not try to outrun a fast fire uphill or shelter in dense vegetation, a tent, or a vehicle surrounded by burning fuel.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5595,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2259,
+      "generated_tokens" : 126,
+      "generation_milliseconds" : 5457,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V012-observation-grounded",
+      "manual_lessons" : [
+        "weather-wildlife-wildfire"
+      ],
+      "minimum_available_memory_bytes" : 3716658176,
+      "peak_physical_footprint_bytes" : 1652050944,
+      "post_available_memory_bytes" : 3720541184,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3767416624,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "signal-smoke-fire",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        4.3441935483870973,
+        1.4945901639344259
+      ],
+      "retrieval_context_milliseconds" : 2.9139518737792969,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "weather-wildlife-wildfire",
+      "tokens_per_second" : 39.086929330831772,
+      "visual_attributes" : [
+        "traffic_exposure",
+        "snow_or_ice",
+        "damaged_vehicle",
+        "blurred_image"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "fire_or_smoke",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 91
+    },
+    {
+      "answer" : "Observed broad hazard: unknown; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 3991,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1093,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 3891,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V018-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3710972904,
+      "peak_physical_footprint_bytes" : 1657736216,
+      "post_available_memory_bytes" : 3779703904,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3767269144,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.671193709792711,
+      "visual_attributes" : [
+        "damaged_vehicle",
+        "snow_or_ice",
+        "snow_or_ice",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: water_source; confidence: high",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5444,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3125,
+      "generated_tokens" : 90,
+      "generation_milliseconds" : 5347,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V009-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3751720008,
+      "peak_physical_footprint_bytes" : 1616989112,
+      "post_available_memory_bytes" : 3756553288,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 4344068368,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-locate"
+      ],
+      "retrieval_candidate_scores" : [
+        3.1145901639344262,
+        1.1534374999999999
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.054005400540056,
+      "visual_attributes" : [
+        "rising_water",
+        "blurred_image",
+        "snow_or_ice",
+        "damaged_vehicle"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6071,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3105,
+      "generated_tokens" : 108,
+      "generation_milliseconds" : 5758,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V019-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3753686088,
+      "peak_physical_footprint_bytes" : 1615023032,
+      "post_available_memory_bytes" : 3753686088,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3801216888,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "navigation-compass"
+      ],
+      "retrieval_candidate_scores" : [
+        0.13639344262295081,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 6.077885627746582,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.331699962306821,
+      "visual_attributes" : [
+        "moving_water",
+        "snow_or_ice",
+        "damaged_vehicle",
+        "traffic_exposure"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "navigation_scene",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Observed broad hazard: unknown; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6118,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3145,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 6037,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V013-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3753702472,
+      "peak_physical_footprint_bytes" : 1615006648,
+      "post_available_memory_bytes" : 3753702472,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3800545120,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 38.38174273858921,
+      "visual_attributes" : [
+        "damaged_vehicle",
+        "snow_or_ice",
+        "snow_or_ice",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: unknown; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4225,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 1454,
+      "generated_tokens" : 111,
+      "generation_milliseconds" : 4148,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V003-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3781489712,
+      "peak_physical_footprint_bytes" : 1587219408,
+      "post_available_memory_bytes" : 3800413232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3800725344,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.831477357089831,
+      "visual_attributes" : [
+        "moving_water",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "multiple_hazards",
+        "condition_uncertain",
+        "image_quality_limited"
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Reduce animal contact, inspect before reaching, and secure every food or scented item. Use this order, and reassess after any major change. Watch where hands and feet go around rocks, logs, brush, and stored gear. Wear footwear and use repellent, nets, and clothing appropriate to local disease risks. Shake out clothing and bedding and keep camp away from nests or obvious animal paths. Do not handle or attempt to kill a snake; many bites occur during handling.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5565,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3109,
+      "generated_tokens" : 93,
+      "generation_milliseconds" : 5427,
+      "grounding_reason" : "visual_hazard",
+      "id" : "TG-V004-observation-grounded",
+      "manual_lessons" : [
+        "weather-wildlife-snakes-insects"
+      ],
+      "minimum_available_memory_bytes" : 3748066376,
+      "peak_physical_footprint_bytes" : 1620626360,
+      "post_available_memory_bytes" : 3752211528,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3842701152,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-snakes-insects",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        2.3345901639344264,
+        0.50419354838709673
+      ],
+      "retrieval_context_milliseconds" : 6.3309669494628906,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : "weather-wildlife-snakes-insects",
+      "tokens_per_second" : 39.689387402933562,
+      "visual_attributes" : [
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "snake_or_wildlife",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 77
+    },
+    {
+      "answer" : "Observed broad hazard: unknown; confidence: high",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 6301,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3184,
+      "generated_tokens" : 119,
+      "generation_milliseconds" : 6165,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V002-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3745821768,
+      "peak_physical_footprint_bytes" : 1622887352,
+      "post_available_memory_bytes" : 3748082760,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5318081504,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.584032203958401,
+      "visual_attributes" : [
+        "blurred_image",
+        "low_light",
+        "damaged_vehicle",
+        "blurred_image"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6522,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3141,
+      "generated_tokens" : 127,
+      "generation_milliseconds" : 6390,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V002-practical_action-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3744347208,
+      "peak_physical_footprint_bytes" : 1624361912,
+      "post_available_memory_bytes" : 3748869192,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3795171168,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "basics-stop"
+      ],
+      "retrieval_candidate_scores" : [
+        0.57639344262295089,
+        0.4561290322580645
+      ],
+      "retrieval_context_milliseconds" : 9.5518827438354492,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 38.78116343490305,
+      "visual_attributes" : [
+        "blurred_image",
+        "blurred_image",
+        "blurred_image",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "image_quality_limited",
+        "scale_uncertain",
+        "distance_uncertain",
+        "condition_uncertain"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Observed broad hazard: tick_or_insect; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5651,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3107,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 5521,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V005-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3742430280,
+      "peak_physical_footprint_bytes" : 1626278840,
+      "post_available_memory_bytes" : 3746575432,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793352544,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.182270091135045,
+      "visual_attributes" : [
+        "traffic_exposure",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "tick_or_insect",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: water_source; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5534,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3109,
+      "generated_tokens" : 95,
+      "generation_milliseconds" : 5446,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V014-observation-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3746640968,
+      "peak_physical_footprint_bytes" : 1622068152,
+      "post_available_memory_bytes" : 3746640968,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793565536,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.222507488232779,
+      "visual_attributes" : [
+        "traffic_exposure",
+        "blurred_image",
+        "snow_or_ice",
+        "damaged_vehicle"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: fire_or_smoke; confidence: high",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5644,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 2731,
+      "generated_tokens" : 110,
+      "generation_milliseconds" : 5536,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V011-practical_action-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3746640944,
+      "peak_physical_footprint_bytes" : 1622068176,
+      "post_available_memory_bytes" : 3748951088,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793614688,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "signal-smoke-fire",
+        "weather-wildlife-wildfire"
+      ],
+      "retrieval_candidate_scores" : [
+        1.8441935483870966,
+        1.4945901639344259
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 38.859180035650624,
+      "visual_attributes" : [
+        "visible_flame",
+        "snow_or_ice",
+        "damaged_vehicle",
+        "traffic_exposure"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "fire_or_smoke",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 5802,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3153,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 5572,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V005-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3754800200,
+      "peak_physical_footprint_bytes" : 1613908920,
+      "post_available_memory_bytes" : 3754800200,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5288917960,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-whistle"
+      ],
+      "retrieval_candidate_scores" : [
+        0.235625,
+        0.13639344262295081
+      ],
+      "retrieval_context_milliseconds" : 8.1250667572021484,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.099214551467547,
+      "visual_attributes" : [
+        "traffic_exposure",
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "tick_or_insect",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Observed broad hazard: navigation_scene; confidence: low",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5622,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3119,
+      "generated_tokens" : 98,
+      "generation_milliseconds" : 5521,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V019-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3750458440,
+      "peak_physical_footprint_bytes" : 1618250680,
+      "post_available_memory_bytes" : 3750458440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3803838304,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.383014154870942,
+      "visual_attributes" : [
+        "moving_water",
+        "snow_or_ice",
+        "damaged_vehicle",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "navigation_scene",
+      "visual_uncertainty_flags" : [
+        "none",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Observed broad hazard: snake_or_wildlife; confidence: high",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5689,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3145,
+      "generated_tokens" : 97,
+      "generation_milliseconds" : 5574,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V004-safety_trap-vision_only",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3751081032,
+      "peak_physical_footprint_bytes" : 1617628088,
+      "post_available_memory_bytes" : 3755226184,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3797579616,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-snakes-insects",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_scores" : [
+        2.3345901639344264,
+        0.50419354838709673
+      ],
+      "route_pass" : true,
+      "run_mode" : "vision_only",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.522437216961713,
+      "visual_attributes" : [
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "high",
+      "visual_hazard_category" : "snake_or_wildlife",
+      "visual_uncertainty_flags" : [
+
+      ],
+      "word_count" : 6
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6398,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3452,
+      "generated_tokens" : 113,
+      "generation_milliseconds" : 6262,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V001-observation-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3752932424,
+      "peak_physical_footprint_bytes" : 1615776696,
+      "post_available_memory_bytes" : 3757536328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3802232696,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-assessment",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        0.5851515151515152,
+        0.33639344262295084
+      ],
+      "retrieval_context_milliseconds" : 12.644052505493164,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 39.857651245551601,
+      "visual_attributes" : [
+        "blurred_image",
+        "damaged_vehicle",
+        "snow_or_ice",
+        "snow_or_ice"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "unknown",
+      "visual_uncertainty_flags" : [
+        "image_quality_limited",
+        "scale_uncertain",
+        "distance_uncertain",
+        "condition_uncertain"
+      ],
+      "word_count" : 41
+    },
+    {
+      "answer" : "Move away from immediate traffic, fire, unstable terrain, water, or other obvious danger, then stop where you can observe safely. Tell me exactly what happened, what hazards or injuries you can see, your location, and what equipment or help is available.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 7641,
+      "expected_manual_lessons" : [
+
+      ],
+      "first_token_milliseconds" : 3410,
+      "generated_tokens" : 153,
+      "generation_milliseconds" : 7483,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "TG-V015-safety_trap-grounded",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3752932424,
+      "peak_physical_footprint_bytes" : 1615776696,
+      "post_available_memory_bytes" : 3755177032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3802068832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : "safe_visual_abstention",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "shelter-tarp"
+      ],
+      "retrieval_candidate_scores" : [
+        0.4561290322580645,
+        0.35538461538461535
+      ],
+      "retrieval_context_milliseconds" : 15.004992485046387,
+      "route_pass" : true,
+      "run_mode" : "grounded",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 37.318929535968572,
+      "visual_attributes" : [
+        "blurred_image",
+        "blurred_image",
+        "blurred_image",
+        "blurred_image"
+      ],
+      "visual_confidence" : "low",
+      "visual_hazard_category" : "water_source",
+      "visual_uncertainty_flags" : [
+        "image_quality_limited",
+        "none",
+        "none",
+        "none"
+      ],
+      "word_count" : 41
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3802232672,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328354512,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-vision",
+  "run_id" : "accuracy-vision-2b-structured-batch-1",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

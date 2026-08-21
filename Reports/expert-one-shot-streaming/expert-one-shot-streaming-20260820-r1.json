@@ -1,0 +1,1793 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "car-no-start-triage"
+        ]
+      ],
+      "answer" : "Set the parking brake; select Park or Neutral for an automatic, or fully depress the clutch and select Neutral for a manual vehicle. Turn off unneeded lights and accessories, make one controlled start attempt, and listen for unusual noises. Observe whether the dash lights normally or dims, whether there is a click, whether the engine cranks, and whether it starts then stops; report those observations instead of guessing a diagnosis. Use the vehicle owner's manual for immobilizer, key, jump-start, and model-specific steps; treat EV and hybrid propulsion systems as model-specific and do not touch orange high-voltage components.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 8688,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2299,
+      "first_visible_text_milliseconds" : 2695,
+      "generated_tokens" : 197,
+      "generation_milliseconds" : 8507,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-01-car-no-start",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3806983360,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1561725760,
+      "post_available_memory_bytes" : 3810997440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321997472,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Set the parking brake; select Park or Neutral for an automatic, or fully depress the clutch and select Neutral for a manual vehicle.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Turn off unneeded lights and accessories, make one controlled start attempt, and listen for unusual noises.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Observe whether the dash lights normally or dims, whether there is a click, whether the engine cranks, and whether it starts then stops; report those observations instead of guessing a diagnosis.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use the vehicle owner's manual for immobilizer, key, jump-start, and model-specific steps; treat EV and hybrid propulsion systems as model-specific and do not touch orange high-voltage components.\",\n      \"e\": [4]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-stay-walk",
+        "car-fuse",
+        "car-stay-walk",
+        "first-aid-assessment",
+        "water-filter-disinfect",
+        "car-jump",
+        "first-aid-bleeding",
+        "shelter-overnight"
+      ],
+      "retrieval_candidate_scores" : [
+        0.096393442622950826,
+        0.028129032258064516,
+        0.022873015873015871,
+        0.020125000000000001,
+        0.019425373134328357,
+        0.018992753623188405,
+        0.018761130136986298,
+        0.018388888888888889
+      ],
+      "retrieval_context_milliseconds" : 27.105093002319336,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "car-no-start-triage"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "ca-dmv-engine-start",
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "stream_delta_count" : 105,
+      "stream_deltas" : [
+        "Set",
+        " ",
+        "the ",
+        "parking ",
+        "brake; ",
+        "select ",
+        "Park ",
+        "or ",
+        "Neutral ",
+        "for ",
+        "an ",
+        "automatic, ",
+        "or ",
+        "fully ",
+        "depress ",
+        "the ",
+        "clutch ",
+        "and ",
+        "select ",
+        "Neutral ",
+        "for ",
+        "a ",
+        "manual ",
+        "vehicle.",
+        " ",
+        "Turn ",
+        "off ",
+        "unneeded ",
+        "lights ",
+        "and ",
+        "accessories, ",
+        "make ",
+        "one ",
+        "controlled ",
+        "start ",
+        "attempt, ",
+        "and ",
+        "listen ",
+        "for ",
+        "unusual ",
+        "noises.",
+        " ",
+        "Observe ",
+        "whether ",
+        "the ",
+        "dash ",
+        "lights ",
+        "normally ",
+        "or ",
+        "dims, ",
+        "whether ",
+        "there ",
+        "is ",
+        "a ",
+        "click, ",
+        "whether ",
+        "the ",
+        "engine ",
+        "cranks,",
+        " ",
+        "and ",
+        "whether ",
+        "it ",
+        "starts ",
+        "then ",
+        "stops; ",
+        "report ",
+        "those ",
+        "observations ",
+        "instead ",
+        "of ",
+        "guessing ",
+        "a ",
+        "diagnosis.",
+        " ",
+        "Use ",
+        "the ",
+        "vehicle ",
+        "owner's ",
+        "manual ",
+        "for ",
+        "immobilizer,",
+        " ",
+        "key, ",
+        "jump-start,",
+        " ",
+        "and ",
+        "model-specific ",
+        "steps; ",
+        "treat ",
+        "EV ",
+        "and ",
+        "hybrid ",
+        "propulsion ",
+        "systems ",
+        "as ",
+        "model-specific ",
+        "and ",
+        "do ",
+        "not ",
+        "touch ",
+        "orange ",
+        "high-voltage",
+        " ",
+        "components."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.572164948453608,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 97
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Bring clear water to a rolling boil for 1 minute. Above 6,500 feet (about 1,980 metres), boil for 3 minutes.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4703,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2266,
+      "first_visible_text_milliseconds" : 2622,
+      "generated_tokens" : 77,
+      "generation_milliseconds" : 4507,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-02-water-boil",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3790484672,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1578224448,
+      "post_available_memory_bytes" : 3811112128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3838621632,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring clear water to a rolling boil for 1 minute.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Above 6,500 feet (about 1,980 metres), boil for 3 minutes.\",\n      \"e\": [3]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "water-store",
+        "weather-wildlife-flood",
+        "water-filter-disinfect",
+        "water-locate",
+        "water-collect-prefilter",
+        "basics-stop"
+      ],
+      "retrieval_candidate_scores" : [
+        0.02789344262295082,
+        0.025455882352941175,
+        0.024129032258064516,
+        0.023992753623188409,
+        0.022873015873015871,
+        0.021925373134328359,
+        0.021084507042253522,
+        0.019625000000000004
+      ],
+      "retrieval_context_milliseconds" : 19.423007965087891,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "water-boil-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "cdc-emergency-water",
+        "cdc-backcountry-water"
+      ],
+      "stream_delta_count" : 26,
+      "stream_deltas" : [
+        "Bring",
+        " ",
+        "clear ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil ",
+        "for ",
+        "1 ",
+        "minute.",
+        " ",
+        "Above ",
+        "6,",
+        "50",
+        "0 ",
+        "feet ",
+        "(about ",
+        "1,",
+        "98",
+        "0 ",
+        "metres), ",
+        "boil ",
+        "for ",
+        "3 ",
+        "minutes."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.91343150379295,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 20
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ],
+        [
+          "basics-stop-scenario"
+        ]
+      ],
+      "answer" : "Stop as soon as landmarks, trail, or position stop matching expectations. Mark the spot without damaging the environment and record time and direction of travel. Review the last certain point, recent turns, terrain, distance, and elevation before moving.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5109,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1913,
+      "first_visible_text_milliseconds" : 2270,
+      "generated_tokens" : 104,
+      "generation_milliseconds" : 4942,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-03-lost-trail",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3792286912,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1576422208,
+      "post_available_memory_bytes" : 3820090560,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3838588864,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop as soon as landmarks, trail, or position stop matching expectations.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Mark the spot without damaging the environment and record time and direction of travel.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Review the last certain point, recent turns, terrain, distance, and elevation before moving.\",\n      \"e\": [4]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stop",
+        "navigation-backtrack",
+        "first-aid-wounds-burns",
+        "fire-decision",
+        "navigation-map",
+        "basics-first-night",
+        "first-aid-heat"
+      ],
+      "retrieval_candidate_scores" : [
+        0.020625000000000001,
+        0.020384615384615386,
+        0.01989344262295082,
+        0.018373015873015871,
+        0.017651515151515151,
+        0.017129032258064517,
+        0.017000000000000001,
+        0.01698901098901099
+      ],
+      "retrieval_context_milliseconds" : 12.49396800994873,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 3,
+      "source_card_ids" : [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness"
+      ],
+      "stream_delta_count" : 41,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "as ",
+        "soon ",
+        "as ",
+        "landmarks, ",
+        "trail, ",
+        "or ",
+        "position ",
+        "stop ",
+        "matching ",
+        "expectations.",
+        " ",
+        "Mark ",
+        "the ",
+        "spot ",
+        "without ",
+        "damaging ",
+        "the ",
+        "environment ",
+        "and ",
+        "record ",
+        "time ",
+        "and ",
+        "direction ",
+        "of ",
+        "travel.",
+        " ",
+        "Review ",
+        "the ",
+        "last ",
+        "certain ",
+        "point, ",
+        "recent ",
+        "turns, ",
+        "terrain, ",
+        "distance, ",
+        "and ",
+        "elevation ",
+        "before ",
+        "moving."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.004621987454605,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 38
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply immediate firm pressure to the wound with a clean cloth or gauze. Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4562,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2037,
+      "first_visible_text_milliseconds" : 2396,
+      "generated_tokens" : 82,
+      "generation_milliseconds" : 4420,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-04-severe-bleeding",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3791746216,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1576962904,
+      "post_available_memory_bytes" : 3833967808,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3847354304,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the wound with a clean cloth or gauze.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Do not loosen the tourniquet after application; obtain emergency evacuation as quickly as possible.\",\n      \"e\": [4, 5]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "car-stay-walk",
+        "first-aid-shock",
+        "basics-stop",
+        "food-low-risk",
+        "first-aid-cold",
+        "first-aid-wounds-burns",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        0.030643442622950819,
+        0.025151515151515154,
+        0.022374999999999999,
+        0.020558227848101265,
+        0.020129032258064516,
+        0.020048192771084338,
+        0.019873015873015872,
+        0.018425373134328359
+      ],
+      "retrieval_context_milliseconds" : 22.387027740478516,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "stream_delta_count" : 31,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "immediate ",
+        "firm ",
+        "pressure ",
+        "to ",
+        "the ",
+        "wound ",
+        "with ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        ".",
+        " ",
+        "Do ",
+        "not ",
+        "loosen ",
+        "the ",
+        "tourniqu",
+        "et ",
+        "after ",
+        "application; ",
+        "obtain ",
+        "emergency ",
+        "evacuation ",
+        "as ",
+        "quickly ",
+        "as ",
+        "possible."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.990767939571967,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 27
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario"
+        ]
+      ],
+      "answer" : "Move out of wind and wet, replace wet clothing, and insulate above and below. Warm the chest, neck, armpits, and groin with wrapped warm packs or shared body heat. Protect frostbitten tissue from pressure and refreezing; evacuate serious cases.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5456,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1951,
+      "first_visible_text_milliseconds" : 2333,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 5267,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-05-hypothermia",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3816371368,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1552337752,
+      "post_available_memory_bytes" : 3835688128,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3861411776,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Move out of wind and wet, replace wet clothing, and insulate above and below.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Warm the chest, neck, armpits, and groin with wrapped warm packs or shared body heat.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Protect frostbitten tissue from pressure and refreezing; evacuate serious cases.\",\n      \"e\": [4]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-cold",
+        "weather-wildlife-cold",
+        "fire-wet",
+        "water-dehydration",
+        "fire-decision",
+        "weather-wildlife-lightning"
+      ],
+      "retrieval_candidate_scores" : [
+        0.02739344262295082,
+        0.021401515151515151,
+        0.018629032258064514,
+        0.018373015873015871,
+        0.018124999999999999,
+        0.016384615384615386
+      ],
+      "retrieval_context_milliseconds" : 3.5519599914550781,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-cold-scenario"
+      ],
+      "sentence_citation_count" : 3,
+      "source_card_ids" : [
+        "redcross-wilderness-first-aid",
+        "nws-heat-cold"
+      ],
+      "stream_delta_count" : 45,
+      "stream_deltas" : [
+        "Move",
+        " ",
+        "out ",
+        "of ",
+        "wind ",
+        "and ",
+        "wet, ",
+        "replace ",
+        "wet ",
+        "clothing, ",
+        "and ",
+        "insulate ",
+        "above ",
+        "and ",
+        "below.",
+        " ",
+        "Warm ",
+        "the ",
+        "chest, ",
+        "neck, ",
+        "armpits",
+        ", ",
+        "and ",
+        "groin ",
+        "with ",
+        "wrapped ",
+        "warm ",
+        "packs ",
+        "or ",
+        "shared ",
+        "body ",
+        "heat.",
+        " ",
+        "Protect ",
+        "frostbitten",
+        " ",
+        "tissue ",
+        "from ",
+        "pressure ",
+        "and ",
+        "refreezing",
+        "; ",
+        "evacuate ",
+        "serious ",
+        "cases."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.47406513872135,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 39
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "weather-wildlife-lightning-scenario"
+        ]
+      ],
+      "answer" : "Leave ridges, peaks, open water, and isolated tall objects immediately. If no safe building or vehicle exists, spread a group apart and move toward lower terrain away from water and tall isolated trees. Wait 30 minutes after the last thunder before leaving safe shelter.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5340,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1877,
+      "first_visible_text_milliseconds" : 2240,
+      "generated_tokens" : 111,
+      "generation_milliseconds" : 5146,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-06-lightning",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3807409320,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1561299800,
+      "post_available_memory_bytes" : 3835802816,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3862935488,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Leave ridges, peaks, open water, and isolated tall objects immediately.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"If no safe building or vehicle exists, spread a group apart and move toward lower terrain away from water and tall isolated trees.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Wait 30 minutes after the last thunder before leaving safe shelter.\",\n      \"e\": [4]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "weather-wildlife-lightning",
+        "shelter-cold-snow",
+        "shelter-site",
+        "food-low-risk",
+        "fire-decision",
+        "first-aid-cold",
+        "weather-wildlife-wind-storm",
+        "signal-whistle"
+      ],
+      "retrieval_candidate_scores" : [
+        0.022393442622950822,
+        0.021285714285714283,
+        0.021129032258064517,
+        0.019884615384615386,
+        0.018373015873015871,
+        0.017709507042253519,
+        0.017651515151515151,
+        0.016625000000000001
+      ],
+      "retrieval_context_milliseconds" : 9.3619823455810547,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "weather-wildlife-lightning-scenario"
+      ],
+      "sentence_citation_count" : 3,
+      "source_card_ids" : [
+        "nws-lightning"
+      ],
+      "stream_delta_count" : 49,
+      "stream_deltas" : [
+        "Leave",
+        " ",
+        "ridges,",
+        " ",
+        "peaks, ",
+        "open ",
+        "water, ",
+        "and ",
+        "isolated ",
+        "tall ",
+        "objects ",
+        "immediately.",
+        " ",
+        "If ",
+        "no ",
+        "safe ",
+        "building ",
+        "or ",
+        "vehicle ",
+        "exists, ",
+        "spread ",
+        "a ",
+        "group ",
+        "apart ",
+        "and ",
+        "move ",
+        "toward ",
+        "lower ",
+        "terrain ",
+        "away ",
+        "from ",
+        "water ",
+        "and ",
+        "tall ",
+        "isolated ",
+        "trees.",
+        " ",
+        "Wait ",
+        "30",
+        " ",
+        "minutes ",
+        "after ",
+        "the ",
+        "last ",
+        "thunder ",
+        "before ",
+        "leaving ",
+        "safe ",
+        "shelter."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.649434077699603,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 44
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-energy-scenario"
+        ],
+        [
+          "food-low-risk-scenario"
+        ]
+      ],
+      "answer" : "Estimate likely rescue time, weather, health, daylight, and food already available. Choose only methods with a high chance of return and low injury risk. Stop if gathering consumes water, warmth, navigation certainty, or signaling time. Protect existing calories and use them to support warmth, decisions, and necessary work.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6107,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1953,
+      "first_visible_text_milliseconds" : 2308,
+      "generated_tokens" : 136,
+      "generation_milliseconds" : 5955,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-07-find-food",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3807540392,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1561168728,
+      "post_available_memory_bytes" : 3835917504,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3863066560,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Estimate likely rescue time, weather, health, daylight, and food already available.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Choose only methods with a high chance of return and low injury risk.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Stop if gathering consumes water, warmth, navigation certainty, or signaling time.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Protect existing calories and use them to support warmth, decisions, and necessary work.\",\n      \"e\": [6]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-energy",
+        "signal-whistle",
+        "signal-smoke-fire",
+        "first-aid-cold",
+        "food-low-risk",
+        "basics-stop",
+        "basics-priorities",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        0.096393442622950826,
+        0.021873015873015871,
+        0.021624999999999998,
+        0.0206986301369863,
+        0.019651515151515152,
+        0.019629032258064515,
+        0.018884615384615385,
+        0.018205882352941176
+      ],
+      "retrieval_context_milliseconds" : 13.71002197265625,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-carried-scenario",
+        "food-energy-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "army-atp-survival",
+        "nps-trip-planning",
+        "nps-olympic-wilderness",
+        "nps-yosemite-wilderness",
+        "nps-wildlife"
+      ],
+      "stream_delta_count" : 52,
+      "stream_deltas" : [
+        "Est",
+        "imate ",
+        "likely ",
+        "rescue ",
+        "time, ",
+        "weather, ",
+        "health, ",
+        "daylight, ",
+        "and ",
+        "food ",
+        "already ",
+        "available.",
+        " ",
+        "Choose ",
+        "only ",
+        "methods ",
+        "with ",
+        "a ",
+        "high ",
+        "chance ",
+        "of ",
+        "return ",
+        "and ",
+        "low ",
+        "injury ",
+        "risk.",
+        " ",
+        "Stop ",
+        "if ",
+        "gathering ",
+        "consumes ",
+        "water, ",
+        "warmth, ",
+        "navigation ",
+        "certainty, ",
+        "or ",
+        "signaling ",
+        "time.",
+        " ",
+        "Protect ",
+        "existing ",
+        "calories ",
+        "and ",
+        "use ",
+        "them ",
+        "to ",
+        "support ",
+        "warmth, ",
+        "decisions, ",
+        "and ",
+        "necessary ",
+        "work."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.733133433283356,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 48
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended. Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water. Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F at the thickest part when a food thermometer is available. Fish only where legal and only if you have suitable gear and safe access to the bank.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 8751,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1936,
+      "first_visible_text_milliseconds" : 2309,
+      "generated_tokens" : 206,
+      "generation_milliseconds" : 8599,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-08-fishing-followup",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3830199488,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1538509632,
+      "post_available_memory_bytes" : 3834066112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3835901120,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Secure line to a purpose-made rod or handline, attach a suitable hook and any float or weight the gear requires, add locally legal bait, and keep the line attended.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Present the bait from a stable bank near cover or a current edge without wading, swimming, climbing, or reaching over unstable ground; retrieve steadily and land the fish without entering the water.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Keep hands, tools, and ready-to-eat food away from raw fish contamination, and cook retained fish to 145 °F at the thickest part when a food thermometer is available.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Fish only where legal and only if you have suitable gear and safe access to the bank.\",\n      \"e\": [14]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "navigation-backtrack",
+        "navigation-travel-crossing",
+        "car-tire",
+        "food-low-risk",
+        "water-filter-disinfect",
+        "car-fuse",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.021893442622950822,
+        0.020125000000000001,
+        0.019884615384615386,
+        0.019651515151515152,
+        0.019629032258064515,
+        0.017425373134328358,
+        0.017205882352941175,
+        0.016873015873015873
+      ],
+      "retrieval_context_milliseconds" : 6.3629150390625,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        5,
+        8
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-fishing-basics",
+        "food-low-risk-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "usda-fish-temperature",
+        "army-atp-survival"
+      ],
+      "stream_delta_count" : 114,
+      "stream_deltas" : [
+        "Secure",
+        " ",
+        "line ",
+        "to ",
+        "a ",
+        "purpose-made ",
+        "rod ",
+        "or ",
+        "handline,",
+        " ",
+        "attach ",
+        "a ",
+        "suitable ",
+        "hook ",
+        "and ",
+        "any ",
+        "float ",
+        "or ",
+        "weight ",
+        "the ",
+        "gear ",
+        "requires, ",
+        "add ",
+        "locally ",
+        "legal ",
+        "bait, ",
+        "and ",
+        "keep ",
+        "the ",
+        "line ",
+        "attended.",
+        " ",
+        "Present ",
+        "the ",
+        "bait ",
+        "from ",
+        "a ",
+        "stable ",
+        "bank ",
+        "near ",
+        "cover ",
+        "or ",
+        "a ",
+        "current ",
+        "edge ",
+        "without ",
+        "wading,",
+        " ",
+        "swimming, ",
+        "climbing, ",
+        "or ",
+        "reaching ",
+        "over ",
+        "unstable ",
+        "ground; ",
+        "retrieve ",
+        "steadily ",
+        "and ",
+        "land ",
+        "the ",
+        "fish ",
+        "without ",
+        "entering ",
+        "the ",
+        "water.",
+        " ",
+        "Keep ",
+        "hands, ",
+        "tools, ",
+        "and ",
+        "ready-to-e",
+        "at ",
+        "food ",
+        "away ",
+        "from ",
+        "raw ",
+        "fish ",
+        "contamination, ",
+        "and ",
+        "cook ",
+        "retained ",
+        "fish ",
+        "to ",
+        "14",
+        "5 ",
+        "°F ",
+        "at ",
+        "the ",
+        "thickest ",
+        "part ",
+        "when ",
+        "a ",
+        "food ",
+        "thermometer ",
+        "is ",
+        "available.",
+        " ",
+        "Fish ",
+        "only ",
+        "where ",
+        "legal ",
+        "and ",
+        "only ",
+        "if ",
+        "you ",
+        "have ",
+        "suitable ",
+        "gear ",
+        "and ",
+        "safe ",
+        "access ",
+        "to ",
+        "the ",
+        "bank."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 30.766921806993846,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 106
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Use carried food or other lower-risk options first. Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty. Keep unknown material away from children and food-preparation surfaces. Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6394,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2048,
+      "first_visible_text_milliseconds" : 2413,
+      "generated_tokens" : 140,
+      "generation_milliseconds" : 6245,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "stream-09-unknown-mushroom",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3806360744,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1562348376,
+      "post_available_memory_bytes" : 3835016384,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3861264320,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\n  \"s\": [\n    {\n      \"a\": \"Use carried food or other lower-risk options first.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Treat look-alike species, mushrooms, berries, roots, and water plants as unknown unless already known with certainty.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Keep unknown material away from children and food-preparation surfaces.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Do not eat unfamiliar animals, shellfish, insects, or plants merely because another animal ate them.\",\n      \"e\": [10]\n    }\n  ]\n}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "new_incident",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-carried",
+        "food-low-risk",
+        "weather-wildlife-large-animals",
+        "food-wildlife",
+        "basics-inventory",
+        "water-boil",
+        "fire-decision"
+      ],
+      "retrieval_candidate_scores" : [
+        0.026893442622950819,
+        0.020373015873015873,
+        0.020129032258064516,
+        0.019205882352941177,
+        0.019125,
+        0.018388888888888889,
+        0.018333333333333333,
+        0.017625000000000002
+      ],
+      "retrieval_context_milliseconds" : 13.010978698730469,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        3,
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-low-risk-scenario",
+        "food-unknown-plants-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "army-atp-survival"
+      ],
+      "stream_delta_count" : 55,
+      "stream_deltas" : [
+        "Use",
+        " ",
+        "carried ",
+        "food ",
+        "or ",
+        "other ",
+        "lower-risk ",
+        "options ",
+        "first.",
+        " ",
+        "Treat ",
+        "look-alike",
+        " ",
+        "species, ",
+        "mushrooms, ",
+        "berries, ",
+        "roots, ",
+        "and ",
+        "water ",
+        "plants ",
+        "as ",
+        "unknown ",
+        "unless ",
+        "already ",
+        "known ",
+        "with ",
+        "certainty.",
+        " ",
+        "Keep ",
+        "unknown ",
+        "material ",
+        "away ",
+        "from ",
+        "children ",
+        "and ",
+        "food-preparation",
+        " ",
+        "surfaces.",
+        " ",
+        "Do ",
+        "not ",
+        "eat ",
+        "unfamiliar ",
+        "animals, ",
+        "shellfish,",
+        " ",
+        "insects, ",
+        "or ",
+        "plants ",
+        "merely ",
+        "because ",
+        "another ",
+        "animal ",
+        "ate ",
+        "them."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.118894448415531,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 48
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Hi, I'm Aurora Expert. I can help with your question.",
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 1262,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 520,
+      "first_visible_text_milliseconds" : 613,
+      "generated_tokens" : 21,
+      "generation_milliseconds" : 1104,
+      "grounding_reason" : "standalone_conversation",
+      "id" : "stream-10-greeting-isolation",
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3806819496,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1561889624,
+      "post_available_memory_bytes" : 3831379136,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3862247360,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+        "{\"a\":\"Hi, I'm Aurora Expert. I can help with your question.\",\"e\":[]}"
+      ],
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "standalone_conversation",
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "car-ev-hybrid",
+        "car-fuse",
+        "first-aid-heat",
+        "weather-wildlife-wind-storm",
+        "first-aid-cold",
+        "weather-wildlife-flood",
+        "signal-ground",
+        "car-scene"
+      ],
+      "retrieval_candidate_scores" : [
+        0.016393442622950821,
+        0.016129032258064516,
+        0.015873015873015872,
+        0.015625,
+        0.015384615384615385,
+        0.015151515151515152,
+        0.014925373134328358,
+        0.014705882352941176
+      ],
+      "retrieval_context_milliseconds" : 5.8510303497314453,
+      "retrieval_flow" : "direct_rag",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 11,
+      "stream_deltas" : [
+        "Hi",
+        ", ",
+        "I'm ",
+        "Aurora ",
+        "Expert. ",
+        "I ",
+        "can ",
+        "help ",
+        "with ",
+        "your ",
+        "question."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.246575342465754,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 10
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5313362984,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325618336,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "2b5caa47f11aadcf4f6710211886d85d160464ed7b47032cd2f12cd2e6da663b",
+  "maximum_thermal_wait_seconds" : 300,
+  "minimum_cooldown_seconds" : 0,
+  "mode" : "expert-one-shot-streaming",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-one-shot-streaming-20260820-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325585568,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 118,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3810997440,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8991,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3811112128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 13856,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3820090560,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 19113,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3833967808,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23830,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3835688128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29423,
+      "phase" : "after_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3835802816,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 34909,
+      "phase" : "after_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3835917504,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 41166,
+      "phase" : "after_6",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3834066112,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50016,
+      "phase" : "after_7",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3835016384,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56567,
+      "phase" : "after_8",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3831379136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 57977,
+      "phase" : "after_9",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3860903872,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 58070,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4342348120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 63258,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4342348120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 68663,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5287361528,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 73849,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362960,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 79260,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362960,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 84394,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313395752,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 89812,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313395752,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 95026,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313395752,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 100259,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313379368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 105471,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313379368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 110882,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313346600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 116262,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 121377,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 126565,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313346600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 131972,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313330216,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 137262,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313346600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 142427,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313346600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 147595,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313346600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 153010,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313330216,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 158255,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313379368,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 163365,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 168521,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 173850,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 179184,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5313362984,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 184319,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

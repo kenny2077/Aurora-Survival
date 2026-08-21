@@ -6,6 +6,8 @@ public enum ModelPromptPurpose: Equatable, Sendable {
     case clarification
     case incidentFallback
     case incidentIntake
+    case expertIntent
+    case nativeVisionAnswer
 }
 
 public enum ModelPromptAttempt: Equatable, Sendable {
@@ -21,6 +23,10 @@ public struct ModelPrompt: Sendable {
     public let tier: ModelTier
     public let permitsVisionReasoning: Bool
     public let conversationHistory: [ConversationTurn]
+    public let expertContextProfile: ExpertContextProfile?
+    public let maximumImageDimension: Int?
+    public let expertEvidence: [RetrievedEvidenceScenario]
+    public let repairFeedback: [String]
     public let purpose: ModelPromptPurpose
     public let attempt: ModelPromptAttempt
 
@@ -32,6 +38,10 @@ public struct ModelPrompt: Sendable {
         tier: ModelTier,
         permitsVisionReasoning: Bool,
         conversationHistory: [ConversationTurn] = [],
+        expertContextProfile: ExpertContextProfile? = nil,
+        maximumImageDimension: Int? = nil,
+        expertEvidence: [RetrievedEvidenceScenario] = [],
+        repairFeedback: [String] = [],
         purpose: ModelPromptPurpose? = nil,
         attempt: ModelPromptAttempt = .initial
     ) {
@@ -42,11 +52,15 @@ public struct ModelPrompt: Sendable {
         self.tier = tier
         self.permitsVisionReasoning = permitsVisionReasoning
         self.conversationHistory = conversationHistory
+        self.expertContextProfile = expertContextProfile
+        self.maximumImageDimension = maximumImageDimension
+        self.expertEvidence = expertEvidence
+        self.repairFeedback = repairFeedback
         self.purpose = purpose ?? (evidence.isEmpty ? .ordinary : .grounded)
         self.attempt = attempt
     }
 
-    public func repairing() -> ModelPrompt {
+    public func repairing(feedback: [String] = []) -> ModelPrompt {
         ModelPrompt(
             question: question,
             evidence: evidence,
@@ -55,6 +69,10 @@ public struct ModelPrompt: Sendable {
             tier: tier,
             permitsVisionReasoning: permitsVisionReasoning,
             conversationHistory: conversationHistory,
+            expertContextProfile: expertContextProfile,
+            maximumImageDimension: maximumImageDimension,
+            expertEvidence: expertEvidence,
+            repairFeedback: feedback,
             purpose: purpose,
             attempt: .repair
         )
@@ -65,6 +83,10 @@ public protocol LocalLanguageModel: Sendable {
     var tier: ModelTier { get }
     var outputMode: ModelOutputMode { get }
     func generate(prompt: ModelPrompt) async throws -> String
+    func generate(
+        prompt: ModelPrompt,
+        tokenSink: (@Sendable (String) -> Void)?
+    ) async throws -> String
 }
 
 public enum ModelOutputMode: String, Codable, Sendable {
@@ -74,6 +96,15 @@ public enum ModelOutputMode: String, Codable, Sendable {
 
 public extension LocalLanguageModel {
     var outputMode: ModelOutputMode { .citationText }
+
+    func generate(
+        prompt: ModelPrompt,
+        tokenSink: (@Sendable (String) -> Void)?
+    ) async throws -> String {
+        let output = try await generate(prompt: prompt)
+        tokenSink?(output)
+        return output
+    }
 }
 
 public enum ModelFailure: Error, Equatable {

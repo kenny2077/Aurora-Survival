@@ -1,0 +1,24 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "id" : "expert-install",
+      "installed" : true,
+      "memory_profile_status" : "retained",
+      "package_id" : "model.expert.qwen3vl-2b-q4km-q8",
+      "version" : "0.1.0-retained-m2"
+    }
+  ],
+  "completed" : true,
+  "final_available_memory_bytes" : 5323881680,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5347081520,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "mode" : "expert-install",
+  "run_id" : "retained-install-m2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

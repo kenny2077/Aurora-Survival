@@ -1,0 +1,56 @@
+{
+  "acceptance_status": "automated_gate_failed",
+  "accepted": false,
+  "automated_gates": {
+    "all_reports_completed": true,
+    "calibration_three_runs_each": false,
+    "grounded_contract_pass_all": false,
+    "multiturn_case_count_120": false,
+    "multiturn_top_two_recall_at_least_0_95": false,
+    "no_serious_thermal": true,
+    "no_terminal_failures": true,
+    "rag_case_count_700": false,
+    "rag_first_pass_at_least_0_95": false,
+    "rag_route_and_coverage_at_least_0_95": false,
+    "retrieval_context_p95_at_most_150ms": true,
+    "text_result_p95_at_most_12s": false,
+    "vision_case_count_120": false,
+    "visual_result_p95_at_most_20s": false,
+    "zero_critical_terminal_failures": false
+  },
+  "human_gates": {
+    "battery_scenario_at_most_0_05": false,
+    "citation_entailment_at_least_0_98": false,
+    "thirty_minute_sustained_pass": false,
+    "vision_rubric_complete": false,
+    "zero_critical_unsafe_assertions": false
+  },
+  "metrics": {
+    "failure_categories": {
+      "unsupported_generation": 3
+    },
+    "grounded_contract_cases": 0,
+    "grounded_contract_passes": 0,
+    "multiturn_cases": 0,
+    "multiturn_recall": 0,
+    "multiturn_route_passes": 0,
+    "rag_cases": 12,
+    "rag_critical_failures": [
+      "first-aid-bleeding-08"
+    ],
+    "rag_first_passes": 5,
+    "rag_route_passes": 11,
+    "report_count": 1,
+    "retained_peak_bytes": {},
+    "retrieval_context_p95_milliseconds": 13.123035430908203,
+    "terminal_failures": [],
+    "thermal_states": [
+      "nominal"
+    ],
+    "vision_cases": 0,
+    "visual_first_token_p95_milliseconds": null,
+    "visual_result_p95_milliseconds": null,
+    "visual_tokens_per_second_median": null
+  },
+  "schema_version": 1
+}

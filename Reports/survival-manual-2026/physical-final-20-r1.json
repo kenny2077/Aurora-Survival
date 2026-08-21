@@ -1,0 +1,6345 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "e3794285082b4442275ed724a6c158dad095f1128ef053acb5d88f7c626676cc  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-wet-scenario"
+        ]
+      ],
+      "answer" : "Build a fire in wet conditions. The goal is finding usable dry material. Search under larger branches; inside dead wood; under natural cover. Outer surfaces may be wet. The interior may remain dry.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6637,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1834,
+      "first_visible_text_milliseconds" : 3049,
+      "generated_tokens" : 138,
+      "generation_milliseconds" : 5610,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-01-wet-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3806459120,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1562250000,
+      "post_available_memory_bytes" : 3809621232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5321292960,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Build a fire in wet conditions.\",\n      \"e\": [1, 2, 3]\n    }\n  ,\n    {\n      \"a\": \"The goal is finding usable dry material.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Search under larger branches; inside dead wood; under natural cover.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Outer surfaces may be wet.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"The interior may remain dry.\",\n      \"e\": [7]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Build a fire in wet conditions.\",\n      \"e\": [1, 2, 3]\n    }\n  ,\n    {\n      \"a\": \"The goal is finding usable dry material.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Search under larger branches; inside dead wood; under natural cover.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Outer surfaces may be wet.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"The interior may remain dry.\",\n      \"e\": [7]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        19,
+        20,
+        23,
+        55,
+        30,
+        56,
+        null,
+        60,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.83848685026168823,
+        0.73339039087295532,
+        0.73170822858810425,
+        0.72109425067901611,
+        0.67226314544677734,
+        0.70557093620300293,
+        0.67104274034500122,
+        null,
+        0.66904759407043457,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "fire-wet",
+        "fire-build-feed",
+        "",
+        "fire-decision",
+        "signal-smoke-fire",
+        "",
+        "fire-materials",
+        "fire-site",
+        "weather-wildlife-heat",
+        "basics-priorities",
+        "",
+        "shelter-tarp",
+        "weather-wildlife-cold",
+        "",
+        "car-ev-hybrid",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        11,
+        1,
+        9,
+        6,
+        25,
+        28,
+        3,
+        17,
+        7,
+        12,
+        20,
+        5,
+        2,
+        10,
+        19
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        2,
+        3,
+        2,
+        2,
+        1,
+        1,
+        3,
+        1,
+        2,
+        2,
+        3,
+        2,
+        2,
+        2,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.05160267471958585,
+        0.038492368742368742,
+        0.036490534055220319,
+        0.036482142857142852,
+        0.033186398923954551,
+        0.029820922723883647,
+        0.022282963603188322,
+        0.022124999999999999,
+        0.022084975630430177,
+        0.020205882352941178,
+        0.019198630136986299,
+        0.018845679012345677,
+        0.018651515151515152,
+        0.017873015873015874,
+        0.017584507042253523,
+        0.017000000000000001
+      ],
+      "retrieval_context_milliseconds" : 0.076055526733398438,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "fire-wet-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 38,
+      "stream_deltas" : [
+        "Build",
+        " ",
+        "a ",
+        "fire ",
+        "in ",
+        "wet ",
+        "conditions.",
+        " ",
+        "The ",
+        "goal ",
+        "is ",
+        "finding ",
+        "usable ",
+        "dry ",
+        "material.",
+        " ",
+        "Search ",
+        "under ",
+        "larger ",
+        "branches; ",
+        "inside ",
+        "dead ",
+        "wood; ",
+        "under ",
+        "natural ",
+        "cover.",
+        " ",
+        "Outer ",
+        "surfaces ",
+        "may ",
+        "be ",
+        "wet.",
+        " ",
+        "The ",
+        "interior ",
+        "may ",
+        "remain ",
+        "dry."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 36.281779661016948,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 33
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-extinguish-scenario"
+        ]
+      ],
+      "answer" : "Stop adding fuel to the fire and add water. Check for remaining heat by touching the ashes with your hand.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4005,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1250,
+      "first_visible_text_milliseconds" : 2376,
+      "generated_tokens" : 67,
+      "generation_milliseconds" : 3092,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-02-extinguish-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3788879016,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1579830104,
+      "post_available_memory_bytes" : 3812226216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3837245424,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop adding fuel to the fire and add water.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Check for remaining heat by touching the ashes with your hand.\",\n      \"e\": [1]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop adding fuel to the fire and add water.\",\n      \"e\": [2, 3]\n    },\n    {\n      \"a\": \"Check for remaining heat by touching the ashes with your hand.\",\n      \"e\": [1]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        3,
+        4,
+        9,
+        8,
+        10,
+        30,
+        40,
+        48,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.70245707035064697,
+        0.70172786712646484,
+        0.65510505437850952,
+        0.65786570310592651,
+        0.64948016405105591,
+        0.61415231227874756,
+        0.60215359926223755,
+        0.59918087720870972,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "fire-extinguish",
+        "fire-build-feed",
+        "fire-decision",
+        "fire-wet",
+        "",
+        "signal-smoke-fire",
+        "weather-wildlife-wildfire",
+        "car-ev-hybrid",
+        "fire-site",
+        "",
+        "",
+        "fire-materials",
+        "car-scene",
+        "",
+        "water-boil",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        2,
+        4,
+        7,
+        6,
+        3,
+        9,
+        11,
+        1,
+        5,
+        8,
+        10,
+        12,
+        13,
+        14,
+        15
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.04301844262295082,
+        0.036397782772782772,
+        0.029670329670329669,
+        0.029198635976129581,
+        0.029009880176581879,
+        0.026614010989010992,
+        0.024186704384724186,
+        0.023063200815494393,
+        0.018629032258064514,
+        0.015151515151515152,
+        0.014492753623188406,
+        0.014084507042253521,
+        0.013698630136986301,
+        0.013513513513513514,
+        0.013333333333333334,
+        0.013157894736842105
+      ],
+      "retrieval_context_milliseconds" : 0.048041343688964844,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "fire-extinguish-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 22,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "adding ",
+        "fuel ",
+        "to ",
+        "the ",
+        "fire ",
+        "and ",
+        "add ",
+        "water.",
+        " ",
+        "Check ",
+        "for ",
+        "remaining ",
+        "heat ",
+        "by ",
+        "touching ",
+        "the ",
+        "ashes ",
+        "with ",
+        "your ",
+        "hand."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.830618892508141,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 20
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Bring water to a rolling boil. Allow settling or filter through clean material. Heat water to a rolling boil for the full recommended time at elevation. Boiling is effective against many biological hazards but does not remove chemical contamination.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6108,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1694,
+      "first_visible_text_milliseconds" : 2850,
+      "generated_tokens" : 124,
+      "generation_milliseconds" : 5176,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-03-boil-elevation",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3783259280,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1585449840,
+      "post_available_memory_bytes" : 3818403032,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3839490008,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat water to a rolling boil for the full recommended time at elevation.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Boiling is effective against many biological hazards but does not remove chemical contamination.\",\n      \"e\": [2, 7]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat water to a rolling boil for the full recommended time at elevation.\",\n      \"e\": [6]\n    },\n    {\n      \"a\": \"Boiling is effective against many biological hazards but does not remove chemical contamination.\",\n      \"e\": [2, 7]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        8,
+        7,
+        5,
+        59,
+        48,
+        35,
+        57,
+        54,
+        43,
+        41,
+        42,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.72396111488342285,
+        0.65382421016693115,
+        0.6548541784286499,
+        0.67974823713302612,
+        0.5864148736000061,
+        0.59484535455703735,
+        0.61684346199035645,
+        0.58806008100509644,
+        0.58962178230285645,
+        0.59800803661346436,
+        0.59984743595123291,
+        0.5983312726020813,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "",
+        "water-locate",
+        "weather-wildlife-flood",
+        "navigation-travel-crossing",
+        "navigation-terrain",
+        "",
+        "weather-wildlife-wind-storm",
+        "water-choose-source",
+        "",
+        "weather-wildlife-lightning",
+        "shelter-heat-rain",
+        "",
+        "water-store",
+        "water-collect-prefilter",
+        ""
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        3,
+        5,
+        4,
+        7,
+        12,
+        2,
+        23,
+        25,
+        35,
+        41,
+        6,
+        20,
+        21,
+        9
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.048274186833203232,
+        0.042364323194685756,
+        0.041709453781512598,
+        0.039803030303030305,
+        0.034406778505182756,
+        0.028895075231927633,
+        0.028615296803652965,
+        0.027847592144202311,
+        0.023100414078674945,
+        0.022243291592128803,
+        0.021220588235294116,
+        0.020512659432705121,
+        0.016925373134328358,
+        0.016845679012345679,
+        0.016695121951219513,
+        0.016285714285714285
+      ],
+      "retrieval_context_milliseconds" : 0.048995018005371094,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "water-boil-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 43,
+      "stream_deltas" : [
+        "Bring",
+        " ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil.",
+        " ",
+        "Allow ",
+        "settling ",
+        "or ",
+        "filter ",
+        "through ",
+        "clean ",
+        "material.",
+        " ",
+        "Heat ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil ",
+        "for ",
+        "the ",
+        "full ",
+        "recommended ",
+        "time ",
+        "at ",
+        "elevation.",
+        " ",
+        "Boiling ",
+        "is ",
+        "effective ",
+        "against ",
+        "many ",
+        "biological ",
+        "hazards ",
+        "but ",
+        "does ",
+        "not ",
+        "remove ",
+        "chemical ",
+        "contamination."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 35.324526134405517,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 39
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "sm26-water-solar-still"
+        ]
+      ],
+      "answer" : "Collect condensed moisture from the surface of a plastic sheet using a container placed in the center and sealed with edges, then place a small weight above it to create pressure for condensation collection. Condensation collects on the inner side of the plastic sheet and drips downward into the container below.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4832,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 856,
+      "first_visible_text_milliseconds" : 1947,
+      "generated_tokens" : 102,
+      "generation_milliseconds" : 3901,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-04-solar-still",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3798938816,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1569770304,
+      "post_available_memory_bytes" : 3821384896,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3845715976,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Collect condensed moisture from the surface of a plastic sheet using a container placed in the center and sealed with edges, then place a small weight above it to create pressure for condensation collection.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Condensation collects on the inner side of the plastic sheet and drips downward into the container below.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Collect condensed moisture from the surface of a plastic sheet using a container placed in the center and sealed with edges, then place a small weight above it to create pressure for condensation collection.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Condensation collects on the inner side of the plastic sheet and drips downward into the container below.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "exact_title",
+          "exact_current_cue",
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        26,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        8,
+        17,
+        20,
+        21,
+        24,
+        33
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.75286120176315308,
+        0.59114688634872437,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.65573698282241821,
+        0.61499220132827759,
+        0.60346555709838867,
+        0.60258525609970093,
+        0.59468472003936768,
+        0.58575117588043213
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "exact_multiword_match",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "",
+        "",
+        "basics-inventory",
+        "navigation-stop-mark",
+        "fire-extinguish",
+        "fire-wet",
+        "water-choose-source",
+        "weather-wildlife-cold",
+        "first-aid-fracture-spine",
+        "navigation-compass",
+        "",
+        "shelter-heat-rain",
+        "car-ev-hybrid",
+        "weather-wildlife-heat",
+        "",
+        "water-filter-disinfect"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        8,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        7,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.11878688524590164,
+        0.026987006496751627,
+        0.018629032258064514,
+        0.018373015873015871,
+        0.018124999999999999,
+        0.017884615384615384,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015285714285714284,
+        0.014705882352941176,
+        0.014492753623188406,
+        0.01282051282051282,
+        0.012345679012345678,
+        0.012195121951219513,
+        0.011764705882352941,
+        0.011638297872340424
+      ],
+      "retrieval_context_milliseconds" : 0.047922134399414062,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "sm26-water-solar-still"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 53,
+      "stream_deltas" : [
+        "Collect",
+        " ",
+        "condensed ",
+        "moisture ",
+        "from ",
+        "the ",
+        "surface ",
+        "of ",
+        "a ",
+        "plastic ",
+        "sheet ",
+        "using ",
+        "a ",
+        "container ",
+        "placed ",
+        "in ",
+        "the ",
+        "center ",
+        "and ",
+        "sealed ",
+        "with ",
+        "edges, ",
+        "then ",
+        "place ",
+        "a ",
+        "small ",
+        "weight ",
+        "above ",
+        "it ",
+        "to ",
+        "create ",
+        "pressure ",
+        "for ",
+        "condensation ",
+        "collection.",
+        " ",
+        "Condensation ",
+        "collects ",
+        "on ",
+        "the ",
+        "inner ",
+        "side ",
+        "of ",
+        "the ",
+        "plastic ",
+        "sheet ",
+        "and ",
+        "drips ",
+        "downward ",
+        "into ",
+        "the ",
+        "container ",
+        "below."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.16912972085386,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 51
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-tarp-scenario"
+        ]
+      ],
+      "answer" : "Deploy a tarp over the ridgeline using stakes to secure it in place. Anchor the corners of the tarp with stakes and ensure they are tightly secured.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5121,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1920,
+      "first_visible_text_milliseconds" : 3059,
+      "generated_tokens" : 79,
+      "generation_milliseconds" : 4203,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-05-a-frame",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3802608832,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1566100288,
+      "post_available_memory_bytes" : 3830150360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3848714224,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Deploy a tarp over the ridgeline using stakes to secure it in place.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Anchor the corners of the tarp with stakes and ensure they are tightly secured.\",\n      \"e\": [7, 4]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Deploy a tarp over the ridgeline using stakes to secure it in place.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Anchor the corners of the tarp with stakes and ensure they are tightly secured.\",\n      \"e\": [7, 4]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "exact_current_cue",
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        6,
+        61,
+        34,
+        38,
+        49,
+        53,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.78209394216537476,
+        0.75643700361251831,
+        0.6391221284866333,
+        0.67356830835342407,
+        0.66389650106430054,
+        0.65098637342453003,
+        0.64616554975509644,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "exact_multiword_match",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris",
+        "shelter-cold-snow",
+        "",
+        "shelter-site",
+        "shelter-heat-rain",
+        "shelter-ground",
+        "fire-build-feed",
+        "shelter-overnight",
+        "car-ev-hybrid",
+        "fire-site",
+        "signal-ground",
+        "",
+        "weather-wildlife-cold",
+        "",
+        "fire-wet"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        9,
+        2,
+        8,
+        10,
+        4,
+        3,
+        7,
+        15,
+        5,
+        6,
+        11,
+        12,
+        13,
+        14
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.11696335583413693,
+        0.047054405392392876,
+        0.032587136451890548,
+        0.031649331662489559,
+        0.029093763724198508,
+        0.027675416133162611,
+        0.025156545209176789,
+        0.020125000000000001,
+        0.019205882352941177,
+        0.017657894736842105,
+        0.017151515151515154,
+        0.016925373134328358,
+        0.014888888888888889,
+        0.014698630136986301,
+        0.014513513513513515,
+        0.014333333333333333
+      ],
+      "retrieval_context_milliseconds" : 0.047087669372558594,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "shelter-tarp-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 29,
+      "stream_deltas" : [
+        "Deploy",
+        " ",
+        "a ",
+        "tarp ",
+        "over ",
+        "the ",
+        "ridgeline ",
+        "using ",
+        "stakes ",
+        "to ",
+        "secure ",
+        "it ",
+        "in ",
+        "place.",
+        " ",
+        "Anchor ",
+        "the ",
+        "corners ",
+        "of ",
+        "the ",
+        "tarp ",
+        "with ",
+        "stakes ",
+        "and ",
+        "ensure ",
+        "they ",
+        "are ",
+        "tightly ",
+        "secured."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.165571616294351,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 27
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "shelter-cold-snow-scenario"
+        ]
+      ],
+      "answer" : "Use snow as an insulating material to protect against wind, cold, and rapid weather changes. A trench covered with insulating material is a suitable method for creating a shelter in snowy conditions. Snow contains trapped air, which helps reduce heat loss and provides insulation against cold temperatures. Use terrain, trees, or rock protection to shield from wind and cold weather changes in a snow shelter.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7270,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1833,
+      "first_visible_text_milliseconds" : 2974,
+      "generated_tokens" : 149,
+      "generation_milliseconds" : 6350,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-06-snow-shelter",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3801855168,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1566853952,
+      "post_available_memory_bytes" : 3831362776,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3857479688,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Use snow as an insulating material to protect against wind, cold, and rapid weather changes.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"A trench covered with insulating material is a suitable method for creating a shelter in snowy conditions.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Snow contains trapped air, which helps reduce heat loss and provides insulation against cold temperatures.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Use terrain, trees, or rock protection to shield from wind and cold weather changes in a snow shelter.\",\n      \"e\": [2]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Use snow as an insulating material to protect against wind, cold, and rapid weather changes.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"A trench covered with insulating material is a suitable method for creating a shelter in snowy conditions.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Snow contains trapped air, which helps reduce heat loss and provides insulation against cold temperatures.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Use terrain, trees, or rock protection to shield from wind and cold weather changes in a snow shelter.\",\n      \"e\": [2]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "exact_current_cue",
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        17,
+        18,
+        28,
+        14,
+        19,
+        27,
+        35,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.87126785516738892,
+        0.72587567567825317,
+        0.72225892543792725,
+        0.7113153338432312,
+        0.74309879541397095,
+        0.72130882740020752,
+        0.71170026063919067,
+        0.70759308338165283,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "exact_multiword_match",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "shelter-heat-rain",
+        "shelter-overnight",
+        "car-ev-hybrid",
+        "",
+        "shelter-site",
+        "shelter-tarp",
+        "shelter-ground",
+        "car-stuck",
+        "navigation-backtrack",
+        "navigation-travel-crossing",
+        "car-tire",
+        "fire-wet",
+        "signal-ground",
+        "food-cook",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        2,
+        1,
+        3,
+        4,
+        25,
+        26,
+        33,
+        6,
+        8,
+        12,
+        14,
+        7,
+        5,
+        13,
+        24
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        2,
+        2,
+        3,
+        2,
+        1,
+        2,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.11878688524590164,
+        0.039093528693528695,
+        0.038037260106165774,
+        0.034360955056179775,
+        0.034131800069300076,
+        0.033472419171866143,
+        0.030357889237199585,
+        0.024819670421360036,
+        0.020425373134328358,
+        0.019992753623188406,
+        0.019198630136986299,
+        0.018833333333333334,
+        0.018205882352941176,
+        0.018151515151515151,
+        0.018013513513513515,
+        0.017264705882352939
+      ],
+      "retrieval_context_milliseconds" : 0.051975250244140625,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "shelter-cold-snow-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 69,
+      "stream_deltas" : [
+        "Use",
+        " ",
+        "snow ",
+        "as ",
+        "an ",
+        "insulating ",
+        "material ",
+        "to ",
+        "protect ",
+        "against ",
+        "wind, ",
+        "cold, ",
+        "and ",
+        "rapid ",
+        "weather ",
+        "changes.",
+        " ",
+        "A ",
+        "trench ",
+        "covered ",
+        "with ",
+        "insulating ",
+        "material ",
+        "is ",
+        "a ",
+        "suitable ",
+        "method ",
+        "for ",
+        "creating ",
+        "a ",
+        "shelter ",
+        "in ",
+        "snowy ",
+        "conditions.",
+        " ",
+        "Snow ",
+        "contains ",
+        "trapped ",
+        "air, ",
+        "which ",
+        "helps ",
+        "reduce ",
+        "heat ",
+        "loss ",
+        "and ",
+        "provides ",
+        "insulation ",
+        "against ",
+        "cold ",
+        "temperatures.",
+        " ",
+        "Use ",
+        "terrain, ",
+        "trees, ",
+        "or ",
+        "rock ",
+        "protection ",
+        "to ",
+        "shield ",
+        "from ",
+        "wind ",
+        "and ",
+        "cold ",
+        "weather ",
+        "changes ",
+        "in ",
+        "a ",
+        "snow ",
+        "shelter."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.765109586008414,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 65
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply immediate firm pressure to the bleeding limb using a clean cloth or gauze, as directed by first-aid guidance for severe bleeding. For life-threatening leg bleeding, use tourniquet if trained and equipped; do not delay in applying pressure until medical help arrives.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6199,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2023,
+      "first_visible_text_milliseconds" : 3164,
+      "generated_tokens" : 105,
+      "generation_milliseconds" : 5277,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-07-leg-bleeding",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3802952896,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1565756224,
+      "post_available_memory_bytes" : 3825956056,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3859118088,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the bleeding limb using a clean cloth or gauze, as directed by first-aid guidance for severe bleeding.\",\n      \"e\": [1, 3]\n    },\n    {\n      \"a\": \"For life-threatening leg bleeding, use tourniquet if trained and equipped; do not delay in applying pressure until medical help arrives.\",\n      \"e\": [2, 4, 5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply immediate firm pressure to the bleeding limb using a clean cloth or gauze, as directed by first-aid guidance for severe bleeding.\",\n      \"e\": [1, 3]\n    },\n    {\n      \"a\": \"For life-threatening leg bleeding, use tourniquet if trained and equipped; do not delay in applying pressure until medical help arrives.\",\n      \"e\": [2, 4, 5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        17,
+        14,
+        19,
+        35,
+        37,
+        34,
+        null,
+        null,
+        null,
+        null,
+        27,
+        45,
+        50,
+        59,
+        60
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.83833801746368408,
+        0.69268739223480225,
+        0.75074928998947144,
+        0.69057440757751465,
+        0.64592552185058594,
+        0.6426774263381958,
+        0.64605343341827393,
+        null,
+        null,
+        null,
+        null,
+        0.66774266958236694,
+        0.63187950849533081,
+        0.62180513143539429,
+        0.61560487747192383,
+        0.6147611141204834
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "",
+        "first-aid-shock",
+        "first-aid-wounds-burns",
+        "basics-danger-injury",
+        "basics-stop",
+        "basics-priorities",
+        "first-aid-assessment",
+        "fire-decision",
+        "fire-build-feed",
+        "signal-smoke-fire",
+        "first-aid-fracture-spine",
+        "",
+        "first-aid-heat",
+        "weather-wildlife-heat",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        2,
+        4,
+        5,
+        1,
+        7,
+        6,
+        3,
+        9,
+        8,
+        10,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        5,
+        3,
+        2,
+        2,
+        4,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.050786885245901643,
+        0.035856319391203109,
+        0.035837811731647351,
+        0.033307442986566696,
+        0.032045698924731178,
+        0.029409963985594239,
+        0.026451688923802043,
+        0.018124999999999999,
+        0.015285714285714284,
+        0.014492753623188406,
+        0.014084507042253521,
+        0.011363636363636364,
+        0.009433962264150943,
+        0.0090090090090090089,
+        0.0083333333333333332,
+        0.0082644628099173556
+      ],
+      "retrieval_context_milliseconds" : 0.043988227844238281,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario"
+      ],
+      "sentence_citation_count" : 2,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 47,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "immediate ",
+        "firm ",
+        "pressure ",
+        "to ",
+        "the ",
+        "bleeding ",
+        "limb ",
+        "using ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        ", ",
+        "as ",
+        "directed ",
+        "by ",
+        "first-aid",
+        " ",
+        "guidance ",
+        "for ",
+        "severe ",
+        "bleeding.",
+        " ",
+        "For ",
+        "life-threatening ",
+        "leg ",
+        "bleeding, ",
+        "use ",
+        "tourniqu",
+        "et ",
+        "if ",
+        "trained ",
+        "and ",
+        "equipped; ",
+        "do ",
+        "not ",
+        "delay ",
+        "in ",
+        "applying ",
+        "pressure ",
+        "until ",
+        "medical ",
+        "help ",
+        "arrives."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.960663798401967,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 42
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario"
+        ]
+      ],
+      "answer" : "Recognize signs of hypothermia, such as shivering and fatigue, which indicate the body is losing heat faster than it can replace it. Move into shelter immediately to stop heat loss and protect from ground contact while warming the core without burning skin. Remove wet clothing, add insulation, and ensure dry layers are worn to prevent further heat loss. Avoid rubbing or applying pressure to affected areas; instead, use gentle methods like covering the body core with insulating materials.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7864,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1739,
+      "first_visible_text_milliseconds" : 2865,
+      "generated_tokens" : 166,
+      "generation_milliseconds" : 6958,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-08-hypothermia",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3806966976,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1561742144,
+      "post_available_memory_bytes" : 3829576920,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3853203464,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Recognize signs of hypothermia, such as shivering and fatigue, which indicate the body is losing heat faster than it can replace it.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Move into shelter immediately to stop heat loss and protect from ground contact while warming the core without burning skin.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Remove wet clothing, add insulation, and ensure dry layers are worn to prevent further heat loss.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Avoid rubbing or applying pressure to affected areas; instead, use gentle methods like covering the body core with insulating materials.\",\n      \"e\": [8]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Recognize signs of hypothermia, such as shivering and fatigue, which indicate the body is losing heat faster than it can replace it.\",\n      \"e\": [1]\n    },\n    {\n      \"a\": \"Move into shelter immediately to stop heat loss and protect from ground contact while warming the core without burning skin.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Remove wet clothing, add insulation, and ensure dry layers are worn to prevent further heat loss.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Avoid rubbing or applying pressure to affected areas; instead, use gentle methods like covering the body core with insulating materials.\",\n      \"e\": [8]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        3,
+        7,
+        11,
+        13,
+        53,
+        null,
+        null,
+        null,
+        32,
+        30,
+        59
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.77854639291763306,
+        0.74150699377059937,
+        0.73752027750015259,
+        0.73477351665496826,
+        0.67749691009521484,
+        null,
+        null,
+        null,
+        0.70195996761322021,
+        0.7029077410697937,
+        0.6717255711555481
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-cold",
+        "weather-wildlife-cold",
+        "first-aid-heat",
+        "first-aid-shock",
+        "car-overheat",
+        "weather-wildlife-large-animals",
+        "first-aid-bites-allergy",
+        "weather-wildlife-wildfire",
+        "weather-wildlife-heat",
+        "first-aid-assessment",
+        "water-dehydration"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        2,
+        7,
+        1,
+        4,
+        3,
+        5,
+        6,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.045018442622950822,
+        0.036968242488252132,
+        0.036231134878193703,
+        0.035555336469252449,
+        0.028656545209176789,
+        0.020125000000000001,
+        0.019651515151515152,
+        0.019425373134328357,
+        0.013669889026743867,
+        0.01098901098901099,
+        0.0083333333333333332
+      ],
+      "retrieval_context_milliseconds" : 0.041961669921875,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-cold-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 83,
+      "stream_deltas" : [
+        "Recogn",
+        "ize ",
+        "signs ",
+        "of ",
+        "hypothermia",
+        ", ",
+        "such ",
+        "as ",
+        "shivering ",
+        "and ",
+        "fatigue, ",
+        "which ",
+        "indicate ",
+        "the ",
+        "body ",
+        "is ",
+        "losing ",
+        "heat ",
+        "faster ",
+        "than ",
+        "it ",
+        "can ",
+        "replace ",
+        "it.",
+        " ",
+        "Move ",
+        "into ",
+        "shelter ",
+        "immediately ",
+        "to ",
+        "stop ",
+        "heat ",
+        "loss ",
+        "and ",
+        "protect ",
+        "from ",
+        "ground ",
+        "contact ",
+        "while ",
+        "warming ",
+        "the ",
+        "core ",
+        "without ",
+        "burning ",
+        "skin.",
+        " ",
+        "Remove ",
+        "wet ",
+        "clothing, ",
+        "add ",
+        "insulation, ",
+        "and ",
+        "ensure ",
+        "dry ",
+        "layers ",
+        "are ",
+        "worn ",
+        "to ",
+        "prevent ",
+        "further ",
+        "heat ",
+        "loss.",
+        " ",
+        "Avoid ",
+        "rubbing ",
+        "or ",
+        "applying ",
+        "pressure ",
+        "to ",
+        "affected ",
+        "areas; ",
+        "instead, ",
+        "use ",
+        "gentle ",
+        "methods ",
+        "like ",
+        "covering ",
+        "the ",
+        "body ",
+        "core ",
+        "with ",
+        "insulating ",
+        "materials."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 31.615251963977773,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 78
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Stop moving immediately and assess your situation. Ask: Where was my last known location? Check terrain; weather; water; shelter options; landmarks. If lost or disoriented, stay calm and determine your position before moving.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6071,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1652,
+      "first_visible_text_milliseconds" : 2774,
+      "generated_tokens" : 122,
+      "generation_milliseconds" : 5135,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-09-stop-lost",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3801789632,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1566919488,
+      "post_available_memory_bytes" : 3829888216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3857348616,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately and assess your situation.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Check terrain; weather; water; shelter options; landmarks.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"If lost or disoriented, stay calm and determine your position before moving.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately and assess your situation.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Check terrain; weather; water; shelter options; landmarks.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"If lost or disoriented, stay calm and determine your position before moving.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        1,
+        7,
+        4,
+        23,
+        19,
+        34,
+        40,
+        50,
+        54,
+        null,
+        null,
+        null,
+        null,
+        null,
+        5,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.76231515407562256,
+        0.71222680807113647,
+        0.72140514850616455,
+        0.67950814962387085,
+        0.68809640407562256,
+        0.66813600063323975,
+        0.66466248035430908,
+        0.64226281642913818,
+        0.63997387886047363,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.7134285569190979,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stop",
+        "",
+        "car-scene",
+        "",
+        "navigation-backtrack",
+        "",
+        "navigation-travel-crossing",
+        "navigation-compass",
+        "car-stuck",
+        "first-aid-bleeding",
+        "food-energy",
+        "basics-inventory",
+        "food-low-risk",
+        "car-stay-walk",
+        ""
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        8,
+        4,
+        1,
+        10,
+        37,
+        35,
+        41,
+        38,
+        2,
+        11,
+        3,
+        9,
+        15,
+        null,
+        5
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        4,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        0,
+        3,
+        4,
+        0,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.044911819143310425,
+        0.038198635976129582,
+        0.035974050046339204,
+        0.033533794162826418,
+        0.029810858393604873,
+        0.020730397422126744,
+        0.020317656765676567,
+        0.018812930577636458,
+        0.018796662274923145,
+        0.017873015873015874,
+        0.01588888888888889,
+        0.015625,
+        0.015285714285714284,
+        0.015157894736842105,
+        0.015151515151515152,
+        0.015151515151515152
+      ],
+      "retrieval_context_milliseconds" : 0.046968460083007812,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 38,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "moving ",
+        "immediately ",
+        "and ",
+        "assess ",
+        "your ",
+        "situation.",
+        " ",
+        "Ask: ",
+        "Where ",
+        "was ",
+        "my ",
+        "last ",
+        "known ",
+        "location?",
+        " ",
+        "Check ",
+        "terrain; ",
+        "weather; ",
+        "water; ",
+        "shelter ",
+        "options; ",
+        "landmarks.",
+        " ",
+        "If ",
+        "lost ",
+        "or ",
+        "disoriented,",
+        " ",
+        "stay ",
+        "calm ",
+        "and ",
+        "determine ",
+        "your ",
+        "position ",
+        "before ",
+        "moving."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 34.740166523112258,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 33
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-compass-scenario"
+        ]
+      ],
+      "answer" : "Align the compass housing so that the north end points toward magnetic north. Set your compass for the direction you are traveling before relying on precise bearings. Use the compass to hold a known direction when landmarks are limited and avoid staring only at the compass while moving.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5115,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 857,
+      "first_visible_text_milliseconds" : 1955,
+      "generated_tokens" : 114,
+      "generation_milliseconds" : 4183,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-10-compass-bearing",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3801527488,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1567181632,
+      "post_available_memory_bytes" : 3824628952,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3857168392,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Align the compass housing so that the north end points toward magnetic north.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Set your compass for the direction you are traveling before relying on precise bearings.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use the compass to hold a known direction when landmarks are limited and avoid staring only at the compass while moving.\",\n      \"e\": [7, 8]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Align the compass housing so that the north end points toward magnetic north.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Set your compass for the direction you are traveling before relying on precise bearings.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use the compass to hold a known direction when landmarks are limited and avoid staring only at the compass while moving.\",\n      \"e\": [7, 8]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        19,
+        18,
+        20,
+        35,
+        60,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        24,
+        36
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81897068023681641,
+        0.65341776609420776,
+        0.65399235486984253,
+        0.64544177055358887,
+        0.62512397766113281,
+        0.59726911783218384,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.64160013198852539,
+        0.6239323616027832
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow",
+        "",
+        "",
+        "",
+        "navigation-backtrack",
+        "water-filter-disinfect",
+        "basics-stop",
+        "",
+        "food-wildlife",
+        "weather-wildlife-large-animals",
+        "weather-wildlife-wildfire",
+        "weather-wildlife-snakes-insects",
+        "signal-communication",
+        "navigation-map",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        3,
+        4,
+        2,
+        8,
+        5,
+        10,
+        6,
+        7,
+        9,
+        12,
+        13,
+        11,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.045786885245901639,
+        0.031129032258064515,
+        0.029283227848101265,
+        0.028730294396961065,
+        0.027289682539682537,
+        0.023757216433105764,
+        0.016151515151515153,
+        0.016084507042253521,
+        0.015925373134328357,
+        0.015705882352941177,
+        0.015285714285714284,
+        0.014698630136986301,
+        0.014513513513513515,
+        0.013888888888888888,
+        0.011764705882352941,
+        0.010309278350515464
+      ],
+      "retrieval_context_milliseconds" : 0.043988227844238281,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-compass-scenario"
+      ],
+      "sentence_citation_count" : 3,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 51,
+      "stream_deltas" : [
+        "Align",
+        " ",
+        "the ",
+        "compass ",
+        "housing ",
+        "so ",
+        "that ",
+        "the ",
+        "north ",
+        "end ",
+        "points ",
+        "toward ",
+        "magnetic ",
+        "north.",
+        " ",
+        "Set ",
+        "your ",
+        "compass ",
+        "for ",
+        "the ",
+        "direction ",
+        "you ",
+        "are ",
+        "traveling ",
+        "before ",
+        "relying ",
+        "on ",
+        "precise ",
+        "bearings.",
+        " ",
+        "Use ",
+        "the ",
+        "compass ",
+        "to ",
+        "hold ",
+        "a ",
+        "known ",
+        "direction ",
+        "when ",
+        "landmarks ",
+        "are ",
+        "limited ",
+        "and ",
+        "avoid ",
+        "staring ",
+        "only ",
+        "at ",
+        "the ",
+        "compass ",
+        "while ",
+        "moving."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.974744437763079,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 48
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-unknown-plants-scenario"
+        ]
+      ],
+      "answer" : "Do not eat the unknown mushroom without expert confirmation. Identify the mushroom using reliable methods and avoid relying on folklore or color alone. If uncertain about identification, do not consume it until expert confirmation is obtained. Never eat a mushroom based on appearance or local tradition without verification from an experienced forager.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 7110,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1744,
+      "first_visible_text_milliseconds" : 2908,
+      "generated_tokens" : 147,
+      "generation_milliseconds" : 6109,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-11-mushroom",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3805770944,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1562938176,
+      "post_available_memory_bytes" : 3824874712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851909128,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Do not eat the unknown mushroom without expert confirmation.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Identify the mushroom using reliable methods and avoid relying on folklore or color alone.\",\n      \"e\": [2, 5, 8]\n    },\n    {\n      \"a\": \"If uncertain about identification, do not consume it until expert confirmation is obtained.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Never eat a mushroom based on appearance or local tradition without verification from an experienced forager.\",\n      \"e\": [2, 7]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Do not eat the unknown mushroom without expert confirmation.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Identify the mushroom using reliable methods and avoid relying on folklore or color alone.\",\n      \"e\": [2, 5, 8]\n    },\n    {\n      \"a\": \"If uncertain about identification, do not consume it until expert confirmation is obtained.\",\n      \"e\": [1, 4]\n    },\n    {\n      \"a\": \"Never eat a mushroom based on appearance or local tradition without verification from an experienced forager.\",\n      \"e\": [2, 7]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        18,
+        43,
+        50,
+        null,
+        null,
+        null,
+        null,
+        21,
+        37,
+        42,
+        45,
+        46,
+        47,
+        51,
+        61
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.81991595029830933,
+        0.68210119009017944,
+        0.60441386699676514,
+        0.59238934516906738,
+        null,
+        null,
+        null,
+        null,
+        0.64851784706115723,
+        0.61067819595336914,
+        0.60474103689193726,
+        0.59754854440689087,
+        0.59737366437911987,
+        0.59388583898544312,
+        0.59208303689956665,
+        0.58379721641540527
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-unknown-plants",
+        "food-energy",
+        "basics-stay-or-move",
+        "fire-decision",
+        "car-stay-walk",
+        "car-overheat",
+        "car-stay-walk",
+        "car-scene",
+        "food-low-risk",
+        "water-locate",
+        "food-cook",
+        "food-carried",
+        "",
+        "weather-wildlife-snakes-insects",
+        "food-wildlife",
+        ""
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        3,
+        4,
+        2,
+        1,
+        5,
+        6,
+        7,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        3,
+        2,
+        2,
+        3,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.048286885245901641,
+        0.043267795749335834,
+        0.034000000000000002,
+        0.03388202488202488,
+        0.026129032258064518,
+        0.016151515151515153,
+        0.015925373134328357,
+        0.015705882352941177,
+        0.012195121951219513,
+        0.01020408163265306,
+        0.0097087378640776691,
+        0.009433962264150943,
+        0.0093457943925233638,
+        0.0092592592592592587,
+        0.0089285714285714281,
+        0.0081967213114754103
+      ],
+      "retrieval_context_milliseconds" : 0.046968460083007812,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-unknown-plants-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 56,
+      "stream_deltas" : [
+        "Do",
+        " ",
+        "not ",
+        "eat ",
+        "the ",
+        "unknown ",
+        "mushroom ",
+        "without ",
+        "expert ",
+        "confirmation.",
+        " ",
+        "Identify ",
+        "the ",
+        "mushroom ",
+        "using ",
+        "reliable ",
+        "methods ",
+        "and ",
+        "avoid ",
+        "relying ",
+        "on ",
+        "folklore ",
+        "or ",
+        "color ",
+        "alone.",
+        " ",
+        "If ",
+        "uncertain ",
+        "about ",
+        "identification, ",
+        "do ",
+        "not ",
+        "consume ",
+        "it ",
+        "until ",
+        "expert ",
+        "confirmation ",
+        "is ",
+        "obtained.",
+        " ",
+        "Never ",
+        "eat ",
+        "a ",
+        "mushroom ",
+        "based ",
+        "on ",
+        "appearance ",
+        "or ",
+        "local ",
+        "tradition ",
+        "without ",
+        "verification ",
+        "from ",
+        "an ",
+        "experienced ",
+        "forager."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.447880870561285,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 52
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "food-fishing-basics"
+        ]
+      ],
+      "answer" : "Catch fish using safe, legal methods with proper gear and access to the bank. Secure the fish immediately after catching it. Remove internal organs from the fish before cleaning or cooking. Clean the fish using safe water when available, and ensure tools are clean to prevent contamination. Cook the fish thoroughly until it is no longer pink in the center.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 8186,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2414,
+      "first_visible_text_milliseconds" : 3579,
+      "generated_tokens" : 162,
+      "generation_milliseconds" : 7252,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-12-fish",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3805525184,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1563183936,
+      "post_available_memory_bytes" : 3829445848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3852187656,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Catch fish using safe, legal methods with proper gear and access to the bank.\",\n      \"e\": [17]\n    },\n    {\n      \"a\": \"Secure the fish immediately after catching it.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Remove internal organs from the fish before cleaning or cooking.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Clean the fish using safe water when available, and ensure tools are clean to prevent contamination.\",\n      \"e\": [13]\n    },\n    {\n      \"a\": \"Cook the fish thoroughly until it is no longer pink in the center.\",\n      \"e\": [20]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Catch fish using safe, legal methods with proper gear and access to the bank.\",\n      \"e\": [17]\n    },\n    {\n      \"a\": \"Secure the fish immediately after catching it.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Remove internal organs from the fish before cleaning or cooking.\",\n      \"e\": [12]\n    },\n    {\n      \"a\": \"Clean the fish using safe water when available, and ensure tools are clean to prevent contamination.\",\n      \"e\": [13]\n    },\n    {\n      \"a\": \"Cook the fish thoroughly until it is no longer pink in the center.\",\n      \"e\": [20]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        2,
+        1,
+        5,
+        40,
+        61,
+        56,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.74818742275238037,
+        0.81323981285095215,
+        0.73127889633178711,
+        0.65158414840698242,
+        0.62358599901199341,
+        0.62580746412277222,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-low-risk",
+        "food-low-risk",
+        "food-energy",
+        "",
+        "food-carried",
+        "navigation-backtrack",
+        "navigation-travel-crossing",
+        "car-tire",
+        "water-filter-disinfect",
+        "car-fuse",
+        "food-wildlife",
+        "fire-wet",
+        "car-overheat",
+        "basics-danger-injury",
+        ""
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        1,
+        0,
+        2,
+        19,
+        12,
+        18,
+        5,
+        6,
+        7,
+        8,
+        9,
+        3,
+        4,
+        10,
+        11,
+        13
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        3,
+        4,
+        2,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.047002048131080387,
+        0.045522474881015337,
+        0.034524531024531027,
+        0.0224009900990099,
+        0.021895351448461713,
+        0.021205236395109815,
+        0.019651515151515152,
+        0.019425373134328357,
+        0.019205882352941177,
+        0.016992753623188406,
+        0.016785714285714286,
+        0.016625000000000001,
+        0.015384615384615385,
+        0.015084507042253521,
+        0.014888888888888889,
+        0.014513513513513515
+      ],
+      "retrieval_context_milliseconds" : 0.047922134399414062,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        2,
+        3
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "food-fishing-basics",
+        "food-low-risk-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026",
+        "army-atp-survival"
+      ],
+      "stream_delta_count" : 65,
+      "stream_deltas" : [
+        "Catch",
+        " ",
+        "fish ",
+        "using ",
+        "safe, ",
+        "legal ",
+        "methods ",
+        "with ",
+        "proper ",
+        "gear ",
+        "and ",
+        "access ",
+        "to ",
+        "the ",
+        "bank.",
+        " ",
+        "Secure ",
+        "the ",
+        "fish ",
+        "immediately ",
+        "after ",
+        "catching ",
+        "it.",
+        " ",
+        "Remove ",
+        "internal ",
+        "organs ",
+        "from ",
+        "the ",
+        "fish ",
+        "before ",
+        "cleaning ",
+        "or ",
+        "cooking.",
+        " ",
+        "Clean ",
+        "the ",
+        "fish ",
+        "using ",
+        "safe ",
+        "water ",
+        "when ",
+        "available, ",
+        "and ",
+        "ensure ",
+        "tools ",
+        "are ",
+        "clean ",
+        "to ",
+        "prevent ",
+        "contamination.",
+        " ",
+        "Cook ",
+        "the ",
+        "fish ",
+        "thoroughly ",
+        "until ",
+        "it ",
+        "is ",
+        "no ",
+        "longer ",
+        "pink ",
+        "in ",
+        "the ",
+        "center."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 33.278214138073587,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 60
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "fire-build-feed-scenario"
+        ]
+      ],
+      "answer" : "Search under larger branches, inside dead wood, and beneath natural cover to locate dry inner material. Remove wet outer layers from the wood by splitting it into smaller pieces before using for fire building. Ensure that fuel is organized and water or extinguishing method is available when possible to prevent unattended fires. Once the flame catches, protect it from wind by adding small kindling and allowing heat to build gradually with larger wood added slowly.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 9451,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2402,
+      "first_visible_text_milliseconds" : 3620,
+      "generated_tokens" : 160,
+      "generation_milliseconds" : 8482,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-13-start-fire",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3800642752,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1568066368,
+      "post_available_memory_bytes" : 3828544728,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3856742408,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Search under larger branches, inside dead wood, and beneath natural cover to locate dry inner material.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Remove wet outer layers from the wood by splitting it into smaller pieces before using for fire building.\",\n      \"e\": [7]\n    },\n    {\n      \"a\": \"Ensure that fuel is organized and water or extinguishing method is available when possible to prevent unattended fires.\",\n      \"e\": [14]\n    },\n    {\n      \"a\": \"Once the flame catches, protect it from wind by adding small kindling and allowing heat to build gradually with larger wood added slowly.\",\n      \"e\": [15]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Search under larger branches, inside dead wood, and beneath natural cover to locate dry inner material.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Remove wet outer layers from the wood by splitting it into smaller pieces before using for fire building.\",\n      \"e\": [7]\n    },\n    {\n      \"a\": \"Ensure that fuel is organized and water or extinguishing method is available when possible to prevent unattended fires.\",\n      \"e\": [14]\n    },\n    {\n      \"a\": \"Once the flame catches, protect it from wind by adding small kindling and allowing heat to build gradually with larger wood added slowly.\",\n      \"e\": [15]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        2,
+        8,
+        44,
+        31,
+        49,
+        30,
+        55,
+        60,
+        39,
+        41,
+        54,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.76729577779769897,
+        0.76501595973968506,
+        0.74983936548233032,
+        0.69020706415176392,
+        0.70692598819732666,
+        0.67713034152984619,
+        0.70841461420059204,
+        0.67134213447570801,
+        0.66718429327011108,
+        0.69728440046310425,
+        0.69431620836257935,
+        0.67211323976516724,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "fire-wet",
+        "fire-build-feed",
+        "fire-extinguish",
+        "fire-decision",
+        "signal-smoke-fire",
+        "car-stay-walk",
+        "",
+        "",
+        "",
+        "fire-ignition",
+        "fire-materials",
+        "weather-wildlife-wildfire",
+        "fire-site",
+        "car-jump",
+        "car-stay-walk",
+        "first-aid-assessment"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        5,
+        7,
+        6,
+        14,
+        1,
+        10,
+        3,
+        2,
+        9,
+        8,
+        15,
+        4,
+        11,
+        12,
+        13
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.043536885245901644,
+        0.039387434250337479,
+        0.035980687258180863,
+        0.034949182658137887,
+        0.030765398550724639,
+        0.030719941348973608,
+        0.029483619041365521,
+        0.028745689655172414,
+        0.028637478682933228,
+        0.028262184873949582,
+        0.026796675191815857,
+        0.024353546910755145,
+        0.019884615384615386,
+        0.018388888888888889,
+        0.016198630136986299,
+        0.015513513513513514
+      ],
+      "retrieval_context_milliseconds" : 0.046968460083007812,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        2,
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "fire-build-feed-scenario",
+        "fire-wet-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 80,
+      "stream_deltas" : [
+        "Search",
+        " ",
+        "under ",
+        "larger ",
+        "branches, ",
+        "inside ",
+        "dead ",
+        "wood, ",
+        "and ",
+        "beneath ",
+        "natural ",
+        "cover ",
+        "to ",
+        "locate ",
+        "dry ",
+        "inner ",
+        "material.",
+        " ",
+        "Remove ",
+        "wet ",
+        "outer ",
+        "layers ",
+        "from ",
+        "the ",
+        "wood ",
+        "by ",
+        "splitting ",
+        "it ",
+        "into ",
+        "smaller ",
+        "pieces ",
+        "before ",
+        "using ",
+        "for ",
+        "fire ",
+        "building.",
+        " ",
+        "Ensure ",
+        "that ",
+        "fuel ",
+        "is ",
+        "organized ",
+        "and ",
+        "water ",
+        "or ",
+        "extinguishing ",
+        "method ",
+        "is ",
+        "available ",
+        "when ",
+        "possible ",
+        "to ",
+        "prevent ",
+        "unattended ",
+        "fires.",
+        " ",
+        "Once ",
+        "the ",
+        "flame ",
+        "catches, ",
+        "protect ",
+        "it ",
+        "from ",
+        "wind ",
+        "by ",
+        "adding ",
+        "small ",
+        "kindling",
+        " ",
+        "and ",
+        "allowing ",
+        "heat ",
+        "to ",
+        "build ",
+        "gradually ",
+        "with ",
+        "larger ",
+        "wood ",
+        "added ",
+        "slowly."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.151315789473685,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 75
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "water-boil-scenario"
+        ]
+      ],
+      "answer" : "Bring water to a rolling boil. Allow settling or filter through clean material if necessary. Heat the water to a rolling boil for at least one minute at normal elevations and three minutes above approximately 6,500 feet (2,000 meters). Boiling is effective against many biological hazards but does not remove chemical contamination. Protect your supply by using clean containers; sealed bottles; covered storage to prevent recontamination and reduce sweating.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 11705,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 3227,
+      "first_visible_text_milliseconds" : 4767,
+      "generated_tokens" : 188,
+      "generation_milliseconds" : 10431,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-14-boil-collected",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3800495296,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1568213824,
+      "post_available_memory_bytes" : 3823760600,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3855824880,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material if necessary.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat the water to a rolling boil for at least one minute at normal elevations and three minutes above approximately 6,500 feet (2,000 meters).\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Boiling is effective against many biological hazards but does not remove chemical contamination.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Protect your supply by using clean containers; sealed bottles; covered storage to prevent recontamination and reduce sweating.\",\n      \"e\": [12, 15]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Bring water to a rolling boil.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Allow settling or filter through clean material if necessary.\",\n      \"e\": [5]\n    },\n    {\n      \"a\": \"Heat the water to a rolling boil for at least one minute at normal elevations and three minutes above approximately 6,500 feet (2,000 meters).\",\n      \"e\": [8]\n    },\n    {\n      \"a\": \"Boiling is effective against many biological hazards but does not remove chemical contamination.\",\n      \"e\": [9]\n    },\n    {\n      \"a\": \"Protect your supply by using clean containers; sealed bottles; covered storage to prevent recontamination and reduce sweating.\",\n      \"e\": [12, 15]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        15,
+        19,
+        60,
+        63,
+        18,
+        32,
+        54,
+        43,
+        52,
+        56,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.79833114147186279,
+        0.70542967319488525,
+        0.67438989877700806,
+        0.6252368688583374,
+        0.62400084733963013,
+        0.67796355485916138,
+        0.64993739128112793,
+        0.63087940216064453,
+        0.63846302032470703,
+        0.63246524333953857,
+        0.62782132625579834,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "",
+        "water-store",
+        "water-filter-disinfect",
+        "",
+        "water-collect-prefilter",
+        "water-choose-source",
+        "",
+        "fire-extinguish",
+        "weather-wildlife-heat",
+        "car-overheat",
+        "water-locate",
+        "navigation-travel-crossing",
+        "",
+        "basics-stop",
+        "weather-wildlife-flood"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        1,
+        8,
+        4,
+        2,
+        9,
+        6,
+        10,
+        24,
+        22,
+        34,
+        11,
+        12,
+        3,
+        5,
+        14
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.045974385245901639,
+        0.039870260328239954,
+        0.036774804905239683,
+        0.033508169103623649,
+        0.03168753200204813,
+        0.031443942133815551,
+        0.028178061306371367,
+        0.023780159216166566,
+        0.022380090497737558,
+        0.021897750293208233,
+        0.020073324336482234,
+        0.019388888888888886,
+        0.018198630136986301,
+        0.017625000000000002,
+        0.017151515151515154,
+        0.015833333333333335
+      ],
+      "retrieval_context_milliseconds" : 0.056028366088867188,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        2,
+        1,
+        3
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "sm26-fire-using-fire-for-water-and-cooking",
+        "water-boil-scenario",
+        "water-store-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 82,
+      "stream_deltas" : [
+        "Bring",
+        " ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil.",
+        " ",
+        "Allow ",
+        "settling ",
+        "or ",
+        "filter ",
+        "through ",
+        "clean ",
+        "material ",
+        "if ",
+        "necessary.",
+        " ",
+        "Heat ",
+        "the ",
+        "water ",
+        "to ",
+        "a ",
+        "rolling ",
+        "boil ",
+        "for ",
+        "at ",
+        "least ",
+        "one ",
+        "minute ",
+        "at ",
+        "normal ",
+        "elevations ",
+        "and ",
+        "three ",
+        "minutes ",
+        "above ",
+        "approximately ",
+        "6,",
+        "50",
+        "0 ",
+        "feet ",
+        "(2,",
+        "00",
+        "0 ",
+        "meters).",
+        " ",
+        "Boiling ",
+        "is ",
+        "effective ",
+        "against ",
+        "many ",
+        "biological ",
+        "hazards ",
+        "but ",
+        "does ",
+        "not ",
+        "remove ",
+        "chemical ",
+        "contamination.",
+        " ",
+        "Protect ",
+        "your ",
+        "supply ",
+        "by ",
+        "using ",
+        "clean ",
+        "containers;",
+        " ",
+        "sealed ",
+        "bottles;",
+        " ",
+        "covered ",
+        "storage ",
+        "to ",
+        "prevent ",
+        "recont",
+        "amination",
+        " ",
+        "and ",
+        "reduce ",
+        "sweating."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.957801221543587,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 69
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-bleeding-scenario"
+        ]
+      ],
+      "answer" : "Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure. Tighten the dressing until there is no further blood flow and maintain firm pressure on the wound site to stop active bleeding. Secure the dressing while maintaining pressure with a tourniquet if necessary for life-threatening limb bleeding. Do not attempt to stop bleeding by applying more than direct pressure or using any other method unless trained and equipped.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 11533,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 3113,
+      "first_visible_text_milliseconds" : 4670,
+      "generated_tokens" : 182,
+      "generation_milliseconds" : 10237,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-15-deep-cut",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3804198080,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1564511040,
+      "post_available_memory_bytes" : 3827496152,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851089904,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure.\",\n      \"e\": [2, 4]\n    },\n    {\n      \"a\": \"Tighten the dressing until there is no further blood flow and maintain firm pressure on the wound site to stop active bleeding.\",\n      \"e\": [3, 5]\n    },\n    {\n      \"a\": \"Secure the dressing while maintaining pressure with a tourniquet if necessary for life-threatening limb bleeding.\",\n      \"e\": [6, 7]\n    },\n    {\n      \"a\": \"Do not attempt to stop bleeding by applying more than direct pressure or using any other method unless trained and equipped.\",\n      \"e\": [1, 8]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Apply direct pressure to the wound using a clean cloth or gauze for severe bleeding from an arm or leg that cannot be controlled by direct pressure.\",\n      \"e\": [2, 4]\n    },\n    {\n      \"a\": \"Tighten the dressing until there is no further blood flow and maintain firm pressure on the wound site to stop active bleeding.\",\n      \"e\": [3, 5]\n    },\n    {\n      \"a\": \"Secure the dressing while maintaining pressure with a tourniquet if necessary for life-threatening limb bleeding.\",\n      \"e\": [6, 7]\n    },\n    {\n      \"a\": \"Do not attempt to stop bleeding by applying more than direct pressure or using any other method unless trained and equipped.\",\n      \"e\": [1, 8]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        1,
+        4,
+        15,
+        21,
+        18,
+        null,
+        43,
+        60,
+        61,
+        19,
+        48,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.65814208984375,
+        0.63680529594421387,
+        0.57941502332687378,
+        0.55241870880126953,
+        0.56462669372558594,
+        null,
+        0.53280770778656006,
+        0.51789140701293945,
+        0.51749700307846069,
+        0.5584753155708313,
+        0.52904230356216431,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "dense_plus_lexical_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-bleeding",
+        "",
+        "first-aid-wounds-burns",
+        "basics-stop",
+        "first-aid-shock",
+        "car-stay-walk",
+        "basics-priorities",
+        "first-aid-heat",
+        "first-aid-cold",
+        "",
+        "weather-wildlife-cold",
+        "navigation-stop-mark",
+        "basics-danger-injury",
+        "car-scene",
+        "food-low-risk",
+        "first-aid-bites-allergy"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        9,
+        1,
+        14,
+        10,
+        3,
+        11,
+        17,
+        18,
+        64,
+        42,
+        13,
+        8,
+        15,
+        4,
+        5
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        2,
+        2,
+        2,
+        1,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2
+      ],
+      "retrieval_candidate_scores" : [
+        0.04902247488101534,
+        0.03497296124927704,
+        0.031286926994906622,
+        0.031028455284552843,
+        0.027742734890354788,
+        0.025625000000000002,
+        0.025504273504273506,
+        0.022084975630430177,
+        0.021854949159576677,
+        0.021500000000000002,
+        0.019883049790683175,
+        0.018013513513513515,
+        0.017992753623188407,
+        0.017657894736842105,
+        0.017384615384615387,
+        0.017151515151515154
+      ],
+      "retrieval_context_milliseconds" : 0.059008598327636719,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-bleeding-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 92,
+      "stream_deltas" : [
+        "Apply",
+        " ",
+        "direct ",
+        "pressure ",
+        "to ",
+        "the ",
+        "wound ",
+        "using ",
+        "a ",
+        "clean ",
+        "cloth ",
+        "or ",
+        "gauze",
+        " ",
+        "for ",
+        "severe ",
+        "bleeding ",
+        "from ",
+        "an ",
+        "arm ",
+        "or ",
+        "leg ",
+        "that ",
+        "cannot ",
+        "be ",
+        "controlled ",
+        "by ",
+        "direct ",
+        "pressure.",
+        " ",
+        "Tighten",
+        " ",
+        "the ",
+        "dressing ",
+        "until ",
+        "there ",
+        "is ",
+        "no ",
+        "further ",
+        "blood ",
+        "flow ",
+        "and ",
+        "maintain ",
+        "firm ",
+        "pressure ",
+        "on ",
+        "the ",
+        "wound ",
+        "site ",
+        "to ",
+        "stop ",
+        "active ",
+        "bleeding.",
+        " ",
+        "Secure ",
+        "the ",
+        "dressing ",
+        "while ",
+        "maintaining ",
+        "pressure ",
+        "with ",
+        "a ",
+        "tourniqu",
+        "et ",
+        "if ",
+        "necessary ",
+        "for ",
+        "life-threatening ",
+        "limb ",
+        "bleeding.",
+        " ",
+        "Do ",
+        "not ",
+        "attempt ",
+        "to ",
+        "stop ",
+        "bleeding ",
+        "by ",
+        "applying ",
+        "more ",
+        "than ",
+        "direct ",
+        "pressure ",
+        "or ",
+        "using ",
+        "any ",
+        "other ",
+        "method ",
+        "unless ",
+        "trained ",
+        "and ",
+        "equipped."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 25.407074677147669,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 85
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Stop moving immediately. Ask: Where was my last known location? Check terrain; weather; water; shelter options; landmarks. Possible signals. Choose the safest action: remain in place; return along a known route; move toward a known location; signal for help.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 9675,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 3297,
+      "first_visible_text_milliseconds" : 4825,
+      "generated_tokens" : 148,
+      "generation_milliseconds" : 8361,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-16-marked-trail",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3799921856,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1568787264,
+      "post_available_memory_bytes" : 3827201240,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3855267824,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Check terrain; weather; water; shelter options; landmarks.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Possible signals.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Choose the safest action: remain in place; return along a known route; move toward a known location; signal for help.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Stop moving immediately.\",\n      \"e\": [1, 2]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Check terrain; weather; water; shelter options; landmarks.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Possible signals.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"Choose the safest action: remain in place; return along a known route; move toward a known location; signal for help.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        2,
+        7,
+        28,
+        13,
+        8,
+        48,
+        34,
+        57,
+        55,
+        47,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.75644248723983765,
+        0.71112829446792603,
+        0.6808658242225647,
+        0.64219677448272705,
+        0.67106419801712036,
+        0.67567473649978638,
+        0.61452758312225342,
+        0.62996047735214233,
+        0.6085129976272583,
+        0.60985654592514038,
+        0.61640232801437378,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "",
+        "",
+        "basics-stop",
+        "navigation-backtrack",
+        "",
+        "navigation-terrain",
+        "navigation-compass",
+        "",
+        "navigation-sun-shadow",
+        "navigation-travel-crossing",
+        "fire-decision",
+        "weather-wildlife-flood",
+        "car-tire",
+        "basics-inventory",
+        ""
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        5,
+        12,
+        1,
+        2,
+        10,
+        4,
+        22,
+        7,
+        14,
+        24,
+        3,
+        6,
+        9,
+        11,
+        8
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        3,
+        1,
+        4,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        3,
+        1
+      ],
+      "retrieval_candidate_scores" : [
+        0.043786885245901637,
+        0.03710786435786436,
+        0.032418401378816367,
+        0.032364987314244288,
+        0.031886529386529389,
+        0.028577260665441927,
+        0.024558927311220891,
+        0.023574508560558025,
+        0.023180458624127619,
+        0.021954022988505746,
+        0.0210239651416122,
+        0.018124999999999999,
+        0.015925373134328357,
+        0.015285714285714284,
+        0.014888888888888889,
+        0.014492753623188406
+      ],
+      "retrieval_context_milliseconds" : 0.051975250244140625,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 44,
+      "stream_deltas" : [
+        "Stop",
+        " ",
+        "moving ",
+        "immediately.",
+        " ",
+        "Ask: ",
+        "Where ",
+        "was ",
+        "my ",
+        "last ",
+        "known ",
+        "location?",
+        " ",
+        "Check ",
+        "terrain; ",
+        "weather; ",
+        "water; ",
+        "shelter ",
+        "options; ",
+        "landmarks.",
+        " ",
+        "Possible ",
+        "signals.",
+        " ",
+        "Choose ",
+        "the ",
+        "safest ",
+        "action: ",
+        "remain ",
+        "in ",
+        "place; ",
+        "return ",
+        "along ",
+        "a ",
+        "known ",
+        "route; ",
+        "move ",
+        "toward ",
+        "a ",
+        "known ",
+        "location; ",
+        "signal ",
+        "for ",
+        "help."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 29.028436018957347,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 39
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values, goals, and expectations while also being open-minded and willing to grow together. Consider getting involved in activities you enjoy or exploring new experiences that can help deepen relationships. Being kind, respectful, and showing empathy are key traits for forming meaningful connections with others.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 5246,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 436,
+      "first_visible_text_milliseconds" : 1570,
+      "generated_tokens" : 84,
+      "generation_milliseconds" : 4032,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-17-dating",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3798938816,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1569770304,
+      "post_available_memory_bytes" : 3822253248,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3854497776,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values, goals, and expectations while also being open-minded and willing to grow together. Consider getting involved in activities you enjoy or exploring new experiences that can help deepen relationships. Being kind, respectful, and showing empathy are key traits for forming meaningful connections with others.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"Getting a girlfriend involves building connections through shared interests, mutual respect, and genuine communication. It's important to be honest about your values, goals, and expectations while also being open-minded and willing to grow together. Consider getting involved in activities you enjoy or exploring new experiences that can help deepen relationships. Being kind, respectful, and showing empathy are key traits for forming meaningful connections with others.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 66,
+      "stream_deltas" : [
+        "Getting",
+        " ",
+        "a ",
+        "girlfriend ",
+        "involves ",
+        "building ",
+        "connections ",
+        "through ",
+        "shared ",
+        "interests, ",
+        "mutual ",
+        "respect, ",
+        "and ",
+        "genuine ",
+        "communication. ",
+        "It's ",
+        "important ",
+        "to ",
+        "be ",
+        "honest ",
+        "about ",
+        "your ",
+        "values, ",
+        "goals, ",
+        "and ",
+        "expectations ",
+        "while ",
+        "also ",
+        "being ",
+        "open-minded ",
+        "and ",
+        "willing ",
+        "to ",
+        "grow ",
+        "together. ",
+        "Consider ",
+        "getting ",
+        "involved ",
+        "in ",
+        "activities ",
+        "you ",
+        "enjoy ",
+        "or ",
+        "exploring ",
+        "new ",
+        "experiences ",
+        "that ",
+        "can ",
+        "help ",
+        "deepen ",
+        "relationships. ",
+        "Being ",
+        "kind, ",
+        "respectful, ",
+        "and ",
+        "showing ",
+        "empathy ",
+        "are ",
+        "key ",
+        "traits ",
+        "for ",
+        "forming ",
+        "meaningful ",
+        "connections ",
+        "with ",
+        "others."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 23.081201334816463,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 65
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 2715,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 414,
+      "first_visible_text_milliseconds" : 1570,
+      "generated_tokens" : 29,
+      "generation_milliseconds" : 1486,
+      "grounding_reason" : "general_question",
+      "id" : "sm26-18-weather",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3796579520,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1572129600,
+      "post_available_memory_bytes" : 3822662848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851565016,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"I cannot retrieve the current weather information. Please check a reliable weather source for the most up-to-date details.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "general_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 20,
+      "stream_deltas" : [
+        "I",
+        " ",
+        "cannot ",
+        "retrieve ",
+        "the ",
+        "current ",
+        "weather ",
+        "information. ",
+        "Please ",
+        "check ",
+        "a ",
+        "reliable ",
+        "weather ",
+        "source ",
+        "for ",
+        "the ",
+        "most ",
+        "up-to-date",
+        " ",
+        "details."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 26.119402985074625,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 18
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "You cannot repair an unfamiliar survival-device model without verified information. Always assume the device is unsafe and do not attempt to fix it yourself. Contact the manufacturer or a qualified technician for proper guidance, as improper repairs could cause serious harm.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 4165,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 523,
+      "first_visible_text_milliseconds" : 1662,
+      "generated_tokens" : 52,
+      "generation_milliseconds" : 2824,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-19-device-repair",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3764417704,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1604291416,
+      "post_available_memory_bytes" : 3764417704,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851696088,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\"a\":\"You cannot repair an unfamiliar survival-device model without verified information. Always assume the device is unsafe and do not attempt to fix it yourself. Contact the manufacturer or a qualified technician for proper guidance, as improper repairs could cause serious harm.\",\"e\":[]}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"general\"}",
+        "{\"a\":\"You cannot repair an unfamiliar survival-device model without verified information. Always assume the device is unsafe and do not attempt to fix it yourself. Contact the manufacturer or a qualified technician for proper guidance, as improper repairs could cause serious harm.\",\"e\":[]}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"general\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        1,
+        2,
+        4,
+        26,
+        30,
+        34,
+        27,
+        28,
+        35,
+        42,
+        56,
+        60,
+        47,
+        57,
+        59
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.64380520582199097,
+        0.643576979637146,
+        0.63589644432067871,
+        0.63231801986694336,
+        0.59444987773895264,
+        0.59229016304016113,
+        0.58898037672042847,
+        0.59309858083724976,
+        0.59247845411300659,
+        0.58852612972259521,
+        0.58583450317382812,
+        0.5807640552520752,
+        0.57714086771011353,
+        0.58429563045501709,
+        0.57843154668807983,
+        0.57778805494308472
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "",
+        "navigation-stop-mark",
+        "car-stay-walk",
+        "",
+        "shelter-overnight",
+        "",
+        "",
+        "car-ev-hybrid",
+        "",
+        "signal-schedule",
+        "car-stuck",
+        "",
+        "",
+        "basics-inventory",
+        "fire-build-feed",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.021893442622950822,
+        0.017129032258064517,
+        0.016873015873015873,
+        0.016384615384615386,
+        0.012494252873563219,
+        0.011989010989010989,
+        0.011526315789473683,
+        0.011363636363636364,
+        0.011235955056179775,
+        0.010416666666666666,
+        0.0097087378640776691,
+        0.0095470085470085488,
+        0.0092644628099173565,
+        0.0092592592592592587,
+        0.0084745762711864406,
+        0.0083333333333333332
+      ],
+      "retrieval_context_milliseconds" : 0.08392333984375,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "no_relevant_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 43,
+      "stream_deltas" : [
+        "You",
+        " ",
+        "cannot ",
+        "repair ",
+        "an ",
+        "unfamiliar ",
+        "survival-device ",
+        "model ",
+        "without ",
+        "verified ",
+        "information. ",
+        "Always ",
+        "assume ",
+        "the ",
+        "device ",
+        "is ",
+        "unsafe ",
+        "and ",
+        "do ",
+        "not ",
+        "attempt ",
+        "to ",
+        "fix ",
+        "it ",
+        "yourself. ",
+        "Contact ",
+        "the ",
+        "manufacturer ",
+        "or ",
+        "a ",
+        "qualified ",
+        "technician ",
+        "for ",
+        "proper ",
+        "guidance,",
+        " ",
+        "as ",
+        "improper ",
+        "repairs ",
+        "could ",
+        "cause ",
+        "serious ",
+        "harm."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 22.164276401564535,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 41
+    },
+    {
+      "acceptable_evidence_sets" : [
+        [
+          "first-aid-cold-scenario",
+          "navigation-stop-mark-scenario"
+        ]
+      ],
+      "answer" : "Move into shelter immediately to stop heat loss and prevent further cooling. Stop moving until you can determine your location with certainty. Ask: Where was my last known location? Check terrain and weather conditions to assess the environment. Avoid making the situation worse by not attempting to move without confirmation of your position.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 9905,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2549,
+      "first_visible_text_milliseconds" : 4314,
+      "generated_tokens" : 163,
+      "generation_milliseconds" : 8407,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "sm26-20-multi",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3757618368,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1611090752,
+      "post_available_memory_bytes" : 3792925888,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3793500120,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"Move into shelter immediately to stop heat loss and prevent further cooling.\",\n      \"e\": [8, 1]\n    },\n    {\n      \"a\": \"Stop moving until you can determine your location with certainty.\",\n      \"e\": [9, 13]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [10]\n    },\n    {\n      \"a\": \"Check terrain and weather conditions to assess the environment.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Avoid making the situation worse by not attempting to move without confirmation of your position.\",\n      \"e\": [2, 14]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"Move into shelter immediately to stop heat loss and prevent further cooling.\",\n      \"e\": [8, 1]\n    },\n    {\n      \"a\": \"Stop moving until you can determine your location with certainty.\",\n      \"e\": [9, 13]\n    },\n    {\n      \"a\": \"Ask: Where was my last known location?\",\n      \"e\": [10]\n    },\n    {\n      \"a\": \"Check terrain and weather conditions to assess the environment.\",\n      \"e\": [11]\n    },\n    {\n      \"a\": \"Avoid making the situation worse by not attempting to move without confirmation of your position.\",\n      \"e\": [2, 14]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap",
+          "linked_discovery"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+          "linked_discovery"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        11,
+        0,
+        8,
+        22,
+        26,
+        25,
+        45,
+        43,
+        29,
+        20,
+        44,
+        19,
+        65,
+        47,
+        95,
+        79
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.7414582371711731,
+        0.84433275461196899,
+        0.75968056917190552,
+        0.68442302942276001,
+        0.68186992406845093,
+        0.68217998743057251,
+        0.6691552996635437,
+        0.67081940174102783,
+        0.67962014675140381,
+        0.68952536582946777,
+        0.66935205459594727,
+        0.69420790672302246,
+        0.66403931379318237,
+        0.66877651214599609,
+        0.65161311626434326,
+        0.65756183862686157
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "strong_dense_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "dense_plus_lexical_alignment"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "first-aid-cold",
+        "navigation-stop-mark",
+        "weather-wildlife-cold",
+        "",
+        "basics-first-night",
+        "shelter-heat-rain",
+        "",
+        "navigation-compass",
+        "weather-wildlife-heat",
+        "navigation-backtrack",
+        "",
+        "shelter-overnight",
+        "",
+        "shelter-cold-snow",
+        "shelter-ground",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        0,
+        7,
+        1,
+        2,
+        3,
+        13,
+        5,
+        0,
+        7,
+        14,
+        4,
+        25,
+        1,
+        9,
+        3,
+        11
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        4,
+        3,
+        4,
+        3,
+        4,
+        2,
+        2,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "retrieval_candidate_scores" : [
+        0.038782331511839706,
+        0.038719187989590627,
+        0.038280236585478279,
+        0.03192120864410021,
+        0.029619252873563217,
+        0.028717891078492992,
+        0.026835477415666092,
+        0.026008827238335436,
+        0.025816993464052286,
+        0.025679012345679014,
+        0.02490842490842491,
+        0.024127906976744187,
+        0.024065540194572452,
+        0.023544973544973542,
+        0.022035256410256408,
+        0.022031746031746031
+      ],
+      "retrieval_context_milliseconds" : 0.048041343688964844,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : true,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1,
+        2
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "first-aid-cold-scenario",
+        "navigation-stop-mark-scenario"
+      ],
+      "sentence_citation_count" : 5,
+      "source_card_ids" : [
+        "survival-manual-2026"
+      ],
+      "stream_delta_count" : 58,
+      "stream_deltas" : [
+        "Move",
+        " ",
+        "into ",
+        "shelter ",
+        "immediately ",
+        "to ",
+        "stop ",
+        "heat ",
+        "loss ",
+        "and ",
+        "prevent ",
+        "further ",
+        "cooling.",
+        " ",
+        "Stop ",
+        "moving ",
+        "until ",
+        "you ",
+        "can ",
+        "determine ",
+        "your ",
+        "location ",
+        "with ",
+        "certainty.",
+        " ",
+        "Ask: ",
+        "Where ",
+        "was ",
+        "my ",
+        "last ",
+        "known ",
+        "location?",
+        " ",
+        "Check ",
+        "terrain ",
+        "and ",
+        "weather ",
+        "conditions ",
+        "to ",
+        "assess ",
+        "the ",
+        "environment.",
+        " ",
+        "Avoid ",
+        "making ",
+        "the ",
+        "situation ",
+        "worse ",
+        "by ",
+        "not ",
+        "attempting ",
+        "to ",
+        "move ",
+        "without ",
+        "confirmation ",
+        "of ",
+        "your ",
+        "position."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 27.654489586889724,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 53
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5291785208,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325110432,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "90ebc8a25f362a3e04c8fd8d1f9dbbb1e9c2fd761b92ff47b899e23dc23ec70f",
+  "maximum_thermal_wait_seconds" : 300,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-survival-manual-2026",
+  "nominal_settle_seconds" : 10,
+  "run_id" : "survival-manual-2026-v3-final-20-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325094048,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 65,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321309344,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5203,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5321276576,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10345,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3809866992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 17087,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3812226216,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 21229,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3818403032,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 27473,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3821384896,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 32443,
+      "phase" : "after_3",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3830150360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 37700,
+      "phase" : "after_4",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3831755992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45105,
+      "phase" : "after_5",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3825956056,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51439,
+      "phase" : "after_6",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3829576920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 59446,
+      "phase" : "after_7",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3829888216,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 65662,
+      "phase" : "after_8",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3824628952,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 70923,
+      "phase" : "after_9",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3824874712,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 78175,
+      "phase" : "after_10",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3829445848,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 86500,
+      "phase" : "after_11",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3828544728,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 96096,
+      "phase" : "after_12",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3823760600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 107974,
+      "phase" : "after_13",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3827922136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119678,
+      "phase" : "after_14",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3827217624,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 129521,
+      "phase" : "after_15",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3822253248,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 134932,
+      "phase" : "after_16",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3822662848,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 137842,
+      "phase" : "after_17",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3764417704,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 142192,
+      "phase" : "after_18",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3793220800,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 152354,
+      "phase" : "after_19",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3820763096,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 152466,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3842226136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 157775,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3842226136,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 163075,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5262900216,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 168185,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5262916600,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 173476,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291867128,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 178792,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291850744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 184027,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291850744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 189261,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291850744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 194603,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291850744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 200021,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291834360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 205142,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 210301,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 215627,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 220948,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 226094,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 231237,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291817976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 236573,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291801592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 241739,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291801592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 246942,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291785208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 252096,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291801592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 257227,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291801592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 262347,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291801592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 267691,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291785208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 273093,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5291785208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 278260,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

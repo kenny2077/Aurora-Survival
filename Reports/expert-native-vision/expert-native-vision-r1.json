@@ -1,0 +1,803 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "e3794285082b4442275ed724a6c158dad095f1128ef053acb5d88f7c626676cc  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "What is in the picture?The image shows a diagram of a bow drill fire tool, which is used for making fires. The diagram includes several illustrations showing different steps and components of the tool.",
+      "answer_model_call_count" : 1,
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6182,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 3503,
+      "first_visible_text_milliseconds" : 4705,
+      "generated_tokens" : 46,
+      "generation_milliseconds" : 4882,
+      "grounding_reason" : "native_vision",
+      "id" : "native-vision-bow-drill",
+      "image_forwarded" : true,
+      "intent_model_call_count" : 0,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3532895256,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1835813864,
+      "post_available_memory_bytes" : 3537237016,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322390712,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "raw_intent_completion" : "",
+      "repair_count" : 0,
+      "required_answer_term_groups" : [
+        [
+          "bow drill",
+          "bow-drill"
+        ],
+        [
+          "fire",
+          "ember"
+        ]
+      ],
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "native_vision",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "native_vision",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 36,
+      "stream_deltas" : [
+        "What",
+        " ",
+        "is ",
+        "in ",
+        "the ",
+        "picture?The",
+        " ",
+        "image ",
+        "shows ",
+        "a ",
+        "diagram ",
+        "of ",
+        "a ",
+        "bow ",
+        "drill ",
+        "fire ",
+        "tool, ",
+        "which ",
+        "is ",
+        "used ",
+        "for ",
+        "making ",
+        "fires. ",
+        "The ",
+        "diagram ",
+        "includes ",
+        "several ",
+        "illustrations ",
+        "showing ",
+        "different ",
+        "steps ",
+        "and ",
+        "components ",
+        "of ",
+        "the ",
+        "tool."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.632342277012327,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 34
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "Yes, there is an insect in this photo. The creature has the distinct features of a leaf-insect (also known as a phasmatodean or leaf-mimic), which uses its body shape and coloration to resemble a leaf for camouflage. It is resting on a large green leaf, with visible details such as its long legs, antennae, and the intricate vein patterns that are characteristic of insects. The insect's form closely matches the structure of a leaf, including the way it holds itself in place.",
+      "answer_model_call_count" : 1,
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6962,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 3219,
+      "first_visible_text_milliseconds" : 3470,
+      "generated_tokens" : 112,
+      "generation_milliseconds" : 6679,
+      "grounding_reason" : "native_vision",
+      "id" : "native-vision-insect-leaf",
+      "image_forwarded" : true,
+      "intent_model_call_count" : 0,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3535189016,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1833520104,
+      "post_available_memory_bytes" : 3560207360,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3584882480,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "raw_intent_completion" : "",
+      "repair_count" : 0,
+      "required_answer_term_groups" : [
+        [
+          "insect",
+          "bug"
+        ],
+        [
+          "leaf",
+          "plant"
+        ]
+      ],
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "native_vision",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "native_vision",
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 89,
+      "stream_deltas" : [
+        "Yes",
+        ", ",
+        "there ",
+        "is ",
+        "an ",
+        "insect ",
+        "in ",
+        "this ",
+        "photo. ",
+        "The ",
+        "creature ",
+        "has ",
+        "the ",
+        "distinct ",
+        "features ",
+        "of ",
+        "a ",
+        "leaf-insect",
+        " ",
+        "(also ",
+        "known ",
+        "as ",
+        "a ",
+        "phasmat",
+        "odean",
+        " ",
+        "or ",
+        "leaf-mim",
+        "ic),",
+        " ",
+        "which ",
+        "uses ",
+        "its ",
+        "body ",
+        "shape ",
+        "and ",
+        "coloration ",
+        "to ",
+        "resemble ",
+        "a ",
+        "leaf ",
+        "for ",
+        "camouflage. ",
+        "It ",
+        "is ",
+        "resting ",
+        "on ",
+        "a ",
+        "large ",
+        "green ",
+        "leaf, ",
+        "with ",
+        "visible ",
+        "details ",
+        "such ",
+        "as ",
+        "its ",
+        "long ",
+        "legs, ",
+        "antennae,",
+        " ",
+        "and ",
+        "the ",
+        "intricate ",
+        "vein ",
+        "patterns ",
+        "that ",
+        "are ",
+        "characteristic ",
+        "of ",
+        "insects. ",
+        "The ",
+        "insect's ",
+        "form ",
+        "closely ",
+        "matches ",
+        "the ",
+        "structure ",
+        "of ",
+        "a ",
+        "leaf, ",
+        "including ",
+        "the ",
+        "way ",
+        "it ",
+        "holds ",
+        "itself ",
+        "in ",
+        "place."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.080924855491332,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 82
+    },
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "You should not drink the water from this muddy puddle. It is contaminated and unsafe to consume, as it contains mud, debris, and possibly pathogens that could cause illness. Before drinking any water, you must first clean or treat it with a safe method such as boiling for at least 1 minute (or using a purification device) to kill harmful bacteria, viruses, and parasites. If the water is not contaminated by human waste, then cleaning it thoroughly before consumption may be necessary.",
+      "answer_model_call_count" : 1,
+      "cold_start" : true,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 6285,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 2813,
+      "first_visible_text_milliseconds" : 3081,
+      "generated_tokens" : 104,
+      "generation_milliseconds" : 6002,
+      "grounding_reason" : "native_vision",
+      "id" : "native-vision-water-advice",
+      "image_forwarded" : true,
+      "intent_model_call_count" : 0,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3558749160,
+      "model_call_count" : 1,
+      "peak_physical_footprint_bytes" : 1809959960,
+      "post_available_memory_bytes" : 3562992616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3607590704,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "",
+      "raw_completion_count" : 1,
+      "raw_completions" : [
+
+      ],
+      "raw_intent_completion" : "",
+      "repair_count" : 0,
+      "required_answer_term_groups" : [
+        [
+          "water"
+        ],
+        [
+          "boil",
+          "filter",
+          "treat",
+          "purify"
+        ]
+      ],
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "none",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+
+      ],
+      "retrieval_candidate_dense_ranks" : [
+
+      ],
+      "retrieval_candidate_dense_similarities" : [
+
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+
+      ],
+      "retrieval_candidate_lesson_ids" : [
+
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+
+      ],
+      "retrieval_candidate_overlap_counts" : [
+
+      ],
+      "retrieval_candidate_scores" : [
+
+      ],
+      "retrieval_flow" : "native_vision",
+      "retrieval_skipped" : true,
+      "retrieval_status" : "not_attempted",
+      "route_pass" : true,
+      "run_mode" : "native_vision",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+
+      ],
+      "sentence_citation_count" : 0,
+      "source_card_ids" : [
+
+      ],
+      "stream_delta_count" : 84,
+      "stream_deltas" : [
+        "You",
+        " ",
+        "should ",
+        "not ",
+        "drink ",
+        "the ",
+        "water ",
+        "from ",
+        "this ",
+        "muddy ",
+        "puddle.",
+        " ",
+        "It ",
+        "is ",
+        "contaminated ",
+        "and ",
+        "unsafe ",
+        "to ",
+        "consume, ",
+        "as ",
+        "it ",
+        "contains ",
+        "mud, ",
+        "debris, ",
+        "and ",
+        "possibly ",
+        "pathogens ",
+        "that ",
+        "could ",
+        "cause ",
+        "illness. ",
+        "Before ",
+        "drinking ",
+        "any ",
+        "water, ",
+        "you ",
+        "must ",
+        "first ",
+        "clean ",
+        "or ",
+        "treat ",
+        "it ",
+        "with ",
+        "a ",
+        "safe ",
+        "method ",
+        "such ",
+        "as ",
+        "boiling ",
+        "for ",
+        "at ",
+        "least ",
+        "1 ",
+        "minute ",
+        "(or ",
+        "using ",
+        "a ",
+        "purification ",
+        "device) ",
+        "to ",
+        "kill ",
+        "harmful ",
+        "bacteria, ",
+        "viruses, ",
+        "and ",
+        "parasites. ",
+        "If ",
+        "the ",
+        "water ",
+        "is ",
+        "not ",
+        "contaminated ",
+        "by ",
+        "human ",
+        "waste, ",
+        "then ",
+        "cleaning ",
+        "it ",
+        "thoroughly ",
+        "before ",
+        "consumption ",
+        "may ",
+        "be ",
+        "necessary."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.298526183756664,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 82
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5257853920,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5326273696,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "393a641b826e386a0a2f6bbae6539d5601150f865539882d9e597407fbd86121",
+  "maximum_thermal_wait_seconds" : 300,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-native-vision",
+  "nominal_settle_seconds" : 10,
+  "run_id" : "expert-native-vision-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5326273696,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 112,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322390712,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 5118,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5322390712,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 10330,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3537237016,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 16626,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3560207360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 23791,
+      "phase" : "after_1",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3562992616,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 30210,
+      "phase" : "after_2",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3609982768,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 30297,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3614258992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 35446,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4768053880,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40782,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5235194848,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45942,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257919456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 51057,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257984992,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 56226,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257968608,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61360,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257952224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66508,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257952224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 71815,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257935840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 77074,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257952224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82335,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257952224,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87476,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257935840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 92811,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257935840,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98035,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257919456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 103275,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257919456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 108392,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257919456,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 113810,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257886688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119000,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257886688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124157,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257886688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 129362,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257886688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 134462,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257886688,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 139815,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257853920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 145065,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257853920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 150454,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5257853920,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 155807,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

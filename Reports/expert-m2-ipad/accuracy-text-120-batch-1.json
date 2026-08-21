@@ -1,0 +1,1219 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "Stop moving long enough to think clearly and avoid making the emergency larger. Use this order, and reassess after any major change. Take slow breaths and say out loud what happened. Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-001",
+      "manual_lessons" : [
+        "basics-stop"
+      ],
+      "minimum_available_memory_bytes" : 5325061328,
+      "peak_physical_footprint_bytes" : 43647792,
+      "post_available_memory_bytes" : 5325044944,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5328092368,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "first-aid-wounds-burns"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 10.133028030395508,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stop",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Stop moving long enough to think clearly and avoid making the emergency larger. Use this order, and reassess after any major change. Take slow breaths and say out loud what happened. Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 102,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-002",
+      "manual_lessons" : [
+        "basics-stop"
+      ],
+      "minimum_available_memory_bytes" : 5324176592,
+      "peak_physical_footprint_bytes" : 44532528,
+      "post_available_memory_bytes" : 5324324048,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324274896,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "first-aid-wounds-burns"
+      ],
+      "retrieval_candidate_scores" : [
+        0.37639344262295082,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 9.9890232086181641,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stop",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Stop moving long enough to think clearly and avoid making the emergency larger. Use this order, and reassess after any major change. Take slow breaths and say out loud what happened. Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 100,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-003",
+      "manual_lessons" : [
+        "basics-stop"
+      ],
+      "minimum_available_memory_bytes" : 5324078288,
+      "peak_physical_footprint_bytes" : 44630832,
+      "post_available_memory_bytes" : 5324274896,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324127440,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "navigation-stop-mark"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1356250000000001,
+        6.1353846153846154
+      ],
+      "retrieval_context_milliseconds" : 10.114073753356934,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stop",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Stop moving long enough to think clearly and avoid making the emergency larger. Use this order, and reassess after any major change. Take slow breaths and say out loud what happened. Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water. Mark where you stopped and note the time, weather, and last place you were certain of your location. Do not run downhill or follow water just because it appears to lead out.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 102,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-004",
+      "manual_lessons" : [
+        "basics-stop"
+      ],
+      "minimum_available_memory_bytes" : 5323947216,
+      "peak_physical_footprint_bytes" : 44761904,
+      "post_available_memory_bytes" : 5323947216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324061904,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "fire-materials"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.37562499999999999
+      ],
+      "retrieval_context_milliseconds" : 10.416984558105469,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stop",
+      "word_count" : 81
+    },
+    {
+      "answer" : "Find immediate threats and life-threatening injuries before working on comfort or travel. Use this order, and reassess after any major change. Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat, then repeat the check after any move or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-005",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 5323832528,
+      "peak_physical_footprint_bytes" : 44876592,
+      "post_available_memory_bytes" : 5323865296,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323898064,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-fracture-spine"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.0990791320800781,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "word_count" : 69
+    },
+    {
+      "answer" : "Find immediate threats and life-threatening injuries before working on comfort or travel. Use this order, and reassess after any major change. Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat, then repeat the check after any move or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-006",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 5323996368,
+      "peak_physical_footprint_bytes" : 44712752,
+      "post_available_memory_bytes" : 5323996368,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324045520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-fracture-spine"
+      ],
+      "retrieval_candidate_scores" : [
+        0.37639344262295082,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.7499618530273438,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "word_count" : 69
+    },
+    {
+      "answer" : "Find immediate threats and life-threatening injuries before working on comfort or travel. Use this order, and reassess after any major change. Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat, then repeat the check after any move or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 102,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-007",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 5323979984,
+      "peak_physical_footprint_bytes" : 44729136,
+      "post_available_memory_bytes" : 5323996368,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323979984,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-assessment"
+      ],
+      "retrieval_candidate_scores" : [
+        7.1358730158730159,
+        6.1361290322580651
+      ],
+      "retrieval_context_milliseconds" : 9.8019838333129883,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "word_count" : 69
+    },
+    {
+      "answer" : "Find immediate threats and life-threatening injuries before working on comfort or travel. Use this order, and reassess after any major change. Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat, then repeat the check after any move or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-008",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 5323963600,
+      "peak_physical_footprint_bytes" : 44745520,
+      "post_available_memory_bytes" : 5324127440,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323816144,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-bleeding"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.37612903225806449
+      ],
+      "retrieval_context_milliseconds" : 9.7860097885131836,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "word_count" : 69
+    },
+    {
+      "answer" : "Know exactly which tools, clothing, food, water, medicines, and signals are available. Use this order, and reassess after any major change. Empty pockets and packs in one controlled place so nothing is lost. Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items. Protect the most important items from rain, damage, and accidental use. Do not scatter equipment while searching in darkness or bad weather.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 105,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-009",
+      "manual_lessons" : [
+        "basics-inventory"
+      ],
+      "minimum_available_memory_bytes" : 5323898064,
+      "peak_physical_footprint_bytes" : 44811056,
+      "post_available_memory_bytes" : 5323963600,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323898064,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-inventory",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.7749958038330078,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-inventory",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Know exactly which tools, clothing, food, water, medicines, and signals are available. Use this order, and reassess after any major change. Empty pockets and packs in one controlled place so nothing is lost. Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items. Protect the most important items from rain, damage, and accidental use. Do not scatter equipment while searching in darkness or bad weather.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-010",
+      "manual_lessons" : [
+        "basics-inventory"
+      ],
+      "minimum_available_memory_bytes" : 5323554000,
+      "peak_physical_footprint_bytes" : 45155120,
+      "post_available_memory_bytes" : 5323554000,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323947216,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-inventory",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.37639344262295082,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.8049173355102539,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-inventory",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Know exactly which tools, clothing, food, water, medicines, and signals are available. Use this order, and reassess after any major change. Empty pockets and packs in one controlled place so nothing is lost. Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items. Protect the most important items from rain, damage, and accidental use. Do not scatter equipment while searching in darkness or bad weather.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-011",
+      "manual_lessons" : [
+        "basics-inventory"
+      ],
+      "minimum_available_memory_bytes" : 5323914448,
+      "peak_physical_footprint_bytes" : 44794672,
+      "post_available_memory_bytes" : 5323947216,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323963600,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-inventory",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1358730158730159,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 10.165095329284668,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-inventory",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Know exactly which tools, clothing, food, water, medicines, and signals are available. Use this order, and reassess after any major change. Empty pockets and packs in one controlled place so nothing is lost. Separate dry insulation, first aid, water treatment, light, ignition, navigation, and communication items. Protect the most important items from rain, damage, and accidental use. Do not scatter equipment while searching in darkness or bad weather.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-inventory"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-012",
+      "manual_lessons" : [
+        "basics-inventory"
+      ],
+      "minimum_available_memory_bytes" : 5323488464,
+      "peak_physical_footprint_bytes" : 45220656,
+      "post_available_memory_bytes" : 5323488464,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323947216,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-inventory",
+        "basics-first-night"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.37587301587301586
+      ],
+      "retrieval_context_milliseconds" : 9.1069936752319336,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-inventory",
+      "word_count" : 68
+    },
+    {
+      "answer" : "Choose the next action from immediate threats, not from a fixed rule of threes. Use this order, and reassess after any major change. Treat breathing and severe bleeding first. Prevent dangerous heat loss, heat gain, fire, flood, or traffic exposure next. Then secure water, signaling, navigation, and food in the order current conditions require. A memorized priority list must change when the actual threat changes.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-013",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 5323799760,
+      "peak_physical_footprint_bytes" : 44909360,
+      "post_available_memory_bytes" : 5323963600,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323799760,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-priorities",
+        "fire-wet"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 7.7570676803588867,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-priorities",
+      "word_count" : 65
+    },
+    {
+      "answer" : "Choose the next action from immediate threats, not from a fixed rule of threes. Use this order, and reassess after any major change. Treat breathing and severe bleeding first. Prevent dangerous heat loss, heat gain, fire, flood, or traffic exposure next. Then secure water, signaling, navigation, and food in the order current conditions require. A memorized priority list must change when the actual threat changes.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-014",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 5323701456,
+      "peak_physical_footprint_bytes" : 45007664,
+      "post_available_memory_bytes" : 5323701456,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5324160208,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-priorities",
+        "fire-wet"
+      ],
+      "retrieval_candidate_scores" : [
+        0.37639344262295082,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 7.7919960021972656,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-priorities",
+      "word_count" : 65
+    },
+    {
+      "answer" : "Choose the next action from immediate threats, not from a fixed rule of threes. Use this order, and reassess after any major change. Treat breathing and severe bleeding first. Prevent dangerous heat loss, heat gain, fire, flood, or traffic exposure next. Then secure water, signaling, navigation, and food in the order current conditions require. A memorized priority list must change when the actual threat changes.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 101,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-015",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 5323701456,
+      "peak_physical_footprint_bytes" : 45007664,
+      "post_available_memory_bytes" : 5323717840,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323701456,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-priorities",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1363934426229507,
+        0.016129032258064516
+      ],
+      "retrieval_context_milliseconds" : 8.87298583984375,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-priorities",
+      "word_count" : 65
+    },
+    {
+      "answer" : "Choose the next action from immediate threats, not from a fixed rule of threes. Use this order, and reassess after any major change. Treat breathing and severe bleeding first. Prevent dangerous heat loss, heat gain, fire, flood, or traffic exposure next. Then secure water, signaling, navigation, and food in the order current conditions require. A memorized priority list must change when the actual threat changes.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-priorities"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-016",
+      "manual_lessons" : [
+        "basics-priorities"
+      ],
+      "minimum_available_memory_bytes" : 5323914448,
+      "peak_physical_footprint_bytes" : 44794672,
+      "post_available_memory_bytes" : 5324012752,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323930832,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-priorities",
+        "basics-danger-injury"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.37612903225806449
+      ],
+      "retrieval_context_milliseconds" : 9.987950325012207,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-priorities",
+      "word_count" : 65
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Use this order, and reassess after any major change. Ask whether anyone knows your route and whether searchers are likely. Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-017",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 5323717840,
+      "peak_physical_footprint_bytes" : 44991280,
+      "post_available_memory_bytes" : 5323701456,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323783376,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stay-or-move",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        14.496393442622951,
+        0.37612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.2520246505737305,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stay-or-move",
+      "word_count" : 87
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Use this order, and reassess after any major change. Ask whether anyone knows your route and whether searchers are likely. Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-018",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 5323652304,
+      "peak_physical_footprint_bytes" : 45056816,
+      "post_available_memory_bytes" : 5323881680,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323652304,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stay-or-move",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        0.49639344262295082,
+        0.37612903225806449
+      ],
+      "retrieval_context_milliseconds" : 8.2379579544067383,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stay-or-move",
+      "word_count" : 87
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Use this order, and reassess after any major change. Ask whether anyone knows your route and whether searchers are likely. Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 104,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-019",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 5323619536,
+      "peak_physical_footprint_bytes" : 45089584,
+      "post_available_memory_bytes" : 5323685072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323619536,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stay-or-move",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        6.2563934426229508,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 8.2149505615234375,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stay-or-move",
+      "word_count" : 87
+    },
+    {
+      "answer" : "Stay near the last known route unless remaining creates more danger or a known safe destination is close. Use this order, and reassess after any major change. Ask whether anyone knows your route and whether searchers are likely. Compare the risks of staying with the terrain, distance, daylight, weather, injury, and certainty of any move. If staying, make shelter and signals; if moving, leave a clear note and mark direction and time. Do not move on a guess or separate a group without a clear rescue reason.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 102,
+      "expected_manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-020",
+      "manual_lessons" : [
+        "basics-stay-or-move"
+      ],
+      "minimum_available_memory_bytes" : 5323521232,
+      "peak_physical_footprint_bytes" : 45187888,
+      "post_available_memory_bytes" : 5323521232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323635920,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stay-or-move",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.61612903225806448
+      ],
+      "retrieval_context_milliseconds" : 9.302973747253418,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-stay-or-move",
+      "word_count" : 87
+    },
+    {
+      "answer" : "Reduce exertion and replace safe fluids before weakness or confusion becomes severe. Use this order, and reassess after any major change. Notice thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen excess layers, and drink safe water in manageable amounts. Treat confusion, collapse, seizure, or inability to drink as an emergency. Do not force fluid into anyone who is not fully alert or cannot swallow.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-021",
+      "manual_lessons" : [
+        "water-dehydration"
+      ],
+      "minimum_available_memory_bytes" : 5323521232,
+      "peak_physical_footprint_bytes" : 45187888,
+      "post_available_memory_bytes" : 5323586768,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323537616,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        14.256393442622951,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 10.406970977783203,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-dehydration",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Reduce exertion and replace safe fluids before weakness or confusion becomes severe. Use this order, and reassess after any major change. Notice thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen excess layers, and drink safe water in manageable amounts. Treat confusion, collapse, seizure, or inability to drink as an emergency. Do not force fluid into anyone who is not fully alert or cannot swallow.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-022",
+      "manual_lessons" : [
+        "water-dehydration"
+      ],
+      "minimum_available_memory_bytes" : 5323537616,
+      "peak_physical_footprint_bytes" : 45171504,
+      "post_available_memory_bytes" : 5323537616,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323570384,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        0.25639344262295083,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 9.856104850769043,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-dehydration",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Reduce exertion and replace safe fluids before weakness or confusion becomes severe. Use this order, and reassess after any major change. Notice thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen excess layers, and drink safe water in manageable amounts. Treat confusion, collapse, seizure, or inability to drink as an emergency. Do not force fluid into anyone who is not fully alert or cannot swallow.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-023",
+      "manual_lessons" : [
+        "water-dehydration"
+      ],
+      "minimum_available_memory_bytes" : 5323177168,
+      "peak_physical_footprint_bytes" : 45531952,
+      "post_available_memory_bytes" : 5323717840,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323537616,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1363934426229507,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 9.653925895690918,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-dehydration",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Reduce exertion and replace safe fluids before weakness or confusion becomes severe. Use this order, and reassess after any major change. Notice thirst, dry mouth, headache, dark urine, dizziness, weakness, and reduced coordination. Rest in shade, loosen excess layers, and drink safe water in manageable amounts. Treat confusion, collapse, seizure, or inability to drink as an emergency. Do not force fluid into anyone who is not fully alert or cannot swallow.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-024",
+      "manual_lessons" : [
+        "water-dehydration"
+      ],
+      "minimum_available_memory_bytes" : 5323455696,
+      "peak_physical_footprint_bytes" : 45253424,
+      "post_available_memory_bytes" : 5323455696,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323537616,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "weather-wildlife-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.61587301587301591
+      ],
+      "retrieval_context_milliseconds" : 10.251998901367188,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-dehydration",
+      "word_count" : 71
+    },
+    {
+      "answer" : "Search deliberately for water without spending more fluid and energy than the search can return. Use this order, and reassess after any major change. Check maps, valleys, drainage lines, springs, green vegetation, animal movement, and low ground. Listen for flowing water and look for converging terrain rather than wandering randomly. Travel during cooler hours and leave markers if a short water search takes you away from shelter. Do not enter steep ravines, unstable banks, caves, or fast water to reach a source.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-025",
+      "manual_lessons" : [
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 5323406544,
+      "peak_physical_footprint_bytes" : 45302576,
+      "post_available_memory_bytes" : 5323504848,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323406544,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25538461538461538
+      ],
+      "retrieval_context_milliseconds" : 8.6959600448608398,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-locate",
+      "word_count" : 82
+    },
+    {
+      "answer" : "Search deliberately for water without spending more fluid and energy than the search can return. Use this order, and reassess after any major change. Check maps, valleys, drainage lines, springs, green vegetation, animal movement, and low ground. Listen for flowing water and look for converging terrain rather than wandering randomly. Travel during cooler hours and leave markers if a short water search takes you away from shelter. Do not enter steep ravines, unstable banks, caves, or fast water to reach a source.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-026",
+      "manual_lessons" : [
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 5323455696,
+      "peak_physical_footprint_bytes" : 45253424,
+      "post_available_memory_bytes" : 5323439312,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323488464,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        10.87639344262295,
+        0.25612903225806449
+      ],
+      "retrieval_context_milliseconds" : 9.4569921493530273,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-locate",
+      "word_count" : 82
+    },
+    {
+      "answer" : "Search deliberately for water without spending more fluid and energy than the search can return. Use this order, and reassess after any major change. Check maps, valleys, drainage lines, springs, green vegetation, animal movement, and low ground. Listen for flowing water and look for converging terrain rather than wandering randomly. Travel during cooler hours and leave markers if a short water search takes you away from shelter. Do not enter steep ravines, unstable banks, caves, or fast water to reach a source.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-027",
+      "manual_lessons" : [
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 5323422928,
+      "peak_physical_footprint_bytes" : 45286192,
+      "post_available_memory_bytes" : 5323488464,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323422928,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        6.1353846153846154,
+        0.016393442622950821
+      ],
+      "retrieval_context_milliseconds" : 7.8690052032470703,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-locate",
+      "word_count" : 82
+    },
+    {
+      "answer" : "Search deliberately for water without spending more fluid and energy than the search can return. Use this order, and reassess after any major change. Check maps, valleys, drainage lines, springs, green vegetation, animal movement, and low ground. Listen for flowing water and look for converging terrain rather than wandering randomly. Travel during cooler hours and leave markers if a short water search takes you away from shelter. Do not enter steep ravines, unstable banks, caves, or fast water to reach a source.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-028",
+      "manual_lessons" : [
+        "water-locate"
+      ],
+      "minimum_available_memory_bytes" : 5323390160,
+      "peak_physical_footprint_bytes" : 45318960,
+      "post_available_memory_bytes" : 5323521232,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323439312,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "food-energy"
+      ],
+      "retrieval_candidate_scores" : [
+        9.0163934426229506,
+        0.61612903225806448
+      ],
+      "retrieval_context_milliseconds" : 10.05101203918457,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-locate",
+      "word_count" : 82
+    },
+    {
+      "answer" : "Use the least contaminated available source and still treat it for germs. Use this order, and reassess after any major change. Prefer a known safe supply, then clearer moving water collected upstream from camps, livestock, roads, or waste. Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff. Collect where the bank is stable and you cannot be swept into the water. Boiling and ordinary filters cannot make chemically contaminated or salty water safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 106,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-029",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 5322947792,
+      "peak_physical_footprint_bytes" : 45761328,
+      "post_available_memory_bytes" : 5322947792,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323521232,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "navigation-travel-crossing"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 7.9030990600585938,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-choose-source",
+      "word_count" : 80
+    },
+    {
+      "answer" : "Use the least contaminated available source and still treat it for germs. Use this order, and reassess after any major change. Prefer a known safe supply, then clearer moving water collected upstream from camps, livestock, roads, or waste. Avoid water with fuel sheen, chemical smell, toxic algae, dead animals, mine drainage, or industrial runoff. Collect where the bank is stable and you cannot be swept into the water. Boiling and ordinary filters cannot make chemically contaminated or salty water safe.",
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 103,
+      "expected_manual_lessons" : [
+        "water-choose-source"
+      ],
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-030",
+      "manual_lessons" : [
+        "water-choose-source"
+      ],
+      "minimum_available_memory_bytes" : 5323341008,
+      "peak_physical_footprint_bytes" : 45368112,
+      "post_available_memory_bytes" : 5323324624,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5323341008,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 0,
+      "raw_completions" : [
+
+      ],
+      "rejection_category" : null,
+      "response_variant_id" : "primary",
+      "retrieval_candidate_lesson_ids" : [
+        "water-choose-source",
+        "water-boil"
+      ],
+      "retrieval_candidate_scores" : [
+        0.37639344262295082,
+        0.1361290322580645
+      ],
+      "retrieval_context_milliseconds" : 8.0269575119018555,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "water-choose-source",
+      "word_count" : 80
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 5323308240,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328125136,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-multiturn",
+  "run_id" : "accuracy-text-120-batch-1",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

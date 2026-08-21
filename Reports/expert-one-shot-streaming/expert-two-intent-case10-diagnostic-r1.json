@@ -1,0 +1,488 @@
+{
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tier" : "vision_expert",
+  "artifact_identity" : {
+    "app_version" : "1.0.0(1)",
+    "database_sha256" : "737aaf8e1176ca106a2bb916e86352bcea19f7a8f296332a0ca58a1b4f0c1d28  survival_knowledge.sqlite",
+    "embedding_sha256" : "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232",
+    "model_sha256" : "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+    "projector_sha256" : "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+    "runtime_commit" : "aedb2a5e9ca3d4064148bbb919e0ddc0c1b70ab3"
+  },
+  "cases" : [
+    {
+      "acceptable_evidence_sets" : [
+
+      ],
+      "answer" : "After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away. Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle. Use only the owner's approved towing method and tell responders if the battery was submerged or damaged. If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.",
+      "answer_model_call_count" : 1,
+      "cold_start" : false,
+      "context_profile" : "full",
+      "control_leakage_detected" : false,
+      "cooldown_milliseconds" : 0,
+      "coverage_status" : "none",
+      "elapsed_milliseconds" : 8137,
+      "expected_manual_lessons" : [
+
+      ],
+      "failure_category" : null,
+      "first_token_milliseconds" : 1572,
+      "first_visible_text_milliseconds" : 2816,
+      "generated_tokens" : 179,
+      "generation_milliseconds" : 7065,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "intent-10-survival-no-evidence",
+      "intent_model_call_count" : 1,
+      "manual_lessons" : [
+
+      ],
+      "maximum_stream_delta_words" : 1,
+      "minimum_available_memory_bytes" : 3804968176,
+      "model_call_count" : 2,
+      "peak_physical_footprint_bytes" : 1563740944,
+      "post_available_memory_bytes" : 3808507120,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5322194080,
+      "pre_inference_thermal" : "nominal",
+      "prior_evidence_ids" : [
+
+      ],
+      "raw_answer_completion" : "{\n  \"s\": [\n    {\n      \"a\": \"After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use only the owner's approved towing method and tell responders if the battery was submerged or damaged.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.\",\n      \"e\": [5]\n    }\n  ]\n}",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"t\":\"survival\"}",
+        "{\n  \"s\": [\n    {\n      \"a\": \"After a crash, flood, fire, battery warning, unusual heat, popping, smoke, or sweet\/solvent odor, switch off if safe and move away.\",\n      \"e\": [2]\n    },\n    {\n      \"a\": \"Call emergency services, identify the vehicle as electric or hybrid, and display a bright signal without returning to a dangerous vehicle.\",\n      \"e\": [3]\n    },\n    {\n      \"a\": \"Use only the owner's approved towing method and tell responders if the battery was submerged or damaged.\",\n      \"e\": [4]\n    },\n    {\n      \"a\": \"If the vehicle is undamaged and used as shelter, clear snow from the exhaust, conserve power, ventilate safely, and keep an exit usable.\",\n      \"e\": [5]\n    }\n  ]\n}"
+      ],
+      "raw_intent_completion" : "{\"t\":\"survival\"}",
+      "repair_count" : 0,
+      "resolved_history_count" : 0,
+      "resolved_turn_type" : "survival_question",
+      "response_variant_id" : null,
+      "retrieval_candidate_applied_boosts" : [
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ],
+        [
+
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+          "term_overlap"
+        ],
+        [
+
+        ]
+      ],
+      "retrieval_candidate_dense_ranks" : [
+        0,
+        19,
+        32,
+        10,
+        14,
+        35,
+        58,
+        50
+      ],
+      "retrieval_candidate_dense_similarities" : [
+        0.63710296154022217,
+        0.56613469123840332,
+        0.55245071649551392,
+        0.58533233404159546,
+        0.57141792774200439,
+        0.54994899034500122,
+        0.53897273540496826,
+        0.5407794713973999
+      ],
+      "retrieval_candidate_eligibility_reasons" : [
+        "strong_dense_alignment",
+        "dense_plus_lexical_alignment",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance",
+        "insufficient_absolute_relevance"
+      ],
+      "retrieval_candidate_lesson_ids" : [
+        "car-ev-hybrid",
+        "car-stay-walk",
+        "navigation-stop-mark",
+        "car-stuck",
+        "car-fuse",
+        "water-choose-source",
+        "fire-extinguish",
+        "car-overheat"
+      ],
+      "retrieval_candidate_lexical_ranks" : [
+        4,
+        0,
+        8,
+        19,
+        24,
+        17,
+        15,
+        25
+      ],
+      "retrieval_candidate_overlap_counts" : [
+        1,
+        2,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "retrieval_candidate_scores" : [
+        0.034278058007566212,
+        0.032393442622950824,
+        0.027745441795231415,
+        0.02658450704225352,
+        0.025098039215686277,
+        0.024237179487179489,
+        0.024061256081379916,
+        0.020636915985753193
+      ],
+      "retrieval_context_milliseconds" : 0.22399425506591797,
+      "retrieval_flow" : "direct_rag",
+      "retrieval_skipped" : false,
+      "retrieval_status" : "accepted_evidence",
+      "route_pass" : false,
+      "run_mode" : "rag",
+      "safety_critical" : true,
+      "safety_pass" : true,
+      "selected_evidence_indexes" : [
+        1
+      ],
+      "selected_lesson_ids" : [
+
+      ],
+      "selected_scenario_ids" : [
+        "car-ev-hybrid-scenario"
+      ],
+      "sentence_citation_count" : 4,
+      "source_card_ids" : [
+        "ready-vehicle",
+        "nhtsa-ev-safety"
+      ],
+      "stream_delta_count" : 87,
+      "stream_deltas" : [
+        "After",
+        " ",
+        "a ",
+        "crash, ",
+        "flood, ",
+        "fire, ",
+        "battery ",
+        "warning, ",
+        "unusual ",
+        "heat, ",
+        "popping, ",
+        "smoke, ",
+        "or ",
+        "sweet\/sol",
+        "vent ",
+        "odor, ",
+        "switch ",
+        "off ",
+        "if ",
+        "safe ",
+        "and ",
+        "move ",
+        "away.",
+        " ",
+        "Call ",
+        "emergency ",
+        "services, ",
+        "identify ",
+        "the ",
+        "vehicle ",
+        "as ",
+        "electric ",
+        "or ",
+        "hybrid, ",
+        "and ",
+        "display ",
+        "a ",
+        "bright ",
+        "signal ",
+        "without ",
+        "returning ",
+        "to ",
+        "a ",
+        "dangerous ",
+        "vehicle.",
+        " ",
+        "Use ",
+        "only ",
+        "the ",
+        "owner's ",
+        "approved ",
+        "towing ",
+        "method ",
+        "and ",
+        "tell ",
+        "responders ",
+        "if ",
+        "the ",
+        "battery ",
+        "was ",
+        "submerged ",
+        "or ",
+        "damaged.",
+        " ",
+        "If ",
+        "the ",
+        "vehicle ",
+        "is ",
+        "undamaged ",
+        "and ",
+        "used ",
+        "as ",
+        "shelter, ",
+        "clear ",
+        "snow ",
+        "from ",
+        "the ",
+        "exhaust, ",
+        "conserve ",
+        "power, ",
+        "ventilate ",
+        "safely, ",
+        "and ",
+        "keep ",
+        "an ",
+        "exit ",
+        "usable."
+      ],
+      "support_status" : "none",
+      "terminal_failure" : false,
+      "tokens_per_second" : 32.404878936828688,
+      "verification_issue_codes" : [
+
+      ],
+      "verification_status" : "none",
+      "word_count" : 82
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 0,
+  "final_available_memory_bytes" : 5310086208,
+  "final_battery_level" : 1,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5325946016,
+  "initial_battery_level" : 1,
+  "initial_thermal" : "nominal",
+  "manifest_sha256" : "f2dce992bdb8cde5c6a62c7622ccfc2c69bcdcd8275b44de7bd4bf776b663408",
+  "maximum_thermal_wait_seconds" : 900,
+  "minimum_cooldown_seconds" : 180,
+  "mode" : "expert-one-shot-streaming",
+  "nominal_settle_seconds" : 0,
+  "run_id" : "expert-two-intent-case10-diagnostic-r1",
+  "schema_version" : 2,
+  "terminal_failure" : null,
+  "thermal_measurement" : "ProcessInfo.thermalState",
+  "thermal_poll_seconds" : 5,
+  "thermal_samples" : [
+    {
+      "available_memory_bytes" : 5325913248,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 65,
+      "phase" : "preflight",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3808507120,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8327,
+      "phase" : "after_0",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 3836131336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 8416,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4804836008,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 13671,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 4804836008,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 18993,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5270305808,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 24332,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 29489,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 34915,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 40169,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 45385,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135336,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 50554,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310118952,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 55925,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086184,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 61053,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310151744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 66290,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310151744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 71626,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310151744,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 76961,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310135360,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 82317,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310118976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 87734,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310118976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 93022,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310118976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 98351,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310118976,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 103679,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310102592,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 108993,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 114311,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 119597,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 124998,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 130334,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    },
+    {
+      "available_memory_bytes" : 5310086208,
+      "battery_level" : 1,
+      "elapsed_milliseconds" : 135670,
+      "phase" : "batch_end",
+      "state" : "nominal"
+    }
+  ]
+}

@@ -1,0 +1,1068 @@
+{
+  "active_pack_status" : "Expert ready offline",
+  "active_tier" : "vision_expert",
+  "cases" : [
+    {
+      "answer" : "If you're experiencing panic, take deep breaths and focus on your surroundings. Try to calm yourself by counting to ten or using grounding techniques like focusing on the present moment. If it's a situation that feels overwhelming, consider seeking support from someone you trust or reaching out for help if needed.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 3658,
+      "expected_manual_lessons" : [
+        "basics-stop"
+      ],
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 65,
+      "generation_milliseconds" : 2075,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "followup-001",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3821450552,
+      "peak_physical_footprint_bytes" : 1547258568,
+      "post_available_memory_bytes" : 3825366328,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5326093496,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"If you're experiencing panic, take deep breaths and focus on your surroundings. Try to calm yourself by counting to ten or using grounding techniques like focusing on the present moment. If it's a situation that feels overwhelming, consider seeking support from someone you trust or reaching out for help if needed.\",\"e\":[]}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "basics-stop",
+        "first-aid-wounds-burns",
+        "fire-build-feed",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.25612903225806449,
+        0.135625,
+        0.13538461538461538
+      ],
+      "retrieval_context_milliseconds" : 10.352015495300293,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 33.988316516197557,
+      "word_count" : 51
+    },
+    {
+      "answer" : "Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat first, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 4439,
+      "expected_manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 72,
+      "generation_milliseconds" : 2936,
+      "grounding_reason" : "resolved_history",
+      "id" : "followup-008",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "basics-danger-injury"
+      ],
+      "minimum_available_memory_bytes" : 3807311136,
+      "peak_physical_footprint_bytes" : 1561397984,
+      "post_available_memory_bytes" : 3825399072,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3854481464,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Look for traffic, fire, unstable terrain, weather, water, wildlife, and falling objects. Check breathing, severe bleeding, confusion, and the ability to move safely. Control the most urgent threat first, then repeat the check after any movement or major change. Do not enter a dangerous area to recover replaceable gear.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "basics-danger-injury",
+        "first-aid-bleeding",
+        "first-aid-fracture-spine",
+        "basics-priorities"
+      ],
+      "retrieval_candidate_scores" : [
+        1.0163934426229508,
+        0.37612903225806449,
+        0.37562499999999999,
+        0.25587301587301586
+      ],
+      "retrieval_context_milliseconds" : 9.9259614944458008,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "basics-danger-injury",
+      "tokens_per_second" : 30.498281786941579,
+      "word_count" : 49
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2526,
+      "expected_manual_lessons" : [
+        "water-dehydration"
+      ],
+      "first_token_milliseconds" : 685,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1104,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "followup-021",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3806590216,
+      "peak_physical_footprint_bytes" : 1562118904,
+      "post_available_memory_bytes" : 3816240392,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3852892192,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-dehydration",
+        "food-energy",
+        "water-boil",
+        "signal-whistle"
+      ],
+      "retrieval_candidate_scores" : [
+        14.256393442622951,
+        0.13587301587301587,
+        0.016129032258064516,
+        0.015625
+      ],
+      "retrieval_context_milliseconds" : 10.076045989990234,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.572792362768496,
+      "word_count" : 10
+    },
+    {
+      "answer" : "avoid using water sources that appear contaminated or are near industrial areas for now. What is the source of the water you're concerned about, and how far is it from any known contamination?",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5383,
+      "expected_manual_lessons" : [
+        "water-locate"
+      ],
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 45,
+      "generation_milliseconds" : 1501,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "followup-025",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3828675848,
+      "peak_physical_footprint_bytes" : 1540033272,
+      "post_available_memory_bytes" : 3848598816,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3857053728,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 4,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}",
+        "{\"a\":\"Avoid moving near the water source; confirm it is not contaminated or frozen. Is there any visible sign of contamination, such as discoloration or unusual odor?\",\"e\":[]}",
+        "{\"a\":\"avoid using water sources that appear contaminated or are near industrial areas for now. What is the source of the water you're concerned about, and how far is it from any known contamination?\",\"e\":[]}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 2,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-locate",
+        "food-energy",
+        "water-boil",
+        "signal-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        8.37639344262295,
+        0.25538461538461538,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 9.7159147262573242,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 33.613445378151262,
+      "word_count" : 33
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5425,
+      "expected_manual_lessons" : [
+        "water-boil"
+      ],
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 40,
+      "generation_milliseconds" : 1339,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "followup-037",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3820385520,
+      "peak_physical_footprint_bytes" : 1548323600,
+      "post_available_memory_bytes" : 3850007792,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3876124728,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 4,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}",
+        "{\"a\":\"Avoid boiling water in a container with visible cracks or damage; confirm the container is intact before use. Is the container showing any signs of damage, such as cracks or leaks?\",\"e\":[]}",
+        "{\"a\":\"Avoid boiling water unless it's from a trusted source; check for contamination or signs of spoilage. What is the age and type of container holding the water?\",\"e\":[]}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 2,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "water-boil",
+        "navigation-travel-crossing",
+        "shelter-tarp",
+        "navigation-terrain"
+      ],
+      "retrieval_candidate_scores" : [
+        14.37639344262295,
+        0.1361290322580645,
+        0.13587301587301587,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 10.31196117401123,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 34.001743679163035,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 2714,
+      "expected_manual_lessons" : [
+        "fire-decision"
+      ],
+      "first_token_milliseconds" : 744,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1163,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-041",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3846223136,
+      "peak_physical_footprint_bytes" : 1522485984,
+      "post_available_memory_bytes" : 3895833912,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5329747056,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-decision",
+        "basics-stay-or-move",
+        "food-energy",
+        "car-stay-walk"
+      ],
+      "retrieval_candidate_scores" : [
+        9.8263934426229493,
+        1.1561290322580646,
+        1.1558730158730159,
+        1.1556250000000001
+      ],
+      "retrieval_context_milliseconds" : 8.5369348526000977,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.572792362768496,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2584,
+      "expected_manual_lessons" : [
+        "fire-materials"
+      ],
+      "first_token_milliseconds" : 739,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1157,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-049",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3844961568,
+      "peak_physical_footprint_bytes" : 1523747552,
+      "post_available_memory_bytes" : 3844928800,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3896162360,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-materials",
+        "fire-wet",
+        "fire-build-feed",
+        "fire-ignition"
+      ],
+      "retrieval_candidate_scores" : [
+        10.296393442622952,
+        0.67562500000000003,
+        0.47612903225806447,
+        0.47587301587301584
+      ],
+      "retrieval_context_milliseconds" : 7.0730447769165039,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.669856459330141,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2646,
+      "expected_manual_lessons" : [
+        "fire-build-feed"
+      ],
+      "first_token_milliseconds" : 744,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1163,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-057",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3848647968,
+      "peak_physical_footprint_bytes" : 1520061152,
+      "post_available_memory_bytes" : 3892409656,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851040800,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "fire-build-feed",
+        "fire-site",
+        "fire-wet",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        12.326393442622949,
+        0.80587301587301585,
+        0.70515151515151508,
+        0.68470588235294116
+      ],
+      "retrieval_context_milliseconds" : 9.8830461502075195,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.572792362768496,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2600,
+      "expected_manual_lessons" : [
+        "shelter-ground"
+      ],
+      "first_token_milliseconds" : 703,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1122,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-065",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3848516896,
+      "peak_physical_footprint_bytes" : 1520192224,
+      "post_available_memory_bytes" : 3899995448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3894868024,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-ground",
+        "signal-ground",
+        "shelter-cold-snow",
+        "first-aid-cold"
+      ],
+      "retrieval_candidate_scores" : [
+        15.156393442622951,
+        0.58562500000000006,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 8.1880092620849609,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.572792362768496,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2639,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "first_token_milliseconds" : 742,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1160,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "correction-069",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3846714656,
+      "peak_physical_footprint_bytes" : 1521994464,
+      "post_available_memory_bytes" : 3899995448,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3902437432,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris",
+        "shelter-overnight",
+        "shelter-site"
+      ],
+      "retrieval_candidate_scores" : [
+        15.826393442622949,
+        1.2561290322580645,
+        0.68587301587301597,
+        0.68562500000000004
+      ],
+      "retrieval_context_milliseconds" : 9.328007698059082,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.669856459330141,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 8941,
+      "expected_manual_lessons" : [
+        "shelter-tarp"
+      ],
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 62,
+      "generation_milliseconds" : 2051,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "ocr-071",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3843945760,
+      "peak_physical_footprint_bytes" : 1524763360,
+      "post_available_memory_bytes" : 3857069320,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5329681520,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"avoid moving near the tarp shelter as it may be unstable; what is the condition of the edge of the tarp shelter that you are observing right now for potential instability or damage to the structure, and how does this affect your safety assessment in real time while on the ground,. e:[]}  This response includes a broad avoidance precaution (avoid moving near the tarp shelter) and asks a focused question about the condition of the edge of the tarp shelter that could indicate potential instability or?\" ,\"e\":[]}",
+        "{\"a\":\"avoid exposure to direct sunlight or heat sources when in a tarp shelter for extended periods due to potential thermal stress on the skin and equipment, but no specific procedure is being asked here. Please confirm if there are any visible signs of injury or hazard that may require immediate attention?\",\"e\":[]}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-tarp",
+        "shelter-debris",
+        "shelter-overnight",
+        "shelter-site"
+      ],
+      "retrieval_candidate_scores" : [
+        6.3681967213114756,
+        0.12806451612903225,
+        0.12793650793650793,
+        0.1278125
+      ],
+      "retrieval_context_milliseconds" : 20.234107971191406,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 32.813340505648199,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6453,
+      "expected_manual_lessons" : [
+        "shelter-cold-snow"
+      ],
+      "first_token_milliseconds" : 192,
+      "generated_tokens" : 51,
+      "generation_milliseconds" : 1703,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "ocr-077",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3838244104,
+      "peak_physical_footprint_bytes" : 1530465016,
+      "post_available_memory_bytes" : 3861591304,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3884644384,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"Shelter in Cold or Snow, what is the temperature outside and are there any signs of snow accumulation on the ground or nearby structures that could affect visibility or safety in this environment for a period of time before making further decisions about sheltering or movement to. e:[]}  # This response includes an appropriate avoidance precaution based on visible conditions (low contrast, uncertain edge) and asks a focused question related to observable environmental factors affecting the safe行动。?\" ,\"e\":[]}",
+        "{\"a\":\"Avoid exposure to extreme cold or snow for safety in the environment, as it may cause frostbite and reduce visibility. Please confirm if you are wearing appropriate protective gear and whether there is any visible risk of freezing temperatures nearby?\",\"e\":[]}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "shelter-cold-snow",
+        "weather-wildlife-cold",
+        "shelter-overnight",
+        "shelter-ground"
+      ],
+      "retrieval_candidate_scores" : [
+        8.3681967213114756,
+        0.24806451612903224,
+        0.24793650793650793,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 13.136029243469238,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 33.090668431502316,
+      "word_count" : 14
+    },
+    {
+      "answer" : "The user should count the food and separate an emergency reserve, as it is essential to protect existing calories for warmth, decisions, and necessary work. Eat small planned amounts during activity instead of finishing easy snacks early to avoid overeating. Keep food dry, sealed, and protected from animals or contamination. Do not restrict food from children, people with diabetes, or those with medical needs without appropriate guidance. Stop if the user is unable to safely manage food intake due to a lack of resources or risk of contamination.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 10149,
+      "expected_manual_lessons" : [
+        "food-carried"
+      ],
+      "first_token_milliseconds" : 570,
+      "generated_tokens" : 109,
+      "generation_milliseconds" : 4144,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-085",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "food-carried"
+      ],
+      "minimum_available_memory_bytes" : 3833279704,
+      "peak_physical_footprint_bytes" : 1535429416,
+      "post_available_memory_bytes" : 3856512264,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3889149984,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user has a blurred on-device OCR, low contrast image, and uncertain edge. The visible observation shows food that is not clearly distinguishable but appears to be in the context of managing carried food. Since the food is unclear, prioritize identifying safe actions based on the lesson’s guidance: count food and separate an emergency reserve. Because the image quality prevents accurate assessment, do not eat small planned amounts during necessary activity until clarity is achieved. The warning states that no restriction should be made without appropriate medical guidance—this must apply to all individuals with specific needs.\",\"e\":[1]}",
+        "{\"a\":\"The user should count the food and separate an emergency reserve, as it is essential to protect existing calories for warmth, decisions, and necessary work. Eat small planned amounts during activity instead of finishing easy snacks early to avoid overeating. Keep food dry, sealed, and protected from animals or contamination. Do not restrict food from children, people with diabetes, or those with medical needs without appropriate guidance. Stop if the user is unable to safely manage food intake due to a lack of resources or risk of contamination.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-carried",
+        "food-unknown-plants",
+        "food-cook",
+        "shelter-debris"
+      ],
+      "retrieval_candidate_scores" : [
+        14.368196721311476,
+        0.24806451612903224,
+        0.24781249999999999,
+        0.12793650793650793
+      ],
+      "retrieval_context_milliseconds" : 10.759115219116211,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-carried",
+      "tokens_per_second" : 30.2182428651371,
+      "word_count" : 88
+    },
+    {
+      "answer" : "The user is in a situation where the on-device OCR shows blurred text, low contrast, and uncertain edges. The visible observation suggests that the image quality is poor, making it difficult to identify any food sources or safe locations. Since the lesson emphasizes using only known methods and avoiding unfamiliar animals, the immediate action should be to stop and assess the environment for safety. A warning must be issued: do not proceed without proper identification of edible items or access points. The user’s current situation requires a halt until clearer visual confirmation is obtained.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 5935,
+      "expected_manual_lessons" : [
+        "food-low-risk"
+      ],
+      "first_token_milliseconds" : 654,
+      "generated_tokens" : 114,
+      "generation_milliseconds" : 4416,
+      "grounding_reason" : "visual_hazard",
+      "id" : "ocr-093",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "food-low-risk"
+      ],
+      "minimum_available_memory_bytes" : 3821843672,
+      "peak_physical_footprint_bytes" : 1546865448,
+      "post_available_memory_bytes" : 3862803720,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3883808776,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"The user is in a situation where the on-device OCR shows blurred text, low contrast, and uncertain edges. The visible observation suggests that the image quality is poor, making it difficult to identify any food sources or safe locations. Since the lesson emphasizes using only known methods and avoiding unfamiliar animals, the immediate action should be to stop and assess the environment for safety. A warning must be issued: do not proceed without proper identification of edible items or access points. The user’s current situation requires a halt until clearer visual confirmation is obtained.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "food-low-risk",
+        "food-energy",
+        "fire-decision",
+        "food-unknown-plants"
+      ],
+      "retrieval_candidate_scores" : [
+        8.6081967213114758,
+        0.36793650793650789,
+        0.36781249999999999,
+        0.36769230769230765
+      ],
+      "retrieval_context_milliseconds" : 13.023972511291504,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : "food-low-risk",
+      "tokens_per_second" : 30.037214247740565,
+      "word_count" : 94
+    },
+    {
+      "answer" : "Expert couldn’t produce a safety-validated answer. Rephrase the complete current situation and observable conditions.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 6289,
+      "expected_manual_lessons" : [
+        "food-cook"
+      ],
+      "first_token_milliseconds" : 193,
+      "generated_tokens" : 44,
+      "generation_milliseconds" : 1478,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "ocr-100",
+      "intent_disposition" : "clarify",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3849401560,
+      "peak_physical_footprint_bytes" : 1519307560,
+      "post_available_memory_bytes" : 3863311624,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3890067464,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"clarify\",\"l\":0}",
+        "{\"a\":\"avoid touching contaminated surfaces to prevent illness, what is the most likely source of contamination on the surface you are observing right now that could be causing a risk to your health or safety in this environment and how can it be addressed immediately for protection and. e:[]}  This response includes an incorrect format with extra keys and non-essential information not aligned with the required structure, so I will correct my answer based on proper formatting as per instructions while up?\" ,\"e\":[]}",
+        "{\"a\":\"Avoid cross-contamination by using separate cutting boards for raw and cooked foods. Ask: Is there any visible evidence of food residue on a utensil or surface that could lead to contamination?\",\"e\":[]}"
+      ],
+      "rejection_category" : "model_validation_or_clarification",
+      "repair_count" : 1,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "food-cook",
+        "food-wildlife",
+        "weather-wildlife-snakes-insects",
+        "basics-inventory"
+      ],
+      "retrieval_candidate_scores" : [
+        1.0081967213114753,
+        0.36793650793650789,
+        0.24806451612903224,
+        0.24781249999999999
+      ],
+      "retrieval_context_milliseconds" : 10.0860595703125,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : false,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 33.463035019455255,
+      "word_count" : 14
+    },
+    {
+      "answer" : "Stop and Mark the Last Known Point. Observe that you are in a new location, so mark your last known point without damaging the environment. Record time and direction of travel before moving forward. Review recent turns, terrain, distance, and elevation to assess if navigation is still valid. Do not keep walking simply to feel productive.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 60000,
+      "elapsed_milliseconds" : 4524,
+      "expected_manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "first_token_milliseconds" : 608,
+      "generated_tokens" : 75,
+      "generation_milliseconds" : 3007,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-101",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "navigation-stop-mark"
+      ],
+      "minimum_available_memory_bytes" : 3856397600,
+      "peak_physical_footprint_bytes" : 1512311520,
+      "post_available_memory_bytes" : 3859969312,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 5320752216,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Stop and Mark the Last Known Point. Observe that you are in a new location, so mark your last known point without damaging the environment. Record time and direction of travel before moving forward. Review recent turns, terrain, distance, and elevation to assess if navigation is still valid. Do not keep walking simply to feel productive.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 0,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-stop-mark",
+        "basics-stay-or-move",
+        "basics-stop",
+        "navigation-backtrack"
+      ],
+      "retrieval_candidate_scores" : [
+        13.36639344262295,
+        1.0961290322580646,
+        0.82587301587301587,
+        0.25562499999999999
+      ],
+      "retrieval_context_milliseconds" : 10.985970497131348,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-stop-mark",
+      "tokens_per_second" : 30.846185910796166,
+      "word_count" : 56
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2514,
+      "expected_manual_lessons" : [
+        "navigation-map"
+      ],
+      "first_token_milliseconds" : 687,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1107,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "adversarial-105",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3841078560,
+      "peak_physical_footprint_bytes" : 1527630560,
+      "post_available_memory_bytes" : 3843175712,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3887200312,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-map",
+        "navigation-compass",
+        "navigation-terrain",
+        "navigation-sun-shadow"
+      ],
+      "retrieval_candidate_scores" : [
+        9.2563934426229508,
+        0.235625,
+        0.1361290322580645,
+        0.13587301587301587
+      ],
+      "retrieval_context_milliseconds" : 5.8569908142089844,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.476190476190474,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination in mind. Choose a visible landmark on that bearing and walk to it; recheck after reaching. If you're unsure of your location or heading, stop and verify terrain and map before continuing.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 8036,
+      "expected_manual_lessons" : [
+        "navigation-compass"
+      ],
+      "first_token_milliseconds" : 569,
+      "generated_tokens" : 83,
+      "generation_milliseconds" : 3241,
+      "grounding_reason" : "ranked_reviewed_intent",
+      "id" : "adversarial-109",
+      "intent_disposition" : "grounded",
+      "manual_lessons" : [
+        "navigation-compass"
+      ],
+      "minimum_available_memory_bytes" : 3848680736,
+      "peak_physical_footprint_bytes" : 1520028384,
+      "post_available_memory_bytes" : 3863885112,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3851466784,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 3,
+      "raw_completions" : [
+        "{\"d\":\"grounded\",\"l\":1}",
+        "{\"a\":\"Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination accounted for if needed. Choose a visible landmark on that bearing and walk to it while rechecking the reading. A precise bearing toward the wrong location is still incorrect; verify terrain and map before proceeding.\",\"e\":[1]}",
+        "{\"a\":\"Use the compass to hold a known direction, not to invent a destination. Keep it level and away from metal objects. Set or read the bearing using the map with local declination in mind. Choose a visible landmark on that bearing and walk to it; recheck after reaching. If you're unsure of your location or heading, stop and verify terrain and map before continuing.\",\"e\":[1]}"
+      ],
+      "rejection_category" : null,
+      "repair_count" : 1,
+      "response_variant_id" : "model_authored",
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-compass",
+        "navigation-sun-shadow",
+        "fire-ignition",
+        "food-low-risk"
+      ],
+      "retrieval_candidate_scores" : [
+        14.586393442622949,
+        0.33612903225806451,
+        0.015873015873015872,
+        0.015625
+      ],
+      "retrieval_context_milliseconds" : 10.352015495300293,
+      "route_pass" : true,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : "navigation-compass",
+      "tokens_per_second" : 30.688622754491018,
+      "word_count" : 64
+    },
+    {
+      "answer" : "Expert couldn’t run right now. Try again in a moment.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2542,
+      "expected_manual_lessons" : [
+        "navigation-terrain"
+      ],
+      "first_token_milliseconds" : 684,
+      "generated_tokens" : 18,
+      "generation_milliseconds" : 1103,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "adversarial-113",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3835557104,
+      "peak_physical_footprint_bytes" : 1533152016,
+      "post_available_memory_bytes" : 3844044016,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3891116088,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\n  \"d\": \"clarify\",\n  \"l\": 0\n}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-terrain",
+        "navigation-compass",
+        "navigation-stop-mark",
+        "navigation-map"
+      ],
+      "retrieval_candidate_scores" : [
+        9.8263934426229493,
+        0.35587301587301584,
+        0.25612903225806449,
+        0.135625
+      ],
+      "retrieval_context_milliseconds" : 9.2490911483764648,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 40.572792362768496,
+      "word_count" : 10
+    },
+    {
+      "answer" : "Return only when the route behind you is known, short, and safer than staying.",
+      "cold_start" : false,
+      "context_profile" : "full",
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 2299,
+      "expected_manual_lessons" : [
+        "navigation-backtrack"
+      ],
+      "first_token_milliseconds" : 205,
+      "generated_tokens" : 23,
+      "generation_milliseconds" : 838,
+      "grounding_reason" : "clarification_or_rejection",
+      "id" : "adversarial-120",
+      "intent_disposition" : "ordinary",
+      "manual_lessons" : [
+
+      ],
+      "minimum_available_memory_bytes" : 3847992560,
+      "peak_physical_footprint_bytes" : 1520716560,
+      "post_available_memory_bytes" : 3856659672,
+      "post_inference_thermal" : "nominal",
+      "pre_available_memory_bytes" : 3850483720,
+      "pre_inference_thermal" : "nominal",
+      "raw_completion_count" : 2,
+      "raw_completions" : [
+        "{\"d\":\"ordinary\",\"l\":0}",
+        "{\"a\":\"Return only when the route behind you is known, short, and safer than staying.\",\"e\":[]}"
+      ],
+      "rejection_category" : "ordinary",
+      "repair_count" : 0,
+      "response_variant_id" : null,
+      "retrieval_candidate_lesson_ids" : [
+        "navigation-backtrack",
+        "food-low-risk",
+        "food-energy",
+        "basics-stay-or-move"
+      ],
+      "retrieval_candidate_scores" : [
+        1.5163934426229508,
+        0.82515151515151519,
+        0.69562499999999994,
+        0.57587301587301587
+      ],
+      "retrieval_context_milliseconds" : 10.820984840393066,
+      "route_pass" : false,
+      "run_mode" : "multi_turn",
+      "safety_critical" : true,
+      "selected_lesson_id" : null,
+      "tokens_per_second" : 34.755134281200633,
+      "word_count" : 14
+    }
+  ],
+  "completed" : true,
+  "cooldown_every_cases" : 5,
+  "final_available_memory_bytes" : 3885873160,
+  "final_battery_level" : 0.89999997615814209,
+  "final_thermal" : "nominal",
+  "initial_available_memory_bytes" : 5328239800,
+  "initial_battery_level" : 0.89999997615814209,
+  "initial_thermal" : "nominal",
+  "minimum_cooldown_seconds" : 60,
+  "mode" : "expert-text-diagnostic",
+  "run_id" : "model-first-text-diagnostic-20-v2",
+  "schema_version" : 1,
+  "terminal_failure" : null
+}

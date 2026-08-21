@@ -113,7 +113,8 @@ public actor PackageInstaller {
     @discardableResult
     public func install(
         envelope: SignedPackageEnvelope,
-        stagedDirectory: URL
+        stagedDirectory: URL,
+        activate: Bool = true
     ) throws -> InstalledPackageVersion {
         try ensureRoot()
         try verifier.verify(envelope: envelope, packageDirectory: stagedDirectory)
@@ -153,6 +154,16 @@ public actor PackageInstaller {
                 options: [.atomic]
             )
             try fileManager.moveItem(at: stagedDirectory, to: destination)
+            try? (destination as NSURL).setResourceValue(
+                true,
+                forKey: .isExcludedFromBackupKey
+            )
+#if os(iOS)
+            try? fileManager.setAttributes(
+                [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+                ofItemAtPath: destination.path
+            )
+#endif
 
             let record = InstalledPackageVersion(
                 packageID: manifest.packageID,
@@ -164,7 +175,9 @@ public actor PackageInstaller {
             )
             current.installed.removeAll { $0.id == record.id }
             current.installed.append(record)
-            current.activeVersions[manifest.packageID] = manifest.version
+            if activate {
+                current.activeVersions[manifest.packageID] = manifest.version
+            }
             try writeIndex(current)
             return record
         } catch let error as PackageInstallError {
