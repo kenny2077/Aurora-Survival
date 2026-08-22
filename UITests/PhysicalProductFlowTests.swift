@@ -171,25 +171,33 @@ final class PhysicalProductFlowTests: XCTestCase {
         )
     }
 
-    func testManualCourseAndUnifiedReferenceRemainAvailableWithoutModel() throws {
+    func testFieldGuideRemainsAvailableWithoutModel() throws {
         let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
-        openManual(in: app)
+        let shortcut = app.buttons["chat.manual-chapter.fire"]
+        XCTAssertTrue(shortcut.waitForExistence(timeout: 20))
+        shortcut.tap()
+        XCTAssertTrue(tabButton("Manual", in: app).isSelected)
         XCTAssertFalse(app.staticTexts["Start here"].exists)
-        let chapter = app.staticTexts["Survival Basics"].firstMatch
-        XCTAssertTrue(chapter.waitForExistence(timeout: 10))
-        chapter.tap()
-        let lesson = app.staticTexts["Stop and Control Panic"].firstMatch
+        let lesson = app.staticTexts["Build a Basic Fire"].firstMatch
         XCTAssertTrue(lesson.waitForExistence(timeout: 10))
         lesson.tap()
         XCTAssertTrue(
-            app.navigationBars["Stop and Control Panic"]
+            app.navigationBars["Build a Basic Fire"]
                 .waitForExistence(timeout: 10)
         )
-        XCTAssertTrue(app.staticTexts["Do this now"].exists)
-        XCTAssertTrue(app.staticTexts["Critical warnings"].exists)
+        let visual = app.buttons["manual.visual.fire_basic_build"]
+        XCTAssertTrue(visual.exists)
+        visual.tap()
+        let close = app.buttons["manual.visual.close"]
+        XCTAssertTrue(close.waitForExistence(timeout: 10))
+        close.tap()
+        let next = app.buttons["manual.next.fire.wet_conditions"]
+        XCTAssertTrue(next.waitForExistence(timeout: 10))
+        next.tap()
+        XCTAssertTrue(app.navigationBars["Fire in Wet Conditions"].waitForExistence(timeout: 10))
 
         app.terminate()
         app.launch()
@@ -197,12 +205,12 @@ final class PhysicalProductFlowTests: XCTestCase {
         let search = app.searchFields.firstMatch
         XCTAssertTrue(search.waitForExistence(timeout: 10))
         search.tap()
-        search.typeText("water purifier boiling")
-        let result = app.staticTexts["Boil Water Correctly"].firstMatch
+        search.typeText("broken bone splint")
+        let result = app.staticTexts["Support a Fracture"].firstMatch
         XCTAssertTrue(result.waitForExistence(timeout: 20))
         result.tap()
         XCTAssertTrue(
-            app.navigationBars["Boil Water Correctly"]
+            app.navigationBars["Support a Fracture"]
                 .waitForExistence(timeout: 20)
         )
     }
@@ -225,7 +233,7 @@ final class PhysicalProductFlowTests: XCTestCase {
         keepScreenshot(named: "Dedicated Maps tab", app: app)
     }
 
-    func testManualTenChaptersAndNoResultsAtLargestType() throws {
+    func testManualSixChaptersAndNoResultsAtLargestType() throws {
         let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launchArguments += [
@@ -236,12 +244,7 @@ final class PhysicalProductFlowTests: XCTestCase {
         app.launch()
         openManual(in: app)
 
-        let chapters = [
-            "Survival Basics", "Find and Treat Water", "Start a Fire",
-            "Build a Shelter", "Find Food Safely", "Navigate When Lost",
-            "Signal for Rescue", "Wilderness First Aid",
-            "Weather and Wildlife", "Car Breakdown",
-        ]
+        let chapters = ["Fire", "Water", "Shelter", "First Aid", "Navigation", "Food"]
         for title in chapters {
             for _ in 0..<12 where !app.staticTexts[title].exists {
                 app.swipeUp()
@@ -257,7 +260,7 @@ final class PhysicalProductFlowTests: XCTestCase {
             app.descendants(matching: .any)["manual.search.no-results"]
                 .waitForExistence(timeout: 10)
         )
-        keepScreenshot(named: "Ten chapter Manual dark largest type", app: app)
+        keepScreenshot(named: "Six chapter Manual dark largest type", app: app)
     }
 
     func testModelCenterDarkModeAndLargestDynamicType() throws {
@@ -524,7 +527,7 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCTAssertTrue(tab.waitForExistence(timeout: 10))
         tab.tap()
         XCTAssertTrue(
-            app.staticTexts["Wilderness Survival"]
+            app.descendants(matching: .any)["manual.home"]
                 .waitForExistence(timeout: 20)
         )
     }

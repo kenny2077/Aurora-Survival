@@ -77,8 +77,9 @@ public struct IncidentRuntimeBootstrap: Sendable {
             }
         }
 
-        let runtimeTiers = activePacks.installedTiers
-            .intersection(availableModelTiers)
+        let runtimeTiers = survivalKnowledge == nil
+            ? []
+            : activePacks.installedTiers.intersection(availableModelTiers)
         let assistant = IncidentAssistant(
             articles: bundledArticles,
             installedTiers: runtimeTiers,

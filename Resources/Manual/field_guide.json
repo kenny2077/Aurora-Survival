@@ -1,0 +1,1613 @@
+{
+  "schemaVersion": 1,
+  "title": "Field Survival Guide",
+  "subtitle": "Essential Wilderness Skills",
+  "introduction": "Use this book to solve six immediate survival needs: Fire • Water • Shelter • First Aid • Navigation • Food. Each skill is written for quick field use.",
+  "chapters": [
+    {
+      "id": "fire",
+      "order": 1,
+      "title": "Fire",
+      "purpose": "Build warmth, cooking heat, and a rescue signal",
+      "symbol": "flame.fill",
+      "theme": "fire",
+      "skills": [
+        {
+          "id": "fire.basic_fire",
+          "order": 1,
+          "title": "Build a Basic Fire",
+          "purpose": "Warmth, cooking, water boiling, signaling",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Gather First",
+              "kind": "text",
+              "content": "Prepare three sizes of fuel:\n- **Tinder:** dry grass, shredded bark, fire starter\n- **Kindling:** thin dry twigs\n- **Fuel:** larger sticks and wood"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Prepare the ground**\nUse bare mineral soil, an established fire ring, or another controlled fire site.\n\n**2. Build a tinder bundle**\nKeep it loose enough for air to move through.\n\n**3. Add small kindling**\nBuild a small teepee or lean-to shape around the tinder.\n\n**4. Ignite the tinder**\nUse a lighter, match, or ferro rod.\n\n**5. Build gradually**\nAdd:\n\nTinder → small twigs → finger-size sticks → larger fuel\n\n**6. Keep airflow**\nLeave gaps between pieces."
+            },
+            {
+              "heading": "Field Tip",
+              "kind": "callout",
+              "content": "Prepare all your wood **before lighting the fire**."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "fire",
+            "build a basic fire",
+            "tinder",
+            "kindling",
+            "fuel",
+            "teepee"
+          ],
+          "relatedSkillIDs": [
+            "fire.wet_conditions",
+            "fire.bow_drill"
+          ],
+          "visuals": [
+            {
+              "assetID": "fire_basic_build",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "fire.wet_conditions",
+          "order": 2,
+          "title": "Fire in Wet Conditions",
+          "purpose": "Look for: dead twigs beneath thick branches standing dead wood dry inner wood inside larger sticks bark or fibers protected from rain",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Find Dry Fuel",
+              "kind": "text",
+              "content": "Look for:\n- dead twigs beneath thick branches\n- standing dead wood\n- dry inner wood inside larger sticks\n- bark or fibers protected from rain"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Create a dry base**\nLay dry sticks or bark above wet soil.\n\n**2. Split wood if possible**\nThe inside is often much drier than the surface.\n\n**3. Make very fine kindling**\nThin curls and small pieces ignite faster.\n\n**4. Start small**\nBuild a strong flame before adding damp wood.\n\n**5. Feed gradually**\nAdd larger pieces only after the fire is stable."
+            }
+          ],
+          "aliases": [
+            "wet fire",
+            "fire in rain"
+          ],
+          "tags": [
+            "fire",
+            "fire in wet conditions",
+            "wet fire",
+            "rain",
+            "dry wood",
+            "split wood",
+            "kindling"
+          ],
+          "relatedSkillIDs": [
+            "fire.basic_fire"
+          ],
+          "visuals": [
+            {
+              "assetID": "fire_wet_conditions",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "fire.bow_drill",
+          "order": 3,
+          "title": "Bow-Drill Fire",
+          "purpose": "fireboard spindle bow cord handhold ember catch tinder bundle",
+          "difficulty": "Advanced",
+          "sections": [
+            {
+              "heading": "Parts",
+              "kind": "text",
+              "content": "fireboard\n- spindle\n- bow\n- cord\n- handhold\n- ember catch\n- tinder bundle"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Make a socket**\nCreate a shallow depression near the fireboard edge.\n\n**2. Burn it in**\nSpin the spindle until the socket becomes dark and smooth.\n\n**3. Cut a V-notch**\nCut from the board edge into the burned socket.\n\n**4. Place an ember catch underneath**\nUse dry bark, leaf, or another flat dry material.\n\n**5. Wrap the spindle**\nLoop the bowstring once around it.\n\n**6. Drill smoothly**\nUse long bow strokes while pressing downward.\n\n**7. Increase speed**\nBuild dark wood dust in the notch.\n\n**8. Form the ember**\nContinue until the dust pile keeps smoking after drilling stops.\n\n**9. Move it to tinder**\nPlace the ember inside the tinder bundle.\n\n**10. Add air**\nBlow steadily until flame appears."
+            },
+            {
+              "heading": "Key Skill",
+              "kind": "callout",
+              "content": "**Control beats strength.** Keep the spindle vertical and use smooth full-arm strokes."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "fire",
+            "bow-drill fire",
+            "bow drill",
+            "friction fire",
+            "ember",
+            "tinder"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "fire_bow_drill",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "fire.extinguish",
+          "order": 4,
+          "title": "Extinguish a Fire",
+          "purpose": "Pour water over the fire.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Pour water over the fire.\n\n2. Stir the ashes and embers.\n\n3. Add more water.\n\n4. Stir again.\n\n5. Check for heat.\n\n6. Leave when everything is cold."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "fire",
+            "extinguish a fire"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "water",
+      "order": 2,
+      "title": "Water",
+      "purpose": "Find, collect, and make water safer",
+      "symbol": "drop.fill",
+      "theme": "water",
+      "skills": [
+        {
+          "id": "water.find",
+          "order": 1,
+          "title": "Find Water",
+          "purpose": "Search terrain in this order:",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Search terrain in this order:"
+            },
+            {
+              "heading": "1. Known Water Sources",
+              "kind": "text",
+              "content": "Look for:\n- mapped springs\n- streams\n- rivers\n- lakes\n- developed water points"
+            },
+            {
+              "heading": "2. Drainage",
+              "kind": "text",
+              "content": "Water collects downhill.\n\nLook for:\n- valleys\n- gullies\n- low terrain\n- places where several drainages meet"
+            },
+            {
+              "heading": "3. Vegetation",
+              "kind": "text",
+              "content": "A concentrated patch of green vegetation can indicate moisture."
+            },
+            {
+              "heading": "4. Rain",
+              "kind": "text",
+              "content": "Collect fresh rain whenever possible."
+            },
+            {
+              "heading": "5. Snow or Ice",
+              "kind": "text",
+              "content": "Melt clean snow or ice where available."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "water",
+            "find water",
+            "drainage",
+            "valley",
+            "vegetation",
+            "rain"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "water_find_terrain",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "water.collect",
+          "order": 2,
+          "title": "Collect Water",
+          "purpose": "Choose the clearest available source.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Choose the clearest available source."
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Collect**\nUse a bottle, pot, bag, or clean container.\n\n**2. Let sediment settle**\nWait until dirt drops toward the bottom.\n\n**3. Pour off the clearer water**\n\n**4. Prefilter if needed**\nPass cloudy water through clean cloth.\n\n**5. Purify**\nClear water can still contain pathogens."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "water",
+            "collect water"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "water.boil",
+          "order": 3,
+          "title": "Boil Water",
+          "purpose": "Prefilter cloudy water 2.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Prefilter cloudy water**\n\n**2. Bring water to a rolling boil**\n\n**3. Boil for at least 1 minute**\nAt elevations above about **6,500 ft / 2,000 m**, boil for **3 minutes**.\n\n**4. Let it cool**\n\n**5. Store in a clean container**"
+            },
+            {
+              "heading": "Remember",
+              "kind": "callout",
+              "content": "**Boiling kills microorganisms.** Use another water source when fuel, chemicals, or industrial contamination are suspected."
+            }
+          ],
+          "aliases": [
+            "purify water",
+            "make water safe"
+          ],
+          "tags": [
+            "water",
+            "boil water",
+            "filter water",
+            "purify",
+            "treatment",
+            "pathogens"
+          ],
+          "relatedSkillIDs": [
+            "water.filter",
+            "water.collect"
+          ],
+          "visuals": [
+            {
+              "assetID": "water_treatment",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "water.filter",
+          "order": 4,
+          "title": "Filter Water",
+          "purpose": "Let muddy water settle.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Let muddy water settle.\n\n2. Prefilter through cloth.\n\n3. Pump or squeeze water through your wilderness filter.\n\n4. Keep untreated water away from the clean side.\n\n5. Add chemical or UV treatment when required by your filter system."
+            },
+            {
+              "heading": "Field Tip",
+              "kind": "callout",
+              "content": "Know your filter before the trip.\n\nDifferent filters remove different organisms."
+            }
+          ],
+          "aliases": [
+            "water purifier"
+          ],
+          "tags": [
+            "water",
+            "filter water",
+            "boil water",
+            "purify",
+            "treatment",
+            "pathogens"
+          ],
+          "relatedSkillIDs": [
+            "water.boil",
+            "water.collect"
+          ],
+          "visuals": [
+            {
+              "assetID": "water_treatment",
+              "role": "related"
+            }
+          ]
+        },
+        {
+          "id": "water.rainwater",
+          "order": 5,
+          "title": "Collect Rainwater",
+          "purpose": "Spread a tarp, rainfly, plastic sheet, or clean waterproof surface.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Spread a tarp, rainfly, plastic sheet, or clean waterproof surface.\n\n2. Create a low point.\n\n3. Place a container beneath it.\n\n4. Direct water toward the container.\n\n5. Treat the collected water when needed."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "water",
+            "collect rainwater"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "water.solar_still",
+          "order": 6,
+          "title": "Solar Still",
+          "purpose": "Use when you have: sun plastic sheet moist ground container",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Use when you have:\n- sun\n- plastic sheet\n- moist ground\n- container"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Dig a wide hole.\n\n2. Place a container in the center.\n\n3. Cover the hole with plastic.\n\n4. Seal the edges with soil or rocks.\n\n5. Place a small stone over the center.\n\n6. Let condensation drip into the container."
+            },
+            {
+              "heading": "Field Use",
+              "kind": "callout",
+              "content": "A solar still is a **supplemental water source**."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "water",
+            "solar still",
+            "condensation",
+            "plastic sheet"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "water_solar_still",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shelter",
+      "order": 3,
+      "title": "Shelter",
+      "purpose": "Protect yourself from exposure",
+      "symbol": "tent.fill",
+      "theme": "earth",
+      "skills": [
+        {
+          "id": "shelter.site",
+          "order": 1,
+          "title": "Choose a Shelter Site",
+          "purpose": "Find a location with: dry ground wind protection natural drainage stable trees nearby building materials easy access Look above you for strong branches and trees.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Find a location with:\n- dry ground\n- wind protection\n- natural drainage\n- stable trees\n- nearby building materials\n- easy access\n\nLook above you for strong branches and trees.\n\nChoose ground above stream level."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "choose a shelter site",
+            "shelter site",
+            "desert",
+            "rainforest",
+            "mountain",
+            "drainage"
+          ],
+          "relatedSkillIDs": [
+            "shelter.tarp",
+            "shelter.debris_hut"
+          ],
+          "visuals": [
+            {
+              "assetID": "shelter_terrain_comparison",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "shelter.tarp",
+          "order": 2,
+          "title": "Quick Tarp Shelter",
+          "purpose": "tarp or rainfly cord trees, poles, or anchors",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Materials",
+              "kind": "text",
+              "content": "tarp or rainfly\n- cord\n- trees, poles, or anchors"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Stretch a ridgeline**\nTie cord between two solid supports.\n\n**2. Place the tarp over it**\n\n**3. Stake or anchor the corners**\n\n**4. Angle the shelter**\nLet rain run off.\n\n**5. Lower the windward side**\nReduce wind entering the shelter.\n\n**6. Insulate the ground**\nUse a sleeping pad, pack, dry vegetation, or spare clothing."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "quick tarp shelter",
+            "tarp",
+            "ridgeline",
+            "lean-to",
+            "rain shelter"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "shelter_tarp_lean_to",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "shelter.debris_hut",
+          "order": 3,
+          "title": "Debris Hut",
+          "purpose": "Best for cold woodland environments with abundant dry material.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Best for cold woodland environments with abundant dry material."
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Build the ridgepole**\nSupport a strong pole above the ground.\n\n**2. Add ribs**\nLean sticks against both sides.\n\n**3. Add smaller sticks**\nCreate a lattice.\n\n**4. Add debris**\nPile dry leaves, grass, or needles over the frame.\n\n**5. Add more insulation**\nBuild a thick insulating layer.\n\n**6. Build the bed**\nPlace deep dry debris underneath your body.\n\n**7. Make the entrance small**\nReduce escaping heat."
+            },
+            {
+              "heading": "Key Skill",
+              "kind": "callout",
+              "content": "Build the shelter only large enough for your body. **Smaller shelter = easier to warm.**"
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "debris hut",
+            "ridgepole",
+            "leaves",
+            "insulation"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "shelter_debris_hut",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "shelter.desert",
+          "order": 4,
+          "title": "Desert Shelter",
+          "purpose": "Your main goal is shade.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Your main goal is **shade**."
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Find natural shade when available.\n\n2. Stretch a tarp above the ground.\n\n3. Leave airflow beneath it.\n\n4. Shade your head and body.\n\n5. Rest during the hottest part of the day.\n\n6. Travel during cooler periods when movement is necessary."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "desert shelter",
+            "shelter site",
+            "desert",
+            "rainforest",
+            "mountain",
+            "drainage"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "shelter_terrain_comparison",
+              "role": "related"
+            }
+          ]
+        },
+        {
+          "id": "shelter.rainforest",
+          "order": 5,
+          "title": "Rainforest Shelter",
+          "purpose": "Your main goals are dryness and drainage.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Your main goals are **dryness and drainage**."
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Choose slightly elevated ground.\n\n2. Build a steep roof.\n\n3. Direct water away from the sleeping area.\n\n4. Raise bedding above wet ground when possible.\n\n5. Maintain airflow.\n\n6. Keep equipment and clothing dry."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "rainforest shelter",
+            "shelter site",
+            "desert",
+            "rainforest",
+            "mountain",
+            "drainage"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "shelter_terrain_comparison",
+              "role": "related"
+            }
+          ]
+        },
+        {
+          "id": "shelter.mountain",
+          "order": 6,
+          "title": "Mountain Shelter",
+          "purpose": "Your main goals are wind protection and insulation.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Your main goals are **wind protection and insulation**."
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Move below exposed ridges when weather worsens.\n\n2. Find terrain protected from wind.\n\n3. Use a tarp, bivy, tent, rock protection, or snow shelter as conditions allow.\n\n4. Insulate yourself heavily from the ground.\n\n5. Keep clothing dry.\n\n6. Reduce shelter volume during cold conditions."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "shelter",
+            "mountain shelter",
+            "shelter site",
+            "desert",
+            "rainforest",
+            "mountain",
+            "drainage"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "shelter_terrain_comparison",
+              "role": "related"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first_aid",
+      "order": 4,
+      "title": "First Aid",
+      "purpose": "Control immediate threats until help arrives",
+      "symbol": "cross.case.fill",
+      "theme": "rescue",
+      "skills": [
+        {
+          "id": "first_aid.bleeding",
+          "order": 1,
+          "title": "Stop Severe Bleeding",
+          "purpose": "Find the bleeding point 2.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Find the bleeding point**\n\n**2. Apply firm direct pressure**\nUse:\n- gauze\n- bandage\n- clean cloth\n\nPress continuously.\n\n**3. Pack deep wounds when trained and appropriate**\nFill the wound firmly with gauze and maintain pressure.\n\n**4. Use a tourniquet for life-threatening arm or leg bleeding**\nPlace it:\n- above the wound\n- between wound and torso\n- away from joints\n\nTighten until severe bleeding stops.\n\n**5. Record the time**\nArrange emergency evacuation."
+            }
+          ],
+          "aliases": [
+            "stop bleeding",
+            "hemorrhage",
+            "tourniquet"
+          ],
+          "tags": [
+            "first aid",
+            "stop severe bleeding",
+            "tourniquet",
+            "severe bleeding",
+            "hemorrhage",
+            "windlass",
+            "improvised tourniquet",
+            "bleeding"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "first_aid_commercial_tourniquet",
+              "role": "primary"
+            },
+            {
+              "assetID": "first_aid_improvised_tourniquet",
+              "role": "secondary"
+            }
+          ]
+        },
+        {
+          "id": "first_aid.wound",
+          "order": 2,
+          "title": "Clean and Cover a Wound",
+          "purpose": "Stop bleeding.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Stop bleeding.\n\n2. Rinse the wound with clean water.\n\n3. Remove loose dirt.\n\n4. Dry the surrounding skin.\n\n5. Cover with a clean dressing.\n\n6. Replace dirty or wet dressings."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "first aid",
+            "clean and cover a wound"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "first_aid.burn",
+          "order": 3,
+          "title": "Treat a Burn",
+          "purpose": "Move away from the heat source.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Move away from the heat source.\n\n2. Cool the burn with clean cool water.\n\n3. Continue cooling for several minutes.\n\n4. Remove rings or tight items before swelling increases.\n\n5. Cover loosely with a clean non-stick dressing.\n\n6. Keep the rest of the body warm."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "first aid",
+            "treat a burn"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "first_aid.fracture",
+          "order": 4,
+          "title": "Support a Fracture",
+          "purpose": "Keep the injured body part still.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Keep the injured body part still.\n\n2. Check circulation and feeling below the injury.\n\n3. Pad around the injury.\n\n4. Place a rigid support beside it.\n\n5. Secure above and below the injury.\n\n6. Recheck circulation.\n\n7. Move carefully toward medical help."
+            }
+          ],
+          "aliases": [
+            "broken bone",
+            "splint"
+          ],
+          "tags": [
+            "first aid",
+            "support a fracture",
+            "fracture",
+            "splint",
+            "broken bone",
+            "immobilize"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "first_aid_improvised_splint",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "first_aid.heat_exhaustion",
+          "order": 5,
+          "title": "Heat Exhaustion",
+          "purpose": "heavy sweating weakness dizziness headache nausea",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Signs",
+              "kind": "text",
+              "content": "heavy sweating\n- weakness\n- dizziness\n- headache\n- nausea"
+            },
+            {
+              "heading": "Actions",
+              "kind": "steps",
+              "content": "1. Move into shade.\n\n2. Rest.\n\n3. Loosen clothing.\n\n4. Cool the skin.\n\n5. Drink water or electrolyte solution.\n\n6. Recover before traveling again."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "first aid",
+            "heat exhaustion",
+            "heat stroke",
+            "heat emergency",
+            "cooling",
+            "immersion",
+            "shade"
+          ],
+          "relatedSkillIDs": [
+            "first_aid.heat_stroke",
+            "first_aid.rehydration"
+          ],
+          "visuals": [
+            {
+              "assetID": "first_aid_heat_cooling",
+              "role": "related"
+            }
+          ]
+        },
+        {
+          "id": "first_aid.heat_stroke",
+          "order": 6,
+          "title": "Heat Stroke",
+          "purpose": "confusion loss of coordination collapse seizure severe overheating",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Signs",
+              "kind": "text",
+              "content": "confusion\n- loss of coordination\n- collapse\n- seizure\n- severe overheating"
+            },
+            {
+              "heading": "Actions",
+              "kind": "steps",
+              "content": "1. Call or signal for emergency help.\n\n2. Move to shade.\n\n3. Remove excess clothing.\n\n4. Cool the body rapidly.\n\n5. Use cold water, wet cloths, or immersion when available.\n\n6. Continue cooling during evacuation."
+            }
+          ],
+          "aliases": [
+            "heat emergency",
+            "overheating"
+          ],
+          "tags": [
+            "first aid",
+            "heat stroke",
+            "heat emergency",
+            "cooling",
+            "immersion",
+            "shade"
+          ],
+          "relatedSkillIDs": [
+            "first_aid.heat_exhaustion"
+          ],
+          "visuals": [
+            {
+              "assetID": "first_aid_heat_cooling",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "first_aid.hypothermia",
+          "order": 7,
+          "title": "Hypothermia",
+          "purpose": "shivering poor coordination slow thinking slurred speech increasing drowsiness",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Signs",
+              "kind": "text",
+              "content": "shivering\n- poor coordination\n- slow thinking\n- slurred speech\n- increasing drowsiness"
+            },
+            {
+              "heading": "Actions",
+              "kind": "steps",
+              "content": "1. Move into shelter.\n\n2. Remove wet clothing.\n\n3. Add dry insulation.\n\n4. Insulate from the ground.\n\n5. Warm the chest and torso.\n\n6. Give warm drinks if the person is fully awake.\n\n7. Evacuate serious cases."
+            }
+          ],
+          "aliases": [
+            "cold person",
+            "rewarming"
+          ],
+          "tags": [
+            "first aid",
+            "hypothermia",
+            "cold",
+            "insulation",
+            "wet clothing",
+            "warming"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "first_aid_hypothermia_wrap",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "first_aid.rehydration",
+          "order": 8,
+          "title": "Rehydration",
+          "purpose": "For dehydration from heavy sweating, vomiting, or diarrhea:",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "For dehydration from heavy sweating, vomiting, or diarrhea:"
+            },
+            {
+              "heading": "Oral Rehydration Mix",
+              "kind": "text",
+              "content": "Use commercial ORS when available.\n\nEmergency homemade mix:\n- **1 liter safe water**\n- **6 level teaspoons sugar**\n- **½ level teaspoon salt** Mix completely.\n\nSip frequently."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "first aid",
+            "rehydration"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "order": 5,
+      "title": "Navigation",
+      "purpose": "Stay oriented and help rescuers find you",
+      "symbol": "location.north.fill",
+      "theme": "sky",
+      "skills": [
+        {
+          "id": "navigation.lost",
+          "order": 1,
+          "title": "What to Do When Lost",
+          "purpose": "S — Stop Stop moving.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "STOP",
+              "kind": "text",
+              "content": "**S — Stop**\nStop moving.\n\n**T — Think**\nRemember your last known location.\n\n**O — Observe**\nCheck terrain, weather, water, map, tracks, and landmarks.\n\n**P — Plan**\nChoose whether staying or moving gives the best chance of rescue."
+            },
+            {
+              "heading": "Field Rule",
+              "kind": "callout",
+              "content": "If rescuers know your route and your location is safe: **Stay visible and signal.**"
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "navigation",
+            "what to do when lost"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "navigation.map_compass",
+          "order": 2,
+          "title": "Use a Map and Compass",
+          "purpose": "Orient the map Rotate it until map north matches real north.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "**1. Orient the map**\nRotate it until map north matches real north.\n\n**2. Identify terrain**\nFind:\n- ridges\n- valleys\n- rivers\n- peaks\n- roads\n- trails\n\n**3. Find your approximate position**\nMatch visible terrain with the map.\n\n**4. Choose a destination**\nSelect a clear landmark.\n\n**5. Take a bearing**\nPoint the compass toward your destination.\n\n**6. Follow the bearing**\nChoose visible objects along the direction and walk toward them one at a time."
+            }
+          ],
+          "aliases": [
+            "take a bearing",
+            "orient map"
+          ],
+          "tags": [
+            "navigation",
+            "use a map and compass",
+            "map",
+            "compass",
+            "bearing",
+            "declination",
+            "orientation"
+          ],
+          "relatedSkillIDs": [
+            "navigation.terrain"
+          ],
+          "visuals": [
+            {
+              "assetID": "navigation_map_compass",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "navigation.terrain",
+          "order": 3,
+          "title": "Read Terrain",
+          "purpose": "Close lines: steep terrain Wide lines: gentle terrain Vshapes: usually indicate valleys or drainage channels Rounded high areas: hills or ridges",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Contour Lines",
+              "kind": "text",
+              "content": "**Close lines:** steep terrain\n\n**Wide lines:** gentle terrain\n\n**V-shapes:** usually indicate valleys or drainage channels\n\n**Rounded high areas:** hills or ridges"
+            },
+            {
+              "heading": "Field Skill",
+              "kind": "callout",
+              "content": "Match the shapes on the map with the shapes around you."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "navigation",
+            "read terrain",
+            "contour lines",
+            "topographic map",
+            "terrain",
+            "ridge",
+            "valley"
+          ],
+          "relatedSkillIDs": [
+            "navigation.map_compass"
+          ],
+          "visuals": [
+            {
+              "assetID": "navigation_contour_lines",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "navigation.polaris",
+          "order": 4,
+          "title": "Find North Using Polaris",
+          "purpose": "Northern Hemisphere",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "**Northern Hemisphere**"
+            },
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Find the Big Dipper.\n\n2. Locate the two outer stars of the bowl.\n\n3. Draw an imaginary line through them.\n\n4. Extend the line about five times their spacing.\n\n5. Find Polaris.\n\n6. Face Polaris.\n\nYou are facing approximately **true north**."
+            }
+          ],
+          "aliases": [
+            "north at night",
+            "north star",
+            "big dipper"
+          ],
+          "tags": [
+            "navigation",
+            "find north using polaris",
+            "Polaris",
+            "North Star",
+            "Big Dipper",
+            "night navigation"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "navigation_polaris",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "navigation.rescue_signal",
+          "order": 5,
+          "title": "Signal for Rescue",
+          "purpose": "Use several methods together.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Use several methods together."
+            },
+            {
+              "heading": "Sound",
+              "kind": "text",
+              "content": "Use a whistle.\n\nShort repeated blasts travel farther than shouting."
+            },
+            {
+              "heading": "Light",
+              "kind": "text",
+              "content": "Use:\n- flashlight\n- headlamp\n- signal mirror"
+            },
+            {
+              "heading": "Color",
+              "kind": "text",
+              "content": "Place bright clothing, tarp, or equipment in an open area."
+            },
+            {
+              "heading": "Electronics",
+              "kind": "text",
+              "content": "Use:\n- mobile phone\n- satellite messenger\n- emergency beacon / PLB"
+            },
+            {
+              "heading": "Position",
+              "kind": "text",
+              "content": "Choose a visible safe location.\n\nMake your position easy to identify from the air or trail."
+            }
+          ],
+          "aliases": [
+            "get rescued",
+            "emergency beacon"
+          ],
+          "tags": [
+            "navigation",
+            "signal for rescue",
+            "rescue",
+            "signal",
+            "whistle",
+            "mirror",
+            "PLB"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": [
+            {
+              "assetID": "navigation_rescue_signals",
+              "role": "primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "order": 6,
+      "title": "Food",
+      "purpose": "Protect energy and prepare food safely",
+      "symbol": "fork.knife",
+      "theme": "wildlife",
+      "skills": [
+        {
+          "id": "food.efficient",
+          "order": 1,
+          "title": "Use Food Efficiently",
+          "purpose": "In a short survival situation: 1.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "In a short survival situation:\n\n1. Inventory your food.\n\n2. Protect it from water and animals.\n\n3. Eat enough to maintain energy.\n\n4. Save high-energy food for movement and cold conditions.\n\nUseful foods include:\n- nuts\n- energy bars\n- dried meat\n- peanut butter\n- dried fruit\n- trail mix\n- rice\n- oats"
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "use food efficiently"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "food.wild_plants",
+          "order": 2,
+          "title": "Wild Plants",
+          "purpose": "Eat wild plants only when you can positively identify: the species the edible part the correct preparation",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Eat wild plants only when you can positively identify:\n- the species\n- the edible part\n- the correct preparation"
+            },
+            {
+              "heading": "Best Field Strategy",
+              "kind": "text",
+              "content": "Learn the common edible plants of the area **before entering the wilderness**.\n\nFocus on a small number you can identify with certainty."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "wild plants"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "food.fishing",
+          "order": 3,
+          "title": "Fishing",
+          "purpose": "Fishing can provide food with relatively little energy expenditure.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": null,
+              "kind": "text",
+              "content": "Fishing can provide food with relatively little energy expenditure."
+            },
+            {
+              "heading": "Basic Method",
+              "kind": "text",
+              "content": "1. Find calm edges, pools, structure, or deeper water.\n\n2. Use available fishing equipment.\n\n3. Present bait naturally.\n\n4. Fish during cooler morning or evening periods when appropriate.\n\n5. Dispatch and clean the fish promptly.\n\n6. Cook thoroughly."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "fishing"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "food.prepare_fish",
+          "order": 4,
+          "title": "Prepare Fish",
+          "purpose": "Keep the fish cool.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Keep the fish cool.\n\n2. Cut from the vent toward the head.\n\n3. Remove internal organs.\n\n4. Rinse with safe water if needed.\n\n5. Remove gills when cooking whole fish.\n\n6. Cook until the flesh reaches **145°F / 63°C** when measured."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "prepare fish",
+            "fish",
+            "clean fish",
+            "gut fish",
+            "cook fish",
+            "food safety"
+          ],
+          "relatedSkillIDs": [
+            "food.fishing",
+            "food.field_cooking"
+          ],
+          "visuals": [
+            {
+              "assetID": "food_prepare_fish",
+              "role": "primary"
+            }
+          ]
+        },
+        {
+          "id": "food.wild_game",
+          "order": 5,
+          "title": "Prepare Wild Game",
+          "purpose": "Process the animal promptly.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Steps",
+              "kind": "steps",
+              "content": "1. Process the animal promptly.\n\n2. Keep meat clean.\n\n3. Separate meat from intestinal contents.\n\n4. Cool the meat quickly.\n\n5. Cut into manageable cooking portions.\n\n6. Cook thoroughly.\n\nFor wild game with parasite risk, especially animals such as bear or wild boar, cook to at least: **165°F / 74°C**"
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "prepare wild game"
+          ],
+          "relatedSkillIDs": [],
+          "visuals": []
+        },
+        {
+          "id": "food.field_cooking",
+          "order": 6,
+          "title": "Simple Field Cooking",
+          "purpose": "Place food beside or above hot coals.",
+          "difficulty": null,
+          "sections": [
+            {
+              "heading": "Roasting",
+              "kind": "text",
+              "content": "Place food beside or above hot coals.\n\nRotate regularly."
+            },
+            {
+              "heading": "Pot Cooking",
+              "kind": "text",
+              "content": "Place food and water in a pot.\n\nBoil or simmer until fully cooked."
+            },
+            {
+              "heading": "Foil or Wrapped Cooking",
+              "kind": "text",
+              "content": "Wrap food securely and place near hot coals."
+            },
+            {
+              "heading": "Field Tip",
+              "kind": "callout",
+              "content": "**Cook over coals more often than large flames.** Coals provide steadier heat and better control."
+            }
+          ],
+          "aliases": [],
+          "tags": [
+            "food",
+            "simple field cooking",
+            "fish",
+            "clean fish",
+            "gut fish",
+            "cook fish",
+            "food safety"
+          ],
+          "relatedSkillIDs": [
+            "food.prepare_fish"
+          ],
+          "visuals": [
+            {
+              "assetID": "food_prepare_fish",
+              "role": "related"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "visuals": [
+    {
+      "id": "fire_basic_build",
+      "imageName": "fire_basic_build",
+      "sourceFilename": "regular_fire_camp.PNG",
+      "title": "Basic Fire Build",
+      "caption": "Gather all fuel first. Start with tinder and small kindling, then add larger fuel only after the fire is established.",
+      "altText": "Four-step guide showing tinder, kindling and fuel, a teepee fire structure, ignition, and gradual fuel addition.",
+      "searchTags": [
+        "fire",
+        "tinder",
+        "kindling",
+        "fuel",
+        "teepee"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "fire_wet_conditions",
+      "imageName": "fire_wet_conditions",
+      "sourceFilename": "make_fire_in_wet_condition.PNG",
+      "title": "Fire in Wet Conditions",
+      "caption": "Find protected dry material, split wood to expose the dry center, prepare fine tinder, and build heat from small fuel upward.",
+      "altText": "Wet-weather fire guide showing dry fuel selection, split wood, fine tinder preparation, and gradual fire building.",
+      "searchTags": [
+        "wet fire",
+        "rain",
+        "dry wood",
+        "split wood",
+        "kindling"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "fire_bow_drill",
+      "imageName": "fire_bow_drill",
+      "sourceFilename": "bow_drill_start_fire.PNG",
+      "title": "Bow-Drill Fire",
+      "caption": "Keep the spindle vertical, use smooth full-arm strokes, build a smoking ember, then transfer it carefully to prepared tinder.",
+      "altText": "Detailed bow-drill diagram showing components, posture, ember creation, transfer, and tinder ignition.",
+      "searchTags": [
+        "bow drill",
+        "friction fire",
+        "ember",
+        "tinder"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "water_find_terrain",
+      "imageName": "water_find_terrain",
+      "sourceFilename": "locate_water.PNG",
+      "title": "Find Water in the Landscape",
+      "caption": "Search known sources first, then follow drainage and concentrated green vegetation toward likely water.",
+      "altText": "Terrain guide showing likely water locations in valleys, drainage channels, vegetation, rain, snow and ice.",
+      "searchTags": [
+        "find water",
+        "drainage",
+        "valley",
+        "vegetation",
+        "rain"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "water_treatment",
+      "imageName": "water_treatment",
+      "sourceFilename": "purify_water.PNG",
+      "title": "Treat Water",
+      "caption": "Let sediment settle, prefilter cloudy water, then boil or use an appropriate wilderness treatment method.",
+      "altText": "Water-treatment guide showing settling, prefiltering, boiling and keeping treated water clean.",
+      "searchTags": [
+        "boil water",
+        "filter water",
+        "purify",
+        "treatment",
+        "pathogens"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "water_solar_still",
+      "imageName": "water_solar_still",
+      "sourceFilename": "solar_still_gather_water.png",
+      "title": "Solar Still",
+      "caption": "Use a solar still only as a supplemental source where sun, plastic, moist ground, and a container are available.",
+      "altText": "Solar-still diagram showing a sealed pit, center container, plastic sheet, weighted low point and condensation drip.",
+      "searchTags": [
+        "solar still",
+        "condensation",
+        "plastic sheet",
+        "water"
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "shelter_terrain_comparison",
+      "imageName": "shelter_terrain_comparison",
+      "sourceFilename": "terrain_shelters.png",
+      "title": "Shelter by Terrain",
+      "caption": "Choose dry, protected, draining ground and adapt shelter priorities to desert, rainforest, or mountain conditions.",
+      "altText": "Terrain comparison showing shelter priorities for desert shade, rainforest drainage and mountain wind protection.",
+      "searchTags": [
+        "shelter site",
+        "desert",
+        "rainforest",
+        "mountain",
+        "drainage"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "shelter_tarp_lean_to",
+      "imageName": "shelter_tarp_lean_to",
+      "sourceFilename": "tarp.PNG",
+      "title": "Quick Tarp Shelter",
+      "caption": "Anchor a ridgeline, angle the tarp for runoff, lower the windward side, and insulate yourself from the ground.",
+      "altText": "Tarp shelter guide showing ridgeline, anchors, rain angle, wind protection and ground insulation.",
+      "searchTags": [
+        "tarp",
+        "ridgeline",
+        "lean-to",
+        "rain shelter"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "shelter_debris_hut",
+      "imageName": "shelter_debris_hut",
+      "sourceFilename": "debris_shelter.png",
+      "title": "Debris Hut",
+      "caption": "Build a body-sized frame, cover it with a thick dry insulating layer, and make a deep dry bed.",
+      "altText": "Debris-hut guide showing ridgepole, ribs, lattice, thick debris insulation, bed and small entrance.",
+      "searchTags": [
+        "debris hut",
+        "ridgepole",
+        "leaves",
+        "insulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "first_aid_commercial_tourniquet",
+      "imageName": "first_aid_commercial_tourniquet",
+      "sourceFilename": "Commercial_tourniquet.png",
+      "title": "Commercial Tourniquet",
+      "caption": "For life-threatening arm or leg bleeding: place, tighten, twist until bleeding stops, secure the windlass, and record the time.",
+      "altText": "Four-step commercial tourniquet guide showing placement, tightening, windlass use, securing and time recording.",
+      "searchTags": [
+        "tourniquet",
+        "severe bleeding",
+        "hemorrhage",
+        "windlass"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "first_aid_improvised_tourniquet",
+      "imageName": "first_aid_improvised_tourniquet",
+      "sourceFilename": "Primitive_tourniquet.png",
+      "title": "Improvised Tourniquet",
+      "caption": "Use an improvised tourniquet only when life-threatening limb bleeding cannot be controlled and a commercial device is unavailable.",
+      "altText": "Improvised tourniquet guide showing a broad band, windlass tightening, securing and time recording.",
+      "searchTags": [
+        "improvised tourniquet",
+        "bleeding",
+        "windlass"
+      ],
+      "priority": "secondary"
+    },
+    {
+      "id": "first_aid_improvised_splint",
+      "imageName": "first_aid_improvised_splint",
+      "sourceFilename": "Improvise_splint.png",
+      "title": "Improvised Fracture Splint",
+      "caption": "Support the limb in the position found, pad rigid supports, secure above and below the injury, and recheck circulation.",
+      "altText": "Three-step improvised splint guide showing circulation assessment, padded supports, securing and circulation recheck.",
+      "searchTags": [
+        "fracture",
+        "splint",
+        "broken bone",
+        "immobilize"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "first_aid_heat_cooling",
+      "imageName": "first_aid_heat_cooling",
+      "sourceFilename": "Heat_relief.png",
+      "title": "Rapid Cooling for Heat Emergency",
+      "caption": "Move to shade, begin rapid cooling, monitor continuously, and arrange emergency help.",
+      "altText": "Heat emergency guide showing shade, immersion, water plus airflow, wet-cloth cooling and monitoring.",
+      "searchTags": [
+        "heat stroke",
+        "heat emergency",
+        "cooling",
+        "immersion",
+        "shade"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "first_aid_hypothermia_wrap",
+      "imageName": "first_aid_hypothermia_wrap",
+      "sourceFilename": "Primitive_hyperthermia_wrap.png",
+      "title": "Primitive Hypothermia Wrap",
+      "caption": "Protect from wind and rain, replace wet layers, insulate from the ground, wrap the person, and warm the torso.",
+      "altText": "Five-step hypothermia wrap guide showing shelter, dry clothing, ground insulation, wrapping and torso warming.",
+      "searchTags": [
+        "hypothermia",
+        "cold",
+        "insulation",
+        "wet clothing",
+        "warming"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "navigation_map_compass",
+      "imageName": "navigation_map_compass",
+      "sourceFilename": "Campass_navigation.png",
+      "title": "Map and Compass: Orient and Take a Bearing",
+      "caption": "Orient the map, align the compass with your route, account for declination where needed, then follow the bearing toward a visible landmark.",
+      "altText": "Four-panel map-and-compass guide showing orientation, placement, alignment, declination and following a bearing.",
+      "searchTags": [
+        "map",
+        "compass",
+        "bearing",
+        "declination",
+        "orientation"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "navigation_contour_lines",
+      "imageName": "navigation_contour_lines",
+      "sourceFilename": "Contour_line.png",
+      "title": "How to Read Contour Lines",
+      "caption": "Close contour lines indicate steep ground; wider spacing indicates gentler slopes. Compare map shapes with the terrain around you.",
+      "altText": "Topographic comparison showing steep and gentle slopes, ridge, valley, stream and contour intervals.",
+      "searchTags": [
+        "contour lines",
+        "topographic map",
+        "terrain",
+        "ridge",
+        "valley"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "navigation_polaris",
+      "imageName": "navigation_polaris",
+      "sourceFilename": "Navigate_northern.png",
+      "title": "Northern Hemisphere Night Navigation",
+      "caption": "Find Merak and Dubhe in the Big Dipper, extend their line about five times their separation, and locate Polaris to identify approximate north.",
+      "altText": "Night-navigation diagram showing the Big Dipper, pointer stars, Polaris, Little Dipper and direction north.",
+      "searchTags": [
+        "Polaris",
+        "North Star",
+        "Big Dipper",
+        "night navigation"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "navigation_rescue_signals",
+      "imageName": "navigation_rescue_signals",
+      "sourceFilename": "Rescue_signal.png",
+      "title": "Signal for Rescue",
+      "caption": "Stay visible and combine sound, reflected light, bright ground signals, and electronic distress devices when available.",
+      "altText": "Rescue signaling illustration showing whistle, mirror, bright marker, personal locator beacon and visible camp.",
+      "searchTags": [
+        "rescue",
+        "signal",
+        "whistle",
+        "mirror",
+        "PLB"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "food_prepare_fish",
+      "imageName": "food_prepare_fish",
+      "sourceFilename": "Cook_fish.png",
+      "title": "Clean and Cook a Fish in the Wild",
+      "caption": "Keep raw and cooked areas separate, remove the internal organs, keep the flesh clean, and cook thoroughly.",
+      "altText": "Five-step field fish guide showing cleaning, gutting, organ removal, cooking and checking doneness.",
+      "searchTags": [
+        "fish",
+        "clean fish",
+        "gut fish",
+        "cook fish",
+        "food safety"
+      ],
+      "priority": "high"
+    }
+  ],
+  "priorityCard": [
+    {
+      "title": "Life",
+      "text": "Control severe bleeding and immediate danger."
+    },
+    {
+      "title": "Shelter",
+      "text": "Protect yourself from heat, cold, wind, and rain."
+    },
+    {
+      "title": "Signal",
+      "text": "Make rescuers able to find you."
+    },
+    {
+      "title": "Water",
+      "text": "Find, collect, and purify it."
+    },
+    {
+      "title": "Fire",
+      "text": "Create warmth, boiled water, cooking heat, and signal."
+    },
+    {
+      "title": "Food",
+      "text": "Maintain energy for longer survival."
+    }
+  ],
+  "masterySkills": [
+    "Make fire with a lighter, match, and ferro rod",
+    "Filter and boil natural water",
+    "Build a tarp shelter",
+    "Stop severe bleeding",
+    "Navigate with a map and compass",
+    "Signal rescuers"
+  ]
+}

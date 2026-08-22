@@ -107,19 +107,48 @@ struct ChatView: View {
     }
 
     private var modelRequired: some View {
-        ContentUnavailableView {
-            Label("Offline model required", systemImage: "cpu")
-        } description: {
-            Text("Install Lite in Tools to use Ask. The Manual and Maps remain available without a model.")
-        } actions: {
-            Button {
-                model.selectedTab = .tools
-            } label: {
-                Label("Set up models", systemImage: "arrow.down.circle.fill")
+        ScrollView {
+            VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
+                ContentUnavailableView {
+                    Label("Offline model required", systemImage: "cpu")
+                } description: {
+                    Text("Install Lite or Expert with its reviewed knowledge package to use Ask. The Field Guide is always available.")
+                } actions: {
+                    Button { model.selectedTab = .tools } label: {
+                        Label("Set up models", systemImage: "arrow.down.circle.fill")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                }
+
+                VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+                    Text("Browse the Field Guide")
+                        .font(.title2.bold())
+                    Text("Choose an immediate need. No model or download is required.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AuroraDesign.Space.sm) {
+                        ForEach(model.fieldGuideChapters) { chapter in
+                            Button { model.openManualChapter(chapter.id) } label: {
+                                VStack(spacing: 8) {
+                                    Image(systemName: chapter.symbol).font(.title2)
+                                    Text(chapter.title).font(.subheadline.weight(.semibold)).multilineTextAlignment(.center)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 92)
+                            }
+                            .buttonStyle(.bordered)
+                            .accessibilityIdentifier("chat.manual-chapter.\(chapter.id)")
+                        }
+                    }
+                }
+                .padding(18)
+                .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22))
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+            .padding(AuroraDesign.Space.md)
+            .frame(maxWidth: 640)
+            .frame(maxWidth: .infinity)
         }
+        .background(Color(uiColor: .systemGroupedBackground))
         .accessibilityIdentifier("chat.modelRequired")
     }
 
@@ -409,15 +438,17 @@ private struct WelcomeCard: View {
 }
 
 private struct MessageBubble: View {
-    @EnvironmentObject private var model: AppModel
     let message: ChatMessage
-    @State private var sourcesExpanded = false
 
     private var visibleNotices: [String] {
         guard let answer = message.answer else { return [] }
         return answer.notices.filter {
             !$0.localizedCaseInsensitiveContains("is available for this incident")
         }
+    }
+
+    private var sourceNames: [String] {
+        message.answer?.sourceDisplayNames ?? []
     }
 
     var body: some View {
@@ -489,71 +520,15 @@ private struct MessageBubble: View {
                         }
                     }
 
-                    if !answer.sourceCards.isEmpty {
-                        DisclosureGroup {
-                            VStack(alignment: .leading, spacing: 10) {
-                                ForEach(answer.sourceCards) { source in
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        if let value = source.url,
-                                           let url = URL(string: value) {
-                                            Link(source.title, destination: url)
-                                                .font(.subheadline.weight(.semibold))
-                                        } else {
-                                            Text(source.title)
-                                                .font(.subheadline.weight(.semibold))
-                                        }
-                                        if let organization = source.organization,
-                                           !organization.isEmpty {
-                                            Text(organization)
-                                        }
-                                        Text(source.locator)
-                                        Text("Updated \(source.updatedAt) · reviewed \(source.reviewedAt) · \(source.jurisdiction)")
-                                            .foregroundStyle(.secondary)
-                                    }
-                                    .font(.caption)
-                                }
-                            }
-                        } label: {
-                            Label(
-                                "Offline sources \(answer.sourceCards.count)",
-                                systemImage: "text.book.closed"
-                            )
-                            .font(.caption.weight(.semibold))
-                        }
-                        .tint(.secondary)
-                    }
-
-                    if !answer.manualReferences.isEmpty {
-                        DisclosureGroup(
-                            "Supporting Manual guidance",
-                            isExpanded: $sourcesExpanded
-                        ) {
-                            VStack(alignment: .leading, spacing: 8) {
-                            ForEach(answer.manualReferences) { reference in
-                                Button {
-                                    model.openManual(reference)
-                                } label: {
-                                    HStack(alignment: .firstTextBaseline) {
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            Text(reference.sectionTitle)
-                                                .font(.subheadline.weight(.semibold))
-                                            Text("\(reference.chapterTitle) · \(reference.pageLabel)")
-                                                .font(.caption)
-                                                .foregroundStyle(.secondary)
-                                        }
-                                        Spacer(minLength: 8)
-                                        Image(systemName: "arrow.right.circle.fill")
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .contentShape(Rectangle())
-                                }
-                                .buttonStyle(.plain)
-                                .accessibilityIdentifier("chat.manual-link")
-                            }
+                    if !sourceNames.isEmpty {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Sources").font(.caption.weight(.semibold))
+                            ForEach(sourceNames, id: \.self) { name in
+                                Text(name).font(.caption).foregroundStyle(.secondary)
                             }
                         }
-                        .font(.caption)
-                        .tint(.secondary)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityIdentifier("chat.sources")
                     }
 
                     ForEach(visibleNotices, id: \.self) { notice in

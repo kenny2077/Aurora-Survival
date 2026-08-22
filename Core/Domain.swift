@@ -425,6 +425,16 @@ public struct AssistantAnswer: Equatable, Sendable, Identifiable {
     public let expertIntent: ExpertTurnIntent?
     public let expertRetrievalStatus: ExpertRetrievalStatus?
 
+    public var sourceDisplayNames: [String] {
+        var values = sourceCards.map(\.title)
+        values.append(contentsOf: sources.map(\.title))
+        if !manualReferences.isEmpty {
+            values.append("Survival Manual 2026")
+        }
+        var seen: Set<String> = []
+        return values.filter { !$0.isEmpty && seen.insert($0).inserted }
+    }
+
     public init(
         id: UUID = UUID(),
         text: String,

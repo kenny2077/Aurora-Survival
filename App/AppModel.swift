@@ -20,7 +20,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var hasAcceptedRiskAcknowledgement: Bool
     @Published var libraryQuery = ""
     @Published var selectedTab: AppTab = .ask
-    @Published var manualPath: [ManualRoute] = []
+    @Published var manualPath: [FieldGuideRoute] = []
     @Published private(set) var activePackStatus = "Active packages not checked"
     @Published private(set) var activePackIssueCount = 0
     @Published private(set) var runtimeTiers: Set<ModelTier> = []
@@ -44,8 +44,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var offlineMaps: [ResolvedOfflineMap] = []
 
     let articles: [KnowledgeArticle]
-    let survivalKnowledge: SurvivalKnowledgeStore?
-    let survivalFallback: SurvivalFallbackBundle?
+    let fieldGuide: FieldGuideStore?
     let entitlementLedger: EntitlementLedger
     private var assistant: IncidentAssistant
     private let appDataRoot: URL
@@ -139,15 +138,10 @@ final class AppModel: ObservableObject {
             )
         )
 
-        let knowledge = Bundle.main.url(
-            forResource: "survival_knowledge",
-            withExtension: "sqlite"
-        ).flatMap { try? SurvivalKnowledgeStore(databaseURL: $0) }
-        survivalKnowledge = knowledge
-        survivalFallback = Bundle.main.url(
-            forResource: "survival_fallback",
+        fieldGuide = Bundle.main.url(
+            forResource: "field_guide",
             withExtension: "json"
-        ).flatMap { try? SurvivalFallbackLoader.load(url: $0) }
+        ).flatMap { try? FieldGuideStore.load(url: $0) }
 
         let loaded: [KnowledgeArticle]
         let corePolicyVersion: String
@@ -179,7 +173,7 @@ final class AppModel: ObservableObject {
         assistant = IncidentAssistant(
             articles: loaded,
             installedTiers: [],
-            retrieval: knowledge.map(SurvivalKnowledgeRetriever.init)
+            retrieval: nil
         )
         modelSelection = modelPreferenceStore.load()
     }
@@ -192,70 +186,25 @@ final class AppModel: ObservableObject {
         return articles.filter { $0.searchableText.lowercased().contains(terms) }
     }
 
-    var manualSearchResults: [SurvivalManualSection] {
+    var fieldGuideSearchResults: [FieldGuideSearchResult] {
         let query = libraryQuery.trimmingCharacters(
             in: .whitespacesAndNewlines
         )
         guard !query.isEmpty else { return [] }
-        return survivalKnowledge?.searchReferences(query, limit: 40) ?? []
+        return fieldGuide?.search(query) ?? []
     }
 
-    var manualLessonSearchResults: [ManualLesson] {
-        let query = libraryQuery.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
-        guard !query.isEmpty else { return [] }
-        if let survivalKnowledge {
-            return survivalKnowledge.searchLessons(query, limit: 30)
-        }
-        let terms = RetrievalEngine.tokens(in: query)
-        return survivalFallback?.cards.map { $0.lesson() }.filter { lesson in
-            terms.isSubset(of: RetrievalEngine.tokens(in: lesson.searchableText))
-        } ?? []
+    var fieldGuideChapters: [FieldGuideChapter] {
+        fieldGuide?.book.chapters ?? []
     }
 
-    var manualCourseChapters: [ManualCourseChapter] {
-        survivalKnowledge?.chapters()
-            ?? survivalFallback?.chapters.sorted { $0.number < $1.number }
-            ?? []
-    }
-
-    func manualChapter(id: String) -> ManualCourseChapter? {
-        manualCourseChapters.first { $0.id == id }
-    }
-
-    func manualLesson(id: String) -> ManualLesson? {
-        survivalKnowledge?.lesson(id: id)
-            ?? survivalFallback?.cards.first { $0.lessonID == id }?.lesson()
-    }
-
-    func manualLessons(for chapter: ManualCourseChapter) -> [ManualLesson] {
-        survivalKnowledge?.lessons(chapterID: chapter.id)
-            ?? survivalFallback?.cards.filter { $0.chapterID == chapter.id }.map { $0.lesson() }
-            ?? []
-    }
-
-    func manualSections(
-        for courseChapter: ManualCourseChapter
-    ) -> [SurvivalManualSection] {
-        survivalKnowledge?.referenceSections(chapterID: courseChapter.id) ?? []
-    }
-
-    func manualDisplayTitle(for section: SurvivalManualSection) -> String {
-        section.title
-    }
-
-    func manualPassage(for reference: ManualReference) -> ManualPassageResolution {
-        survivalKnowledge?.resolve(reference) ?? .unavailable
-    }
-
-    func openManual(_ reference: ManualReference) {
+    func openManualChapter(_ chapterID: String) {
         selectedTab = .manual
         manualPath.removeAll()
         Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(500))
+            try? await Task.sleep(for: .milliseconds(250))
             guard selectedTab == .manual else { return }
-            manualPath = [.reference(reference)]
+            manualPath = [.chapter(chapterID)]
         }
     }
 
@@ -583,10 +532,17 @@ final class AppModel: ObservableObject {
             }
         }
 #endif
+        if sharedRAGKnowledge == nil {
+            availableModelTiers.removeAll()
+            runtimeModels.removeAll()
+            expertContextAssembler = nil
+            expertEmbeddingProvider = nil
+            expertVectorIndex = nil
+        }
         let boundRuntimeModels = runtimeModels
         let runtime = IncidentRuntimeBootstrap(
             bundledArticles: articles,
-            survivalKnowledge: sharedRAGKnowledge ?? survivalKnowledge,
+            survivalKnowledge: sharedRAGKnowledge,
             modelProvider: { tier in
                 boundRuntimeModels[tier]
                     ?? UnavailableLanguageModel(tier: tier)
@@ -607,7 +563,7 @@ final class AppModel: ObservableObject {
             assistant = IncidentAssistant(
                 articles: articles,
                 installedTiers: [],
-                retrieval: survivalKnowledge.map(SurvivalKnowledgeRetriever.init)
+                retrieval: nil
             )
         }
 #endif

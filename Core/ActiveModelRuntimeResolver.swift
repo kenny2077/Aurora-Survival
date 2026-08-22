@@ -41,6 +41,7 @@ public struct SharedRAGRuntimeResolution: Sendable {
 /// text tiers. ActivePackRegistry has already verified every artifact hash;
 /// this layer additionally validates the cross-artifact identities.
 public struct SharedRAGRuntimeResolver: Sendable {
+    public static let packageID = "knowledge.shared-survival-rag-v3"
     public static let contractVersion = "3"
     public static let embeddingIdentity =
         "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
@@ -54,7 +55,8 @@ public struct SharedRAGRuntimeResolver: Sendable {
         activePacks: ActivePackSnapshot
     ) -> SharedRAGRuntimeResolution {
         let packages = activePacks.knowledge.filter {
-            $0.manifest.metadata["shared_rag_contract"] == Self.contractVersion
+            $0.manifest.packageID == Self.packageID
+                && $0.manifest.metadata["shared_rag_contract"] == Self.contractVersion
         }
         guard !packages.isEmpty else {
             return SharedRAGRuntimeResolution(

@@ -27,9 +27,15 @@ targets:
       - path: Resources
         excludes:
           - ExpertVectors
-        buildPhase: resources
-      - path: Resources/ExpertVectors
-        type: folder
+          - Knowledge/CorpusSources
+          - Knowledge/expert_corpus_v3.json
+          - Knowledge/expert_shadow_corpus.json
+          - Knowledge/expert_user_language.json
+          - Knowledge/legacy_anchor_manifest.json
+          - Knowledge/survival_fallback.json
+          - Knowledge/survival_knowledge.sha256
+          - Knowledge/survival_knowledge.sqlite
+          - Knowledge/survival_knowledge_source.json
         buildPhase: resources
     info:
       path: App/Info.plist
