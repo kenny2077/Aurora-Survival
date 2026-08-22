@@ -26,7 +26,6 @@ final class AppModel: ObservableObject {
     @Published private(set) var runtimeTiers: Set<ModelTier> = []
     @Published private(set) var lastModelMetrics: LlamaCompletionMetrics?
     @Published private(set) var lastModelThermalCondition: ThermalCondition?
-    @Published var incidentModeEnabled = true
     @Published var catalogURLString = "" {
         didSet {
             UserDefaults.standard.set(
@@ -277,10 +276,6 @@ final class AppModel: ObservableObject {
 
     func refreshCatalog() async {
         guard !isLoadingCatalog else { return }
-        guard !incidentModeEnabled else {
-            catalogStatus = "Switch to Preparation mode to use the network."
-            return
-        }
         guard let url = URL(string: catalogURLString),
               let scheme = url.scheme?.lowercased(),
               scheme == "https" || scheme == "http"
@@ -311,12 +306,6 @@ final class AppModel: ObservableObject {
     }
 
     func download(_ entry: PackageCatalogEntry) async {
-        guard !incidentModeEnabled else {
-            packageDownloadStates[entry.id] = .failed(
-                "Downloads are disabled in Incident mode."
-            )
-            return
-        }
         guard let catalogURL = URL(string: catalogURLString) else {
             packageDownloadStates[entry.id] = .failed(
                 "The catalog URL is invalid."
@@ -333,9 +322,6 @@ final class AppModel: ObservableObject {
                     isDirectory: true
                 ),
                 installer: packageInstaller,
-                networkPolicy: IncidentNetworkPolicy(
-                    incidentModeEnabled: incidentModeEnabled
-                ),
                 chunkByteCount: 8 * 1_048_576
             )
             _ = try await coordinator.downloadAndInstall(
@@ -396,6 +382,24 @@ final class AppModel: ObservableObject {
 
     func cancelDownload(_ entry: PackageCatalogEntry) {
         downloadTasks[entry.id]?.cancel()
+    }
+
+    func removePackage(_ entry: PackageCatalogEntry) {
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                try await packageInstaller.remove(
+                    packageID: entry.packageID,
+                    version: entry.version
+                )
+                try await refreshInstalledPackageStates()
+                await refreshActivePacks()
+            } catch {
+                packageDownloadStates[entry.id] = .failed(
+                    Self.userMessage(for: error)
+                )
+            }
+        }
     }
 
     func packageState(for entry: PackageCatalogEntry) -> PackageDownloadState {
@@ -993,7 +997,6 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.environment[
             "TRAILGUARD_DEBUG_UPDATE_SHARED_RAG"
         ] == "1" {
-            incidentModeEnabled = false
             await refreshCatalog()
             if let sharedRAG = catalogEntries.first(where: {
                 $0.packageID == "knowledge.shared-survival-rag-v3"
@@ -1001,7 +1004,6 @@ final class AppModel: ObservableObject {
             }) {
                 await download(sharedRAG)
             }
-            incidentModeEnabled = true
         }
 
         let prompts = [
@@ -1699,7 +1701,6 @@ final class AppModel: ObservableObject {
                 writeReport(completed: true)
                 return
             }
-            incidentModeEnabled = false
             catalogURLString = catalogURL
             await refreshCatalog()
             let targetTier: ModelTier = mode == "expert-lite-install" ? .lite : .expert
@@ -2510,8 +2511,6 @@ final class AppModel: ObservableObject {
 
     private static func userMessage(for error: Error) -> String {
         switch error {
-        case PackageDownloadError.incidentModeDenied:
-            return "Downloads are disabled in Incident mode."
         case PackageDownloadError.unexpectedPackage:
             return "The package identity did not match the signed catalog."
         case PackageCatalogError.invalidSignature,

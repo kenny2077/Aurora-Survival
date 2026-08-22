@@ -48,6 +48,8 @@ targets:
         NSPhotoLibraryUsageDescription: "Choose an existing photo or save a photo you take before attaching it for fully offline visual assistance."
         NSCameraUsageDescription: "Take a photo, save it to your Photo Library, and attach it for fully offline visual assistance."
         NSLocalNetworkUsageDescription: "Connect to your trusted Aurora package host to download signed offline models, guides, and maps during preparation."
+        NSLocationWhenInUseUsageDescription: "Show your position and record an explicitly started breadcrumb trail, including while the screen is locked."
+        NSMicrophoneUsageDescription: "Record an optional voice note for a survival waypoint and keep it on this device."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
         UISupportedInterfaceOrientations:
@@ -58,6 +60,8 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         UIRequiresFullScreen: false
+        UIBackgroundModes:
+          - location
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.Aurora

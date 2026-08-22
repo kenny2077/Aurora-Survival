@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "regions": [
+    {
+      "slug": "minnesota",
+      "display_name": "Minnesota Offline Map",
+      "region": "Minnesota",
+      "tier": "scout",
+      "sources": {
+        "protomaps": "maps-source/minnesota.pmtiles",
+        "contours": "maps-source/minnesota-contours.pmtiles"
+      },
+      "bounds": [-97.5, 43.4, -89.4, 49.4],
+      "layers": ["terrain", "topographic", "trail"]
+    }
+  ]
+}

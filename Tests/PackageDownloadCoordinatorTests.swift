@@ -50,35 +50,6 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
         XCTAssertEqual(lastProgress?.fractionCompleted, 1)
     }
 
-    func testIncidentModeDeniesDownloadBeforeNetworkAccess() async throws {
-        let fixture = try makeFixture()
-        defer { try? FileManager.default.removeItem(at: fixture.root) }
-        let transport = MemoryResumableTransport(
-            envelopeURL: fixture.location.envelopeURL,
-            envelopeData: try JSONEncoder().encode(fixture.envelope),
-            artifactData: fixture.artifactData
-        )
-        let coordinator = PackageDownloadCoordinator(
-            stagingRoot: fixture.root.appendingPathComponent("staging"),
-            transport: transport,
-            installer: fixture.installer,
-            networkPolicy: IncidentNetworkPolicy(incidentModeEnabled: true),
-            chunkByteCount: 3
-        )
-
-        do {
-            _ = try await coordinator.downloadAndInstall(from: fixture.location)
-            XCTFail("Expected incident-mode denial")
-        } catch {
-            XCTAssertEqual(
-                error as? PackageDownloadError,
-                .incidentModeDenied
-            )
-        }
-        let requestCount = await transport.totalRequestCount()
-        XCTAssertEqual(requestCount, 0)
-    }
-
     func testCatalogExpectationRejectsDifferentSignedPackageBeforeArtifacts() async throws {
         let fixture = try makeFixture()
         defer { try? FileManager.default.removeItem(at: fixture.root) }

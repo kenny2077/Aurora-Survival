@@ -222,15 +222,29 @@ final class PhysicalProductFlowTests: XCTestCase {
 
         openMaps(in: app)
         XCTAssertTrue(tabButton("Maps", in: app).isSelected)
-        XCTAssertTrue(app.navigationBars["Offline Maps"].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.navigationBars["Maps"].waitForExistence(timeout: 20))
         XCTAssertTrue(
             app.descendants(matching: .any)["maps.home"]
                 .waitForExistence(timeout: 10)
         )
-        let setup = app.textFields["Signed catalog URL"]
-        let manage = app.buttons["Manage map downloads"]
-        XCTAssertTrue(setup.exists || manage.exists)
-        keepScreenshot(named: "Dedicated Maps tab", app: app)
+        keepScreenshot(named: "Maps overlay layout", app: app)
+        let record = app.buttons["Record"].firstMatch
+        let offline = app.buttons["Offline Maps"].firstMatch
+        let waypoints = app.buttons["Waypoints"].firstMatch
+        record.tap()
+        XCTAssertTrue(app.staticTexts["Trail Recording"].waitForExistence(timeout: 2))
+        offline.tap()
+        XCTAssertTrue(app.staticTexts["Offline Maps"].waitForExistence(timeout: 2))
+        waypoints.tap()
+        XCTAssertTrue(
+            app.staticTexts["Survival Waypoints"].waitForExistence(timeout: 2)
+        )
+        let source = app.buttons["Map type"].firstMatch
+        XCTAssertTrue(source.exists)
+        source.tap()
+        XCTAssertTrue(app.buttons["Standard"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.buttons["Satellite"].exists)
+        keepScreenshot(named: "Map type menu", app: app)
     }
 
     func testManualSixChaptersAndNoResultsAtLargestType() throws {

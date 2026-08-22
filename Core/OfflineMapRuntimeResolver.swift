@@ -13,7 +13,9 @@ public struct ResolvedOfflineMap: Equatable, Sendable, Identifiable {
     public let pack: OfflineMapPack
     public let packageDirectory: URL
     public let pmtilesURL: URL
+    public let sourceURLs: [String: URL]
     public let styleURL: URL
+    public let styleURLs: [OfflineMapLayer: URL]
     public let glyphsDirectoryURL: URL?
     public let attribution: String
     public let session: OfflineMapSession
@@ -22,7 +24,9 @@ public struct ResolvedOfflineMap: Equatable, Sendable, Identifiable {
         pack: OfflineMapPack,
         packageDirectory: URL,
         pmtilesURL: URL,
+        sourceURLs: [String: URL]? = nil,
         styleURL: URL,
+        styleURLs: [OfflineMapLayer: URL]? = nil,
         glyphsDirectoryURL: URL?,
         attribution: String,
         session: OfflineMapSession
@@ -30,10 +34,16 @@ public struct ResolvedOfflineMap: Equatable, Sendable, Identifiable {
         self.pack = pack
         self.packageDirectory = packageDirectory
         self.pmtilesURL = pmtilesURL
+        self.sourceURLs = sourceURLs ?? ["protomaps": pmtilesURL]
         self.styleURL = styleURL
+        self.styleURLs = styleURLs ?? [.legacy: styleURL]
         self.glyphsDirectoryURL = glyphsDirectoryURL
         self.attribution = attribution
         self.session = session
+    }
+
+    public func styleURL(for layer: OfflineMapLayer) -> URL? {
+        styleURLs[layer] ?? (layer == .legacy ? styleURL : nil)
     }
 }
 
@@ -101,16 +111,40 @@ public struct OfflineMapRuntimeResolver: Sendable {
             }
 
             let pmtilesURL: URL
+            let sourceURLs: [String: URL]
             let styleURL: URL
+            let styleURLs: [OfflineMapLayer: URL]
             let glyphsDirectoryURL: URL?
             do {
                 pmtilesURL = try PackageVerifier.safeArtifactURL(
                     path: map.pmtilesPath,
                     root: package.directory
                 )
+                sourceURLs = try Dictionary(
+                    uniqueKeysWithValues: map.sourcePaths.map { name, path in
+                        (
+                            name,
+                            try PackageVerifier.safeArtifactURL(
+                                path: path,
+                                root: package.directory
+                            )
+                        )
+                    }
+                )
                 styleURL = try PackageVerifier.safeArtifactURL(
                     path: map.stylePath,
                     root: package.directory
+                )
+                styleURLs = try Dictionary(
+                    uniqueKeysWithValues: map.stylePaths.map { layer, path in
+                        (
+                            layer,
+                            try PackageVerifier.safeArtifactURL(
+                                path: path,
+                                root: package.directory
+                            )
+                        )
+                    }
                 )
                 glyphsDirectoryURL = try map.glyphsDirectoryPath.map {
                     try PackageVerifier.safeArtifactURL(
@@ -136,7 +170,9 @@ public struct OfflineMapRuntimeResolver: Sendable {
                         pack: map,
                         packageDirectory: package.directory,
                         pmtilesURL: pmtilesURL,
+                        sourceURLs: sourceURLs,
                         styleURL: styleURL,
+                        styleURLs: styleURLs.isEmpty ? [.legacy: styleURL] : styleURLs,
                         glyphsDirectoryURL: glyphsDirectoryURL,
                         attribution: package.manifest.metadata["attribution"]
                             ?? "© OpenStreetMap contributors",

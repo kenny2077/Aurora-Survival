@@ -17,20 +17,32 @@ public struct OfflineMapStyleAssembler: Sendable {
         pmtilesURL: URL,
         glyphsDirectoryURL: URL?
     ) throws -> Data {
+        try assemble(
+            templateData: templateData,
+            sourceURLs: ["protomaps": pmtilesURL],
+            glyphsDirectoryURL: glyphsDirectoryURL
+        )
+    }
+
+    public func assemble(
+        templateData: Data,
+        sourceURLs: [String: URL],
+        glyphsDirectoryURL: URL?
+    ) throws -> Data {
         guard var style = try JSONSerialization.jsonObject(
             with: templateData
         ) as? [String: Any],
-              var sources = style["sources"] as? [String: Any],
-              var vectorSource = sources["protomaps"] as? [String: Any]
+              var sources = style["sources"] as? [String: Any]
         else {
             throw OfflineMapStyleError.invalidTemplate
         }
-        guard vectorSource["type"] as? String == "vector" else {
-            throw OfflineMapStyleError.missingVectorSource
+        for (name, url) in sourceURLs {
+            guard var source = sources[name] as? [String: Any],
+                  source["type"] as? String == "vector"
+            else { throw OfflineMapStyleError.missingVectorSource }
+            source["url"] = "pmtiles://\(url.absoluteString)"
+            sources[name] = source
         }
-
-        vectorSource["url"] = "pmtiles://\(pmtilesURL.absoluteString)"
-        sources["protomaps"] = vectorSource
         style["sources"] = sources
 
         if style["glyphs"] != nil {

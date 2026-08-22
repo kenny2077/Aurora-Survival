@@ -21,7 +21,6 @@ public protocol ResumablePackageTransport: PackageTransport {
 }
 
 public enum PackageDownloadError: Error, Equatable {
-    case incidentModeDenied
     case unexpectedPackage
     case invalidRangeResponse
     case invalidChunkSize(expected: Int, actual: Int)
@@ -121,22 +120,17 @@ public actor PackageDownloadCoordinator {
     private let stagingRoot: URL
     private let transport: any ResumablePackageTransport
     private let installer: PackageInstaller
-    private let networkPolicy: IncidentNetworkPolicy
     private let chunkByteCount: Int64
 
     public init(
         stagingRoot: URL,
         transport: any ResumablePackageTransport = URLSessionPackageTransport(),
         installer: PackageInstaller,
-        networkPolicy: IncidentNetworkPolicy = IncidentNetworkPolicy(
-            incidentModeEnabled: false
-        ),
         chunkByteCount: Int64 = 1_048_576
     ) {
         self.stagingRoot = stagingRoot
         self.transport = transport
         self.installer = installer
-        self.networkPolicy = networkPolicy
         self.chunkByteCount = max(1, chunkByteCount)
     }
 
@@ -148,9 +142,6 @@ public actor PackageDownloadCoordinator {
             PackageDownloadProgress
         ) async -> Void = { _ in }
     ) async throws -> InstalledPackageVersion {
-        guard networkPolicy.permits(.packageDownload) else {
-            throw PackageDownloadError.incidentModeDenied
-        }
         let envelopeData = try await transport.data(from: location.envelopeURL)
         let envelope = try JSONDecoder().decode(
             SignedPackageEnvelope.self,

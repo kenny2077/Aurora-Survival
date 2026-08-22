@@ -22,7 +22,6 @@ struct DownloadCenterView: View {
     var body: some View {
         List {
             if showsCatalogConnection {
-                modeSection
                 catalogSection
             }
 
@@ -31,11 +30,7 @@ struct DownloadCenterView: View {
                     ContentUnavailableView(
                         kindFilter == .map ? "No map catalog loaded" : "No downloads loaded",
                         systemImage: kindFilter == .map ? "map" : "arrow.down.circle",
-                        description: Text(
-                            model.incidentModeEnabled
-                                ? "Switch to Preparation mode, then verify the signed catalog."
-                                : "Connect to a signed catalog to see available offline packages."
-                        )
+                        description: Text("Connect to a signed catalog to see available offline packages.")
                     )
                 }
             } else {
@@ -66,32 +61,6 @@ struct DownloadCenterView: View {
         .navigationTitle(kindFilter == .map ? "Offline Maps" : "Downloads")
     }
 
-    private var modeSection: some View {
-        Section {
-            Toggle(
-                isOn: Binding(
-                    get: { !model.incidentModeEnabled },
-                    set: { model.incidentModeEnabled = !$0 }
-                )
-            ) {
-                Label(
-                    model.incidentModeEnabled ? "Incident mode" : "Preparation mode",
-                    systemImage: model.incidentModeEnabled
-                        ? "shield.fill"
-                        : "arrow.down.circle.fill"
-                )
-            }
-            .accessibilityIdentifier("download.mode")
-            Text(
-                model.incidentModeEnabled
-                    ? "Network access is locked. Installed guides, maps, and intelligence remain offline."
-                    : "You explicitly enabled network access for signed downloads."
-            )
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        }
-    }
-
     private var catalogSection: some View {
         Section("Signed catalog") {
             TextField(
@@ -114,7 +83,7 @@ struct DownloadCenterView: View {
                     }
                 }
             }
-            .disabled(model.incidentModeEnabled || model.isLoadingCatalog)
+            .disabled(model.isLoadingCatalog)
             .accessibilityIdentifier("catalog.verify")
 
             Text(model.catalogStatus)
@@ -134,9 +103,9 @@ struct DownloadCenterView: View {
                     PackageDownloadCard(
                         entry: entry,
                         state: model.packageState(for: entry),
-                        incidentModeEnabled: model.incidentModeEnabled,
                         start: { model.startDownload(entry) },
-                        cancel: { model.cancelDownload(entry) }
+                        cancel: { model.cancelDownload(entry) },
+                        remove: { model.removePackage(entry) }
                     )
                 }
             }
@@ -148,9 +117,10 @@ struct DownloadCenterView: View {
 struct PackageDownloadCard: View {
     let entry: PackageCatalogEntry
     let state: PackageDownloadState
-    let incidentModeEnabled: Bool
     let start: () -> Void
     let cancel: () -> Void
+    let remove: () -> Void
+    @State private var confirmsRemoval = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -185,6 +155,16 @@ struct PackageDownloadCard: View {
         .padding(.vertical, 8)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("package.\(entry.id)")
+        .confirmationDialog(
+            "Remove \(entry.displayName)?",
+            isPresented: $confirmsRemoval,
+            titleVisibility: .visible
+        ) {
+            Button("Remove Download", role: .destructive, action: remove)
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("The signed local files will be deleted. You can download them again later.")
+        }
     }
 
     @ViewBuilder
@@ -197,7 +177,6 @@ struct PackageDownloadCard: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            .disabled(incidentModeEnabled)
 
         case let .downloading(fraction):
             VStack(alignment: .leading, spacing: 8) {
@@ -210,12 +189,17 @@ struct PackageDownloadCard: View {
             .accessibilityValue(fraction.formatted(.percent))
 
         case let .installed(active):
-            Label(
-                active ? "Installed & active" : "Installed",
-                systemImage: active ? "checkmark.seal.fill" : "checkmark.circle.fill"
-            )
-            .font(.subheadline.bold())
-            .foregroundStyle(.green)
+            HStack {
+                Label(
+                    active ? "Installed & active" : "Installed",
+                    systemImage: active ? "checkmark.seal.fill" : "checkmark.circle.fill"
+                )
+                .font(.subheadline.bold())
+                .foregroundStyle(.green)
+                Spacer()
+                Button("Remove", role: .destructive) { confirmsRemoval = true }
+                    .buttonStyle(.bordered)
+            }
 
         case let .failed(message):
             VStack(alignment: .leading, spacing: 8) {
@@ -224,7 +208,6 @@ struct PackageDownloadCard: View {
                     .foregroundStyle(.red)
                 Button("Resume", action: start)
                     .buttonStyle(.borderedProminent)
-                    .disabled(incidentModeEnabled)
             }
         }
     }

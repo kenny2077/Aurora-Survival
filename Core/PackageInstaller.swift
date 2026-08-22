@@ -279,6 +279,52 @@ public actor PackageInstaller {
         }
     }
 
+    /// Atomically deactivates and removes an installed package version. If it
+    /// is active, the newest eligible remaining version becomes active.
+    public func remove(packageID: String, version: String) throws {
+        var current = try index()
+        guard let record = current.installed.first(where: {
+            $0.packageID == packageID && $0.version == version
+        }) else { throw PackageInstallError.packageNotInstalled }
+        let target = packagesDirectory.appendingPathComponent(
+            record.directoryName,
+            isDirectory: true
+        )
+        let stagedRemoval = packagesDirectory.appendingPathComponent(
+            ".\(record.directoryName).deleting",
+            isDirectory: true
+        )
+        do {
+            if fileManager.fileExists(atPath: stagedRemoval.path) {
+                try fileManager.removeItem(at: stagedRemoval)
+            }
+            try fileManager.moveItem(at: target, to: stagedRemoval)
+            current.installed.removeAll { $0.id == record.id }
+            if current.activeVersions[packageID] == version {
+                let replacement = current.installed
+                    .filter {
+                        $0.packageID == packageID
+                            && !(current.recalledVersions[packageID] ?? []).contains($0.version)
+                    }
+                    .sorted { $0.installedAt > $1.installedAt }
+                    .first
+                if let replacement {
+                    current.activeVersions[packageID] = replacement.version
+                } else {
+                    current.activeVersions.removeValue(forKey: packageID)
+                }
+            }
+            try writeIndex(current)
+            try fileManager.removeItem(at: stagedRemoval)
+        } catch {
+            if fileManager.fileExists(atPath: stagedRemoval.path),
+               !fileManager.fileExists(atPath: target.path) {
+                try? fileManager.moveItem(at: stagedRemoval, to: target)
+            }
+            throw PackageInstallError.fileOperationFailed
+        }
+    }
+
     public func activePackageDirectory(packageID: String) throws -> URL? {
         let current = try index()
         guard let version = current.activeVersions[packageID],

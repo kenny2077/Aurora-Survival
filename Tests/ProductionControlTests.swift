@@ -304,18 +304,6 @@ final class ProductionControlTests: XCTestCase {
         }
     }
 
-    func testIncidentModeDeniesNonessentialNetworkOperations() {
-        let policy = IncidentNetworkPolicy(incidentModeEnabled: true)
-        XCTAssertTrue(policy.permits(.emergencyContact))
-        XCTAssertTrue(policy.permits(.modelInference))
-        XCTAssertTrue(policy.permits(.knowledgeRetrieval))
-        XCTAssertTrue(policy.permits(.mapUse))
-        XCTAssertFalse(policy.permits(.telemetry))
-        XCTAssertFalse(policy.permits(.packageDownload))
-        XCTAssertFalse(policy.permits(.purchase))
-        XCTAssertFalse(policy.permits(.entitlementRefresh))
-    }
-
     func testCachedEntitlementKeepsInstalledPackAvailableOffline() {
         let resolver = OfflineEntitlementResolver()
         let cached = EntitlementSnapshot(

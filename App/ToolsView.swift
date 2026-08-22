@@ -247,7 +247,6 @@ struct ToolsView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
-            .disabled(model.incidentModeEnabled)
         case let .downloading(fraction):
             VStack(alignment: .leading, spacing: 8) {
                 ProgressView(value: fraction) {
@@ -271,7 +270,6 @@ struct ToolsView: View {
                     .foregroundStyle(.red)
                 Button("Try download again") { model.startDownload(entry) }
                     .buttonStyle(.borderedProminent)
-                    .disabled(model.incidentModeEnabled)
             }
         }
     }
@@ -279,15 +277,6 @@ struct ToolsView: View {
     private var downloadAccess: some View {
         DisclosureGroup("Download access", isExpanded: $showsDownloadAccess) {
             VStack(alignment: .leading, spacing: 14) {
-                Toggle(
-                    model.incidentModeEnabled ? "Incident mode" : "Preparation mode",
-                    isOn: Binding(
-                        get: { !model.incidentModeEnabled },
-                        set: { model.incidentModeEnabled = !$0 }
-                    )
-                )
-                .accessibilityIdentifier("download.mode")
-
                 TextField("https://host/catalog.json", text: $model.catalogURLString)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
@@ -304,7 +293,7 @@ struct ToolsView: View {
                     }
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(model.incidentModeEnabled || model.isLoadingCatalog)
+                .disabled(model.isLoadingCatalog)
                 .accessibilityIdentifier("catalog.verify")
 
                 Text(model.catalogStatus)
