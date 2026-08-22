@@ -96,7 +96,7 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         let answer = await assistant.answer(
             request: ChatRequest(question: "Hi", preferredTier: .expert),
             device: Self.capableDevice,
-            expertTokenSink: { collector.append($0) }
+            tokenSink: { collector.append($0) }
         )
 
         let callCount = await model.callCount
@@ -201,7 +201,7 @@ final class ExpertOneShotStreamingTests: XCTestCase {
             device: Self.capableDevice
         )
 
-        XCTAssertEqual(retrieval.searchCount, 1)
+        XCTAssertEqual(retrieval.searchCount, 0)
         XCTAssertEqual(answer?.expertIntent, .survivalQuestion)
         XCTAssertEqual(answer?.expertRetrievalStatus, .noRelevantEvidence)
         XCTAssertTrue(answer?.sourceCards.isEmpty == true)
@@ -222,6 +222,110 @@ final class ExpertOneShotStreamingTests: XCTestCase {
             .joined(separator: " ")
         XCTAssertTrue(compactPrompt.contains("No reviewed offline evidence matched"))
         XCTAssertTrue(compactPrompt.contains("Do not invent an exact"))
+    }
+
+    func testLiteUsesHiddenIntentAndOneStreamedStatelessAnswer() async {
+        let model = OneShotExpertModel(
+            tier: .lite,
+            intent: .generalQuestion,
+            output: #"{"a":"Hello, how can I help?","e":[]}"#
+        )
+        let retrieval = ExpertRetrievalSpy()
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.lite],
+            expertEvidenceRetrieval: retrieval,
+            modelProvider: { _ in model }
+        )
+        let collector = DeltaCollector()
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "Hi",
+                preferredTier: .lite,
+                hasImage: true,
+                imageData: Data([1, 2, 3]),
+                conversationHistory: [
+                    ConversationTurn(role: .user, text: "My car will not start")
+                ]
+            ),
+            device: Self.capableDevice,
+            tokenSink: { collector.append($0) }
+        )
+
+        let callCount = await model.callCount
+        let purposes = await model.purposes()
+        XCTAssertEqual(callCount, 2)
+        XCTAssertEqual(purposes, [.expertIntent, .ordinary])
+        let prompts = await model.prompts()
+        XCTAssertTrue(prompts.allSatisfy { $0.tier == .lite })
+        XCTAssertTrue(prompts.allSatisfy { $0.conversationHistory.isEmpty })
+        XCTAssertTrue(prompts.allSatisfy { $0.imageData == nil })
+        XCTAssertEqual(retrieval.searchCount, 0)
+        XCTAssertEqual(answer?.text, collector.text)
+        XCTAssertTrue(answer?.sourceCards.isEmpty == true)
+        XCTAssertTrue(answer?.notices.contains {
+            $0.contains("Lite is text-only")
+        } == true)
+    }
+
+    func testLitePromptsUseCompactEnvelopeAndConservativeIntentExamples() {
+        let builder = GroundedPromptBuilder()
+        let intent = builder.systemPrompt(
+            for: .lite,
+            purpose: .expertIntent,
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(intent.contains("How do I get a girlfriend?"))
+        XCTAssertTrue(intent.contains("When uncertain, choose general"))
+
+        let grounded = builder.systemPrompt(
+            for: .lite,
+            purpose: .grounded,
+            outputMode: .groundedJSON,
+            usesReviewedClaims: true
+        )
+        XCTAssertTrue(grounded.contains(#"{"a":"answer","e":[1]}"#))
+        XCTAssertFalse(grounded.contains(#"{"s""#))
+
+        let ordinary = builder.systemPrompt(
+            for: .lite,
+            purpose: .ordinary,
+            outputMode: .groundedJSON
+        )
+        XCTAssertTrue(ordinary.contains("no more than"))
+        XCTAssertTrue(ordinary.contains("75 words"))
+    }
+
+    func testLiteSharedPackFailureDisablesAllGrounding() async {
+        let model = OneShotExpertModel(
+            tier: .lite,
+            intent: .survivalQuestion,
+            output: #"{"a":"Use cautious best-effort steps and stop if conditions worsen.","e":[]}"#
+        )
+        let retrieval = ExpertRetrievalSpy()
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.lite],
+            expertEvidenceRetrieval: retrieval,
+            modelProvider: { _ in model }
+        )
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "How do I repair an unfamiliar survival-device model?",
+                preferredTier: .lite
+            ),
+            device: Self.capableDevice
+        )
+
+        let callCount = await model.callCount
+        XCTAssertEqual(callCount, 2)
+        XCTAssertEqual(retrieval.searchCount, 0)
+        XCTAssertEqual(answer?.expertIntent, .survivalQuestion)
+        XCTAssertEqual(answer?.expertRetrievalStatus, .noRelevantEvidence)
+        XCTAssertTrue(answer?.sourceCards.isEmpty == true)
+        XCTAssertTrue(answer?.notices.contains {
+            $0.contains("Shared semantic retrieval is unavailable")
+        } == true)
     }
 
     private func makeAssistant(
@@ -263,20 +367,31 @@ private actor FailingVisionModel: LocalLanguageModel {
 }
 
 private actor OneShotExpertModel: LocalLanguageModel {
-    nonisolated let tier: ModelTier = .expert
+    nonisolated let tier: ModelTier
     nonisolated let outputMode: ModelOutputMode = .groundedJSON
     private let output: String
     private let rawIntent: String
     private(set) var callCount = 0
     private var recordedPurposes: [ModelPromptPurpose] = []
+    private var recordedPrompts: [ModelPrompt] = []
 
-    init(intent: ExpertTurnIntent, output: String) {
+    init(
+        tier: ModelTier = .expert,
+        intent: ExpertTurnIntent,
+        output: String
+    ) {
+        self.tier = tier
         rawIntent = intent == .survivalQuestion
             ? #"{"t":"survival"}"# : #"{"t":"general"}"#
         self.output = output
     }
 
-    init(rawIntent: String, output: String) {
+    init(
+        tier: ModelTier = .expert,
+        rawIntent: String,
+        output: String
+    ) {
+        self.tier = tier
         self.rawIntent = rawIntent
         self.output = output
     }
@@ -284,6 +399,7 @@ private actor OneShotExpertModel: LocalLanguageModel {
     func generate(prompt: ModelPrompt) async throws -> String {
         callCount += 1
         recordedPurposes.append(prompt.purpose)
+        recordedPrompts.append(prompt)
         if prompt.purpose == .expertIntent {
             return rawIntent
         }
@@ -291,6 +407,7 @@ private actor OneShotExpertModel: LocalLanguageModel {
     }
 
     func purposes() -> [ModelPromptPurpose] { recordedPurposes }
+    func prompts() -> [ModelPrompt] { recordedPrompts }
 }
 
 private final class ExpertRetrievalSpy: ExpertEvidenceRetrieving, @unchecked Sendable {

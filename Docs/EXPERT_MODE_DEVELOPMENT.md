@@ -53,11 +53,10 @@ acceptance is failing.
   memory headroom above the retained peak.
 - Expert keeps only newest whole raw messages for the visible in-memory
   session. Lite receives no history and remains at 2,048 context tokens.
-- Expert queries the corpus-v3 scenario FTS and signed BGE index containing 96
-  scenarios, 760 promoted claims, 79 canonical Survival Manual 2026 chunks, and
-  21 isolated discovery chunks. The manual maps 37 skills onto stable existing
-  scenarios and adds 24 `sm26-*` scenarios. Its 579 development-promoted claims
-  are canonical where guidance overlaps.
+- Expert queries the corpus-v3 scenario FTS and signed BGE index containing 61
+  scenarios, 545 promoted claims, and 79 canonical Survival Manual 2026 chunks.
+  The manifest-discovered reviewed-claim sidecar consolidates overlapping water
+  and food procedures while retaining source locators and corroboration edges.
 - One bounded query is searched lexically and densely. Each channel contributes
   only its best rank per scenario, RRF `k=60` orders candidates, and an absolute
   multiword/cosine gate determines eligibility before any discovery boost. At most

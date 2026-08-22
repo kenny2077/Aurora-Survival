@@ -160,6 +160,9 @@ public struct ShardedExpertVectorIndex: Sendable {
 
     public var isEmpty: Bool { shards.isEmpty }
     public var recordCount: Int { shards.reduce(0) { $0 + $1.records.count } }
+    public var corpusIdentities: Set<String> {
+        Set(shards.map { $0.manifest.corpusIdentity })
+    }
 
     public func search(
         queryVector: [Float],

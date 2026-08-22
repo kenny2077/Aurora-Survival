@@ -364,6 +364,16 @@ public struct RetrievedEvidenceScenario: Hashable, Sendable {
     public let isEligible: Bool
     public let eligibilityReason: String
     public let exclusionReasons: [String]
+    public var subjectConcepts: [String]
+    public var operationConcepts: [String]
+    public var hazardConcepts: [String]
+    public var subjectAlignment: Int
+    public var operationAlignment: Int
+    public var coveredQueryConcepts: Int
+    public var candidatePoolPosition: Int?
+    public var promptTokenContribution: Int
+    public var claimQualityStatus: String
+    public var finalSelectionReason: String?
 
     public init(
         scenario: EvidenceScenarioRecord,
@@ -381,7 +391,17 @@ public struct RetrievedEvidenceScenario: Hashable, Sendable {
         appliedBoosts: [String] = [],
         isEligible: Bool = true,
         eligibilityReason: String = "legacy_eligible",
-        exclusionReasons: [String] = []
+        exclusionReasons: [String] = [],
+        subjectConcepts: [String] = [],
+        operationConcepts: [String] = [],
+        hazardConcepts: [String] = [],
+        subjectAlignment: Int = 0,
+        operationAlignment: Int = 0,
+        coveredQueryConcepts: Int = 0,
+        candidatePoolPosition: Int? = nil,
+        promptTokenContribution: Int = 0,
+        claimQualityStatus: String = "not_evaluated",
+        finalSelectionReason: String? = nil
     ) {
         self.scenario = scenario
         self.preBoostScore = preBoostScore ?? score
@@ -399,6 +419,16 @@ public struct RetrievedEvidenceScenario: Hashable, Sendable {
         self.isEligible = isEligible
         self.eligibilityReason = eligibilityReason
         self.exclusionReasons = exclusionReasons
+        self.subjectConcepts = subjectConcepts
+        self.operationConcepts = operationConcepts
+        self.hazardConcepts = hazardConcepts
+        self.subjectAlignment = subjectAlignment
+        self.operationAlignment = operationAlignment
+        self.coveredQueryConcepts = coveredQueryConcepts
+        self.candidatePoolPosition = candidatePoolPosition
+        self.promptTokenContribution = promptTokenContribution
+        self.claimQualityStatus = claimQualityStatus
+        self.finalSelectionReason = finalSelectionReason
     }
 }
 

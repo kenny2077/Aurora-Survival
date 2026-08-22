@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "documentID": "survival-manual-2026",
+  "scenarios": {
+    "water-locate-scenario": {
+      "relatedScenarioIDs": ["water-choose-source-scenario"],
+      "claims": [
+        {"kind": "applicability", "sectionKey": "watercraft/finding-water", "text": "Locate water while conserving energy."},
+        {"kind": "action", "sectionKey": "watercraft/finding-water", "text": "Search known sources first, including springs, streams, rivers, lakes, and maintained water points."},
+        {"kind": "action", "sectionKey": "watercraft/finding-water", "text": "Because water moves downhill, look in valleys, drainage channels, gullies, and low points between hills."},
+        {"kind": "action", "sectionKey": "watercraft/finding-water", "text": "Greener or denser vegetation may indicate moisture, but it does not guarantee safe drinking water."},
+        {"kind": "contraindication", "sectionKey": "watercraft/finding-water", "text": "Animal tracks, repeated trails, and bird activity may indicate water direction, but they do not establish water safety."},
+        {"kind": "action", "sectionKey": "watercraft/finding-water-by-environment", "text": "Adapt the search to the environment and reduce exposure or exertion before continuing when conditions make the search hazardous."}
+      ]
+    },
+    "water-choose-source-scenario": {
+      "relatedScenarioIDs": ["water-locate-scenario"],
+      "claims": [
+        {"kind": "applicability", "sectionKey": "watercraft/recognizing-contaminated-water", "text": "Assess a found water source for visible or detectable contamination before collecting it."},
+        {"kind": "contraindication", "sectionKey": "watercraft/recognizing-contaminated-water", "text": "Avoid water with a fuel smell, chemical odor, oily appearance, industrial pollution, or dead animals nearby."},
+        {"kind": "contraindication", "sectionKey": "watercraft/recognizing-contaminated-water", "text": "Be cautious with water showing green surface scum, a paint-like appearance, unusual foam, or a strong odor."},
+        {"kind": "contraindication", "sectionKey": "watercraft/recognizing-contaminated-water", "text": "Boiling does not remove all toxins produced by harmful algal blooms."}
+      ]
+    },
+    "food-cook-scenario": {
+      "relatedScenarioIDs": [],
+      "claims": [
+        {"kind": "applicability", "sectionKey": "foodcraft/wild-game-food-safety", "text": "Use hygienic handling and thorough cooking to reduce foodborne illness risk from wild game."},
+        {"kind": "action", "sectionKey": "foodcraft/wild-game-food-safety", "text": "Keep meat and tools clean, and keep raw meat separate from cooked and ready-to-eat food."},
+        {"kind": "contraindication", "sectionKey": "foodcraft/wild-game-food-safety", "text": "Do not rely only on appearance, smell, or texture because wild game can contain parasites and pathogens."},
+        {"kind": "action", "sectionKey": "foodcraft/cooking-methods", "text": "To roast fish or meat pieces, prepare the food, place it near controlled heat, rotate it regularly, and cook it completely."},
+        {"kind": "action", "sectionKey": "foodcraft/cooking-methods", "text": "To boil meat, plants, or soup, add the food and water, heat thoroughly, and maintain the cooking temperature."},
+        {"kind": "action", "sectionKey": "foodcraft/cooking-methods", "text": "Coal cooking can provide stable heat and better temperature control."},
+        {"kind": "contraindication", "sectionKey": "foodcraft/food-hygiene", "text": "Keep raw meat, waste, and contaminated tools in a dirty area separate from cooked food, clean equipment, and ready-to-eat items."}
+      ]
+    }
+  }
+}

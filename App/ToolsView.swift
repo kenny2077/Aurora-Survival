@@ -158,8 +158,8 @@ struct ToolsView: View {
             }
 
             Text(tier == .lite
-                 ? "Gemma 3 1B for iPhone 13-class devices. Fully offline conversation with the same reviewed Manual context."
-                 : "A larger 2B-class vision tier targeted at iPhone 17 Pro Max and iPad Pro with M2 or newer.")
+                 ? "Fast, lower-memory, text-only Gemma 3 1B for iPhone 13-class devices, using the shared offline survival RAG and sources."
+                 : "More capable Qwen text-and-vision guidance for high-memory devices, using the same offline survival RAG and sources.")
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

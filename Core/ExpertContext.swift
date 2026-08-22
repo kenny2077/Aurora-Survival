@@ -468,6 +468,21 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
         let weight: Double
     }
 
+    public enum RankingMode: Equatable, Sendable {
+        case standard
+        case liteOperationAware
+    }
+
+    struct RetrievalProfile: Equatable, Sendable {
+        let subjectConcepts: Set<String>
+        let requestedOperations: Set<String>
+        let hazardConcepts: Set<String>
+
+        var queryConcepts: Set<String> {
+            subjectConcepts.union(requestedOperations).union(hazardConcepts)
+        }
+    }
+
     private let retrieval: any ExpertEvidenceRetrieving
     private let includesShadowCorpus: Bool
 
@@ -482,7 +497,8 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
     public func search(
         request: ChatRequest,
         denseResults: [ExpertVectorSearchResult] = [],
-        limit: Int = 8
+        limit: Int = 8,
+        rankingMode: RankingMode = .standard
     ) -> [RetrievedEvidenceScenario] {
         let current = request.question.trimmingCharacters(
             in: .whitespacesAndNewlines
@@ -504,7 +520,10 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
             .filter { !$0.isEmpty }
             .joined(separator: " ")
         let requestsLiveInformation = Self.requestsLiveInformation(semanticQuery)
-        let lexicalTerms = Self.meaningfulSurvivalTerms(in: semanticQuery)
+        let retrievalProfile = Self.retrievalProfile(in: semanticQuery)
+        let lexicalTerms = rankingMode == .liteOperationAware
+            ? retrievalProfile.queryConcepts
+            : Self.meaningfulSurvivalTerms(in: semanticQuery)
         let boundedQuery = lexicalTerms.sorted().joined(separator: " ")
         var queries = boundedQuery.isEmpty
             ? []
@@ -614,6 +633,25 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
                 queryTerms: lexicalTerms,
                 scenario: scenario
             )
+            let scenarioProfile = Self.retrievalProfile(
+                in: scenario.searchableText
+            )
+            let relatedOperations = Set(scenario.relatedScenarioIDs.flatMap {
+                retrieval.expertScenario(id: $0).map {
+                    Self.retrievalProfile(in: $0.searchableText)
+                        .requestedOperations
+                } ?? []
+            })
+            let operationAlignment = retrievalProfile.requestedOperations
+                .intersection(
+                    scenarioProfile.requestedOperations.union(relatedOperations)
+                ).count
+            let subjectAlignment = retrievalProfile.subjectConcepts
+                .intersection(scenarioProfile.subjectConcepts).count
+            let coveredConcepts = retrievalProfile.queryConcepts
+                .intersection(
+                    scenarioProfile.queryConcepts.union(relatedOperations)
+                ).count
             let eligibility: (Bool, String)
             if requestsLiveInformation {
                 eligibility = (false, "live_information_not_offline_evidence")
@@ -649,15 +687,48 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
                 isEligible: eligibility.0,
                 eligibilityReason: eligibility.1,
                 exclusionReasons: eligibility.0
-                    ? [] : ["insufficient_absolute_relevance"]
+                    ? [] : ["insufficient_absolute_relevance"],
+                subjectConcepts: retrievalProfile.subjectConcepts.sorted(),
+                operationConcepts: retrievalProfile.requestedOperations.sorted(),
+                hazardConcepts: retrievalProfile.hazardConcepts.sorted(),
+                subjectAlignment: subjectAlignment,
+                operationAlignment: operationAlignment,
+                coveredQueryConcepts: coveredConcepts
             )
         }
-        return fused.sorted {
-            if $0.score == $1.score {
-                return $0.scenario.id < $1.scenario.id
+        var ranked = fused.sorted {
+            if rankingMode == .liteOperationAware {
+                if $0.isEligible != $1.isEligible { return $0.isEligible }
+                if $0.operationAlignment != $1.operationAlignment {
+                    return $0.operationAlignment > $1.operationAlignment
+                }
+                if $0.subjectAlignment != $1.subjectAlignment {
+                    return $0.subjectAlignment > $1.subjectAlignment
+                }
+                if $0.coveredQueryConcepts != $1.coveredQueryConcepts {
+                    return $0.coveredQueryConcepts > $1.coveredQueryConcepts
+                }
             }
+            if $0.score == $1.score { return $0.scenario.id < $1.scenario.id }
             return $0.score > $1.score
-        }.prefix(max(1, min(limit, 16))).map { $0 }
+        }
+        if rankingMode == .liteOperationAware,
+           let first = ranked.first,
+           first.isEligible,
+           let relatedIndex = ranked.dropFirst().firstIndex(where: {
+               $0.isEligible
+                   && first.scenario.relatedScenarioIDs.contains($0.scenario.id)
+           }) {
+            let related = ranked.remove(at: relatedIndex)
+            ranked.insert(related, at: 1)
+        }
+        ranked = Array(ranked.prefix(max(1, min(limit, 16))))
+        if rankingMode == .liteOperationAware {
+            for index in ranked.indices {
+                ranked[index].candidatePoolPosition = index + 1
+            }
+        }
+        return ranked
     }
 
     private static func higherAuthority(
@@ -741,6 +812,42 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
             terms.formUnion(expansions[token] ?? [])
         }
         return terms
+    }
+
+    static func retrievalProfile(in value: String) -> RetrievalProfile {
+        let raw = RetrievalEngine.tokens(in: value)
+        let operationAliases: [String: String] = [
+            "find": "locate", "finding": "locate", "search": "locate", "seek": "locate",
+            "where": "locate", "locate": "locate",
+            "cook": "cook", "cooking": "cook", "roast": "cook",
+            "roasting": "cook", "prepare": "cook", "preparing": "cook",
+            "collect": "collect", "collection": "collect", "gather": "collect",
+            "treat": "treat", "treatment": "treat", "purify": "treat",
+            "filter": "filter", "boil": "boil", "boiling": "boil",
+            "build": "build", "extinguish": "extinguish",
+            "navigate": "navigate", "repair": "repair",
+        ]
+        let hazards: Set<String> = [
+            "bleeding", "chemical", "cold", "contaminated", "contamination",
+            "darkness", "dehydration", "fire", "frostbite", "heat",
+            "hypothermia", "injury", "lost", "poison", "shivering",
+            "soaked", "storm", "unsafe",
+        ]
+        var operations: Set<String> = []
+        for token in raw {
+            if let canonical = operationAliases[token] { operations.insert(canonical) }
+        }
+        let meaningful = meaningfulSurvivalTerms(in: value)
+        let hazardConcepts = raw.intersection(hazards)
+        let subjects = meaningful
+            .subtracting(Set(operationAliases.keys))
+            .subtracting(Set(operationAliases.values))
+            .subtracting(hazards)
+        return RetrievalProfile(
+            subjectConcepts: subjects,
+            requestedOperations: operations,
+            hazardConcepts: hazardConcepts
+        )
     }
 
     private static func meaningfulOverlapCount(

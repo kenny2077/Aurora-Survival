@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify and sign the pinned Aurora Expert model/projector/embedder package."""
+"""Verify and sign the pinned Aurora Expert model/projector package."""
 
 from __future__ import annotations
 
@@ -23,10 +23,6 @@ PROJECTOR_BYTES = 445_053_216
 PROJECTOR_SHA256 = "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82"
 MODEL_IDENTITY = f"{REPOSITORY}@{REVISION}"
 PROJECTOR_IDENTITY = f"{MODEL_IDENTITY}:mmproj-Q8_0"
-EMBEDDING_REPOSITORY = "BAAI/bge-small-en-v1.5"
-EMBEDDING_REVISION = "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
-EMBEDDING_IDENTITY = f"{EMBEDDING_REPOSITORY}@{EMBEDDING_REVISION}"
-EMBEDDING_FILENAME = "bge-small-en-v1.5-Q8_0.gguf"
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
@@ -54,14 +50,9 @@ def build(args: argparse.Namespace) -> None:
 
     model = args.model.resolve()
     projector = args.projector.resolve()
-    embedding = args.embedding.resolve()
     output = args.output.resolve()
     verify(model, MODEL_BYTES, MODEL_SHA256)
     verify(projector, PROJECTOR_BYTES, PROJECTOR_SHA256)
-    if not embedding.is_file() or embedding.name != EMBEDDING_FILENAME:
-        raise ValueError("the pinned BGE Q8_0 artifact is missing or misnamed")
-    embedding_bytes = embedding.stat().st_size
-    embedding_sha256 = sha256(embedding)
     validate_memory_profile_args(args)
     if output.exists():
         raise FileExistsError(f"output already exists: {output}")
@@ -71,15 +62,12 @@ def build(args: argparse.Namespace) -> None:
         staging = pathlib.Path(temp)
         model_out = staging / "weights" / MODEL_FILENAME
         projector_out = staging / "weights" / PROJECTOR_FILENAME
-        embedding_out = staging / "weights" / EMBEDDING_FILENAME
         model_out.parent.mkdir(parents=True)
         shutil.copyfile(model, model_out)
         shutil.copyfile(projector, projector_out)
-        shutil.copyfile(embedding, embedding_out)
         artifacts = [
             {"path": f"weights/{MODEL_FILENAME}", "byteCount": MODEL_BYTES, "sha256": MODEL_SHA256},
             {"path": f"weights/{PROJECTOR_FILENAME}", "byteCount": PROJECTOR_BYTES, "sha256": PROJECTOR_SHA256},
-            {"path": f"weights/{EMBEDDING_FILENAME}", "byteCount": embedding_bytes, "sha256": embedding_sha256},
         ]
         metadata = {
             "chat_template": "embedded",
@@ -100,16 +88,8 @@ def build(args: argparse.Namespace) -> None:
             "vision_projector_identity": PROJECTOR_IDENTITY,
             "vision_projector_path": f"weights/{PROJECTOR_FILENAME}",
             "vision_projector_quantization": "Q8_0",
-            "embedding_model_identity": EMBEDDING_IDENTITY,
-            "embedding_model_path": f"weights/{EMBEDDING_FILENAME}",
-            "embedding_quantization": "Q8_0",
-            "embedding_dimensions": "384",
-            "embedding_context_tokens": "512",
-            "embedding_artifact_bytes": str(embedding_bytes),
-            "embedding_artifact_sha256": embedding_sha256,
-            "vector_index_schema": "3",
-            "knowledge_index_schema": "3",
-            "corpus_package_schema": "3",
+            "required_rag_package_id": "knowledge.shared-survival-rag-v3",
+            "required_rag_contract": "3",
         }
         if args.memory_profile_status == "retained":
             metadata.update({
@@ -160,7 +140,6 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=pathlib.Path, required=True)
     parser.add_argument("--projector", type=pathlib.Path, required=True)
-    parser.add_argument("--embedding", type=pathlib.Path, required=True)
     parser.add_argument(
         "--memory-profile-status",
         choices=("calibration", "retained"),
@@ -175,7 +154,7 @@ def parse_args() -> argparse.Namespace:
         ROOT / "Resources" / "Packages" / "development_trusted_package_keys.json"
     ))
     parser.add_argument("--key-id", required=True)
-    parser.add_argument("--version", default="0.4.0-dev")
+    parser.add_argument("--version", default="0.5.0-dev")
     parser.add_argument("--created-at", required=True)
     parser.add_argument("--minimum-app-version", default="1.0.0")
     return parser.parse_args()

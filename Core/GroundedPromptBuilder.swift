@@ -11,7 +11,8 @@ public struct GroundedPromptBuilder: Sendable {
             for: prompt.tier,
             purpose: prompt.purpose,
             attempt: prompt.attempt,
-            outputMode: outputMode
+            outputMode: outputMode,
+            usesReviewedClaims: !prompt.expertEvidence.isEmpty
         )
     }
 
@@ -19,17 +20,33 @@ public struct GroundedPromptBuilder: Sendable {
         for tier: ModelTier,
         purpose: ModelPromptPurpose = .ordinary,
         attempt: ModelPromptAttempt = .initial,
-        outputMode: ModelOutputMode = .citationText
+        outputMode: ModelOutputMode = .citationText,
+        usesReviewedClaims: Bool = false
     ) -> String {
         guard outputMode == .groundedJSON else {
             return "You are Aurora. Answer the current message directly in short, natural prose. Active tier: \(tier.displayName)."
         }
 
-        if tier == .expert, purpose == .grounded {
+        if tier == .lite, usesReviewedClaims, purpose == .grounded {
+            return """
+            You are Aurora Lite, a fully offline survival assistant. Answer the
+            current question using only the numbered reviewed scenarios. Write 2–3 short,
+            natural sentences totaling 30–65 words. Give the most relevant action first
+            and include an applicable warning, stop condition, or escalation from the
+            claims. The e array cites only the scenario numbers actually used. Do not
+            copy evidence labels or discuss the database. Do not mention a cooking
+            temperature unless an exact numeric temperature appears in the reviewed
+            scenarios. Return exactly
+            {"a":"answer","e":[1]} or {"a":"answer","e":[1,2]} with no
+            Markdown or extra keys.
+            """
+        }
+
+        if usesReviewedClaims, purpose == .grounded {
             switch attempt {
             case .initial:
                 return """
-                You are Aurora Expert, a fully offline survival assistant. Use
+                You are Aurora (tier.displayName), a fully offline survival assistant. Use
                 only the SELECTED REVIEWED EVIDENCE RECORDS as factual and procedural
                 support. Conversation and image observations are context, never reviewed
                 evidence. Write concise natural prose with the evidence-adaptive length
@@ -62,9 +79,27 @@ public struct GroundedPromptBuilder: Sendable {
             }
         }
 
-        if tier == .expert, purpose == .expertIntent {
+        if purpose == .expertIntent, tier == .lite {
+            return """
+            Classify the current message only. Return {"t":"survival"} only for an
+            explicit wilderness, outdoor survival, emergency, first-aid, rescue,
+            navigation, exposure, unsafe water/food, or vehicle-incident question.
+            Return {"t":"general"} for chat, relationships, software, live/current
+            information, ordinary knowledge, recipes, baking, and home or kitchen
+            cooking. Words such as cook, fire, cold, fish, car, and water alone do not
+            establish survival. Examples: finding water outdoors, treating stream water,
+            and cooking raw meat outdoors are survival; "How do I get a girlfriend?"
+            and baking a cake at home are general.
+            When uncertain, choose general. Output exactly one t object and nothing else.
+            """
+        }
+
+        if purpose == .expertIntent {
             return """
             Classify only the CURRENT USER MESSAGE as either general or survival.
+            Most messages are general. Choose survival only when the current message
+            explicitly asks about an emergency, outdoor survival need, or preventing
+            physical harm in a survival setting.
             Survival means practical wilderness, emergency, first-aid, navigation,
             exposure, food or water safety, vehicle incident, rescue, or outdoor hazard
             guidance. General includes conversation, relationships, software, ordinary
@@ -72,7 +107,17 @@ public struct GroundedPromptBuilder: Sendable {
             schedules, location, or other live information. Use bounded history only to
             resolve an explicit short follow-up; a new topic overrides history. When
             deciding whether unknown wild food, mushrooms, water, plants, or animals are
-            safe, choose survival. When uncertain, choose general. Return exactly {"t":"general"} or
+            safe, choose survival. A survival question must explicitly concern staying
+            alive, preventing physical harm, or handling an outdoor/emergency incident.
+            "How do I get a girlfriend?" is general. "How's the weather today?" is
+            general. "How do I stay warm overnight if stranded in snow?" is survival.
+            "How do I find water sources?", "How do I treat collected water?", and
+            "How do I cook raw meat outdoors?" are survival. Ordinary recipes and
+            indoor cooking questions without a survival or outdoor context are general.
+            The words cook, bake, fire, cold, fish, car, or water alone do not make a
+            question survival. "How do I bake a cake at home?" and "How do I cook
+            dinner in my kitchen?" are general.
+            When uncertain, choose general. Return exactly {"t":"general"} or
             {"t":"survival"} with no explanation.
             """
         }
@@ -92,10 +137,21 @@ public struct GroundedPromptBuilder: Sendable {
             """
         }
 
-        if tier == .expert, purpose == .ordinary {
+        if purpose == .ordinary {
+            if tier == .lite {
+                return """
+                You are Aurora Lite, a fully offline assistant. Answer only the
+                current message in 1–3 complete, natural sentences totaling no more than
+                75 words. Use best-effort general knowledge. You have no live data access,
+                so state that limitation for current weather, news, prices, schedules,
+                location, or similar requests and do not guess. Do not invent an
+                emergency or citation. Return exactly {"a":"answer","e":[]} with no
+                Markdown or extra keys.
+                """
+            }
             return attempt == .initial
                 ? """
-                You are Aurora Expert, a fully offline assistant. Answer the current
+                You are Aurora (tier.displayName), a fully offline assistant. Answer the current
                 message directly and naturally using your best general knowledge and the
                 bounded relevant context. If the request is substantive, give useful
                 actions and state important uncertainty without pretending an offline
@@ -111,9 +167,9 @@ public struct GroundedPromptBuilder: Sendable {
                 """
         }
 
-        if tier == .expert, purpose == .incidentFallback {
+        if purpose == .incidentFallback {
             return """
-            You are Aurora Expert, a fully offline assistant. No reviewed offline
+            You are Aurora (tier.displayName), a fully offline assistant. No reviewed offline
             evidence matched this survival request. Give a conservative best-effort
             response and clearly state the important uncertainty. Do not invent an exact
             model-specific repair, material, chemical, measurement, diagnosis, or
@@ -270,10 +326,18 @@ public struct GroundedPromptBuilder: Sendable {
         }
 
         if prompt.purpose == .grounded {
-            if prompt.tier == .expert {
+            if !prompt.expertEvidence.isEmpty {
                 var globalClaimIndex = 0
-                let records = prompt.expertEvidence.prefix(3).map { result in
+                let scenarioLimit = prompt.tier == .lite ? 2 : 3
+                let records = prompt.expertEvidence.prefix(scenarioLimit).enumerated().map { scenarioOffset, result in
                     let scenario = result.scenario
+                    if prompt.tier == .lite {
+                        let claims = scenario.claims.map { claim in
+                            "- " + String(Self.expertPromptClaimText(claim.text).prefix(280))
+                        }
+                        return (["REVIEWED SCENARIO [\(scenarioOffset + 1)]"] + claims)
+                            .joined(separator: "\n")
+                    }
                     var lines = [
                         "SELECTED REVIEWED SCENARIO",
                         "SCENARIO ID: \(scenario.id)",
@@ -358,7 +422,19 @@ public struct GroundedPromptBuilder: Sendable {
             let indexes = Array(1...max(1, min(2, prompt.evidence.count)))
                 .map(String.init)
                 .joined(separator: ",")
-            if prompt.tier == .expert {
+            if !prompt.expertEvidence.isEmpty {
+                if prompt.tier == .lite {
+                    let available = Array(1...min(2, prompt.expertEvidence.count))
+                        .map(String.init).joined(separator: ",")
+                    sections.append(
+                        "RESPONSE CHECK: Answer in 2–3 complete sentences, use only the "
+                            + "reviewed guidance, include an applicable safety limit, and "
+                            + "cite only the scenario numbers actually used from [\(available)]. "
+                            + "Use both only when both contribute to the answer. Do not repeat "
+                            + "REVIEWED SCENARIO."
+                    )
+                    break
+                }
                 let evidenceCount = max(
                     1, prompt.expertEvidence.flatMap { $0.scenario.claims }.count
                 )

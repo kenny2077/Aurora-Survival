@@ -6,7 +6,10 @@ import UIKit
 @MainActor
 final class AppModel: ObservableObject {
     @Published var modelSelection: ModelSelectionPreference = .automatic {
-        didSet { modelPreferenceStore.save(modelSelection) }
+        didSet {
+            modelPreferenceStore.save(modelSelection)
+            if activeTier != .expert { removeAttachment() }
+        }
     }
     @Published var messages: [ChatMessage] = []
     @Published var isThinking = false
@@ -63,6 +66,7 @@ final class AppModel: ObservableObject {
     private var debugExpertRuntimeDescriptor: ActiveModelRuntimeDescriptor?
     private var debugCalibrationExpertDescriptor: ActiveModelRuntimeDescriptor?
     private var debugExpertLanguageModel: LlamaLanguageModel?
+    private var debugLiteLanguageModel: LlamaLanguageModel?
     @Published private(set) var debugPhysicalStatus: PhysicalBenchmarkStatus?
     private var debugPhysicalStopRequested = false
 #endif
@@ -413,9 +417,32 @@ final class AppModel: ObservableObject {
     func startDownload(_ entry: PackageCatalogEntry) {
         guard downloadTasks[entry.id] == nil else { return }
         downloadTasks[entry.id] = Task { [weak self] in
-            await self?.download(entry)
+            await self?.downloadWithDependencies(entry)
             self?.downloadTasks[entry.id] = nil
         }
+    }
+
+    private func downloadWithDependencies(_ entry: PackageCatalogEntry) async {
+        if let requiredID = entry.metadata["required_rag_package_id"],
+           let requiredVersion = entry.metadata["required_rag_package_version"] {
+            guard let dependency = catalogEntries.first(where: {
+                $0.packageID == requiredID && $0.version == requiredVersion
+            }) else {
+                packageDownloadStates[entry.id] = .failed(
+                    "The required shared survival RAG package is missing from this catalog."
+                )
+                return
+            }
+            await download(dependency)
+            guard case .installed(active: true) = packageDownloadStates[dependency.id]
+            else {
+                packageDownloadStates[entry.id] = .failed(
+                    "Install the shared survival RAG package before this model."
+                )
+                return
+            }
+        }
+        await download(entry)
     }
 
     func cancelDownload(_ entry: PackageCatalogEntry) {
@@ -455,6 +482,9 @@ final class AppModel: ObservableObject {
         ).resolve(
             activePacks: snapshot
         )
+        let sharedRAGRuntime = SharedRAGRuntimeResolver().resolve(
+            activePacks: snapshot
+        )
 #if DEBUG
         debugExpertRuntimeDescriptor = modelRuntime.descriptors[.expert]
         debugCalibrationExpertDescriptor = modelRuntime.calibrationExpertDescriptor
@@ -464,11 +494,38 @@ final class AppModel: ObservableObject {
         var expertContextAssembler: ExpertContextAssembler?
         var expertEmbeddingProvider: (any ExpertQueryEmbeddingProvider)?
         var expertVectorIndex: ShardedExpertVectorIndex?
+        var sharedRAGKnowledge: SurvivalKnowledgeStore?
         var runtimeBindingIssueCount = modelRuntime.issues.count
+            + sharedRAGRuntime.issues.count
 #if canImport(AuroraLlamaRuntime)
+        if let descriptor = sharedRAGRuntime.descriptor {
+            do {
+                sharedRAGKnowledge = try SurvivalKnowledgeStore(
+                    databaseURL: descriptor.databaseURL
+                )
+                expertEmbeddingProvider = LlamaBGEEmbeddingProvider(
+                    modelURL: descriptor.embeddingModelURL,
+                    threadCount: 4
+                )
+                let index = ShardedExpertVectorIndex(
+                    directories: descriptor.vectorDirectories,
+                    expectedEmbeddingIdentity: SharedRAGRuntimeResolver
+                        .embeddingIdentity
+                )
+                guard !index.isEmpty, index.issues.isEmpty else {
+                    throw ModelFailure.invalidOutput
+                }
+                expertVectorIndex = index
+            } catch {
+                sharedRAGKnowledge = nil
+                expertEmbeddingProvider = nil
+                expertVectorIndex = nil
+                runtimeBindingIssueCount += 1
+            }
+        }
         if let descriptor = modelRuntime.descriptors[.lite] {
             do {
-                runtimeModels[.lite] = try LlamaLanguageModel(
+                let liteModel = try LlamaLanguageModel(
                     tier: .lite,
                     configuration: .lite(
                         modelURL: descriptor.modelURL,
@@ -482,6 +539,10 @@ final class AppModel: ObservableObject {
                         await self?.recordDebugModelCompletion(completion)
                     }
                 )
+                runtimeModels[.lite] = liteModel
+#if DEBUG
+                debugLiteLanguageModel = liteModel
+#endif
                 availableModelTiers.insert(.lite)
             } catch {
                 runtimeBindingIssueCount += 1
@@ -489,7 +550,6 @@ final class AppModel: ObservableObject {
         }
         if let descriptor = modelRuntime.descriptors[.expert],
            let projectorURL = descriptor.visionProjectorURL,
-           let embeddingURL = descriptor.embeddingModelURL,
            let memoryProfile = descriptor.expertMemoryProfile {
             do {
                 let configuration = LlamaRuntimeConfiguration.expert(
@@ -517,39 +577,6 @@ final class AppModel: ObservableObject {
                 expertContextAssembler = ExpertContextAssembler(
                     memoryProfile: memoryProfile
                 )
-                expertEmbeddingProvider = LlamaBGEEmbeddingProvider(
-                    modelURL: embeddingURL,
-                    threadCount: 4
-                )
-                var vectorDirectories = snapshot.knowledge.compactMap {
-                    package -> URL? in
-                    let manifest = package.directory.appendingPathComponent(
-                        ShardedExpertVectorIndex.manifestFilename
-                    )
-                    return FileManager.default.fileExists(atPath: manifest.path)
-                        ? package.directory
-                        : nil
-                }
-                if let bundledRoot = Bundle.main.resourceURL?
-                    .appendingPathComponent("ExpertVectors", isDirectory: true),
-                   let children = try? FileManager.default.contentsOfDirectory(
-                    at: bundledRoot,
-                    includingPropertiesForKeys: nil
-                   ) {
-                    vectorDirectories.append(contentsOf: children.filter {
-                        FileManager.default.fileExists(
-                            atPath: $0.appendingPathComponent(
-                                ShardedExpertVectorIndex.manifestFilename
-                            ).path
-                        )
-                    })
-                }
-                let index = ShardedExpertVectorIndex(
-                    directories: vectorDirectories,
-                    expectedEmbeddingIdentity: ActiveModelRuntimeResolver
-                        .acceptedExpertEmbeddingIdentity
-                )
-                if !index.isEmpty { expertVectorIndex = index }
                 availableModelTiers.insert(.expert)
             } catch {
                 runtimeBindingIssueCount += 1
@@ -559,7 +586,7 @@ final class AppModel: ObservableObject {
         let boundRuntimeModels = runtimeModels
         let runtime = IncidentRuntimeBootstrap(
             bundledArticles: articles,
-            survivalKnowledge: survivalKnowledge,
+            survivalKnowledge: sharedRAGKnowledge ?? survivalKnowledge,
             modelProvider: { tier in
                 boundRuntimeModels[tier]
                     ?? UnavailableLanguageModel(tier: tier)
@@ -790,6 +817,10 @@ final class AppModel: ObservableObject {
             await runDebugTierComparisonPhysicalInference()
             return
         }
+        if mode == "lite-shared-rag" {
+            await runDebugLiteSharedRAGInference()
+            return
+        }
         if mode.hasPrefix("expert-") {
             await runDebugExpertPhysicalInference(mode: mode)
             return
@@ -993,6 +1024,258 @@ final class AppModel: ObservableObject {
     }
 
 #if DEBUG
+    private func runDebugLiteSharedRAGInference() async {
+        UIApplication.shared.isIdleTimerDisabled = true
+        defer { UIApplication.shared.isIdleTimerDisabled = false }
+
+        do {
+            try await installDebugStagedSharedRAGIfPresent()
+        } catch {
+            return
+        }
+
+        if ProcessInfo.processInfo.environment[
+            "TRAILGUARD_DEBUG_UPDATE_SHARED_RAG"
+        ] == "1" {
+            incidentModeEnabled = false
+            await refreshCatalog()
+            if let sharedRAG = catalogEntries.first(where: {
+                $0.packageID == "knowledge.shared-survival-rag-v3"
+                    && $0.version == "3.2.0-dev"
+            }) {
+                await download(sharedRAG)
+            }
+            incidentModeEnabled = true
+        }
+
+        let prompts = [
+            ("water-find-how", "How to find water sources."),
+            ("water-find-where", "Where can I find a water source?"),
+            ("food-raw-meat", "How to cook raw meat outdoors."),
+            ("water-boil", "How long should I boil collected stream water before drinking it?"),
+            ("general-cooking", "How do I bake a cake at home?"),
+        ]
+        let reportRoot = appDataRoot.appendingPathComponent(
+            "Reports/lite-ranking-claim-quality",
+            isDirectory: true
+        )
+        let reportURL = reportRoot.appendingPathComponent("physical-ab-report.json")
+        try? FileManager.default.createDirectory(
+            at: reportRoot,
+            withIntermediateDirectories: true
+        )
+        try? FileManager.default.removeItem(at: reportURL)
+        var results: [[String: Any]] = []
+        var terminalFailure: String?
+        let initial = deviceProfiler.snapshot()
+
+        func writeReport(completed: Bool) {
+            let current = deviceProfiler.snapshot()
+            let report: [String: Any] = [
+                "schema_version": 2,
+                "mode": "lite-ranking-claim-quality-ab",
+                "completed": completed,
+                "device_model": UIDevice.current.model,
+                "active_pack_status": activePackStatus,
+                "initial_thermal": initial.thermalCondition.rawValue,
+                "final_thermal": current.thermalCondition.rawValue,
+                "terminal_failure": terminalFailure ?? NSNull(),
+                "cases": results,
+            ]
+            guard JSONSerialization.isValidJSONObject(report),
+                  let data = try? JSONSerialization.data(
+                    withJSONObject: report,
+                    options: [.prettyPrinted, .sortedKeys]
+                  ) else { return }
+            try? data.write(to: reportURL, options: [.atomic])
+        }
+
+        modelSelection = .lite
+        guard activeTier == .lite else {
+            terminalFailure = "lite_unavailable"
+            writeReport(completed: true)
+            return
+        }
+        let variants: [(String, IncidentAssistant.LiteEvidencePolicy)] = [
+            ("baseline", .legacyTopOne),
+            ("upgrade", .operationAwareTopTwo),
+        ]
+        for (variant, policy) in variants {
+            await assistant.setDebugLiteEvidencePolicy(policy)
+        for (id, prompt) in prompts {
+            let before = deviceProfiler.snapshot()
+            if before.thermalCondition == .serious
+                || before.thermalCondition == .critical {
+                terminalFailure = "thermal_\(before.thermalCondition.rawValue)"
+                break
+            }
+            messages.removeAll()
+            removeAttachment()
+            lastModelMetrics = nil
+            lastModelThermalCondition = nil
+            debugModelCompletions.removeAll()
+            debugExpertStreamDeltas.removeAll()
+            debugExpertFirstVisibleTextAt = nil
+            let sampler = ExpertProcessMemorySampler()
+            let samplingTask = Task.detached {
+                await sampler.sampleUntilStopped()
+            }
+            let started = Date()
+            await send(prompt)
+            let elapsed = Int(Date().timeIntervalSince(started) * 1_000)
+            await sampler.stop()
+            await samplingTask.value
+            let memory = await sampler.result()
+            let after = deviceProfiler.snapshot()
+            let answer = messages.last { $0.role == .assistant }?.answer
+            let text = answer?.text ?? ""
+            let lower = text.lowercased()
+            var failures: [String] = []
+            if text.isEmpty { failures.append("empty_answer") }
+            if GroundedResponseCodec.containsControlLeakage(text) {
+                failures.append("control_leakage")
+            }
+            if lower.contains("\"a\":") || lower.contains("\"e\":") {
+                failures.append("raw_json")
+            }
+            if debugModelCompletions.count != 2 {
+                failures.append("wrong_model_call_count")
+            }
+            if answer?.visionWasUsed == true {
+                failures.append("vision_used")
+            }
+            if !text.isEmpty,
+               text.last.map({ !".!?…".contains($0) }) == true {
+                failures.append("truncated_ending")
+            }
+            if lower.contains("returned an unreadable draft") {
+                failures.append("model_format_error")
+            }
+            switch id {
+            case "general-cooking":
+                if answer?.expertIntent != .generalQuestion {
+                    failures.append("wrong_intent")
+                }
+                if answer?.expertRetrievalStatus != nil
+                    || answer?.sourceCards.isEmpty == false {
+                    failures.append("unexpected_grounding")
+                }
+            case "water-find-how", "water-find-where", "food-raw-meat", "water-boil":
+                if answer?.expertIntent != .survivalQuestion
+                    || answer?.expertRetrievalStatus != .acceptedEvidence {
+                    failures.append("expected_grounding_missing")
+                }
+                if answer?.evidenceIDs.isEmpty != false
+                    || answer?.sourceCards.isEmpty != false {
+                    failures.append("grounded_metadata_missing")
+                }
+            default:
+                break
+            }
+            let diagnostics = await assistant.expertRetrievalDiagnostics()
+            var result: [String: Any] = [
+                "variant": variant,
+                "id": id,
+                "prompt": prompt,
+                "answer": text,
+                "intent": answer?.expertIntent?.rawValue ?? "none",
+                "retrieval_status": answer?.expertRetrievalStatus?.rawValue ?? "none",
+                "selected_scenario_ids": answer?.evidenceIDs ?? [],
+                "source_card_ids": answer?.sourceCards.map(\.id) ?? [],
+                "sources": answer?.sourceCards.map { $0.title } ?? [],
+                "notices": answer?.notices ?? [],
+                "stream_deltas": debugExpertStreamDeltas,
+                "stream_delta_count": debugExpertStreamDeltas.count,
+                "raw_model_completions": debugModelCompletions,
+                "intent_call_count": 1,
+                "answer_call_count": 1,
+                "model_completion_count": debugModelCompletions.count,
+                "repair_count": 0,
+                "elapsed_milliseconds": elapsed,
+                "peak_physical_footprint_bytes": memory.peakPhysicalFootprintBytes,
+                "minimum_available_memory_bytes": memory.minimumAvailableMemoryBytes,
+                "pre_inference_thermal": before.thermalCondition.rawValue,
+                "post_inference_thermal": after.thermalCondition.rawValue,
+                "failures": failures,
+                "retrieval_candidates": diagnostics.map { candidate in
+                    [
+                        "scenario_id": candidate.scenario.id,
+                        "candidate_pool_position": candidate.candidatePoolPosition
+                            .map { $0 as Any } ?? NSNull(),
+                        "eligible": candidate.isEligible,
+                        "eligibility_reason": candidate.eligibilityReason,
+                        "operation_concepts": candidate.operationConcepts,
+                        "subject_concepts": candidate.subjectConcepts,
+                        "hazard_concepts": candidate.hazardConcepts,
+                        "operation_alignment": candidate.operationAlignment,
+                        "subject_alignment": candidate.subjectAlignment,
+                        "covered_query_concepts": candidate.coveredQueryConcepts,
+                        "prompt_token_contribution": candidate.promptTokenContribution,
+                        "claim_quality_status": candidate.claimQualityStatus,
+                        "selection_reason": candidate.finalSelectionReason
+                            .map { $0 as Any } ?? NSNull(),
+                    ] as [String: Any]
+                },
+            ]
+            if let firstVisible = debugExpertFirstVisibleTextAt {
+                result["first_visible_milliseconds"] = Int(
+                    firstVisible.timeIntervalSince(started) * 1_000
+                )
+            }
+            if let metrics = lastModelMetrics {
+                result["first_token_milliseconds"] = metrics.firstTokenMilliseconds
+                result["generation_milliseconds"] = metrics.totalMilliseconds
+                result["generated_tokens"] = metrics.generatedTokenCount
+                result["tokens_per_second"] = metrics.tokensPerSecond
+            }
+            results.append(result)
+            writeReport(completed: false)
+            try? await Task.sleep(nanoseconds: 10_000_000_000)
+        }
+        if variant == "baseline", terminalFailure == nil {
+            try? await Task.sleep(nanoseconds: 45_000_000_000)
+        }
+        }
+        await assistant.setDebugLiteEvidencePolicy(.operationAwareTopTwo)
+        await debugLiteLanguageModel?.unload()
+        writeReport(completed: true)
+    }
+
+    private func installDebugStagedSharedRAGIfPresent() async throws {
+        guard ProcessInfo.processInfo.environment[
+            "TRAILGUARD_DEBUG_INSTALL_STAGED_RAG"
+        ] == "1" else { return }
+        let packages = appDataRoot.appendingPathComponent(
+            "packages", isDirectory: true
+        )
+        let manifest = packages.appendingPathComponent("manifest.json")
+        guard FileManager.default.fileExists(atPath: manifest.path) else { return }
+        let staging = appDataRoot.appendingPathComponent(
+            "debug-shared-rag-staging-3.2.0-dev", isDirectory: true
+        )
+        if FileManager.default.fileExists(atPath: staging.path) {
+            try FileManager.default.removeItem(at: staging)
+        }
+        try FileManager.default.createDirectory(
+            at: staging, withIntermediateDirectories: true
+        )
+        for name in ["envelope.json", "manifest.json", "knowledge", "vectors", "weights"] {
+            try FileManager.default.moveItem(
+                at: packages.appendingPathComponent(name),
+                to: staging.appendingPathComponent(name)
+            )
+        }
+        let envelope = try JSONDecoder().decode(
+            SignedPackageEnvelope.self,
+            from: Data(contentsOf: staging.appendingPathComponent("envelope.json"))
+        )
+        _ = try await packageInstaller.install(
+            envelope: envelope,
+            stagedDirectory: staging
+        )
+        await refreshActivePacks()
+    }
+
     private func runDebugTierComparisonPhysicalInference() async {
         UIApplication.shared.isIdleTimerDisabled = true
         UIDevice.current.isBatteryMonitoringEnabled = true
@@ -2157,7 +2440,7 @@ final class AppModel: ObservableObject {
             answer: nil,
             thumbnailData: attachment?.thumbnailData
         ))
-        let streamingMessageID = activeTier == .expert ? UUID() : nil
+        let streamingMessageID: UUID? = UUID()
         if let streamingMessageID {
             messages.append(ChatMessage(
                 id: streamingMessageID,
@@ -2211,16 +2494,16 @@ final class AppModel: ObservableObject {
                 }
             }
         }
-        let expertTokenSink: (@Sendable (String) -> Void)?
+        let answerTokenSink: (@Sendable (String) -> Void)?
         if let continuation {
-            expertTokenSink = { delta in continuation.yield(delta) }
+            answerTokenSink = { delta in continuation.yield(delta) }
         } else {
-            expertTokenSink = nil
+            answerTokenSink = nil
         }
         let answer = await assistant.answer(
             request: request,
             device: deviceProfiler.snapshot(),
-            expertTokenSink: expertTokenSink
+            tokenSink: answerTokenSink
         )
         continuation?.finish()
         await streamConsumer?.value

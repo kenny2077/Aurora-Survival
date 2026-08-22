@@ -468,9 +468,43 @@ def main() -> None:
     )
     args.root.mkdir(parents=True, exist_ok=True)
 
-    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.1.0"
+    lite_source = args.root / "model-lite-gemma3-1b-q4km-dev@1.1.0"
+    if not (lite_source / "envelope.json").is_file():
+        raise FileNotFoundError(f"Verified Lite package is missing: {lite_source}")
+    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.2.0"
     if not (model / "envelope.json").is_file():
-        raise FileNotFoundError(f"Verified Lite package is missing: {model}")
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "tools" / "prepare_lite_model_package.py"),
+                "--source",
+                str(lite_source),
+                "--output",
+                str(model),
+                "--private-key",
+                str(args.private_key),
+                "--created-at",
+                CREATED_AT,
+            ],
+            check=True,
+        )
+    shared_rag = args.root / "knowledge-shared-rag-v3@3.2.0-dev"
+    if not (shared_rag / "envelope.json").is_file():
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "tools" / "prepare_shared_rag_package.py"),
+                "--embedding",
+                str(ROOT / ".trailguard" / "expert-models" / "bge-small-en-v1.5-Q8_0.gguf"),
+                "--output",
+                str(shared_rag),
+                "--private-key",
+                str(args.private_key),
+                "--created-at",
+                CREATED_AT,
+            ],
+            check=True,
+        )
     knowledge = prepare_knowledge_packages(args.root, args.private_key)
     twin = prepare_map_package(
         args.root,
@@ -499,9 +533,18 @@ def main() -> None:
 
     entries = [
         catalog_entry(
+            shared_rag,
+            "Shared corpus-v3, BGE embeddings, and signed vector shards for Lite and Expert.",
+            {"shared_rag_contract": "3"},
+        ),
+        catalog_entry(
             model,
             "Gemma 3 1B Lite release candidate for the iPhone 13 physical bake-off.",
-            {"model_tier": "lite"},
+            {
+                "model_tier": "lite",
+                "required_rag_package_id": "knowledge.shared-survival-rag-v3",
+                "required_rag_package_version": "3.2.0-dev",
+            },
         )
     ]
     summaries = {
@@ -538,7 +581,7 @@ def main() -> None:
     host_root = args.root / "product-host"
     host_root.mkdir(exist_ok=True)
     shutil.copy2(args.root / "catalog.json", host_root / "catalog.json")
-    for package in [model, *knowledge, twin, minnesota]:
+    for package in [shared_rag, model, *knowledge, twin, minnesota]:
         link = host_root / package.name
         if link.is_symlink():
             if link.resolve() != package.resolve():

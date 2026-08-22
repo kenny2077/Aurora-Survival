@@ -9,6 +9,11 @@ private struct ExpertRenderedResult {
 }
 
 public actor IncidentAssistant {
+    enum LiteEvidencePolicy: Sendable {
+        case legacyTopOne
+        case operationAwareTopTwo
+    }
+
     private let retrieval: any EvidenceRetrieving
     private let expertEvidenceRetrieval: any ExpertEvidenceRetrieving
     private let router: ModelRouter
@@ -22,6 +27,7 @@ public actor IncidentAssistant {
     private let expertVectorIndex: ShardedExpertVectorIndex?
     private var expertSuspended = false
     private var lastExpertRetrievalCandidates: [RetrievedEvidenceScenario] = []
+    private var liteEvidencePolicy: LiteEvidencePolicy = .operationAwareTopTwo
 
     public init(
         articles: [KnowledgeArticle],
@@ -54,10 +60,16 @@ public actor IncidentAssistant {
         self.expertVectorIndex = expertVectorIndex
     }
 
+#if DEBUG
+    func setDebugLiteEvidencePolicy(_ policy: LiteEvidencePolicy) {
+        liteEvidencePolicy = policy
+    }
+#endif
+
     public func answer(
         request: ChatRequest,
         device: DeviceSnapshot,
-        expertTokenSink: (@Sendable (String) -> Void)? = nil
+        tokenSink: (@Sendable (String) -> Void)? = nil
     ) async -> AssistantAnswer? {
         lastExpertRetrievalCandidates = []
         let decision = router.route(
@@ -119,112 +131,29 @@ public actor IncidentAssistant {
                 request: expertRequest,
                 assembly: expertAssembly,
                 notices: notices,
-                tokenSink: expertTokenSink
+                tokenSink: tokenSink
             )
         }
-
-        let retrievalQuery = Self.retrievalQuery(for: request, tier: .lite)
-        let retrieved = retrieval.search(
-            query: retrievalQuery,
-            domain: request.domain,
-            limit: 2
-        )
-        let matched = retrieved.filter {
-            Self.matchesReviewedIntent(
-                query: retrievalQuery,
-                article: $0.article
-            )
+        if request.hasImage {
+            notices.append("Lite is text-only; the attached image was not sent to the model.")
         }
-        let purpose: ModelPromptPurpose = if !matched.isEmpty {
-            .grounded
-        } else if Self.isIncidentIntakeQuery(retrievalQuery) {
-            .incidentIntake
-        } else {
-            .incidentFallback
-        }
-        // Lite remains frozen: retrieval may inspect two candidates, but only
-        // the strongest accepted lesson reaches its stateless model prompt.
-        let candidates = Array(matched.prefix(1))
-        let model = modelProvider(selectedTier)
-        let prompt = ModelPrompt(
+        let liteRequest = ChatRequest(
             question: request.question,
-            evidence: purpose == .grounded ? candidates : [],
+            domain: request.domain,
+            preferredTier: .lite,
+            hasImage: false,
             imageData: nil,
-            imageObservations: request.imageObservations,
-            tier: selectedTier,
-            permitsVisionReasoning: false,
-            conversationHistory: [],
-            expertContextProfile: nil,
-            maximumImageDimension: nil,
-            purpose: purpose
+            imageObservations: [],
+            conversationHistory: []
         )
-
-        if request.hasImage && selectedTier != .expert {
-            notices.append(
-                request.imageObservations.isEmpty
-                    ? "The selected tier cannot inspect the photo. Describe what you see."
-                    : "The selected tier used on-device OCR text only."
-            )
-        }
-
-        let generated: String
-        do {
-            generated = try await model.generate(prompt: prompt)
-        } catch {
-            if selectedTier == .expert { expertSuspended = true }
-            return Self.runtimeFailure(tier: selectedTier, notices: notices)
-        }
-
-        if let result = try? Self.decode(
-            generated,
-            outputMode: model.outputMode,
-            purpose: prompt.purpose,
-            question: prompt.question,
-            tier: selectedTier,
-            evidence: prompt.evidence,
-            codec: responseCodec,
-            citationPolicy: citationPolicy
-        ) {
-            return Self.answer(
-                from: result,
-                tier: selectedTier,
-                usedVision: false,
-                notices: notices
-            )
-        }
-
-        let repaired: String
-        do {
-            repaired = try await model.generate(prompt: prompt.repairing())
-        } catch {
-            if selectedTier == .expert { expertSuspended = true }
-            return Self.runtimeFailure(tier: selectedTier, notices: notices)
-        }
-        guard let result = try? Self.decode(
-            repaired,
-            outputMode: model.outputMode,
-            purpose: prompt.purpose,
-            question: prompt.question,
-            tier: selectedTier,
-            evidence: prompt.evidence,
-            codec: responseCodec,
-            citationPolicy: citationPolicy
-        ) else {
-            return AssistantAnswer(
-                text: "\(selectedTier.displayName) couldn’t form a complete answer. Try rephrasing your question.",
-                severity: .caution,
-                sources: [],
-                manualReferences: [],
-                modelTier: selectedTier,
-                visionWasUsed: false,
-                notices: notices
-            )
-        }
-        return Self.answer(
-            from: result,
-            tier: selectedTier,
-            usedVision: false,
-            notices: notices
+        return await answerSharedText(
+            request: liteRequest,
+            tier: .lite,
+            conversationHistory: [],
+            contextProfile: nil,
+            maximumImageDimension: nil,
+            notices: notices,
+            tokenSink: tokenSink
         )
     }
 
@@ -253,26 +182,47 @@ public actor IncidentAssistant {
                 tokenSink: tokenSink
             )
         }
-        let imageObservations = Array(request.imageObservations.prefix(4))
+        return await answerSharedText(
+            request: request,
+            tier: .expert,
+            conversationHistory: assembly.conversationHistory,
+            contextProfile: assembly.profile,
+            maximumImageDimension: assembly.maximumImageDimension,
+            notices: notices,
+            tokenSink: tokenSink
+        )
+    }
 
+    private func answerSharedText(
+        request: ChatRequest,
+        tier: ModelTier,
+        conversationHistory: [ConversationTurn],
+        contextProfile: ExpertContextProfile?,
+        maximumImageDimension: Int?,
+        notices initialNotices: [String],
+        tokenSink: (@Sendable (String) -> Void)?
+    ) async -> AssistantAnswer {
+        let model = modelProvider(tier)
+        var notices = initialNotices
+        let imageObservations: [String] = []
         let retrievalRequest = ChatRequest(
             question: request.question,
             domain: request.domain,
-            preferredTier: .expert,
-            hasImage: request.hasImage,
+            preferredTier: tier,
+            hasImage: false,
             imageData: nil,
             imageObservations: imageObservations,
-            conversationHistory: assembly.conversationHistory
+            conversationHistory: conversationHistory
         )
         let intentPrompt = ModelPrompt(
             question: request.question,
             evidence: [],
             imageObservations: imageObservations,
-            tier: .expert,
+            tier: tier,
             permitsVisionReasoning: false,
-            conversationHistory: assembly.conversationHistory,
-            expertContextProfile: assembly.profile,
-            maximumImageDimension: assembly.maximumImageDimension,
+            conversationHistory: conversationHistory,
+            expertContextProfile: contextProfile,
+            maximumImageDimension: maximumImageDimension,
             purpose: .expertIntent
         )
         let modelIntent: ExpertTurnIntent
@@ -283,15 +233,20 @@ public actor IncidentAssistant {
         } catch {
             modelIntent = .generalQuestion
         }
-        let intent: ExpertTurnIntent = Self.hasDefiniteSurvivalIntent(request.question)
+        let intent = modelIntent == .generalQuestion
+            && Self.hasDefiniteSurvivalIntent(request.question)
             ? .survivalQuestion
             : modelIntent
         let shouldSearch = intent == .survivalQuestion
         let semanticQuery = shouldSearch
-            ? Self.retrievalQuery(for: retrievalRequest, tier: .expert)
+            ? Self.retrievalQuery(for: retrievalRequest, tier: tier)
             : ""
         var denseResults: [ExpertVectorSearchResult] = []
-        if shouldSearch, let expertEmbeddingProvider, let expertVectorIndex {
+        var sharedRAGAvailable = expertEmbeddingProvider != nil
+            && expertVectorIndex != nil
+            && expertVectorIndex?.issues.isEmpty == true
+        if shouldSearch, sharedRAGAvailable,
+           let expertEmbeddingProvider, let expertVectorIndex {
             do {
                 var denseByID: [String: ExpertVectorSearchResult] = [:]
                 for query in Self.semanticRetrievalQueries(
@@ -311,48 +266,46 @@ public actor IncidentAssistant {
                     if $0.score == $1.score { return $0.record.id < $1.record.id }
                     return $0.score > $1.score
                 }
-                if !expertVectorIndex.issues.isEmpty {
-                    notices.append(
-                        "One or more signed vector shards were quarantined; retrieval used the remaining index."
-                    )
-                }
             } catch {
-                notices.append(
-                    "Dense retrieval was unavailable; Expert used the reviewed lexical index."
-                )
+                sharedRAGAvailable = false
             }
-        } else if shouldSearch {
+        }
+        if shouldSearch, !sharedRAGAvailable {
             notices.append(
-                "Dense retrieval was unavailable; Expert used the reviewed lexical index."
+                "Shared semantic retrieval is unavailable; this answer uses no offline grounding."
             )
         }
-        let candidates = shouldSearch
+        let candidates = shouldSearch && sharedRAGAvailable
             ? ExpertScenarioRetrievalEngine(
                 retrieval: expertEvidenceRetrieval
               ).search(
                 request: retrievalRequest,
                 denseResults: denseResults,
-                limit: 16
+                limit: tier == .lite && liteEvidencePolicy == .operationAwareTopTwo
+                    ? 10 : 16,
+                rankingMode: tier == .lite
+                    && liteEvidencePolicy == .operationAwareTopTwo
+                    ? .liteOperationAware : .standard
               )
             : []
-        lastExpertRetrievalCandidates = candidates
-        var selectedExpertEvidence: [RetrievedEvidenceScenario] = []
-        var selectedClaimCount = 0
-        let orderedCandidates = Self.prioritizeScenarioCoverage(
+        let selectedExpertEvidence = Self.selectEligibleEvidence(
             candidates,
-            for: request.question
+            tier: tier,
+            question: request.question,
+            litePolicy: liteEvidencePolicy
         )
-        for candidate in orderedCandidates where candidate.isEligible {
-            guard selectedExpertEvidence.count < 3 else { break }
-            let prioritized = Self.prioritizeClaims(
-                in: candidate,
-                for: request.question
-            )
-            let proposedClaimCount = selectedClaimCount
-                + prioritized.scenario.claims.count
-            guard proposedClaimCount <= 30 else { continue }
-            selectedExpertEvidence.append(prioritized)
-            selectedClaimCount = proposedClaimCount
+        let selectedByID = Dictionary(uniqueKeysWithValues:
+            selectedExpertEvidence.map { ($0.scenario.id, $0) }
+        )
+        lastExpertRetrievalCandidates = candidates.map { candidate in
+            guard let selected = selectedByID[candidate.scenario.id] else {
+                var rejected = candidate
+                if candidate.isEligible {
+                    rejected.finalSelectionReason = "eligible_below_selection_cutoff"
+                }
+                return rejected
+            }
+            return selected
         }
         let selectedEvidence = selectedExpertEvidence.map(Self.passage(for:))
         let finalPurpose: ModelPromptPurpose = if !selectedExpertEvidence.isEmpty {
@@ -373,11 +326,11 @@ public actor IncidentAssistant {
             question: request.question,
             evidence: selectedEvidence,
             imageObservations: imageObservations,
-            tier: .expert,
+            tier: tier,
             permitsVisionReasoning: false,
-            conversationHistory: assembly.conversationHistory,
-            expertContextProfile: assembly.profile,
-            maximumImageDimension: assembly.maximumImageDimension,
+            conversationHistory: conversationHistory,
+            expertContextProfile: contextProfile,
+            maximumImageDimension: maximumImageDimension,
             expertEvidence: selectedExpertEvidence,
             purpose: finalPurpose
         )
@@ -395,10 +348,10 @@ public actor IncidentAssistant {
             )
         } catch {
             #if DEBUG
-            print("Aurora Expert answer generation failed: \(error)")
+            print("Aurora \(tier.displayName) answer generation failed: \(error)")
             #endif
-            expertSuspended = true
-            return Self.runtimeFailure(tier: .expert, notices: notices)
+            if tier == .expert { expertSuspended = true }
+            return Self.runtimeFailure(tier: tier, notices: notices)
         }
         for delta in streamDecoder.finish() {
             tokenSink?(delta)
@@ -409,9 +362,10 @@ public actor IncidentAssistant {
         } else {
             let streamedText = streamDecoder.text
             guard !streamedText.isEmpty,
+                  streamedText.last.map({ ".!?…".contains($0) }) == true,
                   !GroundedResponseCodec.containsControlLeakage(streamedText)
             else {
-                return Self.modelFormatFailure(tier: .expert, notices: notices)
+                return Self.modelFormatFailure(tier: tier, notices: notices)
             }
             notices.append(
                 "The source envelope was incomplete, so this answer is shown without source attribution."
@@ -426,7 +380,7 @@ public actor IncidentAssistant {
         }
         return Self.answer(
             from: chosen,
-            tier: .expert,
+            tier: tier,
             usedVision: false,
             notices: notices,
             intent: intent,
@@ -487,6 +441,7 @@ public actor IncidentAssistant {
         } else {
             let streamedText = streamDecoder.text
             guard !streamedText.isEmpty,
+                  streamedText.last.map({ ".!?…".contains($0) }) == true,
                   !GroundedResponseCodec.containsControlLeakage(streamedText)
             else {
                 return Self.visionFailure(
@@ -522,7 +477,8 @@ public actor IncidentAssistant {
             "campfire", "compass bearing", "deep cut", "hypothermia",
             "life threatening bleeding", "marked trail", "snow shelter",
             "solar still", "stop method", "stream water", "survival device",
-            "tarp shelter",
+            "tarp shelter", "find water source", "find a water source", "water sources",
+            "raw meat outdoors", "boil collected stream water",
             "unknown mushroom", "will not stop bleeding",
         ]
         if definitePhrases.contains(where: normalized.contains) { return true }
@@ -568,6 +524,47 @@ public actor IncidentAssistant {
         return prioritized
     }
 
+    static func selectEligibleEvidence(
+        _ candidates: [RetrievedEvidenceScenario],
+        tier: ModelTier,
+        question: String,
+        litePolicy: LiteEvidencePolicy = .operationAwareTopTwo
+    ) -> [RetrievedEvidenceScenario] {
+        var selected: [RetrievedEvidenceScenario] = []
+        var selectedClaimCount = 0
+        let scenarioLimit = tier == .lite
+            ? (litePolicy == .legacyTopOne ? 1 : 2)
+            : 3
+        let ordered = tier == .lite
+            ? candidates
+            : prioritizeScenarioCoverage(candidates, for: question)
+        for candidate in ordered
+        where candidate.isEligible {
+            guard selected.count < scenarioLimit else { break }
+            let claimLimit = tier == .lite
+                ? litePolicy == .legacyTopOne
+                    ? 4 : (selected.isEmpty ? 6 : 4)
+                : 8
+            let prioritized = prioritizeClaims(
+                in: candidate,
+                for: question,
+                maximumClaims: claimLimit
+            )
+            let proposedClaimCount = selectedClaimCount
+                + prioritized.scenario.claims.count
+            guard proposedClaimCount <= 30 else { continue }
+            var diagnosed = prioritized
+            diagnosed.finalSelectionReason = "eligible_rank_\(selected.count + 1)"
+            diagnosed.promptTokenContribution = max(
+                1,
+                diagnosed.scenario.claims.reduce(0) { $0 + $1.text.count } / 4
+            )
+            selected.append(diagnosed)
+            selectedClaimCount = proposedClaimCount
+        }
+        return selected
+    }
+
     static func semanticRetrievalQueries(
         base: String,
         question: String
@@ -591,7 +588,8 @@ public actor IncidentAssistant {
 
     static func prioritizeClaims(
         in candidate: RetrievedEvidenceScenario,
-        for question: String
+        for question: String,
+        maximumClaims: Int = 8
     ) -> RetrievedEvidenceScenario {
         func normalizedTerms(_ value: String) -> Set<String> {
             Set(RetrievalEngine.tokens(in: value).map {
@@ -609,28 +607,52 @@ public actor IncidentAssistant {
             }
             return overlap * 10 + safety
         }
-        let ranked = candidate.scenario.claims.enumerated().sorted { left, right in
+        let standalone = candidate.scenario.claims.enumerated().filter {
+            Self.isStandaloneClaim($0.element)
+        }
+        let pool = standalone.isEmpty
+            ? Array(candidate.scenario.claims.enumerated())
+            : standalone
+        func priority(_ claim: ReviewedClaim) -> Int {
+            let directlyRelevant = score(claim) >= 10
+            return switch claim.kind {
+            case .action where directlyRelevant: 0
+            case .contraindication, .stopCondition, .escalation: 1
+            case .allowedNumber where directlyRelevant: 2
+            case .applicability: 3
+            case .action: 4
+            case .allowedNumber: 5
+            case .rationale: 6
+            }
+        }
+        let ranked = pool.sorted { left, right in
+            let leftPriority = priority(left.element)
+            let rightPriority = priority(right.element)
+            if leftPriority != rightPriority { return leftPriority < rightPriority }
             let leftScore = score(left.element)
             let rightScore = score(right.element)
             return leftScore == rightScore
                 ? left.offset < right.offset
                 : leftScore > rightScore
         }
-        let selected = Array(ranked.prefix(8))
-        let claims = selected.sorted { left, right in
-            let leftRelevantAction = left.element.kind == .action
-                && score(left.element) >= 10
-            let rightRelevantAction = right.element.kind == .action
-                && score(right.element) >= 10
-            if leftRelevantAction != rightRelevantAction {
-                return leftRelevantAction
-            }
-            let leftScore = score(left.element)
-            let rightScore = score(right.element)
-            return leftScore == rightScore
-                ? left.offset < right.offset
-                : leftScore > rightScore
-        }.map(\.element)
+        var selectedOffsets: Set<Int> = []
+        if let applicableAction = ranked.first(where: {
+            $0.element.kind == .action || $0.element.kind == .applicability
+        }) {
+            selectedOffsets.insert(applicableAction.offset)
+        }
+        if let warning = ranked.first(where: {
+            [.contraindication, .stopCondition, .escalation]
+                .contains($0.element.kind)
+        }) {
+            selectedOffsets.insert(warning.offset)
+        }
+        for item in ranked where selectedOffsets.count < maximumClaims {
+            selectedOffsets.insert(item.offset)
+        }
+        let claims = ranked.filter { selectedOffsets.contains($0.offset) }
+            .prefix(maximumClaims)
+            .map(\.element)
         let scenario = candidate.scenario
         let reordered = EvidenceScenarioRecord(
             id: scenario.id,
@@ -664,8 +686,33 @@ public actor IncidentAssistant {
             appliedBoosts: candidate.appliedBoosts,
             isEligible: candidate.isEligible,
             eligibilityReason: candidate.eligibilityReason,
-            exclusionReasons: candidate.exclusionReasons
+            exclusionReasons: candidate.exclusionReasons,
+            subjectConcepts: candidate.subjectConcepts,
+            operationConcepts: candidate.operationConcepts,
+            hazardConcepts: candidate.hazardConcepts,
+            subjectAlignment: candidate.subjectAlignment,
+            operationAlignment: candidate.operationAlignment,
+            coveredQueryConcepts: candidate.coveredQueryConcepts,
+            candidatePoolPosition: candidate.candidatePoolPosition,
+            promptTokenContribution: candidate.promptTokenContribution,
+            claimQualityStatus: claims.allSatisfy(Self.isStandaloneClaim)
+                ? "standalone" : "contains_fragment",
+            finalSelectionReason: candidate.finalSelectionReason
         )
+    }
+
+    static func isStandaloneClaim(_ claim: ReviewedClaim) -> Bool {
+        let text = claim.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.count >= 12,
+              !text.hasSuffix(":"),
+              !text.hasSuffix(";"),
+              !text.hasPrefix("- ") else { return false }
+        let orphanLabels: Set<String> = [
+            "best for", "contains", "keep", "look for", "materials",
+            "methods", "possible indicators", "priority", "procedure",
+            "provides", "search", "separate", "use",
+        ]
+        return !orphanLabels.contains(text.lowercased())
     }
 
     public func expertRetrievalDiagnostics() -> [RetrievedEvidenceScenario] {
@@ -685,6 +732,56 @@ public actor IncidentAssistant {
         prompt: ModelPrompt
     ) throws -> ExpertRenderedResult {
         if prompt.purpose == .grounded {
+            if prompt.tier == .lite {
+                let result = try Self.decode(
+                    generated,
+                    outputMode: .groundedJSON,
+                    purpose: prompt.purpose,
+                    question: prompt.question,
+                    tier: prompt.tier,
+                    evidence: prompt.evidence,
+                    codec: responseCodec,
+                    citationPolicy: citationPolicy
+                )
+                let citedPassageIDs = Set(result.passages.map { $0.article.id })
+                let usedScenarios = zip(prompt.evidence, prompt.expertEvidence)
+                    .compactMap { passage, scenario in
+                        citedPassageIDs.contains(passage.article.id)
+                            ? scenario : nil
+                    }
+                guard !usedScenarios.isEmpty else {
+                    throw ModelFailure.invalidOutput
+                }
+                let sourceIDs = Array(Set(
+                    usedScenarios.flatMap { scenario in
+                        scenario.scenario.claims.flatMap { $0.sourceIDs }
+                    }
+                )).sorted()
+                var locatorBySourceID: [String: String] = [:]
+                for claim in usedScenarios.flatMap({ $0.scenario.claims }) {
+                    for (offset, sourceID) in claim.sourceIDs.enumerated()
+                    where claim.sourceLocators.indices.contains(offset) {
+                        locatorBySourceID[sourceID] = claim.sourceLocators[offset]
+                    }
+                }
+                let sourceCards = expertEvidenceRetrieval.expertSources(ids: sourceIDs)
+                    .map { source in
+                        Self.sourceCard(
+                            from: source,
+                            locator: locatorBySourceID[source.id]
+                        )
+                    }
+                return ExpertRenderedResult(
+                    text: result.text,
+                    passages: result.passages,
+                    sentenceCitations: [AnswerSentenceCitation(
+                        sentence: 1,
+                        sourceIDs: sourceIDs
+                    )],
+                    sourceCards: sourceCards,
+                    evidenceIDs: usedScenarios.map { $0.scenario.id }.sorted()
+                )
+            }
             let answer = try ExpertAttributedAnswerCodec().decodeAndValidate(
                 generated,
                 evidenceCount: EvidenceBundle(
@@ -741,7 +838,7 @@ public actor IncidentAssistant {
             outputMode: .groundedJSON,
             purpose: prompt.purpose,
             question: prompt.question,
-            tier: .expert,
+            tier: prompt.tier,
             evidence: prompt.evidence,
             codec: responseCodec,
             citationPolicy: citationPolicy

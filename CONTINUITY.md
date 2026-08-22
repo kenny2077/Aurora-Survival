@@ -6,7 +6,7 @@ The project must always stay aligned with this thesis:
 
 Do not narrow the project into a toy demo.
 
-- Dataset: Versioned corpus-v3 `survival_knowledge.sqlite`, deterministically built from committed reviewed manifests and JSON. Lite remains exactly 10 chapters, 70 lessons, and 1,050 frozen passages. Expert contains 96 scenarios, 760 promoted claim records, 79 canonical Survival Manual 2026 chunks, and 21 isolated discovery chunks. Its signed vector shard contains 956 real records; 100,000 rows remains a separate measured capacity fixture.
+- Dataset: Versioned corpus-v3 `survival_knowledge.sqlite`, deterministically built from committed reviewed manifests and JSON. Lite remains exactly 10 chapters, 70 lessons, and 1,050 frozen passages. Expert contains 61 scenarios, 545 promoted claim records, and 79 canonical Survival Manual 2026 chunks. Its signed vector shard contains 922 real records; 100,000 rows remains a separate measured capacity fixture.
 - Baselines: Manual and Ask share `SurvivalKnowledgeStore`; every stateless Lite message queries the database using only the current question/domain/OCR. Specific normalized lesson matches receive at most two reviewed lessons; unmatched messages use model-only incident fallback with no Manual link. Ten generated Manual fallback cards survive database validation failure.
 - Metrics: Deterministic build/checksum/schema, frozen 200-query Lite recall, 700 generated Expert regression cases plus a separately authored frozen holdout, exact/legacy anchors, real-model prose/leakage sequences, local latency, offline behavior, accessibility, battery/memory/thermal, and physical-device acceptance.
 - Related Work: SQLite FTS5/BM25, llama.cpp on-device inference, CDC, Army ATP 3-50.21, NPS, Red Cross, NWS/NOAA, FEMA/Ready.gov, NHTSA, and MapLibre-compatible offline maps.
@@ -21,7 +21,7 @@ Code Architecture:
 
 Model contract:
 - Lite targets iPhone 13-class devices. Expert targets eligible high-memory hardware only after signed artifact/projector, runtime, thermal/power/storage/memory, and physical vision gates pass.
-- Lite is fully stateless at app, retrieval, and prompt boundaries; specific Manual matches use a 35–55-word grounded prompt, unmatched incidents use a 30–60-word incident fallback, greetings/no-incident messages use incident intake, malformed output receives one repair inference, runtime failures do not retry, and only grounded validated evidence indexes create Manual links.
+- Lite is fully stateless and text-only. Gemma performs one hidden two-intent call and one progressively streamed answer call with zero repair calls; a narrow high-precision survival guard corrects known small-model false-general decisions. Survival turns use the shared BGE/vector/FTS fusion, absolute gate, and cited source resolution, rerank ten candidates, and select at most two independently eligible scenarios with ten claims.
 - Expert is development-only: pinned Qwen3-VL 2B Q4_K_M plus Q8_0 projector and pinned BGE-small-en-v1.5 Q8_0 run through llama.cpp b9637. Deterministic signed 384-dimensional float16 shards support exact Metal search to 100,000 rows. Text-only turns use one hidden two-intent call, survival-only gated RAG, and one streamed answer. Newly attached photos bypass intent and RAG and receive one native streamed Qwen3-VL answer with no sources, Manual links, badges, repair, or fallback inference.
 - Exactly Lite and Expert remain customer-facing. Ask is unavailable without a usable model; Manual and Maps remain available. Chat has no SOS or Clear control.
 
@@ -30,20 +30,15 @@ Model contract:
 ## 2. Progress--Update after every meaningful session
 
 Milestones -- Three Facts only, no raw logs : compact if needed
-- The Expert composer Add control now offers system-camera capture or existing-photo selection before requesting permissions. Camera captures must save successfully to Photos before entering the bounded canonical attachment pipeline; cancellation, denial, restriction, and save failure preserve any prior attachment and retain no full-size capture.
-- Expert photo turns now forward the actual bounded image directly to Qwen3-VL before intent routing. The fixed hazard codec, deterministic visual policy, substituted retrieval intent, and visual-observation grammar were removed; successful photo answers carry only native model prose and `visionWasUsed=true`.
-- The focused connected-M2-iPad native-vision run passed 3/3 routing contracts at nominal thermal: one progressively streamed answer call per photo, zero intent/RAG/repair calls, and zero sources/Manual links/badges. Bow-drill and leaf-insect recognition were correct; muddy-water advice was safe-directional but overconfident about contamination certainty.
-- Signed Expert package `0.4.0-dev` uses corpus/database/vector/package contract v3 and bundles 956 real BGE records across 96 promoted scenarios. Survival Manual 2026 contributes 61 mapped scenarios (37 reused and 24 new), 579 claims, and 79 canonical chunks with zero unresolved conflicts; its original Markdown is preserved with SHA-256 `2bbef9d5ffe502c5cb87fcd23db5afa40315de15e47631b6eb78a6a8e8590cad`.
-- Production Expert has exactly two Qwen-resolved intents. General turns perform zero Survival RAG calls and show no sources; survival turns retain `acceptedEvidence` or `noRelevantEvidence`, retrieve from scenario/claim/chunk records, and receive one streamed answer completion with zero repair completions.
-- Survival Manual 2026 is canonical for overlapping development claims, while compatible prior authorities remain corroboration. Query-aligned claim pruning, conservative absolute eligibility, scenario-level fusion, and multi-hazard coverage prevent duplicate votes and irrelevant grounding; only model-cited accepted claims resolve source cards.
-- The final connected-M2-iPad 20-prompt run passed 20/20 routing and safety checks with one hidden intent call, one streamed answer call, zero repairs, zero leakage, zero false sources, nominal thermal, 6.143-second median latency, and one accepted 10.811-second latency outlier.
+- Lite and Expert now resolve one signed `knowledge.shared-survival-rag-v3` pack containing corpus-v3, pinned BGE-small-en-v1.5 Q8, and the rebuilt 922-record float16 index. Model packages carry only their inference artifacts plus the shared-pack dependency contract.
+- Lite now preserves task-bearing operations, reranks ten gated scenarios, selects up to two independently eligible scenarios, and sends at most ten coherent claims. The manifest-discovered reviewed-claim sidecar consolidates water-location, water-selection, and outdoor-cooking evidence; the compiler reports zero unresolved promoted fragments.
+- Focused iPhone 13 A/B diagnostics held peak footprint near 230–244 MB with at least 1.85 GB available and no jetsam or model-load failure. Repeated unpaced development reruns eventually reached serious thermal, so the Debug harness now paces cases. The user's manual menu test passed the current Lite answer quality; 23 focused Swift regressions and the iOS build pass.
 
 Critical Bugs / Software or Hardware or Network Issues -- Three logs maximum, compact if needed
 
 - M2 iPad 100k capacity gate remains 127.09 ms p95 embedding+search with 35,700,856 additional peak bytes and nominal thermal; the real production index is 956 records, not 100,000.
 - The first physical no-evidence case exposed an EV false match at cosine 0.6371. Strong/moderate gates were recalibrated to 0.68/0.58; three correct physical matches measured 0.6893–0.7865, and the final rerun rejected the false source. A conservative no-evidence prompt then removed its invented solvent repair and directed the user to identify the model/manufacturer.
-- Three clean-install repetitions, sustained/vision/interruption tests, oldest-eligible-device gates, and independent wilderness/medical/product/legal/licensing/accessibility approvals remain incomplete; Expert stays development-only.
-- The retained 10.2-second focused-answer target was exceeded once by 611 ms in the final 20-prompt run; generation quality was accepted for this development integration, but the strict release latency gate remains open.
+- The immutable iPhone 13 trace records the pre-correction quality failures: dating was routed as survival, water/STOP lost source metadata, and hypothermia was withheld for control leakage. `Reports/lite-shared-rag-streaming/ASSESSMENT.md` records the corrections; a post-correction model rerun was intentionally not added beyond the agreed five prompts.
 
 Reflect on current working direction is not worth continuing or have better ideas ?
 
@@ -53,9 +48,9 @@ Direct RAG is materially better than the planner flow and should continue. The n
 
 ## 3. Next Stage Implementation Plan--Update after every meaningful session
 
-- Focus 1: Run the frozen 160-case holdout through production BGE; the current 0.68/0.58 thresholds are supported by static coverage plus a four-case physical cosine spot check, not a release-scale dense calibration.
-- Focus 2: Expand the frozen two-intent calibration split to at least 80 survival positives and 80 separately authored hard negatives, then run three genuine clean-install repetitions plus broader native-vision, interruption, sustained-memory, and paced thermal sequences.
-- Focus 3: Establish equivalent latency/memory gates on the oldest Expert-eligible device and obtain product/legal plus independent wilderness/medical review before unlocking Expert.
+- Focus 1: If a formal release gate is needed later, run the paced Lite A/B comparison from nominal thermal state; it is not required for this completed manual-quality iteration.
+- Focus 2: Preserve the current reviewed evidence limits, including the absence of unsupported cooking temperatures.
+- Focus 3: Keep corpus/model expansion and broader regression work out of this completed Lite iteration.
 
 ---
 
@@ -69,12 +64,12 @@ Files:
 - `Resources/Knowledge/survival_knowledge.sqlite`: immutable runtime database.
 - `Resources/Knowledge/survival_fallback.json`: one emergency action card per chapter.
 - `Core/SurvivalKnowledge.swift`: unified Manual/Ask store and retrieval.
-- `Core/IncidentAssistant.swift`: stateless Lite behavior plus the dedicated one-call native photo path, two-intent text Expert routing, survival-only Direct-RAG, one streamed answer generation, and cited-source resolution.
+- `Core/IncidentAssistant.swift`: tier-neutral two-intent routing and Direct-RAG, stateless top-two Lite selection, bounded Expert history/three-scenario selection, and one streamed answer generation with cited-source resolution.
 - `Core/ExpertContext.swift`: Expert adaptive profiles, `ExpertTurnResolver`, bounded relevant history, scenario-level dense/lexical RRF, one-time boosts, and deterministic selection.
 - `Core/ExpertEvidence.swift`: Expert-only scenario, reviewed claim, numeric fact, evidence bundle, risk, and failure-taxonomy types.
 - `Core/ExpertSafety.swift`: sentence-attribution envelope, structural completeness and control-leakage checks, claim-aware support validation, and actionable repair errors.
 - `Core/ExpertVectorIndex.swift`: signed memory-mapped float16 shards, quarantine/filtering, deterministic bounded top-K, Metal exact scan, and Accelerate fallback.
-- `Core/ActiveModelRuntimeResolver.swift`: exact Lite/Expert runtime allowlists and paired-artifact validation.
+- `Core/ActiveModelRuntimeResolver.swift`: exact Lite/Expert runtime allowlists, shared-RAG dependency validation, and the signed shared corpus/BGE/vector descriptor.
 - `Core/GroundedPromptBuilder.swift`: compact purpose/attempt contracts with defensive Lite history removal.
 - `Core/GroundedResponseCodec.swift`: compact JSON, leakage, completion, and evidence validation.
 - `Runtime/AuroraLlamaRuntime/`: pinned llama.cpp bridge and ignored, verified two-slice mtmd XCFramework; explicit linker references prevent app dead-stripping.

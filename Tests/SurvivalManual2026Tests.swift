@@ -101,6 +101,10 @@ final class SurvivalManual2026Tests: XCTestCase {
             "How do I take and follow a compass bearing?",
             "Can I eat this unknown mushroom?",
             "How do I repair an unfamiliar survival-device model?",
+            "How to find water sources.",
+            "Where can I find a water source?",
+            "How to cook raw meat outdoors.",
+            "How long should I boil collected stream water before drinking it?",
         ]
         let general = [
             "How do I get a girlfriend?",
@@ -170,6 +174,179 @@ final class SurvivalManual2026Tests: XCTestCase {
             ).count,
             3
         )
+    }
+
+    func testLiteAndExpertUseSameOrderingWithDifferentScenarioCaps() throws {
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        let ids = [
+            "first-aid-cold-scenario",
+            "navigation-stop-mark-scenario",
+            "basics-first-night-scenario",
+        ]
+        let candidates = try ids.enumerated().map { index, id in
+            RetrievedEvidenceScenario(
+                scenario: try XCTUnwrap(store.expertScenario(id: id)),
+                score: Double(ids.count - index)
+            )
+        }
+        let question = "I am soaked, shivering, lost, and nearing darkness."
+        let lite = IncidentAssistant.selectEligibleEvidence(
+            candidates,
+            tier: .lite,
+            question: question
+        )
+        let expert = IncidentAssistant.selectEligibleEvidence(
+            candidates,
+            tier: .expert,
+            question: question
+        )
+
+        XCTAssertEqual(lite.count, 2)
+        XCTAssertEqual(lite.first?.scenario.id, expert.first?.scenario.id)
+        XCTAssertLessThanOrEqual(expert.count, 3)
+    }
+
+    func testLiteOperationAwareWaterAndCookingRanking() throws {
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        let engine = ExpertScenarioRetrievalEngine(retrieval: store)
+        let dense = [
+            ("water-locate-scenario", 0.79),
+            ("water-choose-source-scenario", 0.78),
+            ("food-cook-scenario", 0.77),
+        ].enumerated().map { offset, value in
+            ExpertVectorSearchResult(
+                record: ExpertVectorRecord(
+                    id: "lite-ranking-\(offset)",
+                    scenarioIDs: [value.0],
+                    kind: .scenario,
+                    authority: .promoted
+                ),
+                score: value.1,
+                shardID: "test"
+            )
+        }
+
+        for question in [
+            "How to find water sources.",
+            "Where can I find a water source?",
+        ] {
+            let ranked = engine.search(
+                request: ChatRequest(question: question, preferredTier: .lite),
+                denseResults: dense,
+                limit: 10,
+                rankingMode: .liteOperationAware
+            )
+            XCTAssertEqual(
+                Array(ranked.prefix(2).map(\.scenario.id)),
+                ["water-locate-scenario", "water-choose-source-scenario"]
+            )
+            XCTAssertEqual(ranked.first?.operationConcepts, ["locate"])
+            XCTAssertEqual(ranked.first?.candidatePoolPosition, 1)
+        }
+
+        let cooking = engine.search(
+            request: ChatRequest(
+                question: "How to cook raw meat outdoors.",
+                preferredTier: .lite
+            ),
+            denseResults: dense,
+            limit: 10,
+            rankingMode: .liteOperationAware
+        )
+        XCTAssertEqual(cooking.first?.scenario.id, "food-cook-scenario")
+        XCTAssertEqual(cooking.first?.operationConcepts, ["cook"])
+    }
+
+    func testReviewedSidecarLeavesNoPromotedClaimFragments() throws {
+        let reportURL = repositoryRoot().appendingPathComponent(
+            "Reports/survival-manual-2026/corpus-import-report.json"
+        )
+        let report = try JSONSerialization.jsonObject(
+            with: Data(contentsOf: reportURL)
+        ) as? [String: Any]
+        XCTAssertEqual(report?["reviewedClaimSidecarCount"] as? Int, 1)
+        XCTAssertEqual(
+            report?["unresolvedPromotedClaimFragmentCount"] as? Int,
+            0
+        )
+
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        for id in [
+            "water-locate-scenario", "water-choose-source-scenario",
+            "food-cook-scenario",
+        ] {
+            let scenario = try XCTUnwrap(store.expertScenario(id: id))
+            XCTAssertTrue(scenario.claims.allSatisfy {
+                IncidentAssistant.isStandaloneClaim($0)
+            })
+        }
+    }
+
+    func testLiteTopTwoClaimAndPromptBudgets() throws {
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        let candidates = try [
+            "water-locate-scenario", "water-choose-source-scenario",
+            "water-boil-scenario",
+        ].enumerated().map { offset, id in
+            RetrievedEvidenceScenario(
+                scenario: try XCTUnwrap(store.expertScenario(id: id)),
+                score: Double(10 - offset),
+                subjectAlignment: 1,
+                operationAlignment: offset == 0 ? 1 : 0,
+                coveredQueryConcepts: offset == 0 ? 2 : 1
+            )
+        }
+        let selected = IncidentAssistant.selectEligibleEvidence(
+            candidates,
+            tier: .lite,
+            question: "Where can I find a water source?"
+        )
+        XCTAssertEqual(
+            selected.map { $0.scenario.id },
+            ["water-locate-scenario", "water-choose-source-scenario"]
+        )
+        XCTAssertLessThanOrEqual(selected[0].scenario.claims.count, 6)
+        XCTAssertLessThanOrEqual(selected[1].scenario.claims.count, 4)
+        XCTAssertLessThanOrEqual(
+            selected.flatMap { $0.scenario.claims }.count,
+            10
+        )
+
+        let prompt = ModelPrompt(
+            question: "Where can I find a water source?",
+            evidence: selected.map { candidate in
+                RetrievedPassage(article: KnowledgeArticle(
+                    id: candidate.scenario.id,
+                    domain: .wilderness,
+                    title: candidate.scenario.title,
+                    summary: candidate.scenario.applicability,
+                    steps: candidate.scenario.claims.map { $0.text },
+                    warnings: candidate.scenario.safetyClaims.map { $0.text },
+                    keywords: [],
+                    source: SourceReference(
+                        id: "survival-manual-2026",
+                        title: "Survival Manual 2026",
+                        organization: "",
+                        revision: "2026-08-20"
+                    ),
+                    reviewed: true,
+                    manualReference: candidate.scenario.manualReference
+                ), score: candidate.score)
+            },
+            imageObservations: [],
+            tier: .lite,
+            permitsVisionReasoning: false,
+            expertEvidence: selected,
+            purpose: .grounded
+        )
+        let builder = GroundedPromptBuilder()
+        let rendered = builder.systemPrompt(
+            for: prompt,
+            outputMode: .groundedJSON
+        ) + builder.userPrompt(from: prompt, outputMode: .groundedJSON)
+        XCTAssertLessThanOrEqual((rendered.count + 2) / 3, 1_400)
+        XCTAssertTrue(rendered.contains("REVIEWED SCENARIO [1]"))
+        XCTAssertTrue(rendered.contains("REVIEWED SCENARIO [2]"))
     }
 
     private func decodeFixture<T: Decodable>() throws -> T {

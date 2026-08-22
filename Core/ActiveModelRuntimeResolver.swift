@@ -1,5 +1,169 @@
 import Foundation
 
+public enum SharedRAGRuntimeIssue: Equatable, Sendable {
+    case missingPackage
+    case duplicatePackage
+    case unsupportedContract(String)
+    case unsafeArtifact(String)
+    case missingArtifact(String)
+    case invalidDatabase(String)
+    case invalidVectorIndex(String)
+}
+
+public struct SharedRAGRuntimeDescriptor: Sendable {
+    public let packageID: String
+    public let corpusIdentity: String
+    public let databaseURL: URL
+    public let embeddingModelURL: URL
+    public let vectorDirectories: [URL]
+
+    public init(
+        packageID: String,
+        corpusIdentity: String,
+        databaseURL: URL,
+        embeddingModelURL: URL,
+        vectorDirectories: [URL]
+    ) {
+        self.packageID = packageID
+        self.corpusIdentity = corpusIdentity
+        self.databaseURL = databaseURL
+        self.embeddingModelURL = embeddingModelURL
+        self.vectorDirectories = vectorDirectories
+    }
+}
+
+public struct SharedRAGRuntimeResolution: Sendable {
+    public let descriptor: SharedRAGRuntimeDescriptor?
+    public let issues: [SharedRAGRuntimeIssue]
+}
+
+/// Resolves the single signed corpus-v3/BGE/vector package consumed by both
+/// text tiers. ActivePackRegistry has already verified every artifact hash;
+/// this layer additionally validates the cross-artifact identities.
+public struct SharedRAGRuntimeResolver: Sendable {
+    public static let contractVersion = "3"
+    public static let embeddingIdentity =
+        "BAAI/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    public static let embeddingSHA256 =
+        "cb33d693ed112580cd18269561b356d3348a790ef8c13b0f08c17a2373acc232"
+    public static let embeddingByteCount: Int64 = 36_688_064
+
+    public init() {}
+
+    public func resolve(
+        activePacks: ActivePackSnapshot
+    ) -> SharedRAGRuntimeResolution {
+        let packages = activePacks.knowledge.filter {
+            $0.manifest.metadata["shared_rag_contract"] == Self.contractVersion
+        }
+        guard !packages.isEmpty else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.missingPackage]
+            )
+        }
+        guard packages.count == 1, let package = packages.first else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.duplicatePackage]
+            )
+        }
+        let metadata = package.manifest.metadata
+        guard metadata["embedding_model_identity"] == Self.embeddingIdentity,
+              metadata["embedding_quantization"] == "Q8_0",
+              metadata["embedding_dimensions"] == "384",
+              metadata["vector_index_schema"] == "3",
+              metadata["knowledge_index_schema"] == "3",
+              let corpusIdentity = metadata["corpus_identity"],
+              !corpusIdentity.isEmpty,
+              let databasePath = metadata["knowledge_database_path"],
+              let embeddingPath = metadata["embedding_model_path"],
+              let vectorRootPath = metadata["vector_root_path"]
+        else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.unsupportedContract(package.manifest.packageID)]
+            )
+        }
+        guard let databaseURL = artifactURL(databasePath, package: package),
+              let embeddingURL = artifactURL(embeddingPath, package: package),
+              let vectorRoot = artifactURL(vectorRootPath, package: package)
+        else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.unsafeArtifact(package.manifest.packageID)]
+            )
+        }
+        guard FileManager.default.fileExists(atPath: databaseURL.path),
+              FileManager.default.fileExists(atPath: embeddingURL.path),
+              FileManager.default.fileExists(atPath: vectorRoot.path),
+              package.manifest.artifacts.contains(where: {
+                  $0.path == embeddingPath
+                    && $0.byteCount == Self.embeddingByteCount
+                    && $0.sha256 == Self.embeddingSHA256
+              })
+        else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.missingArtifact(package.manifest.packageID)]
+            )
+        }
+        guard (try? SurvivalKnowledgeStore(databaseURL: databaseURL)) != nil else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.invalidDatabase(package.manifest.packageID)]
+            )
+        }
+        let vectorDirectories = ((try? FileManager.default.contentsOfDirectory(
+            at: vectorRoot,
+            includingPropertiesForKeys: nil
+        )) ?? []).filter {
+            FileManager.default.fileExists(atPath: $0.appendingPathComponent(
+                ShardedExpertVectorIndex.manifestFilename
+            ).path)
+        }
+        let index = ShardedExpertVectorIndex(
+            directories: vectorDirectories,
+            expectedEmbeddingIdentity: Self.embeddingIdentity
+        )
+        guard !index.isEmpty, index.issues.isEmpty,
+              index.corpusIdentities == [corpusIdentity]
+        else {
+            return SharedRAGRuntimeResolution(
+                descriptor: nil,
+                issues: [.invalidVectorIndex(package.manifest.packageID)]
+            )
+        }
+        return SharedRAGRuntimeResolution(
+            descriptor: SharedRAGRuntimeDescriptor(
+                packageID: package.manifest.packageID,
+                corpusIdentity: corpusIdentity,
+                databaseURL: databaseURL,
+                embeddingModelURL: embeddingURL,
+                vectorDirectories: vectorDirectories
+            ),
+            issues: []
+        )
+    }
+
+    private func artifactURL(
+        _ path: String,
+        package: ResolvedActivePackage
+    ) -> URL? {
+        guard !path.isEmpty, !path.hasPrefix("/"), !path.contains(".."),
+              package.manifest.artifacts.contains(where: {
+                  $0.path == path || $0.path.hasPrefix(path + "/")
+              })
+        else { return nil }
+        let root = package.directory.standardizedFileURL
+        let result = root.appendingPathComponent(path).standardizedFileURL
+        guard result.path == root.path
+                || result.path.hasPrefix(root.path + "/")
+        else { return nil }
+        return result
+    }
+}
+
 public enum ActiveModelRuntimeIssue: Equatable, Sendable {
     case invalidTier(packageID: String)
     case unsupportedTier(packageID: String, tier: ModelTier)
@@ -202,7 +366,11 @@ public struct ActiveModelRuntimeResolver: Sendable {
               metadata["context_tokens"]
                 == String(LlamaRuntimeConfiguration.liteContextTokens),
               metadata["maximum_output_tokens"]
-                == String(LlamaRuntimeConfiguration.liteMaximumOutputTokens)
+                == String(LlamaRuntimeConfiguration.liteMaximumOutputTokens),
+              metadata["required_rag_package_id"]
+                == "knowledge.shared-survival-rag-v3",
+              metadata["required_rag_contract"]
+                == SharedRAGRuntimeResolver.contractVersion
         else {
             issues.append(.unsupportedConfiguration(packageID: packageID))
             return nil
@@ -244,6 +412,10 @@ public struct ActiveModelRuntimeResolver: Sendable {
               metadata["chat_template"] == "embedded",
               metadata["context_tokens"] == "8192",
               metadata["maximum_output_tokens"] == "256",
+              metadata["required_rag_package_id"]
+                == "knowledge.shared-survival-rag-v3",
+              metadata["required_rag_contract"]
+                == SharedRAGRuntimeResolver.contractVersion,
               let profileStatus = ExpertMemoryProfileStatus(
                 rawValue: metadata["memory_profile_status"] ?? ""
               )
@@ -276,43 +448,6 @@ public struct ActiveModelRuntimeResolver: Sendable {
             package: package,
             unsafeIssue: .unsafeProjectorPath(packageID: packageID),
             missingIssue: .projectorFileMissing(packageID: packageID),
-            issues: &issues
-        ) else { return nil }
-
-        guard let embeddingPath = metadata["embedding_model_path"],
-              !embeddingPath.isEmpty else {
-            issues.append(.missingEmbeddingModelPath(packageID: packageID))
-            return nil
-        }
-        guard let embeddingArtifact = package.manifest.artifacts.first(where: {
-            $0.path == embeddingPath
-        }) else {
-            issues.append(.unverifiedEmbeddingModelPath(packageID: packageID))
-            return nil
-        }
-        guard metadata["embedding_model_identity"]
-                == Self.acceptedExpertEmbeddingIdentity,
-              metadata["embedding_quantization"] == "Q8_0",
-              metadata["embedding_dimensions"]
-                == String(Self.acceptedExpertEmbeddingDimensions),
-              metadata["embedding_context_tokens"]
-                == String(Self.acceptedExpertEmbeddingContextTokens),
-              metadata["embedding_artifact_bytes"]
-                == String(embeddingArtifact.byteCount),
-              metadata["embedding_artifact_sha256"]
-                == embeddingArtifact.sha256,
-              metadata["vector_index_schema"] == "3",
-              metadata["knowledge_index_schema"] == "3",
-              metadata["corpus_package_schema"] == "3"
-        else {
-            issues.append(.unsupportedConfiguration(packageID: packageID))
-            return nil
-        }
-        guard let embeddingURL = safeExistingArtifact(
-            path: embeddingPath,
-            package: package,
-            unsafeIssue: .unsafeEmbeddingModelPath(packageID: packageID),
-            missingIssue: .embeddingModelFileMissing(packageID: packageID),
             issues: &issues
         ) else { return nil }
 
@@ -353,7 +488,7 @@ public struct ActiveModelRuntimeResolver: Sendable {
             tier: .expert,
             modelURL: modelURL,
             visionProjectorURL: projectorURL,
-            embeddingModelURL: embeddingURL,
+            embeddingModelURL: nil,
             contextTokens: ExpertContextProfile.full.contextTokens,
             maximumOutputTokens: ExpertContextAssembler.outputTokenReserve,
             expertMemoryProfile: memoryProfile,

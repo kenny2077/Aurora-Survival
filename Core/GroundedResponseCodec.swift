@@ -343,7 +343,7 @@ public struct GroundedResponseCodec: Sendable {
     static func hasExplicitSafetyLimit(_ answer: String) -> Bool {
         let lowercased = answer.lowercased()
         let signals = [
-            "avoid", "caution", "danger", "do not", "don't", "emergency",
+            "avoid", "caution", "cautious", "danger", "do not", "don't", "emergency",
             "hazard", "never", "risk", "stop", "threat", "unsafe", "warning",
         ]
         return signals.contains(where: lowercased.contains)

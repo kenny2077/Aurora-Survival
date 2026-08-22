@@ -249,8 +249,10 @@ public actor LlamaLanguageModel: LocalLanguageModel {
                 imageData: prompt.permitsVisionReasoning ? prompt.imageData : nil,
                 maximumOutputTokens: activeConfiguration.maximumOutputTokens,
                 evidenceCount: prompt.purpose == .grounded
-                    ? prompt.tier == .expert
-                        ? prompt.expertEvidence.flatMap { $0.scenario.claims }.count
+                    ? !prompt.expertEvidence.isEmpty
+                        ? prompt.tier == .lite
+                            ? prompt.expertEvidence.count
+                            : prompt.expertEvidence.flatMap { $0.scenario.claims }.count
                         : prompt.evidence.count
                     : 0,
                 grammarMode: grammarMode,

@@ -159,7 +159,8 @@ struct ChatView: View {
 
     private var composer: some View {
         VStack(spacing: AuroraDesign.Space.xs) {
-            if let attachment = model.draftImageAttachment {
+            if model.canAttachPhoto,
+               let attachment = model.draftImageAttachment {
                 HStack(spacing: AuroraDesign.Space.sm) {
                     attachmentPreview(attachment)
                     VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
@@ -185,7 +186,9 @@ struct ChatView: View {
                 .padding(.horizontal, AuroraDesign.Space.xs)
             }
 
-            attachmentOperationFeedback
+            if model.canAttachPhoto {
+                attachmentOperationFeedback
+            }
 
             HStack(alignment: .bottom, spacing: AuroraDesign.Space.xs) {
                 if model.canAttachPhoto {

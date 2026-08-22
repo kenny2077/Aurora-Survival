@@ -16,6 +16,7 @@
   "canonicalPriority": 100,
   "provenanceDisclosureCode": "ai_assisted_developer_reviewed",
   "sourceFilename": "source.md",
+  "reviewedClaimsFilename": "reviewed-claims.json",
   "sourceSHA256": "2bbef9d5ffe502c5cb87fcd23db5afa40315de15e47631b6eb78a6a8e8590cad",
   "promotionPolicy": "development_human_approved",
   "scenarioMappings": {

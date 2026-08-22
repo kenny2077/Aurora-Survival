@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "completed": false,
+  "device": {
+    "name": "Kenny’s iPhone",
+    "model": "iPhone 13",
+    "hardware_identifier": "iPhone14,5",
+    "coredevice_state": "connected"
+  },
+  "build": {
+    "configuration": "Debug",
+    "installation_succeeded": true,
+    "bundle_identifier": "com.example.Aurora"
+  },
+  "blocker": {
+    "stage": "application_launch",
+    "domain": "com.apple.dt.CoreDeviceError",
+    "code": 10002,
+    "reason": "The development profile has not been explicitly trusted by the user on this iPhone. iOS denied launch before the benchmark could start."
+  },
+  "prompt_count_run": 0,
+  "cases": [],
+  "claim": "No physical answer-quality, latency, memory, throughput, or thermal result is claimed."
+}

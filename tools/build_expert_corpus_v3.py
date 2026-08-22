@@ -62,6 +62,7 @@ class SourceDocument:
     folder: pathlib.Path
     manifest: dict[str, Any]
     source: str
+    reviewed_claims: dict[str, Any]
 
 
 @dataclass
@@ -147,7 +148,18 @@ def discover_sources(root: pathlib.Path) -> list[SourceDocument]:
         actual_hash = sha256_bytes(source_bytes)
         if actual_hash != manifest["sourceSHA256"]:
             raise CorpusError(f"{source_path}: SHA-256 mismatch ({actual_hash})")
-        documents.append(SourceDocument(manifest_path.parent, manifest, source_bytes.decode("utf-8")))
+        reviewed_claims: dict[str, Any] = {}
+        sidecar_filename = manifest.get("reviewedClaimsFilename")
+        if sidecar_filename:
+            sidecar_path = manifest_path.parent / sidecar_filename
+            reviewed_claims = json.loads(sidecar_path.read_text(encoding="utf-8"))
+            if reviewed_claims.get("schemaVersion") != 1:
+                raise CorpusError(f"{sidecar_path}: schemaVersion must be 1")
+            if reviewed_claims.get("documentID") != manifest["documentID"]:
+                raise CorpusError(f"{sidecar_path}: documentID mismatch")
+        documents.append(SourceDocument(
+            manifest_path.parent, manifest, source_bytes.decode("utf-8"), reviewed_claims
+        ))
     if not documents:
         raise CorpusError(f"no corpus-v3 manifests found under {root}")
     ids = [item.manifest["documentID"] for item in documents]
@@ -492,7 +504,7 @@ def semantic_candidates(unit: Unit) -> list[tuple[str, str, Unit]]:
         if text.rstrip().endswith(":"):
             pieces = [text]
             cursor = index + 1
-            while cursor < len(unit.blocks) and unit.blocks[cursor][0] == heading and len(pieces) < 6:
+            while cursor < len(unit.blocks) and unit.blocks[cursor][0] == heading and len(pieces) < 20:
                 candidate = unit.blocks[cursor][1]
                 if candidate.rstrip().endswith(":"):
                     break
@@ -507,10 +519,60 @@ def semantic_candidates(unit: Unit) -> list[tuple[str, str, Unit]]:
     return result
 
 
+def standalone_claim_text(text: str, heading: str, unit: Unit) -> str:
+    """Turn a source-backed structural list into one standalone reviewed claim."""
+    value = normalize_space(text)
+    label, separator, remainder = value.partition(":")
+    if separator and remainder.strip():
+        clean_heading = re.sub(r"^Method\s+\d+\s+---\s+", "", heading, flags=re.I)
+        introductions = {
+            "best for": f"{clean_heading} is best for",
+            "contains": f"{heading} contains",
+            "keep": f"For {unit.title}, keep",
+            "look for": f"For {unit.title}, look for",
+            "materials": f"Materials for {unit.title} include",
+            "methods": "Use these methods",
+            "possible indicators": f"Possible indicators for {unit.title} include",
+            "priority": f"For {unit.title}, prioritize",
+            "procedure": "Follow this procedure",
+            "provides": f"{clean_heading} provides",
+            "search": f"For {unit.title}, search",
+            "separate": f"For {unit.title}, separate",
+            "use": f"For {unit.title}, use",
+        }
+        prefix = introductions.get(label.strip().lower())
+        if prefix:
+            value = f"{prefix} {remainder.strip()}"
+    value = re.sub(r";\s*", ", ", value).strip(" ,")
+    value = re.sub(r",\s*\.", ".", value)
+    if value and value[-1] not in ".!?":
+        value += "."
+    return value
+
+
+def claim_quality_issues(text: str) -> list[str]:
+    value = normalize_space(text)
+    lower = value.lower().rstrip(".")
+    issues: list[str] = []
+    orphan_labels = {
+        "best for", "contains", "keep", "look for", "materials", "methods",
+        "possible indicators", "priority", "procedure", "provides", "search",
+        "separate", "use",
+    }
+    if not value or value.endswith((":", ";")):
+        issues.append("incomplete_structural_fragment")
+    if lower in orphan_labels:
+        issues.append("orphan_label")
+    if re.match(r"^(?:[a-z][a-z -]{1,40});?$", value) and len(words(value)) <= 4:
+        issues.append("incomplete_list_item")
+    return issues
+
+
 def compile_scenarios(
     documents: list[SourceDocument], units: list[Unit], chunks: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     manifest_by_id = {item.manifest["documentID"]: item.manifest for item in documents}
+    reviewed_by_id = {item.manifest["documentID"]: item.reviewed_claims for item in documents}
     grouped: dict[str, list[Unit]] = {}
     for unit in units:
         mapping = manifest_by_id[unit.document_id].get("scenarioMappings", {})
@@ -526,6 +588,9 @@ def compile_scenarios(
         members.sort(key=lambda unit: (-unit.priority, unit.document_id, unit.line_start))
         canonical = members[0]
         source_manifest = manifest_by_id[canonical.document_id]
+        sidecar_scenario = reviewed_by_id[canonical.document_id].get(
+            "scenarios", {}
+        ).get(scenario_id)
         candidate_texts: list[tuple[str, str, Unit]] = []
         applicability = ""
         for unit in members:
@@ -534,7 +599,14 @@ def compile_scenarios(
                     applicability = concise(text, 45)
             candidate_texts.extend(semantic_candidates(unit))
         if not applicability:
-            first = next((text for _, text, _ in candidate_texts if len(words(text)) >= 5), canonical.title)
+            first = next((
+                standalone_claim_text(text, heading, unit)
+                for heading, text, unit in candidate_texts
+                if len(words(text)) >= 5
+                and not claim_quality_issues(
+                    standalone_claim_text(text, heading, unit)
+                )
+            ), f"Use {canonical.title.lower()} guidance for this situation.")
             applicability = concise(first, 45)
         cues = list(dict.fromkeys(
             title.lower()
@@ -546,6 +618,8 @@ def compile_scenarios(
             for unit in members
             for chunk in chunks_by_section.get((unit.document_id, unit.section_key), [])
         })
+        related_scenarios = sidecar_scenario.get("relatedScenarioIDs", []) \
+            if sidecar_scenario else []
         scenarios.append({
             "id": scenario_id,
             "chapterID": canonical.chapter_id,
@@ -564,18 +638,33 @@ def compile_scenarios(
             "sectionPath": canonical.section_path,
             "locator": canonical.locator,
             "canonicalPriority": canonical.priority,
+            "relatedScenarioIDs": related_scenarios,
         })
-        chosen: list[tuple[str, str, Unit]] = [("applicability", applicability, canonical)]
+        chosen: list[tuple[str, str, Unit]] = []
+        if sidecar_scenario:
+            unit_by_key = {unit.section_key: unit for unit in members}
+            for reviewed in sidecar_scenario["claims"]:
+                section_key = reviewed["sectionKey"]
+                if section_key not in unit_by_key:
+                    raise CorpusError(
+                        f"{scenario_id}: sidecar section {section_key} is not mapped"
+                    )
+                chosen.append((
+                    reviewed["kind"], normalize_space(reviewed["text"]),
+                    unit_by_key[section_key],
+                ))
+        else:
+            chosen.append(("applicability", applicability, canonical))
         seen = {normalized_fingerprint(applicability)}
         warnings: list[tuple[str, str, Unit]] = []
         actions: list[tuple[str, str, Unit]] = []
         numerics: list[tuple[str, str, Unit]] = []
-        for heading, text, unit in candidate_texts:
+        for heading, text, unit in ([] if sidecar_scenario else candidate_texts):
             if heading.lower() == "purpose":
                 continue
-            value = concise(text)
+            value = concise(standalone_claim_text(text, heading, unit))
             fingerprint = normalized_fingerprint(value)
-            if len(words(value)) < 2 or fingerprint in seen:
+            if len(words(value)) < 2 or fingerprint in seen or claim_quality_issues(value):
                 continue
             seen.add(fingerprint)
             kind = classify_claim(value, heading)
@@ -596,12 +685,12 @@ def compile_scenarios(
         }
         # A shared scenario must retain representative guidance from every mapped
         # skill before earlier sections consume the fixed runtime claim budget.
-        for unit in members:
+        for unit in ([] if sidecar_scenario else members):
             buckets = categorized[unit.section_key]
             for key in ("warnings", "actions", "numerics"):
                 if buckets[key]:
                     chosen.append(buckets[key].pop(0))
-        for key in ("warnings", "numerics", "actions"):
+        for key in (() if sidecar_scenario else ("warnings", "numerics", "actions")):
             while len(chosen) < 15:
                 added = False
                 for unit in members:
@@ -614,6 +703,11 @@ def compile_scenarios(
                 if not added:
                     break
         for order, (kind, text, unit) in enumerate(chosen[:15]):
+            issues = claim_quality_issues(text)
+            if issues:
+                raise CorpusError(
+                    f"{scenario_id}: rejected promoted claim {text!r}: {', '.join(issues)}"
+                )
             claim_id = f"{scenario_id}-v3-c{order + 1:02d}"
             claims.append({
                 "id": claim_id,
@@ -685,6 +779,12 @@ def build(args: argparse.Namespace) -> None:
     unresolved = [item for item in conflicts if item["status"] == "unresolved"]
     if unresolved:
         raise CorpusError(f"{len(unresolved)} unresolved corpus conflicts")
+    quality_issues = [
+        {"claimID": claim["id"], "issues": claim_quality_issues(claim["text"])}
+        for claim in claims if claim_quality_issues(claim["text"])
+    ]
+    if quality_issues:
+        raise CorpusError(f"{len(quality_issues)} unresolved promoted claim fragments")
     document_records = [{
         "id": item.manifest["documentID"],
         "title": item.manifest["title"],
@@ -747,6 +847,8 @@ def build(args: argparse.Namespace) -> None:
         "mappedExistingScenarioCount": sum(not item["id"].startswith("sm26-") for item in scenarios),
         "newScenarioCount": sum(item["id"].startswith("sm26-") for item in scenarios),
         "claimCount": len(claims),
+        "reviewedClaimSidecarCount": sum(bool(item.reviewed_claims) for item in documents),
+        "unresolvedPromotedClaimFragmentCount": len(quality_issues),
         "numericClaimCount": sum(item["kind"] == "allowed_number" for item in claims),
         "conflictCount": len(conflicts),
         "sourceLocators": len(claim_sources),

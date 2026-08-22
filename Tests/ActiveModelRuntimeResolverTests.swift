@@ -35,9 +35,9 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
         let descriptor = try XCTUnwrap(resolution.descriptors[.expert])
         XCTAssertEqual(descriptor.modelURL, fixture.modelURL)
         XCTAssertEqual(descriptor.visionProjectorURL, fixture.projectorURL)
-        XCTAssertEqual(descriptor.embeddingModelURL, fixture.embeddingURL)
+        XCTAssertNil(descriptor.embeddingModelURL)
         XCTAssertEqual(descriptor.contextTokens, 8_192)
-        XCTAssertEqual(descriptor.maximumOutputTokens, 384)
+        XCTAssertEqual(descriptor.maximumOutputTokens, 256)
         XCTAssertEqual(descriptor.expertMemoryProfileStatus, .retained)
         XCTAssertEqual(
             descriptor.expertMemoryProfile?.measuredPeakBytes[.balanced],
@@ -109,7 +109,7 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
         )
     }
 
-    func testExpertRejectsMissingEmbeddingArtifact() throws {
+    func testExpertUsesSharedRAGDependencyWithoutEmbeddedEmbeddingArtifact() throws {
         let fixture = try makeExpertFixture(includeEmbeddingArtifact: false)
         defer { try? FileManager.default.removeItem(at: fixture.root) }
 
@@ -117,11 +117,8 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
             allowDevelopmentExpert: true
         ).resolve(activePacks: snapshot(package: fixture.package))
 
-        XCTAssertNil(resolution.descriptors[.expert])
-        XCTAssertEqual(
-            resolution.issues,
-            [.unverifiedEmbeddingModelPath(packageID: "model.expert.qwen3vl")]
-        )
+        XCTAssertNotNil(resolution.descriptors[.expert])
+        XCTAssertTrue(resolution.issues.isEmpty)
     }
 
     func testVerifiedLiteArtifactResolvesConservativeRuntime() throws {
@@ -268,6 +265,8 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
                 "chat_template": "embedded",
                 "context_tokens": contextTokens,
                 "maximum_output_tokens": "160",
+                "required_rag_package_id": "knowledge.shared-survival-rag-v3",
+                "required_rag_contract": "3",
             ]
         )
         return (
@@ -351,6 +350,8 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
             "chat_template": "embedded",
             "context_tokens": "8192",
             "maximum_output_tokens": "256",
+            "required_rag_package_id": "knowledge.shared-survival-rag-v3",
+            "required_rag_contract": "3",
             "memory_profile_status": memoryProfileStatus.rawValue,
         ]
         if includesPeakMeasurements {
