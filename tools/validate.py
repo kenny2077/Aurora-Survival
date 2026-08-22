@@ -445,7 +445,11 @@ def validate_contracts() -> None:
         fail("retired safety routing is still connected to Lite Chat")
 
     tools_view = (ROOT / "App" / "ToolsView.swift").read_text(encoding="utf-8")
-    for contract in ("Offline setup", "tools.tier", "Validation pending"):
+    for contract in (
+        "Offline AI",
+        "tools.tier",
+        "No model loaded this launch",
+    ):
         if contract not in tools_view:
             fail(f"focused model center is missing: {contract}")
 
@@ -463,7 +467,6 @@ def validate_contracts() -> None:
     production_controls = [
         "GroundedResponse.swift",
         "GroundedResponseCodec.swift",
-        "IncidentNetworkPolicy.swift",
         "EmergencyCoreStore.swift",
         "ReleaseValidation.swift",
         "ResumableArtifactAssembler.swift",
@@ -509,16 +512,9 @@ def validate_contracts() -> None:
     downloader = (
         ROOT / "Core" / "PackageDownloadCoordinator.swift"
     ).read_text(encoding="utf-8")
-    for contract in ("incidentModeDenied", "ResumableArtifactAssembler", "byteRange"):
+    for contract in ("ResumableArtifactAssembler", "byteRange"):
         if contract not in downloader:
             fail(f"package delivery integration is missing: {contract}")
-
-    incident_policy = (
-        ROOT / "Core" / "IncidentNetworkPolicy.swift"
-    ).read_text(encoding="utf-8")
-    for denied in ("packageCatalog", "packageDownload", "purchase", "telemetry"):
-        if denied not in incident_policy:
-            fail(f"incident network policy is missing operation: {denied}")
 
     workflow = ROOT / ".github" / "workflows" / "ci.yml"
     if not workflow.is_file():

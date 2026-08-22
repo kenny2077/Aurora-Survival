@@ -52,7 +52,8 @@ public struct SharedRAGRuntimeResolver: Sendable {
     public init() {}
 
     public func resolve(
-        activePacks: ActivePackSnapshot
+        activePacks: ActivePackSnapshot,
+        validateContents: Bool = true
     ) -> SharedRAGRuntimeResolution {
         let packages = activePacks.knowledge.filter {
             $0.manifest.packageID == Self.packageID
@@ -110,12 +111,6 @@ public struct SharedRAGRuntimeResolver: Sendable {
                 issues: [.missingArtifact(package.manifest.packageID)]
             )
         }
-        guard (try? SurvivalKnowledgeStore(databaseURL: databaseURL)) != nil else {
-            return SharedRAGRuntimeResolution(
-                descriptor: nil,
-                issues: [.invalidDatabase(package.manifest.packageID)]
-            )
-        }
         let vectorDirectories = ((try? FileManager.default.contentsOfDirectory(
             at: vectorRoot,
             includingPropertiesForKeys: nil
@@ -124,17 +119,25 @@ public struct SharedRAGRuntimeResolver: Sendable {
                 ShardedExpertVectorIndex.manifestFilename
             ).path)
         }
-        let index = ShardedExpertVectorIndex(
-            directories: vectorDirectories,
-            expectedEmbeddingIdentity: Self.embeddingIdentity
-        )
-        guard !index.isEmpty, index.issues.isEmpty,
-              index.corpusIdentities == [corpusIdentity]
-        else {
-            return SharedRAGRuntimeResolution(
-                descriptor: nil,
-                issues: [.invalidVectorIndex(package.manifest.packageID)]
+        if validateContents {
+            guard (try? SurvivalKnowledgeStore(databaseURL: databaseURL)) != nil else {
+                return SharedRAGRuntimeResolution(
+                    descriptor: nil,
+                    issues: [.invalidDatabase(package.manifest.packageID)]
+                )
+            }
+            let index = ShardedExpertVectorIndex(
+                directories: vectorDirectories,
+                expectedEmbeddingIdentity: Self.embeddingIdentity
             )
+            guard !index.isEmpty, index.issues.isEmpty,
+                  index.corpusIdentities == [corpusIdentity]
+            else {
+                return SharedRAGRuntimeResolution(
+                    descriptor: nil,
+                    issues: [.invalidVectorIndex(package.manifest.packageID)]
+                )
+            }
         }
         return SharedRAGRuntimeResolution(
             descriptor: SharedRAGRuntimeDescriptor(
@@ -492,7 +495,7 @@ public struct ActiveModelRuntimeResolver: Sendable {
             visionProjectorURL: projectorURL,
             embeddingModelURL: nil,
             contextTokens: ExpertContextProfile.full.contextTokens,
-            maximumOutputTokens: ExpertContextAssembler.outputTokenReserve,
+            maximumOutputTokens: LlamaRuntimeConfiguration.expertMaximumOutputTokens,
             expertMemoryProfile: memoryProfile,
             expertMemoryProfileStatus: profileStatus
         )

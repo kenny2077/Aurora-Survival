@@ -213,21 +213,18 @@ public enum ModelTier: String, Codable, CaseIterable, Sendable {
 }
 
 public enum ModelSelectionPreference: String, Codable, CaseIterable, Sendable {
-    case automatic
     case lite
     case expert
 
     public var displayName: String {
         switch self {
-        case .automatic: return "Auto"
         case .lite: return "Lite"
         case .expert: return "Expert"
         }
     }
 
-    public var requestedTier: ModelTier? {
+    public var requestedTier: ModelTier {
         switch self {
-        case .automatic: return nil
         case .lite: return .lite
         case .expert: return .expert
         }

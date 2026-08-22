@@ -3,12 +3,27 @@ import CryptoKit
 import SwiftUI
 import UIKit
 
+enum ModelRuntimeLoadState: Equatable {
+    case idle
+    case loading(ModelTier)
+    case loaded(ModelTier)
+    case failed(ModelTier, String)
+}
+
+enum ModelSetupState: Equatable {
+    case unavailable
+    case available
+    case downloading(Double)
+    case ready
+    case failed(String)
+}
+
 @MainActor
 final class AppModel: ObservableObject {
-    @Published var modelSelection: ModelSelectionPreference = .automatic {
+    @Published var modelSelection: ModelSelectionPreference = .lite {
         didSet {
             modelPreferenceStore.save(modelSelection)
-            if activeTier != .expert { removeAttachment() }
+            if loadedTier != .expert { removeAttachment() }
         }
     }
     @Published var messages: [ChatMessage] = []
@@ -24,16 +39,10 @@ final class AppModel: ObservableObject {
     @Published private(set) var activePackStatus = "Active packages not checked"
     @Published private(set) var activePackIssueCount = 0
     @Published private(set) var runtimeTiers: Set<ModelTier> = []
+    @Published private(set) var modelRuntimeState: ModelRuntimeLoadState = .idle
     @Published private(set) var lastModelMetrics: LlamaCompletionMetrics?
     @Published private(set) var lastModelThermalCondition: ThermalCondition?
-    @Published var catalogURLString = "" {
-        didSet {
-            UserDefaults.standard.set(
-                catalogURLString,
-                forKey: Self.catalogURLDefaultsKey
-            )
-        }
-    }
+    @Published var catalogURLString = ""
     @Published private(set) var catalogEntries: [PackageCatalogEntry] = []
     @Published private(set) var packageDownloadStates: [
         String: PackageDownloadState
@@ -57,6 +66,17 @@ final class AppModel: ObservableObject {
     private let userDefaults: UserDefaults
     private var isRefreshingActivePacks = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
+    private var discoveredActivePacks: ActivePackSnapshot?
+    private var discoveredModelRuntime = ActiveModelRuntimeResolution(
+        descriptors: [:],
+        calibrationExpertDescriptor: nil,
+        issues: []
+    )
+    private var discoveredSharedRAGRuntime = SharedRAGRuntimeResolution(
+        descriptor: nil,
+        issues: []
+    )
+    private var loadedLlamaModel: LlamaLanguageModel?
 #if DEBUG
     private var debugModelCompletions: [String] = []
     private var debugExpertStreamDeltas: [String] = []
@@ -122,12 +142,7 @@ final class AppModel: ObservableObject {
             isDirectory: true
         )
         self.appDataRoot = appDataRoot
-        let developmentCatalogURL = Self.developmentCatalogURL
-        catalogURLString = developmentCatalogURL.isEmpty
-            ? UserDefaults.standard.string(
-                forKey: Self.catalogURLDefaultsKey
-            ) ?? ""
-            : developmentCatalogURL
+        catalogURLString = Self.configuredCatalogURL
         entitlementLedger = EntitlementLedger(
             fileURL: appDataRoot.appendingPathComponent("entitlements.json")
         )
@@ -216,14 +231,131 @@ final class AppModel: ObservableObject {
         )
     }
 
-    var activeTier: ModelTier? { modelRoutingDecision.selected }
+    var loadedTier: ModelTier? {
+        guard case let .loaded(tier) = modelRuntimeState else { return nil }
+        return tier
+    }
 
-    var canUseAsk: Bool { activeTier != nil }
+    var activeTier: ModelTier? { loadedTier }
 
-    var canAttachPhoto: Bool { activeTier == .expert }
+    var canUseAsk: Bool { loadedTier != nil }
+
+    var canAttachPhoto: Bool { loadedTier == .expert }
+
+    var isModelLoading: Bool {
+        if case .loading = modelRuntimeState { return true }
+        return false
+    }
 
     var modelCatalogEntries: [PackageCatalogEntry] {
         catalogEntries.filter { $0.kind == .model }
+    }
+
+    func modelEntry(for tier: ModelTier) -> PackageCatalogEntry? {
+        modelCatalogEntries.first { $0.metadata["model_tier"] == tier.rawValue }
+    }
+
+    func ragEntry(for modelEntry: PackageCatalogEntry) -> PackageCatalogEntry? {
+        guard let packageID = modelEntry.metadata["required_rag_package_id"],
+              let version = modelEntry.metadata["required_rag_package_version"]
+        else { return nil }
+        return catalogEntries.first {
+            $0.packageID == packageID && $0.version == version
+        }
+    }
+
+    func modelSetupByteCount(for tier: ModelTier) -> Int64 {
+        guard let modelEntry = modelEntry(for: tier) else { return 0 }
+        let modelBytes: Int64
+        if case .installed = packageState(for: modelEntry) {
+            modelBytes = 0
+        } else {
+            modelBytes = modelEntry.totalByteCount
+        }
+        guard let ragEntry = ragEntry(for: modelEntry) else { return modelBytes }
+        let ragBytes: Int64
+        if case .installed = packageState(for: ragEntry) {
+            ragBytes = 0
+        } else {
+            ragBytes = ragEntry.totalByteCount
+        }
+        return modelBytes + ragBytes
+    }
+
+    func modelSetupState(for tier: ModelTier) -> ModelSetupState {
+        guard let modelEntry = modelEntry(for: tier),
+              let ragEntry = ragEntry(for: modelEntry)
+        else { return .unavailable }
+        let modelState = packageState(for: modelEntry)
+        let ragState = packageState(for: ragEntry)
+        if case let .failed(message) = modelState { return .failed(message) }
+        if case let .failed(message) = ragState { return .failed(message) }
+        if case .installed = modelState, case .installed = ragState {
+            return runtimeTiers.contains(tier) ? .ready : .failed(
+                "The installed model or shared survival knowledge failed validation."
+            )
+        }
+        let total = Double(modelEntry.totalByteCount + ragEntry.totalByteCount)
+        if case let .downloading(fraction) = ragState {
+            return .downloading(
+                Double(ragEntry.totalByteCount) * fraction / total
+            )
+        }
+        if case let .downloading(fraction) = modelState {
+            let completedRAG = if case .installed = ragState {
+                Double(ragEntry.totalByteCount)
+            } else {
+                0.0
+            }
+            return .downloading(
+                (completedRAG + Double(modelEntry.totalByteCount) * fraction) / total
+            )
+        }
+        return .available
+    }
+
+    func startModelSetup(_ tier: ModelTier) {
+        guard let entry = modelEntry(for: tier) else { return }
+        startDownload(entry)
+    }
+
+    func cancelModelSetup(_ tier: ModelTier) {
+        guard let entry = modelEntry(for: tier) else { return }
+        cancelDownload(entry)
+    }
+
+    func removeModelSetup(_ tier: ModelTier) {
+        guard let entry = modelEntry(for: tier) else { return }
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                if loadedTier == tier { await unloadModel() }
+                try await packageInstaller.remove(
+                    packageID: entry.packageID,
+                    version: entry.version
+                )
+                let anotherTierInstalled = ModelTier.allCases
+                    .filter { $0 != tier }
+                    .compactMap { self.modelEntry(for: $0) }
+                    .contains {
+                        if case .installed = self.packageState(for: $0) { return true }
+                        return false
+                    }
+                if !anotherTierInstalled,
+                   let ragEntry = ragEntry(for: entry) {
+                    try await packageInstaller.remove(
+                        packageID: ragEntry.packageID,
+                        version: ragEntry.version
+                    )
+                }
+                try await refreshInstalledPackageStates()
+                await refreshActivePacks()
+            } catch {
+                packageDownloadStates[entry.id] = .failed(
+                    Self.userMessage(for: error)
+                )
+            }
+        }
     }
 
     var mapCatalogEntries: [PackageCatalogEntry] {
@@ -303,6 +435,11 @@ final class AppModel: ObservableObject {
             catalogEntries = []
             catalogStatus = "Catalog verification failed: \(Self.userMessage(for: error))"
         }
+    }
+
+    func ensureCatalogLoaded() async {
+        guard catalogEntries.isEmpty, !catalogURLString.isEmpty else { return }
+        await refreshCatalog()
     }
 
     func download(_ entry: PackageCatalogEntry) async {
@@ -430,150 +567,34 @@ final class AppModel: ObservableObject {
             activePacks: snapshot
         )
         offlineMaps = mapRuntime.maps
-        let modelRuntime = ActiveModelRuntimeResolver(
+        discoveredActivePacks = snapshot
+        discoveredModelRuntime = ActiveModelRuntimeResolver(
             allowDevelopmentExpert: Self.allowDevelopmentExpert
         ).resolve(
             activePacks: snapshot
         )
-        let sharedRAGRuntime = SharedRAGRuntimeResolver().resolve(
-            activePacks: snapshot
-        )
-#if DEBUG
-        debugExpertRuntimeDescriptor = modelRuntime.descriptors[.expert]
-        debugCalibrationExpertDescriptor = modelRuntime.calibrationExpertDescriptor
-#endif
-        var availableModelTiers: Set<ModelTier> = []
-        var runtimeModels: [ModelTier: any LocalLanguageModel] = [:]
-        var expertContextAssembler: ExpertContextAssembler?
-        var expertEmbeddingProvider: (any ExpertQueryEmbeddingProvider)?
-        var expertVectorIndex: ShardedExpertVectorIndex?
-        var sharedRAGKnowledge: SurvivalKnowledgeStore?
-        var runtimeBindingIssueCount = modelRuntime.issues.count
-            + sharedRAGRuntime.issues.count
-#if canImport(AuroraLlamaRuntime)
-        if let descriptor = sharedRAGRuntime.descriptor {
-            do {
-                sharedRAGKnowledge = try SurvivalKnowledgeStore(
-                    databaseURL: descriptor.databaseURL
-                )
-                expertEmbeddingProvider = LlamaBGEEmbeddingProvider(
-                    modelURL: descriptor.embeddingModelURL,
-                    threadCount: 4
-                )
-                let index = ShardedExpertVectorIndex(
-                    directories: descriptor.vectorDirectories,
-                    expectedEmbeddingIdentity: SharedRAGRuntimeResolver
-                        .embeddingIdentity
-                )
-                guard !index.isEmpty, index.issues.isEmpty else {
-                    throw ModelFailure.invalidOutput
-                }
-                expertVectorIndex = index
-            } catch {
-                sharedRAGKnowledge = nil
-                expertEmbeddingProvider = nil
-                expertVectorIndex = nil
-                runtimeBindingIssueCount += 1
-            }
-        }
-        if let descriptor = modelRuntime.descriptors[.lite] {
-            do {
-                let liteModel = try LlamaLanguageModel(
-                    tier: .lite,
-                    configuration: .lite(
-                        modelURL: descriptor.modelURL,
-                        threadCount: 4
-                    ),
-                    backend: LlamaXCFrameworkBackend(),
-                    metricsSink: { [weak self] metrics in
-                        await self?.recordModelMetrics(metrics)
-                    },
-                    completionSink: { [weak self] completion in
-                        await self?.recordDebugModelCompletion(completion)
-                    }
-                )
-                runtimeModels[.lite] = liteModel
-#if DEBUG
-                debugLiteLanguageModel = liteModel
-#endif
-                availableModelTiers.insert(.lite)
-            } catch {
-                runtimeBindingIssueCount += 1
-            }
-        }
-        if let descriptor = modelRuntime.descriptors[.expert],
-           let projectorURL = descriptor.visionProjectorURL,
-           let memoryProfile = descriptor.expertMemoryProfile {
-            do {
-                let configuration = LlamaRuntimeConfiguration.expert(
-                    modelURL: descriptor.modelURL,
-                    visionProjectorURL: projectorURL,
-                    profile: .full,
-                    threadCount: 4
-                )
-                try await LlamaXCFrameworkBackend.validateExpertRuntime(
-                    configuration: configuration
-                )
-                let expertModel = try LlamaLanguageModel(
-                    tier: .expert,
-                    configuration: configuration,
-                    backend: LlamaXCFrameworkBackend(),
-                    metricsSink: { [weak self] metrics in
-                        await self?.recordModelMetrics(metrics)
-                    },
-                    completionSink: { [weak self] completion in
-                        await self?.recordDebugModelCompletion(completion)
-                    }
-                )
-                runtimeModels[.expert] = expertModel
-                debugExpertLanguageModel = expertModel
-                expertContextAssembler = ExpertContextAssembler(
-                    memoryProfile: memoryProfile
-                )
-                availableModelTiers.insert(.expert)
-            } catch {
-                runtimeBindingIssueCount += 1
-            }
-        }
-#endif
-        if sharedRAGKnowledge == nil {
-            availableModelTiers.removeAll()
-            runtimeModels.removeAll()
-            expertContextAssembler = nil
-            expertEmbeddingProvider = nil
-            expertVectorIndex = nil
-        }
-        let boundRuntimeModels = runtimeModels
-        let runtime = IncidentRuntimeBootstrap(
-            bundledArticles: articles,
-            survivalKnowledge: sharedRAGKnowledge,
-            modelProvider: { tier in
-                boundRuntimeModels[tier]
-                    ?? UnavailableLanguageModel(tier: tier)
-            }
-        ).resolve(
+        discoveredSharedRAGRuntime = SharedRAGRuntimeResolver().resolve(
             activePacks: snapshot,
-            availableModelTiers: availableModelTiers,
-            expertContextAssembler: expertContextAssembler,
-            expertEmbeddingProvider: expertEmbeddingProvider,
-            expertVectorIndex: expertVectorIndex
+            validateContents: false
         )
-
-        assistant = runtime.assistant
-        runtimeTiers = runtime.runtimeTiers
+#if DEBUG
+        debugExpertRuntimeDescriptor = discoveredModelRuntime.descriptors[.expert]
+        debugCalibrationExpertDescriptor = discoveredModelRuntime.calibrationExpertDescriptor
+#endif
+        runtimeTiers = discoveredSharedRAGRuntime.descriptor == nil
+            ? []
+            : Set(discoveredModelRuntime.descriptors.keys)
 #if DEBUG
         if ProcessInfo.processInfo.environment["TRAILGUARD_UI_FORCE_NO_MODEL"] == "1" {
             runtimeTiers = []
-            assistant = IncidentAssistant(
-                articles: articles,
-                installedTiers: [],
-                retrieval: nil
-            )
         }
 #endif
+        if let loadedTier, !runtimeTiers.contains(loadedTier) {
+            await unloadModel()
+        }
         activePackIssueCount = snapshot.issues.count
-            + runtime.issues.count
-            + runtimeBindingIssueCount
+            + discoveredModelRuntime.issues.count
+            + discoveredSharedRAGRuntime.issues.count
             + mapRuntime.issues.count
         if activePackIssueCount > 0 {
             let activeOptionalTiers = ModelTier.allCases
@@ -590,6 +611,141 @@ final class AppModel: ObservableObject {
         } else {
             activePackStatus = "\(installedTierSummary)"
         }
+    }
+
+    func loadSelectedModel() async {
+        await loadModel(modelSelection.requestedTier)
+    }
+
+    func loadModel(_ tier: ModelTier) async {
+        guard !isModelLoading else { return }
+        modelSelection = tier == .lite ? .lite : .expert
+        guard runtimeTiers.contains(tier),
+              availability(for: tier) == .ready,
+              let snapshot = discoveredActivePacks,
+              let ragDescriptor = discoveredSharedRAGRuntime.descriptor,
+              let modelDescriptor = discoveredModelRuntime.descriptors[tier]
+        else {
+            modelRuntimeState = .failed(
+                tier,
+                modelRoutingDecision.explanation
+            )
+            return
+        }
+
+        await unloadModel()
+        modelRuntimeState = .loading(tier)
+#if canImport(AuroraLlamaRuntime)
+        do {
+            let knowledge = try SurvivalKnowledgeStore(
+                databaseURL: ragDescriptor.databaseURL
+            )
+            let embeddingProvider = LlamaBGEEmbeddingProvider(
+                modelURL: ragDescriptor.embeddingModelURL,
+                threadCount: 4
+            )
+            let vectorIndex = ShardedExpertVectorIndex(
+                directories: ragDescriptor.vectorDirectories,
+                expectedEmbeddingIdentity: SharedRAGRuntimeResolver.embeddingIdentity
+            )
+            guard !vectorIndex.isEmpty,
+                  vectorIndex.issues.isEmpty,
+                  vectorIndex.corpusIdentities == [ragDescriptor.corpusIdentity]
+            else {
+                throw ModelFailure.invalidOutput
+            }
+
+            let configuration: LlamaRuntimeConfiguration
+            var expertContextAssembler: ExpertContextAssembler?
+            switch tier {
+            case .lite:
+                configuration = .lite(
+                    modelURL: modelDescriptor.modelURL,
+                    threadCount: 4
+                )
+            case .expert:
+                guard let projectorURL = modelDescriptor.visionProjectorURL,
+                      let memoryProfile = modelDescriptor.expertMemoryProfile
+                else { throw ModelFailure.unavailable }
+                configuration = .expert(
+                    modelURL: modelDescriptor.modelURL,
+                    visionProjectorURL: projectorURL,
+                    profile: .full,
+                    threadCount: 4
+                )
+                try await LlamaXCFrameworkBackend.validateExpertRuntime(
+                    configuration: configuration
+                )
+                expertContextAssembler = ExpertContextAssembler(
+                    memoryProfile: memoryProfile
+                )
+            }
+
+            let languageModel = try LlamaLanguageModel(
+                tier: tier,
+                configuration: configuration,
+                backend: LlamaXCFrameworkBackend(),
+                metricsSink: { [weak self] metrics in
+                    await self?.recordModelMetrics(metrics)
+                },
+                completionSink: { [weak self] completion in
+                    await self?.recordDebugModelCompletion(completion)
+                }
+            )
+            let runtime = IncidentRuntimeBootstrap(
+                bundledArticles: articles,
+                survivalKnowledge: knowledge,
+                modelProvider: { requestedTier -> any LocalLanguageModel in
+                    if requestedTier == tier { return languageModel }
+                    return UnavailableLanguageModel(tier: requestedTier)
+                }
+            ).resolve(
+                activePacks: snapshot,
+                availableModelTiers: [tier],
+                expertContextAssembler: expertContextAssembler,
+                expertEmbeddingProvider: embeddingProvider,
+                expertVectorIndex: vectorIndex
+            )
+            guard runtime.runtimeTiers.contains(tier) else {
+                throw ModelFailure.unavailable
+            }
+            loadedLlamaModel = languageModel
+            assistant = runtime.assistant
+            modelRuntimeState = .loaded(tier)
+#if DEBUG
+            if tier == .lite { debugLiteLanguageModel = languageModel }
+            if tier == .expert { debugExpertLanguageModel = languageModel }
+#endif
+        } catch {
+            loadedLlamaModel = nil
+            assistant = IncidentAssistant(
+                articles: articles,
+                installedTiers: [],
+                retrieval: nil
+            )
+            modelRuntimeState = .failed(
+                tier,
+                "\(tier.displayName) could not load: \(error.localizedDescription)"
+            )
+        }
+#else
+        modelRuntimeState = .failed(
+            tier,
+            "The native model runtime is unavailable in this build."
+        )
+#endif
+    }
+
+    func unloadModel() async {
+        await loadedLlamaModel?.unload()
+        loadedLlamaModel = nil
+        assistant = IncidentAssistant(
+            articles: articles,
+            installedTiers: [],
+            retrieval: nil
+        )
+        modelRuntimeState = .idle
+        removeAttachment()
     }
 
     func refreshPhotoAuthorizationStatus() {
@@ -1049,6 +1205,7 @@ final class AppModel: ObservableObject {
         }
 
         modelSelection = .lite
+        await loadModel(.lite)
         guard activeTier == .lite else {
             terminalFailure = "lite_unavailable"
             writeReport(completed: true)
@@ -1342,6 +1499,7 @@ final class AppModel: ObservableObject {
                     await debugExpertLanguageModel?.unload()
                 }
                 modelSelection = tier == .expert ? .expert : .lite
+                await loadModel(tier)
                 guard activeTier == tier else {
                     terminalFailure = "\(tier.rawValue)_unavailable"
                     break
@@ -1746,6 +1904,7 @@ final class AppModel: ObservableObject {
         if mode == "expert-vector-benchmark" {
             do {
                 modelSelection = .expert
+                await loadModel(.expert)
                 guard activeTier == .expert,
                       let embeddingURL = debugExpertRuntimeDescriptor?
                         .embeddingModelURL
@@ -1888,6 +2047,7 @@ final class AppModel: ObservableObject {
                 cooldownSecondsRemaining: 60
             )
             modelSelection = .expert
+            await loadModel(.expert)
             guard activeTier == .expert,
                   let descriptor = debugExpertRuntimeDescriptor,
                   descriptor.visionProjectorURL != nil,
@@ -2534,7 +2694,6 @@ final class AppModel: ObservableObject {
         ) as? String ?? "0"
     }
 
-    private static let catalogURLDefaultsKey = "Aurora.catalogURL"
     private static let riskAcknowledgementDefaultsKey =
         "Aurora.riskAcknowledgementSchema"
     static let riskAcknowledgementSchemaVersion = 2
@@ -2547,12 +2706,17 @@ final class AppModel: ObservableObject {
         hasAcceptedRiskAcknowledgement = true
     }
 
-    private static var developmentCatalogURL: String {
+    private static var configuredCatalogURL: String {
 #if DEBUG
-        ProcessInfo.processInfo.environment["TRAILGUARD_CATALOG_URL"] ?? ""
-#else
-        ""
+        if let override = ProcessInfo.processInfo.environment[
+            "TRAILGUARD_CATALOG_URL"
+        ], !override.isEmpty {
+            return override
+        }
 #endif
+        return Bundle.main.object(
+            forInfoDictionaryKey: "AuroraPackageCatalogURL"
+        ) as? String ?? ""
     }
 
     private static func loadTrustedPackageKeys() -> [TrustedPackageKey] {

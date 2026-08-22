@@ -40,9 +40,9 @@ final class AuroraCoreTests: XCTestCase {
         XCTAssertFalse(ModelTier.lite.supportsVision)
     }
 
-    func testAutoSelectsLiteOnIPhone13ClassDevice() {
+    func testExplicitLiteSelectsLiteOnIPhone13ClassDevice() {
         let decision = ModelRouter().route(
-            preference: .automatic,
+            preference: .lite,
             installed: [.lite],
             device: iPhone13ClassDevice
         )
@@ -51,21 +51,21 @@ final class AuroraCoreTests: XCTestCase {
         XCTAssertFalse(decision.canAnalyzeImage)
     }
 
-    func testExpertStaysValidationLockedAndFallsBackToLite() {
+    func testExpertStaysValidationLockedWithoutFallback() {
         let decision = ModelRouter().route(
             preference: .expert,
             installed: [.lite, .expert],
             expertValidated: false,
             device: capableDevice
         )
-        XCTAssertEqual(decision.selected, .lite)
+        XCTAssertNil(decision.selected)
         XCTAssertEqual(decision.availability, .validationLocked)
         XCTAssertFalse(decision.canAnalyzeImage)
     }
 
     func testValidatedExpertRoutesOnCapableDevice() {
         let decision = ModelRouter().route(
-            preference: .automatic,
+            preference: .expert,
             installed: [.lite, .expert],
             expertValidated: true,
             device: capableDevice
@@ -75,7 +75,7 @@ final class AuroraCoreTests: XCTestCase {
         XCTAssertTrue(decision.canAnalyzeImage)
     }
 
-    func testExpertDegradesToLiteUnderThermalPressure() {
+    func testExpertDoesNotFallBackUnderThermalPressure() {
         let hot = DeviceSnapshot(
             physicalMemoryBytes: 12_000_000_000,
             freeStorageBytes: 20_000_000_000,
@@ -83,18 +83,18 @@ final class AuroraCoreTests: XCTestCase {
             isLowPowerMode: false
         )
         let decision = ModelRouter().route(
-            preference: .automatic,
+            preference: .expert,
             installed: [.lite, .expert],
             expertValidated: true,
             device: hot
         )
-        XCTAssertEqual(decision.selected, .lite)
-        XCTAssertEqual(decision.availability, .ready)
+        XCTAssertNil(decision.selected)
+        XCTAssertEqual(decision.availability, .temporarilyIneligible)
     }
 
     func testNoInstalledModelReturnsUnavailableDecision() {
         let decision = ModelRouter().route(
-            preference: .automatic,
+            preference: .lite,
             installed: [],
             device: capableDevice
         )

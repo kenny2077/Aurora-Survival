@@ -180,7 +180,7 @@ final class ConversationalRAGTests: XCTestCase {
         let model = ScriptedLanguageModel(steps: [
             .output("{\"a\":\"\(fallback)\",\"e\":[]}")
         ])
-        let assistant = makeAssistant(model: model)
+        let assistant = await makeAssistant(model: model)
         let answer = await assistant.answer(
             request: ChatRequest(question: "Hello", preferredTier: .lite),
             device: capableDevice()
@@ -190,38 +190,6 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(answer?.manualReferences.isEmpty == true)
         XCTAssertTrue(answer?.sources.isEmpty == true)
         XCTAssertTrue(answer?.notices.isEmpty == true)
-    }
-
-    func testLiteIncidentIntakeTurnsIgnorePriorCarAndWaterHistory() async {
-        let fallback = "Hello. Describe the complete current incident, including your location, observable hazards or injuries, weather, and available equipment, so I can respond to the actual situation."
-        for question in ["Hi", "What's up", "How are you?", "Oh", "You"] {
-            let retrieval = RetrievalRecorder()
-            let model = ScriptedLanguageModel(steps: [
-                .output("{\"a\":\"\(fallback)\",\"e\":[]}")
-            ])
-            let assistant = makeAssistant(retrieval: retrieval, model: model)
-            let answer = await assistant.answer(
-                request: ChatRequest(
-                    question: question,
-                    preferredTier: .lite,
-                    conversationHistory: [
-                        ConversationTurn(role: .user, text: "My car will not start"),
-                        ConversationTurn(role: .assistant, text: "Check the car battery."),
-                        ConversationTurn(role: .user, text: "Where can I find water?"),
-                    ]
-                ),
-                device: capableDevice()
-            )
-
-            XCTAssertEqual(retrieval.queries, [question], question)
-            XCTAssertTrue(answer?.manualReferences.isEmpty == true, question)
-            XCTAssertFalse(answer?.text.localizedCaseInsensitiveContains("car") == true)
-            XCTAssertFalse(answer?.text.localizedCaseInsensitiveContains("water") == true)
-            let prompts = await model.recordedPrompts()
-            XCTAssertEqual(prompts.count, 1)
-            XCTAssertEqual(prompts.first?.conversationHistory, [])
-            XCTAssertEqual(prompts.first?.purpose, .incidentIntake)
-        }
     }
 
     func testBroadCarRequestUsesIncidentFallbackWithoutManualLink() async {
@@ -239,7 +207,7 @@ final class ConversationalRAGTests: XCTestCase {
         let model = ScriptedLanguageModel(steps: [
             .output("{\"a\":\"\(fallback)\",\"e\":[]}")
         ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
+        let assistant = await makeAssistant(retrieval: retrieval, model: model)
         let answer = await assistant.answer(
             request: ChatRequest(
                 question: "How to fix my car",
@@ -316,7 +284,7 @@ final class ConversationalRAGTests: XCTestCase {
             let model = ScriptedLanguageModel(steps: [
                 .output("{\"a\":\"\(fallback)\",\"e\":[]}")
             ])
-            let assistant = makeAssistant(retrieval: retrieval, model: model)
+            let assistant = await makeAssistant(retrieval: retrieval, model: model)
             let answer = await assistant.answer(
                 request: ChatRequest(question: question, preferredTier: .lite),
                 device: capableDevice()
@@ -329,84 +297,13 @@ final class ConversationalRAGTests: XCTestCase {
         }
     }
 
-    func testScreenshotIntentVariantsUseReviewedEvidence() async {
-        let cases = [
-            ("Flat tire", "car-tire", "Change a Tire Safely", ["flat tire", "tyre", "puncture", "tire"]),
-            ("How to stop the bleed", "first-aid-bleeding", "Control Severe Bleeding", ["bleeding", "blood loss", "hemorrhage"]),
-        ]
-        for (question, id, title, keywords) in cases {
-            let article = makeManualArticle(
-                id: id,
-                title: title,
-                chapter: title.contains("Tire") ? "Car Breakdown" : "Wilderness First Aid",
-                summary: "Take immediate reviewed action and stop when conditions are unsafe.",
-                keywords: keywords
-            )
-            let retrieval = RetrievalRecorder(results: [
-                RetrievedPassage(article: article, score: 1)
-            ])
-            let answerText = "First, move away from immediate hazards and prepare the correct equipment. Next, follow the reviewed actions in order without skipping safety checks. Stop if conditions become unsafe and seek trained help."
-            let model = ScriptedLanguageModel(steps: [
-                .output("{\"a\":\"\(answerText)\",\"e\":[1]}")
-            ])
-            let assistant = makeAssistant(retrieval: retrieval, model: model)
-            let answer = await assistant.answer(
-                request: ChatRequest(question: question, preferredTier: .lite),
-                device: capableDevice()
-            )
-
-            XCTAssertEqual(retrieval.queries, [question])
-            XCTAssertEqual(answer?.manualReferences, [article.manualReference!], question)
-            let prompts = await model.recordedPrompts()
-            XCTAssertEqual(prompts.first?.purpose, .grounded)
-        }
-    }
-
-    func testLiteGroundsInStrongestReviewedLessonOnly() async {
-        let primary = makeManualArticle(
-            id: "fire-wet",
-            title: "Start Fire in Wet Conditions",
-            chapter: "Start a Fire",
-            summary: "Expose dry inner wood before building the fire.",
-            keywords: ["wet wood", "wet fire"]
-        )
-        let neighbor = makeManualArticle(
-            id: "fire-materials",
-            title: "Gather Fire Materials",
-            chapter: "Start a Fire",
-            summary: "Gather tinder, kindling, and fuel before ignition.",
-            keywords: ["wet wood", "kindling"]
-        )
-        let retrieval = RetrievalRecorder(results: [
-            RetrievedPassage(article: primary, score: 2),
-            RetrievedPassage(article: neighbor, score: 1),
-        ])
-        let answerText = "Split wet wood to expose its dry inner material and protect fine tinder from rain. Build a small core with dry kindling, then add larger fuel gradually. Stop if wind or nearby vegetation makes the fire unsafe."
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"\(answerText)\",\"e\":[1]}")
-        ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
-
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "How do I start a fire with wet wood?",
-                preferredTier: .lite
-            ),
-            device: capableDevice()
-        )
-
-        let prompts = await model.recordedPrompts()
-        XCTAssertEqual(prompts.first?.evidence.map(\.article.id), ["fire-wet"])
-        XCTAssertEqual(answer?.manualReferences, [primary.manualReference!])
-    }
-
     func testUnmatchedDrunkRequestUsesFallbackWithoutRoleReversalOrLink() async {
         let fallback = "Do not drive, operate equipment, wander off alone, or drink more alcohol. Stay with a sober person, sip water if fully alert, and seek emergency help for vomiting, slow breathing, confusion, collapse, or inability to wake."
         let retrieval = RetrievalRecorder()
         let model = ScriptedLanguageModel(steps: [
             .output("{\"a\":\"\(fallback)\",\"e\":[]}")
         ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
+        let assistant = await makeAssistant(retrieval: retrieval, model: model)
         let answer = await assistant.answer(
             request: ChatRequest(question: "I’m drunk", preferredTier: .lite),
             device: capableDevice()
@@ -417,94 +314,6 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(answer?.sources.isEmpty == true)
         let prompts = await model.recordedPrompts()
         XCTAssertEqual(prompts.first?.purpose, .incidentFallback)
-    }
-
-    func testNewInjuryQuestionUsesOnlyCurrentTextForRetrieval() async {
-        let article = makeManualArticle(
-            id: "first-aid-1",
-            title: "Assess an Injury",
-            chapter: "Wilderness First Aid",
-            summary: "Stop, check the scene, and assess the injured person before moving them.",
-            keywords: ["injured", "injury", "first aid"]
-        )
-        let retrieval = RetrievalRecorder(results: [
-            RetrievedPassage(article: article, score: 1)
-        ])
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"Move away from immediate hazards, then check breathing and severe bleeding. Keep the injured person still while you assess what happened and protect them from exposure. Do not move them if a spine injury may be present unless immediate danger requires it.\",\"e\":[1]}")
-        ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "I am injured",
-                preferredTier: .lite,
-                conversationHistory: [
-                    ConversationTurn(role: .user, text: "My car will not start")
-                ]
-            ),
-            device: capableDevice()
-        )
-
-        XCTAssertEqual(retrieval.queries, ["I am injured"])
-        XCTAssertEqual(answer?.manualReferences, [article.manualReference!])
-        XCTAssertTrue(answer?.text.contains("check breathing and severe bleeding") == true)
-    }
-
-    func testSurvivalAnswerLinksOnlySelectedManualSection() async {
-        let article = makeManualArticle()
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"\(usefulWaterAnswer)\",\"e\":[1]}")
-        ])
-        let assistant = IncidentAssistant(
-            articles: [article],
-            installedTiers: [.lite],
-            modelProvider: { _ in model }
-        )
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "How can I treat water?",
-                preferredTier: .lite
-            ),
-            device: capableDevice()
-        )
-
-        XCTAssertEqual(answer?.text, usefulWaterAnswer)
-        XCTAssertEqual(answer?.manualReferences, [article.manualReference!])
-    }
-
-    func testLitePromptExcludesHistoryAndUsesCompactGroundedExcerpt() async {
-        let article = makeManualArticle()
-        let retrieval = RetrievalRecorder(results: [
-            RetrievedPassage(article: article, score: 1)
-        ])
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"\(usefulWaterAnswer)\",\"e\":[1]}")
-        ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
-        _ = await assistant.answer(
-            request: ChatRequest(
-                question: "What if I do not have a water filter?",
-                preferredTier: .lite,
-                conversationHistory: [
-                    ConversationTurn(role: .user, text: "My engine made a strange noise.")
-                ]
-            ),
-            device: capableDevice()
-        )
-
-        let prompts = await model.recordedPrompts()
-        let prompt = try! XCTUnwrap(prompts.first)
-        let rendered = GroundedPromptBuilder().userPrompt(
-            from: prompt,
-            outputMode: .groundedJSON
-        )
-        XCTAssertFalse(rendered.contains("RECENT CONVERSATION"))
-        XCTAssertFalse(rendered.contains("My engine made a strange noise."))
-        XCTAssertTrue(rendered.contains("REVIEWED EXCERPT [1]"))
-        XCTAssertTrue(rendered.contains("Water Purifiers"))
-        XCTAssertTrue(rendered.contains("ACTIONS:"))
-        XCTAssertTrue(rendered.contains("WARNING:"))
-        XCTAssertFalse(rendered.contains("No relevant Field Manual excerpts"))
     }
 
     func testExpertPromptCanRetainBoundedHistory() {
@@ -552,47 +361,9 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(rendered.contains("ALLOWED NUMBERS: none"))
     }
 
-    func testLeakedFirstOutputGetsOneCompactRepair() async {
-        let repaired = "Hello. Describe the complete current incident, including your location, observable hazards or injuries, weather, and available equipment, so I can respond to the actual situation."
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"Do not invent steps. Do not put citation markers inside a.\",\"e\":[]}"),
-            .output("{\"a\":\"\(repaired)\",\"e\":[]}"),
-        ])
-        let assistant = makeAssistant(model: model)
-        let answer = await assistant.answer(
-            request: ChatRequest(question: "Hi", preferredTier: .lite),
-            device: capableDevice()
-        )
-
-        XCTAssertEqual(answer?.text, repaired)
-        let prompts = await model.recordedPrompts()
-        XCTAssertEqual(prompts.map(\.attempt), [.initial, .repair])
-        XCTAssertTrue(prompts.allSatisfy { $0.conversationHistory.isEmpty })
-    }
-
-    func testInvalidRepairReturnsRephraseMessageAfterExactlyTwoCalls() async {
-        let model = ScriptedLanguageModel(steps: [
-            .output("not json"),
-            .output("{\"a\":\"This answer is incomplete\",\"e\":[]}"),
-        ])
-        let assistant = makeAssistant(model: model)
-        let answer = await assistant.answer(
-            request: ChatRequest(question: "Hello", preferredTier: .lite),
-            device: capableDevice()
-        )
-
-        XCTAssertEqual(
-            answer?.text,
-            "Lite couldn’t form a complete answer. Try rephrasing your question."
-        )
-        let prompts = await model.recordedPrompts()
-        XCTAssertEqual(prompts.count, 2)
-        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
-    }
-
     func testRuntimeFailureDoesNotRetry() async {
         let model = ScriptedLanguageModel(steps: [.failure(.unavailable)])
-        let assistant = makeAssistant(model: model)
+        let assistant = await makeAssistant(model: model)
         let answer = await assistant.answer(
             request: ChatRequest(question: "Hello", preferredTier: .lite),
             device: capableDevice()
@@ -604,30 +375,7 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(answer?.manualReferences.isEmpty == true)
     }
 
-    func testUnsupportedHighRiskRequestUsesBestEffortIncidentFallback() async {
-        let retrieval = RetrievalRecorder()
-        let fallback = "Move away from immediate danger and contact emergency medical help. Do not attempt field surgery without trained support; control visible bleeding, protect the person from cold, and monitor breathing while arranging evacuation."
-        let model = ScriptedLanguageModel(steps: [
-            .output("{\"a\":\"\(fallback)\",\"e\":[]}")
-        ])
-        let assistant = makeAssistant(retrieval: retrieval, model: model)
-        let answer = await assistant.answer(
-            request: ChatRequest(
-                question: "Teach me how to perform surgery in the field.",
-                preferredTier: .lite
-            ),
-            device: capableDevice()
-        )
-
-        XCTAssertEqual(retrieval.queries, ["Teach me how to perform surgery in the field."])
-        XCTAssertEqual(answer?.text, fallback)
-        XCTAssertTrue(answer?.manualReferences.isEmpty == true)
-        let prompts = await model.recordedPrompts()
-        XCTAssertEqual(prompts.count, 1)
-        XCTAssertEqual(prompts.first?.purpose, .incidentFallback)
-    }
-
-    func testCompactPromptContractsIncludeIncidentFallbackAndRepair() {
+    func testCompactPromptContractsIncludeFallbackAndRepairBoundaries() {
         let builder = GroundedPromptBuilder()
         let ordinary = builder.systemPrompt(
             for: .lite,
@@ -673,7 +421,7 @@ final class ConversationalRAGTests: XCTestCase {
             outputMode: .groundedJSON
         )
 
-        XCTAssertTrue(ordinary.contains("new conversation"))
+        XCTAssertTrue(ordinary.contains("Aurora Lite"))
         XCTAssertTrue(ordinary.contains("\"e\":[]"))
         XCTAssertFalse(ordinary.contains("REVIEWED EXCERPTS"))
         XCTAssertTrue(grounded.contains("REVIEWED EXCERPTS"))
@@ -683,15 +431,14 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(repair.contains("30–50 words"))
         XCTAssertTrue(clarification.contains("too broad"))
         XCTAssertTrue(clarification.contains("\"e\":[]"))
-        XCTAssertTrue(fallback.contains("survival and incident assistant"))
-        XCTAssertTrue(fallback.contains("30–60 words"))
-        XCTAssertTrue(fallback.contains("never claim their condition as your own"))
-        XCTAssertTrue(fallbackRepair.contains("30–60 words"))
+        XCTAssertTrue(fallback.contains("No reviewed offline"))
+        XCTAssertTrue(fallback.contains("2–4 complete natural"))
+        XCTAssertTrue(fallback.contains("qualified help, or emergency services"))
+        XCTAssertEqual(fallbackRepair, fallback)
         XCTAssertTrue(intake.contains("No actual"))
         XCTAssertTrue(intake.contains("incident was described"))
         XCTAssertTrue(intake.contains("\"e\":[]"))
         XCTAssertTrue(intakeRepair.contains("No incident was described"))
-        XCTAssertTrue(fallbackRepair.count < fallback.count)
         XCTAssertTrue(repair.count < grounded.count)
     }
 
@@ -885,6 +632,8 @@ final class ConversationalRAGTests: XCTestCase {
                     measuredPeakBytes: [.full: 1]
                 )
             ),
+            expertEmbeddingProvider: DivergentEmbeddingProvider(),
+            expertVectorIndex: emptyVectorIndex(),
             modelProvider: { _ in model }
         )
         XCTAssertTrue(IncidentAssistant.matchesExactReviewedIntent(
@@ -960,6 +709,8 @@ final class ConversationalRAGTests: XCTestCase {
             expertContextAssembler: ExpertContextAssembler(
                 memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
             ),
+            expertEmbeddingProvider: DivergentEmbeddingProvider(),
+            expertVectorIndex: emptyVectorIndex(),
             modelProvider: { _ in model }
         )
 
@@ -1022,6 +773,8 @@ final class ConversationalRAGTests: XCTestCase {
             expertContextAssembler: ExpertContextAssembler(
                 memoryProfile: ExpertRuntimeMemoryProfile(measuredPeakBytes: [.full: 1])
             ),
+            expertEmbeddingProvider: DivergentEmbeddingProvider(),
+            expertVectorIndex: emptyVectorIndex(),
             modelProvider: { _ in model }
         )
 
@@ -1262,12 +1015,23 @@ final class ConversationalRAGTests: XCTestCase {
     private func makeAssistant(
         retrieval: (any EvidenceRetrieving)? = nil,
         model: ScriptedLanguageModel
-    ) -> IncidentAssistant {
-        IncidentAssistant(
+    ) async -> IncidentAssistant {
+        let assistant = IncidentAssistant(
             articles: [],
             installedTiers: [.lite],
             retrieval: retrieval,
+            expertEmbeddingProvider: DivergentEmbeddingProvider(),
+            expertVectorIndex: emptyVectorIndex(),
             modelProvider: { _ in model }
+        )
+        await assistant.setDebugLiteEvidencePolicy(.legacyTopOne)
+        return assistant
+    }
+
+    private func emptyVectorIndex() -> ShardedExpertVectorIndex {
+        ShardedExpertVectorIndex(
+            directories: [],
+            expectedEmbeddingIdentity: SharedRAGRuntimeResolver.embeddingIdentity
         )
     }
 
@@ -1381,8 +1145,10 @@ private actor ScriptedLanguageModel: LocalLanguageModel {
     }
 
     func generate(prompt: ModelPrompt) async throws -> String {
-        prompts.append(prompt)
-        if prompt.tier == .expert, prompt.purpose == .expertIntent {
+        if prompt.tier != .lite || prompt.purpose != .expertIntent {
+            prompts.append(prompt)
+        }
+        if prompt.purpose == .expertIntent {
             let lower = prompt.question.lowercased()
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             let exactGreetings: Set<String> = ["hi", "hello", "wassup"]

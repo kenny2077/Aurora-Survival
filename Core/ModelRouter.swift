@@ -24,23 +24,19 @@ public struct ModelRouter: Sendable {
         if requested == .expert && !expertValidated {
             return ModelRoutingDecision(
                 requested: .expert,
-                selected: liteIsEligible ? .lite : nil,
+                selected: nil,
                 canAnalyzeImage: false,
                 availability: .validationLocked,
-                explanation: liteIsEligible
-                    ? "Expert validation is pending; using Lite."
-                    : "Expert validation is pending. Install Lite to use Ask."
+                explanation: "Expert validation is pending. Choose Lite explicitly to use Ask."
             )
         }
 
         let selected: ModelTier?
         switch preference {
-        case .automatic:
-            selected = expertIsEligible ? .expert : (liteIsEligible ? .lite : nil)
         case .lite:
             selected = liteIsEligible ? .lite : nil
         case .expert:
-            selected = expertIsEligible ? .expert : (liteIsEligible ? .lite : nil)
+            selected = expertIsEligible ? .expert : nil
         }
 
         if let selected {
@@ -56,9 +52,7 @@ public struct ModelRouter: Sendable {
             )
         }
 
-        let requestedReasons = requested.map {
-            ineligibilityReasons(for: $0, device: device)
-        } ?? []
+        let requestedReasons = ineligibilityReasons(for: requested, device: device)
         return ModelRoutingDecision(
             requested: requested,
             selected: nil,
@@ -88,12 +82,6 @@ public struct ModelRouter: Sendable {
         preference: ModelSelectionPreference,
         selected: ModelTier
     ) -> String {
-        if preference == .automatic {
-            return "Auto selected \(selected.displayName) for this device."
-        }
-        if preference.requestedTier != selected {
-            return "The preferred tier is unavailable; using \(selected.displayName)."
-        }
         return "\(selected.displayName) is ready offline."
     }
 

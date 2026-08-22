@@ -30,7 +30,8 @@ struct MapPackView: View {
         .toolbarBackground(.hidden, for: .navigationBar)
         .sheet(isPresented: $showsDownloadCenter) {
             NavigationStack {
-                DownloadCenterView(kindFilter: .map, showsCatalogConnection: true)
+                DownloadCenterView(kindFilter: .map, showsCatalogConnection: false)
+                    .task { await model.ensureCatalogLoaded() }
             }
         }
         .sheet(isPresented: $showsWaypointEditor) {

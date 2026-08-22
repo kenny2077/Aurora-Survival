@@ -18,13 +18,17 @@ public struct ModelPreferenceStore {
            let preference = ModelSelectionPreference(rawValue: raw) {
             return preference
         }
+        if defaults.string(forKey: key) == "automatic" {
+            save(.lite)
+            return .lite
+        }
         guard let legacyFileURL,
               let data = try? Data(contentsOf: legacyFileURL),
               let object = try? JSONSerialization.jsonObject(with: data),
               let dictionary = object as? [String: Any],
               let rawTier = dictionary["preferredTier"] as? String
                     ?? dictionary["preferred_tier"] as? String
-        else { return .automatic }
+        else { return .lite }
         let migrated: ModelSelectionPreference = rawTier == ModelTier.expert.rawValue
             ? .expert
             : .lite

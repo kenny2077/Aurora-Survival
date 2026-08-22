@@ -17,38 +17,12 @@ struct ChatView: View {
     ]
 
     var body: some View {
-        Group {
-            if model.canUseAsk {
-                VStack(spacing: 0) {
-                    messages
-                    composer
-                }
-            } else {
-                modelRequired
-            }
+        VStack(spacing: 0) {
+            messages
+            composer
         }
         .navigationTitle("Aurora")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Menu {
-                    Button("Auto") { model.modelSelection = .automatic }
-                    Button("Lite") { model.modelSelection = .lite }
-                        .disabled(!model.runtimeTiers.contains(.lite))
-                    Button("Expert") { model.modelSelection = .expert }
-                        .disabled(model.availability(for: .expert) != .ready)
-                } label: {
-                    HStack(spacing: 6) {
-                        Text(model.modelSelection.displayName)
-                            .font(.subheadline.weight(.semibold))
-                        Image(systemName: "chevron.down")
-                            .font(.caption2.weight(.bold))
-                    }
-                    .frame(minHeight: 44)
-                }
-                .accessibilityLabel("Model: \(model.modelSelection.displayName)")
-            }
-        }
         .onChange(of: photoItem) { _, item in
             Task {
                 guard let item else { return }
@@ -106,58 +80,15 @@ struct ChatView: View {
         }
     }
 
-    private var modelRequired: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
-                ContentUnavailableView {
-                    Label("Offline model required", systemImage: "cpu")
-                } description: {
-                    Text("Install Lite or Expert with its reviewed knowledge package to use Ask. The Field Guide is always available.")
-                } actions: {
-                    Button { model.selectedTab = .tools } label: {
-                        Label("Set up models", systemImage: "arrow.down.circle.fill")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                }
-
-                VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-                    Text("Browse the Field Guide")
-                        .font(.title2.bold())
-                    Text("Choose an immediate need. No model or download is required.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AuroraDesign.Space.sm) {
-                        ForEach(model.fieldGuideChapters) { chapter in
-                            Button { model.openManualChapter(chapter.id) } label: {
-                                VStack(spacing: 8) {
-                                    Image(systemName: chapter.symbol).font(.title2)
-                                    Text(chapter.title).font(.subheadline.weight(.semibold)).multilineTextAlignment(.center)
-                                }
-                                .frame(maxWidth: .infinity, minHeight: 92)
-                            }
-                            .buttonStyle(.bordered)
-                            .accessibilityIdentifier("chat.manual-chapter.\(chapter.id)")
-                        }
-                    }
-                }
-                .padding(18)
-                .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22))
-            }
-            .padding(AuroraDesign.Space.md)
-            .frame(maxWidth: 640)
-            .frame(maxWidth: .infinity)
-        }
-        .background(Color(uiColor: .systemGroupedBackground))
-        .accessibilityIdentifier("chat.modelRequired")
-    }
-
     private var messages: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(spacing: AuroraDesign.Space.lg) {
                     if model.messages.isEmpty {
                         WelcomeCard(starters: starters) { draft = $0 }
+                    }
+                    if !model.canUseAsk {
+                        modelLoadBanner
                     }
                     ForEach(model.messages) { message in
                         MessageBubble(message: message)
@@ -229,6 +160,8 @@ struct ChatView: View {
                     .padding(.vertical, 11)
                     .focused($composerIsFocused)
                     .accessibilityIdentifier("chat.composer")
+
+                modelControl
 
                 Button {
                     let outgoing = draft
@@ -349,12 +282,91 @@ struct ChatView: View {
     }
 
     private var canSend: Bool {
-        guard !model.isThinking else { return false }
+        guard model.canUseAsk, !model.isThinking else { return false }
         if !draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return true
         }
         guard let attachment = model.draftImageAttachment else { return false }
         return attachment.loadState == .ready && attachment.imageData != nil
+    }
+
+    private var modelControl: some View {
+        Group {
+            if model.isModelLoading {
+                ProgressView()
+                    .frame(width: 44, height: 44)
+                    .accessibilityLabel("Loading model")
+            } else {
+                Menu {
+                    ForEach(ModelTier.allCases, id: \.self) { tier in
+                        Button {
+                            model.modelSelection = tier == .lite ? .lite : .expert
+                            if model.runtimeTiers.contains(tier) {
+                                Task { await model.loadModel(tier) }
+                            } else {
+                                model.selectedTab = .tools
+                            }
+                        } label: {
+                            Label(
+                                model.loadedTier == tier
+                                    ? "\(tier.displayName) loaded"
+                                    : model.runtimeTiers.contains(tier)
+                                        ? "Load \(tier.displayName)"
+                                        : "Set up \(tier.displayName)",
+                                systemImage: model.loadedTier == tier
+                                    ? "checkmark"
+                                    : "cpu"
+                            )
+                        }
+                    }
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "cpu")
+                        Text(model.loadedTier?.displayName ?? "Load")
+                            .lineLimit(1)
+                    }
+                    .font(.caption.bold())
+                    .frame(minWidth: 44, minHeight: 44)
+                }
+                .buttonStyle(.glass)
+                .accessibilityLabel(
+                    model.loadedTier.map { "Model: \($0.displayName)" }
+                        ?? "Load \(model.modelSelection.displayName) model"
+                )
+                .accessibilityIdentifier("chat.modelSelection")
+            }
+        }
+    }
+
+    private var modelLoadBanner: some View {
+        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+            Label("Load an offline model to ask Aurora", systemImage: "cpu")
+                .font(.headline)
+            Text("Your \(model.modelSelection.displayName) choice is remembered, but Aurora leaves AI unloaded when the app opens to save memory and battery.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            if case let .failed(_, message) = model.modelRuntimeState {
+                Text(message).font(.caption).foregroundStyle(.red)
+            }
+            Button {
+                if model.runtimeTiers.contains(model.modelSelection.requestedTier) {
+                    Task { await model.loadSelectedModel() }
+                } else {
+                    model.selectedTab = .tools
+                }
+            } label: {
+                Label(
+                    model.runtimeTiers.contains(model.modelSelection.requestedTier)
+                        ? "Load \(model.modelSelection.displayName)"
+                        : "Set up \(model.modelSelection.displayName)",
+                    systemImage: "play.circle.fill"
+                )
+            }
+            .buttonStyle(.glassProminent)
+        }
+        .padding(AuroraDesign.Space.md)
+        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 20))
+        .accessibilityIdentifier("chat.modelRequired")
     }
 
     @ViewBuilder

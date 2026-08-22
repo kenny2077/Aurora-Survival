@@ -34,30 +34,58 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCTAssertFalse(app.descendants(matching: .any)["agreement.screen"].exists)
     }
 
-    func testPhotoAccessPresentsLimitedFullDenyHierarchyAndPersistsDenial() {
+    func testToolsUsesEmergencyFirstDashboardWithoutLegacyAccessSections() {
         let app = makeApp()
         app.launch()
         openTools(in: app)
-        XCTAssertTrue(
-            app.descendants(matching: .any)["tools.photoPrivacy"]
-                .waitForExistence(timeout: 20)
-        )
-        let monitor = addUIInterruptionMonitor(
-            withDescription: "Photo Library authorization"
-        ) { alert in
-            let labels = Set(alert.buttons.allElementsBoundByIndex.map(\.label))
-            XCTAssertTrue(labels.contains("Select Photos…") || labels.contains("Select Photos..."))
-            XCTAssertTrue(labels.contains("Allow Full Access"))
-            XCTAssertTrue(labels.contains("Don’t Allow"))
-            alert.buttons["Don’t Allow"].tap()
-            return true
-        }
-        defer { removeUIInterruptionMonitor(monitor) }
-        app.buttons["Choose photo access"].tap()
-        app.tap()
+        XCTAssertTrue(app.staticTexts["EMERGENCY CENTER"].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.buttons["Tools settings"].exists)
+        XCTAssertFalse(app.staticTexts["Photo privacy"].exists)
+        XCTAssertFalse(app.staticTexts["Download Access"].exists)
+        XCTAssertFalse(app.buttons["Auto"].exists)
+    }
 
-        XCTAssertTrue(app.staticTexts["Access: Denied"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["Open Settings"].exists)
+    func testExplicitLiteLoadAndRelaunchStartsUnloaded() throws {
+        let app = makeApp()
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["Load an offline model to ask Aurora"].waitForExistence(timeout: 20))
+        guard app.buttons["Load Lite"].waitForExistence(timeout: 5) else {
+            throw XCTSkip("The signed Lite + shared RAG setup is not installed on this device.")
+        }
+        app.buttons["Load Lite"].tap()
+        XCTAssertTrue(app.buttons["Model: Lite"].waitForExistence(timeout: 90))
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.staticTexts["Load an offline model to ask Aurora"].waitForExistence(timeout: 30))
+        XCTAssertTrue(app.buttons["Load Lite"].exists)
+        XCTAssertFalse(app.buttons["Model: Lite"].exists)
+    }
+
+    func testPhysicalSurvivalToolsCoreFlow() {
+        let app = makeApp()
+        app.launch()
+        openTools(in: app)
+
+        var flashlight = app.staticTexts["SOS Flashlight"]
+        for _ in 0..<3 where !flashlight.exists { app.swipeUp() }
+        flashlight = app.staticTexts["SOS Flashlight"]
+        XCTAssertTrue(flashlight.waitForExistence(timeout: 20))
+        flashlight.tap()
+        XCTAssertTrue(app.buttons["Start SOS Signal"].waitForExistence(timeout: 10))
+        app.buttons["Start SOS Signal"].tap()
+        XCTAssertTrue(app.buttons["STOP SIGNAL"].waitForExistence(timeout: 10))
+        app.buttons["STOP SIGNAL"].tap()
+        app.navigationBars.buttons["Tools"].tap()
+
+        var checklist = app.staticTexts["Checklist"]
+        for _ in 0..<2 where !checklist.exists { app.swipeUp() }
+        checklist = app.staticTexts["Checklist"]
+        XCTAssertTrue(checklist.waitForExistence(timeout: 10))
+        checklist.tap()
+        XCTAssertTrue(app.navigationBars["Trip Checklist"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Add checklist item"].exists)
     }
 
     func testCameraAttachmentThreePhysicalJourneys() throws {

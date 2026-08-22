@@ -36,7 +36,7 @@ final class ModelPreferenceStoreTests: XCTestCase {
         }
     }
 
-    func testMissingOrCorruptLegacyStateDefaultsToAuto() throws {
+    func testMissingOrCorruptLegacyStateDefaultsToLite() throws {
         let suite = "Aurora.ModelPreference.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
@@ -46,7 +46,16 @@ final class ModelPreferenceStoreTests: XCTestCase {
 
         XCTAssertEqual(
             ModelPreferenceStore(defaults: defaults, legacyFileURL: file).load(),
-            .automatic
+            .lite
         )
+    }
+
+    func testStoredAutoMigratesToLite() throws {
+        let suite = "Aurora.ModelPreference.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set("automatic", forKey: "Aurora.modelSelectionPreference")
+
+        XCTAssertEqual(ModelPreferenceStore(defaults: defaults).load(), .lite)
     }
 }

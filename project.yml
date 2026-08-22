@@ -11,6 +11,7 @@ settings:
     CODE_SIGN_STYLE: Automatic
     MARKETING_VERSION: "1.0.0"
     CURRENT_PROJECT_VERSION: "1"
+    AURORA_PACKAGE_CATALOG_URL: ""
 packages:
   MapLibre:
     url: https://github.com/maplibre/maplibre-gl-native-distribution
@@ -48,6 +49,7 @@ targets:
         NSPhotoLibraryUsageDescription: "Choose an existing photo or save a photo you take before attaching it for fully offline visual assistance."
         NSCameraUsageDescription: "Take a photo, save it to your Photo Library, and attach it for fully offline visual assistance."
         NSLocalNetworkUsageDescription: "Connect to your trusted Aurora package host to download signed offline models, guides, and maps during preparation."
+        AuroraPackageCatalogURL: "$(AURORA_PACKAGE_CATALOG_URL)"
         NSLocationWhenInUseUsageDescription: "Show your position and record an explicitly started breadcrumb trail, including while the screen is locked."
         NSMicrophoneUsageDescription: "Record an optional voice note for a survival waypoint and keep it on this device."
         NSAppTransportSecurity:
