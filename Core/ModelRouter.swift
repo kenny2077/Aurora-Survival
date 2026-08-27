@@ -1,7 +1,7 @@
 import Foundation
 
 public struct ModelRouter: Sendable {
-    public static let minimumExpertMemory: UInt64 = 7_500_000_000
+    public static let minimumExpertMemory: UInt64 = 5_500_000_000
     public static let minimumExpertStorage: Int64 = 3_500_000_000
     public static let minimumLiteMemory: UInt64 = 3_500_000_000
 

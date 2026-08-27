@@ -15,6 +15,191 @@ final class PhysicalProductFlowTests: XCTestCase {
         return app
     }
 
+    func testChatLiquidGlassEmptyStateAndLiteCapability() {
+        let app = makeApp()
+        app.launch()
+
+        XCTAssertTrue(
+            app.staticTexts["chat.greeting"].waitForExistence(timeout: 20)
+        )
+        let modelMenu = app.buttons["chat.modelSelection"]
+        XCTAssertTrue(modelMenu.waitForExistence(timeout: 20))
+        XCTAssertFalse(app.staticTexts["Load Lite"].exists)
+        XCTAssertTrue(app.textFields["chat.composer"].exists)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["chat.composerSurface"].exists
+        )
+        XCTAssertTrue(app.buttons["chat.attach"].exists)
+        XCTAssertLessThan(modelMenu.frame.midX, app.frame.midX)
+        XCTAssertTrue(
+            app.navigationBars.buttons.allElementsBoundByIndex
+                .filter { $0.frame.midX > app.frame.midX }
+                .isEmpty
+        )
+
+        let greeting = app.staticTexts["chat.greeting"]
+        let greetingY = greeting.frame.minY
+        app.swipeUp()
+        XCTAssertEqual(greeting.frame.minY, greetingY, accuracy: 2)
+        app.swipeDown()
+        XCTAssertEqual(greeting.frame.minY, greetingY, accuracy: 2)
+
+        for removedText in [
+            "Aurora",
+            "Offline intelligence for the outdoors",
+            "My car will not start",
+            "How do I make water safer?",
+            "What should I do if I am lost?",
+            "Load an offline model to ask Aurora",
+        ] {
+            XCTAssertFalse(app.staticTexts[removedText].exists, removedText)
+        }
+        XCTAssertFalse(app.buttons["Voice input"].exists)
+
+        modelMenu.tap()
+        XCTAssertTrue(app.buttons["Load Lite"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["Set Up Expert"].exists)
+        keepScreenshot(named: "Chat model dropdown", app: app)
+        app.staticTexts["chat.greeting"].tap()
+
+        app.buttons["chat.attach"].tap()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["chat.liteAttachmentSheet"]
+                .waitForExistence(timeout: 10)
+        )
+        let camera = app.buttons["chat.liteAttachment.camera"]
+        let photo = app.buttons["chat.liteAttachment.photo"]
+        XCTAssertTrue(camera.exists)
+        XCTAssertTrue(photo.exists)
+        XCTAssertFalse(camera.isEnabled)
+        XCTAssertFalse(photo.isEnabled)
+        XCTAssertTrue(camera.label.contains("Expert mode"))
+        XCTAssertTrue(photo.label.contains("Expert mode"))
+        XCTAssertFalse(app.staticTexts["Add a photo"].exists)
+        XCTAssertFalse(app.buttons["Done"].exists)
+        keepScreenshot(named: "Chat liquid glass empty state", app: app)
+    }
+
+    func testChatComposerDismissesKeyboardAndPreservesDraft() {
+        let app = makeApp()
+        app.launch()
+
+        let composer = app.textFields["chat.composer"]
+        XCTAssertTrue(composer.waitForExistence(timeout: 20))
+        composer.tap()
+        let draft = "Keep this draft"
+        composer.typeText(draft)
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
+        keepScreenshot(named: "Chat focused glass composer", app: app)
+
+        app.staticTexts["chat.greeting"].tap()
+
+        XCTAssertTrue(
+            app.keyboards.firstMatch.waitForNonExistence(timeout: 5)
+        )
+        XCTAssertEqual(composer.value as? String, draft)
+    }
+
+    func testChatPhysicalLiteLoadAndConversation() {
+        let app = makeApp()
+        app.launch()
+
+        let modelMenu = app.buttons["chat.modelSelection"]
+        XCTAssertTrue(modelMenu.waitForExistence(timeout: 30))
+        modelMenu.tap()
+        let loadLite = app.buttons["Load Lite"]
+        XCTAssertTrue(
+            loadLite.waitForExistence(timeout: 30),
+            "A validated Lite package must be installed for the physical gate."
+        )
+        loadLite.tap()
+        XCTAssertTrue(
+            app.buttons["Model: Lite"].waitForExistence(timeout: 90)
+        )
+        let loadedModelMenu = app.buttons["Model: Lite"]
+        loadedModelMenu.tap()
+        let unloadLite = app.buttons["Unload Lite"]
+        if !unloadLite.waitForExistence(timeout: 5) {
+            loadedModelMenu.tap()
+        }
+        XCTAssertTrue(unloadLite.waitForExistence(timeout: 5))
+        app.staticTexts["chat.greeting"].tap()
+
+        let composer = app.textFields["chat.composer"]
+        composer.tap()
+        composer.typeText("Where can I find water?")
+        app.buttons["chat.send"].tap()
+
+        let response = app.descendants(matching: .any)[
+            "chat.message.assistant"
+        ]
+        XCTAssertTrue(response.waitForExistence(timeout: 180))
+        let thinking = app.descendants(matching: .any)["chat.thinking"]
+            .firstMatch
+        XCTAssertTrue(thinking.waitForExistence(timeout: 5))
+        keepScreenshot(named: "Chat thinking above response", app: app)
+        XCTAssertTrue(
+            response.staticTexts["Lite"].waitForExistence(timeout: 180)
+        )
+        XCTAssertLessThan(response.frame.minY, app.frame.midY)
+        keepScreenshot(named: "Chat physical Lite conversation", app: app)
+
+        tabButton("Tools", in: app).tap()
+        let toolsUnloadLite = app.buttons.matching(
+            NSPredicate(
+                format: "identifier == %@ OR label == %@",
+                "tools.model.unload.lite",
+                "Unload Lite"
+            )
+        ).firstMatch
+        XCTAssertTrue(
+            toolsUnloadLite.waitForExistence(timeout: 10)
+        )
+        keepScreenshot(named: "Tools Lite runtime control", app: app)
+    }
+
+    func testToolsCompactLiteControlsAndExpertGate() {
+        let app = makeApp()
+        app.launch()
+        openTools(in: app)
+
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.offlineAI"]
+                .waitForExistence(timeout: 20)
+        )
+        let loadLite = app.buttons.matching(
+            NSPredicate(
+                format: "identifier == %@ OR label == %@",
+                "tools.model.load.lite",
+                "Load Lite"
+            )
+        ).firstMatch
+        XCTAssertTrue(
+            loadLite.waitForExistence(timeout: 30),
+            "A validated Lite package must be installed for this device check."
+        )
+        XCTAssertLessThan(loadLite.frame.width, 60)
+        XCTAssertTrue(
+            app.staticTexts["Requires a newer device"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertFalse(app.buttons["tools.model.load.vision_expert"].exists)
+        XCTAssertFalse(app.buttons["tools.model.download.vision_expert"].exists)
+        loadLite.tap()
+
+        let unloadLite = app.buttons.matching(
+            NSPredicate(
+                format: "identifier == %@ OR label == %@",
+                "tools.model.unload.lite",
+                "Unload Lite"
+            )
+        ).firstMatch
+        XCTAssertTrue(unloadLite.waitForExistence(timeout: 90))
+        XCTAssertLessThan(unloadLite.frame.width, 60)
+        unloadLite.tap()
+        XCTAssertTrue(loadLite.waitForExistence(timeout: 30))
+    }
+
     func testRiskAcknowledgementRefusalAcceptanceAndPersistence() throws {
         let app = makeApp(acceptAgreement: false)
         app.launchEnvironment["TRAILGUARD_UI_RESET_AGREEMENT"] = "1"
@@ -34,15 +219,51 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCTAssertFalse(app.descendants(matching: .any)["agreement.screen"].exists)
     }
 
-    func testToolsUsesEmergencyFirstDashboardWithoutLegacyAccessSections() {
+    func testToolsDashboardLiquidGlassSimplicity() {
         let app = makeApp()
         app.launch()
         openTools(in: app)
-        XCTAssertTrue(app.staticTexts["EMERGENCY CENTER"].waitForExistence(timeout: 20))
+
+        XCTAssertTrue(app.navigationBars["Tools"].waitForExistence(timeout: 20))
         XCTAssertTrue(app.buttons["Tools settings"].exists)
-        XCTAssertFalse(app.staticTexts["Photo privacy"].exists)
-        XCTAssertFalse(app.staticTexts["Download Access"].exists)
-        XCTAssertFalse(app.buttons["Auto"].exists)
+        XCTAssertTrue(app.staticTexts["Offline Models"].exists)
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.tier.lite"].exists
+        )
+        XCTAssertTrue(
+            app.descendants(matching: .any)["tools.tier.vision_expert"].exists
+        )
+
+        let emergency = app.buttons["tools.emergency"]
+        for _ in 0..<2 where !emergency.exists { app.swipeUp() }
+        XCTAssertTrue(emergency.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Field tools"].exists)
+        XCTAssertFalse(app.staticTexts["EMERGENCY CENTER"].exists)
+        for removedBadge in ["Ready", "Loaded", "Available", "Unavailable"] {
+            XCTAssertFalse(app.staticTexts[removedBadge].exists)
+        }
+        keepScreenshot(named: "Tools liquid glass dashboard", app: app)
+    }
+
+    func testToolsSettingsSimplicity() {
+        let app = makeApp()
+        app.launch()
+        openTools(in: app)
+
+        let settings = app.buttons["tools.settings"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 20))
+        settings.tap()
+
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Version"].exists)
+        XCTAssertTrue(app.staticTexts["Selected model"].exists)
+        XCTAssertFalse(app.staticTexts["Loaded model"].exists)
+        XCTAssertFalse(app.staticTexts["Installed AI"].exists)
+        XCTAssertTrue(app.staticTexts["Legal"].exists)
+
+        app.swipeUp()
+        XCTAssertTrue(app.buttons["tools.reset"].waitForExistence(timeout: 10))
+        keepScreenshot(named: "Tools simplified settings", app: app)
     }
 
     func testExplicitLiteLoadAndRelaunchStartsUnloaded() throws {
@@ -204,75 +425,316 @@ final class PhysicalProductFlowTests: XCTestCase {
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
+        XCTAssertTrue(
+            app.descendants(matching: .any)["chat.modelRequired"]
+                .waitForExistence(timeout: 20)
+        )
+        XCTAssertTrue(app.images["chat.survivalGuideIcon"].exists)
+        XCTAssertTrue(app.staticTexts["Survival Guide"].exists)
+        for chapter in [
+            "fire": "Fire",
+            "water": "Water",
+            "shelter": "Shelter",
+            "first_aid": "First Aid",
+            "navigation": "Navigation",
+            "food": "Food",
+        ] {
+            let block = app.buttons["chat.manual-chapter.\(chapter.key)"]
+            XCTAssertTrue(block.exists, "Missing \(chapter.value) chapter")
+            XCTAssertEqual(block.label, chapter.value)
+        }
+        for removedText in [
+            "How can I help?",
+            "Browse the Field Guide",
+            "Choose an immediate need. No model or download is required.",
+            "Offline model required",
+        ] {
+            XCTAssertFalse(app.staticTexts[removedText].exists, removedText)
+        }
+        keepScreenshot(named: "No-model glass chapter links", app: app)
+
         let shortcut = app.buttons["chat.manual-chapter.fire"]
-        XCTAssertTrue(shortcut.waitForExistence(timeout: 20))
         shortcut.tap()
         XCTAssertTrue(tabButton("Manual", in: app).isSelected)
-        XCTAssertFalse(app.staticTexts["Start here"].exists)
-        let lesson = app.staticTexts["Build a Basic Fire"].firstMatch
-        XCTAssertTrue(lesson.waitForExistence(timeout: 10))
-        lesson.tap()
         XCTAssertTrue(
-            app.navigationBars["Build a Basic Fire"]
+            app.descendants(matching: .any)["manual.chapter.fire"]
                 .waitForExistence(timeout: 10)
-        )
-        let visual = app.buttons["manual.visual.fire_basic_build"]
-        XCTAssertTrue(visual.exists)
-        visual.tap()
-        let close = app.buttons["manual.visual.close"]
-        XCTAssertTrue(close.waitForExistence(timeout: 10))
-        close.tap()
-        let next = app.buttons["manual.next.fire.wet_conditions"]
-        XCTAssertTrue(next.waitForExistence(timeout: 10))
-        next.tap()
-        XCTAssertTrue(app.navigationBars["Fire in Wet Conditions"].waitForExistence(timeout: 10))
-
-        app.terminate()
-        app.launch()
-        openManual(in: app)
-        let search = app.searchFields.firstMatch
-        XCTAssertTrue(search.waitForExistence(timeout: 10))
-        search.tap()
-        search.typeText("broken bone splint")
-        let result = app.staticTexts["Support a Fracture"].firstMatch
-        XCTAssertTrue(result.waitForExistence(timeout: 20))
-        result.tap()
-        XCTAssertTrue(
-            app.navigationBars["Support a Fracture"]
-                .waitForExistence(timeout: 20)
         )
     }
 
-    func testMapsIsDirectFourthProductArea() throws {
+    func testMapsTopChromeAndCompactOfflinePanel() throws {
         let app = makeApp()
         app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
         app.launch()
 
         openMaps(in: app)
-        XCTAssertTrue(tabButton("Maps", in: app).isSelected)
-        XCTAssertTrue(app.navigationBars["Maps"].waitForExistence(timeout: 20))
+        let canvas = app.descendants(matching: .any)["maps.canvas"]
+        let scale = app.descendants(matching: .any)["maps.scale"]
+        let source = app.buttons["maps.source"]
+        XCTAssertTrue(canvas.waitForExistence(timeout: 20))
+        XCTAssertTrue(scale.waitForExistence(timeout: 10))
+        XCTAssertTrue(source.exists)
+        XCTAssertFalse(app.navigationBars["Maps"].exists)
+        XCTAssertEqual(scale.frame.midX, app.frame.midX, accuracy: 8)
+        XCTAssertLessThan(scale.frame.minY, source.frame.maxY)
+        XCTAssertFalse(scale.frame.intersects(source.frame))
+
+        app.buttons["maps.mode.offlineMaps"].tap()
+        let description = app.staticTexts[
+            "Use downloaded maps without service."
+        ]
+        let manage = app.buttons["maps.download.manage"]
+        XCTAssertFalse(description.exists)
+        XCTAssertTrue(manage.exists)
+        XCTAssertEqual(manage.label, "Downloads")
+        XCTAssertLessThan(manage.frame.width, app.frame.width * 0.55)
+        keepScreenshot(named: "Top scale and compact offline panel", app: app)
+    }
+
+    func testMapsCleanChromeAndGestureIsolation() throws {
+        let app = makeApp()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+        openMaps(in: app)
+
+        let canvas = app.descendants(matching: .any)["maps.canvas"]
+        let chrome = app.descendants(matching: .any)["maps.chrome"]
+        let source = app.buttons["maps.source"]
+        XCTAssertTrue(canvas.waitForExistence(timeout: 20))
+        XCTAssertTrue(chrome.waitForExistence(timeout: 10))
+
+        canvas.swipeLeft()
+        XCTAssertTrue(chrome.exists)
+        canvas.rotate(.pi / 6, withVelocity: 1)
+        XCTAssertTrue(chrome.exists)
+
+        app.buttons["maps.mode.record"].tap()
+        let pause = app.buttons["Pause"]
+        let resume = app.buttons["Resume"]
+        let start = app.buttons["Start"]
+        if !pause.exists {
+            if resume.waitForExistence(timeout: 2) {
+                resume.tap()
+            } else {
+                XCTAssertTrue(start.waitForExistence(timeout: 8))
+                start.tap()
+            }
+        }
+        XCTAssertTrue(pause.waitForExistence(timeout: 10))
+
+        let togglePoint = canvas.coordinate(
+            withNormalizedOffset: CGVector(dx: 0.5, dy: 0.32)
+        )
+        togglePoint.tap()
+        XCTAssertTrue(chrome.waitForNonExistence(timeout: 10))
+        XCTAssertTrue(source.waitForNonExistence(timeout: 10))
         XCTAssertTrue(
-            app.descendants(matching: .any)["maps.home"]
+            app.descendants(matching: .any)["maps.scale"]
+                .waitForNonExistence(timeout: 10)
+        )
+        XCTAssertTrue(tabButton("Maps", in: app).exists)
+        keepScreenshot(named: "Clean map with chrome hidden", app: app)
+
+        togglePoint.tap()
+        XCTAssertTrue(chrome.waitForExistence(timeout: 10))
+        XCTAssertTrue(source.waitForExistence(timeout: 10))
+        XCTAssertTrue(pause.waitForExistence(timeout: 10))
+        app.buttons["Finish"].tap()
+
+        app.buttons["maps.mode.waypoints"].tap()
+        let placement = canvas.coordinate(
+            withNormalizedOffset: CGVector(dx: 0.35, dy: 0.35)
+        )
+        placement.press(forDuration: 0.6)
+        XCTAssertTrue(
+            app.navigationBars["New Waypoint"].waitForExistence(timeout: 10)
+        )
+        app.buttons["Cancel"].tap()
+        XCTAssertTrue(
+            app.navigationBars["New Waypoint"].waitForNonExistence(timeout: 10)
+        )
+        XCTAssertTrue(chrome.exists)
+
+        let savedWaypoint = app.buttons.matching(
+            NSPredicate(
+                format: "identifier BEGINSWITH %@",
+                "maps.waypoint.saved."
+            )
+        ).firstMatch
+        XCTAssertTrue(savedWaypoint.waitForExistence(timeout: 10))
+        canvas.swipeLeft()
+        canvas.swipeLeft()
+        let pannedCenter = canvas.value as? String
+        XCTAssertNotNil(pannedCenter)
+        savedWaypoint.tap()
+        let recentered = NSPredicate(
+            format: "value != %@",
+            pannedCenter ?? ""
+        )
+        expectation(for: recentered, evaluatedWith: canvas)
+        waitForExpectations(timeout: 10)
+        keepScreenshot(named: "Saved waypoint recentered", app: app)
+    }
+
+    func testMapsCompactInstalledMapRouting() throws {
+        let app = makeApp()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+        openMaps(in: app)
+
+        app.buttons["maps.mode.offlineMaps"].tap()
+        let manage = app.buttons["maps.download.manage"]
+        XCTAssertTrue(manage.waitForExistence(timeout: 10))
+        manage.tap()
+        XCTAssertTrue(
+            app.navigationBars["Offline Maps"].waitForExistence(timeout: 20)
+        )
+
+        let openButtons = app.buttons.matching(
+            NSPredicate(
+                format: "identifier BEGINSWITH %@",
+                "downloads.map.open."
+            )
+        )
+        let open = openButtons.firstMatch
+        XCTAssertTrue(open.waitForExistence(timeout: 20))
+        XCTAssertGreaterThan(openButtons.count, 0)
+        for button in openButtons.allElementsBoundByIndex {
+            XCTAssertLessThan(button.frame.height, 50)
+            XCTAssertLessThan(button.frame.width, 150)
+        }
+
+        let mapID = String(
+            open.identifier.dropFirst("downloads.map.open.".count)
+        )
+        let name = app.descendants(matching: .any)[
+            "downloads.map.name.\(mapID)"
+        ]
+        XCTAssertTrue(name.waitForExistence(timeout: 10))
+        XCTAssertEqual(name.frame.midY, open.frame.midY, accuracy: 8)
+        keepScreenshot(named: "Compact installed map rows", app: app)
+
+        open.tap()
+        let layer = app.buttons.matching(
+            NSPredicate(
+                format: "identifier BEGINSWITH %@",
+                "downloads.map.layer."
+            )
+        ).firstMatch
+        if layer.waitForExistence(timeout: 2) {
+            layer.tap()
+        }
+        XCTAssertTrue(
+            app.navigationBars["Offline Maps"].waitForNonExistence(timeout: 20)
+        )
+        XCTAssertTrue(
+            app.descendants(matching: .any)["maps.canvas"]
                 .waitForExistence(timeout: 10)
         )
-        keepScreenshot(named: "Maps overlay layout", app: app)
-        let record = app.buttons["Record"].firstMatch
-        let offline = app.buttons["Offline Maps"].firstMatch
-        let waypoints = app.buttons["Waypoints"].firstMatch
-        record.tap()
-        XCTAssertTrue(app.staticTexts["Trail Recording"].waitForExistence(timeout: 2))
-        offline.tap()
-        XCTAssertTrue(app.staticTexts["Offline Maps"].waitForExistence(timeout: 2))
-        waypoints.tap()
-        XCTAssertTrue(
-            app.staticTexts["Survival Waypoints"].waitForExistence(timeout: 2)
+    }
+
+    func testManualSimplicityHome() throws {
+        let app = makeApp()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+        openManual(in: app)
+
+        XCTAssertTrue(app.navigationBars["Field Guide"].exists)
+        XCTAssertTrue(app.searchFields["Search skills"].exists)
+        XCTAssertFalse(
+            app.descendants(matching: .any)["manual.orientation"].exists
         )
-        let source = app.buttons["Map type"].firstMatch
-        XCTAssertTrue(source.exists)
-        source.tap()
-        XCTAssertTrue(app.buttons["Standard"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.buttons["Satellite"].exists)
-        keepScreenshot(named: "Map type menu", app: app)
+
+        for chapter in [
+            "fire", "water", "shelter", "first_aid", "navigation", "food",
+        ] {
+            let link = app.descendants(matching: .any)[
+                "manual.chapter-link.\(chapter)"
+            ]
+            for _ in 0..<8 where !link.exists {
+                app.swipeUp()
+            }
+            XCTAssertTrue(link.exists, "Missing chapter link: \(chapter)")
+        }
+
+        for removedText in [
+            "Start here",
+            "Always offline",
+            "Six essential chapters",
+            "Survival priority card",
+            "Six skills to master before you go",
+            "Essential Wilderness Skills",
+        ] {
+            XCTAssertFalse(app.staticTexts[removedText].exists, removedText)
+        }
+        app.swipeDown()
+        app.swipeDown()
+        keepScreenshot(named: "Manual compact glass home", app: app)
+    }
+
+    func testManualCompactSearchAndRouting() throws {
+        let app = makeApp()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+        openManual(in: app)
+
+        let search = app.searchFields["Search skills"]
+        XCTAssertTrue(search.exists)
+        search.tap()
+        search.typeText("water")
+
+        let result = app.descendants(matching: .any)[
+            "manual.search-result.water.find"
+        ]
+        XCTAssertTrue(result.waitForExistence(timeout: 10))
+        result.tap()
+
+        XCTAssertTrue(
+            app.descendants(matching: .any)["manual.skill.water.find"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.staticTexts["Find Water"].exists)
+        XCTAssertTrue(app.staticTexts["Search terrain in this order:"].exists)
+    }
+
+    func testManualVisualIndicatorMatchesBundledImage() throws {
+        let app = makeApp()
+        app.launchEnvironment["TRAILGUARD_UI_FORCE_NO_MODEL"] = "1"
+        app.launch()
+        openManual(in: app)
+
+        let fire = app.descendants(matching: .any)["manual.chapter-link.fire"]
+        XCTAssertTrue(fire.waitForExistence(timeout: 10))
+        fire.tap()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["manual.chapter.fire"]
+                .waitForExistence(timeout: 10)
+        )
+
+        let visualSkill = app.descendants(matching: .any)[
+            "manual.skill-link.fire.basic_fire"
+        ]
+        let textSkill = app.descendants(matching: .any)[
+            "manual.skill-link.fire.extinguish"
+        ]
+        XCTAssertTrue(visualSkill.exists)
+        for _ in 0..<5 where !textSkill.exists {
+            app.swipeUp()
+        }
+        XCTAssertTrue(textSkill.exists)
+        XCTAssertEqual(visualSkill.value as? String, "Includes visual guide")
+        XCTAssertEqual(textSkill.value as? String, "Text guide")
+
+        app.swipeDown()
+        visualSkill.tap()
+        let visual = app.descendants(matching: .any)[
+            "manual.visual.fire_basic_build"
+        ]
+        XCTAssertTrue(visual.waitForExistence(timeout: 10))
+        visual.tap()
+        XCTAssertTrue(
+            app.buttons["manual.visual.close"].waitForExistence(timeout: 10)
+        )
     }
 
     func testManualSixChaptersAndNoResultsAtLargestType() throws {

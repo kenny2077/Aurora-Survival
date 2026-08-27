@@ -16,19 +16,18 @@ struct GuideLibraryView: View {
                 if isSearching {
                     searchResults
                 } else if let guide = model.fieldGuide {
-                    manualHeader(guide.book)
                     chapterLibrary(guide.book.chapters)
-                    priorityCard(guide.book)
-                    masteryCard(guide.book)
                 }
             }
             .padding(AuroraDesign.Space.md)
+            .padding(.top, AuroraDesign.Space.xs)
             .frame(maxWidth: 980)
             .frame(maxWidth: .infinity)
         }
-        .background(Color(uiColor: .systemGroupedBackground))
+        .background(Color(uiColor: .systemBackground))
         .navigationTitle("Field Guide")
-        .searchable(text: $model.libraryQuery, prompt: "Search skills, needs, or conditions")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $model.libraryQuery, prompt: "Search skills")
         .navigationDestination(for: FieldGuideRoute.self) { route in
             switch route {
             case .chapter(let id):
@@ -45,39 +44,14 @@ struct GuideLibraryView: View {
         .accessibilityIdentifier("manual.home")
     }
 
-    private func manualHeader(_ book: FieldGuideBook) -> some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.md) {
-            HStack(alignment: .top) {
-                Image(systemName: "mountain.2.fill")
-                    .font(.title2).padding(12)
-                    .background(.white.opacity(0.18), in: RoundedRectangle(cornerRadius: 14))
-                    .accessibilityHidden(true)
-                Spacer()
-                Label("Always offline", systemImage: "checkmark.circle.fill")
-                    .font(.caption.weight(.bold)).padding(.horizontal, 10).padding(.vertical, 6)
-                    .background(.white.opacity(0.16), in: Capsule())
-            }
-            Text(book.title).font(.largeTitle.bold()).accessibilityAddTraits(.isHeader)
-            Text(book.subtitle.uppercased()).font(.caption.weight(.bold)).tracking(1.2).opacity(0.82)
-            Text(book.introduction).font(.body).opacity(0.92).fixedSize(horizontal: false, vertical: true)
-        }
-        .foregroundStyle(.white).padding(AuroraDesign.Space.lg)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            LinearGradient(colors: [AuroraDesign.spruce, AuroraDesign.river.opacity(0.82)], startPoint: .topLeading, endPoint: .bottomTrailing),
-            in: RoundedRectangle(cornerRadius: 28)
-        )
-    }
-
     private func chapterLibrary(_ chapters: [FieldGuideChapter]) -> some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            Text("Six essential chapters").font(.title2.bold()).accessibilityAddTraits(.isHeader)
-            LazyVGrid(columns: chapterColumns, spacing: AuroraDesign.Space.md) {
-                ForEach(chapters) { chapter in
-                    NavigationLink(value: FieldGuideRoute.chapter(chapter.id)) {
-                        FieldGuideChapterCard(chapter: chapter)
-                    }.buttonStyle(.plain)
+        LazyVGrid(columns: chapterColumns, spacing: AuroraDesign.Space.sm) {
+            ForEach(chapters) { chapter in
+                NavigationLink(value: FieldGuideRoute.chapter(chapter.id)) {
+                    FieldGuideChapterCard(chapter: chapter)
                 }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("manual.chapter-link.\(chapter.id)")
             }
         }
     }
@@ -95,79 +69,112 @@ struct GuideLibraryView: View {
                 .frame(maxWidth: .infinity).padding(.vertical, 56)
                 .accessibilityIdentifier("manual.search.no-results")
         } else {
-            HStack {
-                Text("Skills").font(.title2.bold())
-                Spacer()
-                Text("\(results.count)").font(.caption.bold()).foregroundStyle(.secondary)
-            }
-            ForEach(results) { result in
-                NavigationLink(value: FieldGuideRoute.skill(result.skill.id)) {
-                    FieldGuideSkillRow(chapter: result.chapter, skill: result.skill, detail: result.excerpt)
-                }.buttonStyle(.plain)
-            }
-        }
-    }
-
-    private func priorityCard(_ book: FieldGuideBook) -> some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            Label("Survival priority card", systemImage: "list.number").font(.title3.bold())
-            ForEach(Array(book.priorityCard.enumerated()), id: \.element.id) { index, item in
-                HStack(alignment: .top, spacing: 12) {
-                    Text("\(index + 1)").font(.caption.bold()).foregroundStyle(.white)
-                        .frame(width: 28, height: 28).background(AuroraDesign.signal, in: Circle())
-                        .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(item.title).font(.headline)
-                        Text(item.text).font(.subheadline).foregroundStyle(.secondary)
+            LazyVStack(spacing: AuroraDesign.Space.sm) {
+                ForEach(results) { result in
+                    let hasVisual = fieldGuideHasLoadableVisual(
+                        result.skill,
+                        in: model.fieldGuide
+                    )
+                    NavigationLink(value: FieldGuideRoute.skill(result.skill.id)) {
+                        FieldGuideSkillRow(
+                            chapter: result.chapter,
+                            skill: result.skill,
+                            detail: result.excerpt,
+                            showsChapterName: true,
+                            hasVisual: hasVisual
+                        )
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityValue(
+                        hasVisual ? "Includes visual guide" : "Text guide"
+                    )
+                    .accessibilityIdentifier(
+                        "manual.search-result.\(result.skill.id)"
+                    )
                 }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("Priority \(index + 1), \(item.title). \(item.text)")
             }
         }
-        .padding(18)
-        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 20))
     }
 
-    private func masteryCard(_ book: FieldGuideBook) -> some View {
-        DisclosureGroup {
-            VStack(alignment: .leading, spacing: 10) {
-                ForEach(Array(book.masterySkills.enumerated()), id: \.offset) { index, item in
-                    Label(item, systemImage: "\(index + 1).circle.fill").frame(maxWidth: .infinity, alignment: .leading)
-                }
-            }.padding(.top, 10)
-        } label: { Text("Six skills to master before you go").font(.headline) }
-        .padding(18)
-        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 20))
-    }
 }
 
 private struct FieldGuideChapterView: View {
+    @EnvironmentObject private var model: AppModel
     let chapter: FieldGuideChapter
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
+            LazyVStack(alignment: .leading, spacing: 0) {
+                VStack(spacing: AuroraDesign.Space.sm) {
+                    Image(systemName: chapter.symbol)
+                        .font(.title.weight(.semibold))
+                        .foregroundStyle(chapterColor(chapter.theme))
+                        .frame(width: 52, height: 52)
+                        .glassEffect(
+                            .regular,
+                            in: RoundedRectangle(
+                                cornerRadius: AuroraDesign.Radius.compact
+                            )
+                        )
+                        .accessibilityHidden(true)
+                    Text(chapter.title)
+                        .font(.title2.bold())
+                    Text(chapterDirectorySummary(chapter))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                }
+                .padding(.horizontal, AuroraDesign.Space.lg)
+                .padding(.vertical, AuroraDesign.Space.lg)
+                .frame(maxWidth: 440)
+                .glassEffect(
+                    .regular,
+                    in: RoundedRectangle(
+                        cornerRadius: AuroraDesign.Radius.prominent
+                    )
+                )
+                .frame(maxWidth: .infinity, alignment: .center)
+
                 VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-                    HStack {
-                        Image(systemName: chapter.symbol).font(.title2)
-                        Spacer(); Text("CHAPTER \(chapter.order)").font(.caption.bold())
+                    Label {
+                        Text("Skills")
+                            .font(.title3.bold())
+                    } icon: {
+                        Image(systemName: "checklist")
+                            .foregroundStyle(chapterColor(chapter.theme))
                     }
-                    Text(chapter.title).font(.largeTitle.bold())
-                    Text(chapter.purpose).font(.body).opacity(0.9)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityIdentifier("manual.chapter.skills")
+
+                    LazyVStack(spacing: AuroraDesign.Space.md) {
+                        ForEach(chapter.skills) { skill in
+                            let hasVisual = fieldGuideHasLoadableVisual(
+                                skill,
+                                in: model.fieldGuide
+                            )
+                            NavigationLink(value: FieldGuideRoute.skill(skill.id)) {
+                                FieldGuideSkillRow(
+                                    chapter: chapter,
+                                    skill: skill,
+                                    detail: skillDirectorySummary(skill),
+                                    hasVisual: hasVisual
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityValue(
+                                hasVisual ? "Includes visual guide" : "Text guide"
+                            )
+                            .accessibilityIdentifier(
+                                "manual.skill-link.\(skill.id)"
+                            )
+                        }
+                    }
                 }
-                .foregroundStyle(.white).padding(AuroraDesign.Space.lg)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(chapterColor(chapter.theme).gradient, in: RoundedRectangle(cornerRadius: 26))
-                Text("Skills").font(.title2.bold())
-                ForEach(chapter.skills) { skill in
-                    NavigationLink(value: FieldGuideRoute.skill(skill.id)) {
-                        FieldGuideSkillRow(chapter: chapter, skill: skill, detail: skill.purpose)
-                    }.buttonStyle(.plain)
-                }
+                .padding(.top, AuroraDesign.Space.lg)
             }
             .padding(AuroraDesign.Space.md).frame(maxWidth: AuroraDesign.readableWidth).frame(maxWidth: .infinity)
         }
-        .background(Color(uiColor: .systemGroupedBackground))
+        .background(Color(uiColor: .systemBackground))
         .navigationTitle(chapter.title).navigationBarTitleDisplayMode(.inline)
         .accessibilityIdentifier("manual.chapter.\(chapter.id)")
     }
@@ -275,21 +282,33 @@ private struct FieldGuideSkillView: View {
 private struct FieldGuideChapterCard: View {
     let chapter: FieldGuideChapter
     var body: some View {
-        HStack(spacing: AuroraDesign.Space.md) {
-            VStack(spacing: 4) { Image(systemName: chapter.symbol).font(.title2); Text("\(chapter.order)").font(.caption.bold()) }
-                .foregroundStyle(chapterColor(chapter.theme)).frame(width: 54, height: 62)
-                .background(chapterColor(chapter.theme).opacity(0.12), in: RoundedRectangle(cornerRadius: 16)).accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 5) {
+        HStack(spacing: AuroraDesign.Space.sm) {
+            Image(systemName: chapter.symbol)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(chapterColor(chapter.theme))
+                .frame(width: 34)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
                 Text(chapter.title).font(.headline).foregroundStyle(.primary)
-                Text(chapter.purpose).font(.subheadline).foregroundStyle(.secondary).lineLimit(2)
+                Text(chapterDirectorySummary(chapter))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
                 Text("\(chapter.skills.count) skills").font(.caption.weight(.semibold)).foregroundStyle(chapterColor(chapter.theme))
             }
             Spacer(minLength: 4); Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(.tertiary)
         }
-        .padding(16).frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 20))
-        .contentShape(RoundedRectangle(cornerRadius: 20)).accessibilityElement(children: .combine)
-        .accessibilityLabel("Chapter \(chapter.order), \(chapter.title). \(chapter.skills.count) skills. \(chapter.purpose)")
+        .padding(AuroraDesign.Space.md)
+        .frame(maxWidth: .infinity, minHeight: 88, alignment: .leading)
+        .glassEffect(
+            .regular.interactive(),
+            in: RoundedRectangle(cornerRadius: AuroraDesign.Radius.prominent)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: AuroraDesign.Radius.prominent))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "\(chapter.title). \(chapterDirectorySummary(chapter)). \(chapter.skills.count) skills"
+        )
     }
 }
 
@@ -297,26 +316,55 @@ private struct FieldGuideSkillRow: View {
     let chapter: FieldGuideChapter
     let skill: FieldGuideSkill
     let detail: String
+    var showsChapterName = false
+    let hasVisual: Bool
+
     var body: some View {
-        HStack(alignment: .top, spacing: 13) {
+        HStack(alignment: .top, spacing: AuroraDesign.Space.sm) {
             Text("\(skill.order)").font(.caption.bold()).foregroundStyle(chapterColor(chapter.theme))
-                .frame(width: 38, height: 38).background(chapterColor(chapter.theme).opacity(0.11), in: RoundedRectangle(cornerRadius: 11)).accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 5) {
+                .frame(width: 32, height: 32)
+                .background(
+                    chapterColor(chapter.theme).opacity(0.11),
+                    in: RoundedRectangle(cornerRadius: 10)
+                )
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(skill.title).font(.headline).foregroundStyle(.primary)
-                    if !skill.visuals.isEmpty {
+                    if hasVisual {
                         Label("Visual guide", systemImage: "photo").labelStyle(.iconOnly).font(.caption)
-                            .foregroundStyle(chapterColor(chapter.theme)).accessibilityLabel("Includes visual guide")
+                            .foregroundStyle(chapterColor(chapter.theme))
+                            .accessibilityLabel("Includes visual guide")
+                            .accessibilityIdentifier(
+                                "manual.skill-visual.\(skill.id)"
+                            )
                     }
                 }
-                Text(chapter.title.uppercased()).font(.caption2.bold()).foregroundStyle(chapterColor(chapter.theme))
-                Text(detail).font(.subheadline).foregroundStyle(.secondary).lineLimit(2)
+                if showsChapterName {
+                    Text(chapter.title)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(chapterColor(chapter.theme))
+                }
+                Text(detail)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
             Spacer(minLength: 4); Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(.tertiary).padding(.top, 4)
         }
-        .padding(15).frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18))
-        .contentShape(RoundedRectangle(cornerRadius: 18)).accessibilityElement(children: .combine)
+        .padding(AuroraDesign.Space.sm)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassEffect(
+            .regular.interactive(),
+            in: RoundedRectangle(cornerRadius: AuroraDesign.Radius.standard)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: AuroraDesign.Radius.standard))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "\(skill.title). \(detail)\(hasVisual ? ". Includes visual guide" : "")"
+        )
+        .accessibilityValue(hasVisual ? "Includes visual guide" : "Text guide")
+        .accessibilityIdentifier("manual.skill-row.\(skill.id)")
     }
 }
 
@@ -472,6 +520,69 @@ private struct FieldGuideUnavailableView: View {
 private func fieldGuideImage(named name: String) -> UIImage? {
     guard let url = Bundle.main.url(forResource: name, withExtension: "png") else { return nil }
     return UIImage(contentsOfFile: url.path)
+}
+
+private func fieldGuideHasLoadableVisual(
+    _ skill: FieldGuideSkill,
+    in guide: FieldGuideStore?
+) -> Bool {
+    skill.visuals.contains { placement in
+        guard let visual = guide?.visual(id: placement.assetID) else {
+            return false
+        }
+        return fieldGuideImage(named: visual.imageName) != nil
+    }
+}
+
+private func chapterDirectorySummary(_ chapter: FieldGuideChapter) -> String {
+    switch chapter.id {
+    case "fire": return "Warmth, cooking, and signaling"
+    case "water": return "Find, collect, and treat water"
+    case "shelter": return "Protection from weather and exposure"
+    case "first_aid": return "Manage immediate threats until help arrives"
+    case "navigation": return "Stay oriented and signal rescuers"
+    case "food": return "Protect energy and prepare food safely"
+    default: return chapter.purpose
+    }
+}
+
+private func skillDirectorySummary(_ skill: FieldGuideSkill) -> String {
+    switch skill.id {
+    case "fire.wet_conditions":
+        return "Find dry fuel and expose dry inner wood"
+    case "fire.bow_drill":
+        return "Create an ember with a bow-drill set"
+    case "water.find":
+        return "Locate the safest available water source"
+    case "water.boil":
+        return "Make collected water safer by boiling"
+    case "water.filter":
+        return "Remove sediment before treatment"
+    case "water.solar_still":
+        return "Collect supplemental water using sun and plastic"
+    case "shelter.site":
+        return "Choose dry, stable, protected ground"
+    case "shelter.tarp":
+        return "Build fast cover with a tarp and cord"
+    case "first_aid.bleeding":
+        return "Control life-threatening bleeding"
+    case "first_aid.heat_exhaustion":
+        return "Recognize and cool heat exhaustion"
+    case "first_aid.heat_stroke":
+        return "Recognize and rapidly cool heat stroke"
+    case "first_aid.hypothermia":
+        return "Recognize and protect against dangerous cold"
+    case "navigation.lost":
+        return "Stop, think, observe, and plan"
+    case "navigation.terrain":
+        return "Read contour lines and terrain features"
+    case "food.efficient":
+        return "Conserve energy and manage available food"
+    case "food.wild_plants":
+        return "Avoid plants you cannot identify safely"
+    default:
+        return skill.purpose
+    }
 }
 
 private func chapterColor(_ theme: String) -> Color {

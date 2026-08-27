@@ -2,27 +2,43 @@ import PhotosUI
 import SwiftUI
 
 struct ChatView: View {
+    private static let bundledAuroraIcon: UIImage? = {
+        guard let url = Bundle.main.url(
+            forResource: "AppIcon60x60@2x",
+            withExtension: "png"
+        ) else { return nil }
+        return UIImage(contentsOfFile: url.path)
+    }()
+
     @EnvironmentObject private var model: AppModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var draft = ""
     @State private var photoItem: PhotosPickerItem?
     @State private var showsAttachmentSourceDialog = false
+    @State private var showsAttachmentMenu = false
     @State private var showsPhotoPicker = false
     @State private var showsCamera = false
     @FocusState private var composerIsFocused: Bool
 
-    private let starters = [
-        "My car will not start",
-        "How do I make water safer?",
-        "What should I do if I am lost?"
-    ]
-
     var body: some View {
-        VStack(spacing: 0) {
-            messages
+        VStack(spacing: AuroraDesign.Space.xs) {
+            modelStatus
+            if model.canUseAsk {
+                messages
+            } else {
+                noModelChapters
+            }
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             composer
         }
-        .navigationTitle("Aurora")
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                modelControl
+            }
+        }
+        .toolbarBackground(.hidden, for: .navigationBar)
         .onChange(of: photoItem) { _, item in
             Task {
                 guard let item else { return }
@@ -80,41 +96,186 @@ struct ChatView: View {
         }
     }
 
-    private var messages: some View {
-        ScrollViewReader { proxy in
+    private var noModelChapters: some View {
+        GeometryReader { geometry in
             ScrollView {
-                VStack(spacing: AuroraDesign.Space.lg) {
-                    if model.messages.isEmpty {
-                        WelcomeCard(starters: starters) { draft = $0 }
+                VStack(spacing: 40) {
+                    VStack(spacing: AuroraDesign.Space.sm) {
+                        auroraGuideIcon
+                            .accessibilityLabel("Aurora")
+                            .accessibilityIdentifier(
+                                "chat.survivalGuideIcon"
+                            )
+                        Text("Survival Guide")
+                            .font(.title.weight(.semibold))
+                            .multilineTextAlignment(.center)
+                            .accessibilityAddTraits(.isHeader)
                     }
-                    if !model.canUseAsk {
-                        modelLoadBanner
-                    }
-                    ForEach(model.messages) { message in
-                        MessageBubble(message: message)
-                            .id(message.id)
-                    }
-                    if model.isThinking {
-                        HStack(spacing: 10) {
-                            ProgressView()
-                            Text("Thinking offline…")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                    LazyVGrid(
+                        columns: noModelChapterColumns,
+                        spacing: AuroraDesign.Space.sm
+                    ) {
+                        ForEach(model.fieldGuideChapters) { chapter in
+                            Button {
+                                model.openManualChapter(chapter.id)
+                            } label: {
+                                HStack(spacing: AuroraDesign.Space.xs) {
+                                    Image(systemName: chapter.symbol)
+                                        .accessibilityHidden(true)
+                                    Text(chapter.title)
+                                }
+                                .font(.subheadline.weight(.semibold))
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, minHeight: 52)
+                            }
+                            .buttonStyle(.glass)
+                            .accessibilityIdentifier(
+                                "chat.manual-chapter.\(chapter.id)"
+                            )
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 4)
                     }
                 }
                 .frame(maxWidth: AuroraDesign.readableWidth)
+                .frame(
+                    minHeight: max(
+                        0,
+                        geometry.size.height
+                            - AuroraDesign.Space.md
+                            - AuroraDesign.Space.lg
+                    ),
+                    alignment: .bottom
+                )
                 .padding(.horizontal, AuroraDesign.Space.md)
-                .padding(.vertical, AuroraDesign.Space.lg)
+                .padding(.top, AuroraDesign.Space.md)
+                .padding(.bottom, AuroraDesign.Space.lg)
                 .frame(maxWidth: .infinity)
             }
-            .onChange(of: model.messages.count) {
-                guard let last = model.messages.last else { return }
-                proxy.scrollTo(last.id, anchor: .bottom)
+            .scrollBounceBehavior(.basedOnSize)
+            .scrollIndicators(.hidden)
+        }
+        .accessibilityIdentifier("chat.modelRequired")
+    }
+
+    @ViewBuilder
+    private var auroraGuideIcon: some View {
+        if let icon = Self.bundledAuroraIcon {
+            Image(uiImage: icon)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .clipShape(
+                    RoundedRectangle(
+                        cornerRadius: AuroraDesign.Radius.standard
+                    )
+                )
+                .frame(width: 76, height: 76)
+                .offset(y: -16)
+        } else {
+            Image(systemName: "mountain.2.fill")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 80, height: 80)
+                .background(
+                    AuroraDesign.aurora,
+                    in: RoundedRectangle(
+                        cornerRadius: AuroraDesign.Radius.standard
+                    )
+                )
+                .frame(width: 76, height: 76)
+                .offset(y: -16)
+        }
+    }
+
+    private var noModelChapterColumns: [GridItem] {
+        let count: Int
+        if dynamicTypeSize.isAccessibilitySize {
+            count = 1
+        } else if horizontalSizeClass == .regular {
+            count = 3
+        } else {
+            count = 2
+        }
+        return Array(
+            repeating: GridItem(
+                .flexible(),
+                spacing: AuroraDesign.Space.sm
+            ),
+            count: count
+        )
+    }
+
+    private var messages: some View {
+        GeometryReader { geometry in
+            if model.messages.isEmpty {
+                VStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    Text("How can I help?")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                    Spacer(minLength: 0)
+                    Color.clear
+                        .frame(height: geometry.size.height * 0.12)
+                }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .contentShape(Rectangle())
+                    .simultaneousGesture(
+                        TapGesture().onEnded { dismissComposer() }
+                    )
+                    .accessibilityIdentifier("chat.greeting")
+            } else {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(spacing: AuroraDesign.Space.lg) {
+                            ForEach(model.messages) { message in
+                                VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+                                    if model.isThinking,
+                                       message.role == .assistant,
+                                       message.id == model.messages.last?.id {
+                                        thinkingIndicator
+                                    }
+                                    MessageBubble(message: message)
+                                }
+                                .id(message.id)
+                            }
+                        }
+                        .frame(maxWidth: AuroraDesign.readableWidth)
+                        .frame(
+                            minHeight: geometry.size.height,
+                            alignment: .top
+                        )
+                        .padding(.horizontal, AuroraDesign.Space.md)
+                        .padding(.vertical, AuroraDesign.Space.lg)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .scrollDismissesKeyboard(.interactively)
+                    .simultaneousGesture(
+                        TapGesture().onEnded { dismissComposer() }
+                    )
+                    .onChange(of: model.messages.count) {
+                        guard let first = model.messages.first else { return }
+                        if model.messages.count <= 2 {
+                            proxy.scrollTo(first.id, anchor: .top)
+                        } else if let last = model.messages.last {
+                            proxy.scrollTo(last.id, anchor: .bottom)
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private var thinkingIndicator: some View {
+        HStack(spacing: AuroraDesign.Space.xs) {
+            ProgressView()
+            Text("Thinking offline…")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 4)
+        .accessibilityIdentifier("chat.thinking")
     }
 
     private var composer: some View {
@@ -150,43 +311,47 @@ struct ChatView: View {
                 attachmentOperationFeedback
             }
 
-            HStack(alignment: .bottom, spacing: AuroraDesign.Space.xs) {
-                if model.canAttachPhoto {
-                    photoAttachmentControl
+            GlassEffectContainer(spacing: AuroraDesign.Space.xs) {
+                ZStack(alignment: .bottom) {
+                    composerTextField
+                        .padding(
+                            .leading,
+                            composerIsExpanded
+                                ? AuroraDesign.Space.xs
+                                : 56
+                        )
+                        .padding(.trailing, 44)
+                        .padding(
+                            .top,
+                            composerIsExpanded ? AuroraDesign.Space.xs : 0
+                        )
+                        .padding(
+                            .bottom,
+                            composerIsExpanded ? 44 : 0
+                        )
+                        .frame(
+                            maxWidth: .infinity,
+                            minHeight: composerIsExpanded ? 104 : 44,
+                            alignment: composerIsExpanded ? .topLeading : .center
+                        )
+
+                    HStack(spacing: AuroraDesign.Space.xs) {
+                        photoAttachmentControl
+                        Spacer()
+                        sendButton
+                    }
                 }
-
-                TextField("Describe the situation…", text: $draft, axis: .vertical)
-                    .lineLimit(1...5)
-                    .padding(.vertical, 11)
-                    .focused($composerIsFocused)
-                    .accessibilityIdentifier("chat.composer")
-
-                modelControl
-
-                Button {
-                    let outgoing = draft
-                    draft = ""
-                    composerIsFocused = false
-                    Task { await model.send(outgoing) }
-                } label: {
-                    Image(systemName: "arrow.up")
-                        .font(.body.weight(.bold))
-                        .foregroundStyle(.white)
-                        .frame(width: 36, height: 36)
-                        .background(Color.accentColor, in: Circle())
-                }
-                .disabled(!canSend)
-                .accessibilityLabel("Send")
-                .accessibilityIdentifier("chat.send")
+                .padding(AuroraDesign.Space.xxs)
+                .glassEffect(
+                    .regular,
+                    in: RoundedRectangle(
+                        cornerRadius: composerIsExpanded ? 30 : 26
+                    )
+                )
             }
-            .padding(.leading, 2)
-            .padding(.trailing, AuroraDesign.Space.xxs)
-            .padding(.vertical, AuroraDesign.Space.xxs)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24))
-            .overlay {
-                RoundedRectangle(cornerRadius: 24)
-                    .stroke(.separator.opacity(0.35), lineWidth: 0.5)
-            }
+            .animation(.smooth(duration: 0.24), value: composerIsExpanded)
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("chat.composerSurface")
 
             if model.canAttachPhoto,
                model.photoAuthorizationStatus == .denied
@@ -204,22 +369,92 @@ struct ChatView: View {
         }
         .frame(maxWidth: AuroraDesign.readableWidth)
         .padding(.horizontal, AuroraDesign.Space.md)
-        .padding(.top, AuroraDesign.Space.xs)
-        .padding(.bottom, AuroraDesign.Space.sm)
+        .padding(.top, AuroraDesign.Space.xxs)
+        .padding(.bottom, AuroraDesign.Space.xs)
         .frame(maxWidth: .infinity)
-        .background(.bar)
+    }
+
+    private var composerTextField: some View {
+        TextField(
+            model.canUseAsk
+                ? "Ask anything…"
+                : "Select a model to start a chat",
+            text: $draft,
+            axis: .vertical
+        )
+            .lineLimit(1...5)
+            .focused($composerIsFocused)
+            .disabled(!model.canUseAsk)
+            .accessibilityIdentifier("chat.composer")
+    }
+
+    private var sendButton: some View {
+        Group {
+            if canSend {
+                sendButtonControl
+                    .buttonStyle(.glassProminent)
+                    .tint(Color.primary)
+            } else {
+                sendButtonControl
+                    .buttonStyle(.glass)
+                    .disabled(true)
+                    .overlay {
+                        Image(systemName: "arrow.up")
+                            .font(.callout.weight(.bold))
+                            .foregroundStyle(.primary)
+                            .accessibilityHidden(true)
+                    }
+            }
+        }
+    }
+
+    private var sendButtonControl: some View {
+        Button(action: sendDraft) {
+            Image(systemName: "arrow.up")
+                .font(.callout.weight(.bold))
+                .frame(width: 28, height: 28)
+        }
+        .buttonBorderShape(.circle)
+        .frame(minWidth: 44, minHeight: 44)
+        .contentShape(Rectangle())
+        .accessibilityLabel("Send")
+        .accessibilityIdentifier("chat.send")
+    }
+
+    private func sendDraft() {
+        let outgoing = draft
+        draft = ""
+        composerIsFocused = false
+        Task { await model.send(outgoing) }
+    }
+
+    private var composerIsExpanded: Bool {
+        composerIsFocused || !draft.isEmpty
     }
 
     @ViewBuilder
     private var photoAttachmentControl: some View {
         Button {
-            showsAttachmentSourceDialog = true
+            showsAttachmentMenu = true
         } label: {
             Image(systemName: "plus")
-                .font(.body.weight(.semibold))
-                .frame(width: 44, height: 44)
+                .font(.callout.weight(.semibold))
+                .frame(width: 28, height: 28)
         }
+        .buttonStyle(.glass)
+        .buttonBorderShape(.circle)
+        .frame(minWidth: 44, minHeight: 44)
+        .contentShape(Rectangle())
         .accessibilityLabel("Attach photo")
+        .accessibilityIdentifier("chat.attach")
+        .popover(
+            isPresented: $showsAttachmentMenu,
+            attachmentAnchor: .rect(.bounds),
+            arrowEdge: .bottom
+        ) {
+            attachmentMenu
+                .presentationCompactAdaptation(.popover)
+        }
     }
 
     @ViewBuilder
@@ -281,6 +516,13 @@ struct ChatView: View {
         }
     }
 
+    private func dismissComposer() {
+        guard composerIsFocused else { return }
+        withAnimation(.smooth(duration: 0.2)) {
+            composerIsFocused = false
+        }
+    }
+
     private var canSend: Bool {
         guard model.canUseAsk, !model.isThinking else { return false }
         if !draft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -290,83 +532,158 @@ struct ChatView: View {
         return attachment.loadState == .ready && attachment.imageData != nil
     }
 
+    @ViewBuilder
     private var modelControl: some View {
-        Group {
-            if model.isModelLoading {
-                ProgressView()
-                    .frame(width: 44, height: 44)
-                    .accessibilityLabel("Loading model")
-            } else {
-                Menu {
-                    ForEach(ModelTier.allCases, id: \.self) { tier in
-                        Button {
-                            model.modelSelection = tier == .lite ? .lite : .expert
-                            if model.runtimeTiers.contains(tier) {
-                                Task { await model.loadModel(tier) }
-                            } else {
-                                model.selectedTab = .tools
-                            }
-                        } label: {
-                            Label(
-                                model.loadedTier == tier
-                                    ? "\(tier.displayName) loaded"
-                                    : model.runtimeTiers.contains(tier)
-                                        ? "Load \(tier.displayName)"
-                                        : "Set up \(tier.displayName)",
-                                systemImage: model.loadedTier == tier
-                                    ? "checkmark"
-                                    : "cpu"
-                            )
-                        }
-                    }
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "cpu")
-                        Text(model.loadedTier?.displayName ?? "Load")
-                            .lineLimit(1)
-                    }
-                    .font(.caption.bold())
-                    .frame(minWidth: 44, minHeight: 44)
-                }
-                .buttonStyle(.glass)
-                .accessibilityLabel(
-                    model.loadedTier.map { "Model: \($0.displayName)" }
-                        ?? "Load \(model.modelSelection.displayName) model"
-                )
+        if model.isModelLoading {
+            ProgressView()
+                .frame(minWidth: 44, minHeight: 44)
+                .accessibilityLabel("Loading model")
                 .accessibilityIdentifier("chat.modelSelection")
+        } else {
+            Menu {
+                ForEach(ModelTier.allCases, id: \.self) { tier in
+                    Button {
+                        activateModel(tier)
+                    } label: {
+                        Label(
+                            modelMenuTitle(for: tier),
+                            systemImage: model.loadedTier == tier
+                                ? "checkmark"
+                                : model.runtimeTiers.contains(tier)
+                                    ? "cpu"
+                                    : "arrow.down.circle"
+                        )
+                    }
+                    .disabled(tier == .expert && !model.expertDeviceIsEligible)
+                    .accessibilityIdentifier("chat.model.\(tier.rawValue)")
+                }
+
+                if let loadedTier = model.loadedTier {
+                    Divider()
+                    Button {
+                        Task { await model.unloadModel() }
+                    } label: {
+                        Label(
+                            "Unload \(loadedTier.displayName)",
+                            systemImage: "eject"
+                        )
+                    }
+                    .accessibilityIdentifier("chat.model.unload")
+                }
+            } label: {
+                HStack(spacing: AuroraDesign.Space.xs) {
+                    Image(systemName: "cpu")
+                    Text("Model")
+                }
+                    .font(.subheadline.weight(.semibold))
+                    .fixedSize()
+                    .frame(minHeight: 44)
             }
+            .accessibilityLabel(modelControlAccessibilityLabel)
+            .accessibilityIdentifier("chat.modelSelection")
         }
     }
 
-    private var modelLoadBanner: some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            Label("Load an offline model to ask Aurora", systemImage: "cpu")
-                .font(.headline)
-            Text("Your \(model.modelSelection.displayName) choice is remembered, but Aurora leaves AI unloaded when the app opens to save memory and battery.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            if case let .failed(_, message) = model.modelRuntimeState {
-                Text(message).font(.caption).foregroundStyle(.red)
-            }
-            Button {
-                if model.runtimeTiers.contains(model.modelSelection.requestedTier) {
-                    Task { await model.loadSelectedModel() }
-                } else {
-                    model.selectedTab = .tools
-                }
-            } label: {
-                Label(
-                    model.runtimeTiers.contains(model.modelSelection.requestedTier)
-                        ? "Load \(model.modelSelection.displayName)"
-                        : "Set up \(model.modelSelection.displayName)",
-                    systemImage: "play.circle.fill"
-                )
-            }
-            .buttonStyle(.glassProminent)
+    private var preferredUnloadedTier: ModelTier {
+        if model.modelSelection == .expert, model.expertDeviceIsEligible {
+            return .expert
         }
-        .padding(AuroraDesign.Space.md)
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 20))
-        .accessibilityIdentifier("chat.modelRequired")
+        return .lite
+    }
+
+    private func modelMenuTitle(for tier: ModelTier) -> String {
+        if model.loadedTier == tier { return tier.displayName }
+        return model.runtimeTiers.contains(tier)
+            ? "Load \(tier.displayName)"
+            : "Set Up \(tier.displayName)"
+    }
+
+    private var modelControlAccessibilityLabel: String {
+        if let loadedTier = model.loadedTier {
+            return "Model: \(loadedTier.displayName)"
+        }
+        return model.runtimeTiers.contains(preferredUnloadedTier)
+            ? "Choose model. \(preferredUnloadedTier.displayName) is ready to load."
+            : "Set up model"
+    }
+
+    private func activateModel(_ tier: ModelTier) {
+        model.modelSelection = tier == .lite ? .lite : .expert
+        if model.runtimeTiers.contains(tier) {
+            Task { await model.loadModel(tier) }
+        } else {
+            model.selectedTab = .tools
+        }
+    }
+
+    @ViewBuilder
+    private var modelStatus: some View {
+        if case let .failed(_, message) = model.modelRuntimeState {
+            Label(message, systemImage: "exclamationmark.triangle.fill")
+                .font(.caption)
+                .foregroundStyle(.red)
+                .frame(maxWidth: AuroraDesign.readableWidth, alignment: .leading)
+                .padding(.horizontal, AuroraDesign.Space.md)
+                .accessibilityIdentifier("chat.modelStatus")
+        }
+    }
+
+    private var attachmentMenu: some View {
+        VStack(spacing: 0) {
+            attachmentMenuRow(title: "Take Photo", systemImage: "camera") {
+                takePhoto()
+            }
+            Divider()
+            attachmentMenuRow(
+                title: "Choose Photo",
+                systemImage: "photo.on.rectangle"
+            ) {
+                chooseExistingPhoto()
+            }
+        }
+        .frame(width: 250)
+        .padding(.vertical, AuroraDesign.Space.xxs)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("chat.liteAttachmentSheet")
+    }
+
+    private func attachmentMenuRow(
+        title: String,
+        systemImage: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            showsAttachmentMenu = false
+            action()
+        } label: {
+            HStack(spacing: AuroraDesign.Space.sm) {
+                Image(systemName: systemImage)
+                    .frame(width: 24)
+                VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
+                    Text(title)
+                        .font(.body.weight(.medium))
+                    if !model.canAttachPhoto {
+                        Text("Expert mode")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .padding(.horizontal, AuroraDesign.Space.md)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(model.canAttachPhoto ? .primary : .secondary)
+        .disabled(!model.canAttachPhoto)
+        .accessibilityLabel(
+            model.canAttachPhoto ? title : "\(title), Expert mode"
+        )
+        .accessibilityIdentifier(
+            title == "Take Photo"
+                ? "chat.liteAttachment.camera"
+                : "chat.liteAttachment.photo"
+        )
     }
 
     @ViewBuilder
@@ -417,38 +734,6 @@ struct ChatView: View {
     }
 }
 
-private struct WelcomeCard: View {
-    let starters: [String]
-    let choose: (String) -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.md) {
-            Text("Offline intelligence for the outdoors")
-                .font(.title2.weight(.semibold))
-            Text("Ask about water, fire, shelter, navigation, first aid, or vehicle trouble. Aurora connects answers to reviewed guidance stored on this device.")
-                .foregroundStyle(.secondary)
-            ForEach(starters, id: \.self) { starter in
-                Button {
-                    choose(starter)
-                } label: {
-                    HStack {
-                        Text(starter)
-                        Spacer()
-                        Image(systemName: "arrow.up.right")
-                            .font(.caption)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .buttonStyle(.plain)
-                .padding(AuroraDesign.Space.sm)
-                .background(.quaternary.opacity(0.6), in: RoundedRectangle(cornerRadius: AuroraDesign.Radius.compact))
-            }
-        }
-        .padding(.vertical, AuroraDesign.Space.lg)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
 private struct MessageBubble: View {
     let message: ChatMessage
 
@@ -481,6 +766,7 @@ private struct MessageBubble: View {
                 Text(message.text)
                     .font(.body)
                     .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
                     .textSelection(.enabled)
                     .accessibilityIdentifier(
                         message.role == .user ? "chat.question" : "chat.answer"
@@ -552,7 +838,10 @@ private struct MessageBubble: View {
             }
             .padding(.horizontal, message.role == .user ? 14 : 0)
             .padding(.vertical, message.role == .user ? 11 : 0)
-            .frame(maxWidth: message.role == .user ? 560 : .infinity, alignment: .leading)
+            .frame(
+                maxWidth: message.role == .user ? nil : .infinity,
+                alignment: .leading
+            )
             .background(
                 message.role == .user
                     ? Color.accentColor.opacity(0.12)

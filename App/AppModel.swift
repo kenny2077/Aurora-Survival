@@ -242,6 +242,15 @@ final class AppModel: ObservableObject {
 
     var canAttachPhoto: Bool { loadedTier == .expert }
 
+    var expertDeviceIsEligible: Bool {
+        ModelRouter().route(
+            requested: .expert,
+            installed: [.expert],
+            expertValidated: true,
+            device: deviceProfiler.snapshot()
+        ).availability == .ready
+    }
+
     var isModelLoading: Bool {
         if case .loading = modelRuntimeState { return true }
         return false

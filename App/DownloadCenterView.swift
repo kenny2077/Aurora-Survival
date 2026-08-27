@@ -4,18 +4,27 @@ struct DownloadCenterView: View {
     @EnvironmentObject private var model: AppModel
     let kindFilter: PackageKind?
     let showsCatalogConnection: Bool
+    let onOpenMap: ((String, OfflineMapLayer) -> Void)?
 
     init(
         kindFilter: PackageKind? = nil,
-        showsCatalogConnection: Bool = true
+        showsCatalogConnection: Bool = true,
+        onOpenMap: ((String, OfflineMapLayer) -> Void)? = nil
     ) {
         self.kindFilter = kindFilter
         self.showsCatalogConnection = showsCatalogConnection
+        self.onOpenMap = onOpenMap
     }
 
     private var visibleEntries: [PackageCatalogEntry] {
         model.catalogEntries.filter { entry in
             kindFilter.map { entry.kind == $0 } ?? true
+        }
+    }
+
+    private var installedMapsWithoutCatalogEntries: [ResolvedOfflineMap] {
+        model.offlineMaps.filter { map in
+            !visibleEntries.contains { $0.packageID == map.id }
         }
     }
 
@@ -25,7 +34,13 @@ struct DownloadCenterView: View {
                 catalogSection
             }
 
-            if visibleEntries.isEmpty {
+            if kindFilter == .map,
+               !installedMapsWithoutCatalogEntries.isEmpty {
+                installedMapSection
+            }
+
+            if visibleEntries.isEmpty
+                && installedMapsWithoutCatalogEntries.isEmpty {
                 Section {
                     ContentUnavailableView(
                         kindFilter == .map ? "No map catalog loaded" : "No downloads loaded",
@@ -100,15 +115,79 @@ struct DownloadCenterView: View {
         if !entries.isEmpty {
             Section(title) {
                 ForEach(entries) { entry in
+                    let installedMap = model.offlineMaps.first {
+                        $0.id == entry.packageID
+                    }
                     PackageDownloadCard(
                         entry: entry,
                         state: model.packageState(for: entry),
                         start: { model.startDownload(entry) },
                         cancel: { model.cancelDownload(entry) },
-                        remove: { model.removePackage(entry) }
+                        remove: { model.removePackage(entry) },
+                        mapLayers: installedMap?.pack.availableLayers ?? [],
+                        openMap: { layer in
+                            onOpenMap?(installedMap?.id ?? entry.packageID, layer)
+                        }
                     )
                 }
             }
+        }
+    }
+
+    private var installedMapSection: some View {
+        Section("Installed") {
+            ForEach(installedMapsWithoutCatalogEntries) { map in
+                HStack(spacing: 12) {
+                    Image(systemName: "map.fill")
+                        .accessibilityHidden(true)
+                    Text(map.pack.name)
+                        .font(.headline)
+                        .accessibilityIdentifier("downloads.map.name.\(map.id)")
+                    Spacer(minLength: 8)
+                    compactOpenMap(
+                        id: map.id,
+                        layers: map.pack.availableLayers
+                    )
+                }
+                .padding(.vertical, 6)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func compactOpenMap(id: String, layers: [OfflineMapLayer]) -> some View {
+        if let onlyLayer = layers.first, layers.count == 1 {
+            Button("Open Map") {
+                onOpenMap?(id, onlyLayer)
+            }
+            .buttonStyle(.glass)
+            .controlSize(.small)
+            .accessibilityIdentifier("downloads.map.open.\(id)")
+        } else if !layers.isEmpty {
+            Menu("Open Map") {
+                ForEach(layers, id: \.self) { layer in
+                    Button {
+                        onOpenMap?(id, layer)
+                    } label: {
+                        Label(layer.displayName, systemImage: layerIcon(layer))
+                    }
+                    .accessibilityIdentifier(
+                        "downloads.map.layer.\(layer.rawValue)"
+                    )
+                }
+            }
+            .buttonStyle(.glass)
+            .controlSize(.small)
+            .accessibilityIdentifier("downloads.map.open.\(id)")
+        }
+    }
+
+    private func layerIcon(_ layer: OfflineMapLayer) -> String {
+        switch layer {
+        case .legacy: "map"
+        case .terrain: "mountain.2"
+        case .topographic: "lines.measurement.horizontal"
+        case .trail: "figure.hiking"
         }
     }
 
@@ -120,6 +199,8 @@ struct PackageDownloadCard: View {
     let start: () -> Void
     let cancel: () -> Void
     let remove: () -> Void
+    let mapLayers: [OfflineMapLayer]
+    let openMap: (OfflineMapLayer) -> Void
     @State private var confirmsRemoval = false
 
     var body: some View {
@@ -134,13 +215,22 @@ struct PackageDownloadCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(entry.displayName)
                         .font(.headline)
+                        .accessibilityIdentifier(
+                            entry.kind == .map && isInstalledMap
+                                ? "downloads.map.name.\(entry.id)"
+                                : "package.title.\(entry.id)"
+                        )
                     Text(entry.summary)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-            }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
+                if isInstalledMap {
+                    compactMapOpenAction
+                }
+            }
             HStack(spacing: 8) {
                 Label(byteCount, systemImage: "internaldrive")
                 if let region = entry.metadata["region"] {
@@ -197,8 +287,10 @@ struct PackageDownloadCard: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(.green)
                 Spacer()
-                Button("Remove", role: .destructive) { confirmsRemoval = true }
-                    .buttonStyle(.bordered)
+                Button("Remove", role: .destructive) {
+                    confirmsRemoval = true
+                }
+                .buttonStyle(.bordered)
             }
 
         case let .failed(message):
@@ -220,10 +312,52 @@ struct PackageDownloadCard: View {
         }
     }
 
+    private var isInstalledMap: Bool {
+        guard entry.kind == .map, !mapLayers.isEmpty else { return false }
+        if case .installed = state { return true }
+        return false
+    }
+
+    @ViewBuilder private var compactMapOpenAction: some View {
+        if let onlyLayer = mapLayers.first, mapLayers.count == 1 {
+            Button("Open Map") {
+                openMap(onlyLayer)
+            }
+            .buttonStyle(.glass)
+            .controlSize(.small)
+            .accessibilityIdentifier("downloads.map.open.\(entry.id)")
+        } else if !mapLayers.isEmpty {
+            Menu("Open Map") {
+                ForEach(mapLayers, id: \.self) { layer in
+                    Button {
+                        openMap(layer)
+                    } label: {
+                        Label(layer.displayName, systemImage: layerIcon(layer))
+                    }
+                    .accessibilityIdentifier(
+                        "downloads.map.layer.\(layer.rawValue)"
+                    )
+                }
+            }
+            .buttonStyle(.glass)
+            .controlSize(.small)
+            .accessibilityIdentifier("downloads.map.open.\(entry.id)")
+        }
+    }
+
     private var byteCount: String {
         ByteCountFormatter.string(
             fromByteCount: entry.totalByteCount,
             countStyle: .file
         )
+    }
+
+    private func layerIcon(_ layer: OfflineMapLayer) -> String {
+        switch layer {
+        case .legacy: "map"
+        case .terrain: "mountain.2"
+        case .topographic: "lines.measurement.horizontal"
+        case .trail: "figure.hiking"
+        }
     }
 }

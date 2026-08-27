@@ -4,43 +4,74 @@ import SwiftUI
 
 struct MapPackView: View {
     @EnvironmentObject private var model: AppModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @StateObject private var coordinator = MapsFeatureCoordinator()
     @State private var showsDownloadCenter = false
     @State private var showsWaypointEditor = false
+    @State private var bottomChromeHeight: CGFloat = 0
+    @State private var mapChromeVisible = true
+    @State private var mapFocus: MapCameraFocus?
 
     var body: some View {
         ZStack {
-            mapSurface.ignoresSafeArea(edges: .top)
+            mapSurface
+                .ignoresSafeArea(edges: .top)
+                .accessibilityIdentifier("maps.canvas")
             VStack(spacing: AuroraDesign.Space.sm) {
-                HStack {
-                    Spacer()
-                    mapStyleButton
+                if mapChromeVisible {
+                    HStack {
+                        Spacer()
+                        mapStyleButton
+                    }
+                    .transition(.opacity)
                 }
-                if let message = coordinator.statusMessage { statusBanner(message) }
+                if mapChromeVisible,
+                   let message = coordinator.statusMessage {
+                    statusBanner(message)
+                        .transition(.opacity)
+                }
                 Spacer()
-                modePanel
-                modeSwitcher
+                if mapChromeVisible {
+                    bottomChrome
+                        .transition(.opacity)
+                }
             }
             .padding(.horizontal, AuroraDesign.Space.sm)
             .padding(.vertical, AuroraDesign.Space.xs)
         }
-        .navigationTitle("Maps")
-        .navigationBarTitleDisplayMode(.inline)
-        .accessibilityIdentifier("maps.home")
-        .toolbarBackground(.hidden, for: .navigationBar)
+        .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $showsDownloadCenter) {
             NavigationStack {
-                DownloadCenterView(kindFilter: .map, showsCatalogConnection: false)
+                DownloadCenterView(
+                    kindFilter: .map,
+                    showsCatalogConnection: false,
+                    onOpenMap: { packID, layer in
+                        coordinator.selectSource(
+                            .offline(packID: packID, layer: layer)
+                        )
+                        showsDownloadCenter = false
+                    }
+                )
                     .task { await model.ensureCatalogLoaded() }
             }
         }
         .sheet(isPresented: $showsWaypointEditor) {
             WaypointEditorSheet(coordinator: coordinator)
         }
-        .onAppear { configure() }
+        .onAppear {
+            mapChromeVisible = true
+            configure()
+            coordinator.requestLocation()
+        }
+        .onDisappear { coordinator.stopDisplayLocation() }
         .onChange(of: model.offlineMaps.map(\.id)) { _, _ in configure() }
         .onChange(of: coordinator.pendingWaypointCoordinate) { _, coordinate in
             showsWaypointEditor = coordinate != nil
+        }
+        .onPreferenceChange(MapBottomChromeHeightKey.self) { height in
+            if abs(bottomChromeHeight - height) > 1 {
+                bottomChromeHeight = height
+            }
         }
     }
 
@@ -50,7 +81,11 @@ struct MapPackView: View {
             AppleMapCanvas(
                 source: coordinator.source,
                 scene: coordinator.scene,
-                onLongPress: { coordinator.prepareWaypoint(at: $0) }
+                bottomChromeInset: mapChromeVisible ? bottomChromeHeight : 0,
+                showsChrome: mapChromeVisible,
+                focus: mapFocus,
+                onLongPress: { coordinator.prepareWaypoint(at: $0) },
+                onSingleTap: toggleMapChrome
             )
         case let .offline(packID, layer):
             if let map = model.offlineMaps.first(where: { $0.id == packID }) {
@@ -58,7 +93,10 @@ struct MapPackView: View {
                     map: map,
                     layer: layer,
                     scene: coordinator.scene,
-                    onLongPress: { coordinator.prepareWaypoint(at: $0) }
+                    showsChrome: mapChromeVisible,
+                    focus: mapFocus,
+                    onLongPress: { coordinator.prepareWaypoint(at: $0) },
+                    onSingleTap: toggleMapChrome
                 )
             } else {
                 ZStack {
@@ -102,7 +140,6 @@ struct MapPackView: View {
         }
         .buttonStyle(.glass)
         .controlSize(.small)
-        .offset(y: -8)
         .accessibilityLabel("Map type")
         .accessibilityIdentifier("maps.source")
     }
@@ -134,28 +171,40 @@ struct MapPackView: View {
 
     private var waypointPanel: some View {
         VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            HStack {
-                Label("Survival Waypoints", systemImage: "mappin.and.ellipse").font(.headline)
-                Spacer()
-                Button { coordinator.prepareWaypoint() } label: {
-                    Label("Mark Here", systemImage: "plus.circle.fill")
-                }
-                .buttonStyle(.glass)
-                .accessibilityIdentifier("maps.waypoint.add")
-            }
+            Label("Survival Waypoints", systemImage: "mappin.and.ellipse")
+                .font(.headline)
             if coordinator.scene.waypoints.isEmpty {
-                Text("Mark your location or long-press the map. Notes and attachments remain offline.")
+                Text("Long-press the map to add.")
                     .font(.caption).foregroundStyle(.secondary)
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(coordinator.scene.waypoints) { waypoint in
-                            Label(waypoint.kind.displayName, systemImage: waypoint.kind.systemImage)
-                                .font(.caption.bold()).padding(8)
-                                .glassEffect(.regular.interactive(), in: Capsule())
-                                .contextMenu {
-                                    Button("Delete", role: .destructive) { coordinator.deleteWaypoint(waypoint) }
+                            Button {
+                                mapFocus = MapCameraFocus(
+                                    coordinate: waypoint.coordinate
+                                )
+                            } label: {
+                                Label(
+                                    waypoint.kind.displayName,
+                                    systemImage: waypoint.kind.systemImage
+                                )
+                                .font(.caption.bold())
+                                .padding(8)
+                                .glassEffect(
+                                    .regular.interactive(),
+                                    in: Capsule()
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier(
+                                "maps.waypoint.saved.\(waypoint.id.uuidString)"
+                            )
+                            .contextMenu {
+                                Button("Delete", role: .destructive) {
+                                    coordinator.deleteWaypoint(waypoint)
                                 }
+                            }
                         }
                     }
                 }
@@ -185,9 +234,6 @@ struct MapPackView: View {
                     .buttonStyle(.glass)
                     Text(trail.state.rawValue.capitalized).font(.caption.bold()).foregroundStyle(.secondary)
                 }
-            } else {
-                Text("Record a durable breadcrumb trail while the screen is locked or the app is backgrounded.")
-                    .font(.caption).foregroundStyle(.secondary)
             }
             if !coordinator.savedTrails.filter({ $0.state == .idle }).isEmpty {
                 DisclosureGroup("Route history") {
@@ -220,50 +266,31 @@ struct MapPackView: View {
     }
 
     private var offlinePanel: some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            HStack {
-                Label("Offline Maps", systemImage: "internaldrive").font(.headline)
-                Spacer()
-                Button("Manage Downloads") { showsDownloadCenter = true }
-                    .buttonStyle(.glass)
-                    .accessibilityIdentifier("maps.download.manage")
+        HStack(spacing: AuroraDesign.Space.md) {
+            Label("Offline Maps", systemImage: "map.fill")
+                .font(.headline)
+            Spacer(minLength: AuroraDesign.Space.sm)
+            Button("Downloads") {
+                showsDownloadCenter = true
             }
-            if model.offlineMaps.isEmpty {
-                Text("No signed region is installed. Minnesota is the test region for this release.")
-                    .font(.caption).foregroundStyle(.secondary)
-            } else {
-                ForEach(model.offlineMaps) { map in
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text(map.pack.regionCode).font(.subheadline.bold())
-                            Spacer()
-                            Text(ByteCountFormatter.string(fromByteCount: map.pack.unpackedByteCount, countStyle: .file))
-                                .font(.caption.monospacedDigit())
-                        }
-                        HStack(spacing: 8) {
-                            ForEach(map.pack.availableLayers, id: \.self) { layer in
-                                Button {
-                                    coordinator.selectSource(.offline(packID: map.id, layer: layer))
-                                } label: {
-                                    Label(
-                                        layer == .legacy ? "Open Offline" : layer.displayName,
-                                        systemImage: layerIcon(layer)
-                                    )
-                                }
-                                .buttonStyle(.glass)
-                                .controlSize(.small)
-                            }
-                        }
-                    }
-                    .padding(.top, 4)
-                }
-            }
+            .buttonStyle(.glass)
+            .controlSize(.small)
+            .accessibilityIdentifier("maps.download.manage")
         }
     }
 
     private var modeSwitcher: some View {
         HStack(spacing: 4) {
-            ForEach(MapsMode.allCases, id: \.self) { mode in
+            ForEach(Array(MapsMode.allCases.enumerated()), id: \.element) {
+                index,
+                mode in
+                if index > 0 {
+                    Divider()
+                        .frame(height: 28)
+                        .opacity(0.38)
+                        .accessibilityHidden(true)
+                        .accessibilityIdentifier("maps.mode.divider.\(index)")
+                }
                 Button {
                     coordinator.mode = mode
                 } label: {
@@ -287,18 +314,40 @@ struct MapPackView: View {
         }
         .padding(5).frame(maxWidth: 520)
         .glassEffect(.clear, in: RoundedRectangle(cornerRadius: 18))
+        .sensoryFeedback(.selection, trigger: coordinator.mode)
+    }
+
+    private var bottomChrome: some View {
+        VStack(spacing: AuroraDesign.Space.sm) {
+            modePanel
+            modeSwitcher
+        }
+        .overlay(alignment: .topLeading) {
+            Color.clear
+                .frame(width: 1, height: 1)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Map controls")
+                .accessibilityIdentifier("maps.chrome")
+        }
+        .background {
+            GeometryReader { proxy in
+                Color.clear.preference(
+                    key: MapBottomChromeHeightKey.self,
+                    value: proxy.size.height
+                )
+            }
+        }
     }
 
     private func configure() {
         coordinator.configure(maps: model.offlineMaps)
     }
 
-    private func layerIcon(_ layer: OfflineMapLayer) -> String {
-        switch layer {
-        case .legacy: "map"
-        case .terrain: "mountain.2"
-        case .topographic: "lines.measurement.horizontal"
-        case .trail: "figure.hiking"
+    private func toggleMapChrome() {
+        withAnimation(
+            reduceMotion ? .linear(duration: 0.01) : .smooth(duration: 0.24)
+        ) {
+            mapChromeVisible.toggle()
         }
     }
 
@@ -332,14 +381,26 @@ private struct PreparedOfflineMapSurface: View {
     let map: ResolvedOfflineMap
     let layer: OfflineMapLayer
     let scene: MapSceneSnapshot
+    let showsChrome: Bool
+    let focus: MapCameraFocus?
     let onLongPress: (GeoCoordinate) -> Void
+    let onSingleTap: () -> Void
     @State private var preparedStyleURL: URL?
     @State private var errorMessage: String?
 
     var body: some View {
         Group {
             if let preparedStyleURL {
-                SurvivalOfflineMapCanvas(map: map, layer: layer, styleURL: preparedStyleURL, scene: scene, onLongPress: onLongPress)
+                SurvivalOfflineMapCanvas(
+                    map: map,
+                    layer: layer,
+                    styleURL: preparedStyleURL,
+                    scene: scene,
+                    showsChrome: showsChrome,
+                    focus: focus,
+                    onLongPress: onLongPress,
+                    onSingleTap: onSingleTap
+                )
             } else if let errorMessage {
                 ContentUnavailableView("Offline Map Unavailable", systemImage: "exclamationmark.triangle", description: Text(errorMessage))
             } else {
@@ -365,6 +426,14 @@ private struct PreparedOfflineMapSurface: View {
         } catch {
             errorMessage = "The signed local map style failed validation."
         }
+    }
+}
+
+private struct MapBottomChromeHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
@@ -398,6 +467,7 @@ private struct WaypointEditorSheet: View {
                 }
             }
             .navigationTitle("New Waypoint")
+            .accessibilityIdentifier("maps.waypoint.editor")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {

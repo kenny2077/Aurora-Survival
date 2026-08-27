@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ToolsView: View {
     private enum ToolRoute: Hashable {
+        case emergency
         case flashlight
         case satellite
         case compass
@@ -10,6 +11,8 @@ struct ToolsView: View {
     }
 
     @EnvironmentObject private var model: AppModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @StateObject private var emergencyStore = EmergencyProfileStore()
     @StateObject private var checklistStore = TripChecklistStore()
     @StateObject private var locationModel = SurvivalToolsLocationModel()
@@ -17,39 +20,25 @@ struct ToolsView: View {
     @State private var showsSettings = false
     @State private var modelPendingRemoval: ModelTier?
 
-    private let columns = [GridItem(.flexible()), GridItem(.flexible())]
-
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
-                emergencyHero
-                offlineAI
+                offlineModels
                 Text("Field tools").font(.title2.bold())
                 GlassEffectContainer(spacing: AuroraDesign.Space.sm) {
-                    LazyVGrid(columns: columns, spacing: AuroraDesign.Space.sm) {
-                        toolLink("SOS Flashlight", flashlight.isRunning ? "SIGNALING" : "Morse torch signal", "flashlight.on.fill", .orange, route: .flashlight)
-                        toolLink("Satellite", "Compatibility & guide", "antenna.radiowaves.left.and.right", .indigo, route: .satellite)
-                        toolLink("Compass", "Heading & coordinates", "safari.fill", AuroraDesign.river, route: .compass)
-                        toolLink("Checklist", "\(checklistStore.completedCount) of \(checklistStore.items.count) ready", "checklist.checked", .green, route: .checklist)
-                    }
+                    fieldToolsGrid
                 }
             }
             .padding(AuroraDesign.Space.md)
             .frame(maxWidth: AuroraDesign.readableWidth)
             .frame(maxWidth: .infinity)
         }
-        .background(
-            LinearGradient(
-                colors: [.init(uiColor: .systemGroupedBackground), AuroraDesign.river.opacity(0.08), .indigo.opacity(0.06)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ).ignoresSafeArea()
-        )
+        .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
         .navigationTitle("Tools")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { showsSettings = true } label: { Image(systemName: "gearshape.fill") }
-                    .buttonStyle(.glass)
                     .accessibilityLabel("Tools settings")
                     .accessibilityIdentifier("tools.settings")
             }
@@ -57,7 +46,6 @@ struct ToolsView: View {
         .task { await model.ensureCatalogLoaded() }
         .sheet(isPresented: $showsSettings) {
             ToolsSettingsView(model: model, checklistStore: checklistStore)
-                .presentationBackground(.ultraThinMaterial)
         }
         .confirmationDialog(
             "Remove \(modelPendingRemoval?.displayName ?? "model") download?",
@@ -83,155 +71,159 @@ struct ToolsView: View {
         .accessibilityIdentifier("tools.home")
     }
 
-    private var emergencyHero: some View {
-        NavigationLink {
-            EmergencyCenterView(store: emergencyStore, location: locationModel)
-        } label: {
-            HStack(spacing: AuroraDesign.Space.sm) {
-                Image(systemName: "sos.circle.fill")
-                    .font(.title2)
-                Spacer()
-                Text("Emergency Center")
-                    .font(.headline)
-                Image(systemName: "chevron.right")
-                    .font(.subheadline.bold())
-            }
-            .foregroundStyle(.white)
-            .padding(.horizontal, AuroraDesign.Space.md)
-            .padding(.vertical, AuroraDesign.Space.sm)
-            .frame(maxWidth: .infinity)
-            .background(
-                LinearGradient(colors: [AuroraDesign.signal, .red.opacity(0.72)], startPoint: .topLeading, endPoint: .bottomTrailing),
-                in: RoundedRectangle(cornerRadius: 18)
-            )
-            .shadow(color: AuroraDesign.signal.opacity(0.18), radius: 10, y: 4)
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("tools.emergency")
-    }
-
-    private var offlineAI: some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.md) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Offline AI").font(.title2.bold())
-                    Text(model.loadedTier.map { "\($0.displayName) loaded" } ?? "No model loaded this launch")
-                        .font(.caption).foregroundStyle(.secondary)
+    private var offlineModels: some View {
+        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+            Text("Offline Models").font(.title2.bold())
+            GlassEffectContainer(spacing: AuroraDesign.Space.sm) {
+                VStack(spacing: AuroraDesign.Space.sm) {
+                    tierCard(.lite)
+                    tierCard(.expert)
                 }
-                Spacer()
-                modelMenu
             }
-            tierCard(.lite)
-            tierCard(.expert)
         }
-        .padding(AuroraDesign.Space.md)
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 24))
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tools.offlineAI")
     }
 
-    private var modelMenu: some View {
-        Menu {
-            ForEach(ModelTier.allCases, id: \.self) { tier in
-                Button { choose(tier) } label: {
-                    Label(model.loadedTier == tier ? "\(tier.displayName) loaded" : "Load \(tier.displayName)",
-                          systemImage: model.loadedTier == tier ? "checkmark" : "cpu")
-                }
-            }
-        } label: {
-            Label(model.modelSelection.displayName, systemImage: "chevron.up.chevron.down")
-                .font(.subheadline.bold())
-        }
-        .buttonStyle(.glass)
-        .accessibilityIdentifier("tools.modelSelection")
-    }
-
-    private func choose(_ tier: ModelTier) {
-        model.modelSelection = tier == .lite ? .lite : .expert
-        guard model.runtimeTiers.contains(tier) else { return }
-        Task { await model.loadModel(tier) }
-    }
-
     private func tierCard(_ tier: ModelTier) -> some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            HStack(alignment: .top) {
-                Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
-                    .font(.title2).foregroundStyle(tier == .lite ? AuroraDesign.river : .indigo)
-                    .frame(width: 42, height: 42)
-                    .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 13))
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(tier.displayName).font(.headline)
-                    Text(tier == .lite ? "Fast · text" : "Advanced · text + vision")
-                        .font(.caption.bold()).foregroundStyle(.secondary)
-                }
-                Spacer()
-                modelStatus(tier)
-                if case .ready = model.modelSetupState(for: tier) {
-                    Menu {
-                        Button("Remove Download", role: .destructive) {
-                            modelPendingRemoval = tier
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
-                    }
-                    .accessibilityLabel("Manage \(tier.displayName) download")
+        HStack(spacing: AuroraDesign.Space.sm) {
+            Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
+                .font(.headline)
+                .foregroundStyle(tier == .lite ? AuroraDesign.river : .indigo)
+                .frame(width: 34, height: 34)
+                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 11))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(tier.displayName).font(.headline)
+                Text(modelDescription(for: tier))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+            Spacer(minLength: AuroraDesign.Space.sm)
+            modelControl(tier)
+        }
+        .padding(AuroraDesign.Space.sm)
+        .frame(maxWidth: .infinity, minHeight: 62)
+        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 18))
+        .opacity(tier == .expert && !model.expertDeviceIsEligible ? 0.68 : 1)
+        .contextMenu {
+            if case .ready = model.modelSetupState(for: tier) {
+                Button("Remove Download", role: .destructive) {
+                    modelPendingRemoval = tier
                 }
             }
-            Text(tier == .lite
-                 ? "Lower-memory offline guidance paired with Aurora’s reviewed survival knowledge and embedding index."
-                 : "Higher-depth offline guidance with photo analysis on validated high-memory devices.")
-                .font(.caption).foregroundStyle(.secondary)
-            modelAction(tier)
         }
-        .padding(AuroraDesign.Space.md)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 20))
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("tools.tier.\(tier.rawValue)")
     }
 
-    private func modelStatus(_ tier: ModelTier) -> some View {
-        let result: (String, Color)
-        if model.loadedTier == tier {
-            result = ("LOADED", .green)
-        } else {
-            result = switch model.modelSetupState(for: tier) {
-            case .ready: ("READY", .green)
-            case .downloading: ("DOWNLOADING", .blue)
-            case .available: ("AVAILABLE", .blue)
-            case .failed: ("ATTENTION", .red)
-            case .unavailable: ("UNAVAILABLE", .secondary)
-            }
-        }
-        return Text(result.0).font(.caption2.bold()).foregroundStyle(result.1)
-            .padding(.horizontal, 8).padding(.vertical, 5)
-            .background(result.1.opacity(0.12), in: Capsule())
-    }
-
-    @ViewBuilder private func modelAction(_ tier: ModelTier) -> some View {
-        if case .loading(tier) = model.modelRuntimeState {
-            HStack { ProgressView(); Text("Loading \(tier.displayName)…") }.font(.subheadline.bold())
+    @ViewBuilder private func modelControl(_ tier: ModelTier) -> some View {
+        if tier == .expert && !model.expertDeviceIsEligible {
+            EmptyView()
+        } else if case .loading(tier) = model.modelRuntimeState {
+            ProgressView()
+                .frame(width: 34, height: 34)
+                .accessibilityLabel("Loading \(tier.displayName)")
+                .accessibilityIdentifier("tools.model.loading.\(tier.rawValue)")
         } else if model.loadedTier == tier {
-            Label("Loaded for this launch", systemImage: "checkmark.circle.fill")
-                .font(.subheadline.bold()).foregroundStyle(.green)
+            Button {
+                Task { await model.unloadModel() }
+            } label: {
+                Image(systemName: "eject.fill")
+                    .frame(width: 32, height: 32)
+            }
+            .buttonStyle(.glass)
+            .buttonBorderShape(.circle)
+            .controlSize(.small)
+            .accessibilityLabel("Unload \(tier.displayName)")
+            .accessibilityIdentifier("tools.model.unload.\(tier.rawValue)")
+        } else if model.runtimeTiers.contains(tier) {
+            Button {
+                Task { await model.loadModel(tier) }
+            } label: {
+                Image(systemName: "play.fill")
+                    .frame(width: 32, height: 32)
+            }
+            .buttonStyle(.glass)
+            .buttonBorderShape(.circle)
+            .controlSize(.small)
+            .disabled(model.isModelLoading)
+            .accessibilityLabel("Load \(tier.displayName)")
+            .accessibilityIdentifier("tools.model.load.\(tier.rawValue)")
         } else {
             switch model.modelSetupState(for: tier) {
             case .ready:
-                Button { Task { await model.loadModel(tier) } } label: {
-                    Label("Load \(tier.displayName)", systemImage: "play.circle.fill").frame(maxWidth: .infinity)
-                }.buttonStyle(.glassProminent)
+                EmptyView()
             case let .downloading(fraction):
-                ProgressView(value: fraction) { Text("Preparing \(fraction.formatted(.percent.precision(.fractionLength(0))))") }
-                Button("Pause") { model.cancelModelSetup(tier) }.buttonStyle(.glass)
+                ProgressView(value: fraction)
+                    .progressViewStyle(.circular)
+                    .frame(width: 34, height: 34)
+                    .accessibilityLabel("Downloading \(tier.displayName)")
+                    .accessibilityValue(
+                        fraction.formatted(
+                            .percent.precision(.fractionLength(0))
+                        )
+                    )
+                    .accessibilityIdentifier(
+                        "tools.model.downloading.\(tier.rawValue)"
+                    )
             case .available:
-                Button { model.startModelSetup(tier) } label: {
-                    Label(downloadLabel(tier), systemImage: "arrow.down.circle.fill").frame(maxWidth: .infinity)
-                }.buttonStyle(.glassProminent)
+                modelIconButton(
+                    "arrow.down",
+                    label: downloadLabel(tier),
+                    identifier: "tools.model.download.\(tier.rawValue)"
+                ) {
+                    model.startModelSetup(tier)
+                }
             case let .failed(message):
-                Label(message, systemImage: "exclamationmark.triangle.fill").font(.caption).foregroundStyle(.red)
-                Button("Try Again") { model.startModelSetup(tier) }.buttonStyle(.glassProminent)
+                HStack(spacing: 4) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        .accessibilityHidden(true)
+                    modelIconButton(
+                        "arrow.clockwise",
+                        label: "Retry \(tier.displayName)",
+                        identifier: "tools.model.retry.\(tier.rawValue)",
+                        hint: message
+                    ) {
+                        model.startModelSetup(tier)
+                    }
+                }
             case .unavailable:
-                Text(model.catalogStatus).font(.caption).foregroundStyle(.secondary)
-                Button("Check Availability") { Task { await model.refreshCatalog() } }.buttonStyle(.glass)
+                EmptyView()
             }
         }
+    }
+
+    private func modelDescription(for tier: ModelTier) -> String {
+        switch tier {
+        case .lite:
+            "Fast offline text"
+        case .expert where !model.expertDeviceIsEligible:
+            "Requires a newer device"
+        case .expert:
+            "Offline text and photos"
+        }
+    }
+
+    private func modelIconButton(
+        _ symbol: String,
+        label: String,
+        identifier: String,
+        hint: String? = nil,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .frame(width: 32, height: 32)
+        }
+        .buttonStyle(.glass)
+        .buttonBorderShape(.circle)
+        .controlSize(.small)
+        .accessibilityLabel(label)
+        .accessibilityHint(hint ?? "")
+        .accessibilityIdentifier(identifier)
     }
 
     private func downloadLabel(_ tier: ModelTier) -> String {
@@ -240,8 +232,111 @@ struct ToolsView: View {
         return bytes > 0 ? base + " · " + ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file) : base
     }
 
-    private func toolLink(_ title: String, _ detail: String, _ symbol: String,
-                          _ tint: Color, route: ToolRoute) -> some View {
+    @ViewBuilder private var fieldToolsGrid: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(spacing: AuroraDesign.Space.sm) {
+                fieldToolCards
+            }
+        } else if horizontalSizeClass == .regular {
+            LazyVGrid(
+                columns: Array(
+                    repeating: GridItem(.flexible()),
+                    count: 3
+                ),
+                spacing: AuroraDesign.Space.sm
+            ) {
+                fieldToolCards
+            }
+        } else {
+            Grid(
+                horizontalSpacing: AuroraDesign.Space.sm,
+                verticalSpacing: AuroraDesign.Space.sm
+            ) {
+                GridRow {
+                    emergencyTool.gridCellColumns(2)
+                    flashlightTool.gridCellColumns(2)
+                }
+                GridRow {
+                    satelliteTool.gridCellColumns(2)
+                    compassTool.gridCellColumns(2)
+                }
+                GridRow {
+                    checklistTool.gridCellColumns(2)
+                    Color.clear
+                        .accessibilityHidden(true)
+                        .gridCellColumns(2)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private var fieldToolCards: some View {
+        emergencyTool
+        flashlightTool
+        satelliteTool
+        compassTool
+        checklistTool
+    }
+
+    private var emergencyTool: some View {
+        toolLink(
+            "Emergency Center",
+            "SOS & emergency info",
+            "sos.circle.fill",
+            AuroraDesign.signal,
+            route: .emergency,
+            identifier: "tools.emergency"
+        )
+    }
+
+    private var flashlightTool: some View {
+        toolLink(
+            "SOS Flashlight",
+            flashlight.isRunning ? "SIGNALING" : "Morse torch signal",
+            "flashlight.on.fill",
+            .orange,
+            route: .flashlight
+        )
+    }
+
+    private var satelliteTool: some View {
+        toolLink(
+            "Satellite",
+            "Compatibility & guide",
+            "antenna.radiowaves.left.and.right",
+            .indigo,
+            route: .satellite
+        )
+    }
+
+    private var compassTool: some View {
+        toolLink(
+            "Compass",
+            "Heading & coordinates",
+            "safari.fill",
+            AuroraDesign.river,
+            route: .compass
+        )
+    }
+
+    private var checklistTool: some View {
+        toolLink(
+            "Checklist",
+            "\(checklistStore.completedCount) of \(checklistStore.items.count) ready",
+            "checklist.checked",
+            .green,
+            route: .checklist
+        )
+    }
+
+    private func toolLink(
+        _ title: String,
+        _ detail: String,
+        _ symbol: String,
+        _ tint: Color,
+        route: ToolRoute,
+        identifier: String? = nil
+    ) -> some View {
         NavigationLink(value: route) {
             VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
                 Image(systemName: symbol).font(.title2).foregroundStyle(tint)
@@ -252,14 +347,18 @@ struct ToolsView: View {
                 Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(2)
             }
             .padding(AuroraDesign.Space.md)
-            .frame(maxWidth: .infinity, minHeight: 154, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: 132, alignment: .leading)
             .contentShape(RoundedRectangle(cornerRadius: 22))
             .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 22))
-        }.buttonStyle(.plain)
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier(identifier ?? "tools.tool.\(title)")
     }
 
     @ViewBuilder private func toolDestination(for route: ToolRoute) -> some View {
         switch route {
+        case .emergency:
+            EmergencyCenterView(store: emergencyStore, location: locationModel)
         case .flashlight:
             SOSFlashlightView(controller: flashlight)
         case .satellite:
@@ -594,8 +693,6 @@ private struct ToolsSettingsView: View {
                 Section("About") {
                     LabeledContent("Version", value: version)
                     LabeledContent("Selected model", value: model.modelSelection.displayName)
-                    LabeledContent("Loaded model", value: model.loadedTier?.displayName ?? "Not loaded")
-                    LabeledContent("Installed AI", value: model.installedTierSummary)
                 }
                 Section("Legal") {
                     NavigationLink("AI Usage Disclosure") { LegalDocumentView(document: .ai) }
@@ -611,7 +708,12 @@ private struct ToolsSettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .toolbar { Button("Done") { dismiss() } }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
             .confirmationDialog("Reset preferences to defaults?", isPresented: $confirmsReset, titleVisibility: .visible) {
                 Button("Reset Preferences", role: .destructive) {
                     checklistStore.reset(); model.modelSelection = .lite

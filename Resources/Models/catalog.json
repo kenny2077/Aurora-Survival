@@ -54,10 +54,10 @@
       "maximum_context_tokens": 8192,
       "maximum_output_tokens": 256,
       "validation_status": "locked_pending_signed_artifacts_and_physical_acceptance",
-      "target_devices": ["iPhone 17 Pro Max", "iPad Pro with M2 or newer"],
+      "target_devices": ["iPhone 13 Pro or newer 6 GB-class devices", "iPad Pro with M2 or newer"],
       "purpose": "Larger local text-and-vision assistance on validated high-memory devices.",
       "gates": {
-        "minimum_physical_memory_bytes": 7500000000,
+        "minimum_physical_memory_bytes": 5500000000,
         "minimum_free_storage_bytes": 3500000000,
         "allowed_thermal_states": ["nominal", "fair"],
         "disable_in_low_power_mode": true

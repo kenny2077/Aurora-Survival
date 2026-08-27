@@ -71,6 +71,11 @@ final class MapsFeatureCoordinator: ObservableObject {
         locationService.startDisplayUpdates()
     }
 
+    func stopDisplayLocation() {
+        guard recording.trail?.state != .recording else { return }
+        locationService.stopDisplayUpdates()
+    }
+
     func selectSource(_ newSource: MapSource) {
         guard !newSource.requiresNetwork || isConnected else {
             statusMessage = "Online maps need a network connection."
