@@ -1,4 +1,5 @@
 import Foundation
+import NaturalLanguage
 
 public enum ExpertGroundingReason: String, Codable, Sendable {
     case exactReviewedIntent = "exact_reviewed_intent"
@@ -234,38 +235,126 @@ public enum ExpertTurnIntentError: Error, Equatable, Sendable {
     case malformed
 }
 
-public enum ResponseLanguage: String, Codable, Equatable, Sendable {
-    case english = "en"
-    case chinese = "zh"
+public struct ResponseLanguage: Codable, Equatable, Sendable {
+    public static let english = ResponseLanguage(identifier: "en", confidence: 1)
+    public static let chinese = ResponseLanguage(identifier: "zh-Hans", confidence: 1)
+
+    public let identifier: String?
+    public let confidence: Double
+
+    public init(identifier: String?, confidence: Double) {
+        self.identifier = identifier
+        self.confidence = min(1, max(0, confidence))
+    }
+
+    public static func == (lhs: ResponseLanguage, rhs: ResponseLanguage) -> Bool {
+        lhs.identifier == rhs.identifier
+    }
 
     public static func detect(in value: String) -> ResponseLanguage {
-        value.unicodeScalars.contains { scalar in
-            (0x3400...0x4DBF).contains(scalar.value)
-                || (0x4E00...0x9FFF).contains(scalar.value)
-                || (0xF900...0xFAFF).contains(scalar.value)
-        } ? .chinese : .english
+        if containsCJK(value) { return .chinese }
+
+        let normalized = value
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines.union(.punctuationCharacters))
+        if ["hi", "hello", "hey", "thanks", "thank you"].contains(normalized) {
+            return .english
+        }
+        let wordCount = normalized.split(whereSeparator: \.isWhitespace).count
+        if wordCount <= 2 {
+            return ResponseLanguage(identifier: nil, confidence: 0)
+        }
+
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(value)
+        if let result = recognizer.languageHypotheses(withMaximum: 1).first,
+           result.value >= 0.4 {
+            return ResponseLanguage(
+                identifier: result.key.rawValue,
+                confidence: result.value
+            )
+        }
+        if value.unicodeScalars.allSatisfy({ $0.isASCII }) {
+            return .english
+        }
+        return ResponseLanguage(identifier: nil, confidence: 0)
     }
 
     public var instruction: String {
-        switch self {
-        case .english: return "Respond in English."
-        case .chinese: return "Use clear Simplified Chinese for the complete answer."
+        switch baseIdentifier {
+        case "en":
+            return "Reply entirely in English, matching the CURRENT USER MESSAGE."
+        case "zh":
+            return "请完全使用清晰的简体中文回答，并与“CURRENT USER MESSAGE”的语言保持一致。"
+        case let language?:
+            let displayName = Locale(identifier: "en").localizedString(
+                forLanguageCode: language
+            ) ?? language
+            return "Reply entirely in \(displayName), matching the CURRENT USER MESSAGE."
+        case nil:
+            return "Reply entirely in the same language as the CURRENT USER MESSAGE."
         }
+    }
+
+    public func accepts(_ answer: String) -> Bool {
+        guard let expected = baseIdentifier else { return true }
+        if expected == "zh" {
+            guard Self.containsCJK(answer) else { return false }
+            return !Self.sentences(in: answer).contains { sentence in
+                !Self.containsCJK(String(sentence))
+                    && sentence.split(whereSeparator: \.isWhitespace).filter {
+                        $0.unicodeScalars.contains(where: CharacterSet.letters.contains)
+                    }.count >= 4
+            }
+        }
+        if expected == "en", Self.sentences(in: answer).contains(where: {
+            $0.unicodeScalars.filter(Self.isCJK).count >= 4
+        }) {
+            return false
+        }
+
+        let detected = Self.detect(in: answer)
+        guard detected.confidence >= 0.4,
+              let actual = detected.baseIdentifier else { return true }
+        return actual == expected
+    }
+
+    public var retryMessage: String {
+        switch baseIdentifier {
+        case "zh": return "未能完成可验证来源的回答，请重试。"
+        case "es": return "No se pudo completar una respuesta con fuentes verificadas. Inténtalo de nuevo."
+        default: return "The source-verified answer could not be completed. Please try again."
+        }
+    }
+
+    private var baseIdentifier: String? {
+        identifier?.split(separator: "-").first.map(String.init)
+    }
+
+    private static func containsCJK(_ value: String) -> Bool {
+        value.unicodeScalars.contains(where: isCJK)
+    }
+
+    private static func isCJK(_ scalar: UnicodeScalar) -> Bool {
+        (0x3400...0x4DBF).contains(scalar.value)
+            || (0x4E00...0x9FFF).contains(scalar.value)
+            || (0xF900...0xFAFF).contains(scalar.value)
+    }
+
+    private static func sentences(in value: String) -> [Substring] {
+        value.split(whereSeparator: { ".!?…。！？".contains($0) })
     }
 }
 
 public struct TurnRoutingDecision: Equatable, Sendable {
     public let intent: ExpertTurnIntent
-    public let responseLanguage: ResponseLanguage
     public let retrievalQuery: String
 
     public init(
         intent: ExpertTurnIntent,
-        responseLanguage: ResponseLanguage,
         retrievalQuery: String
     ) {
         self.intent = intent
-        self.responseLanguage = responseLanguage
         self.retrievalQuery = retrievalQuery
     }
 }
@@ -273,12 +362,10 @@ public struct TurnRoutingDecision: Equatable, Sendable {
 public struct TurnRoutingDecisionCodec: Sendable {
     private struct CompactDecision: Decodable {
         let intent: String
-        let language: String
         let query: String
 
         private enum CodingKeys: String, CodingKey {
             case intent = "t"
-            case language = "l"
             case query = "q"
         }
     }
@@ -292,12 +379,11 @@ public struct TurnRoutingDecisionCodec: Sendable {
               let data = String(value[start...end]).data(using: .utf8),
               let object = try? JSONSerialization.jsonObject(with: data)
                 as? [String: Any],
-              Set(object.keys) == ["t", "l", "q"],
+              Set(object.keys) == ["t", "q"],
               let decoded = try? JSONDecoder().decode(
                 CompactDecision.self,
                 from: data
-              ),
-              let language = ResponseLanguage(rawValue: decoded.language)
+              )
         else { throw ExpertTurnIntentError.malformed }
 
         let intent: ExpertTurnIntent
@@ -317,7 +403,6 @@ public struct TurnRoutingDecisionCodec: Sendable {
 
         return TurnRoutingDecision(
             intent: intent,
-            responseLanguage: language,
             retrievalQuery: query
         )
     }
@@ -351,6 +436,26 @@ public struct ExpertAnswerSafetyValidator: Sendable {
     ]
 
     public init() {}
+
+    public func validateEssential(
+        answer: String,
+        scenarios: [RetrievedEvidenceScenario]
+    ) throws {
+        guard !scenarios.isEmpty,
+              scenarios.allSatisfy({
+                  !$0.scenario.claims.isEmpty
+                    && $0.scenario.claims.allSatisfy({ !$0.sourceIDs.isEmpty })
+              })
+        else { throw ExpertAnswerSafetyError.unreviewedEvidence }
+        try validateNumbers(
+            in: answer,
+            allowed: Set(scenarios
+                .flatMap { $0.scenario.claims }
+                .flatMap(\.allowedNumericFacts)
+                .map { $0.token.lowercased() })
+        )
+        try validateProhibitedClaims(answer)
+    }
 
     public func validate(
         answer: ExpertAttributedAnswer,

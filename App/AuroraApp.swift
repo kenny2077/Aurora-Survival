@@ -24,6 +24,7 @@ struct AuroraApp: App {
             RootView()
                 .environmentObject(appModel)
                 .tint(Color.accentColor)
+                .preferredColorScheme(appModel.appearancePreference.colorScheme)
                 .task {
                     await appModel.restoreBackgroundDownloads()
                     await appModel.refreshActivePacks()

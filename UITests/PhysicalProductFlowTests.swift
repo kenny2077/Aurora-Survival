@@ -447,9 +447,40 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCTAssertFalse(app.staticTexts["Loaded model"].exists)
         XCTAssertFalse(app.staticTexts["Installed AI"].exists)
         XCTAssertTrue(app.staticTexts["Legal"].exists)
+        let appearancePicker = app.descendants(matching: .any)["tools.appearance"]
+        XCTAssertTrue(appearancePicker.exists)
+        for appearance in ["System", "Light", "Dark"] {
+            XCTAssertTrue(app.buttons[appearance].exists)
+        }
+        app.buttons["Dark"].tap()
+        XCTAssertEqual(appearancePicker.value as? String, "Dark")
+        app.buttons["Done"].tap()
+
+        app.terminate()
+        app.launch()
+        openTools(in: app)
+        XCTAssertTrue(settings.waitForExistence(timeout: 20))
+        settings.tap()
+        XCTAssertTrue(app.navigationBars["Settings"].waitForExistence(timeout: 10))
+        XCTAssertEqual(
+            app.descendants(matching: .any)["tools.appearance"].value as? String,
+            "Dark"
+        )
 
         app.swipeUp()
         XCTAssertTrue(app.buttons["tools.reset"].waitForExistence(timeout: 10))
+        app.buttons["tools.reset"].tap()
+        XCTAssertTrue(app.buttons["Reset Preferences"].waitForExistence(timeout: 5))
+        app.buttons["Reset Preferences"].tap()
+        app.swipeDown()
+        let resetPicker = app.descendants(matching: .any)["tools.appearance"]
+        expectation(
+            for: NSPredicate { object, _ in
+                (object as? XCUIElement)?.value as? String == "System"
+            },
+            evaluatedWith: resetPicker
+        )
+        waitForExpectations(timeout: 5)
         keepScreenshot(named: "Tools simplified settings", app: app)
     }
 

@@ -292,7 +292,7 @@ private actor ExpertPipelineRecorder: LocalLanguageModel {
         switch prompt.purpose {
         case .expertIntent:
             let query = prompt.question.replacingOccurrences(of: "\"", with: "")
-            return "{\"t\":\"survival\",\"l\":\"en\",\"q\":\"\(query)\"}"
+            return "{\"t\":\"survival\",\"q\":\"\(query)\"}"
         case .incidentFallback:
             return #"{"a":"Move away from immediate hazards and preserve warmth, water, and communication while you assess the situation. Use only actions you can perform safely with available equipment. Stop and seek emergency help if conditions worsen or anyone becomes confused, unresponsive, or severely injured.","e":[]}"#
         case .grounded:
@@ -300,26 +300,13 @@ private actor ExpertPipelineRecorder: LocalLanguageModel {
                 errors.append("grounded_without_evidence:\(expectedLessonID)")
                 throw ModelFailure.invalidOutput
             }
-            let bundle = EvidenceBundle(scenarios: prompt.expertEvidence)
             let claims = Array(scenario.claims.prefix(3))
-            let attributed = ExpertAttributedAnswer(sentences: claims.map {
-                let index = bundle.claims.firstIndex(of: $0).map { $0 + 1 } ?? 0
-                return ExpertAttributedSentence(
-                    text: $0.text,
-                    evidenceIndexes: [index]
-                )
-            })
-            let data = try JSONEncoder().encode(attributed)
-            let output = String(decoding: data, as: UTF8.self)
-            do {
-                _ = try ExpertAttributedAnswerCodec().decodeAndValidate(
-                    output,
-                    evidenceCount: bundle.claims.count
-                )
-            } catch {
-                errors.append("\(scenario.lessonID):\(error)")
-            }
-            return output
+            let answer = claims.map(\.text).joined(separator: " ")
+            let data = try JSONSerialization.data(withJSONObject: [
+                "a": answer,
+                "e": [1],
+            ])
+            return String(decoding: data, as: UTF8.self)
         default:
             throw ModelFailure.invalidOutput
         }

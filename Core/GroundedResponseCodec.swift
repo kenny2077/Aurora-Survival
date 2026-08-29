@@ -31,6 +31,13 @@ public struct GroundedResponseCodec: Sendable {
         guard let json = Self.jsonObjectData(in: generated) else {
             throw GroundedResponseCodecError.noJSONObject
         }
+        guard let object = try? JSONSerialization.jsonObject(with: json)
+                as? [String: Any],
+              Set(object.keys).isSubset(of: ["a", "e"]),
+              Set(object.keys) == ["a", "e"]
+        else {
+            throw GroundedResponseCodecError.invalidJSON
+        }
         guard let decision = try? JSONDecoder().decode(
             CompactConversationalDecision.self,
             from: json
@@ -92,14 +99,10 @@ public struct GroundedResponseCodec: Sendable {
         }
 
         let indexes = decision.evidenceIndexes
-        guard indexes.count <= 2,
+        guard indexes.count <= 3,
               Set(indexes).count == indexes.count,
               (effectivePurpose == .grounded ? !indexes.isEmpty : indexes.isEmpty)
         else {
-            throw GroundedResponseError.invalidConversationalEvidence
-        }
-        if tier == .expert, effectivePurpose == .grounded,
-           indexes != [1] {
             throw GroundedResponseError.invalidConversationalEvidence
         }
         let evidenceIDs = try indexes.map { index -> String in
@@ -224,52 +227,26 @@ public struct GroundedResponseCodec: Sendable {
             return false
         }
 
-        let wordCount = answer.split(whereSeparator: \.isWhitespace).count
         let sentenceCount = answer.split {
             sentenceTerminators.contains($0)
         }.filter {
             !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }.count
-        let meaningfulCharacterCount = answer.filter { !$0.isWhitespace }.count
+        guard responseLanguage.accepts(answer) else { return false }
         switch purpose {
         case .ordinary, .nativeVisionAnswer:
             break
         case .grounded:
-            let sentenceRange = tier == .expert ? 2...5 : 2...4
-            let lengthIsValid = responseLanguage == .chinese
-                ? (tier == .expert ? 35...360 : 24...220)
-                    .contains(meaningfulCharacterCount)
-                : (tier == .expert ? 45...95 : 28...70).contains(wordCount)
-            guard lengthIsValid, sentenceRange.contains(sentenceCount),
-                  Self.hasWarningOrStopCondition(answer) else {
-                return false
-            }
+            guard (1...5).contains(sentenceCount) else { return false }
         case .clarification:
-            let lengthIsValid = responseLanguage == .chinese
-                ? (18...180).contains(meaningfulCharacterCount)
-                : (tier == .expert ? 25...60 : 18...45).contains(wordCount)
-            guard lengthIsValid,
-                  Self.isClarificationRequest(answer) else {
-                return false
-            }
+            guard sentenceCount <= 4 else { return false }
         case .incidentFallback:
-            let lengthIsValid = responseLanguage == .chinese
-                ? (18...260).contains(meaningfulCharacterCount)
-                : (24...75).contains(wordCount)
-            guard lengthIsValid,
-                  (1...6).contains(sentenceCount),
+            guard (1...6).contains(sentenceCount),
                   !Self.impersonatesUser(answer, question: question) else {
                 return false
             }
         case .incidentIntake:
-            let lengthIsValid = responseLanguage == .chinese
-                ? (12...160).contains(meaningfulCharacterCount)
-                : (14...40).contains(wordCount)
-            guard lengthIsValid,
-                  (1...3).contains(sentenceCount),
-                  Self.isIncidentIntakeRequest(answer) else {
-                return false
-            }
+            guard (1...3).contains(sentenceCount) else { return false }
         case .expertIntent:
             return false
         }
@@ -366,10 +343,6 @@ public struct GroundedResponseCodec: Sendable {
         return signals.contains(where: lowercased.contains)
     }
 
-    private static func hasWarningOrStopCondition(_ answer: String) -> Bool {
-        hasExplicitSafetyLimit(answer)
-    }
-
     private static func containsAffirmativeInstruction(
         _ answer: String,
         phrase: String
@@ -394,39 +367,6 @@ public struct GroundedResponseCodec: Sendable {
             searchStart = range.upperBound
         }
         return false
-    }
-
-    private static func isClarificationRequest(_ answer: String) -> Bool {
-        let lowercased = answer.lowercased()
-        let detailRequests = [
-            "what ", "which ", "describe", "tell me", "detail",
-            "symptom", "condition", "observe", "happening",
-            "什么", "哪", "描述", "告诉我", "症状", "情况", "观察",
-        ]
-        let procedures = [
-            "bandage", "boil", "clear the exhaust", "disconnect",
-            "filter the water", "jack up", "jump start", "remove the",
-            "replace", "splint", "start the engine", "tourniquet", "tow",
-        ]
-        return (answer.contains("?") || answer.contains("？"))
-            && detailRequests.contains(where: lowercased.contains)
-            && !procedures.contains(where: lowercased.contains)
-    }
-
-    private static func isIncidentIntakeRequest(_ answer: String) -> Bool {
-        let lowercased = answer.lowercased()
-        let detailRequests = [
-            "describe", "detail", "happening", "location", "observe",
-            "situation", "tell me", "what ", "where ",
-            "描述", "详情", "位置", "观察", "情况", "告诉我", "什么", "哪里",
-        ]
-        let inventedActions = [
-            "apply pressure", "call emergency", "check the battery", "drink water",
-            "establish a secure", "move away", "secure the perimeter", "stay put",
-            "turn off", "use a tourniquet",
-        ]
-        return detailRequests.contains(where: lowercased.contains)
-            && !inventedActions.contains(where: lowercased.contains)
     }
 
     private static func stepMap(

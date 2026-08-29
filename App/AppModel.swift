@@ -20,6 +20,23 @@ enum ModelSetupState: Equatable {
     case failed(String)
 }
 
+enum AppearancePreference: String, CaseIterable, Identifiable {
+    case system
+    case light
+    case dark
+
+    var id: String { rawValue }
+    var displayName: String { rawValue.capitalized }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+}
+
 @MainActor
 final class AppModel: ObservableObject {
     @Published var modelSelection: ModelSelectionPreference = .lite {
@@ -57,6 +74,14 @@ final class AppModel: ObservableObject {
             userDefaults.set(
                 allowsCellularModelDownloads,
                 forKey: Self.cellularDownloadsDefaultsKey
+            )
+        }
+    }
+    @Published var appearancePreference: AppearancePreference {
+        didSet {
+            userDefaults.set(
+                appearancePreference.rawValue,
+                forKey: Self.appearanceDefaultsKey
             )
         }
     }
@@ -129,6 +154,9 @@ final class AppModel: ObservableObject {
         self.capturedPhotoSaver = capturedPhotoSaver
             ?? SystemCapturedPhotoSaver()
         self.userDefaults = userDefaults
+        appearancePreference = AppearancePreference(
+            rawValue: userDefaults.string(forKey: Self.appearanceDefaultsKey) ?? ""
+        ) ?? .system
         allowsCellularModelDownloads = userDefaults.bool(
             forKey: Self.cellularDownloadsDefaultsKey
         )
@@ -1811,10 +1839,15 @@ final class AppModel: ObservableObject {
                     }?.answer
                     let text = answer?.text ?? ""
                     let lowercased = text.lowercased()
+                    let requestedLanguage = ResponseLanguage.detect(
+                        in: item.question
+                    )
+                    let detectedLanguage = ResponseLanguage.detect(in: text)
                     let selectedScenarioIDs = answer?.evidenceIDs ?? []
                     let manualLessonIDs = answer?.manualReferences.map(
                         \.lessonID
                     ) ?? []
+                    let sourceTitles = answer?.sourceCards.map(\.title) ?? []
                     let expectedRoutePass: Bool
                     if tier == .expert {
                         let acceptable = item.acceptableEvidenceSets ?? []
@@ -1837,6 +1870,15 @@ final class AppModel: ObservableObject {
                     if GroundedResponseCodec.containsControlLeakage(text) {
                         automaticFailures.append("control_leakage")
                     }
+                    if !requestedLanguage.accepts(text) {
+                        automaticFailures.append("wrong_language")
+                    }
+                    if !sourceTitles.contains("Survival Manual 2026") {
+                        automaticFailures.append("missing_reviewed_source")
+                    }
+                    if !expectedRoutePass {
+                        automaticFailures.append("unexpected_retrieval")
+                    }
                     if !text.isEmpty,
                        text.last.map({ !".!?…".contains($0) }) == true {
                         automaticFailures.append("truncated_ending")
@@ -1849,16 +1891,22 @@ final class AppModel: ObservableObject {
                         || lowercased.contains("couldn't run") {
                         automaticFailures.append("terminal_refusal")
                     }
-                    if item.id == "comparison-water-boil",
-                       lowercased.contains("10 minute")
-                        || lowercased.contains("ten minute") {
-                        automaticFailures.append("incorrect_numeric_guidance")
+                    let screenshotName = "adaptive-language-\(tier.rawValue)-\(item.id).png"
+                    let screenshotCaptured = captureDebugWindowScreenshot(
+                        named: screenshotName
+                    )
+                    if !screenshotCaptured {
+                        automaticFailures.append("screenshot_failed")
                     }
                     var result: [String: Any] = [
                         "id": item.id,
                         "tier": tier.rawValue,
                         "question": item.question,
                         "answer": text,
+                        "requested_language": requestedLanguage.identifier
+                            ?? "undetermined",
+                        "detected_language": detectedLanguage.identifier
+                            ?? "undetermined",
                         "word_count": text.split(
                             whereSeparator: \.isWhitespace
                         ).count,
@@ -1872,6 +1920,9 @@ final class AppModel: ObservableObject {
                         "selected_scenario_ids": selectedScenarioIDs,
                         "manual_lesson_ids": manualLessonIDs,
                         "source_card_ids": answer?.sourceCards.map(\.id) ?? [],
+                        "source_card_titles": sourceTitles,
+                        "source_state": sourceTitles.contains("Survival Manual 2026")
+                            ? "reviewed" : "none",
                         "sentence_citation_count": answer?
                             .sentenceCitations.count ?? 0,
                         "support_status": answer?.supportStatus?.rawValue
@@ -1884,6 +1935,11 @@ final class AppModel: ObservableObject {
                             .verificationIssues.map(\.code) ?? [],
                         "expected_route_pass": expectedRoutePass,
                         "automatic_failures": automaticFailures,
+                        "pass_reason": automaticFailures.isEmpty
+                            ? "passed" : automaticFailures.joined(separator: ","),
+                        "passed": automaticFailures.isEmpty,
+                        "screenshot": screenshotCaptured
+                            ? screenshotName : NSNull(),
                         "raw_completion_count": debugModelCompletions.count,
                         "repair_count": max(
                             0, debugModelCompletions.count - 1
@@ -2982,6 +3038,7 @@ final class AppModel: ObservableObject {
     static let legalSchemaVersion = 1
     private static let cellularDownloadsDefaultsKey =
         "Aurora.allowsCellularModelDownloads"
+    private static let appearanceDefaultsKey = "Aurora.appearance"
     private static let pendingDownloadsDefaultsKey =
         "Aurora.pendingPackageDownloads"
 

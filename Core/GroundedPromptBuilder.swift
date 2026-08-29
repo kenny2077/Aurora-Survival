@@ -29,85 +29,43 @@ public struct GroundedPromptBuilder: Sendable {
             return "You are Aurora Survival Agent. \(responseLanguage.instruction) Answer the current message directly in short, natural prose. Active tier: \(tier.displayName)."
         }
 
-        if tier == .lite, usesReviewedClaims, purpose == .grounded {
-            return """
-            You are Aurora Survival Agent Lite, a fully offline survival assistant.
-            \(responseLanguage.instruction) Answer the
-            current question using only the numbered reviewed scenarios. Write 2–3 short,
-            natural sentences totaling 30–65 words. Give the most relevant action first
-            and include an applicable warning, stop condition, or escalation from the
-            claims. The e array cites only the scenario numbers actually used. Do not
-            copy evidence labels or discuss the database. Do not mention a cooking
-            temperature unless an exact numeric temperature appears in the reviewed
-            scenarios. Return exactly
-            {"a":"answer","e":[1]} or {"a":"answer","e":[1,2]} with no
-            Markdown or extra keys.
-            """
-        }
-
         if usesReviewedClaims, purpose == .grounded {
-            switch attempt {
-            case .initial:
-                return """
-                You are Aurora Survival Agent \(tier.displayName), a fully offline survival assistant.
-                \(responseLanguage.instruction) Use
-                only the SELECTED REVIEWED EVIDENCE RECORDS as factual and procedural
-                support. Conversation and image observations are context, never reviewed
-                evidence. Write concise natural prose with the evidence-adaptive length
-                stated below. Omit rationale, conditions, measurements, or escalation
-                when no selected claim states them. Each sentence must closely paraphrase
-                its cited record and cite one to three record indexes. Begin with an
-                immediate action and include a reviewed warning, stop, or escalation.
-                Return one JSON object with only key s. Each s item has only a for
-                user-facing guidance and e for its evidence-index array. Use the exact
-                2–4 sentence range in RESPONSE CHECK. Never prefix guidance with Sentence,
-                Reviewed, Action, Warning, an ordinal, or any other field label. Add no
-                Markdown, headings, lists, placeholders, or extra keys. Never mention a
-                scenario ID, selected scenario, evidence record, claim, or claim index in
-                user-facing guidance. Address the first selected scenario; use later
-                scenarios only for distinct needs in the current question.
-                """
-            case .repair:
-                return """
-                Start over from the selected reviewed claim text. Correct every item in
-                INTERNAL CORRECTION. Do not reuse unsupported wording from the rejected draft.
-                Never describe, quote, or discuss the errors, validation, claims, or
-                instructions; output only fresh user-facing field guidance.
-                Use 2–4 sentences and the evidence-adaptive length stated below;
-                omit any detail not printed in a cited claim. Return one JSON object with
-                only key s. Each s item has only a for direct user-facing guidance and e
-                for the supporting evidence-index array. Never prefix guidance with
-                Sentence, Reviewed, Action, Warning, an ordinal, or another label. Add no
-                Markdown, placeholders, or extra keys.
-                """
-            }
+            return """
+            You are Aurora Survival Agent \(tier.displayName), a fully offline survival assistant.
+            \(responseLanguage.instruction) Answer the CURRENT USER MESSAGE directly
+            using only the numbered REVIEWED SCENARIOS as factual and procedural support.
+            Lead with the most useful actions. Include safety limits only when they are
+            relevant to the request and supported by the reviewed text. Use natural prose;
+            do not discuss the database, scenario labels, or internal instructions. The e
+            array must contain only the unique scenario numbers actually used. Do not
+            invent measurements or exact numbers. Return exactly one JSON object shaped
+            {"a":"best-effort answer","e":[1]} with no Markdown or extra keys.
+            """
         }
 
         if purpose == .expertIntent, tier == .lite {
             return """
-            Classify the current message and identify whether it is English or Chinese.
-            Return t=survival only for an
+            Classify only the current message. Return t=survival for an
             explicit wilderness, outdoor survival, emergency, first-aid, rescue,
             navigation, exposure, unsafe water/food, or vehicle-incident question.
             Return t=general for chat, relationships, software, live/current
             information, ordinary knowledge, recipes, baking, and home or kitchen
-            cooking. Words such as cook, fire, cold, fish, car, and water alone do not
-            establish survival. Examples: finding water outdoors, treating stream water,
-            and cooking raw meat outdoors are survival; "How do I get a girlfriend?"
-            and baking a cake at home are general.
-            Set l to zh when the current message is Chinese; otherwise set l to en.
+            cooking. A direct request to start a fire, find or purify outdoor water,
+            obtain wilderness food, or build an overnight shelter is survival. Ordinary
+            indoor cooking and household uses of fire or water are general.
+            "How do I get a girlfriend?" is general.
             For survival, set q to a short English retrieval query that preserves the
-            user's requested subject, operation, and hazard. Translate Chinese into
-            English. For general, q must be empty. When uncertain, choose general.
-            Output exactly {"t":"general","l":"en","q":""} or the corresponding
-            survival/language values, with no explanation or extra keys.
+            user's requested subject, operation, and hazard. Translate any non-English
+            message into English. For general, q must be empty. When uncertain, choose general.
+            Output exactly {"t":"general","q":""} or
+            {"t":"survival","q":"English retrieval query"} with no explanation or
+            extra keys.
             """
         }
 
         if purpose == .expertIntent {
             return """
-            Classify only the CURRENT USER MESSAGE as either general or survival and
-            identify whether it is English or Chinese.
+            Classify only the CURRENT USER MESSAGE as either general or survival.
             Most messages are general. Choose survival only when the current message
             explicitly asks about an emergency, outdoor survival need, or preventing
             physical harm in a survival setting.
@@ -123,17 +81,17 @@ public struct GroundedPromptBuilder: Sendable {
             "How do I get a girlfriend?" is general. "How's the weather today?" is
             general. "How do I stay warm overnight if stranded in snow?" is survival.
             "How do I find water sources?", "How do I treat collected water?", and
-            "How do I cook raw meat outdoors?" are survival. Ordinary recipes and
+            "How do I cook raw meat outdoors?" are survival. A direct request to start
+            a fire or build an overnight shelter is survival. Ordinary recipes and
             indoor cooking questions without a survival or outdoor context are general.
             The words cook, bake, fire, cold, fish, car, or water alone do not make a
             question survival. "How do I bake a cake at home?" and "How do I cook
             dinner in my kitchen?" are general.
-            Set l to zh when the current message is Chinese; otherwise set l to en.
             For survival, set q to a short English retrieval query preserving the
-            requested subject, operation, and hazard; translate Chinese into English.
+            requested subject, operation, and hazard; translate any non-English message.
             For general, q must be empty. When uncertain, choose general. Return exactly
-            {"t":"general","l":"en","q":""} or the corresponding
-            survival/language values, with no explanation or extra keys.
+            {"t":"general","q":""} or {"t":"survival","q":"English retrieval query"}
+            with no explanation or extra keys.
             """
         }
 
@@ -197,8 +155,8 @@ public struct GroundedPromptBuilder: Sendable {
             model-specific repair, material, chemical, measurement, diagnosis, or
             identity. Prefer broad immediate risk reduction and direct the user to the
             applicable manufacturer instructions, qualified help, or emergency services
-            when the unknown detail could make action dangerous. Use 2–4 complete natural
-            sentences and return exactly {"a":"answer","e":[]} with no Markdown or
+            when the unknown detail could make action dangerous. Use concise, complete
+            prose and return exactly {"a":"answer","e":[]} with no Markdown or
             extra keys. The value of a must contain prose only; never print e=[] inside
             the answer string.
             """
@@ -209,14 +167,14 @@ public struct GroundedPromptBuilder: Sendable {
                 ? """
                 You are Aurora Survival Agent Expert. \(responseLanguage.instruction)
                 The current survival request lacks enough
-                reviewed grounding for a specific procedure. In 25–60 words, give only a
+                reviewed grounding for a specific procedure. Give only a
                 broad immediate avoidance precaution and ask one focused question for the
                 observable condition that would change the safe action. Do not invent a
                 procedure, diagnosis, identity, number, or Manual citation. Return exactly
                 {"a":"answer","e":[]} with no Markdown or extra keys.
                 """
                 : """
-                Ask one focused question for concrete observations in 25–60 words. Give
+                Ask one focused question for concrete observations. Give
                 only a broad avoidance precaution, name no procedure or diagnosis, and return
                 valid JSON exactly as {"a":"answer","e":[]}.
                 """
@@ -227,54 +185,45 @@ public struct GroundedPromptBuilder: Sendable {
             return """
             You are Aurora Survival Agent, a friendly offline assistant.
             \(responseLanguage.instruction) This is a new conversation.
-            Answer only the current message in one complete natural sentence of 4–28 words.
+            Answer only the current message in concise, complete natural prose.
             Return exactly {"a":"answer","e":[]} with no Markdown or extra keys.
             """
         case (.ordinary, .repair):
             return """
-            Answer the current message with one complete natural sentence.
+            Answer the current message with concise, complete natural prose.
             Return valid JSON exactly as {"a":"answer","e":[]} and nothing else.
             """
         case (.grounded, .initial):
             return """
             You are Aurora Survival Agent, an offline survival assistant.
             \(responseLanguage.instruction) Use only the numbered
-            REVIEWED EXCERPTS below. Answer the exact question in one compact
-            35–55 word paragraph under 360 characters. Write exactly three sentences:
-            paraphrase reviewed action 1, then action 2, then the warning. Begin the
-            warning sentence with Avoid, Stop, or Do not. Begin directly with the first
-            action, not the lesson title. Use plain prose; do not
+            REVIEWED EXCERPTS below. Answer the exact question with useful actions first.
+            Add safety guidance only when it is relevant and supported. Use plain prose; do not
             reverse or weaken any warning or prohibition in the reviewed excerpt. Do not
             output excerpt titles, headings, labels, or lists. Return exactly
             {"a":"answer","e":[1]} with no Markdown or extra keys. e must contain
-            one or two unique excerpt numbers actually used. Put no source labels,
-            page numbers, or evidence markers inside a. If only excerpt [1] is
-            provided, e must be exactly [1].
+            only unique excerpt numbers actually used. Put no source labels,
+            page numbers, or evidence markers inside a.
             """
         case (.grounded, .repair):
             return """
-            Start over using only the reviewed excerpts. Write exactly three short
-            plain-prose sentences totaling 30–50 words: paraphrase reviewed action 1,
-            then action 2, then the warning beginning Avoid, Stop, or Do not. Follow
-            prohibitions literally; never suggest the warned-against
-            action even "with caution." Begin with the first action, never the lesson
-            title, and do not stop before the warning sentence. Never use a heading,
-            label, list, or newline.
-            Return valid JSON as {"a":"answer","e":[1]} and nothing else. Cite one
-            or two used excerpts. If only excerpt [1] is provided, e must be [1].
+            Start over using only the reviewed excerpts. Give a direct, useful answer in
+            complete natural prose. Follow prohibitions literally and never suggest a
+            warned-against action. Return valid JSON as {"a":"answer","e":[1]} and
+            nothing else. Cite only excerpt numbers actually used.
             """
         case (.clarification, .initial):
             return """
             You are Aurora Survival Agent. \(responseLanguage.instruction)
             The current survival request is too broad for a safe
-            procedure. In 18–45 words, give one general scene-safety precaution, ask
+            procedure. Give a general scene-safety precaution only when relevant, ask
             for observable symptoms or conditions, and tell the user to restate the
             complete situation. Do not name a repair procedure. Return exactly
             {"a":"answer","e":[]} with no Markdown or extra keys.
             """
         case (.clarification, .repair):
             return """
-            Ask for concrete observations and a complete restatement in 18–45 words.
+            Ask for concrete observations and a complete restatement.
             Give only a general scene-safety precaution, name no procedure, and return
             valid JSON exactly as {"a":"answer","e":[]}.
             """
@@ -282,9 +231,9 @@ public struct GroundedPromptBuilder: Sendable {
             return """
             You are Aurora Survival Agent, an offline survival and incident assistant.
             \(responseLanguage.instruction) Answer the
-            user's current situation directly using your best relevant knowledge. In
-            30–60 words, give two useful actions and one warning, stop condition, or
-            escalation. Speak to the user; never claim their condition as your own.
+            user's current situation directly using your best relevant knowledge. Lead
+            with useful actions and add a warning, stop condition, or escalation only
+            when relevant. Speak to the user; never claim their condition as your own.
             Never claim water slows alcohol absorption; never advise inducing vomiting,
             driving while impaired, touching live wiring, or remaining in smoke.
             For intoxication, include sober supervision and emergency signs. For a
@@ -294,9 +243,8 @@ public struct GroundedPromptBuilder: Sendable {
             """
         case (.incidentFallback, .repair):
             return """
-            Start over and answer the user's incident in exactly three short sentences
-            totaling 30–60 words: first action, second action, then a warning or
-            escalation. Do not ask for details or speak as if you have the condition.
+            Start over and answer the user's incident directly in complete natural prose.
+            Do not ask for details or speak as if you have the condition.
             Never claim water slows alcohol absorption; never advise inducing vomiting,
             driving while impaired, touching live wiring, or remaining in smoke.
             For intoxication, chemical ingestion, or severe chest pain, include the
@@ -314,7 +262,7 @@ public struct GroundedPromptBuilder: Sendable {
             """
         case (.incidentIntake, .repair):
             return """
-            No incident was described. In one or two sentences, ask the user for the
+            No incident was described. Ask the user for the
             complete current situation and observable conditions. Do not invent danger
             or give actions. Return valid JSON exactly as {"a":"answer","e":[]}.
             """
@@ -343,8 +291,6 @@ public struct GroundedPromptBuilder: Sendable {
             sections.append("RECENT CONVERSATION\n\(recentTurns)")
         }
 
-        sections.append("QUESTION\n\(prompt.question)")
-
         if !prompt.imageObservations.isEmpty {
             sections.append(
                 "ON-DEVICE OCR\n" + prompt.imageObservations.prefix(4)
@@ -355,22 +301,12 @@ public struct GroundedPromptBuilder: Sendable {
 
         if prompt.purpose == .grounded {
             if !prompt.expertEvidence.isEmpty {
-                var globalClaimIndex = 0
                 let scenarioLimit = prompt.tier == .lite ? 2 : 3
                 let records = prompt.expertEvidence.prefix(scenarioLimit).enumerated().map { scenarioOffset, result in
                     let scenario = result.scenario
-                    if prompt.tier == .lite {
-                        let claims = scenario.claims.map { claim in
-                            "- " + String(Self.expertPromptClaimText(claim.text).prefix(280))
-                        }
-                        return (["REVIEWED SCENARIO [\(scenarioOffset + 1)]"] + claims)
-                            .joined(separator: "\n")
-                    }
                     var lines = [
-                        "SELECTED REVIEWED SCENARIO",
-                        "SCENARIO ID: \(scenario.id)",
+                        "REVIEWED SCENARIO [\(scenarioOffset + 1)]",
                         "APPLIES WHEN: \(scenario.applicability)",
-                        "RISK: \(scenario.riskClass.rawValue)",
                     ]
                     if !scenario.prerequisites.isEmpty {
                         lines.append(
@@ -378,12 +314,11 @@ public struct GroundedPromptBuilder: Sendable {
                                 + scenario.prerequisites.joined(separator: " ")
                         )
                     }
-                    lines.append("REVIEWED CLAIMS:")
+                    lines.append("REVIEWED GUIDANCE:")
                     lines.append(contentsOf: scenario.claims.map { claim in
-                        globalClaimIndex += 1
                         let applies = claim.applicability.isEmpty
                             ? "" : " applies when: \(claim.applicability)"
-                        return "[\(globalClaimIndex)] [\(claim.requirementClass.rawValue)] "
+                        return "- "
                             + String(Self.expertPromptClaimText(claim.text).prefix(320))
                             + applies
                     })
@@ -451,67 +386,27 @@ public struct GroundedPromptBuilder: Sendable {
                 .map(String.init)
                 .joined(separator: ",")
             if !prompt.expertEvidence.isEmpty {
-                if prompt.tier == .lite {
-                    let available = Array(1...min(2, prompt.expertEvidence.count))
-                        .map(String.init).joined(separator: ",")
-                    sections.append(
-                        "RESPONSE CHECK: Answer in 2–3 complete sentences, use only the "
-                            + "reviewed guidance, include an applicable safety limit, and "
-                            + "cite only the scenario numbers actually used from [\(available)]. "
-                            + "Use both only when both contribute to the answer. Do not repeat "
-                            + "REVIEWED SCENARIO."
-                    )
-                    break
-                }
-                let evidenceCount = max(
-                    1, prompt.expertEvidence.flatMap { $0.scenario.claims }.count
-                )
-                let claimCount = prompt.expertEvidence
-                    .flatMap { $0.scenario.claims }
-                    .count
-                let maximumWords = min(56, max(40, 18 + claimCount * 4))
-                let minimumWords = max(24, maximumWords - 22)
+                let available = Array(1...min(
+                    prompt.tier == .lite ? 2 : 3,
+                    prompt.expertEvidence.count
+                )).map(String.init).joined(separator: ",")
                 sections.append(
-                    "RESPONSE CHECK: Write 2–4 attributed sentences totaling "
-                    + "\(minimumWords)–\(maximumWords) words. Cite only exact claim indexes "
-                    + "1 through \(evidenceCount). Start with an applicable action and end with an applicable warning, stop, "
-                    + "contraindication, or escalation printed in the cited record. "
-                    + "Cite each sentence only to the record containing its operative "
-                    + "wording. Closely paraphrase claim nouns and verbs; omit unsupported "
-                    + "rationale. When a claim prints equivalent Fahrenheit and Celsius "
-                    + "temperatures, use only the Fahrenheit value. Current user facts may identify the situation but cannot "
-                    + "authorize a procedure."
+                    "RESPONSE CHECK: Give the best direct answer in complete natural prose. "
+                    + "Cite only the reviewed scenario numbers actually used from [\(available)]. "
+                    + "Use more than one only when each contributes. Put citations only in e, "
+                    + "not inside a. Do not repeat REVIEWED SCENARIO or internal labels."
                 )
-                let questionTerms = RetrievalEngine.tokens(in: prompt.question)
-                let exposureTerms: Set<String> = [
-                    "clumsy", "hypothermia", "shivering", "soaked",
-                ]
-                let navigationTerms: Set<String> = [
-                    "disoriented", "lost", "navigation", "trail",
-                ]
-                if !questionTerms.isDisjoint(with: exposureTerms),
-                   !questionTerms.isDisjoint(with: navigationTerms),
-                   prompt.expertEvidence.count >= 2 {
-                    sections.append(
-                        "MULTI-NEED CHECK: Address both exposure and being lost. "
-                        + "Cite at least one applicable claim from the first selected "
-                        + "scenario and at least one from the second selected scenario."
-                    )
-                }
             } else {
                 sections.append(
-                    "RESPONSE CHECK: Write all three sentences and 30–50 words: "
-                    + "first action, second action, warning. Use only evidence "
-                    + "indexes [\(indexes)]. Begin with the first action and do not "
-                    + "repeat the lesson title or field labels. A shorter or one-action "
-                    + "answer is invalid."
+                    "RESPONSE CHECK: Give the best direct answer in complete natural prose. "
+                    + "Use only evidence indexes [\(indexes)] actually used, and do not "
+                    + "repeat the lesson title or field labels."
                 )
             }
         case .incidentFallback:
             sections.append(
-                "RESPONSE CHECK: Write all three sentences and 30–60 words: "
-                + "first action, second action, warning or escalation. Address "
-                + "the user with imperative directions and return e=[]."
+                "RESPONSE CHECK: Give the useful answer first, adding safety guidance "
+                + "only when relevant. Address the user directly and return e=[]."
             )
         case .incidentIntake:
             sections.append(
@@ -534,11 +429,13 @@ public struct GroundedPromptBuilder: Sendable {
             )
         case .expertIntent:
             sections.append(
-                "ROUTING CHECK: Classify the current message only. Set l to en or zh. "
-                    + "For survival, return a short English retrieval query in q; "
+                "ROUTING CHECK: Classify the current message only. "
+                    + "For survival, return a short translated English retrieval query in q; "
                     + "otherwise return t=general and q as an empty string."
             )
         }
+
+        sections.append("CURRENT USER MESSAGE\n\(prompt.question)")
 
         sections.append(
             prompt.purpose == .expertIntent

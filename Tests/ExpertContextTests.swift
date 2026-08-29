@@ -64,40 +64,67 @@ final class ExpertContextTests: XCTestCase {
         )
     }
 
-    func testTurnRoutingCodecAcceptsStrictBilingualEnvelope() throws {
+    func testTurnRoutingCodecAcceptsStrictIntentAndQueryEnvelope() throws {
         let codec = TurnRoutingDecisionCodec()
         XCTAssertEqual(
             try codec.decodeAndValidate(
-                #"{"t":"survival","l":"zh","q":"find and purify water outdoors"}"#
+                #"{"t":"survival","q":"find and purify water outdoors"}"#
             ),
             TurnRoutingDecision(
                 intent: .survivalQuestion,
-                responseLanguage: .chinese,
                 retrievalQuery: "find and purify water outdoors"
             )
         )
         XCTAssertEqual(
-            try codec.decodeAndValidate(#"{"t":"general","l":"en","q":""}"#),
+            try codec.decodeAndValidate(#"{"t":"general","q":""}"#),
             TurnRoutingDecision(
                 intent: .generalQuestion,
-                responseLanguage: .english,
                 retrievalQuery: ""
             )
         )
         XCTAssertThrowsError(try codec.decodeAndValidate(
-            #"{"t":"general","l":"zh","q":"weather"}"#
+            #"{"t":"general","q":"weather"}"#
         ))
         XCTAssertThrowsError(try codec.decodeAndValidate(
             #"{"t":"survival","l":"fr","q":"water"}"#
         ))
         XCTAssertThrowsError(try codec.decodeAndValidate(
-            #"{"t":"general","l":"en","q":"","x":1}"#
+            #"{"t":"general","q":"","x":1}"#
         ))
     }
 
-    func testResponseLanguageDetectsEnglishAndChinese() {
+    func testResponseLanguageDetectsAdaptiveLanguagesAndMixedOutput() {
         XCTAssertEqual(ResponseLanguage.detect(in: "Hello"), .english)
         XCTAssertEqual(ResponseLanguage.detect(in: "如何净化野外水源？"), .chinese)
+        XCTAssertEqual(
+            ResponseLanguage.detect(in: "¿Cómo puedo construir un refugio?").identifier,
+            "es"
+        )
+        XCTAssertTrue(ResponseLanguage.chinese.accepts("先寻找流动水源，再进行净化。"))
+        XCTAssertFalse(ResponseLanguage.chinese.accepts(
+            "先寻找流动水源。 Search streams and rivers before moving downhill."
+        ))
+    }
+
+    func testAdaptiveLanguageKeepsUserHistoryAndMatchingAssistantLanguage() {
+        let history = [
+            ConversationTurn(role: .user, text: "Where can I find water?"),
+            ConversationTurn(role: .assistant, text: "Look for streams and springs."),
+            ConversationTurn(role: .user, text: "请继续解释。"),
+            ConversationTurn(role: .assistant, text: "先寻找流动的溪流和泉水。"),
+        ]
+
+        XCTAssertEqual(
+            IncidentAssistant.languageCompatibleHistory(
+                history,
+                responseLanguage: .chinese
+            ).map(\.text),
+            [
+                "Where can I find water?",
+                "请继续解释。",
+                "先寻找流动的溪流和泉水。",
+            ]
+        )
     }
 
     func testExpertEvidencePlanAcceptsBoundedMultiRecordSelection() throws {

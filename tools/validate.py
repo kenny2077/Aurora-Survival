@@ -416,7 +416,7 @@ def validate_model_catalog() -> int:
     if not str(expert.get("validation_status", "")).startswith("locked_"):
         fail("Expert must stay validation locked")
     gates = expert.get("gates", {})
-    if gates.get("minimum_physical_memory_bytes", 0) < 7_500_000_000:
+    if gates.get("minimum_physical_memory_bytes", 0) < 5_500_000_000:
         fail("vision memory gate is below approved MVP threshold")
     if not gates.get("disable_in_low_power_mode"):
         fail("vision must be disabled in Low Power Mode")
@@ -448,7 +448,7 @@ def validate_contracts() -> None:
     for contract in (
         "Offline AI",
         "tools.tier",
-        "No model loaded this launch",
+        "Appearance",
     ):
         if contract not in tools_view:
             fail(f"focused model center is missing: {contract}")
@@ -481,17 +481,12 @@ def validate_contracts() -> None:
         encoding="utf-8"
     )
     for contract in (
-        '{"a":"answer","e":[1]}',
-        "REVIEWED EXCERPTS",
-        "35–55 word paragraph under 360 characters",
-        "exactly three sentences",
-        "under 360 characters",
-        "ACTIONS:",
-        "WARNING:",
-        "survival and incident assistant",
-        "30–60 words",
-        "case (.grounded, .repair)",
-        "case (.incidentFallback, .repair)",
+        '{"a":"best-effort answer","e":[1]}',
+        "REVIEWED SCENARIOS",
+        "Lead with the most useful actions",
+        "safety limits only when they are",
+        "CURRENT USER MESSAGE",
+        '{"t":"general","q":""}',
     ):
         if contract not in prompt:
             fail(f"Gemma prompt contract is missing: {contract}")

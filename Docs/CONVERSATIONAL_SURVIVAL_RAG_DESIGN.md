@@ -1,6 +1,27 @@
 # Lite Chat and Unified Wilderness Knowledge Design
 
-Status: implemented 2026-08-09
+Status: adaptive-language repair implemented 2026-08-29
+
+## Adaptive-language answer contract
+
+The current user message determines reply language on device. Short Chinese
+text is detected directly; longer text uses Natural Language recognition with
+an explicit low-confidence state. Routing is language-independent and returns
+only intent plus an English retrieval query. Expert history keeps user turns
+but excludes assistant prose that is clearly in a different language.
+
+Lite and Expert now share one model-led response envelope:
+`{"a":"best-effort answer","e":[1]}`. The model leads with the useful answer,
+adds safety guidance only when relevant, and names only reviewed scenario
+indexes it actually used. Aurora validates the envelope, language, completion,
+control leakage, known dangerous instructions, numeric support, and source
+mapping. It does not impose warning counts, sentence templates, or subjective
+action scoring. A malformed grounded envelope is withheld behind a localized
+retry state; ordinary complete prose may survive only an empty malformed
+citation wrapper.
+
+This keeps the routing-plus-answer ceiling at two text inferences and adds no
+translation model, network request, package growth, or runtime memory increase.
 
 ## Contract
 

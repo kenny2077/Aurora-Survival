@@ -757,6 +757,16 @@ private struct ToolsSettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("Appearance") {
+                    Picker("Appearance", selection: $model.appearancePreference) {
+                        ForEach(AppearancePreference.allCases) { preference in
+                            Text(preference.displayName).tag(preference)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .accessibilityIdentifier("tools.appearance")
+                    .accessibilityValue(model.appearancePreference.displayName)
+                }
                 Section("About") {
                     LabeledContent("Version", value: version)
                     LabeledContent("Selected model", value: model.modelSelection.displayName)
@@ -790,6 +800,7 @@ private struct ToolsSettingsView: View {
             .confirmationDialog("Reset preferences to defaults?", isPresented: $confirmsReset, titleVisibility: .visible) {
                 Button("Reset Preferences", role: .destructive) {
                     checklistStore.reset(); model.modelSelection = .lite
+                    model.appearancePreference = .system
                     Task { await model.unloadModel() }
                 }
                 Button("Cancel", role: .cancel) {}

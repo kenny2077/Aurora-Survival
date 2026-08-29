@@ -138,9 +138,9 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         XCTAssertEqual(callCount, 2)
         XCTAssertEqual(answer?.text, "Use the safest available route.")
         XCTAssertTrue(answer?.sourceCards.isEmpty ?? false)
-        XCTAssertTrue(answer?.notices.contains {
+        XCTAssertFalse(answer?.notices.contains {
             $0.contains("source envelope was incomplete")
-        } ?? false)
+        } ?? true)
     }
 
     func testGeneralQuestionsSkipSurvivalRetrievalAndSources() async {
@@ -277,6 +277,8 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         )
         XCTAssertTrue(intent.contains("How do I get a girlfriend?"))
         XCTAssertTrue(intent.contains("When uncertain, choose general"))
+        XCTAssertTrue(intent.contains(#"{"t":"general","q":""}"#))
+        XCTAssertFalse(intent.contains(#""l""#))
 
         let grounded = builder.systemPrompt(
             for: .lite,
@@ -284,7 +286,7 @@ final class ExpertOneShotStreamingTests: XCTestCase {
             outputMode: .groundedJSON,
             usesReviewedClaims: true
         )
-        XCTAssertTrue(grounded.contains(#"{"a":"answer","e":[1]}"#))
+        XCTAssertTrue(grounded.contains(#"{"a":"best-effort answer","e":[1]}"#))
         XCTAssertFalse(grounded.contains(#"{"s""#))
 
         let ordinary = builder.systemPrompt(
@@ -382,8 +384,8 @@ private actor OneShotExpertModel: LocalLanguageModel {
     ) {
         self.tier = tier
         rawIntent = intent == .survivalQuestion
-            ? #"{"t":"survival","l":"en","q":"survival guidance"}"#
-            : #"{"t":"general","l":"en","q":""}"#
+            ? #"{"t":"survival","q":"survival guidance"}"#
+            : #"{"t":"general","q":""}"#
         self.output = output
     }
 

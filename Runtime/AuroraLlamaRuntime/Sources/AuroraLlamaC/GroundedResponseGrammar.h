@@ -5,8 +5,8 @@
 // answer verbatim and uses validated evidence indexes only for manual links.
 inline constexpr char kGroundedResponseGrammar[] = R"GBNF(
 sentence-char ::= [^"\\\[\]*{}.!?。！？\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
-sentence ::= sentence-char{25,219} [.!?。！？]
-answer-string ::= "\"" sentence " " sentence "\"" space
+sentence ::= sentence-char{4,219} [.!?。！？]
+answer-string ::= "\"" sentence (" " sentence){0,3} "\"" space
 answer-kv ::= "\"a\"" space ":" space answer-string
 index ::= ("1" | "2") space
 indexes ::= "[" space (index ("," space index)?)? "]" space
@@ -17,8 +17,8 @@ space ::= | " " | "\n"{1,2} [ \t]{0,20}
 
 inline constexpr char kSingleEvidenceResponseGrammar[] = R"GBNF(
 sentence-char ::= [^"\\\[\]*{}.!?。！？\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
-sentence ::= sentence-char{25,219} [.!?。！？]
-answer-string ::= "\"" sentence " " sentence "\"" space
+sentence ::= sentence-char{4,219} [.!?。！？]
+answer-string ::= "\"" sentence (" " sentence){0,3} "\"" space
 answer-kv ::= "\"a\"" space ":" space answer-string
 evidence-kv ::= "\"e\"" space ":" space "[" space "1" space "]" space
 root ::= "{" space answer-kv "," space evidence-kv "}" space
@@ -35,25 +35,26 @@ root ::= "{" space answer-kv "," space evidence-kv "}" space
 space ::= | " " | "\n"{1,2} [ \t]{0,20}
 )GBNF";
 
-// Expert grounded answers must finish naturally instead of reaching the
-// generic character ceiling. Encoding the 2–5 sentence contract here also
-// prevents a malformed or truncated answer from reaching Swift validation.
+// Expert and Lite share the compact answer-plus-scenario citation envelope.
 inline constexpr char kExpertGroundedResponseGrammar[] = R"GBNF(
-sentence-char ::= [^"\\.!?。！？\x00-\x1F] | "\\" (["\\/bf] | "u" [0-9a-fA-F]{4})
-sentence ::= sentence-char{15,220} [.!?。！？]
-index ::= ([1-9] | [1-2] [0-9] | "30") space
+sentence-char ::= [^"\\\[\]*{}.!?。！？\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
+sentence ::= sentence-char{4,240} [.!?。！？]
+answer-string ::= "\"" sentence (" " sentence){0,4} "\"" space
+answer-kv ::= "\"a\"" space ":" space answer-string
+index ::= ("1" | "2" | "3") space
 indexes ::= "[" space index ("," space index){0,2} "]" space
-sentence-object ::= "{" space "\"a\"" space ":" space "\"" sentence "\"" space "," space "\"e\"" space ":" space indexes "}" space
-root ::= "{" space "\"s\"" space ":" space "[" space sentence-object "," space sentence-object ("," space sentence-object){0,3} "]" space "}" space
+evidence-kv ::= "\"e\"" space ":" space indexes
+root ::= "{" space answer-kv "," space evidence-kv "}" space
 space ::= | " " | "\n"{1,2} [ \t]{0,20}
 )GBNF";
 
 inline constexpr char kExpertSingleEvidenceResponseGrammar[] = R"GBNF(
-sentence-char ::= [^"\\.!?。！？\x00-\x1F] | "\\" (["\\/bf] | "u" [0-9a-fA-F]{4})
-sentence ::= sentence-char{15,220} [.!?。！？]
-indexes ::= "[" space "1" space "]" space
-sentence-object ::= "{" space "\"a\"" space ":" space "\"" sentence "\"" space "," space "\"e\"" space ":" space indexes "}" space
-root ::= "{" space "\"s\"" space ":" space "[" space sentence-object "," space sentence-object ("," space sentence-object){0,3} "]" space "}" space
+sentence-char ::= [^"\\\[\]*{}.!?。！？\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
+sentence ::= sentence-char{4,240} [.!?。！？]
+answer-string ::= "\"" sentence (" " sentence){0,4} "\"" space
+answer-kv ::= "\"a\"" space ":" space answer-string
+evidence-kv ::= "\"e\"" space ":" space "[" space "1" space "]" space
+root ::= "{" space answer-kv "," space evidence-kv "}" space
 space ::= | " " | "\n"{1,2} [ \t]{0,20}
 )GBNF";
 
@@ -79,7 +80,7 @@ space ::= | " " | "\n"{1,2} [ \t]{0,20}
 
 inline constexpr char kExpertIntentDecisionGrammar[] = R"GBNF(
 query-char ::= [^"\\\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
-root ::= "{" space "\"t\"" space ":" space "\"" ("general" | "survival") "\"" space "," space "\"l\"" space ":" space "\"" ("en" | "zh") "\"" space "," space "\"q\"" space ":" space "\"" query-char{0,160} "\"" space "}" space
+root ::= "{" space "\"t\"" space ":" space "\"" ("general" | "survival") "\"" space "," space "\"q\"" space ":" space "\"" query-char{0,160} "\"" space "}" space
 space ::= | " " | "\n"{1,2} [ \t]{0,20}
 )GBNF";
 

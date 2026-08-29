@@ -104,9 +104,9 @@ final class ProductionControlTests: XCTestCase {
             "\"e\":",
             "extra keys",
             "REVIEWED EXCERPTS",
-            "35–55 word paragraph",
-            "paraphrase reviewed action 1",
-            "one or two unique excerpt numbers",
+            "useful actions first",
+            "only when it is relevant and supported",
+            "only unique excerpt numbers actually used",
         ] {
             XCTAssertTrue(prompt.contains(required), "Missing prompt contract: \(required)")
         }

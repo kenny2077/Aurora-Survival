@@ -1,6 +1,6 @@
 # Physical device validation
 
-Updated: 2026-08-25
+Updated: 2026-08-29
 
 ## Confirmed intent
 
@@ -52,6 +52,16 @@ Updated: 2026-08-25
    focused composer expands into one compact glass surface, thinking status
    precedes the answer, and populated conversations are top-aligned. Tools
    exposes an adjacent load or unload control for each model tier.
+6. **Appearance is explicit but minimal.** Settings exposes only System, Light,
+   and Dark. The persisted choice applies at the app root, Reset to Defaults
+   restores System, and the enabled send control uses inverse semantic colors
+   so its arrow remains dark in Dark appearance and light in Light appearance.
+7. **Adaptive-language acceptance is paired across tiers.** The maintained
+   physical runner performs exactly three Lite and three Expert conversations:
+   English wilderness food, Simplified Chinese water location/purification,
+   and Spanish overnight shelter. Each record retains the exact answer,
+   requested and detected language, reviewed-source state, latency, failure
+   reason, memory/thermal data, and one screenshot.
 
 ## Evidence matrix
 

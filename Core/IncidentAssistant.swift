@@ -205,18 +205,22 @@ public actor IncidentAssistant {
         let model = modelProvider(tier)
         var notices = initialNotices
         let imageObservations: [String] = []
+        let responseLanguage = ResponseLanguage.detect(in: request.question)
+        let languageCompatibleHistory = Self.languageCompatibleHistory(
+            conversationHistory,
+            responseLanguage: responseLanguage
+        )
         let intentPrompt = ModelPrompt(
             question: request.question,
             evidence: [],
             imageObservations: imageObservations,
             tier: tier,
             permitsVisionReasoning: false,
-            conversationHistory: conversationHistory,
+            conversationHistory: languageCompatibleHistory,
             expertContextProfile: contextProfile,
             maximumImageDimension: maximumImageDimension,
             purpose: .expertIntent
         )
-        let detectedLanguage = ResponseLanguage.detect(in: request.question)
         let routingDecision: TurnRoutingDecision
         do {
             let rawIntent = try await model.generate(prompt: intentPrompt)
@@ -224,27 +228,12 @@ public actor IncidentAssistant {
         } catch {
             routingDecision = TurnRoutingDecision(
                 intent: .generalQuestion,
-                responseLanguage: detectedLanguage,
                 retrievalQuery: ""
             )
         }
-        let responseLanguage = routingDecision.responseLanguage == detectedLanguage
-            ? routingDecision.responseLanguage
-            : detectedLanguage
-        let definiteSurvivalOverride = routingDecision.intent == .generalQuestion
-            && Self.hasDefiniteSurvivalIntent(request.question)
-        let intent: ExpertTurnIntent = definiteSurvivalOverride
-            ? .survivalQuestion
-            : routingDecision.intent
+        let intent = routingDecision.intent
         let shouldSearch = intent == .survivalQuestion
-        let routedQuery: String
-        if routingDecision.intent == .survivalQuestion {
-            routedQuery = routingDecision.retrievalQuery
-        } else if definiteSurvivalOverride {
-            routedQuery = Self.fallbackRetrievalQuery(for: request.question)
-        } else {
-            routedQuery = ""
-        }
+        let routedQuery = shouldSearch ? routingDecision.retrievalQuery : ""
         let semanticQuery = shouldSearch ? routedQuery : ""
         let retrievalRequest = ChatRequest(
             question: semanticQuery,
@@ -253,7 +242,7 @@ public actor IncidentAssistant {
             hasImage: false,
             imageData: nil,
             imageObservations: imageObservations,
-            conversationHistory: conversationHistory
+            conversationHistory: languageCompatibleHistory
         )
         var denseResults: [ExpertVectorSearchResult] = []
         var sharedRAGAvailable = expertEmbeddingProvider != nil
@@ -342,7 +331,7 @@ public actor IncidentAssistant {
             imageObservations: imageObservations,
             tier: tier,
             permitsVisionReasoning: false,
-            conversationHistory: conversationHistory,
+            conversationHistory: languageCompatibleHistory,
             expertContextProfile: contextProfile,
             maximumImageDimension: maximumImageDimension,
             expertEvidence: selectedExpertEvidence,
@@ -376,15 +365,18 @@ public actor IncidentAssistant {
             chosen = result
         } else {
             let streamedText = streamDecoder.text
-            guard !streamedText.isEmpty,
+            guard finalPurpose == .ordinary,
+                  !streamedText.isEmpty,
                   streamedText.last.map({ ".!?…。！？".contains($0) }) == true,
-                  !GroundedResponseCodec.containsControlLeakage(streamedText)
+                  !GroundedResponseCodec.containsControlLeakage(streamedText),
+                  responseLanguage.accepts(streamedText)
             else {
-                return Self.modelFormatFailure(tier: tier, notices: notices)
+                return Self.modelFormatFailure(
+                    tier: tier,
+                    language: responseLanguage,
+                    notices: notices
+                )
             }
-            notices.append(
-                "The source envelope was incomplete, so this answer is shown without source attribution."
-            )
             chosen = ExpertRenderedResult(
                 text: streamedText,
                 passages: [],
@@ -481,57 +473,13 @@ public actor IncidentAssistant {
         )
     }
 
-    static func hasDefiniteSurvivalIntent(_ question: String) -> Bool {
-        let normalized = question.lowercased().replacingOccurrences(of: "-", with: " ")
-        let chineseSurvivalPhrases = [
-            "野外", "求生", "急救", "迷路", "失温", "冻伤", "流血", "止血",
-            "避难", "生火", "净化水", "饮用水", "水源", "雷电", "雪崩", "救援",
-        ]
-        if chineseSurvivalPhrases.contains(where: normalized.contains) {
-            return true
+    static func languageCompatibleHistory(
+        _ history: [ConversationTurn],
+        responseLanguage: ResponseLanguage
+    ) -> [ConversationTurn] {
+        history.filter { turn in
+            turn.role == .user || responseLanguage.accepts(turn.text)
         }
-        let terms = Set(RetrievalEngine.tokens(in: question))
-        let generalCollisions: Set<String> = [
-            "api", "code", "coding", "dating", "girlfriend", "news", "price",
-            "program", "programming", "schedule", "software", "stock",
-        ]
-        guard terms.isDisjoint(with: generalCollisions) else { return false }
-        let definitePhrases = [
-            "campfire", "compass bearing", "deep cut", "hypothermia",
-            "life threatening bleeding", "marked trail", "snow shelter",
-            "start a fire", "build a fire",
-            "solar still", "stop method", "stream water", "survival device",
-            "tarp shelter", "find water source", "find a water source", "water sources",
-            "raw meat outdoors", "boil collected stream water",
-            "unknown mushroom", "will not stop bleeding",
-        ]
-        if definitePhrases.contains(where: normalized.contains) { return true }
-        let incidentTerms: Set<String> = [
-            "avalanche", "bleeding", "disoriented", "frostbite", "hypothermia",
-            "lost", "stranded", "tourniquet",
-        ]
-        return !terms.isDisjoint(with: incidentTerms)
-    }
-
-    static func fallbackRetrievalQuery(for question: String) -> String {
-        guard ResponseLanguage.detect(in: question) == .chinese else {
-            return question
-        }
-        let normalized = question.lowercased()
-        if normalized.contains("水源") || normalized.contains("净化水")
-            || normalized.contains("饮用水") {
-            return "find and purify water sources in the wilderness"
-        }
-        if normalized.contains("生火") {
-            return "start a fire outdoors"
-        }
-        if normalized.contains("止血") || normalized.contains("流血") {
-            return "control severe bleeding first aid"
-        }
-        if normalized.contains("迷路") {
-            return "lost in the wilderness navigation survival"
-        }
-        return "wilderness survival safety"
     }
 
     static func prioritizeScenarioCoverage(
@@ -777,90 +725,36 @@ public actor IncidentAssistant {
         prompt: ModelPrompt
     ) throws -> ExpertRenderedResult {
         if prompt.purpose == .grounded {
-            if prompt.tier == .lite {
-                let result = try Self.decode(
-                    generated,
-                    outputMode: .groundedJSON,
-                    purpose: prompt.purpose,
-                    question: prompt.question,
-                    tier: prompt.tier,
-                    responseLanguage: prompt.responseLanguage,
-                    evidence: prompt.evidence,
-                    codec: responseCodec,
-                    citationPolicy: citationPolicy
-                )
-                let citedPassageIDs = Set(result.passages.map { $0.article.id })
-                let usedScenarios = zip(prompt.evidence, prompt.expertEvidence)
-                    .compactMap { passage, scenario in
-                        citedPassageIDs.contains(passage.article.id)
-                            ? scenario : nil
-                    }
-                guard !usedScenarios.isEmpty else {
-                    throw ModelFailure.invalidOutput
-                }
-                let sourceIDs = Array(Set(
-                    usedScenarios.flatMap { scenario in
-                        scenario.scenario.claims.flatMap { $0.sourceIDs }
-                    }
-                )).sorted()
-                var locatorBySourceID: [String: String] = [:]
-                for claim in usedScenarios.flatMap({ $0.scenario.claims }) {
-                    for (offset, sourceID) in claim.sourceIDs.enumerated()
-                    where claim.sourceLocators.indices.contains(offset) {
-                        locatorBySourceID[sourceID] = claim.sourceLocators[offset]
-                    }
-                }
-                let sourceCards = expertEvidenceRetrieval.expertSources(ids: sourceIDs)
-                    .map { source in
-                        Self.sourceCard(
-                            from: source,
-                            locator: locatorBySourceID[source.id]
-                        )
-                    }
-                return ExpertRenderedResult(
-                    text: result.text,
-                    passages: result.passages,
-                    sentenceCitations: [AnswerSentenceCitation(
-                        sentence: 1,
-                        sourceIDs: sourceIDs
-                    )],
-                    sourceCards: sourceCards,
-                    evidenceIDs: usedScenarios.map { $0.scenario.id }.sorted()
-                )
-            }
-            let answer = try ExpertAttributedAnswerCodec().decodeAndValidate(
+            let result = try Self.decode(
                 generated,
-                evidenceCount: EvidenceBundle(
-                    scenarios: prompt.expertEvidence
-                ).claims.count
+                outputMode: .groundedJSON,
+                purpose: prompt.purpose,
+                question: prompt.question,
+                tier: prompt.tier,
+                responseLanguage: prompt.responseLanguage,
+                evidence: prompt.evidence,
+                codec: responseCodec,
+                citationPolicy: citationPolicy
             )
-            let bundle = EvidenceBundle(scenarios: prompt.expertEvidence)
-            let passages = Array(Set(answer.evidenceIndexes.compactMap {
-                bundle.scenario(forClaimIndex: $0)
-            })).map(Self.passage(for:))
-            let usedScenarioIDs = Array(Set(answer.evidenceIndexes.compactMap {
-                bundle.scenario(forClaimIndex: $0)?.scenario.id
-            })).sorted()
-            let citations = answer.sentences.enumerated().map { offset, sentence in
-                AnswerSentenceCitation(
-                    sentence: offset + 1,
-                    sourceIDs: Array(Set<String>(sentence.evidenceIndexes.flatMap { index -> [String] in
-                        guard bundle.claims.indices.contains(index - 1) else {
-                            return []
-                        }
-                        return bundle.claims[index - 1].sourceIDs
-                    })).sorted()
-                )
-            }
-            let sourceIDs = Array(Set<String>(citations.flatMap {
-                $0.sourceIDs
-            })).sorted()
+            let citedPassageIDs = Set(result.passages.map { $0.article.id })
+            let usedScenarios = zip(prompt.evidence, prompt.expertEvidence)
+                .compactMap { passage, scenario in
+                    citedPassageIDs.contains(passage.article.id) ? scenario : nil
+                }
+            guard !usedScenarios.isEmpty else { throw ModelFailure.invalidOutput }
+            try ExpertAnswerSafetyValidator().validateEssential(
+                answer: result.text,
+                scenarios: usedScenarios
+            )
+            let sourceIDs = Array(Set(
+                usedScenarios.flatMap { scenario in
+                    scenario.scenario.claims.flatMap(\.sourceIDs)
+                }
+            )).sorted()
             var locatorBySourceID: [String: String] = [:]
-            for evidenceIndex in answer.evidenceIndexes {
-                guard bundle.claims.indices.contains(evidenceIndex - 1) else { continue }
-                let claim = bundle.claims[evidenceIndex - 1]
+            for claim in usedScenarios.flatMap({ $0.scenario.claims }) {
                 for (offset, sourceID) in claim.sourceIDs.enumerated()
-                    where claim.sourceLocators.indices.contains(offset) {
+                where claim.sourceLocators.indices.contains(offset) {
                     locatorBySourceID[sourceID] = claim.sourceLocators[offset]
                 }
             }
@@ -872,11 +766,14 @@ public actor IncidentAssistant {
                     )
                 }
             return ExpertRenderedResult(
-                text: answer.text,
-                passages: passages,
-                sentenceCitations: citations,
+                text: result.text,
+                passages: result.passages,
+                sentenceCitations: [AnswerSentenceCitation(
+                    sentence: 1,
+                    sourceIDs: sourceIDs
+                )],
                 sourceCards: sourceCards,
-                evidenceIDs: usedScenarioIDs
+                evidenceIDs: usedScenarios.map { $0.scenario.id }.sorted()
             )
         }
         let result = try Self.decode(
@@ -1322,10 +1219,11 @@ public actor IncidentAssistant {
 
     private static func modelFormatFailure(
         tier: ModelTier,
+        language: ResponseLanguage,
         notices: [String]
     ) -> AssistantAnswer {
         AssistantAnswer(
-            text: "\(tier.displayName) returned an unreadable draft. Retry this question.",
+            text: language.retryMessage,
             severity: .caution,
             sources: [],
             modelTier: tier,

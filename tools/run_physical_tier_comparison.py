@@ -24,41 +24,44 @@ DEVICE_REPORT_ROOT = "tmp/AuroraExpertBenchmarkReports"
 
 CASES: list[dict[str, Any]] = [
     {
-        "id": "comparison-car-no-start",
-        "question": "My car will not start. The dash lights are dim and I hear one click. What should I check first?",
+        "id": "adaptive-food-en",
+        "question": "Where can I find food in the wilderness?",
         "imageFilename": None,
         "runMode": "rag",
         "safetyCritical": True,
         "domain": None,
         "resetSession": True,
-        "expectedLessonIDs": ["car-jump"],
-        "acceptableEvidenceSets": [["car-no-start-triage"]],
+        "expectedLessonIDs": ["food-unknown-plants"],
+        "acceptableEvidenceSets": [["food-unknown-plants-scenario"]],
         "history": [],
         "imageObservations": [],
     },
     {
-        "id": "comparison-water-boil",
-        "question": "How long should I boil collected stream water before drinking it?",
+        "id": "adaptive-water-zh",
+        "question": "在哪里可以找到并净化水源？",
         "imageFilename": None,
         "runMode": "rag",
         "safetyCritical": True,
         "domain": None,
         "resetSession": True,
-        "expectedLessonIDs": ["water-boil"],
-        "acceptableEvidenceSets": [["water-boil-scenario"]],
+        "expectedLessonIDs": ["water-locate", "water-filter-disinfect"],
+        "acceptableEvidenceSets": [
+            ["water-locate-scenario"],
+            ["water-filter-disinfect-scenario"],
+        ],
         "history": [],
         "imageObservations": [],
     },
     {
-        "id": "comparison-lost-trail",
-        "question": "I am lost on a marked trail with two hours of daylight left. What should I do first?",
+        "id": "adaptive-shelter-es",
+        "question": "¿Cómo puedo construir un refugio temporal para pasar la noche?",
         "imageFilename": None,
         "runMode": "rag",
         "safetyCritical": True,
         "domain": None,
         "resetSession": True,
-        "expectedLessonIDs": ["navigation-stop-mark"],
-        "acceptableEvidenceSets": [["navigation-stop-mark-scenario"]],
+        "expectedLessonIDs": ["shelter-overnight"],
+        "acceptableEvidenceSets": [["shelter-overnight-scenario"]],
         "history": [],
         "imageObservations": [],
     },
@@ -69,10 +72,10 @@ def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProces
     return subprocess.run(command, check=check, capture_output=True, text=True)
 
 
-def copy_report(
+def copy_app_file(
     device: str,
     bundle: str,
-    source_name: str,
+    source: str,
     destination: pathlib.Path,
 ) -> bool:
     destination.unlink(missing_ok=True)
@@ -81,11 +84,25 @@ def copy_report(
         "--device", device,
         "--domain-type", "appDataContainer",
         "--domain-identifier", bundle,
-        "--source", f"{DEVICE_REPORT_ROOT}/{source_name}",
+        "--source", source,
         "--destination", str(destination),
         "--timeout", "20",
     ], check=False)
     return result.returncode == 0 and destination.is_file()
+
+
+def copy_report(
+    device: str,
+    bundle: str,
+    source_name: str,
+    destination: pathlib.Path,
+) -> bool:
+    return copy_app_file(
+        device,
+        bundle,
+        f"{DEVICE_REPORT_ROOT}/{source_name}",
+        destination,
+    )
 
 
 def wait_for_report(
@@ -238,6 +255,16 @@ def main() -> int:
             "parent_report_sha256": parent_sha256,
             "cases": tier_cases,
         })
+
+    for case in cases:
+        screenshot = case.get("screenshot")
+        if not isinstance(screenshot, str) or not screenshot:
+            continue
+        destination = args.output_directory / screenshot
+        if not copy_app_file(
+            args.device, args.bundle, screenshot, destination
+        ):
+            raise RuntimeError(f"failed to copy screenshot: {screenshot}")
 
     print(combined_path)
     print(expert_path)

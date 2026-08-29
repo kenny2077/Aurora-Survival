@@ -396,6 +396,7 @@ struct ChatView: View {
                 sendButtonControl
                     .buttonStyle(.glassProminent)
                     .tint(Color.primary)
+                    .foregroundStyle(Color(uiColor: .systemBackground))
             } else {
                 sendButtonControl
                     .buttonStyle(.glass)

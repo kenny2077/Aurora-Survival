@@ -95,32 +95,6 @@ final class SurvivalManual2026Tests: XCTestCase {
         XCTAssertEqual(fixture.cases.filter(\.expectNoRelevantEvidence).count, 1)
     }
 
-    func testDefiniteSurvivalIntentGuardIsNarrow() {
-        let survival = [
-            "Apply the STOP method when lost.",
-            "How do I take and follow a compass bearing?",
-            "Can I eat this unknown mushroom?",
-            "How to start a fire",
-            "如何在野外找到并净化水源？",
-            "How do I repair an unfamiliar survival-device model?",
-            "How to find water sources.",
-            "Where can I find a water source?",
-            "How to cook raw meat outdoors.",
-            "How long should I boil collected stream water before drinking it?",
-        ]
-        let general = [
-            "How do I get a girlfriend?",
-            "How's the weather today?",
-            "How do I implement a compass widget in software?",
-        ]
-        XCTAssertTrue(survival.allSatisfy(IncidentAssistant.hasDefiniteSurvivalIntent))
-        XCTAssertTrue(general.allSatisfy { !IncidentAssistant.hasDefiniteSurvivalIntent($0) })
-        XCTAssertEqual(
-            IncidentAssistant.fallbackRetrievalQuery(for: "如何在野外找到并净化水源？"),
-            "find and purify water sources in the wilderness"
-        )
-    }
-
     func testSharedPlantAndMushroomScenarioRetainsMushroomWarnings() throws {
         let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
         let scenario = try XCTUnwrap(
