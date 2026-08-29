@@ -2,6 +2,7 @@ import XCTest
 
 final class PhysicalProductFlowTests: XCTestCase {
     private let catalogURL = "http://192.168.3.51:8765/catalog.json"
+    private let betaCatalogURL = "https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/beta/catalog.json"
 
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -200,23 +201,209 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCTAssertTrue(loadLite.waitForExistence(timeout: 30))
     }
 
-    func testRiskAcknowledgementRefusalAcceptanceAndPersistence() throws {
+    func testOnboardingCleanLaunchUsesAuroraBrandAndConsolidatedLegalHub() throws {
+        XCUIDevice.shared.orientation = .portrait
         let app = makeApp(acceptAgreement: false)
         app.launchEnvironment["TRAILGUARD_UI_RESET_AGREEMENT"] = "1"
         app.launch()
 
-        let screen = app.descendants(matching: .any)["agreement.screen"]
+        let screen = app.descendants(matching: .any)["onboarding.screen"]
         XCTAssertTrue(screen.waitForExistence(timeout: 20))
-        app.buttons["agreement.notNow"].tap()
-        XCTAssertTrue(screen.exists)
-        app.buttons["agreement.accept"].tap()
+        XCTAssertTrue(app.staticTexts["Meet Aurora"].exists)
+        XCTAssertTrue(
+            app.staticTexts[
+                "Offline AI help for the outdoors."
+            ].exists
+        )
+        let disclosure = app.staticTexts.matching(
+            NSPredicate(
+                format: "label == %@",
+                "Aurora can be wrong, so check critical guidance and seek help when possible; by continuing, you agree to Aurora’s Terms and acknowledge the Privacy Notice."
+            )
+        ).firstMatch
+        XCTAssertTrue(disclosure.exists)
+        let pageIndicator = app.descendants(matching: .any)[
+            "onboarding.pageIndicator"
+        ]
+        XCTAssertTrue(pageIndicator.exists)
+        XCTAssertEqual(pageIndicator.label, "Page 1 of 3")
+        XCTAssertFalse(
+            app.descendants(matching: .any)["onboarding.features"].exists
+        )
+        keepScreenshot(named: "Aurora onboarding page 1", app: app)
+
+        app.buttons["Legal & Privacy"].tap()
+        XCTAssertTrue(
+            app.navigationBars["Legal & Privacy"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.buttons["Aurora Terms & AI Use"].exists)
+        XCTAssertTrue(app.buttons["Privacy Notice"].exists)
+        XCTAssertTrue(app.buttons["Model Licenses & Notices"].exists)
+        keepScreenshot(named: "Onboarding legal and privacy hub", app: app)
+
+        app.navigationBars["Legal & Privacy"].buttons.firstMatch.tap()
+        app.buttons["onboarding.accept"].tap()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["onboarding.features"]
+                .waitForExistence(timeout: 10)
+        )
+    }
+
+    func testOnboardingThreePageNavigationAndModelsRouting() throws {
+        XCUIDevice.shared.orientation = .portrait
+        let app = makeApp(acceptAgreement: false)
+        app.launchEnvironment["TRAILGUARD_UI_RESET_AGREEMENT"] = "1"
+        app.launchEnvironment["TRAILGUARD_CATALOG_URL"] = betaCatalogURL
+        app.launch()
+
+        XCTAssertTrue(
+            app.buttons["onboarding.accept"].waitForExistence(timeout: 20)
+        )
+        app.buttons["onboarding.accept"].tap()
+        XCTAssertTrue(
+            app.staticTexts["Ready when the network isn’t"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.staticTexts["Works offline"].exists)
+        XCTAssertTrue(app.staticTexts["Source-backed"].exists)
+        XCTAssertTrue(app.staticTexts["Private by design"].exists)
+        keepScreenshot(named: "Aurora onboarding page 2", app: app)
+
+        app.buttons["Back"].tap()
+        XCTAssertTrue(app.staticTexts["Meet Aurora"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.accept"].tap()
+        XCTAssertTrue(
+            app.buttons["onboarding.continue"].waitForExistence(timeout: 10)
+        )
+        app.buttons["onboarding.continue"].tap()
+        XCTAssertTrue(
+            app.staticTexts["Choose what to take offline"]
+                .waitForExistence(timeout: 10)
+        )
+        XCTAssertTrue(app.staticTexts["Aurora Lite"].exists)
+        XCTAssertTrue(app.staticTexts["Aurora Expert"].exists)
+        XCTAssertFalse(
+            app.staticTexts["Download a model now or set it up later."].exists
+        )
+        XCTAssertFalse(
+            app.staticTexts[
+                "Large downloads use Wi-Fi by default. Both models keep working after download."
+            ].exists
+        )
+        let liteDownload = app.buttons["onboarding.download.lite"]
+        let expertDownload = app.buttons["onboarding.download.vision_expert"]
+        XCTAssertTrue(liteDownload.waitForExistence(timeout: 10))
+        XCTAssertTrue(expertDownload.exists)
+        let downloadsEnabled = expectation(
+            for: NSPredicate(format: "enabled == true"),
+            evaluatedWith: liteDownload
+        )
+        let expertDownloadEnabled = expectation(
+            for: NSPredicate(format: "enabled == true"),
+            evaluatedWith: expertDownload
+        )
+        wait(for: [downloadsEnabled, expertDownloadEnabled], timeout: 30)
+        keepScreenshot(named: "Aurora onboarding page 3", app: app)
+
+        liteDownload.tap()
+        XCTAssertTrue(tabButton("Tools", in: app).waitForExistence(timeout: 20))
+        XCTAssertTrue(tabButton("Tools", in: app).isSelected)
+    }
+
+    func testOnboardingExpertDownloadAndSetUpLaterPersistence() throws {
+        XCUIDevice.shared.orientation = .portrait
+        let app = makeApp(acceptAgreement: false)
+        app.launchEnvironment["TRAILGUARD_UI_RESET_AGREEMENT"] = "1"
+        app.launchEnvironment["TRAILGUARD_CATALOG_URL"] = betaCatalogURL
+        app.launch()
+
+        XCTAssertTrue(
+            app.buttons["onboarding.accept"].waitForExistence(timeout: 20)
+        )
+        app.buttons["onboarding.accept"].tap()
+        XCTAssertTrue(
+            app.buttons["onboarding.continue"].waitForExistence(timeout: 10)
+        )
+        app.buttons["onboarding.continue"].tap()
+        let expertDownload = app.buttons["onboarding.download.vision_expert"]
+        XCTAssertTrue(expertDownload.waitForExistence(timeout: 10))
+        let expertDownloadEnabled = expectation(
+            for: NSPredicate(format: "enabled == true"),
+            evaluatedWith: expertDownload
+        )
+        wait(for: [expertDownloadEnabled], timeout: 30)
+        expertDownload.tap()
+        XCTAssertTrue(tabButton("Tools", in: app).waitForExistence(timeout: 20))
+        XCTAssertTrue(tabButton("Tools", in: app).isSelected)
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(
+            app.buttons["onboarding.accept"].waitForExistence(timeout: 20)
+        )
+        app.buttons["onboarding.accept"].tap()
+        XCTAssertTrue(
+            app.buttons["onboarding.continue"].waitForExistence(timeout: 10)
+        )
+        app.buttons["onboarding.continue"].tap()
+        XCTAssertTrue(
+            app.buttons["onboarding.skipModels"].waitForExistence(timeout: 10)
+        )
+        app.buttons["onboarding.skipModels"].tap()
+
         XCTAssertTrue(tabButton("Ask", in: app).waitForExistence(timeout: 20))
+        XCTAssertTrue(tabButton("Manual", in: app).exists)
+        XCTAssertTrue(tabButton("Maps", in: app).exists)
+        XCTAssertTrue(tabButton("Tools", in: app).exists)
 
         app.terminate()
         app.launchEnvironment.removeValue(forKey: "TRAILGUARD_UI_RESET_AGREEMENT")
         app.launch()
         XCTAssertTrue(tabButton("Ask", in: app).waitForExistence(timeout: 20))
-        XCTAssertFalse(app.descendants(matching: .any)["agreement.screen"].exists)
+        XCTAssertFalse(app.descendants(matching: .any)["onboarding.screen"].exists)
+    }
+
+    func testLiteDownloadShowsProgressWithoutStartingExpert() throws {
+        let app = makeApp()
+        app.launch()
+        openTools(in: app)
+
+        let lite = app.buttons.matching(
+            NSPredicate(format: "label BEGINSWITH %@", "Download Lite + Knowledge")
+        ).firstMatch
+        let expert = app.buttons.matching(
+            NSPredicate(format: "label BEGINSWITH %@", "Download Expert + Knowledge")
+        ).firstMatch
+        XCTAssertTrue(lite.waitForExistence(timeout: 30))
+        XCTAssertTrue(expert.waitForExistence(timeout: 30))
+        XCTAssertTrue(lite.label.contains("MB"))
+        XCTAssertTrue(expert.label.contains("GB"))
+
+        lite.tap()
+        let liteProgress = app.descendants(matching: .any)[
+            "tools.model.progress.lite"
+        ]
+        let liteProgressLabel = app.staticTexts[
+            "tools.model.progressLabel.lite"
+        ]
+        XCTAssertTrue(liteProgress.waitForExistence(timeout: 30))
+        XCTAssertTrue(liteProgressLabel.waitForExistence(timeout: 30))
+        XCTAssertTrue(liteProgressLabel.label.hasSuffix("%"))
+
+        XCTAssertTrue(expert.exists)
+        XCTAssertFalse(
+            app.descendants(matching: .any)[
+                "tools.model.progress.vision_expert"
+            ].exists
+        )
+        XCTAssertFalse(app.buttons["tools.model.pause.vision_expert"].exists)
+
+        let pause = app.buttons.matching(
+            NSPredicate(format: "label == %@", "Pause Lite download")
+        ).firstMatch
+        XCTAssertTrue(pause.waitForExistence(timeout: 30))
+        pause.tap()
     }
 
     func testToolsDashboardLiquidGlassSimplicity() {

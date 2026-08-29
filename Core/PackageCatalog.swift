@@ -141,6 +141,79 @@ public enum PackageCatalogError: Error, Equatable {
     case signingKeyNotCurrentlyValid
 }
 
+public enum PackageCatalogInstallStatus: Equatable, Sendable {
+    case available
+    case installed(active: Bool)
+    case updateAvailable(installedVersion: String, availableVersion: String)
+}
+
+public struct SemanticPackageVersion: Comparable, Equatable, Sendable {
+    private let core: [Int]
+    private let prerelease: [String]?
+
+    public init?(_ value: String) {
+        let pieces = value.split(separator: "-", maxSplits: 1).map(String.init)
+        let numbers = pieces[0].split(separator: ".").compactMap { Int($0) }
+        guard numbers.count == pieces[0].split(separator: ".").count,
+              (2...3).contains(numbers.count) else { return nil }
+        core = numbers + Array(repeating: 0, count: 3 - numbers.count)
+        prerelease = pieces.count == 2
+            ? pieces[1].split(separator: ".").map(String.init)
+            : nil
+    }
+
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        if lhs.core != rhs.core {
+            return lhs.core.lexicographicallyPrecedes(rhs.core)
+        }
+        switch (lhs.prerelease, rhs.prerelease) {
+        case (nil, nil): return false
+        case (nil, _): return false
+        case (_, nil): return true
+        case let (.some(left), .some(right)):
+            for (a, b) in zip(left, right) where a != b {
+                if let aNumber = Int(a), let bNumber = Int(b) {
+                    return aNumber < bNumber
+                }
+                if Int(a) != nil { return true }
+                if Int(b) != nil { return false }
+                return a < b
+            }
+            return left.count < right.count
+        }
+    }
+}
+
+public struct PackageCatalogInstallStatusResolver: Sendable {
+    public init() {}
+
+    public func resolve(
+        entry: PackageCatalogEntry,
+        index: PackageActivationIndex
+    ) -> PackageCatalogInstallStatus {
+        if index.installed.contains(where: {
+            $0.packageID == entry.packageID && $0.version == entry.version
+        }) {
+            return .installed(
+                active: index.activeVersions[entry.packageID] == entry.version
+            )
+        }
+        if let installedVersion = index.activeVersions[entry.packageID],
+           installedVersion != entry.version {
+            if let installed = SemanticPackageVersion(installedVersion),
+               let available = SemanticPackageVersion(entry.version),
+               available > installed {
+                return .updateAvailable(
+                    installedVersion: installedVersion,
+                    availableVersion: entry.version
+                )
+            }
+            return .installed(active: true)
+        }
+        return .available
+    }
+}
+
 public struct PackageCatalogVerifier: Sendable {
     private let trustedKeys: [String: TrustedPackageKey]
     private let now: @Sendable () -> Date

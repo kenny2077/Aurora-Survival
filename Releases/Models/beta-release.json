@@ -1,0 +1,27 @@
+{
+  "bucket": "aurora-survival-models",
+  "catalogObject": "beta/catalog.json",
+  "channel": "beta",
+  "createdAt": "2026-08-27T05:51:32Z",
+  "packages": [
+    {
+      "envelopePath": "packages/model.lite.gemma3-1b-q4km/1.2.0-beta.1/envelope.json",
+      "packageID": "model.lite.gemma3-1b-q4km",
+      "totalByteCount": 806069296,
+      "version": "1.2.0-beta.1"
+    },
+    {
+      "envelopePath": "packages/model.expert.qwen3vl-2b-q4km-q8/0.4.0-beta.1/envelope.json",
+      "packageID": "model.expert.qwen3vl-2b-q4km-q8",
+      "totalByteCount": 1589163057,
+      "version": "0.4.0-beta.1"
+    },
+    {
+      "envelopePath": "packages/knowledge.shared-survival-rag-v3/3.2.0-beta.1/envelope.json",
+      "packageID": "knowledge.shared-survival-rag-v3",
+      "totalByteCount": 43156859,
+      "version": "3.2.0-beta.1"
+    }
+  ],
+  "schemaVersion": 1
+}

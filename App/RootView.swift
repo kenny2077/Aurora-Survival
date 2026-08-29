@@ -15,7 +15,7 @@ struct RootView: View {
     @ViewBuilder
     var body: some View {
         Group {
-            if model.hasAcceptedRiskAcknowledgement {
+            if model.hasCompletedOnboarding {
                 ZStack {
                     if horizontalSizeClass == .regular {
                         tabs
@@ -32,7 +32,7 @@ struct RootView: View {
 #endif
                 }
             } else {
-                RiskAcknowledgementView()
+                OnboardingView()
             }
         }
         .onChange(of: scenePhase) { _, phase in

@@ -20,6 +20,15 @@ public protocol ResumablePackageTransport: PackageTransport {
     func data(from url: URL, byteRange: Range<Int64>) async throws -> Data
 }
 
+public protocol BackgroundFilePackageTransport: ResumablePackageTransport {
+    func downloadArtifact(
+        from url: URL,
+        to destination: URL,
+        expectedByteCount: Int64,
+        progress: @escaping @Sendable (Int64) async -> Void
+    ) async throws
+}
+
 public enum PackageDownloadError: Error, Equatable {
     case unexpectedPackage
     case invalidRangeResponse
@@ -190,16 +199,37 @@ public actor PackageDownloadCoordinator {
                     )
                     continue
                 }
-                let partial = destination.appendingPathExtension("partial")
-                let assembler = ResumableArtifactAssembler(
-                    partialURL: partial,
-                    expectedByteCount: artifact.byteCount
-                )
                 let remoteURL = artifact.path
                     .split(separator: "/")
                     .reduce(location.artifactBaseURL) {
                         $0.appendingPathComponent(String($1), isDirectory: false)
                     }
+                if let backgroundTransport = transport as? any BackgroundFilePackageTransport {
+                    let completedBeforeArtifact = completedByteCount
+                    try await backgroundTransport.downloadArtifact(
+                        from: remoteURL,
+                        to: destination,
+                        expectedByteCount: artifact.byteCount,
+                        progress: { artifactBytes in
+                            await progress(
+                                PackageDownloadProgress(
+                                    packageID: envelope.manifest.packageID,
+                                    artifactPath: artifact.path,
+                                    receivedByteCount: completedBeforeArtifact + artifactBytes,
+                                    totalByteCount: totalByteCount
+                                )
+                            )
+                        }
+                    )
+                    completedByteCount += artifact.byteCount
+                    continue
+                }
+
+                let partial = destination.appendingPathExtension("partial")
+                let assembler = ResumableArtifactAssembler(
+                    partialURL: partial,
+                    expectedByteCount: artifact.byteCount
+                )
                 if artifact.byteCount == 0 {
                     try await assembler.append(Data(), atOffset: 0)
                 }

@@ -42,7 +42,7 @@ struct RiskAcknowledgementView: View {
                 }
 
                 Button {
-                    model.acceptRiskAcknowledgement()
+                    model.acceptLegalTerms()
                 } label: {
                     Text("I understand and accept")
                         .frame(maxWidth: .infinity)
@@ -58,7 +58,7 @@ struct RiskAcknowledgementView: View {
                     .accessibilityHint("Aurora remains on this screen")
                     .accessibilityIdentifier("agreement.notNow")
 
-                Text("Acknowledgment version \(AppModel.riskAcknowledgementSchemaVersion). A future material change will require acceptance again.")
+                Text("Acknowledgment version \(AppModel.legalSchemaVersion). A future material change will require acceptance again.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

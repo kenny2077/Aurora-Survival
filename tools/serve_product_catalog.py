@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import http.server
 import pathlib
 import re
@@ -16,6 +17,30 @@ DEFAULT_DIRECTORY = ROOT / ".trailguard" / "development" / "product-host"
 
 class RangeRequestHandler(http.server.SimpleHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
+    required_authorization: str | None = None
+
+    def do_GET(self) -> None:
+        if not self._is_authorized():
+            self._deny()
+            return
+        super().do_GET()
+
+    def do_HEAD(self) -> None:
+        if not self._is_authorized():
+            self._deny()
+            return
+        super().do_HEAD()
+
+    def _is_authorized(self) -> bool:
+        return self.required_authorization is None or self.headers.get(
+            "Authorization"
+        ) == self.required_authorization
+
+    def _deny(self) -> None:
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Basic realm="Aurora iPad beta"')
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
     def end_headers(self) -> None:
         self.send_header("Accept-Ranges", "bytes")
@@ -75,14 +100,25 @@ def main() -> None:
     parser.add_argument("--bind", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--directory", type=pathlib.Path, default=DEFAULT_DIRECTORY)
+    parser.add_argument(
+        "--basic-token",
+        help="Require HTTP Basic auth with username 'aurora' for local device testing.",
+    )
     args = parser.parse_args()
     if not (args.directory / "catalog.json").is_file():
         raise SystemExit(
             "Signed catalog host is missing. Run tools/prepare_product_catalog.py first."
         )
-    handler = lambda *items, **kwargs: RangeRequestHandler(  # noqa: E731
-        *items, directory=str(args.directory), **kwargs
-    )
+    authorization = None
+    if args.basic_token:
+        encoded = base64.b64encode(f"aurora:{args.basic_token}".encode()).decode()
+        authorization = f"Basic {encoded}"
+
+    def handler(*items, **kwargs):
+        request = RangeRequestHandler(*items, directory=str(args.directory), **kwargs)
+        return request
+
+    RangeRequestHandler.required_authorization = authorization
     server_type = IPv6ThreadingHTTPServer if ":" in args.bind else http.server.ThreadingHTTPServer
     server = server_type((args.bind, args.port), handler)
     print(f"Serving {args.directory} on http://{args.bind}:{args.port}/catalog.json")

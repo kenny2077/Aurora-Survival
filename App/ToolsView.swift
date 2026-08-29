@@ -86,28 +86,33 @@ struct ToolsView: View {
     }
 
     private func tierCard(_ tier: ModelTier) -> some View {
-        HStack(spacing: AuroraDesign.Space.sm) {
-            Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
-                .font(.headline)
-                .foregroundStyle(tier == .lite ? AuroraDesign.river : .indigo)
-                .frame(width: 34, height: 34)
-                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 11))
-            VStack(alignment: .leading, spacing: 2) {
-                Text(tier.displayName).font(.headline)
-                Text(modelDescription(for: tier))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+        let setupState = model.modelSetupState(for: tier)
+        return VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+            HStack(spacing: AuroraDesign.Space.sm) {
+                Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
+                    .font(.headline)
+                    .foregroundStyle(tier == .lite ? AuroraDesign.river : .indigo)
+                    .frame(width: 34, height: 34)
+                    .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 11))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(tier.displayName).font(.headline)
+                    Text(modelDescription(for: tier))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: AuroraDesign.Space.sm)
+                modelControl(tier, setupState: setupState)
             }
-            Spacer(minLength: AuroraDesign.Space.sm)
-            modelControl(tier)
+
+            modelProgress(tier, setupState: setupState)
         }
         .padding(AuroraDesign.Space.sm)
         .frame(maxWidth: .infinity, minHeight: 62)
         .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 18))
         .opacity(tier == .expert && !model.expertDeviceIsEligible ? 0.68 : 1)
         .contextMenu {
-            if case .ready = model.modelSetupState(for: tier) {
+            if case .ready = setupState {
                 Button("Remove Download", role: .destructive) {
                     modelPendingRemoval = tier
                 }
@@ -117,7 +122,10 @@ struct ToolsView: View {
         .accessibilityIdentifier("tools.tier.\(tier.rawValue)")
     }
 
-    @ViewBuilder private func modelControl(_ tier: ModelTier) -> some View {
+    @ViewBuilder private func modelControl(
+        _ tier: ModelTier,
+        setupState: ModelSetupState
+    ) -> some View {
         if tier == .expert && !model.expertDeviceIsEligible {
             EmptyView()
         } else if case .loading(tier) = model.modelRuntimeState {
@@ -151,27 +159,40 @@ struct ToolsView: View {
             .accessibilityLabel("Load \(tier.displayName)")
             .accessibilityIdentifier("tools.model.load.\(tier.rawValue)")
         } else {
-            switch model.modelSetupState(for: tier) {
+            switch setupState {
             case .ready:
                 EmptyView()
-            case let .downloading(fraction):
-                ProgressView(value: fraction)
-                    .progressViewStyle(.circular)
-                    .frame(width: 34, height: 34)
-                    .accessibilityLabel("Downloading \(tier.displayName)")
-                    .accessibilityValue(
-                        fraction.formatted(
-                            .percent.precision(.fractionLength(0))
-                        )
-                    )
-                    .accessibilityIdentifier(
-                        "tools.model.downloading.\(tier.rawValue)"
-                    )
+            case .downloading:
+                Button { model.cancelModelSetup(tier) } label: {
+                    Image(systemName: "pause.fill")
+                        .frame(width: 32, height: 32)
+                }
+                .buttonStyle(.glass)
+                .buttonBorderShape(.circle)
+                .accessibilityLabel("Pause \(tier.displayName) download")
+                .accessibilityIdentifier("tools.model.pause.\(tier.rawValue)")
+            case let .paused(fraction):
+                modelIconButton(
+                    "play.fill",
+                    label: "Resume \(tier.displayName) download at "
+                        + fraction.formatted(.percent.precision(.fractionLength(0))),
+                    identifier: "tools.model.resume.\(tier.rawValue)"
+                ) {
+                    model.startModelSetup(tier)
+                }
             case .available:
                 modelIconButton(
                     "arrow.down",
                     label: downloadLabel(tier),
                     identifier: "tools.model.download.\(tier.rawValue)"
+                ) {
+                    model.startModelSetup(tier)
+                }
+            case .updateAvailable:
+                modelIconButton(
+                    "arrow.down.circle",
+                    label: "Update \(tier.displayName)",
+                    identifier: "tools.model.update.\(tier.rawValue)"
                 ) {
                     model.startModelSetup(tier)
                 }
@@ -193,6 +214,52 @@ struct ToolsView: View {
             case .unavailable:
                 EmptyView()
             }
+        }
+    }
+
+    @ViewBuilder private func modelProgress(
+        _ tier: ModelTier,
+        setupState: ModelSetupState
+    ) -> some View {
+        switch setupState {
+        case let .downloading(fraction):
+            progressRow(tier, fraction: fraction, paused: false)
+        case let .paused(fraction):
+            progressRow(tier, fraction: fraction, paused: true)
+        default:
+            EmptyView()
+        }
+    }
+
+    private func progressRow(
+        _ tier: ModelTier,
+        fraction: Double,
+        paused: Bool
+    ) -> some View {
+        let percentage = fraction.formatted(
+            .percent.precision(.fractionLength(0))
+        )
+        return VStack(alignment: .leading, spacing: 5) {
+            HStack {
+                Text(paused ? "Paused" : "Downloading")
+                Spacer()
+                Text(percentage)
+                    .monospacedDigit()
+                    .accessibilityIdentifier(
+                        "tools.model.progressLabel.\(tier.rawValue)"
+                    )
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.secondary)
+
+            ProgressView(value: fraction)
+                .progressViewStyle(.linear)
+                .tint(tier == .lite ? AuroraDesign.river : .indigo)
+                .accessibilityLabel("\(tier.displayName) download progress")
+                .accessibilityValue(percentage)
+                .accessibilityIdentifier(
+                    "tools.model.progress.\(tier.rawValue)"
+                )
         }
     }
 
@@ -694,11 +761,17 @@ private struct ToolsSettingsView: View {
                     LabeledContent("Version", value: version)
                     LabeledContent("Selected model", value: model.modelSelection.displayName)
                 }
+                Section("Downloads") {
+                    Toggle(
+                        "Allow Cellular Model Downloads",
+                        isOn: $model.allowsCellularModelDownloads
+                    )
+                    Text("Model downloads use Wi-Fi by default. Enable cellular only after reviewing the model size with your carrier plan.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
                 Section("Legal") {
-                    NavigationLink("AI Usage Disclosure") { LegalDocumentView(document: .ai) }
-                    NavigationLink("Terms of Use") { LegalDocumentView(document: .terms) }
-                    NavigationLink("Safety & Liability") { LegalDocumentView(document: .safety) }
-                    NavigationLink("Privacy") { LegalDocumentView(document: .privacy) }
+                    NavigationLink("Legal & Privacy") { LegalPrivacyHubView() }
                 }
                 Section {
                     Button("Reset to Defaults", role: .destructive) { confirmsReset = true }
@@ -731,7 +804,129 @@ private struct ToolsSettingsView: View {
     }
 }
 
-private struct LegalDocument {
+struct LegalPrivacyHubView: View {
+    var body: some View {
+        List {
+            Section {
+                NavigationLink("Aurora Terms & AI Use") {
+                    CombinedAuroraAgreementView()
+                }
+                .accessibilityIdentifier("legal.agreement")
+
+                NavigationLink("Privacy Notice") {
+                    LegalDocumentView(document: .privacy)
+                }
+                .accessibilityIdentifier("legal.privacy")
+
+                NavigationLink("Model Licenses & Notices") {
+                    ModelLicensesAndNoticesView()
+                }
+                .accessibilityIdentifier("legal.models")
+            } footer: {
+                Text("All documents are stored with Aurora and remain available offline.")
+            }
+        }
+        .navigationTitle("Legal & Privacy")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct CombinedAuroraAgreementView: View {
+    private let documents: [LegalDocument] = [.terms, .ai, .safety]
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: AuroraDesign.Space.xl) {
+                ForEach(Array(documents.enumerated()), id: \.offset) { index, document in
+                    VStack(alignment: .leading, spacing: AuroraDesign.Space.md) {
+                        Text(document.title)
+                            .font(.title2.bold())
+                            .accessibilityAddTraits(.isHeader)
+                        Text(document.introduction)
+                            .font(.callout.bold())
+                            .foregroundStyle(.secondary)
+                        ForEach(Array(document.sections.enumerated()), id: \.offset) { _, section in
+                            VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
+                                Text(section.0).font(.headline)
+                                Text(section.1).foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    if index < documents.count - 1 { Divider() }
+                }
+
+                Text("Beta legal text · August 22, 2026")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(AuroraDesign.Space.lg)
+            .frame(maxWidth: AuroraDesign.readableWidth, alignment: .leading)
+            .frame(maxWidth: .infinity)
+        }
+        .navigationTitle("Aurora Terms & AI Use")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct ModelLicensesAndNoticesView: View {
+    var body: some View {
+        List {
+            Section("Gemma") {
+                NavigationLink("Gemma Terms of Use") {
+                    BundledLegalTextView(
+                        title: "Gemma Terms of Use",
+                        resource: "GEMMA_TERMS_2026-04-01"
+                    )
+                }
+                NavigationLink("Gemma Prohibited Use Policy") {
+                    LegalDocumentView(document: .gemmaRestrictions)
+                }
+                NavigationLink("Gemma Modification Notice") {
+                    BundledLegalTextView(
+                        title: "Gemma Modification Notice",
+                        resource: "GEMMA_MODIFICATIONS_NOTICE"
+                    )
+                }
+            }
+
+            Section("Qwen") {
+                NavigationLink("Apache License 2.0") {
+                    BundledLegalTextView(
+                        title: "Apache License 2.0",
+                        resource: "LICENSE_APACHE_2.0",
+                        fileExtension: "txt"
+                    )
+                }
+                NavigationLink("Redistribution Notice") {
+                    BundledLegalTextView(
+                        title: "Qwen Redistribution Notice",
+                        resource: "QWEN_NOTICE"
+                    )
+                }
+            }
+
+            Section("BGE") {
+                NavigationLink("MIT License") {
+                    BundledLegalTextView(
+                        title: "BGE MIT License",
+                        resource: "LICENSE_MIT_BGE",
+                        fileExtension: "txt"
+                    )
+                }
+                NavigationLink("Conversion Notice") {
+                    BundledLegalTextView(
+                        title: "BGE Conversion Notice",
+                        resource: "BGE_CONVERSION_NOTICE"
+                    )
+                }
+            }
+        }
+        .navigationTitle("Model Licenses & Notices")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct LegalDocument {
     let title: String
     let introduction: String
     let sections: [(String, String)]
@@ -747,6 +942,7 @@ private struct LegalDocument {
         introduction: "By using this beta, you agree to use Aurora lawfully, responsibly, and subject to these limitations. If you do not agree, do not use the beta.", sections: [
             ("Permitted use", "Aurora is a preparation and informational aid. You are responsible for your decisions, route, equipment, communications, compliance with local law, and the safety of people affected by your actions."),
             ("Emergency services", "Aurora does not place emergency calls, dispatch responders, guarantee communication, or create a rescue relationship. Call the applicable local emergency number whenever circumstances require it."),
+            ("Gemma use restrictions", "Aurora Lite includes Google Gemma. You agree that your use of Gemma is governed by the Gemma Terms of Use and must not violate the incorporated Gemma Prohibited Use Policy, including prohibited dangerous, illegal, malicious, rights-infringing, deceptive, or privacy-invasive activity."),
             ("Third-party services", "Maps, Apple satellite features, carriers, emergency systems, external links, model licenses, and other third-party services have separate availability, terms, fees, and privacy practices."),
             ("Changes", "Beta features, models, datasets, compatibility, and these terms may change. Material legal text should be versioned and reviewed before production."),
         ])
@@ -764,9 +960,23 @@ private struct LegalDocument {
             ("Sharing and links", "Copy, Share, phone, map, and external-link actions leave Aurora at your direction and may be handled by another service under its terms. Do not share medical or location information with people you do not trust."),
             ("Beta review", "This beta text describes the current local implementation and is not a substitute for a finalized jurisdiction-specific privacy policy or legal review."),
         ])
+    static let gemmaRestrictions = LegalDocument(
+        title: "Gemma Prohibited Use Policy",
+        introduction: "Gemma use is subject to Google's Gemma Terms of Use and the incorporated Prohibited Use Policy.",
+        sections: [
+            (
+                "Enforceable restrictions",
+                "You must not use Gemma for prohibited, dangerous, illegal, malicious, rights-infringing, deceptive, privacy-invasive, or otherwise unlawful activity. The complete current policy is available at ai.google.dev/gemma/prohibited_use_policy."
+            ),
+            (
+                "Model distribution",
+                "Aurora Lite includes an offline copy of the applicable Gemma Terms, the required Notice file, and a record of the GGUF conversion and quantization."
+            ),
+        ]
+    )
 }
 
-private struct LegalDocumentView: View {
+struct LegalDocumentView: View {
     let document: LegalDocument
     var body: some View {
         ScrollView {

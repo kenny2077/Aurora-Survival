@@ -278,6 +278,26 @@ struct PackageDownloadCard: View {
             }
             .accessibilityValue(fraction.formatted(.percent))
 
+        case let .paused(fraction):
+            VStack(alignment: .leading, spacing: 8) {
+                ProgressView(value: fraction) {
+                    Text("Paused at \(fraction.formatted(.percent.precision(.fractionLength(0))))")
+                }
+                Button("Resume", action: start)
+                    .buttonStyle(.borderedProminent)
+            }
+
+        case let .updateAvailable(installedVersion, availableVersion):
+            VStack(alignment: .leading, spacing: 8) {
+                Label(
+                    "Update available · \(installedVersion) → \(availableVersion)",
+                    systemImage: "arrow.down.circle.fill"
+                )
+                .font(.subheadline.bold())
+                Button("Update", action: start)
+                    .buttonStyle(.borderedProminent)
+            }
+
         case let .installed(active):
             HStack {
                 Label(

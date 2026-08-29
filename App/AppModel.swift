@@ -13,7 +13,9 @@ enum ModelRuntimeLoadState: Equatable {
 enum ModelSetupState: Equatable {
     case unavailable
     case available
+    case updateAvailable
     case downloading(Double)
+    case paused(Double)
     case ready
     case failed(String)
 }
@@ -32,7 +34,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var photoAuthorizationStatus: PhotoLibraryAccessStatus
     @Published private(set) var cameraAuthorizationStatus: CameraAuthorizationStatus
     @Published private(set) var attachmentOperationState: AttachmentOperationState = .idle
-    @Published private(set) var hasAcceptedRiskAcknowledgement: Bool
+    @Published private(set) var onboardingState: OnboardingState
     @Published var libraryQuery = ""
     @Published var selectedTab: AppTab = .ask
     @Published var manualPath: [FieldGuideRoute] = []
@@ -50,6 +52,14 @@ final class AppModel: ObservableObject {
     @Published private(set) var catalogStatus = "Connect to a signed package catalog."
     @Published private(set) var isLoadingCatalog = false
     @Published private(set) var offlineMaps: [ResolvedOfflineMap] = []
+    @Published var allowsCellularModelDownloads: Bool {
+        didSet {
+            userDefaults.set(
+                allowsCellularModelDownloads,
+                forKey: Self.cellularDownloadsDefaultsKey
+            )
+        }
+    }
 
     let articles: [KnowledgeArticle]
     let fieldGuide: FieldGuideStore?
@@ -64,8 +74,17 @@ final class AppModel: ObservableObject {
     private let cameraAuthorization: any CameraAuthorizing
     private let capturedPhotoSaver: any CapturedPhotoSaving
     private let userDefaults: UserDefaults
+    private let onboardingStore: OnboardingStateStore
     private var isRefreshingActivePacks = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
+    private lazy var wifiPackageTransport = BackgroundURLSessionPackageTransport(
+        identifier: "com.example.Aurora.packages.wifi",
+        allowsCellularAccess: false
+    )
+    private lazy var cellularPackageTransport = BackgroundURLSessionPackageTransport(
+        identifier: "com.example.Aurora.packages.cellular",
+        allowsCellularAccess: true
+    )
     private var discoveredActivePacks: ActivePackSnapshot?
     private var discoveredModelRuntime = ActiveModelRuntimeResolution(
         descriptors: [:],
@@ -110,27 +129,29 @@ final class AppModel: ObservableObject {
         self.capturedPhotoSaver = capturedPhotoSaver
             ?? SystemCapturedPhotoSaver()
         self.userDefaults = userDefaults
+        allowsCellularModelDownloads = userDefaults.bool(
+            forKey: Self.cellularDownloadsDefaultsKey
+        )
+        onboardingStore = OnboardingStateStore(defaults: userDefaults)
 #if DEBUG
         if ProcessInfo.processInfo.environment[
             "TRAILGUARD_UI_RESET_AGREEMENT"
         ] == "1" {
-            userDefaults.removeObject(
-                forKey: Self.riskAcknowledgementDefaultsKey
-            )
+            onboardingStore.reset()
         }
 #endif
         photoAuthorizationStatus = photoAuthorization.currentStatus()
         cameraAuthorizationStatus = cameraAuthorization.currentStatus()
-        hasAcceptedRiskAcknowledgement = userDefaults.integer(
-            forKey: Self.riskAcknowledgementDefaultsKey
-        ) == Self.riskAcknowledgementSchemaVersion
+        onboardingState = onboardingStore.load()
 #if DEBUG
         if ProcessInfo.processInfo.environment[
             "TRAILGUARD_UI_ACCEPT_AGREEMENT"
         ] == "1" || ProcessInfo.processInfo.environment[
             "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE"
         ] != nil {
-            hasAcceptedRiskAcknowledgement = true
+            onboardingState = onboardingStore.complete(
+                schemaVersion: Self.legalSchemaVersion
+            )
         }
 #endif
         let applicationSupport = FileManager.default.urls(
@@ -297,15 +318,27 @@ final class AppModel: ObservableObject {
         else { return .unavailable }
         let modelState = packageState(for: modelEntry)
         let ragState = packageState(for: ragEntry)
+        let ownsDependencyTransfer = switch modelState {
+        case .downloading, .paused:
+            true
+        default:
+            false
+        }
         if case let .failed(message) = modelState { return .failed(message) }
-        if case let .failed(message) = ragState { return .failed(message) }
+        if ownsDependencyTransfer,
+           case let .failed(message) = ragState {
+            return .failed(message)
+        }
+        if case .updateAvailable = modelState { return .updateAvailable }
+        if case .updateAvailable = ragState { return .updateAvailable }
         if case .installed = modelState, case .installed = ragState {
             return runtimeTiers.contains(tier) ? .ready : .failed(
                 "The installed model or shared survival knowledge failed validation."
             )
         }
         let total = Double(modelEntry.totalByteCount + ragEntry.totalByteCount)
-        if case let .downloading(fraction) = ragState {
+        if ownsDependencyTransfer,
+           case let .downloading(fraction) = ragState {
             return .downloading(
                 Double(ragEntry.totalByteCount) * fraction / total
             )
@@ -317,6 +350,22 @@ final class AppModel: ObservableObject {
                 0.0
             }
             return .downloading(
+                (completedRAG + Double(modelEntry.totalByteCount) * fraction) / total
+            )
+        }
+        if ownsDependencyTransfer,
+           case let .paused(fraction) = ragState {
+            return .paused(
+                Double(ragEntry.totalByteCount) * fraction / total
+            )
+        }
+        if case let .paused(fraction) = modelState {
+            let completedRAG = if case .installed = ragState {
+                Double(ragEntry.totalByteCount)
+            } else {
+                0.0
+            }
+            return .paused(
                 (completedRAG + Double(modelEntry.totalByteCount) * fraction) / total
             )
         }
@@ -467,6 +516,9 @@ final class AppModel: ObservableObject {
                     "download-staging",
                     isDirectory: true
                 ),
+                transport: allowsCellularModelDownloads
+                    ? cellularPackageTransport
+                    : wifiPackageTransport,
                 installer: packageInstaller,
                 chunkByteCount: 8 * 1_048_576
             )
@@ -488,6 +540,16 @@ final class AppModel: ObservableObject {
         } catch PackageInstallError.packageAlreadyInstalled {
             try? await refreshInstalledPackageStates()
             await refreshActivePacks()
+        } catch is CancellationError {
+            let fraction: Double
+            if case let .paused(value) = packageDownloadStates[entry.id] {
+                fraction = value
+            } else if case let .downloading(value) = packageDownloadStates[entry.id] {
+                fraction = value
+            } else {
+                fraction = 0
+            }
+            packageDownloadStates[entry.id] = .paused(fraction)
         } catch {
             packageDownloadStates[entry.id] = .failed(
                 Self.userMessage(for: error)
@@ -497,13 +559,37 @@ final class AppModel: ObservableObject {
 
     func startDownload(_ entry: PackageCatalogEntry) {
         guard downloadTasks[entry.id] == nil else { return }
+        setPendingDownload(entry.id, pending: true)
         downloadTasks[entry.id] = Task { [weak self] in
             await self?.downloadWithDependencies(entry)
+            if let self,
+               case .paused = self.packageDownloadStates[entry.id] {
+                // Keep the identity so a normal relaunch can resume it.
+            } else {
+                self?.setPendingDownload(entry.id, pending: false)
+            }
             self?.downloadTasks[entry.id] = nil
         }
     }
 
+    func restoreBackgroundDownloads() async {
+        await wifiPackageTransport.recoverOrphanedTasks()
+        await cellularPackageTransport.recoverOrphanedTasks()
+        await ensureCatalogLoaded()
+        let pending = Set(
+            userDefaults.stringArray(forKey: Self.pendingDownloadsDefaultsKey)
+                ?? []
+        )
+        for entry in catalogEntries where pending.contains(entry.id) {
+            if packageDownloadStates[entry.id] == nil {
+                packageDownloadStates[entry.id] = .paused(0)
+            }
+            startDownload(entry)
+        }
+    }
+
     private func downloadWithDependencies(_ entry: PackageCatalogEntry) async {
+        packageDownloadStates[entry.id] = .downloading(0)
         if let requiredID = entry.metadata["required_rag_package_id"],
            let requiredVersion = entry.metadata["required_rag_package_version"] {
             guard let dependency = catalogEntries.first(where: {
@@ -517,9 +603,16 @@ final class AppModel: ObservableObject {
             await download(dependency)
             guard case .installed(active: true) = packageDownloadStates[dependency.id]
             else {
-                packageDownloadStates[entry.id] = .failed(
-                    "Install the shared survival RAG package before this model."
-                )
+                if Task.isCancelled {
+                    let fraction = if case let .paused(value) = packageDownloadStates[entry.id] {
+                        value
+                    } else { 0.0 }
+                    packageDownloadStates[entry.id] = .paused(fraction)
+                } else {
+                    packageDownloadStates[entry.id] = .failed(
+                        "Install the shared survival RAG package before this model."
+                    )
+                }
                 return
             }
         }
@@ -527,6 +620,9 @@ final class AppModel: ObservableObject {
     }
 
     func cancelDownload(_ entry: PackageCatalogEntry) {
+        if case let .downloading(fraction) = packageDownloadStates[entry.id] {
+            packageDownloadStates[entry.id] = .paused(fraction)
+        }
         downloadTasks[entry.id]?.cancel()
     }
 
@@ -2660,18 +2756,25 @@ final class AppModel: ObservableObject {
 
     private func refreshInstalledPackageStates() async throws {
         let index = try await packageInstaller.index()
-        let active = index.activeVersions
         for entry in catalogEntries {
-            let installed = index.installed.contains {
-                $0.packageID == entry.packageID && $0.version == entry.version
-            }
-            if installed {
-                packageDownloadStates[entry.id] = .installed(
-                    active: active[entry.packageID] == entry.version
+            switch PackageCatalogInstallStatusResolver().resolve(
+                entry: entry,
+                index: index
+            ) {
+            case let .installed(active):
+                packageDownloadStates[entry.id] = .installed(active: active)
+            case let .updateAvailable(installedVersion, availableVersion):
+                packageDownloadStates[entry.id] = .updateAvailable(
+                    installedVersion: installedVersion,
+                    availableVersion: availableVersion
                 )
-            } else if case .downloading = packageDownloadStates[entry.id] {
-                continue
-            } else {
+            case .available:
+                if case .downloading = packageDownloadStates[entry.id] {
+                    continue
+                }
+                if case .paused = packageDownloadStates[entry.id] {
+                    continue
+                }
                 packageDownloadStates[entry.id] = .available
             }
         }
@@ -2703,16 +2806,48 @@ final class AppModel: ObservableObject {
         ) as? String ?? "0"
     }
 
-    private static let riskAcknowledgementDefaultsKey =
-        "Aurora.riskAcknowledgementSchema"
-    static let riskAcknowledgementSchemaVersion = 2
+    static let legalSchemaVersion = 1
+    private static let cellularDownloadsDefaultsKey =
+        "Aurora.allowsCellularModelDownloads"
+    private static let pendingDownloadsDefaultsKey =
+        "Aurora.pendingPackageDownloads"
 
-    func acceptRiskAcknowledgement() {
-        userDefaults.set(
-            Self.riskAcknowledgementSchemaVersion,
-            forKey: Self.riskAcknowledgementDefaultsKey
+    var hasAcceptedLegalTerms: Bool {
+        onboardingState.accepts(schemaVersion: Self.legalSchemaVersion)
+    }
+
+    var hasCompletedOnboarding: Bool {
+        hasAcceptedLegalTerms && onboardingState.isComplete
+    }
+
+    func acceptLegalTerms() {
+        onboardingState = onboardingStore.accept(
+            schemaVersion: Self.legalSchemaVersion
         )
-        hasAcceptedRiskAcknowledgement = true
+    }
+
+    func completeOnboarding(openModels: Bool) {
+        guard hasAcceptedLegalTerms else { return }
+        onboardingState = onboardingStore.complete(
+            schemaVersion: Self.legalSchemaVersion
+        )
+        selectedTab = openModels ? .tools : .ask
+    }
+
+    private func setPendingDownload(_ id: String, pending: Bool) {
+        var values = Set(
+            userDefaults.stringArray(forKey: Self.pendingDownloadsDefaultsKey)
+                ?? []
+        )
+        if pending {
+            values.insert(id)
+        } else {
+            values.remove(id)
+        }
+        userDefaults.set(
+            values.sorted(),
+            forKey: Self.pendingDownloadsDefaultsKey
+        )
     }
 
     private static var configuredCatalogURL: String {
@@ -2778,7 +2913,9 @@ final class AppModel: ObservableObject {
 enum PackageDownloadState: Equatable {
     case available
     case downloading(Double)
+    case paused(Double)
     case installed(active: Bool)
+    case updateAvailable(installedVersion: String, availableVersion: String)
     case failed(String)
 }
 
