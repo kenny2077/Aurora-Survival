@@ -64,18 +64,40 @@ final class ExpertContextTests: XCTestCase {
         )
     }
 
-    func testExpertIntentCodecAcceptsOnlyTwoValues() throws {
-        let codec = ExpertTurnIntentCodec()
+    func testTurnRoutingCodecAcceptsStrictBilingualEnvelope() throws {
+        let codec = TurnRoutingDecisionCodec()
         XCTAssertEqual(
-            try codec.decodeAndValidate(#"{"t":"survival"}"#),
-            .survivalQuestion
+            try codec.decodeAndValidate(
+                #"{"t":"survival","l":"zh","q":"find and purify water outdoors"}"#
+            ),
+            TurnRoutingDecision(
+                intent: .survivalQuestion,
+                responseLanguage: .chinese,
+                retrievalQuery: "find and purify water outdoors"
+            )
         )
         XCTAssertEqual(
-            try codec.decodeAndValidate(#"{"t":"general"}"#),
-            .generalQuestion
+            try codec.decodeAndValidate(#"{"t":"general","l":"en","q":""}"#),
+            TurnRoutingDecision(
+                intent: .generalQuestion,
+                responseLanguage: .english,
+                retrievalQuery: ""
+            )
         )
-        XCTAssertThrowsError(try codec.decodeAndValidate(#"{"t":"live"}"#))
-        XCTAssertThrowsError(try codec.decodeAndValidate(#"{"t":"general","x":1}"#))
+        XCTAssertThrowsError(try codec.decodeAndValidate(
+            #"{"t":"general","l":"zh","q":"weather"}"#
+        ))
+        XCTAssertThrowsError(try codec.decodeAndValidate(
+            #"{"t":"survival","l":"fr","q":"water"}"#
+        ))
+        XCTAssertThrowsError(try codec.decodeAndValidate(
+            #"{"t":"general","l":"en","q":"","x":1}"#
+        ))
+    }
+
+    func testResponseLanguageDetectsEnglishAndChinese() {
+        XCTAssertEqual(ResponseLanguage.detect(in: "Hello"), .english)
+        XCTAssertEqual(ResponseLanguage.detect(in: "如何净化野外水源？"), .chinese)
     }
 
     func testExpertEvidencePlanAcceptsBoundedMultiRecordSelection() throws {

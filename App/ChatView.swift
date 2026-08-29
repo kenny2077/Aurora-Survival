@@ -19,6 +19,7 @@ struct ChatView: View {
     @State private var showsAttachmentMenu = false
     @State private var showsPhotoPicker = false
     @State private var showsCamera = false
+    @State private var previewPhoto: PhotoPreview?
     @FocusState private var composerIsFocused: Bool
 
     var body: some View {
@@ -93,6 +94,11 @@ struct ChatView: View {
                 }
             )
             .ignoresSafeArea()
+        }
+        .fullScreenCover(item: $previewPhoto) { preview in
+            PhotoPreviewView(preview: preview) {
+                previewPhoto = nil
+            }
         }
     }
 
@@ -236,7 +242,12 @@ struct ChatView: View {
                                        message.id == model.messages.last?.id {
                                         thinkingIndicator
                                     }
-                                    MessageBubble(message: message)
+                                    MessageBubble(message: message) { data in
+                                        previewPhoto = PhotoPreview(
+                                            data: data,
+                                            accessibilityLabel: "Sent photo"
+                                        )
+                                    }
                                 }
                                 .id(message.id)
                             }
@@ -283,7 +294,7 @@ struct ChatView: View {
             if model.canAttachPhoto,
                let attachment = model.draftImageAttachment {
                 HStack(spacing: AuroraDesign.Space.sm) {
-                    attachmentPreview(attachment)
+                    attachmentPreviewTile(attachment)
                     VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
                         Text(attachmentTitle(attachment))
                             .font(.subheadline.weight(.semibold))
@@ -294,15 +305,6 @@ struct ChatView: View {
                             )
                     }
                     Spacer()
-                    Button("Replace") {
-                        showsAttachmentSourceDialog = true
-                    }
-                    .frame(minHeight: 44)
-                    Button("Remove") {
-                        photoItem = nil
-                        model.removeAttachment()
-                    }
-                    .frame(minHeight: 44)
                 }
                 .padding(.horizontal, AuroraDesign.Space.xs)
             }
@@ -687,7 +689,43 @@ struct ChatView: View {
     }
 
     @ViewBuilder
-    private func attachmentPreview(_ attachment: DraftImageAttachment) -> some View {
+    private func attachmentPreviewTile(_ attachment: DraftImageAttachment) -> some View {
+        ZStack(alignment: .topTrailing) {
+            Button {
+                guard let data = attachment.imageData else { return }
+                previewPhoto = PhotoPreview(
+                    data: data,
+                    accessibilityLabel: "Attached photo preview"
+                )
+            } label: {
+                attachmentPreviewImage(attachment)
+            }
+            .buttonStyle(.plain)
+            .disabled(attachment.imageData == nil)
+            .accessibilityLabel("Preview attached photo")
+            .accessibilityIdentifier("chat.attachment.preview")
+
+            Button {
+                photoItem = nil
+                model.removeAttachment()
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title2.weight(.semibold))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.white, .black.opacity(0.72))
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .offset(x: 12, y: -12)
+            .accessibilityLabel("Remove attached photo")
+            .accessibilityIdentifier("chat.attachment.remove")
+        }
+        .padding(.top, AuroraDesign.Space.xxs)
+    }
+
+    @ViewBuilder
+    private func attachmentPreviewImage(_ attachment: DraftImageAttachment) -> some View {
         if let data = attachment.thumbnailData,
            let image = UIImage(data: data) {
             Image(uiImage: image)
@@ -736,6 +774,7 @@ struct ChatView: View {
 
 private struct MessageBubble: View {
     let message: ChatMessage
+    let onPreviewPhoto: (Data) -> Void
 
     private var visibleNotices: [String] {
         guard let answer = message.answer else { return [] }
@@ -756,12 +795,18 @@ private struct MessageBubble: View {
             VStack(alignment: .leading, spacing: 12) {
                 if let thumbnailData = message.thumbnailData,
                    let image = UIImage(data: thumbnailData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 240, maxHeight: 180)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .accessibilityLabel("Sent photo")
+                    Button {
+                        onPreviewPhoto(message.previewImageData ?? thumbnailData)
+                    } label: {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 240, maxHeight: 180)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Preview sent photo")
+                    .accessibilityIdentifier("chat.message.photoPreview")
                 }
                 Text(message.text)
                     .font(.body)
@@ -856,5 +901,44 @@ private struct MessageBubble: View {
                 Spacer(minLength: 20)
             }
         }
+    }
+}
+
+private struct PhotoPreview: Identifiable {
+    let id = UUID()
+    let data: Data
+    let accessibilityLabel: String
+}
+
+private struct PhotoPreviewView: View {
+    let preview: PhotoPreview
+    let dismiss: () -> Void
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            if let image = UIImage(data: preview.data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(AuroraDesign.Space.md)
+                    .accessibilityLabel(preview.accessibilityLabel)
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            Button(action: dismiss) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.largeTitle)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.white, .black.opacity(0.64))
+                    .frame(width: 52, height: 52)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding()
+            .accessibilityLabel("Close photo preview")
+            .accessibilityIdentifier("chat.photoPreview.close")
+        }
+        .accessibilityIdentifier("chat.photoPreview")
     }
 }

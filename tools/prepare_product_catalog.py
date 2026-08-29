@@ -123,7 +123,7 @@ def prepare_knowledge_packages(root: pathlib.Path, private_key: pathlib.Path) ->
         "first_aid": "First Aid Quick Guide",
     }
     outputs: list[pathlib.Path] = []
-    with tempfile.TemporaryDirectory(prefix="trailguard-product-knowledge-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-product-knowledge-") as temp:
         temp_root = pathlib.Path(temp)
         for domain, display_name in names.items():
             selected = [article for article in articles if article["domain"] == domain]
@@ -142,7 +142,7 @@ def prepare_knowledge_packages(root: pathlib.Path, private_key: pathlib.Path) ->
                 },
                 "review": {
                     "status": "approved",
-                    "attestation_id": "trailguard.starter-review.2026-07",
+                    "attestation_id": "aurora.starter-review.2026-07",
                 },
                 "records": [],
             }
@@ -210,7 +210,7 @@ def prepare_map_package(
             raise FileNotFoundError(
                 f"Map source '{source_name}' is not ready: {source_path}"
             )
-    with tempfile.TemporaryDirectory(prefix=f"trailguard-map-{slug}-", dir=root) as temp:
+    with tempfile.TemporaryDirectory(prefix=f"aurora-map-{slug}-", dir=root) as temp:
         staging = pathlib.Path(temp)
         map_dir = staging / "maps"
         style_dir = staging / "style"
@@ -238,16 +238,16 @@ def prepare_map_package(
         style = {
             "version": 8,
             "name": "Aurora Offline",
-            "glyphs": "trailguard://glyphs/{fontstack}/{range}.pbf",
+            "glyphs": "aurora://glyphs/{fontstack}/{range}.pbf",
             "sources": {
                 "protomaps": {
                     "type": "vector",
-                    "url": "trailguard://pmtiles",
+                    "url": "aurora://pmtiles",
                     "attribution": "© OpenStreetMap contributors",
                 },
                 "contours": {
                     "type": "vector",
-                    "url": "trailguard://source/contours",
+                    "url": "aurora://source/contours",
                     "attribution": "USGS 3DEP public domain",
                 },
             },

@@ -1,5 +1,5 @@
-#ifndef TRAILGUARD_LLAMA_C_H
-#define TRAILGUARD_LLAMA_C_H
+#ifndef AURORA_LLAMA_C_H
+#define AURORA_LLAMA_C_H
 
 #include <stdint.h>
 

@@ -24,7 +24,7 @@ final class IntegrationPersistenceTests: XCTestCase {
         let snapshots = await reopened.snapshots()
         XCTAssertTrue(
             OfflineEntitlementResolver().canLaunch(
-                productID: "trailguard.lite",
+                productID: "aurora.lite",
                 packageIsInstalled: true,
                 cachedEntitlements: snapshots
             )
@@ -46,7 +46,7 @@ final class IntegrationPersistenceTests: XCTestCase {
         let snapshots = await ledger.snapshots()
         XCTAssertFalse(
             OfflineEntitlementResolver().canLaunch(
-                productID: "trailguard.lite",
+                productID: "aurora.lite",
                 packageIsInstalled: true,
                 cachedEntitlements: snapshots
             )
@@ -63,7 +63,7 @@ final class IntegrationPersistenceTests: XCTestCase {
             try await ledger.apply(
                 VerifiedEntitlementEvent(
                     eventID: "unverified-1",
-                    productID: "trailguard.lite",
+                    productID: "aurora.lite",
                     kind: .purchased,
                     verifiedAt: "2026-07-23T00:00:00Z",
                     verificationSucceeded: false
@@ -130,7 +130,7 @@ final class IntegrationPersistenceTests: XCTestCase {
     ) -> VerifiedEntitlementEvent {
         VerifiedEntitlementEvent(
             eventID: id,
-            productID: "trailguard.lite",
+            productID: "aurora.lite",
             kind: kind,
             verifiedAt: "2026-07-23T00:00:00Z",
             verificationSucceeded: true

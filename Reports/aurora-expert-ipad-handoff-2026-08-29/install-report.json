@@ -1,0 +1,25 @@
+{
+  "active_pack_issues" : [
+
+  ],
+  "active_pack_status" : "Lite, Expert ready offline",
+  "active_tiers" : [
+    "lite",
+    "vision_expert"
+  ],
+  "available_memory_bytes" : 5345754464,
+  "device_model" : "iPad",
+  "error" : null,
+  "free_storage_bytes" : 47359046254,
+  "low_power_mode" : false,
+  "model_runtime_issues" : [
+
+  ],
+  "onboarding_complete" : false,
+  "physical_memory_bytes" : 7902838784,
+  "schema_version" : 1,
+  "shared_rag_issues" : [
+
+  ],
+  "thermal_state" : "nominal"
+}

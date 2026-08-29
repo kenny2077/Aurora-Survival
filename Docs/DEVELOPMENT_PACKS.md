@@ -28,10 +28,10 @@ openssl genpkey -algorithm ED25519 \
 chmod 600 .trailguard/development/package-signing-key.pem
 
 # build compiled and signed v1/v2 development packs
-/tmp/trailguard-dev-venv/bin/python tools/prepare_development_packs.py
+/tmp/aurora-dev-venv/bin/python tools/prepare_development_packs.py
 
 # verify real Swift install, activation, rollback, recall, and tamper rejection
-swift run trailguard-pack-check \
+swift run aurora-pack-check \
   Resources/Packages/development_trusted_package_keys.json \
   .trailguard/development/knowledge-lifecycle/v1 \
   .trailguard/development/knowledge-lifecycle/v2

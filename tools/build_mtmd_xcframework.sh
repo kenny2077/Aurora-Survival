@@ -6,7 +6,7 @@ runtime_release="b9637"
 repo_url="https://github.com/ggml-org/llama.cpp.git"
 script_root="$(cd "$(dirname "$0")/.." && pwd)"
 output_root="${script_root}/Runtime/AuroraLlamaRuntime/Artifacts"
-work_root="$(mktemp -d "${TMPDIR:-/tmp}/trailguard-mtmd.XXXXXX")"
+work_root="$(mktemp -d "${TMPDIR:-/tmp}/aurora-mtmd.XXXXXX")"
 trap 'rm -rf "${work_root}"' EXIT
 minimum_free_kib=$((30 * 1024 * 1024))
 

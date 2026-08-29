@@ -1,0 +1,149 @@
+{
+  "active_pack_status" : "Lite ready offline",
+  "active_tier" : "lite",
+  "cases" : [
+    {
+      "answer" : "Hello there, how can I assist you today?",
+      "cold_start" : false,
+      "cooldown_milliseconds" : 0,
+      "elapsed_milliseconds" : 11844,
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_purpose" : "general",
+      "first_token_milliseconds" : 301,
+      "generated_tokens" : 20,
+      "generation_milliseconds" : 1235,
+      "greeting_pass" : true,
+      "id" : "lite-greeting",
+      "language_pass" : true,
+      "leakage_detected" : false,
+      "manual_lessons" : [
+
+      ],
+      "manual_titles" : [
+
+      ],
+      "passed" : true,
+      "pre_inference_thermal" : "nominal",
+      "question" : "Hi",
+      "raw_completions" : [
+        "{\"t\":\"general\",\"l\":\"en\",\"q\":\"\"}",
+        "{\"a\":\"Hello there, how can I assist you today?\"\n  ,\"e\":[]}\n"
+      ],
+      "role_reversal" : false,
+      "route_pass" : true,
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "screenshot" : "lite-core-3-lite-greeting.png",
+      "sources" : [
+
+      ],
+      "structural_pass" : true,
+      "term_groups_pass" : true,
+      "terminal_failure" : false,
+      "thermal" : "nominal",
+      "thermal_pass" : true,
+      "tokens_per_second" : 20.342612419700213,
+      "useful" : true,
+      "word_count" : 8
+    },
+    {
+      "answer" : "Start with tinder – dry leaves, twigs, or cotton. Create a small nest, then gently blow on the embers to encourage flames. Use kindling to gradually build the fire as it grows.",
+      "cold_start" : false,
+      "cooldown_milliseconds" : 5000,
+      "elapsed_milliseconds" : 3668,
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_purpose" : "grounded",
+      "first_token_milliseconds" : 160,
+      "generated_tokens" : 48,
+      "generation_milliseconds" : 3020,
+      "greeting_pass" : true,
+      "id" : "lite-fire",
+      "language_pass" : true,
+      "leakage_detected" : false,
+      "manual_lessons" : [
+
+      ],
+      "manual_titles" : [
+
+      ],
+      "passed" : false,
+      "pre_inference_thermal" : "nominal",
+      "question" : "How to start a fire",
+      "raw_completions" : [
+        "{\"t\":\"general\",\"l\":\"en\",\"q\":\"\"}",
+        "{\"a\":\"Start with tinder – dry leaves, twigs, or cotton. Create a small nest, then gently blow on the embers to encourage flames. Use kindling to gradually build the fire as it grows.\" , \"e\":[]}"
+      ],
+      "role_reversal" : false,
+      "route_pass" : false,
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "screenshot" : "lite-core-3-lite-fire.png",
+      "sources" : [
+
+      ],
+      "structural_pass" : true,
+      "term_groups_pass" : true,
+      "terminal_failure" : false,
+      "thermal" : "nominal",
+      "thermal_pass" : true,
+      "tokens_per_second" : 16.433566433566433,
+      "useful" : false,
+      "word_count" : 32
+    },
+    {
+      "answer" : "First, locate a relatively clear, flowing water source – a stream or spring is ideal. Always prioritize safety and avoid stagnant water. Next, use a portable water filter or purification tablets to eliminate bacteria and protozoa, ensuring the water is safe to drink.",
+      "cold_start" : false,
+      "cooldown_milliseconds" : 5000,
+      "elapsed_milliseconds" : 4495,
+      "expected_manual_lessons" : [
+
+      ],
+      "expected_purpose" : "grounded",
+      "first_token_milliseconds" : 180,
+      "generated_tokens" : 58,
+      "generation_milliseconds" : 3818,
+      "greeting_pass" : true,
+      "id" : "lite-water-zh",
+      "language_pass" : false,
+      "leakage_detected" : false,
+      "manual_lessons" : [
+
+      ],
+      "manual_titles" : [
+
+      ],
+      "passed" : false,
+      "pre_inference_thermal" : "nominal",
+      "question" : "如何在野外找到并净化水源？",
+      "raw_completions" : [
+        "{\"t\":\"general\",\"l\":\"en\",\"q\":\"\"}\n",
+        "{\"a\":\"First, locate a relatively clear, flowing water source – a stream or spring is ideal. Always prioritize safety and avoid stagnant water. Next, use a portable water filter or purification tablets to eliminate bacteria and protozoa, ensuring the water is safe to drink.\",\"e\":[]}"
+      ],
+      "role_reversal" : false,
+      "route_pass" : false,
+      "safety_critical" : false,
+      "safety_pass" : true,
+      "screenshot" : "lite-core-3-lite-water-zh.png",
+      "sources" : [
+
+      ],
+      "structural_pass" : false,
+      "term_groups_pass" : true,
+      "terminal_failure" : false,
+      "thermal" : "nominal",
+      "thermal_pass" : true,
+      "tokens_per_second" : 15.667949422759758,
+      "useful" : false,
+      "word_count" : 43
+    }
+  ],
+  "completed" : true,
+  "current_thermal" : "nominal",
+  "mode" : "lite-core-3",
+  "run_id" : "aurora-lite-handoff",
+  "schema_version" : 1
+}

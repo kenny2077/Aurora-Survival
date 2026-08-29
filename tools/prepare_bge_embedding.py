@@ -65,7 +65,7 @@ def main() -> None:
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-bge-", dir=output.parent) as raw:
+    with tempfile.TemporaryDirectory(prefix="aurora-bge-", dir=output.parent) as raw:
         f16 = pathlib.Path(raw) / "bge-small-en-v1.5-f16.gguf"
         subprocess.run([
             str(args.python.absolute()), str(converter), str(source),

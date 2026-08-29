@@ -151,7 +151,7 @@ struct SystemCapturedPhotoSaver: CapturedPhotoSaving {
     func savePhoto(data: Data) async throws {
 #if DEBUG
         if ProcessInfo.processInfo.environment[
-            "TRAILGUARD_UI_FORCE_CAPTURE_SAVE_FAILURE"
+            "AURORA_UI_FORCE_CAPTURE_SAVE_FAILURE"
         ] == "1" {
             throw CapturedPhotoSaveError.debugForcedFailure
         }

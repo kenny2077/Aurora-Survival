@@ -10,7 +10,7 @@ let package = Package(
     products: [
         .library(name: "AuroraCore", targets: ["AuroraCore"]),
         .executable(
-            name: "trailguard-pack-check",
+            name: "aurora-pack-check",
             targets: ["AuroraPackCheck"]
         )
     ],

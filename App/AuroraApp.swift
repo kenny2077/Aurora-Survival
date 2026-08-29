@@ -28,6 +28,8 @@ struct AuroraApp: App {
                     await appModel.restoreBackgroundDownloads()
                     await appModel.refreshActivePacks()
                     await appModel.loadDebugOCRFixtureIfPresent()
+                    appModel.resetDebugOnboardingIfRequested()
+                    await appModel.installDebugPackagesOnlyIfRequested()
                     await appModel.runDebugPhysicalInferenceIfRequested()
                 }
         }

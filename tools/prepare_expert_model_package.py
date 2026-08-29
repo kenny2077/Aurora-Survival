@@ -58,7 +58,7 @@ def build(args: argparse.Namespace) -> None:
         raise FileExistsError(f"output already exists: {output}")
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-expert-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-expert-", dir=output.parent) as temp:
         staging = pathlib.Path(temp)
         model_out = staging / "weights" / MODEL_FILENAME
         projector_out = staging / "weights" / PROJECTOR_FILENAME

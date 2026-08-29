@@ -32,7 +32,7 @@
         "locator": "scenario:medical_unconscious",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -65,7 +65,7 @@
         "locator": "scenario:medical_bleeding",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -98,7 +98,7 @@
         "locator": "scenario:vehicle_fuel",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -131,7 +131,7 @@
         "locator": "scenario:vehicle_heat",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -164,7 +164,7 @@
         "locator": "scenario:vehicle_no_start",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -197,7 +197,7 @@
         "locator": "scenario:wilderness_water",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -230,7 +230,7 @@
         "locator": "scenario:wilderness_shelter",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -263,7 +263,7 @@
         "locator": "scenario:navigation_lost",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -296,7 +296,7 @@
         "locator": "scenario:unsupported_surgery",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [
@@ -329,7 +329,7 @@
         "locator": "scenario:unsupported_ecu",
         "owner": "Aurora",
         "revision": "1.0.0",
-        "source_id": "trailguard.synthetic-evaluation",
+        "source_id": "aurora.synthetic-evaluation",
         "title": "Aurora synthetic evaluation fixture"
       },
       "steps": [

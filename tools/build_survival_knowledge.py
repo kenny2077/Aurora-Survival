@@ -1190,7 +1190,7 @@ def build(args: argparse.Namespace) -> None:
     validate_expert_corpus(expert_corpus, content)
     validate_corpus_v3(corpus_v3, content)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-knowledge-", dir=args.output.parent) as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-knowledge-", dir=args.output.parent) as temp:
         staged = pathlib.Path(temp) / args.output.name
         create_database(content, legacy, expert_language, expert_corpus, corpus_v3, staged)
         staged.replace(args.output)

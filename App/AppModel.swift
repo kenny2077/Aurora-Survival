@@ -78,11 +78,11 @@ final class AppModel: ObservableObject {
     private var isRefreshingActivePacks = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
     private lazy var wifiPackageTransport = BackgroundURLSessionPackageTransport(
-        identifier: "com.example.Aurora.packages.wifi",
+        identifier: "com.example.AuroraSurvivalAgent.packages.wifi",
         allowsCellularAccess: false
     )
     private lazy var cellularPackageTransport = BackgroundURLSessionPackageTransport(
-        identifier: "com.example.Aurora.packages.cellular",
+        identifier: "com.example.AuroraSurvivalAgent.packages.cellular",
         allowsCellularAccess: true
     )
     private var discoveredActivePacks: ActivePackSnapshot?
@@ -135,7 +135,7 @@ final class AppModel: ObservableObject {
         onboardingStore = OnboardingStateStore(defaults: userDefaults)
 #if DEBUG
         if ProcessInfo.processInfo.environment[
-            "TRAILGUARD_UI_RESET_AGREEMENT"
+            "AURORA_UI_RESET_AGREEMENT"
         ] == "1" {
             onboardingStore.reset()
         }
@@ -145,9 +145,9 @@ final class AppModel: ObservableObject {
         onboardingState = onboardingStore.load()
 #if DEBUG
         if ProcessInfo.processInfo.environment[
-            "TRAILGUARD_UI_ACCEPT_AGREEMENT"
+            "AURORA_UI_ACCEPT_AGREEMENT"
         ] == "1" || ProcessInfo.processInfo.environment[
-            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE"
+            "AURORA_DEBUG_PHYSICAL_INFERENCE"
         ] != nil {
             onboardingState = onboardingStore.complete(
                 schemaVersion: Self.legalSchemaVersion
@@ -690,7 +690,7 @@ final class AppModel: ObservableObject {
             ? []
             : Set(discoveredModelRuntime.descriptors.keys)
 #if DEBUG
-        if ProcessInfo.processInfo.environment["TRAILGUARD_UI_FORCE_NO_MODEL"] == "1" {
+        if ProcessInfo.processInfo.environment["AURORA_UI_FORCE_NO_MODEL"] == "1" {
             runtimeTiers = []
         }
 #endif
@@ -1020,7 +1020,7 @@ final class AppModel: ObservableObject {
 #if DEBUG
         guard draftImageAttachment == nil,
               let encoded = ProcessInfo.processInfo.environment[
-                  "TRAILGUARD_DEBUG_OCR_FIXTURE_BASE64"
+                  "AURORA_DEBUG_OCR_FIXTURE_BASE64"
               ],
               let data = Data(base64Encoded: encoded)
         else { return }
@@ -1031,7 +1031,7 @@ final class AppModel: ObservableObject {
     func runDebugPhysicalInferenceIfRequested() async {
 #if DEBUG
         guard let mode = ProcessInfo.processInfo.environment[
-            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE"
+            "AURORA_DEBUG_PHYSICAL_INFERENCE"
         ] else { return }
 
         if mode == "tier-comparison" {
@@ -1046,13 +1046,23 @@ final class AppModel: ObservableObject {
             await runDebugExpertPhysicalInference(mode: mode)
             return
         }
-        guard ["smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
+        guard ["lite-core-3", "smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
 
         UIApplication.shared.isIdleTimerDisabled = true
         defer { UIApplication.shared.isIdleTimerDisabled = false }
 
+        if mode == "lite-core-3" {
+            do {
+                try await installDebugStagedPackagesIfPresent()
+            } catch {
+                return
+            }
+            modelSelection = .lite
+            await loadModel(.lite)
+        }
+
         let requestedRunID = ProcessInfo.processInfo.environment[
-            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID"
+            "AURORA_DEBUG_PHYSICAL_RUN_ID"
         ] ?? "local"
         let runID = requestedRunID.replacingOccurrences(
             of: #"[^A-Za-z0-9._-]"#,
@@ -1068,6 +1078,12 @@ final class AppModel: ObservableObject {
         try? FileManager.default.removeItem(at: reportURL)
         let cases: [DebugPhysicalInferenceCase]
         switch mode {
+        case "lite-core-3":
+            cases = [
+                .init("lite-greeting", "Hi", purpose: "general"),
+                .init("lite-fire", "How to start a fire", purpose: "grounded"),
+                .init("lite-water-zh", "如何在野外找到并净化水源？", purpose: "grounded"),
+            ]
         case "smoke":
             cases = [
                 .init("smoke-flat", "Flat tire", purpose: "grounded", lesson: "car-tire"),
@@ -1160,14 +1176,24 @@ final class AppModel: ObservableObject {
             let text = answer?.text ?? ""
             let words = text.split(whereSeparator: \.isWhitespace).count
             let manualLessons = answer?.manualReferences.map(\.lessonID) ?? []
-            let routePass = item.purpose == "grounded"
-                ? Set(item.expectedLessonIDs).isSubset(of: Set(manualLessons))
+            let sources = answer?.sourceCards.map(\.title) ?? []
+            let routePass: Bool
+            if item.purpose == "grounded" {
+                routePass = Set(item.expectedLessonIDs).isSubset(of: Set(manualLessons))
                     && manualLessons.count <= 2
-                : manualLessons.isEmpty
-            let validLength = switch item.purpose {
-            case "grounded": (22...70).contains(words)
-            case "incidentIntake": (14...40).contains(words)
-            default: (24...75).contains(words)
+                    && sources.contains("Survival Manual 2026")
+            } else {
+                routePass = manualLessons.isEmpty && sources.isEmpty
+            }
+            let validLength: Bool
+            if mode == "lite-core-3" {
+                validLength = !text.isEmpty
+            } else {
+                validLength = switch item.purpose {
+                case "grounded": (22...70).contains(words)
+                case "incidentIntake": (14...40).contains(words)
+                default: (24...75).contains(words)
+                }
             }
             let lowercased = text.lowercased()
             let leaked = [
@@ -1202,8 +1228,21 @@ final class AppModel: ObservableObject {
             let safetyPass = !item.hasProhibitedInstruction(in: lowercased)
             let thermal = lastModelThermalCondition?.rawValue ?? "unknown"
             let thermalPass = thermal != "serious" && thermal != "critical"
-            let structuralPass = validLength && !leaked && !roleReversal && !terminal
+            let languagePass = item.id == "lite-water-zh"
+                ? ResponseLanguage.detect(in: text) == .chinese
+                : true
+            let greetingPass = item.id == "lite-greeting"
+                ? !lowercased.contains("weather")
+                    && !lowercased.contains("latest")
+                    && !lowercased.contains("update")
+                : true
+            let structuralPass = validLength && !leaked && !roleReversal
+                && !terminal && languagePass && greetingPass
             let useful = structuralPass && routePass && termGroupsPass
+            let screenshotName = "lite-core-3-\(item.id).png"
+            let screenshotCaptured = mode == "lite-core-3"
+                ? captureDebugWindowScreenshot(named: screenshotName)
+                : false
             var result: [String: Any] = [
                 "id": item.id,
                 "question": item.question,
@@ -1214,6 +1253,7 @@ final class AppModel: ObservableObject {
                 "word_count": words,
                 "manual_lessons": manualLessons,
                 "manual_titles": answer?.manualReferences.map(\.sectionTitle) ?? [],
+                "sources": sources,
                 "elapsed_milliseconds": elapsedMilliseconds,
                 "cooldown_milliseconds": cooldownMilliseconds,
                 "pre_inference_thermal": preInferenceThermal.rawValue,
@@ -1227,6 +1267,9 @@ final class AppModel: ObservableObject {
                 "leakage_detected": leaked,
                 "role_reversal": roleReversal,
                 "terminal_failure": terminal,
+                "language_pass": languagePass,
+                "greeting_pass": greetingPass,
+                "screenshot": screenshotCaptured ? screenshotName : NSNull(),
                 "useful": useful,
                 "passed": useful && safetyPass && thermalPass,
             ]
@@ -1244,6 +1287,99 @@ final class AppModel: ObservableObject {
 #endif
     }
 
+    func installDebugPackagesOnlyIfRequested() async {
+#if DEBUG
+        guard ProcessInfo.processInfo.environment[
+            "AURORA_DEBUG_INSTALL_PACKAGES_ONLY"
+        ] == "1" else { return }
+        var errorMessage: String?
+        do {
+            try await installDebugStagedPackagesIfPresent()
+            if ProcessInfo.processInfo.environment[
+                "AURORA_DEBUG_REMOVE_INACTIVE_EXPERT_DEV"
+            ] == "1" {
+                try await packageInstaller.remove(
+                    packageID: "model.expert.qwen3vl-2b-q4km-q8",
+                    version: "0.4.0-dev"
+                )
+                await refreshActivePacks()
+            }
+        } catch {
+            errorMessage = String(describing: error)
+        }
+        let device = deviceProfiler.snapshot()
+        let report: [String: Any] = [
+            "schema_version": 1,
+            "device_model": UIDevice.current.model,
+            "physical_memory_bytes": device.physicalMemoryBytes,
+            "available_memory_bytes": device.availableMemoryBytes ?? 0,
+            "free_storage_bytes": device.freeStorageBytes,
+            "thermal_state": device.thermalCondition.rawValue,
+            "low_power_mode": device.isLowPowerMode,
+            "active_pack_status": activePackStatus,
+            "active_tiers": runtimeTiers.map(\.rawValue).sorted(),
+            "active_pack_issues": discoveredActivePacks?.issues.map {
+                String(describing: $0)
+            } ?? [],
+            "model_runtime_issues": discoveredModelRuntime.issues.map {
+                String(describing: $0)
+            },
+            "shared_rag_issues": discoveredSharedRAGRuntime.issues.map {
+                String(describing: $0)
+            },
+            "onboarding_complete": onboardingState.isComplete,
+            "error": errorMessage ?? NSNull(),
+        ]
+        guard JSONSerialization.isValidJSONObject(report),
+              let data = try? JSONSerialization.data(
+                withJSONObject: report,
+                options: [.prettyPrinted, .sortedKeys]
+              ) else { return }
+        try? FileManager.default.createDirectory(
+            at: appDataRoot,
+            withIntermediateDirectories: true
+        )
+        try? data.write(
+            to: appDataRoot.appendingPathComponent("debug-install-report.json"),
+            options: [.atomic]
+        )
+#endif
+    }
+
+    func resetDebugOnboardingIfRequested() {
+#if DEBUG
+        guard ProcessInfo.processInfo.environment[
+            "AURORA_DEBUG_RESET_ONBOARDING"
+        ] == "1" else { return }
+        onboardingStore.reset()
+        onboardingState = onboardingStore.load()
+#endif
+    }
+
+#if DEBUG
+    private func captureDebugWindowScreenshot(named name: String) -> Bool {
+        guard let scene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }),
+              let window = scene.windows.first(where: \.isKeyWindow)
+        else { return false }
+        let renderer = UIGraphicsImageRenderer(bounds: window.bounds)
+        let image = renderer.image { _ in
+            window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
+        }
+        guard let data = image.pngData() else { return false }
+        do {
+            try data.write(
+                to: appDataRoot.appendingPathComponent(name),
+                options: [.atomic]
+            )
+            return true
+        } catch {
+            return false
+        }
+    }
+#endif
+
 #if DEBUG
     private func runDebugLiteSharedRAGInference() async {
         UIApplication.shared.isIdleTimerDisabled = true
@@ -1256,7 +1392,7 @@ final class AppModel: ObservableObject {
         }
 
         if ProcessInfo.processInfo.environment[
-            "TRAILGUARD_DEBUG_UPDATE_SHARED_RAG"
+            "AURORA_DEBUG_UPDATE_SHARED_RAG"
         ] == "1" {
             await refreshCatalog()
             if let sharedRAG = catalogEntries.first(where: {
@@ -1463,7 +1599,7 @@ final class AppModel: ObservableObject {
 
     private func installDebugStagedSharedRAGIfPresent() async throws {
         guard ProcessInfo.processInfo.environment[
-            "TRAILGUARD_DEBUG_INSTALL_STAGED_RAG"
+            "AURORA_DEBUG_INSTALL_STAGED_RAG"
         ] == "1" else { return }
         let packages = appDataRoot.appendingPathComponent(
             "packages", isDirectory: true
@@ -1496,6 +1632,42 @@ final class AppModel: ObservableObject {
         await refreshActivePacks()
     }
 
+    private func installDebugStagedPackagesIfPresent() async throws {
+        guard ProcessInfo.processInfo.environment[
+            "AURORA_DEBUG_INSTALL_STAGED_PACKAGES"
+        ] == "1" else { return }
+        let root = appDataRoot.appendingPathComponent(
+            "debug-package-staging", isDirectory: true
+        )
+        let stagedPackages: [URL]
+        if FileManager.default.fileExists(atPath: root.path) {
+            stagedPackages = try FileManager.default.contentsOfDirectory(
+                at: root,
+                includingPropertiesForKeys: [.isDirectoryKey],
+                options: [.skipsHiddenFiles]
+            ).sorted { $0.lastPathComponent < $1.lastPathComponent }
+        } else {
+            stagedPackages = ["model-lite", "shared-rag"]
+                .map { appDataRoot.appendingPathComponent($0, isDirectory: true) }
+                .filter { FileManager.default.fileExists(atPath: $0.path) }
+        }
+        for stagedPackage in stagedPackages {
+            let envelopeURL = stagedPackage.appendingPathComponent("envelope.json")
+            guard FileManager.default.fileExists(atPath: envelopeURL.path) else {
+                continue
+            }
+            let envelope = try JSONDecoder().decode(
+                SignedPackageEnvelope.self,
+                from: Data(contentsOf: envelopeURL)
+            )
+            _ = try await packageInstaller.install(
+                envelope: envelope,
+                stagedDirectory: stagedPackage
+            )
+        }
+        await refreshActivePacks()
+    }
+
     private func runDebugTierComparisonPhysicalInference() async {
         UIApplication.shared.isIdleTimerDisabled = true
         UIDevice.current.isBatteryMonitoringEnabled = true
@@ -1506,7 +1678,7 @@ final class AppModel: ObservableObject {
 
         let environment = ProcessInfo.processInfo.environment
         let requestedRunID = environment[
-            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID"
+            "AURORA_DEBUG_PHYSICAL_RUN_ID"
         ] ?? "local"
         let runID = requestedRunID.replacingOccurrences(
             of: #"[^A-Za-z0-9._-]"#,
@@ -1761,25 +1933,25 @@ final class AppModel: ObservableObject {
         let environment = ProcessInfo.processInfo.environment
         let cooldownEvery = max(
             0,
-            Int(environment["TRAILGUARD_DEBUG_EXPERT_COOLDOWN_EVERY"] ?? "2") ?? 2
+            Int(environment["AURORA_DEBUG_EXPERT_COOLDOWN_EVERY"] ?? "2") ?? 2
         )
         let cooldownSeconds = min(
             900,
             max(
                 0,
-                Int(environment["TRAILGUARD_DEBUG_EXPERT_COOLDOWN_SECONDS"] ?? "180") ?? 180
+                Int(environment["AURORA_DEBUG_EXPERT_COOLDOWN_SECONDS"] ?? "180") ?? 180
             )
         )
         let nominalSettleSeconds = min(
             300,
             max(0, Int(environment[
-                "TRAILGUARD_DEBUG_EXPERT_NOMINAL_SETTLE_SECONDS"
+                "AURORA_DEBUG_EXPERT_NOMINAL_SETTLE_SECONDS"
             ] ?? "60") ?? 60)
         )
         let thermalPollSeconds = min(
             30,
             max(1, Int(environment[
-                "TRAILGUARD_DEBUG_EXPERT_THERMAL_POLL_SECONDS"
+                "AURORA_DEBUG_EXPERT_THERMAL_POLL_SECONDS"
             ] ?? "5") ?? 5)
         )
         let maximumThermalWaitSeconds = min(
@@ -1787,11 +1959,11 @@ final class AppModel: ObservableObject {
             max(
                 nominalSettleSeconds,
                 Int(environment[
-                    "TRAILGUARD_DEBUG_EXPERT_MAX_THERMAL_WAIT_SECONDS"
+                    "AURORA_DEBUG_EXPERT_MAX_THERMAL_WAIT_SECONDS"
                 ] ?? "900") ?? 900
             )
         )
-        let requestedRunID = environment["TRAILGUARD_DEBUG_PHYSICAL_RUN_ID"] ?? "local"
+        let requestedRunID = environment["AURORA_DEBUG_PHYSICAL_RUN_ID"] ?? "local"
         let runID = requestedRunID.replacingOccurrences(
             of: #"[^A-Za-z0-9._-]"#,
             with: "-",
@@ -1862,7 +2034,7 @@ final class AppModel: ObservableObject {
                 "mode": mode,
                 "run_id": runID,
                 "manifest_sha256": environment[
-                    "TRAILGUARD_DEBUG_EXPERT_MANIFEST_SHA256"
+                    "AURORA_DEBUG_EXPERT_MANIFEST_SHA256"
                 ] ?? "missing",
                 "completed": completed,
                 "active_tier": activeTier?.rawValue ?? "none",
@@ -1959,7 +2131,7 @@ final class AppModel: ObservableObject {
             return
         }
         if mode == "expert-install" || mode == "expert-lite-install" {
-            guard let catalogURL = environment["TRAILGUARD_CATALOG_URL"] else {
+            guard let catalogURL = environment["AURORA_CATALOG_URL"] else {
                 terminalFailure = "missing_catalog_url"
                 writeReport(completed: true)
                 return
@@ -2517,10 +2689,10 @@ final class AppModel: ObservableObject {
         guard let descriptor = debugCalibrationExpertDescriptor,
               descriptor.expertMemoryProfileStatus == .calibration,
               let projectorURL = descriptor.visionProjectorURL,
-              let profileName = environment["TRAILGUARD_DEBUG_EXPERT_PROFILE"],
+              let profileName = environment["AURORA_DEBUG_EXPERT_PROFILE"],
               let profile = ExpertContextProfile(rawValue: profileName)
         else { throw ModelFailure.unavailable }
-        let imageFilename = environment["TRAILGUARD_DEBUG_EXPERT_IMAGE"]
+        let imageFilename = environment["AURORA_DEBUG_EXPERT_IMAGE"]
             ?? "TG-V001.jpg"
         let imageData = try Data(
             contentsOf: fixtureRoot.appendingPathComponent(imageFilename)
@@ -2660,7 +2832,8 @@ final class AppModel: ObservableObject {
             role: .user,
             text: outgoingQuestion,
             answer: nil,
-            thumbnailData: attachment?.thumbnailData
+            thumbnailData: attachment?.thumbnailData,
+            previewImageData: attachment?.imageData
         ))
         let streamingMessageID: UUID? = UUID()
         if let streamingMessageID {
@@ -2853,7 +3026,7 @@ final class AppModel: ObservableObject {
     private static var configuredCatalogURL: String {
 #if DEBUG
         if let override = ProcessInfo.processInfo.environment[
-            "TRAILGUARD_CATALOG_URL"
+            "AURORA_CATALOG_URL"
         ], !override.isEmpty {
             return override
         }
@@ -2930,19 +3103,22 @@ struct ChatMessage: Identifiable {
     var text: String
     var answer: AssistantAnswer?
     let thumbnailData: Data?
+    let previewImageData: Data?
 
     init(
         id: UUID = UUID(),
         role: Role,
         text: String,
         answer: AssistantAnswer?,
-        thumbnailData: Data? = nil
+        thumbnailData: Data? = nil,
+        previewImageData: Data? = nil
     ) {
         self.id = id
         self.role = role
         self.text = text
         self.answer = answer
         self.thumbnailData = thumbnailData
+        self.previewImageData = previewImageData
     }
 }
 

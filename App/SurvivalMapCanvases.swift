@@ -431,7 +431,7 @@ struct AppleMapCanvas: UIViewRepresentable {
             guard !appliedUITestBearing,
                   let fix,
                   let rawBearing = ProcessInfo.processInfo.environment[
-                    "TRAILGUARD_UI_MAP_BEARING"
+                    "AURORA_UI_MAP_BEARING"
                   ],
                   let bearing = CLLocationDirection(rawBearing)
             else { return }

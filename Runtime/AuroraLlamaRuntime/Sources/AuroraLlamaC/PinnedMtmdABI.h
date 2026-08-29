@@ -1,5 +1,5 @@
-#ifndef TRAILGUARD_PINNED_MTMD_ABI_H
-#define TRAILGUARD_PINNED_MTMD_ABI_H
+#ifndef AURORA_PINNED_MTMD_ABI_H
+#define AURORA_PINNED_MTMD_ABI_H
 
 // Minimal ABI surface copied from llama.cpp b9637 (commit aedb2a5) so the
 // shipping bridge can detect a custom mtmd-capable XCFramework at runtime.

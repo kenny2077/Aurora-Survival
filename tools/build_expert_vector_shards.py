@@ -168,7 +168,7 @@ def embed(
         raise ValueError("embedding unit text must be one physical line")
     output.parent.mkdir(parents=True, exist_ok=True)
     embeddings: list[list[float]] = []
-    with tempfile.TemporaryDirectory(prefix="trailguard-embedding-") as raw:
+    with tempfile.TemporaryDirectory(prefix="aurora-embedding-") as raw:
         prompts = pathlib.Path(raw) / "prompts.txt"
         for start in range(0, len(units), 8):
             batch = units[start:start + 8]

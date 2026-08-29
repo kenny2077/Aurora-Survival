@@ -382,7 +382,8 @@ private actor OneShotExpertModel: LocalLanguageModel {
     ) {
         self.tier = tier
         rawIntent = intent == .survivalQuestion
-            ? #"{"t":"survival"}"# : #"{"t":"general"}"#
+            ? #"{"t":"survival","l":"en","q":"survival guidance"}"#
+            : #"{"t":"general","l":"en","q":""}"#
         self.output = output
     }
 

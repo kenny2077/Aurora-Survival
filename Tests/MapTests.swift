@@ -215,7 +215,7 @@ final class MapTests: XCTestCase {
     func testOfflineStyleAssemblerUsesOnlyLocalPackageResources() throws {
         let template = Data(
             """
-            {"version":8,"glyphs":"trailguard://glyphs","sources":{"protomaps":{"type":"vector","url":"trailguard://pmtiles"}},"layers":[]}
+            {"version":8,"glyphs":"aurora://glyphs","sources":{"protomaps":{"type":"vector","url":"aurora://pmtiles"}},"layers":[]}
             """.utf8
         )
         let mapURL = URL(fileURLWithPath: "/tmp/map.pmtiles")

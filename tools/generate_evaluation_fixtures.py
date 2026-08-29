@@ -94,7 +94,7 @@ def main() -> None:
                 "warnings": ["Development fixture only; no real-world instruction."],
                 "keywords": [scenario, domain, "development-fixture"],
                 "source": {
-                    "source_id": "trailguard.synthetic-evaluation",
+                    "source_id": "aurora.synthetic-evaluation",
                     "title": "Aurora synthetic evaluation fixture",
                     "owner": "Aurora",
                     "revision": "1.0.0",

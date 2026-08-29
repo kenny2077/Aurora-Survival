@@ -91,7 +91,7 @@ def main() -> None:
     source_v2["version"] = "1.1.0"
 
     args.output_root.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-development-pack-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-development-pack-") as temp:
         source_v2_path = pathlib.Path(temp) / "development_knowledge_pack_v2.json"
         source_v2_path.write_text(
             json.dumps(source_v2, ensure_ascii=False, sort_keys=True, indent=2) + "\n",

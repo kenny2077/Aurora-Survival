@@ -205,15 +205,6 @@ public actor IncidentAssistant {
         let model = modelProvider(tier)
         var notices = initialNotices
         let imageObservations: [String] = []
-        let retrievalRequest = ChatRequest(
-            question: request.question,
-            domain: request.domain,
-            preferredTier: tier,
-            hasImage: false,
-            imageData: nil,
-            imageObservations: imageObservations,
-            conversationHistory: conversationHistory
-        )
         let intentPrompt = ModelPrompt(
             question: request.question,
             evidence: [],
@@ -225,22 +216,45 @@ public actor IncidentAssistant {
             maximumImageDimension: maximumImageDimension,
             purpose: .expertIntent
         )
-        let modelIntent: ExpertTurnIntent
+        let detectedLanguage = ResponseLanguage.detect(in: request.question)
+        let routingDecision: TurnRoutingDecision
         do {
             let rawIntent = try await model.generate(prompt: intentPrompt)
-            modelIntent = (try? ExpertTurnIntentCodec().decodeAndValidate(rawIntent))
-                ?? .generalQuestion
+            routingDecision = try TurnRoutingDecisionCodec().decodeAndValidate(rawIntent)
         } catch {
-            modelIntent = .generalQuestion
+            routingDecision = TurnRoutingDecision(
+                intent: .generalQuestion,
+                responseLanguage: detectedLanguage,
+                retrievalQuery: ""
+            )
         }
-        let intent = modelIntent == .generalQuestion
+        let responseLanguage = routingDecision.responseLanguage == detectedLanguage
+            ? routingDecision.responseLanguage
+            : detectedLanguage
+        let definiteSurvivalOverride = routingDecision.intent == .generalQuestion
             && Self.hasDefiniteSurvivalIntent(request.question)
+        let intent: ExpertTurnIntent = definiteSurvivalOverride
             ? .survivalQuestion
-            : modelIntent
+            : routingDecision.intent
         let shouldSearch = intent == .survivalQuestion
-        let semanticQuery = shouldSearch
-            ? Self.retrievalQuery(for: retrievalRequest, tier: tier)
-            : ""
+        let routedQuery: String
+        if routingDecision.intent == .survivalQuestion {
+            routedQuery = routingDecision.retrievalQuery
+        } else if definiteSurvivalOverride {
+            routedQuery = Self.fallbackRetrievalQuery(for: request.question)
+        } else {
+            routedQuery = ""
+        }
+        let semanticQuery = shouldSearch ? routedQuery : ""
+        let retrievalRequest = ChatRequest(
+            question: semanticQuery,
+            domain: request.domain,
+            preferredTier: tier,
+            hasImage: false,
+            imageData: nil,
+            imageObservations: imageObservations,
+            conversationHistory: conversationHistory
+        )
         var denseResults: [ExpertVectorSearchResult] = []
         var sharedRAGAvailable = expertEmbeddingProvider != nil
             && expertVectorIndex != nil
@@ -332,6 +346,7 @@ public actor IncidentAssistant {
             expertContextProfile: contextProfile,
             maximumImageDimension: maximumImageDimension,
             expertEvidence: selectedExpertEvidence,
+            responseLanguage: responseLanguage,
             purpose: finalPurpose
         )
         let streamDecoder = ExpertEnvelopeStreamDecoder()
@@ -362,7 +377,7 @@ public actor IncidentAssistant {
         } else {
             let streamedText = streamDecoder.text
             guard !streamedText.isEmpty,
-                  streamedText.last.map({ ".!?…".contains($0) }) == true,
+                  streamedText.last.map({ ".!?…。！？".contains($0) }) == true,
                   !GroundedResponseCodec.containsControlLeakage(streamedText)
             else {
                 return Self.modelFormatFailure(tier: tier, notices: notices)
@@ -411,6 +426,7 @@ public actor IncidentAssistant {
             conversationHistory: conversationHistory,
             expertContextProfile: assembly.profile,
             maximumImageDimension: assembly.maximumImageDimension,
+            responseLanguage: ResponseLanguage.detect(in: question),
             purpose: .nativeVisionAnswer
         )
         let streamDecoder = ExpertEnvelopeStreamDecoder()
@@ -441,7 +457,7 @@ public actor IncidentAssistant {
         } else {
             let streamedText = streamDecoder.text
             guard !streamedText.isEmpty,
-                  streamedText.last.map({ ".!?…".contains($0) }) == true,
+                  streamedText.last.map({ ".!?…。！？".contains($0) }) == true,
                   !GroundedResponseCodec.containsControlLeakage(streamedText)
             else {
                 return Self.visionFailure(
@@ -467,6 +483,13 @@ public actor IncidentAssistant {
 
     static func hasDefiniteSurvivalIntent(_ question: String) -> Bool {
         let normalized = question.lowercased().replacingOccurrences(of: "-", with: " ")
+        let chineseSurvivalPhrases = [
+            "野外", "求生", "急救", "迷路", "失温", "冻伤", "流血", "止血",
+            "避难", "生火", "净化水", "饮用水", "水源", "雷电", "雪崩", "救援",
+        ]
+        if chineseSurvivalPhrases.contains(where: normalized.contains) {
+            return true
+        }
         let terms = Set(RetrievalEngine.tokens(in: question))
         let generalCollisions: Set<String> = [
             "api", "code", "coding", "dating", "girlfriend", "news", "price",
@@ -476,6 +499,7 @@ public actor IncidentAssistant {
         let definitePhrases = [
             "campfire", "compass bearing", "deep cut", "hypothermia",
             "life threatening bleeding", "marked trail", "snow shelter",
+            "start a fire", "build a fire",
             "solar still", "stop method", "stream water", "survival device",
             "tarp shelter", "find water source", "find a water source", "water sources",
             "raw meat outdoors", "boil collected stream water",
@@ -487,6 +511,27 @@ public actor IncidentAssistant {
             "lost", "stranded", "tourniquet",
         ]
         return !terms.isDisjoint(with: incidentTerms)
+    }
+
+    static func fallbackRetrievalQuery(for question: String) -> String {
+        guard ResponseLanguage.detect(in: question) == .chinese else {
+            return question
+        }
+        let normalized = question.lowercased()
+        if normalized.contains("水源") || normalized.contains("净化水")
+            || normalized.contains("饮用水") {
+            return "find and purify water sources in the wilderness"
+        }
+        if normalized.contains("生火") {
+            return "start a fire outdoors"
+        }
+        if normalized.contains("止血") || normalized.contains("流血") {
+            return "control severe bleeding first aid"
+        }
+        if normalized.contains("迷路") {
+            return "lost in the wilderness navigation survival"
+        }
+        return "wilderness survival safety"
     }
 
     static func prioritizeScenarioCoverage(
@@ -739,6 +784,7 @@ public actor IncidentAssistant {
                     purpose: prompt.purpose,
                     question: prompt.question,
                     tier: prompt.tier,
+                    responseLanguage: prompt.responseLanguage,
                     evidence: prompt.evidence,
                     codec: responseCodec,
                     citationPolicy: citationPolicy
@@ -839,6 +885,7 @@ public actor IncidentAssistant {
             purpose: prompt.purpose,
             question: prompt.question,
             tier: prompt.tier,
+            responseLanguage: prompt.responseLanguage,
             evidence: prompt.evidence,
             codec: responseCodec,
             citationPolicy: citationPolicy
@@ -1155,6 +1202,7 @@ public actor IncidentAssistant {
         purpose: ModelPromptPurpose,
         question: String,
         tier: ModelTier,
+        responseLanguage: ResponseLanguage,
         evidence: [RetrievedPassage],
         codec: GroundedResponseCodec,
         citationPolicy: CitationPolicy
@@ -1166,7 +1214,8 @@ public actor IncidentAssistant {
                 evidence: evidence,
                 purpose: purpose,
                 question: question,
-                tier: tier
+                tier: tier,
+                responseLanguage: responseLanguage
             )
             let selected = response.evidenceIDs.compactMap { evidenceID in
                 evidence.first { $0.article.id == evidenceID }

@@ -190,7 +190,7 @@ def build(args: argparse.Namespace) -> None:
     validate_input(pack)
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-pack-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-pack-", dir=output.parent) as temp:
         staging = pathlib.Path(temp)
         content_path = staging / "content.sqlite"
         vector_path = staging / "vectors.bin"

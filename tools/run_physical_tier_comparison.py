@@ -17,7 +17,7 @@ from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DEFAULT_DEVICE = "00008112-001D484C2678A01E"
-DEFAULT_BUNDLE = "com.example.Aurora"
+DEFAULT_BUNDLE = "com.example.AuroraSurvivalAgent"
 DEVICE_TEMP_ROOT = "tmp"
 DEVICE_REPORT_ROOT = "tmp/AuroraExpertBenchmarkReports"
 
@@ -96,7 +96,7 @@ def wait_for_report(
     timeout: int,
 ) -> dict[str, Any]:
     deadline = time.monotonic() + timeout
-    with tempfile.TemporaryDirectory(prefix="trailguard-tier-report-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-tier-report-") as temp:
         candidate = pathlib.Path(temp) / source_name
         while time.monotonic() < deadline:
             if launcher.poll() is not None:
@@ -157,7 +157,7 @@ def main() -> int:
     ).encode("utf-8")
     fixture_sha256 = hashlib.sha256(fixture_data).hexdigest()
     source_name = f"physical-tier-comparison-{run_id}.json"
-    with tempfile.TemporaryDirectory(prefix="trailguard-tier-fixture-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-tier-fixture-") as temp:
         fixture_parent = pathlib.Path(temp)
         fixture_root = fixture_parent / "AuroraExpertBenchmark"
         fixture_root.mkdir()
@@ -186,8 +186,8 @@ def main() -> int:
             "--timeout", "60",
         ])
         environment = json.dumps({
-            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE": "tier-comparison",
-            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID": run_id,
+            "AURORA_DEBUG_PHYSICAL_INFERENCE": "tier-comparison",
+            "AURORA_DEBUG_PHYSICAL_RUN_ID": run_id,
         }, separators=(",", ":"))
         launcher = subprocess.Popen([
             "xcrun", "devicectl", "device", "process", "launch",

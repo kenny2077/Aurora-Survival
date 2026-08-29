@@ -10,6 +10,49 @@ import XCTest
 final class ConversationalRAGTests: XCTestCase {
     private let usefulWaterAnswer = "Bring the water to a rolling boil, then keep it boiling for the reviewed time. Let it cool in a clean, covered container before drinking. Avoid sources contaminated by fuel, chemicals, or toxic algae because boiling will not remove those hazards."
 
+    func testChineseGroundedResponsePreservesReviewedEvidenceLink() throws {
+        let article = makeManualArticle()
+        let evidence = [RetrievedPassage(article: article, score: 1)]
+        let answer = "先选择没有燃油、化学品或有毒藻类污染迹象的水源，再过滤明显沉淀并将水持续煮沸。冷却时使用干净且有盖的容器；不要饮用仍有异味、变色或油膜的水。"
+        let response = try GroundedResponseCodec().decodeConversationalAndValidate(
+            "{\"a\":\"\(answer)\",\"e\":[1]}",
+            evidence: evidence,
+            purpose: .grounded,
+            tier: .lite,
+            responseLanguage: .chinese
+        )
+
+        XCTAssertEqual(response.answer, answer)
+        XCTAssertEqual(response.evidenceIDs, [article.id])
+    }
+
+    func testAuroraPromptsCarryChineseLanguageAndConditionalLiveDataPolicy() {
+        let builder = GroundedPromptBuilder()
+        let prompt = ModelPrompt(
+            question: "你好",
+            evidence: [],
+            imageObservations: [],
+            tier: .lite,
+            permitsVisionReasoning: false,
+            responseLanguage: .chinese,
+            purpose: .ordinary
+        )
+        let system = builder.systemPrompt(for: prompt, outputMode: .groundedJSON)
+
+        XCTAssertTrue(system.contains("Aurora Survival Agent Lite"))
+        XCTAssertTrue(system.contains("Simplified Chinese"))
+        XCTAssertTrue(system.contains("only when the current message asks"))
+        XCTAssertFalse(system.contains("Trail" + "Guard"))
+    }
+
+    func testUnsupportedChannelTextIsRejected() {
+        XCTAssertThrowsError(try GroundedResponseCodec().decodeConversationalAndValidate(
+            #"{"a":"Unsupported channel returned by the local model.","e":[]}"#,
+            evidence: [],
+            purpose: .ordinary
+        ))
+    }
+
     func testExpertGroundedContractRequiresConciseDepthAndWarning() throws {
         let evidence = [RetrievedPassage(article: makeManualArticle(), score: 1)]
         let answer = "Move the container away from visible fuel, chemical sheen, and algae before collecting anything. Prefer the clearest available source, filter out sediment, then bring the water to a rolling boil and keep it there for the reviewed duration. This sequence reduces biological contamination while limiting extra exposure and wasted fuel. Do not rely on boiling for chemicals or fuel; stop using that source and seek a safer supply if odor, color, or sheen remains."
@@ -421,7 +464,7 @@ final class ConversationalRAGTests: XCTestCase {
             outputMode: .groundedJSON
         )
 
-        XCTAssertTrue(ordinary.contains("Aurora Lite"))
+        XCTAssertTrue(ordinary.contains("Aurora Survival Agent Lite"))
         XCTAssertTrue(ordinary.contains("\"e\":[]"))
         XCTAssertFalse(ordinary.contains("REVIEWED EXCERPTS"))
         XCTAssertTrue(grounded.contains("REVIEWED EXCERPTS"))
@@ -1158,7 +1201,11 @@ private actor ScriptedLanguageModel: LocalLanguageModel {
             let intent = exactGreetings.contains(lower)
                 || generalTopics.contains(where: lower.contains)
                 ? "general" : "survival"
-            return "{\"t\":\"\(intent)\"}"
+            let language = ResponseLanguage.detect(in: prompt.question).rawValue
+            let query = intent == "survival"
+                ? prompt.question.replacingOccurrences(of: "\"", with: "")
+                : ""
+            return "{\"t\":\"\(intent)\",\"l\":\"\(language)\",\"q\":\"\(query)\"}"
         }
         guard !steps.isEmpty else { throw ModelFailure.unavailable }
         switch steps.removeFirst() {

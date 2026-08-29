@@ -291,7 +291,8 @@ private actor ExpertPipelineRecorder: LocalLanguageModel {
         recordedPurposes.append(prompt.purpose)
         switch prompt.purpose {
         case .expertIntent:
-            return #"{"t":"survival"}"#
+            let query = prompt.question.replacingOccurrences(of: "\"", with: "")
+            return "{\"t\":\"survival\",\"l\":\"en\",\"q\":\"\(query)\"}"
         case .incidentFallback:
             return #"{"a":"Move away from immediate hazards and preserve warmth, water, and communication while you assess the situation. Use only actions you can perform safely with available equipment. Stop and seek emergency help if conditions worsen or anyone becomes confused, unresponsive, or severely injured.","e":[]}"#
         case .grounded:

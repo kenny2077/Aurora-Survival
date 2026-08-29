@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://trailguard.app/schemas/grounded-response.schema.json",
+  "$id": "https://aurora.app/schemas/grounded-response.schema.json",
   "title": "Aurora grounded response",
   "type": "object",
   "additionalProperties": false,

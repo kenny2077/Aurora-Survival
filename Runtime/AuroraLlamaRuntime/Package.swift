@@ -17,7 +17,7 @@ let llamaTarget: Target = hasLocalRuntime ? .binaryTarget(
 )
 var llamaCXXSettings: [CXXSetting] = [.headerSearchPath("include")]
 if hasLocalRuntime {
-    llamaCXXSettings.append(.define("TRAILGUARD_LINKED_MTMD", .when(platforms: [.iOS])))
+    llamaCXXSettings.append(.define("AURORA_LINKED_MTMD", .when(platforms: [.iOS])))
 }
 
 let package = Package(

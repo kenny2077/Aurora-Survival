@@ -20,7 +20,7 @@ from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DEFAULT_DEVICE = "9187C86E-BD31-5C56-9FAE-87B46FD139A5"
-DEFAULT_BUNDLE = "com.example.Aurora"
+DEFAULT_BUNDLE = "com.example.AuroraSurvivalAgent"
 BENCHMARK = ROOT / "Vision_benchmark"
 DEVICE_TEMP_ROOT = "tmp"
 DEVICE_REPORTS = "tmp/AuroraExpertBenchmarkReports"
@@ -494,7 +494,7 @@ def copy_report(device: str, bundle: str, name: str, destination: pathlib.Path) 
 
 
 def existing_device_report(device: str, bundle: str, name: str) -> bool:
-    with tempfile.TemporaryDirectory(prefix="trailguard-existing-report-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-existing-report-") as temp:
         return copy_report(device, bundle, name, pathlib.Path(temp) / name)
 
 
@@ -519,7 +519,7 @@ def wait_for_report(
     timeout: int,
 ) -> dict[str, Any]:
     deadline = time.monotonic() + timeout
-    with tempfile.TemporaryDirectory(prefix="trailguard-expert-report-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-expert-report-") as temp:
         candidate = pathlib.Path(temp) / name
         while time.monotonic() < deadline:
             if launcher.poll() is not None:
@@ -686,7 +686,7 @@ def main() -> int:
         parser.error(f"immutable output already exists: {output}")
     report_name = f"expert-physical-report-{run_id}-{args.mode}.json"
 
-    with tempfile.TemporaryDirectory(prefix="trailguard-expert-fixtures-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-expert-fixtures-") as temp:
         fixture_root = pathlib.Path(temp) / "AuroraExpertBenchmark"
         stage_fixtures(
             args.mode,
@@ -764,21 +764,21 @@ def main() -> int:
         ])
         copy_fixtures(args.device, args.bundle, fixture_root)
         environment = {
-            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE": args.mode,
-            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID": run_id,
-            "TRAILGUARD_DEBUG_EXPERT_COOLDOWN_EVERY": str(args.cooldown_every),
-            "TRAILGUARD_DEBUG_EXPERT_COOLDOWN_SECONDS": str(args.cooldown_seconds),
-            "TRAILGUARD_DEBUG_EXPERT_NOMINAL_SETTLE_SECONDS": str(args.nominal_settle_seconds),
-            "TRAILGUARD_DEBUG_EXPERT_THERMAL_POLL_SECONDS": str(args.thermal_poll_seconds),
-            "TRAILGUARD_DEBUG_EXPERT_MAX_THERMAL_WAIT_SECONDS": str(args.maximum_thermal_wait_seconds),
-            "TRAILGUARD_DEBUG_EXPERT_MANIFEST_SHA256": hashlib.sha256(
+            "AURORA_DEBUG_PHYSICAL_INFERENCE": args.mode,
+            "AURORA_DEBUG_PHYSICAL_RUN_ID": run_id,
+            "AURORA_DEBUG_EXPERT_COOLDOWN_EVERY": str(args.cooldown_every),
+            "AURORA_DEBUG_EXPERT_COOLDOWN_SECONDS": str(args.cooldown_seconds),
+            "AURORA_DEBUG_EXPERT_NOMINAL_SETTLE_SECONDS": str(args.nominal_settle_seconds),
+            "AURORA_DEBUG_EXPERT_THERMAL_POLL_SECONDS": str(args.thermal_poll_seconds),
+            "AURORA_DEBUG_EXPERT_MAX_THERMAL_WAIT_SECONDS": str(args.maximum_thermal_wait_seconds),
+            "AURORA_DEBUG_EXPERT_MANIFEST_SHA256": hashlib.sha256(
                 canonical_json(manifest)
             ).hexdigest(),
         }
         if args.profile:
-            environment["TRAILGUARD_DEBUG_EXPERT_PROFILE"] = args.profile
+            environment["AURORA_DEBUG_EXPERT_PROFILE"] = args.profile
         if args.catalog_url:
-            environment["TRAILGUARD_CATALOG_URL"] = args.catalog_url
+            environment["AURORA_CATALOG_URL"] = args.catalog_url
         if existing_device_report(args.device, args.bundle, report_name):
             raise FileExistsError(f"immutable device report already exists: {report_name}")
         process = launch(args.device, args.bundle, environment)

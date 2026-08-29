@@ -39,7 +39,7 @@ def build(output: pathlib.Path, key_path: pathlib.Path) -> None:
 
 
 def main() -> None:
-    with tempfile.TemporaryDirectory(prefix="trailguard-repro-") as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-repro-") as temp:
         root = pathlib.Path(temp)
         key = Ed25519PrivateKey.generate()
         key_path = root / "private.pem"

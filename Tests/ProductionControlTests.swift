@@ -307,27 +307,27 @@ final class ProductionControlTests: XCTestCase {
     func testCachedEntitlementKeepsInstalledPackAvailableOffline() {
         let resolver = OfflineEntitlementResolver()
         let cached = EntitlementSnapshot(
-            productID: "trailguard.vision",
+            productID: "aurora.vision",
             verified: true,
             verifiedAt: "2026-07-23T00:00:00Z"
         )
         XCTAssertTrue(
             resolver.canLaunch(
-                productID: "trailguard.vision",
+                productID: "aurora.vision",
                 packageIsInstalled: true,
                 cachedEntitlements: [cached]
             )
         )
         XCTAssertFalse(
             resolver.canLaunch(
-                productID: "trailguard.vision",
+                productID: "aurora.vision",
                 packageIsInstalled: false,
                 cachedEntitlements: [cached]
             )
         )
         XCTAssertFalse(
             resolver.canLaunch(
-                productID: "trailguard.other",
+                productID: "aurora.other",
                 packageIsInstalled: true,
                 cachedEntitlements: [cached]
             )

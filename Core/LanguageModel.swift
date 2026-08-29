@@ -27,6 +27,7 @@ public struct ModelPrompt: Sendable {
     public let maximumImageDimension: Int?
     public let expertEvidence: [RetrievedEvidenceScenario]
     public let repairFeedback: [String]
+    public let responseLanguage: ResponseLanguage
     public let purpose: ModelPromptPurpose
     public let attempt: ModelPromptAttempt
 
@@ -42,6 +43,7 @@ public struct ModelPrompt: Sendable {
         maximumImageDimension: Int? = nil,
         expertEvidence: [RetrievedEvidenceScenario] = [],
         repairFeedback: [String] = [],
+        responseLanguage: ResponseLanguage = .english,
         purpose: ModelPromptPurpose? = nil,
         attempt: ModelPromptAttempt = .initial
     ) {
@@ -56,6 +58,7 @@ public struct ModelPrompt: Sendable {
         self.maximumImageDimension = maximumImageDimension
         self.expertEvidence = expertEvidence
         self.repairFeedback = repairFeedback
+        self.responseLanguage = responseLanguage
         self.purpose = purpose ?? (evidence.isEmpty ? .ordinary : .grounded)
         self.attempt = attempt
     }
@@ -73,6 +76,7 @@ public struct ModelPrompt: Sendable {
             maximumImageDimension: maximumImageDimension,
             expertEvidence: expertEvidence,
             repairFeedback: feedback,
+            responseLanguage: responseLanguage,
             purpose: purpose,
             attempt: .repair
         )

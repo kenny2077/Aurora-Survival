@@ -106,7 +106,7 @@ python3 tools/prepare_lite_model_package.py \
   --version 1.1.0 \
   --created-at 2026-08-09T14:40:00Z
 
-swift run trailguard-pack-check model \
+swift run aurora-pack-check model \
   Resources/Packages/development_trusted_package_keys.json \
   .trailguard/development/model-lite-gemma3-1b-q4km-dev@1.1.0
 ```

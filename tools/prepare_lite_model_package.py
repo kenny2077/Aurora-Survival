@@ -25,7 +25,7 @@ def build(args: argparse.Namespace) -> None:
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="trailguard-lite-", dir=output.parent) as temp:
+    with tempfile.TemporaryDirectory(prefix="aurora-lite-", dir=output.parent) as temp:
         staging = pathlib.Path(temp)
         for artifact in source_manifest["artifacts"]:
             source_file = source / artifact["path"]

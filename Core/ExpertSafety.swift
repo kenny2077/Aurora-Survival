@@ -234,37 +234,92 @@ public enum ExpertTurnIntentError: Error, Equatable, Sendable {
     case malformed
 }
 
-public struct ExpertTurnIntentCodec: Sendable {
+public enum ResponseLanguage: String, Codable, Equatable, Sendable {
+    case english = "en"
+    case chinese = "zh"
+
+    public static func detect(in value: String) -> ResponseLanguage {
+        value.unicodeScalars.contains { scalar in
+            (0x3400...0x4DBF).contains(scalar.value)
+                || (0x4E00...0x9FFF).contains(scalar.value)
+                || (0xF900...0xFAFF).contains(scalar.value)
+        } ? .chinese : .english
+    }
+
+    public var instruction: String {
+        switch self {
+        case .english: return "Respond in English."
+        case .chinese: return "Use clear Simplified Chinese for the complete answer."
+        }
+    }
+}
+
+public struct TurnRoutingDecision: Equatable, Sendable {
+    public let intent: ExpertTurnIntent
+    public let responseLanguage: ResponseLanguage
+    public let retrievalQuery: String
+
+    public init(
+        intent: ExpertTurnIntent,
+        responseLanguage: ResponseLanguage,
+        retrievalQuery: String
+    ) {
+        self.intent = intent
+        self.responseLanguage = responseLanguage
+        self.retrievalQuery = retrievalQuery
+    }
+}
+
+public struct TurnRoutingDecisionCodec: Sendable {
     private struct CompactDecision: Decodable {
         let intent: String
+        let language: String
+        let query: String
 
         private enum CodingKeys: String, CodingKey {
             case intent = "t"
+            case language = "l"
+            case query = "q"
         }
     }
 
     public init() {}
 
-    public func decodeAndValidate(_ value: String) throws -> ExpertTurnIntent {
+    public func decodeAndValidate(_ value: String) throws -> TurnRoutingDecision {
         guard let start = value.firstIndex(of: "{"),
               let end = value.lastIndex(of: "}"),
               start <= end,
               let data = String(value[start...end]).data(using: .utf8),
               let object = try? JSONSerialization.jsonObject(with: data)
                 as? [String: Any],
-              Set(object.keys) == ["t"],
+              Set(object.keys) == ["t", "l", "q"],
               let decoded = try? JSONDecoder().decode(
                 CompactDecision.self,
                 from: data
-              )
+              ),
+              let language = ResponseLanguage(rawValue: decoded.language)
         else { throw ExpertTurnIntentError.malformed }
 
+        let intent: ExpertTurnIntent
         switch decoded.intent {
-        case "general": return .generalQuestion
-        case "survival": return .survivalQuestion
-        default:
-            throw ExpertTurnIntentError.malformed
+        case "general": intent = .generalQuestion
+        case "survival": intent = .survivalQuestion
+        default: throw ExpertTurnIntentError.malformed
         }
+
+        let query = decoded.query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard query.count <= 160,
+              !query.unicodeScalars.contains(where: {
+                  CharacterSet.controlCharacters.contains($0)
+              }),
+              (intent == .generalQuestion ? query.isEmpty : !query.isEmpty)
+        else { throw ExpertTurnIntentError.malformed }
+
+        return TurnRoutingDecision(
+            intent: intent,
+            responseLanguage: language,
+            retrievalQuery: query
+        )
     }
 }
 

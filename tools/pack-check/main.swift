@@ -28,9 +28,9 @@ struct AuroraPackCheck {
             FileHandle.standardError.write(
                 Data(
                     (
-                        "usage: trailguard-pack-check <keyring.json> <pack-v1> <pack-v2>\n"
-                            + "   or: trailguard-pack-check model <keyring.json> <model-pack>\n"
-                            + "   or: trailguard-pack-check catalog <keyring.json> <catalog.json>\n"
+                        "usage: aurora-pack-check <keyring.json> <pack-v1> <pack-v2>\n"
+                            + "   or: aurora-pack-check model <keyring.json> <model-pack>\n"
+                            + "   or: aurora-pack-check catalog <keyring.json> <catalog.json>\n"
                     ).utf8
                 )
             )

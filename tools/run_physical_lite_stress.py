@@ -17,7 +17,7 @@ from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DEFAULT_DEVICE = "00008110-001645080EA8201E"
-DEFAULT_BUNDLE = "com.example.Aurora"
+DEFAULT_BUNDLE = "com.example.AuroraSurvivalAgent"
 APP_REPORT_ROOT = "Library/Application Support/Aurora"
 
 
@@ -55,8 +55,8 @@ def launch_batch(
 ) -> subprocess.Popen[bytes]:
     environment = json.dumps(
         {
-            "TRAILGUARD_DEBUG_PHYSICAL_INFERENCE": f"stress-{batch}",
-            "TRAILGUARD_DEBUG_PHYSICAL_RUN_ID": run_id,
+            "AURORA_DEBUG_PHYSICAL_INFERENCE": f"stress-{batch}",
+            "AURORA_DEBUG_PHYSICAL_RUN_ID": run_id,
         },
         separators=(",", ":"),
     )
@@ -86,7 +86,7 @@ def wait_for_batch(
 ) -> dict[str, Any]:
     source_name = f"physical-inference-report-{run_id}-stress-{batch}.json"
     deadline = time.monotonic() + timeout_seconds
-    with tempfile.TemporaryDirectory(prefix="trailguard-stress-") as temp_root:
+    with tempfile.TemporaryDirectory(prefix="aurora-stress-") as temp_root:
         candidate = pathlib.Path(temp_root) / source_name
         while time.monotonic() < deadline:
             if launcher is not None and launcher.poll() is not None:

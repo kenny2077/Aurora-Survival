@@ -43,7 +43,7 @@ hold:
 
 Release builds reject Expert packages regardless of those checks.
 Ordinary Debug chat additionally requires
-`TRAILGUARD_ENABLE_EXPERT_NORMAL_CHAT=1`; do not set it while retained physical
+`AURORA_ENABLE_EXPERT_NORMAL_CHAT=1`; do not set it while retained physical
 acceptance is failing.
 
 ## Behavior

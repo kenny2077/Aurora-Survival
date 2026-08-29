@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://trailguard.app/schemas/map-pack.schema.json",
+  "$id": "https://aurora.app/schemas/map-pack.schema.json",
   "title": "Aurora offline map pack",
   "type": "object",
   "additionalProperties": false,

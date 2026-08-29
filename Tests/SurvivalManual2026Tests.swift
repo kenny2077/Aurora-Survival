@@ -100,6 +100,8 @@ final class SurvivalManual2026Tests: XCTestCase {
             "Apply the STOP method when lost.",
             "How do I take and follow a compass bearing?",
             "Can I eat this unknown mushroom?",
+            "How to start a fire",
+            "如何在野外找到并净化水源？",
             "How do I repair an unfamiliar survival-device model?",
             "How to find water sources.",
             "Where can I find a water source?",
@@ -113,6 +115,10 @@ final class SurvivalManual2026Tests: XCTestCase {
         ]
         XCTAssertTrue(survival.allSatisfy(IncidentAssistant.hasDefiniteSurvivalIntent))
         XCTAssertTrue(general.allSatisfy { !IncidentAssistant.hasDefiniteSurvivalIntent($0) })
+        XCTAssertEqual(
+            IncidentAssistant.fallbackRetrievalQuery(for: "如何在野外找到并净化水源？"),
+            "find and purify water sources in the wilderness"
+        )
     }
 
     func testSharedPlantAndMushroomScenarioRetainsMushroomWarnings() throws {

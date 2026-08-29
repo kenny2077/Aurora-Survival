@@ -99,7 +99,7 @@ Function load_mtmd_symbol(const char * name) {
 }
 
 const MtmdAPI & mtmd_api() {
-#if defined(TRAILGUARD_LINKED_MTMD)
+#if defined(AURORA_LINKED_MTMD)
     static const MtmdAPI api{
         mtmd_context_params_default,
         mtmd_init_from_file,

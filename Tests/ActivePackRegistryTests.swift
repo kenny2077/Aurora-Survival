@@ -52,7 +52,7 @@ final class ActivePackRegistryTests: XCTestCase {
     }
 
     func testPaidLiteRequiresCachedVerifiedEntitlement() async throws {
-        let fixture = try makeFixture(productID: "trailguard.lite")
+        let fixture = try makeFixture(productID: "aurora.lite")
         defer { try? FileManager.default.removeItem(at: fixture.root) }
         let registry = registry(for: fixture.root)
 
@@ -65,7 +65,7 @@ final class ActivePackRegistryTests: XCTestCase {
         let allowed = await registry.resolve(
             cachedEntitlements: [
                 EntitlementSnapshot(
-                    productID: "trailguard.lite",
+                    productID: "aurora.lite",
                     verified: true,
                     verifiedAt: "2026-07-23T00:00:00Z"
                 )
