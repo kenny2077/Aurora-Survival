@@ -32,7 +32,10 @@ CASES: list[dict[str, Any]] = [
         "domain": None,
         "resetSession": True,
         "expectedLessonIDs": ["food-unknown-plants"],
-        "acceptableEvidenceSets": [["food-unknown-plants-scenario"]],
+        "acceptableEvidenceSets": [
+            ["food-unknown-plants-scenario"],
+            ["sm26-food-core-principles"],
+        ],
         "history": [],
         "imageObservations": [],
     },
@@ -61,7 +64,10 @@ CASES: list[dict[str, Any]] = [
         "domain": None,
         "resetSession": True,
         "expectedLessonIDs": ["shelter-overnight"],
-        "acceptableEvidenceSets": [["shelter-overnight-scenario"]],
+        "acceptableEvidenceSets": [
+            ["shelter-overnight-scenario"],
+            ["shelter-tarp-scenario"],
+        ],
         "history": [],
         "imageObservations": [],
     },
@@ -262,7 +268,10 @@ def main() -> int:
             continue
         destination = args.output_directory / screenshot
         if not copy_app_file(
-            args.device, args.bundle, screenshot, destination
+            args.device,
+            args.bundle,
+            f"Library/Application Support/Aurora/{screenshot}",
+            destination,
         ):
             raise RuntimeError(f"failed to copy screenshot: {screenshot}")
 

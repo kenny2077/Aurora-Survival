@@ -1,0 +1,293 @@
+{
+  "active_pack_status": "Lite, Expert ready offline",
+  "available_tiers": [
+    "lite",
+    "vision_expert"
+  ],
+  "cases": [
+    {
+      "answer": "To find food in the wilderness, prioritize safety, shelter, water, and medical needs first. Once these are secured, focus on identifying safe food sources that provide energy for movement, body heat, recovery, physical performance, and mental function\u2014though it is not the top emergency priority. A good survival strategy involves high-energy return, low risk, reliable sources, and efficient preparation. The most common mistake in wilderness survival is spending more energy searching for food than the food provides. Therefore, assess your situation carefully before proceeding with food gathering.",
+      "automatic_failures": [
+        "unexpected_retrieval"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "en",
+      "elapsed_milliseconds": 7499,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 820,
+      "generated_tokens": 115,
+      "generation_milliseconds": 5721,
+      "id": "adaptive-food-en",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 3785717048,
+      "pass_reason": "unexpected_retrieval",
+      "passed": false,
+      "peak_physical_footprint_bytes": 1582992072,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "Where can I find food in the wilderness?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"survival\",\"q\":\"Where can I find food in the wilderness?\"}",
+        "{\"a\":\"To find food in the wilderness, prioritize safety, shelter, water, and medical needs first. Once these are secured, focus on identifying safe food sources that provide energy for movement, body heat, recovery, physical performance, and mental function\u2014though it is not the top emergency priority. A good survival strategy involves high-energy return, low risk, reliable sources, and efficient preparation. The most common mistake in wilderness survival is spending more energy searching for food than the food provides. Therefore, assess your situation carefully before proceeding with food gathering.\",\"e\":[1]}"
+      ],
+      "repair_count": 1,
+      "requested_language": "en",
+      "screenshot": "adaptive-language-vision_expert-adaptive-food-en.png",
+      "selected_scenario_ids": [
+        "sm26-food-core-principles"
+      ],
+      "sentence_citation_count": 1,
+      "source_card_ids": [
+        "survival-manual-2026"
+      ],
+      "source_card_titles": [
+        "Survival Manual 2026"
+      ],
+      "source_state": "reviewed",
+      "support_status": "none",
+      "tier": "vision_expert",
+      "tokens_per_second": 23.26055906957764,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 86
+    },
+    {
+      "answer": "\u5728\u5bfb\u627e\u5e76\u51c0\u5316\u6c34\u6e90\u65f6\uff0c\u5e94\u4f18\u5148\u641c\u7d22\u5df2\u77e5\u7684\u6c34\u6e90\u70b9\uff0c\u5982\u6cc9\u6c34\u3001\u6eaa\u6d41\u3001\u6cb3\u6d41\u3001\u6e56\u6cca\u548c\u7ef4\u62a4\u826f\u597d\u7684\u4f9b\u6c34\u8bbe\u65bd\u3002 \u7531\u4e8e\u6c34\u6d41\u901a\u5e38\u4ece\u9ad8\u5904\u5411\u4f4e\u5904\u6d41\u52a8\uff0c\u5728\u5c71\u8c37\u3001\u6392\u6c34\u6c9f\u6e20\u3001\u6c9f\u58d1\u4ee5\u53ca\u5c71\u4e18\u4e4b\u95f4\u7684\u6d3c\u5730\u7b49\u4f4d\u7f6e\u8fdb\u884c\u641c\u5bfb\u53ef\u80fd\u6709\u52a9\u4e8e\u53d1\u73b0\u6c34\u6e90\u3002 \u9700\u8981\u6ce8\u610f\u7684\u662f\uff0c\u7eff\u8272\u6216\u66f4\u5bc6\u96c6\u7684\u690d\u88ab\u53ef\u80fd\u8868\u660e\u6f6e\u6e7f\u73af\u5883\uff0c\u4f46\u5e76\u4e0d\u80fd\u4fdd\u8bc1\u996e\u7528\u6c34\u7684\u5b89\u5168\u6027\u3002 \u5728\u641c\u7d22\u8fc7\u7a0b\u4e2d\u5e94\u5c3d\u91cf\u51cf\u5c11\u66b4\u9732\u548c\u4f53\u529b\u6d88\u8017\uff0c\u5e76\u6839\u636e\u5b9e\u9645\u60c5\u51b5\u8c03\u6574\u884c\u52a8\u7b56\u7565\u4ee5\u786e\u4fdd\u5b89\u5168\u3002",
+      "automatic_failures": [
+        "truncated_ending"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "zh-Hans",
+      "elapsed_milliseconds": 7033,
+      "expected_route_pass": true,
+      "first_token_milliseconds": 657,
+      "generated_tokens": 120,
+      "generation_milliseconds": 5697,
+      "id": "adaptive-water-zh",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 3696981184,
+      "pass_reason": "truncated_ending",
+      "passed": false,
+      "peak_physical_footprint_bytes": 1671727936,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "\u5728\u54ea\u91cc\u53ef\u4ee5\u627e\u5230\u5e76\u51c0\u5316\u6c34\u6e90\uff1f",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"survival\",\"q\":\"where can i find and purify water?\"}",
+        "{\"a\":\"\u5728\u5bfb\u627e\u5e76\u51c0\u5316\u6c34\u6e90\u65f6\uff0c\u5e94\u4f18\u5148\u641c\u7d22\u5df2\u77e5\u7684\u6c34\u6e90\u70b9\uff0c\u5982\u6cc9\u6c34\u3001\u6eaa\u6d41\u3001\u6cb3\u6d41\u3001\u6e56\u6cca\u548c\u7ef4\u62a4\u826f\u597d\u7684\u4f9b\u6c34\u8bbe\u65bd\u3002 \u7531\u4e8e\u6c34\u6d41\u901a\u5e38\u4ece\u9ad8\u5904\u5411\u4f4e\u5904\u6d41\u52a8\uff0c\u5728\u5c71\u8c37\u3001\u6392\u6c34\u6c9f\u6e20\u3001\u6c9f\u58d1\u4ee5\u53ca\u5c71\u4e18\u4e4b\u95f4\u7684\u6d3c\u5730\u7b49\u4f4d\u7f6e\u8fdb\u884c\u641c\u5bfb\u53ef\u80fd\u6709\u52a9\u4e8e\u53d1\u73b0\u6c34\u6e90\u3002 \u9700\u8981\u6ce8\u610f\u7684\u662f\uff0c\u7eff\u8272\u6216\u66f4\u5bc6\u96c6\u7684\u690d\u88ab\u53ef\u80fd\u8868\u660e\u6f6e\u6e7f\u73af\u5883\uff0c\u4f46\u5e76\u4e0d\u80fd\u4fdd\u8bc1\u996e\u7528\u6c34\u7684\u5b89\u5168\u6027\u3002 \u5728\u641c\u7d22\u8fc7\u7a0b\u4e2d\u5e94\u5c3d\u91cf\u51cf\u5c11\u66b4\u9732\u548c\u4f53\u529b\u6d88\u8017\uff0c\u5e76\u6839\u636e\u5b9e\u9645\u60c5\u51b5\u8c03\u6574\u884c\u52a8\u7b56\u7565\u4ee5\u786e\u4fdd\u5b89\u5168\u3002\",\"e\":[1]}"
+      ],
+      "repair_count": 1,
+      "requested_language": "zh-Hans",
+      "screenshot": "adaptive-language-vision_expert-adaptive-water-zh.png",
+      "selected_scenario_ids": [
+        "water-locate-scenario"
+      ],
+      "sentence_citation_count": 1,
+      "source_card_ids": [
+        "survival-manual-2026"
+      ],
+      "source_card_titles": [
+        "Survival Manual 2026"
+      ],
+      "source_state": "reviewed",
+      "support_status": "none",
+      "tier": "vision_expert",
+      "tokens_per_second": 23.61111111111111,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 4
+    },
+    {
+      "answer": "Para construir un refugio temporal para pasar la noche, puedes usar una tira de lona como herramienta eficiente y r\u00e1pida. Aseg\u00farate de que el techo est\u00e9 bien protegido del viento y que las aguas se desv\u00edan hacia fuera del \u00e1rea de dormir. Usa los puntos de fijaci\u00f3n adecuados para asegurar la estructura, incluyendo anclajes o palos para mantenerla firme. Una vez que hayas preparado el refugio con una lona, coloca la tira sobre la l\u00ednea y aseg\u00farate de sujetar las esquinas para evitar que se desplome. Adem\u00e1s, puedes crear un sistema de protecci\u00f3n adicional si necesitas m\u00e1s seguridad contra los elementos.",
+      "automatic_failures": [
+        "unexpected_retrieval"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "es",
+      "elapsed_milliseconds": 9943,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 1301,
+      "generated_tokens": 167,
+      "generation_milliseconds": 8585,
+      "id": "adaptive-shelter-es",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 3727733880,
+      "pass_reason": "unexpected_retrieval",
+      "passed": false,
+      "peak_physical_footprint_bytes": 1640975240,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "\u00bfC\u00f3mo puedo construir un refugio temporal para pasar la noche?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"survival\",\"q\":\"How do I build a temporary shelter to spend the night?\"}",
+        "{\"a\":\"Para construir un refugio temporal para pasar la noche, puedes usar una tira de lona como herramienta eficiente y r\u00e1pida. Aseg\u00farate de que el techo est\u00e9 bien protegido del viento y que las aguas se desv\u00edan hacia fuera del \u00e1rea de dormir. Usa los puntos de fijaci\u00f3n adecuados para asegurar la estructura, incluyendo anclajes o palos para mantenerla firme. Una vez que hayas preparado el refugio con una lona, coloca la tira sobre la l\u00ednea y aseg\u00farate de sujetar las esquinas para evitar que se desplome. Adem\u00e1s, puedes crear un sistema de protecci\u00f3n adicional si necesitas m\u00e1s seguridad contra los elementos.\",\"e\":[1]}"
+      ],
+      "repair_count": 1,
+      "requested_language": "es",
+      "screenshot": "adaptive-language-vision_expert-adaptive-shelter-es.png",
+      "selected_scenario_ids": [
+        "shelter-tarp-scenario"
+      ],
+      "sentence_citation_count": 1,
+      "source_card_ids": [
+        "survival-manual-2026"
+      ],
+      "source_card_titles": [
+        "Survival Manual 2026"
+      ],
+      "source_state": "reviewed",
+      "support_status": "none",
+      "tier": "vision_expert",
+      "tokens_per_second": 22.789676002196597,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 101
+    },
+    {
+      "answer": "I can help you with that. Please tell me your location, and I'll provide some potential food sources.",
+      "automatic_failures": [
+        "missing_reviewed_source",
+        "unexpected_retrieval"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "en",
+      "elapsed_milliseconds": 3671,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 161,
+      "generated_tokens": 30,
+      "generation_milliseconds": 1861,
+      "id": "adaptive-food-en",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 5062506744,
+      "pass_reason": "missing_reviewed_source,unexpected_retrieval",
+      "passed": false,
+      "peak_physical_footprint_bytes": 306202376,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "Where can I find food in the wilderness?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"general\",\"q\":\"English retrieval query\"}\n",
+        "{\"a\":\"I can help you with that. Please tell me your location, and I'll provide some potential food sources.\",\"e\":[]}"
+      ],
+      "repair_count": 1,
+      "requested_language": "en",
+      "screenshot": "adaptive-language-lite-adaptive-food-en.png",
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "source_card_titles": [],
+      "source_state": "none",
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 17.058823529411764,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 18
+    },
+    {
+      "answer": "\u627e\u5230\u5e76\u51c0\u5316\u6c34\u6e90\u9700\u8981\u8c28\u614e\uff0c\u56e0\u4e3a\u6c34\u6e90\u53ef\u80fd\u542b\u6709\u6c61\u67d3\u7269\u3002 \u5efa\u8bae\u60a8\u5148\u68c0\u67e5\u6c34\u6e90\u662f\u5426\u5e72\u51c0\uff0c\u5e76\u8fdb\u884c\u7b80\u5355\u7684\u8fc7\u6ee4\u3002 \u5f3a\u70c8\u5efa\u8bae\u60a8\u4f7f\u7528\u51c0\u6c34\u5668\u6216\u6ee4\u82af\uff0c\u4ee5\u53bb\u9664\u6742\u8d28\u548c\u7ec6\u83cc\u3002",
+      "automatic_failures": [
+        "missing_reviewed_source",
+        "unexpected_retrieval",
+        "truncated_ending"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "zh-Hans",
+      "elapsed_milliseconds": 4243,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 181,
+      "generated_tokens": 66,
+      "generation_milliseconds": 3502,
+      "id": "adaptive-water-zh",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 5023152304,
+      "pass_reason": "missing_reviewed_source,unexpected_retrieval,truncated_ending",
+      "passed": false,
+      "peak_physical_footprint_bytes": 345556816,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "\u5728\u54ea\u91cc\u53ef\u4ee5\u627e\u5230\u5e76\u51c0\u5316\u6c34\u6e90\uff1f",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"survival\",\"q\":\"English retrieval query\"}\n",
+        "{\n  \"a\": \"\u627e\u5230\u5e76\u51c0\u5316\u6c34\u6e90\u9700\u8981\u8c28\u614e\uff0c\u56e0\u4e3a\u6c34\u6e90\u53ef\u80fd\u542b\u6709\u6c61\u67d3\u7269\u3002 \u5efa\u8bae\u60a8\u5148\u68c0\u67e5\u6c34\u6e90\u662f\u5426\u5e72\u51c0\uff0c\u5e76\u8fdb\u884c\u7b80\u5355\u7684\u8fc7\u6ee4\u3002 \u5f3a\u70c8\u5efa\u8bae\u60a8\u4f7f\u7528\u51c0\u6c34\u5668\u6216\u6ee4\u82af\uff0c\u4ee5\u53bb\u9664\u6742\u8d28\u548c\u7ec6\u83cc\u3002\"\n  ,\n  \"e\": []\n}\n"
+      ],
+      "repair_count": 1,
+      "requested_language": "zh-Hans",
+      "screenshot": "adaptive-language-lite-adaptive-water-zh.png",
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "source_card_titles": [],
+      "source_state": "none",
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 19.572417946401686,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 3
+    },
+    {
+      "answer": "No se pudo completar una respuesta con fuentes verificadas. Int\u00e9ntalo de nuevo.",
+      "automatic_failures": [
+        "missing_reviewed_source",
+        "unexpected_retrieval"
+      ],
+      "cold_start": false,
+      "coverage_status": "none",
+      "detected_language": "es",
+      "elapsed_milliseconds": 5495,
+      "expected_route_pass": false,
+      "first_token_milliseconds": 487,
+      "generated_tokens": 64,
+      "generation_milliseconds": 4473,
+      "id": "adaptive-shelter-es",
+      "manual_lesson_ids": [],
+      "minimum_available_memory_bytes": 5007636584,
+      "pass_reason": "missing_reviewed_source,unexpected_retrieval",
+      "passed": false,
+      "peak_physical_footprint_bytes": 361072536,
+      "post_inference_thermal": "nominal",
+      "pre_inference_thermal": "nominal",
+      "question": "\u00bfC\u00f3mo puedo construir un refugio temporal para pasar la noche?",
+      "raw_completion_count": 2,
+      "raw_completions": [
+        "{\"t\":\"survival\",\"q\":\"How do I build a temporary shelter for the night?\"}\n",
+        "{\"a\":\"best-effort answer,\u201d, \u201ce\u201d:1, \u201cguidance\u201d: \u201cCrea un refugio temporal para pasar la noche. Utiliza materiales naturales. Crea un refugio utilizando ramas fuertes. Crea un refugio con una capa de aislamiento m\u00e1s gruesa.\",\"e\":[1,2]}"
+      ],
+      "repair_count": 1,
+      "requested_language": "es",
+      "screenshot": "adaptive-language-lite-adaptive-shelter-es.png",
+      "selected_scenario_ids": [],
+      "sentence_citation_count": 0,
+      "source_card_ids": [],
+      "source_card_titles": [],
+      "source_state": "none",
+      "support_status": "none",
+      "tier": "lite",
+      "tokens_per_second": 15.805318615153036,
+      "verification_issue_codes": [],
+      "verification_status": "none",
+      "word_count": 12
+    }
+  ],
+  "completed": true,
+  "final_battery_level": 0.8999999761581421,
+  "final_thermal": "nominal",
+  "fixture_sha256": "de9256b1d2b88bd606e5ac94a24d9214cecb02a1a90bad6e4a2f23d931cd52c2",
+  "initial_battery_level": 0.8999999761581421,
+  "initial_thermal": "nominal",
+  "mode": "tier-comparison",
+  "run_id": "adaptive-language-2026-08-30-morning",
+  "schema_version": 1,
+  "terminal_failure": null
+}

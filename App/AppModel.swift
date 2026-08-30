@@ -1529,7 +1529,7 @@ final class AppModel: ObservableObject {
                 failures.append("vision_used")
             }
             if !text.isEmpty,
-               text.last.map({ !".!?…".contains($0) }) == true {
+               text.last.map({ !".!?…。！？".contains($0) }) == true {
                 failures.append("truncated_ending")
             }
             if lower.contains("returned an unreadable draft") {
@@ -1880,7 +1880,7 @@ final class AppModel: ObservableObject {
                         automaticFailures.append("unexpected_retrieval")
                     }
                     if !text.isEmpty,
-                       text.last.map({ !".!?…".contains($0) }) == true {
+                       text.last.map({ !".!?…。！？".contains($0) }) == true {
                         automaticFailures.append("truncated_ending")
                     }
                     if lowercased.contains("couldn’t form")
