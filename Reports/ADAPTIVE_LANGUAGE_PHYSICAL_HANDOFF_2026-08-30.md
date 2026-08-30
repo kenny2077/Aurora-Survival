@@ -48,8 +48,9 @@ All six replies matched the requested language. Expert selected reviewed source 
 ## Appearance verification
 
 - The automated appearance, persistence, reset, and semantic send-button tests passed before physical handoff.
-- A physical settings-only UI run was attempted without submitting a chat turn. Signing succeeded, but the iPad timed out while enabling Xcode automation mode before the test body ran.
-- System/Light/Dark and enabled-arrow contrast therefore remain explicit manual handoff checks on this device.
+- After Xcode UI automation was enabled on the iPad, the physical settings-only test passed in 40.460 seconds without submitting a chat turn.
+- The test verified that System, Light, and Dark are present; Dark applies and persists across relaunch; and Reset to Defaults restores System.
+- Enabled-arrow contrast is covered by the semantic-color implementation and automated suite; it remains a recommended visual check during manual handoff.
 
 ## Evidence
 
@@ -62,6 +63,7 @@ All six replies matched the requested language. Expert selected reviewed source 
 - [Lite English screenshot](physical-tier-comparison/adaptive-language-lite-adaptive-food-en.png)
 - [Lite Chinese screenshot](physical-tier-comparison/adaptive-language-lite-adaptive-water-zh.png)
 - [Lite Spanish screenshot](physical-tier-comparison/adaptive-language-lite-adaptive-shelter-es.png)
+- [Physical appearance reset screenshot](physical-tier-comparison/adaptive-language-appearance-system-reset.png)
 
 ## Next implementation target
 
