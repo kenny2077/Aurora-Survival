@@ -11,6 +11,7 @@ struct ChatView: View {
     }()
 
     @EnvironmentObject private var model: AppModel
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var draft = ""
@@ -184,7 +185,7 @@ struct ChatView: View {
                 .foregroundStyle(.white)
                 .frame(width: 80, height: 80)
                 .background(
-                    AuroraDesign.aurora,
+                    AuroraDesign.aurora(colorScheme: colorScheme),
                     in: RoundedRectangle(
                         cornerRadius: AuroraDesign.Radius.standard
                     )
@@ -293,20 +294,25 @@ struct ChatView: View {
         VStack(spacing: AuroraDesign.Space.xs) {
             if model.canAttachPhoto,
                let attachment = model.draftImageAttachment {
-                HStack(spacing: AuroraDesign.Space.sm) {
+                VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
                     attachmentPreviewTile(attachment)
-                    VStack(alignment: .leading, spacing: AuroraDesign.Space.xxs) {
-                        Text(attachmentTitle(attachment))
-                            .font(.subheadline.weight(.semibold))
-                        Text(attachmentDetail(attachment))
+                    if let message = attachmentFailureMessage(attachment) {
+                        Text(message)
                             .font(.caption)
-                            .foregroundStyle(
-                                attachmentIsFailed(attachment) ? .red : .secondary
-                            )
+                            .foregroundStyle(.red)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier("chat.attachment.error")
                     }
-                    Spacer()
                 }
                 .padding(.horizontal, AuroraDesign.Space.xs)
+            } else if model.canAttachPhoto,
+                      case .loading = model.attachmentOperationState {
+                ProgressView()
+                    .frame(width: 64, height: 64)
+                    .padding(.horizontal, AuroraDesign.Space.xs)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .accessibilityLabel("Loading photo")
+                    .accessibilityIdentifier("chat.attachment.loading")
             }
 
             if model.canAttachPhoto {
@@ -395,7 +401,7 @@ struct ChatView: View {
             if canSend {
                 sendButtonControl
                     .buttonStyle(.glassProminent)
-                    .tint(Color.primary)
+                    .tint(Color.accentColor)
                     .foregroundStyle(Color(uiColor: .systemBackground))
             } else {
                 sendButtonControl
@@ -465,15 +471,8 @@ struct ChatView: View {
         switch model.attachmentOperationState {
         case .idle:
             EmptyView()
-        case let .loading(message):
-            HStack(spacing: AuroraDesign.Space.xs) {
-                ProgressView()
-                Text(message)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Spacer()
-            }
-            .padding(.horizontal, AuroraDesign.Space.xs)
+        case .loading:
+            EmptyView()
         case let .failed(message, offersSettings):
             HStack(alignment: .firstTextBaseline, spacing: AuroraDesign.Space.xs) {
                 Text(message)
@@ -746,30 +745,12 @@ struct ChatView: View {
         }
     }
 
-    private func attachmentTitle(_ attachment: DraftImageAttachment) -> String {
-        switch attachment.loadState {
-        case .loading: return "Loading photo"
-        case .ready: return "Photo attached"
-        case .failed: return "Photo unavailable"
-        }
-    }
-
-    private func attachmentDetail(_ attachment: DraftImageAttachment) -> String {
+    private func attachmentFailureMessage(
+        _ attachment: DraftImageAttachment
+    ) -> String? {
         if case let .failed(message) = attachment.loadState { return message }
-        switch attachment.ocrState {
-        case .pending: return "Preparing offline analysis"
-        case let .complete(lines):
-            return lines.isEmpty
-                ? "Ready for offline analysis"
-                : "\(lines.count) text lines found"
-        case let .failed(message): return message
-        }
-    }
-
-    private func attachmentIsFailed(_ attachment: DraftImageAttachment) -> Bool {
-        if case .failed = attachment.loadState { return true }
-        if case .failed = attachment.ocrState { return true }
-        return false
+        if case let .failed(message) = attachment.ocrState { return message }
+        return nil
     }
 }
 
@@ -926,6 +907,7 @@ private struct PhotoPreviewView: View {
                     .accessibilityLabel(preview.accessibilityLabel)
             }
         }
+        .accessibilityIdentifier("chat.photoPreview")
         .overlay(alignment: .topTrailing) {
             Button(action: dismiss) {
                 Image(systemName: "xmark.circle.fill")
@@ -940,6 +922,5 @@ private struct PhotoPreviewView: View {
             .accessibilityLabel("Close photo preview")
             .accessibilityIdentifier("chat.photoPreview.close")
         }
-        .accessibilityIdentifier("chat.photoPreview")
     }
 }

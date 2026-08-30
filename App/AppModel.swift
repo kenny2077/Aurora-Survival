@@ -287,9 +287,23 @@ final class AppModel: ObservableObject {
 
     var activeTier: ModelTier? { loadedTier }
 
-    var canUseAsk: Bool { loadedTier != nil }
+    var canUseAsk: Bool {
+#if DEBUG
+        if ProcessInfo.processInfo.environment[
+            "AURORA_UI_FORCE_EXPERT_COMPOSER"
+        ] == "1" { return true }
+#endif
+        return loadedTier != nil
+    }
 
-    var canAttachPhoto: Bool { loadedTier == .expert }
+    var canAttachPhoto: Bool {
+#if DEBUG
+        if ProcessInfo.processInfo.environment[
+            "AURORA_UI_FORCE_EXPERT_COMPOSER"
+        ] == "1" { return true }
+#endif
+        return loadedTier == .expert
+    }
 
     var expertDeviceIsEligible: Bool {
         ModelRouter().route(
@@ -1046,6 +1060,19 @@ final class AppModel: ObservableObject {
 
     func loadDebugOCRFixtureIfPresent() async {
 #if DEBUG
+        if let encoded = ProcessInfo.processInfo.environment[
+            "AURORA_UI_SENT_PHOTO_FIXTURE_BASE64"
+        ],
+           let data = Data(base64Encoded: encoded),
+           UIImage(data: data) != nil {
+            messages.append(ChatMessage(
+                role: .user,
+                text: "",
+                answer: nil,
+                thumbnailData: data,
+                previewImageData: data
+            ))
+        }
         guard draftImageAttachment == nil,
               let encoded = ProcessInfo.processInfo.environment[
                   "AURORA_DEBUG_OCR_FIXTURE_BASE64"

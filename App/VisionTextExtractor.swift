@@ -11,13 +11,14 @@ struct VisionTextExtractor: Sendable {
                 continuation.resume(returning: [])
                 return
             }
+            let completion = VisionTextCompletion(continuation)
 
             let request = VNRecognizeTextRequest { request, _ in
                 let lines = (request.results as? [VNRecognizedTextObservation])?
                     .compactMap { $0.topCandidates(1).first?.string }
                     .filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
                     ?? []
-                continuation.resume(returning: Array(lines.prefix(30)))
+                completion.resume(returning: Array(lines.prefix(30)))
             }
             request.recognitionLevel = .accurate
             request.usesLanguageCorrection = true
@@ -27,9 +28,27 @@ struct VisionTextExtractor: Sendable {
                 do {
                     try handler.perform([request])
                 } catch {
-                    continuation.resume(returning: [])
+                    completion.resume(returning: [])
                 }
             }
         }
+    }
+}
+
+private final class VisionTextCompletion: @unchecked Sendable {
+    private let lock = NSLock()
+    private var didResume = false
+    private let continuation: CheckedContinuation<[String], Never>
+
+    init(_ continuation: CheckedContinuation<[String], Never>) {
+        self.continuation = continuation
+    }
+
+    func resume(returning lines: [String]) {
+        lock.lock()
+        defer { lock.unlock() }
+        guard !didResume else { return }
+        didResume = true
+        continuation.resume(returning: lines)
     }
 }

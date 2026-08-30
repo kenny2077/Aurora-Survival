@@ -14,6 +14,7 @@ struct OnboardingView: View {
 
     @EnvironmentObject private var model: AppModel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var page: Page = .introduction
@@ -25,7 +26,7 @@ struct OnboardingView: View {
         NavigationStack {
             ZStack {
                 Color(uiColor: .systemGroupedBackground).ignoresSafeArea()
-                AuroraDesign.aurora
+                AuroraDesign.aurora(colorScheme: colorScheme)
                     .opacity(0.09)
                     .ignoresSafeArea()
 
@@ -176,7 +177,14 @@ struct OnboardingView: View {
         HStack(spacing: AuroraDesign.Space.xs) {
             ForEach(Page.allCases, id: \.rawValue) { item in
                 Capsule()
-                    .fill(item == page ? AuroraDesign.river : .secondary.opacity(0.28))
+                    .fill(
+                        item == page
+                            ? AuroraDesign.ordinaryAccent(
+                                light: AuroraDesign.river,
+                                colorScheme: colorScheme
+                            )
+                            : .secondary.opacity(0.28)
+                    )
                     .frame(width: item == page ? 24 : 8, height: 8)
             }
         }
@@ -244,7 +252,9 @@ struct OnboardingView: View {
         HStack(alignment: .top, spacing: AuroraDesign.Space.md) {
             Image(systemName: symbol)
                 .font(.title2)
-                .foregroundStyle(AuroraDesign.aurora)
+                .foregroundStyle(
+                    AuroraDesign.aurora(colorScheme: colorScheme)
+                )
                 .frame(width: 42, height: 42)
             VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
                 Text(title).font(.headline)
@@ -302,7 +312,9 @@ struct OnboardingView: View {
         HStack(alignment: .top, spacing: AuroraDesign.Space.md) {
             Image(systemName: symbol)
                 .font(.title2)
-                .foregroundStyle(AuroraDesign.aurora)
+                .foregroundStyle(
+                    AuroraDesign.aurora(colorScheme: colorScheme)
+                )
                 .frame(width: 42, height: 42)
             VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
                 Text(title).font(.headline)
@@ -379,6 +391,7 @@ struct OnboardingView: View {
 
 private struct AuroraAppIcon: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
@@ -394,7 +407,14 @@ private struct AuroraAppIcon: View {
                     style: .continuous
                 )
             )
-            .shadow(color: AuroraDesign.river.opacity(0.22), radius: 22, y: 12)
+            .shadow(
+                color: AuroraDesign.ordinaryAccent(
+                    light: AuroraDesign.river,
+                    colorScheme: colorScheme
+                ).opacity(0.22),
+                radius: 22,
+                y: 12
+            )
     }
 
     private var iconSize: CGFloat { horizontalSizeClass == .regular ? 112 : 92 }

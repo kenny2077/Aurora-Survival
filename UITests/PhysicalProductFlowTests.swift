@@ -553,7 +553,11 @@ final class PhysicalProductFlowTests: XCTestCase {
             app.buttons["Take Photo"].tap()
             app.tap()
             captureAndUsePhoto(in: app)
-            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+            XCTAssertTrue(
+                app.buttons["chat.attachment.preview"]
+                    .waitForExistence(timeout: 20)
+            )
+            assertSuccessfulAttachmentMetadataIsHidden(in: app)
             XCTAssertFalse(app.buttons["Replace"].exists)
             XCTAssertFalse(app.buttons["Remove"].exists)
             XCTAssertTrue(app.buttons["chat.attachment.remove"].exists)
@@ -565,7 +569,8 @@ final class PhysicalProductFlowTests: XCTestCase {
             app.buttons["chat.photoPreview.close"].tap()
             app.buttons["chat.send"].tap()
             XCTAssertTrue(
-                app.staticTexts["Photo attached"].waitForNonExistence(timeout: 2)
+                app.buttons["chat.attachment.preview"]
+                    .waitForNonExistence(timeout: 2)
             )
             XCTAssertTrue(
                 app.buttons["chat.message.photoPreview"].waitForExistence(timeout: 10)
@@ -579,10 +584,15 @@ final class PhysicalProductFlowTests: XCTestCase {
             app.buttons["Attach photo"].tap()
             app.buttons["Choose Existing Photo"].tap()
             selectFirstPhoto(in: app)
-            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+            XCTAssertTrue(
+                app.buttons["chat.attachment.preview"]
+                    .waitForExistence(timeout: 20)
+            )
+            assertSuccessfulAttachmentMetadataIsHidden(in: app)
             app.buttons["chat.attachment.remove"].tap()
             XCTAssertTrue(
-                app.staticTexts["Photo attached"].waitForNonExistence(timeout: 2)
+                app.buttons["chat.attachment.preview"]
+                    .waitForNonExistence(timeout: 2)
             )
         }
 
@@ -592,7 +602,11 @@ final class PhysicalProductFlowTests: XCTestCase {
         app.launch()
 
         XCTContext.runActivity(named: "3. Failed save discards capture") { _ in
-            XCTAssertTrue(app.staticTexts["Photo attached"].waitForExistence(timeout: 20))
+            XCTAssertTrue(
+                app.buttons["chat.attachment.preview"]
+                    .waitForExistence(timeout: 20)
+            )
+            assertSuccessfulAttachmentMetadataIsHidden(in: app)
             app.buttons["Attach photo"].tap()
             app.buttons["Take Photo"].tap()
             captureAndUsePhoto(in: app)
@@ -601,9 +615,49 @@ final class PhysicalProductFlowTests: XCTestCase {
                     NSPredicate(format: "label CONTAINS[c] %@", "could not be saved and was discarded")
                 ).firstMatch.waitForExistence(timeout: 20)
             )
-            XCTAssertTrue(app.staticTexts["Photo attached"].exists)
             XCTAssertTrue(app.buttons["chat.attachment.preview"].exists)
         }
+    }
+
+    func testDarkForestComposerAndCleanPhotoControlsWithoutSending() throws {
+        let app = makeApp()
+        app.launchArguments += ["-Aurora.appearance", "dark"]
+        app.launchEnvironment["AURORA_DEBUG_OCR_FIXTURE_BASE64"] =
+            Self.fixturePNGBase64
+        app.launchEnvironment["AURORA_UI_SENT_PHOTO_FIXTURE_BASE64"] =
+            Self.fixturePNGBase64
+        app.launchEnvironment["AURORA_UI_FORCE_EXPERT_COMPOSER"] = "1"
+        app.launch()
+
+        let pendingPreview = app.buttons["chat.attachment.preview"]
+        XCTAssertTrue(pendingPreview.waitForExistence(timeout: 30))
+        XCTAssertTrue(app.buttons["chat.attachment.remove"].exists)
+        XCTAssertTrue(app.buttons["chat.message.photoPreview"].exists)
+        assertSuccessfulAttachmentMetadataIsHidden(in: app)
+
+        pendingPreview.tap()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["chat.photoPreview"]
+                .waitForExistence(timeout: 5)
+        )
+        app.buttons["chat.photoPreview.close"].tap()
+
+        app.buttons["chat.message.photoPreview"].tap()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["chat.photoPreview"]
+                .waitForExistence(timeout: 5)
+        )
+        app.buttons["chat.photoPreview.close"].tap()
+
+        let composer = app.textFields["chat.composer"]
+        composer.tap()
+        composer.typeText("Draft only")
+        XCTAssertTrue(app.buttons["chat.send"].isEnabled)
+        keepScreenshot(named: "Dark forest enabled composer", app: app)
+
+        app.buttons["chat.attachment.remove"].tap()
+        XCTAssertTrue(pendingPreview.waitForNonExistence(timeout: 2))
+        XCTAssertTrue(app.buttons["chat.message.photoPreview"].exists)
     }
 
     func testFourTabShellAndFocusedModelCenter() throws {
@@ -1229,6 +1283,19 @@ final class PhysicalProductFlowTests: XCTestCase {
             .tap()
         let add = app.buttons["Add"]
         if add.waitForExistence(timeout: 2) { add.tap() }
+    }
+
+    private func assertSuccessfulAttachmentMetadataIsHidden(
+        in app: XCUIApplication
+    ) {
+        XCTAssertFalse(app.staticTexts["Photo attached"].exists)
+        XCTAssertFalse(app.staticTexts["Preparing offline analysis"].exists)
+        XCTAssertFalse(app.staticTexts["Ready for offline analysis"].exists)
+        XCTAssertFalse(
+            app.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS[c] %@", "text lines found")
+            ).firstMatch.exists
+        )
     }
 
     private static let fixturePNGBase64 =

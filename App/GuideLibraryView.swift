@@ -395,7 +395,7 @@ private struct FieldGuideMarkdownContent: View {
                 } else if let step = numbered(line) {
                     HStack(alignment: .top, spacing: 10) {
                         Text(step.number).font(.caption.bold()).foregroundStyle(.white)
-                            .frame(width: 26, height: 26).background(AuroraDesign.spruce, in: Circle())
+                            .frame(width: 26, height: 26).background(Color.accentColor, in: Circle())
                         markdown(step.text)
                     }.accessibilityElement(children: .combine).accessibilityLabel("Step \(step.number). \(plain(step.text))")
                 } else { markdown(line) }
@@ -593,6 +593,6 @@ private func chapterColor(_ theme: String) -> Color {
     case "rescue": return AuroraDesign.signal
     case "sky": return .blue
     case "wildlife": return .green
-    default: return AuroraDesign.spruce
+    default: return Color.accentColor
     }
 }

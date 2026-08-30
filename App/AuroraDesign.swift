@@ -33,9 +33,20 @@ enum AuroraDesign {
         green: 111 / 255,
         blue: 116 / 255
     )
-    static let aurora = LinearGradient(
-        colors: [river, Color.indigo.opacity(0.82)],
-        startPoint: .leading,
-        endPoint: .trailing
-    )
+    static func ordinaryAccent(
+        light: Color,
+        colorScheme: ColorScheme
+    ) -> Color {
+        colorScheme == .dark ? Color.accentColor : light
+    }
+
+    static func aurora(colorScheme: ColorScheme) -> LinearGradient {
+        LinearGradient(
+            colors: colorScheme == .dark
+                ? [Color.accentColor, Color.accentColor.opacity(0.68)]
+                : [river, Color.indigo.opacity(0.82)],
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+    }
 }

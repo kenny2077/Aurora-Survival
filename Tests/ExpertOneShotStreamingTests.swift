@@ -53,6 +53,23 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         XCTAssertFalse(user.contains("SELECTED REVIEWED"))
     }
 
+    func testNativeVisionPromptKeepsOnDeviceOCRInternalContext() {
+        let prompt = ModelPrompt(
+            question: "What does this label say?",
+            evidence: [],
+            imageData: Data("image".utf8),
+            imageObservations: ["TRAIL CLOSED", "Bridge out"],
+            tier: .expert,
+            permitsVisionReasoning: true
+        )
+
+        let userPrompt = GroundedPromptBuilder().userPrompt(from: prompt)
+
+        XCTAssertTrue(userPrompt.contains("ON-DEVICE OCR"))
+        XCTAssertTrue(userPrompt.contains("- TRAIL CLOSED"))
+        XCTAssertTrue(userPrompt.contains("- Bridge out"))
+    }
+
     func testNativeVisionFailureDoesNotLaunchFallbackInference() async {
         let model = FailingVisionModel()
         let retrieval = ExpertRetrievalSpy()

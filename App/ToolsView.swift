@@ -11,6 +11,7 @@ struct ToolsView: View {
     }
 
     @EnvironmentObject private var model: AppModel
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @StateObject private var emergencyStore = EmergencyProfileStore()
@@ -91,7 +92,7 @@ struct ToolsView: View {
             HStack(spacing: AuroraDesign.Space.sm) {
                 Image(systemName: tier == .lite ? "text.bubble.fill" : "eye.fill")
                     .font(.headline)
-                    .foregroundStyle(tier == .lite ? AuroraDesign.river : .indigo)
+                    .foregroundStyle(tierAccent(tier))
                     .frame(width: 34, height: 34)
                     .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 11))
                 VStack(alignment: .leading, spacing: 2) {
@@ -254,7 +255,7 @@ struct ToolsView: View {
 
             ProgressView(value: fraction)
                 .progressViewStyle(.linear)
-                .tint(tier == .lite ? AuroraDesign.river : .indigo)
+                .tint(tierAccent(tier))
                 .accessibilityLabel("\(tier.displayName) download progress")
                 .accessibilityValue(percentage)
                 .accessibilityIdentifier(
@@ -272,6 +273,13 @@ struct ToolsView: View {
         case .expert:
             "Offline text and photos"
         }
+    }
+
+    private func tierAccent(_ tier: ModelTier) -> Color {
+        AuroraDesign.ordinaryAccent(
+            light: tier == .lite ? AuroraDesign.river : .indigo,
+            colorScheme: colorScheme
+        )
     }
 
     private func modelIconButton(
@@ -371,7 +379,10 @@ struct ToolsView: View {
             "Satellite",
             "Compatibility & guide",
             "antenna.radiowaves.left.and.right",
-            .indigo,
+            AuroraDesign.ordinaryAccent(
+                light: .indigo,
+                colorScheme: colorScheme
+            ),
             route: .satellite
         )
     }
@@ -391,7 +402,10 @@ struct ToolsView: View {
             "Checklist",
             "\(checklistStore.completedCount) of \(checklistStore.items.count) ready",
             "checklist.checked",
-            .green,
+            AuroraDesign.ordinaryAccent(
+                light: .green,
+                colorScheme: colorScheme
+            ),
             route: .checklist
         )
     }
@@ -687,6 +701,7 @@ private struct CompassToolView: View {
 
 private struct TripChecklistView: View {
     @ObservedObject var store: TripChecklistStore
+    @Environment(\.colorScheme) private var colorScheme
     @State private var editsItem: TripChecklistItem?
     @State private var addsItem = false
 
@@ -710,7 +725,13 @@ private struct TripChecklistView: View {
                         }
                         .swipeActions {
                             Button("Delete", role: .destructive) { store.delete(item) }
-                            Button("Edit") { editsItem = item }.tint(.blue)
+                            Button("Edit") { editsItem = item }
+                                .tint(
+                                    AuroraDesign.ordinaryAccent(
+                                        light: .blue,
+                                        colorScheme: colorScheme
+                                    )
+                                )
                         }
                     }
                 }

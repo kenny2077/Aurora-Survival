@@ -8,7 +8,7 @@ struct RiskAcknowledgementView: View {
             VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
                 Image(systemName: "mountain.2.fill")
                     .font(.system(size: 44, weight: .semibold))
-                    .foregroundStyle(AuroraDesign.spruce)
+                    .foregroundStyle(Color.accentColor)
                     .accessibilityHidden(true)
 
                 Text("Before you use Aurora")
@@ -73,7 +73,7 @@ struct RiskAcknowledgementView: View {
     private func acknowledgementRow(icon: String, text: String) -> some View {
         HStack(alignment: .top, spacing: AuroraDesign.Space.sm) {
             Image(systemName: icon)
-                .foregroundStyle(AuroraDesign.spruce)
+                .foregroundStyle(Color.accentColor)
                 .frame(width: 24)
                 .accessibilityHidden(true)
             Text(text)

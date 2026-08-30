@@ -302,7 +302,7 @@ struct MapPackView: View {
                 .foregroundStyle(.primary)
                 .background(
                     coordinator.mode == mode
-                        ? AuroraDesign.spruce.opacity(0.22)
+                        ? Color.accentColor.opacity(0.22)
                         : Color.clear,
                     in: RoundedRectangle(cornerRadius: 14)
                 )
