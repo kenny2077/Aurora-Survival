@@ -43,13 +43,21 @@ struct OnboardingView: View {
                                     pageContent
                                         .id(page)
                                         .transition(pageTransition)
+                                        .padding(
+                                            .bottom,
+                                            page == .introduction
+                                                ? AuroraDesign.Space.xl * 2
+                                                : 0
+                                        )
                                 }
                                 .padding(AuroraDesign.Space.xl)
                                 .frame(maxWidth: galleryWidth)
                                 .frame(
                                     maxWidth: .infinity,
                                     minHeight: geometry.size.height,
-                                    alignment: .top
+                                    alignment: page == .introduction
+                                        ? .center
+                                        : .top
                                 )
                             }
                             .onChange(of: page) { _, _ in
@@ -57,8 +65,10 @@ struct OnboardingView: View {
                             }
                         }
                     }
-                    navigationBar
                 }
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                navigationBar
             }
             .task { await model.ensureCatalogLoaded() }
         }
@@ -78,7 +88,7 @@ struct OnboardingView: View {
     }
 
     private var introductionPage: some View {
-        VStack(spacing: AuroraDesign.Space.lg) {
+        VStack(spacing: AuroraDesign.Space.xl) {
             AuroraAppIcon()
 
             VStack(spacing: AuroraDesign.Space.xs) {
@@ -92,20 +102,6 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 440)
             }
-
-            VStack(spacing: AuroraDesign.Space.xs) {
-                Text("Aurora can be wrong, so check critical guidance and seek help when possible; by continuing, you agree to Aurora’s Terms and acknowledge the Privacy Notice.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-
-                NavigationLink("Legal & Privacy") {
-                    LegalPrivacyHubView()
-                }
-                .font(.footnote.weight(.semibold))
-                .accessibilityIdentifier("onboarding.legal")
-            }
-            .frame(maxWidth: 480)
         }
         .frame(maxWidth: .infinity, alignment: .top)
     }
@@ -198,39 +194,51 @@ struct OnboardingView: View {
 
     @ViewBuilder
     private var navigationBar: some View {
-        HStack(spacing: AuroraDesign.Space.md) {
-            if page == .features {
-                Button("Back") { move(by: -1) }
-                    .buttonStyle(.glass)
-                    .frame(maxWidth: .infinity)
+        VStack(spacing: AuroraDesign.Space.sm) {
+            if page == .introduction {
+                NavigationLink {
+                    LegalDocumentView(document: .terms)
+                } label: {
+                    Text("AI can make mistakes—review Aurora’s Terms.")
+                        .font(.footnote.weight(.semibold))
+                        .multilineTextAlignment(.center)
+                }
+                .accessibilityIdentifier("onboarding.legal")
+            }
 
-                Button("Continue") { move(by: 1) }
+            HStack(spacing: AuroraDesign.Space.md) {
+                if page == .features {
+                    Button("Back") { move(by: -1) }
+                        .buttonStyle(.glassProminent)
+                        .frame(maxWidth: .infinity)
+
+                    Button("Continue") { move(by: 1) }
+                        .buttonStyle(.glassProminent)
+                        .frame(maxWidth: .infinity)
+                        .accessibilityIdentifier("onboarding.continue")
+                } else if page == .models {
+                    Button("Set Up Later") {
+                        model.completeOnboarding(openModels: false)
+                    }
                     .buttonStyle(.glassProminent)
                     .frame(maxWidth: .infinity)
-                    .accessibilityIdentifier("onboarding.continue")
-            } else if page == .models {
-                Button("Set Up Later") {
-                    model.completeOnboarding(openModels: false)
+                    .accessibilityIdentifier("onboarding.skipModels")
+                } else {
+                    Button("Agree & Continue") {
+                        model.acceptLegalTerms()
+                        move(by: 1)
+                    }
+                    .buttonStyle(.glassProminent)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityIdentifier("onboarding.accept")
                 }
-                .buttonStyle(.glass)
-                .frame(maxWidth: .infinity)
-                .accessibilityIdentifier("onboarding.skipModels")
-            } else {
-                Button("Agree & Continue") {
-                    model.acceptLegalTerms()
-                    move(by: 1)
-                }
-                .buttonStyle(.glassProminent)
-                .frame(maxWidth: .infinity)
-                .accessibilityIdentifier("onboarding.accept")
             }
         }
         .disabled(isTransitioning)
         .frame(maxWidth: galleryWidth)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, AuroraDesign.Space.lg)
-        .padding(.vertical, AuroraDesign.Space.md)
-        .glassEffect(.regular, in: Rectangle())
+        .padding(.top, AuroraDesign.Space.md)
     }
 
     private func onboardingTitle(_ title: String, subtitle: String?) -> some View {
