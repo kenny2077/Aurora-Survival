@@ -86,6 +86,7 @@ public actor IncidentAssistant {
         if selectedTier == .expert {
             let resolved = ExpertTurnResolver().resolve(request)
             expertTurnContext = resolved
+            let isChinese = ResponseLanguage.detect(in: request.question) == .chinese
             expertRequest = ChatRequest(
                 question: request.question,
                 domain: request.domain,
@@ -93,7 +94,9 @@ public actor IncidentAssistant {
                 hasImage: request.hasImage,
                 imageData: request.imageData,
                 imageObservations: request.imageObservations,
-                conversationHistory: resolved.relevantHistory
+                conversationHistory: isChinese
+                    ? request.conversationHistory
+                    : resolved.relevantHistory
             )
             if let assembly = expertContextAssembler?.assemble(
                 question: expertRequest.question,
@@ -164,7 +167,7 @@ public actor IncidentAssistant {
         tokenSink: (@Sendable (String) -> Void)?
     ) async -> AssistantAnswer {
         let model = modelProvider(.expert)
-        var notices = initialNotices
+        let notices = initialNotices
         if request.hasImage {
             guard let imageData = request.imageData else {
                 return Self.visionFailure(
@@ -203,9 +206,20 @@ public actor IncidentAssistant {
         tokenSink: (@Sendable (String) -> Void)?
     ) async -> AssistantAnswer {
         let model = modelProvider(tier)
-        var notices = initialNotices
+        let notices = initialNotices
         let imageObservations: [String] = []
         let responseLanguage = ResponseLanguage.detect(in: request.question)
+        if responseLanguage == .chinese {
+            return await answerChineseBestEffort(
+                request: request,
+                tier: tier,
+                conversationHistory: conversationHistory,
+                contextProfile: contextProfile,
+                maximumImageDimension: maximumImageDimension,
+                notices: initialNotices,
+                tokenSink: tokenSink
+            )
+        }
         let languageCompatibleHistory = Self.languageCompatibleHistory(
             conversationHistory,
             responseLanguage: responseLanguage
@@ -233,74 +247,80 @@ public actor IncidentAssistant {
         }
         let intent = routingDecision.intent
         let shouldSearch = intent == .survivalQuestion
-        let routedQuery = shouldSearch ? routingDecision.retrievalQuery : ""
-        let semanticQuery = shouldSearch ? routedQuery : ""
-        let retrievalRequest = ChatRequest(
-            question: semanticQuery,
-            domain: request.domain,
-            preferredTier: tier,
-            hasImage: false,
-            imageData: nil,
-            imageObservations: imageObservations,
-            conversationHistory: languageCompatibleHistory
-        )
-        var denseResults: [ExpertVectorSearchResult] = []
+        let facetQuestion: String
+        if ExpertRetrievalEngine.isEllipticalFollowUp(request.question),
+           let priorUser = languageCompatibleHistory.last(where: {
+               $0.role == .user
+           }) {
+            facetQuestion = "\(priorUser.text) \(request.question)"
+        } else {
+            facetQuestion = request.question
+        }
+        let facets = shouldSearch
+            ? ExpertScenarioRetrievalEngine.requestFacets(in: facetQuestion)
+            : nil
+        var candidatesByFacet: [[RetrievedEvidenceScenario]] = []
         var sharedRAGAvailable = expertEmbeddingProvider != nil
             && expertVectorIndex != nil
             && expertVectorIndex?.issues.isEmpty == true
-        if shouldSearch, sharedRAGAvailable,
+        if shouldSearch, let facets, sharedRAGAvailable,
            let expertEmbeddingProvider, let expertVectorIndex {
             do {
-                var denseByID: [String: ExpertVectorSearchResult] = [:]
-                for query in Self.semanticRetrievalQueries(
-                    base: semanticQuery,
-                    question: request.question
-                ) {
-                    let vector = try await expertEmbeddingProvider.embedding(for: query)
-                    for result in expertVectorIndex.search(
+                let engine = ExpertScenarioRetrievalEngine(
+                    retrieval: expertEvidenceRetrieval
+                )
+                for facet in facets {
+                    let vector = try await expertEmbeddingProvider.embedding(
+                        for: facet.normalizedQuery
+                    )
+                    let denseResults = expertVectorIndex.search(
                         queryVector: vector,
                         domain: request.domain,
                         globalLimit: 128
-                    ) where result.score > (denseByID[result.record.id]?.score ?? -.infinity) {
-                        denseByID[result.record.id] = result
-                    }
-                }
-                denseResults = denseByID.values.sorted {
-                    if $0.score == $1.score { return $0.record.id < $1.record.id }
-                    return $0.score > $1.score
+                    )
+                    let facetRequest = ChatRequest(
+                        question: facet.text,
+                        domain: request.domain,
+                        preferredTier: tier,
+                        hasImage: false,
+                        imageData: nil,
+                        imageObservations: imageObservations,
+                        conversationHistory: []
+                    )
+                    candidatesByFacet.append(engine.search(
+                        request: facetRequest,
+                        denseResults: denseResults,
+                        limit: tier == .lite ? 10 : 16,
+                        rankingMode: tier == .lite
+                            ? .liteOperationAware : .standard
+                    ))
                 }
             } catch {
                 sharedRAGAvailable = false
+                candidatesByFacet = []
             }
         }
-        if shouldSearch, !sharedRAGAvailable {
-            notices.append(
-                "Shared semantic retrieval is unavailable; this answer uses no offline grounding."
-            )
-        }
-        let candidates = shouldSearch && sharedRAGAvailable
-            ? ExpertScenarioRetrievalEngine(
-                retrieval: expertEvidenceRetrieval
-              ).search(
-                request: retrievalRequest,
-                denseResults: denseResults,
-                limit: tier == .lite && liteEvidencePolicy == .operationAwareTopTwo
-                    ? 10 : 16,
-                rankingMode: tier == .lite
-                    && liteEvidencePolicy == .operationAwareTopTwo
-                    ? .liteOperationAware : .standard
-              )
-            : []
-        let selectedExpertEvidence = Self.selectEligibleEvidence(
-            candidates,
+        let coverage = Self.coverageDecision(
+            facets: facets ?? [],
+            candidatesByFacet: candidatesByFacet,
             tier: tier,
-            question: request.question,
             litePolicy: liteEvidencePolicy
         )
+        let selectedExpertEvidence = coverage.coversCompleteRequest
+            ? coverage.selectedEvidence : []
         let selectedByID = Dictionary(uniqueKeysWithValues:
             selectedExpertEvidence.map { ($0.scenario.id, $0) }
         )
-        lastExpertRetrievalCandidates = candidates.map { candidate in
+        var candidateByID: [String: RetrievedEvidenceScenario] = [:]
+        for candidate in candidatesByFacet.flatMap({ $0 }) {
+            if candidate.score > (candidateByID[candidate.scenario.id]?.score ?? -.infinity) {
+                candidateByID[candidate.scenario.id] = candidate
+            }
+        }
+        lastExpertRetrievalCandidates = candidateByID.values.sorted {
+            if $0.score == $1.score { return $0.scenario.id < $1.scenario.id }
+            return $0.score > $1.score
+        }.map { candidate in
             guard let selected = selectedByID[candidate.scenario.id] else {
                 var rejected = candidate
                 if candidate.isEligible {
@@ -317,12 +337,6 @@ public actor IncidentAssistant {
             .incidentFallback
         } else {
             .ordinary
-        }
-        if selectedExpertEvidence.isEmpty,
-           intent == .survivalQuestion {
-            notices.append(
-                "No matching offline source was found; this is the model's best-effort answer."
-            )
         }
 
         let finalPrompt = ModelPrompt(
@@ -365,17 +379,11 @@ public actor IncidentAssistant {
             chosen = result
         } else {
             let streamedText = streamDecoder.text
-            guard finalPurpose == .ordinary,
-                  !streamedText.isEmpty,
-                  streamedText.last.map({ ".!?…。！？".contains($0) }) == true,
-                  !GroundedResponseCodec.containsControlLeakage(streamedText),
-                  responseLanguage.accepts(streamedText)
-            else {
-                return Self.modelFormatFailure(
-                    tier: tier,
-                    language: responseLanguage,
-                    notices: notices
-                )
+            guard GroundedResponseCodec.isSafeDisplayableAnswer(
+                streamedText,
+                tier: tier
+            ) else {
+                return Self.runtimeFailure(tier: tier, notices: notices)
             }
             chosen = ExpertRenderedResult(
                 text: streamedText,
@@ -392,9 +400,71 @@ public actor IncidentAssistant {
             notices: notices,
             intent: intent,
             retrievalStatus: intent == .survivalQuestion
-                ? (selectedExpertEvidence.isEmpty
+                ? (chosen.evidenceIDs.isEmpty
                     ? .noRelevantEvidence : .acceptedEvidence)
                 : nil
+        )
+    }
+
+    private func answerChineseBestEffort(
+        request: ChatRequest,
+        tier: ModelTier,
+        conversationHistory: [ConversationTurn],
+        contextProfile: ExpertContextProfile?,
+        maximumImageDimension: Int?,
+        notices: [String],
+        tokenSink: (@Sendable (String) -> Void)?
+    ) async -> AssistantAnswer {
+        let prompt = ModelPrompt(
+            question: request.question,
+            evidence: [],
+            imageObservations: [],
+            tier: tier,
+            permitsVisionReasoning: false,
+            conversationHistory: tier == .expert
+                ? Self.chineseHistory(conversationHistory)
+                : [],
+            expertContextProfile: contextProfile,
+            maximumImageDimension: maximumImageDimension,
+            responseLanguage: .chinese,
+            purpose: .ordinary
+        )
+        let streamDecoder = ExpertEnvelopeStreamDecoder()
+        let streamedTokenSink: @Sendable (String) -> Void = { piece in
+            for delta in streamDecoder.append(piece) {
+                tokenSink?(delta)
+            }
+        }
+        let generated: String
+        do {
+            generated = try await modelProvider(tier).generate(
+                prompt: prompt,
+                tokenSink: streamedTokenSink
+            )
+        } catch {
+            #if DEBUG
+            print("Aurora \(tier.displayName) Chinese answer generation failed: \(error)")
+            #endif
+            if tier == .expert { expertSuspended = true }
+            return Self.runtimeFailure(tier: tier, notices: notices)
+        }
+        for delta in streamDecoder.finish() {
+            tokenSink?(delta)
+        }
+        let extracted = streamDecoder.text
+        let raw = generated.trimmingCharacters(in: .whitespacesAndNewlines)
+        let text = extracted.isEmpty ? raw : extracted
+        guard !text.isEmpty else {
+            return Self.runtimeFailure(tier: tier, notices: notices)
+        }
+        return AssistantAnswer(
+            text: text,
+            severity: .informational,
+            sources: [],
+            manualReferences: [],
+            modelTier: tier,
+            visionWasUsed: false,
+            notices: notices
         )
     }
 
@@ -482,6 +552,12 @@ public actor IncidentAssistant {
         }
     }
 
+    private static func chineseHistory(
+        _ history: [ConversationTurn]
+    ) -> [ConversationTurn] {
+        history.filter { ResponseLanguage.detect(in: $0.text) == .chinese }
+    }
+
     static func prioritizeScenarioCoverage(
         _ candidates: [RetrievedEvidenceScenario],
         for question: String
@@ -515,6 +591,75 @@ public actor IncidentAssistant {
             !selectedIDs.contains($0.scenario.id)
         })
         return prioritized
+    }
+
+    static func coverageDecision(
+        facets: [RetrievalFacet],
+        candidatesByFacet: [[RetrievedEvidenceScenario]],
+        tier: ModelTier,
+        litePolicy: LiteEvidencePolicy = .operationAwareTopTwo
+    ) -> EvidenceCoverageDecision {
+        guard !facets.isEmpty, candidatesByFacet.count == facets.count else {
+            return EvidenceCoverageDecision(
+                facets: facets,
+                selectedEvidence: [],
+                coversCompleteRequest: false,
+                reason: "facets_unavailable"
+            )
+        }
+        let scenarioLimit = tier == .lite
+            ? (litePolicy == .legacyTopOne ? 1 : 2)
+            : 3
+        var selectedByID: [String: RetrievedEvidenceScenario] = [:]
+        var selectionOrder: [String] = []
+        var facetTextByScenarioID: [String: [String]] = [:]
+        for (facet, candidates) in zip(facets, candidatesByFacet) {
+            guard let candidate = candidates.first(where: \.isEligible) else {
+                return EvidenceCoverageDecision(
+                    facets: facets,
+                    selectedEvidence: [],
+                    coversCompleteRequest: false,
+                    reason: "uncovered_facet"
+                )
+            }
+            let scenarioID = candidate.scenario.id
+            if selectedByID[scenarioID] == nil {
+                selectedByID[scenarioID] = candidate
+                selectionOrder.append(scenarioID)
+            }
+            facetTextByScenarioID[scenarioID, default: []].append(facet.text)
+        }
+        guard selectionOrder.count <= scenarioLimit else {
+            return EvidenceCoverageDecision(
+                facets: facets,
+                selectedEvidence: [],
+                coversCompleteRequest: false,
+                reason: "scenario_budget_exceeded"
+            )
+        }
+        let selected: [RetrievedEvidenceScenario] = selectionOrder.enumerated()
+            .compactMap { offset, scenarioID in
+            guard let candidate = selectedByID[scenarioID] else { return nil }
+            let alignedQuestion = facetTextByScenarioID[scenarioID, default: []]
+                .joined(separator: " ")
+            var diagnosed = prioritizeClaims(
+                in: candidate,
+                for: alignedQuestion,
+                maximumClaims: tier == .lite ? 6 : 8
+            )
+            diagnosed.finalSelectionReason = "facet_coverage_\(offset + 1)"
+            diagnosed.promptTokenContribution = max(
+                1,
+                diagnosed.scenario.claims.reduce(0) { $0 + $1.text.count } / 4
+            )
+            return diagnosed
+        }
+        return EvidenceCoverageDecision(
+            facets: facets,
+            selectedEvidence: selected,
+            coversCompleteRequest: selected.count == selectionOrder.count,
+            reason: "complete_facet_coverage"
+        )
     }
 
     static func selectEligibleEvidence(
@@ -1214,23 +1359,6 @@ public actor IncidentAssistant {
             evidenceIDs: result.evidenceIDs,
             expertIntent: intent,
             expertRetrievalStatus: retrievalStatus
-        )
-    }
-
-    private static func modelFormatFailure(
-        tier: ModelTier,
-        language: ResponseLanguage,
-        notices: [String]
-    ) -> AssistantAnswer {
-        AssistantAnswer(
-            text: language.retryMessage,
-            severity: .caution,
-            sources: [],
-            modelTier: tier,
-            visionWasUsed: false,
-            notices: notices + [
-                "Internal model-format text was withheld instead of being shown as guidance."
-            ]
         )
     }
 

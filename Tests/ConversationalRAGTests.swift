@@ -10,6 +10,107 @@ import XCTest
 final class ConversationalRAGTests: XCTestCase {
     private let usefulWaterAnswer = "Bring the water to a rolling boil, then keep it boiling for the reviewed time. Let it cool in a clean, covered container before drinking. Avoid sources contaminated by fuel, chemicals, or toxic algae because boiling will not remove those hazards."
 
+    func testChineseLiteBypassesRoutingAndRetrievalAndDisplaysMixedAnswer() async throws {
+        let generated = #"{"a":"先寻找流动水源。 Search downhill carefully","e":[]}"#
+        let model = ScriptedLanguageModel(steps: [.output(generated)])
+        let retrieval = RetrievalRecorder(results: [
+            RetrievedPassage(article: makeManualArticle(), score: 1),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.lite],
+            retrieval: retrieval,
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "在野外怎么找到水源？",
+                preferredTier: .lite
+            ),
+            device: capableDevice()
+        )
+
+        XCTAssertEqual(answer?.text, "先寻找流动水源。 Search downhill carefully")
+        XCTAssertTrue(answer?.sources.isEmpty == true)
+        XCTAssertTrue(answer?.sourceCards.isEmpty == true)
+        XCTAssertTrue(answer?.notices.isEmpty == true)
+        XCTAssertTrue(retrieval.queries.isEmpty)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.count, 1)
+        XCTAssertEqual(prompts.first?.purpose, .ordinary)
+        XCTAssertTrue(prompts.first?.expertEvidence.isEmpty == true)
+        let prompt = try XCTUnwrap(prompts.first)
+        let builder = GroundedPromptBuilder()
+        let system = builder.systemPrompt(for: prompt, outputMode: .groundedJSON)
+        let user = builder.userPrompt(from: prompt, outputMode: .groundedJSON)
+        for forbidden in ["CURRENT USER MESSAGE", "REVIEWED", "ROUTING", "English"] {
+            XCTAssertFalse(system.contains(forbidden))
+            XCTAssertFalse(user.contains(forbidden))
+        }
+        XCTAssertTrue(user.contains("当前用户消息\n在野外怎么找到水源？"))
+    }
+
+    func testChineseExpertUsesOnlyChineseHistoryAndPreservesTruncatedAnswer() async throws {
+        let model = ScriptedLanguageModel(steps: [
+            .output(#"{"a":"先观察地势并寻找流动水源"#),
+        ])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.expert],
+            expertValidated: true,
+            expertContextAssembler: ExpertContextAssembler(
+                memoryProfile: ExpertRuntimeMemoryProfile(
+                    measuredPeakBytes: [.full: 1]
+                )
+            ),
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(
+                question: "在野外怎么找到水源？",
+                preferredTier: .expert,
+                conversationHistory: [
+                    ConversationTurn(role: .user, text: "Where can I find water?"),
+                    ConversationTurn(role: .assistant, text: "Search downhill."),
+                    ConversationTurn(role: .user, text: "我还需要净化水。"),
+                    ConversationTurn(role: .assistant, text: "先过滤明显沉淀。"),
+                ]
+            ),
+            device: capableExpertDevice()
+        )
+
+        XCTAssertEqual(answer?.text, "先观察地势并寻找流动水源")
+        XCTAssertTrue(answer?.sourceDisplayNames.isEmpty == true)
+        XCTAssertTrue(answer?.notices.isEmpty == true)
+        let prompts = await model.recordedPrompts()
+        XCTAssertEqual(prompts.count, 1)
+        let prompt = try XCTUnwrap(prompts.first)
+        XCTAssertEqual(prompt.purpose, .ordinary)
+        XCTAssertEqual(
+            prompt.conversationHistory.map(\.text),
+            ["我还需要净化水。", "先过滤明显沉淀。"]
+        )
+    }
+
+    func testChineseNonemptyMalformedGenerationIsDisplayedRaw() async {
+        let model = ScriptedLanguageModel(steps: [.output("模型原始输出")])
+        let assistant = IncidentAssistant(
+            articles: [],
+            installedTiers: [.lite],
+            modelProvider: { _ in model }
+        )
+
+        let answer = await assistant.answer(
+            request: ChatRequest(question: "你是谁？", preferredTier: .lite),
+            device: capableDevice()
+        )
+
+        XCTAssertEqual(answer?.text, "模型原始输出")
+        XCTAssertTrue(answer?.notices.isEmpty == true)
+    }
+
     func testChineseGroundedResponsePreservesReviewedEvidenceLink() throws {
         let article = makeManualArticle()
         let evidence = [RetrievedPassage(article: article, score: 1)]
@@ -26,13 +127,13 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertEqual(response.evidenceIDs, [article.id])
     }
 
-    func testChineseAnswerRejectsEnglishAndMateriallyMixedProse() {
+    func testCodecDoesNotBlockUsefulProseByLanguage() {
         let evidence = [RetrievedPassage(article: makeManualArticle(), score: 1)]
         for answer in [
             "Search streams and springs before moving downhill.",
             "先寻找流动水源。 Search streams and springs before moving downhill.",
         ] {
-            XCTAssertThrowsError(
+            XCTAssertNoThrow(
                 try GroundedResponseCodec().decodeConversationalAndValidate(
                     "{\"a\":\"\(answer)\",\"e\":[1]}",
                     evidence: evidence,
@@ -66,7 +167,7 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
-    func testAuroraPromptsCarryChineseLanguageAndConditionalLiveDataPolicy() {
+    func testAuroraChinesePromptUsesLocalizedLiveDataPolicy() {
         let builder = GroundedPromptBuilder()
         let prompt = ModelPrompt(
             question: "你好",
@@ -78,10 +179,14 @@ final class ConversationalRAGTests: XCTestCase {
             purpose: .ordinary
         )
         let system = builder.systemPrompt(for: prompt, outputMode: .groundedJSON)
+        let user = builder.userPrompt(from: prompt, outputMode: .groundedJSON)
 
         XCTAssertTrue(system.contains("Aurora Survival Agent Lite"))
-        XCTAssertTrue(system.contains("简体中文"))
-        XCTAssertTrue(system.contains("only when the current message asks"))
+        XCTAssertTrue(system.contains("只使用清晰、自然的简体中文"))
+        XCTAssertTrue(system.contains("只有当用户询问实时天气"))
+        XCTAssertTrue(user.contains("当前用户消息\n你好"))
+        XCTAssertFalse(system.contains("current message"))
+        XCTAssertFalse(user.contains("CURRENT USER MESSAGE"))
         XCTAssertFalse(system.contains("Trail" + "Guard"))
     }
 
@@ -145,10 +250,14 @@ final class ConversationalRAGTests: XCTestCase {
         ) { error in
             XCTAssertEqual(error as? GroundedResponseError, .unknownEvidenceIndex(2))
         }
-        for generated in [
-            "{\"a\":\"\(usefulWaterAnswer)\",\"e\":[1,1]}",
-            "{\"a\":\"\(usefulWaterAnswer)\",\"e\":[]}",
-        ] {
+        XCTAssertNoThrow(
+            try codec.decodeConversationalAndValidate(
+                "{\"a\":\"\(usefulWaterAnswer)\",\"e\":[1,1]}",
+                evidence: evidence,
+                purpose: .grounded
+            )
+        )
+        for generated in ["{\"a\":\"\(usefulWaterAnswer)\",\"e\":[]}"] {
             XCTAssertThrowsError(
                 try codec.decodeConversationalAndValidate(
                     generated,
@@ -171,10 +280,16 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
-    func testCodecRejectsIncompleteAndLeakedAnswers() {
+    func testCodecAcceptsIncompleteProseButRejectsProtocolLeakage() {
         let codec = GroundedResponseCodec()
+        XCTAssertNoThrow(
+            try codec.decodeConversationalAndValidate(
+                "{\"a\":\"This answer stops midway\",\"e\":[]}",
+                evidence: [],
+                purpose: .ordinary
+            )
+        )
         for answer in [
-            "This answer stops midway",
             "Do not invent steps. Do not put citation markers inside a.",
             "Return exactly the requested JSON object.",
             "Read FIELD MANUAL [1] before continuing.",
@@ -210,25 +325,26 @@ final class ConversationalRAGTests: XCTestCase {
         }
     }
 
-    func testGroundedCodecRejectsOverBriefAndOverlongAnswers() {
+    func testGroundedCodecAcceptsConciseProseAndRejectsOnlyOverlongAnswers() {
         let evidence = [RetrievedPassage(article: makeManualArticle(), score: 1)]
         let codec = GroundedResponseCodec()
-        for count in [21, 27, 71] {
+        for count in [21, 27] {
             let answer = Array(repeating: "action", count: count)
-                .joined(separator: " ") + "."
-            XCTAssertThrowsError(
+                .joined(separator: " ")
+            XCTAssertNoThrow(
                 try codec.decodeConversationalAndValidate(
                     "{\"a\":\"\(answer)\",\"e\":[1]}",
                     evidence: evidence,
                     purpose: .grounded
                 )
-            ) { error in
-                XCTAssertEqual(
-                    error as? GroundedResponseError,
-                    .invalidConversationalAnswer
-                )
-            }
+            )
         }
+        let overlong = Array(repeating: "action", count: 71).joined(separator: " ")
+        XCTAssertThrowsError(try codec.decodeConversationalAndValidate(
+            "{\"a\":\"\(overlong)\",\"e\":[1]}",
+            evidence: evidence,
+            purpose: .grounded
+        ))
     }
 
     func testClarificationKeepsEmptyEvidenceWithoutStyleScoring() throws {
@@ -517,6 +633,7 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertTrue(fallback.contains("No reviewed offline"))
         XCTAssertTrue(fallback.contains("concise, complete"))
         XCTAssertTrue(fallback.contains("qualified help, or emergency services"))
+        XCTAssertTrue(fallback.contains("unidentified cactus"))
         XCTAssertEqual(fallbackRepair, fallback)
         XCTAssertTrue(intake.contains("No actual"))
         XCTAssertTrue(intake.contains("incident was described"))
@@ -536,7 +653,7 @@ final class ConversationalRAGTests: XCTestCase {
         XCTAssertEqual(response.answer, valid)
 
         let reversed = "I’m feeling a bit drunk and unsteady, so I should sit down somewhere safe. I will avoid driving, stop drinking alcohol, and ask a sober person to stay nearby."
-        XCTAssertThrowsError(
+        XCTAssertNoThrow(
             try GroundedResponseCodec().decodeConversationalAndValidate(
                 "{\"a\":\"\(reversed)\",\"e\":[]}",
                 evidence: [],
@@ -566,9 +683,9 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
-    func testIncidentFallbackRejectsGenericFirstPersonRoleReversal() {
+    func testIncidentFallbackDoesNotUseSubjectiveRoleReversalGate() {
         let answer = "I swallowed household cleaner and inhaled its fumes. I moved to clear air and monitored my breathing. I should avoid more exposure and contact emergency help if symptoms worsen."
-        XCTAssertThrowsError(
+        XCTAssertNoThrow(
             try GroundedResponseCodec().decodeConversationalAndValidate(
                 "{\"a\":\"\(answer)\",\"e\":[]}",
                 evidence: [],
@@ -621,20 +738,22 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
-    func testIncidentFallbackRejectsOverBriefAndOverlongAnswers() {
+    func testIncidentFallbackAcceptsConciseAndRejectsOverlongAnswers() {
         let codec = GroundedResponseCodec()
-        for count in [23, 76] {
-            let answer = Array(repeating: "action", count: count)
-                .joined(separator: " ") + "."
-            XCTAssertThrowsError(
-                try codec.decodeConversationalAndValidate(
-                    "{\"a\":\"\(answer)\",\"e\":[]}",
-                    evidence: [],
-                    purpose: .incidentFallback,
-                    question: "Unknown incident"
-                )
-            )
-        }
+        let concise = Array(repeating: "action", count: 23).joined(separator: " ")
+        XCTAssertNoThrow(try codec.decodeConversationalAndValidate(
+            "{\"a\":\"\(concise)\",\"e\":[]}",
+            evidence: [],
+            purpose: .incidentFallback,
+            question: "Unknown incident"
+        ))
+        let overlong = Array(repeating: "action", count: 76).joined(separator: " ")
+        XCTAssertThrowsError(try codec.decodeConversationalAndValidate(
+            "{\"a\":\"\(overlong)\",\"e\":[]}",
+            evidence: [],
+            purpose: .incidentFallback,
+            question: "Unknown incident"
+        ))
     }
 
     func testConversationalAnswerRejectsInlineEvidenceMarkers() {
@@ -883,7 +1002,7 @@ final class ConversationalRAGTests: XCTestCase {
         )
     }
 
-    func testExpertWithholdsGroundedProseWhenEnvelopeIsIncomplete() async {
+    func testExpertDisplaysGroundedProseWithoutSourcesWhenEnvelopeIsIncomplete() async {
         let article = makeManualArticle()
         let draft = "Keep the container away from the visible fuel sheen. Use a different water source."
         let model = ScriptedLanguageModel(steps: [
@@ -912,10 +1031,7 @@ final class ConversationalRAGTests: XCTestCase {
             device: capableExpertDevice()
         )
 
-        XCTAssertEqual(
-            answer?.text,
-            "The source-verified answer could not be completed. Please try again."
-        )
+        XCTAssertEqual(answer?.text, draft)
         XCTAssertNil(answer?.verificationStatus)
         XCTAssertTrue(answer?.verificationIssues.isEmpty == true)
         let promptCount = await model.recordedPrompts().count

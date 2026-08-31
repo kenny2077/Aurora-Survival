@@ -76,10 +76,7 @@ public struct GroundedResponseCodec: Sendable {
         let effectivePurpose = purpose ?? (evidence.isEmpty ? .ordinary : .grounded)
         guard Self.isUsableConversationalAnswer(
             answer,
-            purpose: effectivePurpose,
-            question: question,
-            tier: tier,
-            responseLanguage: responseLanguage
+            tier: tier
         ) else {
             throw GroundedResponseError.invalidConversationalAnswer
         }
@@ -98,9 +95,11 @@ public struct GroundedResponseCodec: Sendable {
             throw GroundedResponseError.invalidFollowUp
         }
 
-        let indexes = decision.evidenceIndexes
+        var seenIndexes: Set<Int> = []
+        let indexes = decision.evidenceIndexes.filter {
+            seenIndexes.insert($0).inserted
+        }
         guard indexes.count <= 3,
-              Set(indexes).count == indexes.count,
               (effectivePurpose == .grounded ? !indexes.isEmpty : indexes.isEmpty)
         else {
             throw GroundedResponseError.invalidConversationalEvidence
@@ -213,44 +212,18 @@ public struct GroundedResponseCodec: Sendable {
 
     private static func isUsableConversationalAnswer(
         _ answer: String,
-        purpose: ModelPromptPurpose,
-        question: String?,
-        tier: ModelTier,
-        responseLanguage: ResponseLanguage
+        tier: ModelTier
     ) -> Bool {
-        let sentenceTerminators = ".!?…。！？"
+        isSafeDisplayableAnswer(answer, tier: tier)
+    }
+
+    static func isSafeDisplayableAnswer(
+        _ answer: String,
+        tier: ModelTier
+    ) -> Bool {
+        let answer = answer.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !answer.isEmpty,
-              answer.count <= (tier == .expert ? 900 : 440),
-              let last = answer.last,
-              sentenceTerminators.contains(last)
-        else {
-            return false
-        }
-
-        let sentenceCount = answer.split {
-            sentenceTerminators.contains($0)
-        }.filter {
-            !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        }.count
-        guard responseLanguage.accepts(answer) else { return false }
-        switch purpose {
-        case .ordinary, .nativeVisionAnswer:
-            break
-        case .grounded:
-            guard (1...5).contains(sentenceCount) else { return false }
-        case .clarification:
-            guard sentenceCount <= 4 else { return false }
-        case .incidentFallback:
-            guard (1...6).contains(sentenceCount),
-                  !Self.impersonatesUser(answer, question: question) else {
-                return false
-            }
-        case .incidentIntake:
-            guard (1...3).contains(sentenceCount) else { return false }
-        case .expertIntent:
-            return false
-        }
-
+              answer.count <= (tier == .expert ? 900 : 700) else { return false }
         let structuralMarkers = ["FIELD MANUAL", "USER MESSAGE"]
         if structuralMarkers.contains(where: answer.contains) {
             return false
@@ -295,42 +268,6 @@ public struct GroundedResponseCodec: Sendable {
             of: #"[;,:]\s+[?!.](?:\s|$)"#,
             options: .regularExpression
         ) != nil
-    }
-
-    private static func impersonatesUser(
-        _ answer: String,
-        question: String?
-    ) -> Bool {
-        guard let question else { return false }
-        let user = question.lowercased()
-            .replacingOccurrences(of: "’", with: "'")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        guard user.hasPrefix("i ") || user.hasPrefix("i'm ")
-                || user.hasPrefix("i am ") || user.hasPrefix("my ") else {
-            return false
-        }
-        let response = answer.lowercased()
-            .replacingOccurrences(of: "’", with: "'")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        let allowedFirstPerson = [
-            "i'm sorry", "i am sorry", "i understand", "i recommend", "i can ",
-        ]
-        if allowedFirstPerson.contains(where: response.hasPrefix) {
-            return false
-        }
-        let selfClaimPrefixes = [
-            "i ", "i'm ", "i am ", "my ", "i feel ", "i have ", "i need ",
-            "i dropped ", "i lost ", "i was ",
-        ]
-        guard selfClaimPrefixes.contains(where: response.hasPrefix) else {
-            return false
-        }
-        let generic: Set<String> = ["am", "are", "have", "the", "this", "with"]
-        let userTerms = RetrievalEngine.tokens(in: user).subtracting(generic)
-        let firstSentence = response.split(whereSeparator: { ".!?…。！？".contains($0) })
-            .first.map(String.init) ?? response
-        let responseTerms = RetrievalEngine.tokens(in: firstSentence).subtracting(generic)
-        return !userTerms.isDisjoint(with: responseTerms)
     }
 
     static func hasExplicitSafetyLimit(_ answer: String) -> Bool {

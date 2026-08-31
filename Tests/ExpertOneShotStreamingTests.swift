@@ -222,9 +222,7 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         XCTAssertEqual(answer?.expertIntent, .survivalQuestion)
         XCTAssertEqual(answer?.expertRetrievalStatus, .noRelevantEvidence)
         XCTAssertTrue(answer?.sourceCards.isEmpty == true)
-        XCTAssertTrue(answer?.notices.contains {
-            $0.contains("No matching offline source")
-        } == true)
+        XCTAssertTrue(answer?.notices.isEmpty == true)
         let callCount = await model.callCount
         let purposes = await model.purposes()
         XCTAssertEqual(callCount, 2)
@@ -304,6 +302,8 @@ final class ExpertOneShotStreamingTests: XCTestCase {
             usesReviewedClaims: true
         )
         XCTAssertTrue(grounded.contains(#"{"a":"best-effort answer","e":[1]}"#))
+        XCTAssertTrue(grounded.contains("70–120"))
+        XCTAssertFalse(grounded.contains("tier == .lite"))
         XCTAssertFalse(grounded.contains(#"{"s""#))
 
         let ordinary = builder.systemPrompt(
@@ -311,8 +311,10 @@ final class ExpertOneShotStreamingTests: XCTestCase {
             purpose: .ordinary,
             outputMode: .groundedJSON
         )
-        XCTAssertTrue(ordinary.contains("no more than"))
-        XCTAssertTrue(ordinary.contains("75 words"))
+        XCTAssertTrue(ordinary.contains("70–120"))
+        XCTAssertTrue(ordinary.contains("animal-behavior"))
+        XCTAssertTrue(ordinary.contains("present local conditions"))
+        XCTAssertFalse(ordinary.contains("no more than"))
     }
 
     func testLiteSharedPackFailureDisablesAllGrounding() async {
@@ -342,9 +344,7 @@ final class ExpertOneShotStreamingTests: XCTestCase {
         XCTAssertEqual(answer?.expertIntent, .survivalQuestion)
         XCTAssertEqual(answer?.expertRetrievalStatus, .noRelevantEvidence)
         XCTAssertTrue(answer?.sourceCards.isEmpty == true)
-        XCTAssertTrue(answer?.notices.contains {
-            $0.contains("Shared semantic retrieval is unavailable")
-        } == true)
+        XCTAssertTrue(answer?.notices.isEmpty == true)
     }
 
     private func makeAssistant(

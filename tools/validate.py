@@ -381,8 +381,8 @@ def validate_model_catalog() -> int:
         fail("Lite must remain available when Expert degrades in Low Power Mode")
     if lite.get("maximum_context_tokens") != 2_048:
         fail("lite context must remain conservatively bounded")
-    if lite.get("maximum_output_tokens") != 160:
-        fail("lite output must remain conservatively bounded")
+    if lite.get("maximum_output_tokens") != 256:
+        fail("lite output must match the 256-token contract")
     expected_lite_candidate = {
         "candidate_model": "ggml-org/gemma-3-1b-it-GGUF",
         "candidate_revision": "f9c28bcd85737ffc5aef028638d3341d49869c27",
@@ -550,6 +550,13 @@ def validate_llama_runtime_pin() -> str:
         fail("llama.cpp text bridge must constrain grounded JSON with a grammar")
     if not LLAMA_GRAMMAR_HEADER.is_file():
         fail("llama.cpp grounded-response grammar is missing")
+    grammar = LLAMA_GRAMMAR_HEADER.read_text(encoding="utf-8")
+    if grammar.count("answer-char{20,700}") < 5:
+        fail("Lite and Expert answer grammars must allow expanded prose")
+    if "maximum_output_tokens > 160" in bridge:
+        fail("runtime tier selection must not depend on the old Lite ceiling")
+    if "llama_n_ctx(session.context) > 2048" not in bridge:
+        fail("runtime tier selection must use the loaded session profile")
     if "llama_model_chat_template" not in bridge:
         fail("llama.cpp text bridge must use the model chat template")
     if "session.context = llama_init_from_model(" not in bridge:

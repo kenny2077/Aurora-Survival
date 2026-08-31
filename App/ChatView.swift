@@ -305,6 +305,7 @@ struct ChatView: View {
                     }
                 }
                 .padding(.horizontal, AuroraDesign.Space.xs)
+                .frame(maxWidth: .infinity, alignment: .leading)
             } else if model.canAttachPhoto,
                       case .loading = model.attachmentOperationState {
                 ProgressView()
@@ -410,7 +411,12 @@ struct ChatView: View {
                     .overlay {
                         Image(systemName: "arrow.up")
                             .font(.callout.weight(.bold))
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(
+                                AuroraDesign.ordinaryAccent(
+                                    light: .primary,
+                                    colorScheme: colorScheme
+                                )
+                            )
                             .accessibilityHidden(true)
                     }
             }

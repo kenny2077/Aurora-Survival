@@ -2,7 +2,7 @@ import Foundation
 
 public struct LlamaRuntimeConfiguration: Equatable, Sendable {
     public static let liteContextTokens = 2_048
-    public static let liteMaximumOutputTokens = 160
+    public static let liteMaximumOutputTokens = 256
     public static let expertMaximumOutputTokens = 256
 
     public let modelURL: URL

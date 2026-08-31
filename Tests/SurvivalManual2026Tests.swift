@@ -24,6 +24,110 @@ final class SurvivalManual2026Tests: XCTestCase {
         }
     }
 
+    func testRetrievalFacetsSplitNormalizeDeduplicateAndBoundCompounds() throws {
+        let compound = try XCTUnwrap(
+            ExpertScenarioRetrievalEngine.requestFacets(
+                in: "Can I find water in the desert? Can I eat cactus?"
+            )
+        )
+        XCTAssertEqual(compound.count, 2)
+        XCTAssertEqual(compound[0].operationConcepts, Set(["locate"]))
+        XCTAssertEqual(compound[1].operationConcepts, Set(["eat"]))
+
+        let deduplicated = try XCTUnwrap(
+            ExpertScenarioRetrievalEngine.requestFacets(
+                in: "How to build a shelter? How to construct a shelter?"
+            )
+        )
+        XCTAssertEqual(deduplicated.count, 1)
+        XCTAssertEqual(deduplicated[0].operationConcepts, Set(["build"]))
+        XCTAssertNil(ExpertScenarioRetrievalEngine.requestFacets(in: "How can I help?"))
+        XCTAssertNil(ExpertScenarioRetrievalEngine.requestFacets(
+            in: "Find water. Build shelter. Start fire. Hunt rabbits."
+        ))
+    }
+
+    func testDenseAuthorizationRequiresStrongSubjectAndOperationAlignment() throws {
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        let engine = ExpertScenarioRetrievalEngine(retrieval: store)
+        let dense = [
+            ExpertVectorSearchResult(
+                record: ExpertVectorRecord(
+                    id: "irrelevant-water",
+                    scenarioIDs: ["water-locate-scenario"],
+                    kind: .scenario,
+                    authority: .promoted
+                ),
+                score: 0.91,
+                shardID: "test"
+            ),
+            ExpertVectorSearchResult(
+                record: ExpertVectorRecord(
+                    id: "moderate-shelter",
+                    scenarioIDs: ["shelter-tarp-scenario"],
+                    kind: .scenario,
+                    authority: .promoted
+                ),
+                score: 0.60,
+                shardID: "test"
+            ),
+        ]
+        let results = engine.search(
+            request: ChatRequest(
+                question: "How to build a shelter",
+                preferredTier: .expert
+            ),
+            denseResults: dense,
+            limit: 16
+        )
+        XCTAssertFalse(try XCTUnwrap(results.first {
+            $0.scenario.id == "water-locate-scenario"
+        }).isEligible)
+        XCTAssertFalse(try XCTUnwrap(results.first {
+            $0.scenario.id == "shelter-tarp-scenario"
+        }).isEligible)
+    }
+
+    func testFullFacetCoverageHonorsLiteAndExpertScenarioBudgets() throws {
+        let store = try SurvivalKnowledgeStore(databaseURL: knowledgeURL())
+        let facets = try XCTUnwrap(ExpertScenarioRetrievalEngine.requestFacets(
+            in: "Find water. Build a shelter. Start a fire."
+        ))
+        let scenarioIDs = [
+            "water-locate-scenario", "shelter-site-scenario", "fire-site-scenario",
+        ]
+        let candidates = try scenarioIDs.map { id in
+            [RetrievedEvidenceScenario(
+                scenario: try XCTUnwrap(store.expertScenario(id: id)),
+                score: 1,
+                isEligible: true
+            )]
+        }
+        let lite = IncidentAssistant.coverageDecision(
+            facets: facets,
+            candidatesByFacet: candidates,
+            tier: .lite
+        )
+        XCTAssertFalse(lite.coversCompleteRequest)
+        XCTAssertTrue(lite.selectedEvidence.isEmpty)
+
+        let expert = IncidentAssistant.coverageDecision(
+            facets: facets,
+            candidatesByFacet: candidates,
+            tier: .expert
+        )
+        XCTAssertTrue(expert.coversCompleteRequest)
+        XCTAssertEqual(expert.selectedEvidence.count, 3)
+
+        let partial = IncidentAssistant.coverageDecision(
+            facets: Array(facets.prefix(2)),
+            candidatesByFacet: [candidates[0], []],
+            tier: .expert
+        )
+        XCTAssertFalse(partial.coversCompleteRequest)
+        XCTAssertTrue(partial.selectedEvidence.isEmpty)
+    }
+
     func testCanonicalSourceMatchesManifestAndIsPreserved() throws {
         let root = repositoryRoot()
         let folder = root.appendingPathComponent(

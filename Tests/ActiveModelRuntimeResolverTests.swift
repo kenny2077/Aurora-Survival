@@ -133,7 +133,7 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
         let descriptor = try XCTUnwrap(resolution.descriptors[.lite])
         XCTAssertEqual(descriptor.modelURL, fixture.modelURL)
         XCTAssertEqual(descriptor.contextTokens, 2_048)
-        XCTAssertEqual(descriptor.maximumOutputTokens, 160)
+        XCTAssertEqual(descriptor.maximumOutputTokens, 256)
     }
 
     func testMetadataCannotSelectUnverifiedArtifact() throws {
@@ -264,7 +264,7 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
                 "runtime_release": "b9637",
                 "chat_template": "embedded",
                 "context_tokens": contextTokens,
-                "maximum_output_tokens": "160",
+                "maximum_output_tokens": "256",
                 "required_rag_package_id": "knowledge.shared-survival-rag-v3",
                 "required_rag_contract": "3",
             ]

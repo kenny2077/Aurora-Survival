@@ -319,14 +319,6 @@ public struct ResponseLanguage: Codable, Equatable, Sendable {
         return actual == expected
     }
 
-    public var retryMessage: String {
-        switch baseIdentifier {
-        case "zh": return "未能完成可验证来源的回答，请重试。"
-        case "es": return "No se pudo completar una respuesta con fuentes verificadas. Inténtalo de nuevo."
-        default: return "The source-verified answer could not be completed. Please try again."
-        }
-    }
-
     private var baseIdentifier: String? {
         identifier?.split(separator: "-").first.map(String.init)
     }

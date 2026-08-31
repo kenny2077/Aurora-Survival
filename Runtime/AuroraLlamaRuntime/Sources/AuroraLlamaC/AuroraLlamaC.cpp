@@ -463,7 +463,9 @@ char * tg_llama_session_complete(
     llama_sampler * sampler = llama_sampler_chain_init(
         llama_sampler_chain_default_params()
     );
-    const bool expert_request = maximum_output_tokens > 160;
+    // Tier identity comes from the loaded session, not the generation cap.
+    // Lite and Expert intentionally share a 256-token output ceiling.
+    const bool expert_request = llama_n_ctx(session.context) > 2048;
     const bool expert_grounded = expert_request
         && evidence_count > 0;
     const bool expert_intent = grammar_mode == 2;

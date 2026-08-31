@@ -1101,7 +1101,7 @@ final class AppModel: ObservableObject {
             await runDebugExpertPhysicalInference(mode: mode)
             return
         }
-        guard ["lite-core-3", "smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
+        guard ["lite-256-core-2", "lite-core-3", "smoke", "finalists", "failures", "matrix", "stress-1", "stress-2", "stress-3", "stress-4"].contains(mode) else { return }
 
         UIApplication.shared.isIdleTimerDisabled = true
         defer { UIApplication.shared.isIdleTimerDisabled = false }
@@ -1112,6 +1112,9 @@ final class AppModel: ObservableObject {
             } catch {
                 return
             }
+            modelSelection = .lite
+            await loadModel(.lite)
+        } else if mode == "lite-256-core-2" {
             modelSelection = .lite
             await loadModel(.lite)
         }
@@ -1133,6 +1136,20 @@ final class AppModel: ObservableObject {
         try? FileManager.default.removeItem(at: reportURL)
         let cases: [DebugPhysicalInferenceCase]
         switch mode {
+        case "lite-256-core-2":
+            cases = [
+                .init(
+                    "lite-256-rabbit",
+                    "What is typical rabbit behavior in a forest?",
+                    purpose: "general"
+                ),
+                .init(
+                    "lite-256-shelter",
+                    "How to build a shelter",
+                    purpose: "grounded",
+                    lesson: "shelter-tarp-scenario"
+                ),
+            ]
         case "lite-core-3":
             cases = [
                 .init("lite-greeting", "Hi", purpose: "general"),
@@ -1217,12 +1234,30 @@ final class AppModel: ObservableObject {
                 cooldownMilliseconds += 15_000
                 writeReport(completed: false)
             }
-            let preInferenceThermal = deviceProfiler.snapshot().thermalCondition
+            let preInferenceSnapshot = deviceProfiler.snapshot()
+            let preInferenceThermal = preInferenceSnapshot.thermalCondition
+            let measuresMemory = mode == "lite-256-core-2"
+            let prePhysicalFootprint = measuresMemory
+                ? ExpertProcessMemoryProbe.physicalFootprintBytes() : 0
+            let memorySampler = measuresMemory
+                ? ExpertProcessMemorySampler() : nil
+            let memorySamplingTask = memorySampler.map { sampler in
+                Task.detached { await sampler.sampleUntilStopped() }
+            }
             lastModelMetrics = nil
             lastModelThermalCondition = nil
             debugModelCompletions.removeAll()
             let started = Date()
             await send(item.question)
+            await memorySampler?.stop()
+            await memorySamplingTask?.value
+            let memory = await memorySampler?.result()
+            if measuresMemory {
+                try? await Task.sleep(for: .seconds(2))
+            }
+            let postInferenceSnapshot = deviceProfiler.snapshot()
+            let postPhysicalFootprint = ExpertProcessMemoryProbe
+                .physicalFootprintBytes()
             let elapsedMilliseconds = Int(
                 Date().timeIntervalSince(started) * 1_000
             )
@@ -1243,6 +1278,8 @@ final class AppModel: ObservableObject {
             let validLength: Bool
             if mode == "lite-core-3" {
                 validLength = !text.isEmpty
+            } else if mode == "lite-256-core-2" {
+                validLength = (50...130).contains(words)
             } else {
                 validLength = switch item.purpose {
                 case "grounded": (22...70).contains(words)
@@ -1294,8 +1331,9 @@ final class AppModel: ObservableObject {
             let structuralPass = validLength && !leaked && !roleReversal
                 && !terminal && languagePass && greetingPass
             let useful = structuralPass && routePass && termGroupsPass
-            let screenshotName = "lite-core-3-\(item.id).png"
-            let screenshotCaptured = mode == "lite-core-3"
+            let screenshotName = "\(mode)-\(item.id).png"
+            let screenshotCaptured = ["lite-core-3", "lite-256-core-2"]
+                .contains(mode)
                 ? captureDebugWindowScreenshot(named: screenshotName)
                 : false
             var result: [String: Any] = [
@@ -1312,6 +1350,12 @@ final class AppModel: ObservableObject {
                 "elapsed_milliseconds": elapsedMilliseconds,
                 "cooldown_milliseconds": cooldownMilliseconds,
                 "pre_inference_thermal": preInferenceThermal.rawValue,
+                "pre_physical_footprint_bytes": prePhysicalFootprint,
+                "peak_physical_footprint_bytes": memory?.peakPhysicalFootprintBytes ?? 0,
+                "post_physical_footprint_bytes": postPhysicalFootprint,
+                "pre_available_memory_bytes": preInferenceSnapshot.availableMemoryBytes ?? 0,
+                "minimum_available_memory_bytes": memory?.minimumAvailableMemoryBytes ?? 0,
+                "post_available_memory_bytes": postInferenceSnapshot.availableMemoryBytes ?? 0,
                 "thermal": thermal,
                 "raw_completions": debugModelCompletions,
                 "route_pass": routePass,

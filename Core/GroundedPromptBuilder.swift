@@ -25,6 +25,9 @@ public struct GroundedPromptBuilder: Sendable {
         usesReviewedClaims: Bool = false,
         responseLanguage: ResponseLanguage = .english
     ) -> String {
+        if purpose == .ordinary, responseLanguage == .chinese {
+            return chineseBestEffortSystemPrompt(for: tier)
+        }
         guard outputMode == .groundedJSON else {
             return "You are Aurora Survival Agent. \(responseLanguage.instruction) Answer the current message directly in short, natural prose. Active tier: \(tier.displayName)."
         }
@@ -36,6 +39,7 @@ public struct GroundedPromptBuilder: Sendable {
             using only the numbered REVIEWED SCENARIOS as factual and procedural support.
             Lead with the most useful actions. Include safety limits only when they are
             relevant to the request and supported by the reviewed text. Use natural prose;
+            \(tier == .lite ? "For a substantive answer, aim for 70–120 useful words without padding or repetition." : "")
             do not discuss the database, scenario labels, or internal instructions. The e
             array must contain only the unique scenario numbers actually used. Do not
             invent measurements or exact numbers. Return exactly one JSON object shaped
@@ -115,13 +119,14 @@ public struct GroundedPromptBuilder: Sendable {
             if tier == .lite {
                 return """
                 You are Aurora Survival Agent Lite, a fully offline assistant.
-                \(responseLanguage.instruction) Answer only the
-                current message in 1–3 complete, natural sentences totaling no more than
-                75 words. Use best-effort general knowledge. For a greeting, greet the
-                user directly and offer help without introducing weather or limitations.
-                Mention that live data is unavailable only when the current message asks
-                for current weather, news, prices, schedules, location, or similar live
-                information; otherwise do not mention it. Do not guess live facts or invent an
+                \(responseLanguage.instruction) Answer only the current message using
+                best-effort general knowledge. For a substantive question, aim for 70–120
+                useful words without padding or repetition; keep greetings and simple chat
+                brief. Answer general habitat, animal-behavior, and other stable knowledge
+                directly. Mention that live data is unavailable only when the current
+                message asks for current weather, news, prices, schedules, the user's
+                present local conditions, or similarly current information. Otherwise do
+                not mention limitations. Do not guess live facts or invent an
                 emergency or citation. Return exactly {"a":"answer","e":[]} with no
                 Markdown or extra keys.
                 """
@@ -155,7 +160,11 @@ public struct GroundedPromptBuilder: Sendable {
             model-specific repair, material, chemical, measurement, diagnosis, or
             identity. Prefer broad immediate risk reduction and direct the user to the
             applicable manufacturer instructions, qualified help, or emergency services
-            when the unknown detail could make action dangerous. Use concise, complete
+            when the unknown detail could make action dangerous. For wild-food questions,
+            do not imply that unidentified cactus or other wild plants are generally
+            edible or safe hydration sources; species and preparation matter.
+            \(tier == .lite ? "For a substantive answer, aim for 70–120 useful words without padding or repetition. General animal habitat and behavior do not require live data." : "")
+            Use concise, complete
             prose and return exactly {"a":"answer","e":[]} with no Markdown or
             extra keys. The value of a must contain prose only; never print e=[] inside
             the answer string.
@@ -198,6 +207,7 @@ public struct GroundedPromptBuilder: Sendable {
             You are Aurora Survival Agent, an offline survival assistant.
             \(responseLanguage.instruction) Use only the numbered
             REVIEWED EXCERPTS below. Answer the exact question with useful actions first.
+            \(tier == .lite ? "Aim for 70–120 useful words when the reviewed excerpts support that depth; do not pad or repeat." : "")
             Add safety guidance only when it is relevant and supported. Use plain prose; do not
             reverse or weaken any warning or prohibition in the reviewed excerpt. Do not
             output excerpt titles, headings, labels, or lists. Return exactly
@@ -277,6 +287,9 @@ public struct GroundedPromptBuilder: Sendable {
         from prompt: ModelPrompt,
         outputMode: ModelOutputMode = .citationText
     ) -> String {
+        if prompt.purpose == .ordinary, prompt.responseLanguage == .chinese {
+            return chineseBestEffortUserPrompt(from: prompt)
+        }
         var sections: [String] = []
 
         if prompt.tier == .expert, !prompt.conversationHistory.isEmpty {
@@ -451,5 +464,34 @@ public struct GroundedPromptBuilder: Sendable {
             with: "",
             options: .regularExpression
         )
+    }
+
+    private func chineseBestEffortSystemPrompt(for tier: ModelTier) -> String {
+        let name = tier == .lite
+            ? "Aurora Survival Agent Lite"
+            : "Aurora Survival Agent Expert"
+        return """
+        你是 \(name)，一款完全离线的助手。请只使用清晰、自然的简体中文直接回答用户当前的问题，并优先提供有用的信息。只有当用户询问实时天气、新闻、价格、日程、位置或类似的当前信息时，才说明你无法获取实时数据；其他情况下不要主动提及限制。不要虚构实时信息、紧急情况、离线资料或引用。只返回 {"a":"回答","e":[]}，不要使用标记格式，也不要添加其他字段。
+        """
+    }
+
+    private func chineseBestEffortUserPrompt(from prompt: ModelPrompt) -> String {
+        var sections: [String] = []
+        if prompt.tier == .expert, !prompt.conversationHistory.isEmpty {
+            let history = prompt.conversationHistory.map { turn in
+                let role = turn.role == .user ? "用户" : "助手"
+                let text = String(
+                    turn.text
+                        .replacingOccurrences(of: "\n", with: " ")
+                        .prefix(320)
+                )
+                return "\(role)：\(text)"
+            }.joined(separator: "\n")
+            sections.append("最近对话\n\(history)")
+        }
+        sections.append("回答要求：直接回答当前问题，并返回 e=[]。")
+        sections.append("当前用户消息\n\(prompt.question)")
+        sections.append("回答：")
+        return sections.joined(separator: "\n\n")
     }
 }

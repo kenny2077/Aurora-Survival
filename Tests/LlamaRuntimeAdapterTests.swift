@@ -29,7 +29,7 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
         )
 
         XCTAssertEqual(configuration.contextTokens, 2_048)
-        XCTAssertEqual(configuration.maximumOutputTokens, 160)
+        XCTAssertEqual(configuration.maximumOutputTokens, 256)
         XCTAssertNil(configuration.visionProjectorURL)
     }
 

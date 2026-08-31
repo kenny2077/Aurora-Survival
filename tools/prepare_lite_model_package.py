@@ -34,11 +34,13 @@ def build(args: argparse.Namespace) -> None:
             shutil.copyfile(source_file, destination)
         metadata = dict(source_manifest["metadata"])
         metadata.update({
+            "maximum_output_tokens": "256",
             "required_rag_package_id": "knowledge.shared-survival-rag-v3",
             "required_rag_contract": "3",
         })
         manifest = dict(source_manifest)
         manifest.update({
+            "displayName": "Aurora Lite — Gemma 3 1B Q4_K_M",
             "version": args.version,
             "createdAt": args.created_at,
             "minimumAppVersion": args.minimum_app_version,
@@ -65,7 +67,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=pathlib.Path, required=True)
     parser.add_argument("--private-key", type=pathlib.Path, required=True)
     parser.add_argument("--key-id", default="development-2026-07")
-    parser.add_argument("--version", default="1.2.0")
+    parser.add_argument("--version", default="1.3.0")
     parser.add_argument("--created-at", required=True)
     parser.add_argument("--minimum-app-version", default="1.0.0")
     return parser.parse_args()

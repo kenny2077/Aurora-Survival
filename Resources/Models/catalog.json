@@ -23,7 +23,7 @@
       "chat_template": "Embedded Gemma 3 tokenizer.chat_template",
       "evaluation_status": "physical_iPhone13_short_and_five_turn_pass",
       "maximum_context_tokens": 2048,
-      "maximum_output_tokens": 160,
+      "maximum_output_tokens": 256,
       "purpose": "Compact fully offline conversation and Manual-grounded answers for iPhone 13-class devices.",
       "gates": {
         "minimum_physical_memory_bytes": 3500000000,

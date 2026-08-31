@@ -459,6 +459,21 @@ public struct ExpertRetrievalEngine: Sendable {
     }
 }
 
+struct RetrievalFacet: Equatable, Sendable {
+    let text: String
+    let normalizedQuery: String
+    let subjectConcepts: Set<String>
+    let operationConcepts: Set<String>
+    let hazardConcepts: Set<String>
+}
+
+struct EvidenceCoverageDecision: Sendable {
+    let facets: [RetrievalFacet]
+    let selectedEvidence: [RetrievedEvidenceScenario]
+    let coversCompleteRequest: Bool
+    let reason: String
+}
+
 public struct ExpertScenarioRetrievalEngine: Sendable {
     public static let strongDenseSimilarityThreshold = 0.68
     public static let moderateDenseSimilarityThreshold = 0.58
@@ -652,18 +667,25 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
                 .intersection(
                     scenarioProfile.queryConcepts.union(relatedOperations)
                 ).count
+            let subjectAligned = retrievalProfile.subjectConcepts.isEmpty
+                || subjectAlignment > 0
+            let operationAligned = retrievalProfile.requestedOperations.isEmpty
+                || operationAlignment > 0
+            let hazardAligned = retrievalProfile.hazardConcepts.isEmpty
+                || !retrievalProfile.hazardConcepts.isDisjoint(
+                    with: scenarioProfile.hazardConcepts
+                )
             let eligibility: (Bool, String)
             if requestsLiveInformation {
                 eligibility = (false, "live_information_not_offline_evidence")
             } else if relevance.exact {
                 eligibility = (true, "exact_multiword_match")
             } else if let denseSimilarity,
-                      denseSimilarity >= Self.strongDenseSimilarityThreshold {
+                      denseSimilarity >= Self.strongDenseSimilarityThreshold,
+                      subjectAligned,
+                      operationAligned,
+                      hazardAligned {
                 eligibility = (true, "strong_dense_alignment")
-            } else if let denseSimilarity,
-                      denseSimilarity >= Self.moderateDenseSimilarityThreshold,
-                      overlapCount >= 2 {
-                eligibility = (true, "dense_plus_lexical_alignment")
             } else {
                 eligibility = (false, "insufficient_absolute_relevance")
             }
@@ -819,12 +841,20 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
         let operationAliases: [String: String] = [
             "find": "locate", "finding": "locate", "search": "locate", "seek": "locate",
             "where": "locate", "locate": "locate",
+            "start": "ignite", "starting": "ignite", "ignite": "ignite",
+            "light": "ignite", "lighting": "ignite",
+            "hunt": "hunt", "hunting": "hunt", "trap": "hunt",
+            "trapping": "hunt", "catch": "hunt", "capture": "hunt",
+            "eat": "eat", "eating": "eat", "edible": "eat",
+            "consume": "eat", "consuming": "eat",
             "cook": "cook", "cooking": "cook", "roast": "cook",
             "roasting": "cook", "prepare": "cook", "preparing": "cook",
             "collect": "collect", "collection": "collect", "gather": "collect",
             "treat": "treat", "treatment": "treat", "purify": "treat",
             "filter": "filter", "boil": "boil", "boiling": "boil",
-            "build": "build", "extinguish": "extinguish",
+            "build": "build", "building": "build", "construct": "build",
+            "constructing": "build", "erect": "build",
+            "extinguish": "extinguish",
             "navigate": "navigate", "repair": "repair",
         ]
         let hazards: Set<String> = [
@@ -848,6 +878,69 @@ public struct ExpertScenarioRetrievalEngine: Sendable {
             requestedOperations: operations,
             hazardConcepts: hazardConcepts
         )
+    }
+
+    static func requestFacets(in question: String) -> [RetrievalFacet]? {
+        let trimmed = question.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+        let boundaryPattern = #"(?i)(?:[.!?;]+|\b(?:and then|also|additionally|plus)\b)"#
+        guard let expression = try? NSRegularExpression(pattern: boundaryPattern) else {
+            return nil
+        }
+        let range = NSRange(trimmed.startIndex..., in: trimmed)
+        var pieces: [String] = []
+        var cursor = trimmed.startIndex
+        for match in expression.matches(in: trimmed, range: range) {
+            guard let matchRange = Range(match.range, in: trimmed) else { continue }
+            let piece = trimmed[cursor..<matchRange.lowerBound]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            if !piece.isEmpty { pieces.append(piece) }
+            cursor = matchRange.upperBound
+        }
+        let tail = trimmed[cursor...].trimmingCharacters(in: .whitespacesAndNewlines)
+        if !tail.isEmpty { pieces.append(tail) }
+
+        var expanded: [String] = []
+        for piece in pieces {
+            let connector = " and "
+            guard let split = piece.range(
+                of: connector,
+                options: [.caseInsensitive]
+            ) else {
+                expanded.append(piece)
+                continue
+            }
+            let left = piece[..<split.lowerBound]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let right = piece[split.upperBound...]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let leftProfile = retrievalProfile(in: left)
+            let rightProfile = retrievalProfile(in: right)
+            if !leftProfile.requestedOperations.isEmpty,
+               !rightProfile.requestedOperations.isEmpty {
+                expanded.append(contentsOf: [left, right])
+            } else {
+                expanded.append(piece)
+            }
+        }
+        guard !expanded.isEmpty, expanded.count <= 3 else { return nil }
+
+        var seen: Set<String> = []
+        var facets: [RetrievalFacet] = []
+        for text in expanded {
+            let profile = retrievalProfile(in: text)
+            guard !profile.queryConcepts.isEmpty else { return nil }
+            let normalized = profile.queryConcepts.sorted().joined(separator: " ")
+            guard seen.insert(normalized).inserted else { continue }
+            facets.append(RetrievalFacet(
+                text: text,
+                normalizedQuery: normalized,
+                subjectConcepts: profile.subjectConcepts,
+                operationConcepts: profile.requestedOperations,
+                hazardConcepts: profile.hazardConcepts
+            ))
+        }
+        return facets.isEmpty ? nil : facets
     }
 
     private static func meaningfulOverlapCount(

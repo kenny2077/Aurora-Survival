@@ -30,8 +30,8 @@ PUBLIC_USER_AGENT = "AuroraReleasePublisher/1.0"
 PACKAGE_SPECS = (
     (
         "lite",
-        ROOT / ".trailguard/development/model-lite-gemma3-1b-q4km-dev@1.2.0",
-        "1.2.0-beta.1",
+        ROOT / ".trailguard/development/model-lite-gemma3-1b-q4km-dev@1.3.0",
+        "1.3.0-beta.1",
     ),
     (
         "expert",

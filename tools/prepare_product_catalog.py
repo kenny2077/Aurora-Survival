@@ -535,7 +535,7 @@ def main() -> None:
     lite_source = args.root / "model-lite-gemma3-1b-q4km-dev@1.1.0"
     if not (lite_source / "envelope.json").is_file():
         raise FileNotFoundError(f"Verified Lite package is missing: {lite_source}")
-    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.2.0"
+    model = args.root / "model-lite-gemma3-1b-q4km-dev@1.3.0"
     if not (model / "envelope.json").is_file():
         subprocess.run(
             [
