@@ -8,6 +8,9 @@ struct ToolsView: View {
         case satellite
         case compass
         case checklist
+#if AURORA_MESH_BETA
+        case mesh
+#endif
     }
 
     @EnvironmentObject private var model: AppModel
@@ -337,9 +340,13 @@ struct ToolsView: View {
                 }
                 GridRow {
                     checklistTool.gridCellColumns(2)
+#if AURORA_MESH_BETA
+                    meshTool.gridCellColumns(2)
+#else
                     Color.clear
                         .accessibilityHidden(true)
                         .gridCellColumns(2)
+#endif
                 }
             }
         }
@@ -351,6 +358,9 @@ struct ToolsView: View {
         satelliteTool
         compassTool
         checklistTool
+#if AURORA_MESH_BETA
+        meshTool
+#endif
     }
 
     private var emergencyTool: some View {
@@ -410,6 +420,19 @@ struct ToolsView: View {
         )
     }
 
+#if AURORA_MESH_BETA
+    private var meshTool: some View {
+        toolLink(
+            "Mesh Chat",
+            "Encrypted nearby groups · Beta",
+            "point.3.connected.trianglepath.dotted",
+            AuroraDesign.ordinaryAccent(light: .cyan, colorScheme: colorScheme),
+            route: .mesh,
+            identifier: "tools.meshChat"
+        )
+    }
+#endif
+
     private func toolLink(
         _ title: String,
         _ detail: String,
@@ -448,6 +471,10 @@ struct ToolsView: View {
             CompassToolView(location: locationModel)
         case .checklist:
             TripChecklistView(store: checklistStore)
+#if AURORA_MESH_BETA
+        case .mesh:
+            MeshChatView()
+#endif
         }
     }
 }

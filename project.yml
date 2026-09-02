@@ -12,6 +12,7 @@ settings:
     MARKETING_VERSION: "1.1.0"
     CURRENT_PROJECT_VERSION: "1"
     AURORA_PACKAGE_CATALOG_URL: ""
+    AURORA_CAMERA_USAGE_DESCRIPTION: "Take a photo for fully offline visual assistance."
 packages:
   MapLibre:
     url: https://github.com/maplibre/maplibre-gl-native-distribution
@@ -47,7 +48,8 @@ targets:
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}
         NSPhotoLibraryUsageDescription: "Choose an existing photo or save a photo you take before attaching it for fully offline visual assistance."
-        NSCameraUsageDescription: "Take a photo, save it to your Photo Library, and attach it for fully offline visual assistance."
+        NSCameraUsageDescription: "$(AURORA_CAMERA_USAGE_DESCRIPTION)"
+        NSBluetoothAlwaysUsageDescription: "Find nearby Aurora Mesh Chat group members while the Debug beta is visibly open."
         NSLocalNetworkUsageDescription: "Connect to your trusted Aurora package host to download signed offline models, guides, and maps during preparation."
         AuroraPackageCatalogURL: "$(AURORA_PACKAGE_CATALOG_URL)"
         NSLocationWhenInUseUsageDescription: "Show your position and record an explicitly started breadcrumb trail, including while the screen is locked."
@@ -71,6 +73,9 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
       configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG AURORA_MESH_BETA"
+          AURORA_CAMERA_USAGE_DESCRIPTION: "Take a photo for offline visual assistance or scan an in-person Aurora Mesh Chat invite."
         Release:
           EXCLUDED_SOURCE_FILE_NAMES: development_trusted_package_keys.json
     dependencies:
@@ -92,6 +97,9 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.example.AuroraSurvivalAgentTests
         DEVELOPMENT_TEAM: AL8BCFV85N
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG AURORA_MESH_BETA"
   AuroraUITests:
     type: bundle.ui-testing
     platform: iOS
@@ -104,6 +112,9 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.example.AuroraSurvivalAgentUITests
         DEVELOPMENT_TEAM: AL8BCFV85N
+      configs:
+        Debug:
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG AURORA_MESH_BETA"
 schemes:
   Aurora:
     build:

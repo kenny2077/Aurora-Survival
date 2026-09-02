@@ -17,7 +17,10 @@ let package = Package(
     targets: [
         .target(
             name: "AuroraCore",
-            path: "Core"
+            path: "Core",
+            swiftSettings: [
+                .define("AURORA_MESH_BETA", .when(configuration: .debug))
+            ]
         ),
         .executableTarget(
             name: "AuroraPackCheck",
@@ -30,6 +33,9 @@ let package = Package(
             path: "Tests",
             resources: [
                 .copy("Fixtures")
+            ],
+            swiftSettings: [
+                .define("AURORA_MESH_BETA", .when(configuration: .debug))
             ]
         )
     ]
