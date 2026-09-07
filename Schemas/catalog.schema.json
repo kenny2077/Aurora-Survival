@@ -11,7 +11,8 @@
     "policy_version": { "type": "string", "minLength": 1 },
     "models": { "type": "array", "items": { "$ref": "#/$defs/item" } },
     "knowledge": { "type": "array", "items": { "$ref": "#/$defs/item" } },
-    "maps": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+    "maps": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "species": { "type": "array", "items": { "$ref": "#/$defs/item" } }
   },
   "$defs": {
     "item": {

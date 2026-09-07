@@ -8,6 +8,7 @@ struct ToolsView: View {
         case satellite
         case compass
         case checklist
+        case species
 #if AURORA_MESH_BETA
         case mesh
 #endif
@@ -340,14 +341,16 @@ struct ToolsView: View {
                 }
                 GridRow {
                     checklistTool.gridCellColumns(2)
+                    speciesTool.gridCellColumns(2)
+                }
 #if AURORA_MESH_BETA
+                GridRow {
                     meshTool.gridCellColumns(2)
-#else
                     Color.clear
                         .accessibilityHidden(true)
                         .gridCellColumns(2)
-#endif
                 }
+#endif
             }
         }
     }
@@ -358,6 +361,7 @@ struct ToolsView: View {
         satelliteTool
         compassTool
         checklistTool
+        speciesTool
 #if AURORA_MESH_BETA
         meshTool
 #endif
@@ -420,6 +424,22 @@ struct ToolsView: View {
         )
     }
 
+    private var speciesTool: some View {
+        toolLink(
+            "Species ID",
+            model.speciesPackDescriptor == nil
+                ? "Optional offline model"
+                : "504 animals · Offline",
+            "pawprint.fill",
+            AuroraDesign.ordinaryAccent(
+                light: .green,
+                colorScheme: colorScheme
+            ),
+            route: .species,
+            identifier: "tools.speciesID"
+        )
+    }
+
 #if AURORA_MESH_BETA
     private var meshTool: some View {
         toolLink(
@@ -471,6 +491,8 @@ struct ToolsView: View {
             CompassToolView(location: locationModel)
         case .checklist:
             TripChecklistView(store: checklistStore)
+        case .species:
+            SpeciesScannerView()
 #if AURORA_MESH_BETA
         case .mesh:
             MeshChatView()

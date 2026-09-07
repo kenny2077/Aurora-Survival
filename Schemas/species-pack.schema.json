@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.app/schemas/species-pack.schema.json",
+  "title": "Aurora species recognition pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_id",
+    "version",
+    "model_identity",
+    "model_revision",
+    "upstream_code_commit",
+    "encoder_path",
+    "species_table_path",
+    "embeddings_path",
+    "input_side",
+    "embedding_dimensions",
+    "species_count",
+    "contract_version",
+    "license"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "package_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "version": { "type": "string", "minLength": 1 },
+    "model_identity": { "const": "imageomics/bioclip-2" },
+    "model_revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "upstream_code_commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "encoder_path": { "type": "string", "minLength": 1 },
+    "species_table_path": { "type": "string", "minLength": 1 },
+    "embeddings_path": { "type": "string", "minLength": 1 },
+    "input_side": { "const": 224 },
+    "embedding_dimensions": { "const": 768 },
+    "species_count": { "const": 504 },
+    "contract_version": { "const": 1 },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx_id", "notice_path"],
+      "properties": {
+        "spdx_id": { "const": "MIT" },
+        "notice_path": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

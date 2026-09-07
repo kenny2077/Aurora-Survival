@@ -2,6 +2,7 @@ import Foundation
 import CryptoKit
 import SwiftUI
 import UIKit
+import AuroraSpeciesKit
 
 enum ModelRuntimeLoadState: Equatable {
     case idle
@@ -18,6 +19,23 @@ enum ModelSetupState: Equatable {
     case paused(Double)
     case ready
     case failed(String)
+}
+
+enum SpeciesScannerFailure: Error, LocalizedError {
+    case packageMissing
+    case insufficientCompileSpace
+    case deviceUnderPressure
+
+    var errorDescription: String? {
+        switch self {
+        case .packageMissing:
+            "Download and activate Species ID before scanning."
+        case .insufficientCompileSpace:
+            "Species ID needs at least 1.2 GB free to prepare the downloaded model."
+        case .deviceUnderPressure:
+            "Species ID is paused until the device cools down."
+        }
+    }
 }
 
 enum AppearancePreference: String, CaseIterable, Identifiable {
@@ -69,6 +87,8 @@ final class AppModel: ObservableObject {
     @Published private(set) var catalogStatus = "Connect to a signed package catalog."
     @Published private(set) var isLoadingCatalog = false
     @Published private(set) var offlineMaps: [ResolvedOfflineMap] = []
+    @Published private(set) var speciesPackDescriptor: SpeciesPackDescriptor?
+    @Published private(set) var speciesRuntimeError: String?
     @Published var allowsCellularModelDownloads: Bool {
         didSet {
             userDefaults.set(
@@ -120,7 +140,12 @@ final class AppModel: ObservableObject {
         descriptor: nil,
         issues: []
     )
+    private var discoveredSpeciesRuntime = SpeciesPackResolution(
+        descriptor: nil,
+        issues: []
+    )
     private var loadedLlamaModel: LlamaLanguageModel?
+    private var speciesClassifier: AuroraSpeciesKit.SpeciesClassifier?
 #if DEBUG
     private var debugModelCompletions: [String] = []
     private var debugExpertStreamDeltas: [String] = []
@@ -321,6 +346,55 @@ final class AppModel: ObservableObject {
 
     var modelCatalogEntries: [PackageCatalogEntry] {
         catalogEntries.filter { $0.kind == .model }
+    }
+
+    var speciesCatalogEntry: PackageCatalogEntry? {
+        catalogEntries.first { $0.kind == .species }
+    }
+
+    var speciesPackageState: PackageDownloadState {
+        guard let entry = speciesCatalogEntry else { return .available }
+        return packageState(for: entry)
+    }
+
+    func startSpeciesSetup() {
+        guard let entry = speciesCatalogEntry else { return }
+        startDownload(entry)
+    }
+
+    func cancelSpeciesSetup() {
+        guard let entry = speciesCatalogEntry else { return }
+        cancelDownload(entry)
+    }
+
+    func removeSpeciesSetup() {
+        let identity: (packageID: String, version: String, stateID: String?)
+        if let entry = speciesCatalogEntry {
+            identity = (entry.packageID, entry.version, entry.id)
+        } else if let descriptor = speciesPackDescriptor {
+            identity = (descriptor.packageID, descriptor.version, nil)
+        } else {
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            unloadSpeciesClassifier()
+            do {
+                try await packageInstaller.remove(
+                    packageID: identity.packageID,
+                    version: identity.version
+                )
+                try? FileManager.default.removeItem(at: speciesCompileCacheDirectory)
+                try await refreshInstalledPackageStates()
+                await refreshActivePacks()
+            } catch {
+                if let stateID = identity.stateID {
+                    packageDownloadStates[stateID] = .failed(Self.userMessage(for: error))
+                } else {
+                    speciesRuntimeError = Self.userMessage(for: error)
+                }
+            }
+        }
     }
 
     func modelEntry(for tier: ModelTier) -> PackageCatalogEntry? {
@@ -724,6 +798,12 @@ final class AppModel: ObservableObject {
             activePacks: snapshot,
             validateContents: false
         )
+        let previousSpeciesDigest = discoveredSpeciesRuntime.descriptor?.encoderSHA256
+        discoveredSpeciesRuntime = SpeciesPackResolver().resolve(activePacks: snapshot)
+        if previousSpeciesDigest != discoveredSpeciesRuntime.descriptor?.encoderSHA256 {
+            unloadSpeciesClassifier()
+        }
+        speciesPackDescriptor = discoveredSpeciesRuntime.descriptor
 #if DEBUG
         debugExpertRuntimeDescriptor = discoveredModelRuntime.descriptors[.expert]
         debugCalibrationExpertDescriptor = discoveredModelRuntime.calibrationExpertDescriptor
@@ -743,6 +823,7 @@ final class AppModel: ObservableObject {
             + discoveredModelRuntime.issues.count
             + discoveredSharedRAGRuntime.issues.count
             + mapRuntime.issues.count
+            + discoveredSpeciesRuntime.issues.filter { $0 != .missingPackage }.count
         if activePackIssueCount > 0 {
             let activeOptionalTiers = ModelTier.allCases
                 .filter(runtimeTiers.contains)
@@ -893,6 +974,61 @@ final class AppModel: ObservableObject {
         )
         modelRuntimeState = .idle
         removeAttachment()
+    }
+
+    func classifySpecies(imageData: Data) async throws -> [SpeciesResult] {
+        guard let descriptor = speciesPackDescriptor else {
+            throw SpeciesScannerFailure.packageMissing
+        }
+        let device = deviceProfiler.snapshot()
+        guard device.thermalCondition != .serious,
+              device.thermalCondition != .critical else {
+            unloadSpeciesClassifier()
+            throw SpeciesScannerFailure.deviceUnderPressure
+        }
+        let compiledModelURL = speciesCompileCacheDirectory
+            .appendingPathComponent(descriptor.encoderSHA256, isDirectory: true)
+            .appendingPathExtension("mlmodelc")
+        guard speciesClassifier != nil
+                || FileManager.default.fileExists(atPath: compiledModelURL.path)
+                || device.freeStorageBytes >= 1_200_000_000 else {
+            throw SpeciesScannerFailure.insufficientCompileSpace
+        }
+
+        await unloadModel()
+        speciesRuntimeError = nil
+        do {
+            let classifier: AuroraSpeciesKit.SpeciesClassifier
+            if let loaded = speciesClassifier {
+                classifier = loaded
+            } else {
+                classifier = try await AuroraSpeciesKit.SpeciesClassifier.load(
+                    artifacts: SpeciesArtifactSet(
+                        encoderURL: descriptor.encoderURL,
+                        speciesTableURL: descriptor.speciesTableURL,
+                        embeddingsURL: descriptor.embeddingsURL,
+                        modelIdentity: descriptor.modelIdentity,
+                        version: descriptor.version,
+                        encoderSHA256: descriptor.encoderSHA256,
+                        compileCacheDirectory: speciesCompileCacheDirectory
+                    )
+                )
+                speciesClassifier = classifier
+            }
+            return try await classifier.classify(imageData, topK: 3)
+        } catch {
+            speciesRuntimeError = error.localizedDescription
+            throw error
+        }
+    }
+
+    func unloadSpeciesClassifier() {
+        speciesClassifier = nil
+    }
+
+    func handleRuntimePressure() async {
+        unloadSpeciesClassifier()
+        await unloadModel()
     }
 
     func refreshPhotoAuthorizationStatus() {
@@ -3104,6 +3240,10 @@ final class AppModel: ObservableObject {
         Bundle.main.object(
             forInfoDictionaryKey: "CFBundleShortVersionString"
         ) as? String ?? "0"
+    }
+
+    private var speciesCompileCacheDirectory: URL {
+        appDataRoot.appendingPathComponent("compiled-species", isDirectory: true)
     }
 
     static let legalSchemaVersion = 1

@@ -19,6 +19,9 @@ packages:
     exactVersion: 6.26.0
   AuroraLlamaRuntime:
     path: Runtime/AuroraLlamaRuntime
+  AuroraSpeciesKit:
+    url: https://github.com/kenny2077/aurora-species-BioCLIP
+    exactVersion: 0.1.1
 targets:
   Aurora:
     type: application
@@ -81,6 +84,7 @@ targets:
     dependencies:
       - package: MapLibre
       - package: AuroraLlamaRuntime
+      - package: AuroraSpeciesKit
   AuroraTests:
     type: bundle.unit-test
     platform: iOS

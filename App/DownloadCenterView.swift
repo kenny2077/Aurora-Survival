@@ -61,6 +61,10 @@ struct DownloadCenterView: View {
                     title: "Offline maps",
                     kind: .map
                 )
+                packageSection(
+                    title: "Species recognition",
+                    kind: .species
+                )
             }
 
             if showsCatalogConnection {
@@ -329,6 +333,7 @@ struct PackageDownloadCard: View {
         case .model: "cpu"
         case .knowledge: "books.vertical"
         case .map: "map"
+        case .species: "pawprint.fill"
         }
     }
 

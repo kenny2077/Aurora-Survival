@@ -4,6 +4,7 @@ public enum PackageKind: String, Codable, CaseIterable, Sendable {
     case model
     case knowledge
     case map
+    case species
 }
 
 public struct PackageArtifact: Codable, Hashable, Sendable {

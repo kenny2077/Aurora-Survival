@@ -628,6 +628,15 @@ def main() -> None:
             ],
         ]
     )
+    species = args.root / "species-bioclip2-north-america-504@1.0.0"
+    if (species / "envelope.json").is_file():
+        entries.append(
+            catalog_entry(
+                species,
+                "Optional offline identification for 504 North American animals.",
+                {"species_contract": "1", "coverage": "504 animals"},
+            )
+        )
     catalog = {"schemaVersion": 1, "generatedAt": CREATED_AT, "entries": entries}
     signed = {
         "catalog": catalog,
@@ -640,7 +649,10 @@ def main() -> None:
     host_root = args.root / "product-host"
     host_root.mkdir(exist_ok=True)
     shutil.copy2(args.root / "catalog.json", host_root / "catalog.json")
-    for package in [shared_rag, model, *knowledge, *maps]:
+    hosted_packages = [shared_rag, model, *knowledge, *maps]
+    if (species / "envelope.json").is_file():
+        hosted_packages.append(species)
+    for package in hosted_packages:
         link = host_root / package.name
         if link.is_symlink():
             if link.resolve() != package.resolve():

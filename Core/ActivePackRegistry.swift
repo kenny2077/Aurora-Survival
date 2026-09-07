@@ -41,6 +41,7 @@ public struct ActivePackSnapshot: Equatable, Sendable {
     public let models: [ResolvedActivePackage]
     public let knowledge: [ResolvedActivePackage]
     public let maps: [ResolvedActivePackage]
+    public let species: [ResolvedActivePackage]
     public let installedTiers: Set<ModelTier>
     public let issues: [ActivePackIssue]
 
@@ -48,12 +49,14 @@ public struct ActivePackSnapshot: Equatable, Sendable {
         models: [ResolvedActivePackage],
         knowledge: [ResolvedActivePackage],
         maps: [ResolvedActivePackage],
+        species: [ResolvedActivePackage] = [],
         installedTiers: Set<ModelTier>,
         issues: [ActivePackIssue]
     ) {
         self.models = models
         self.knowledge = knowledge
         self.maps = maps
+        self.species = species
         self.installedTiers = installedTiers
         self.issues = issues
     }
@@ -62,6 +65,7 @@ public struct ActivePackSnapshot: Equatable, Sendable {
         models: [],
         knowledge: [],
         maps: [],
+        species: [],
         installedTiers: [],
         issues: []
     )
@@ -121,6 +125,7 @@ public actor ActivePackRegistry {
         var models: [ResolvedActivePackage] = []
         var knowledge: [ResolvedActivePackage] = []
         var maps: [ResolvedActivePackage] = []
+        var species: [ResolvedActivePackage] = []
         var installedTiers: Set<ModelTier> = []
         var issues: [ActivePackIssue] = []
 
@@ -274,6 +279,9 @@ public actor ActivePackRegistry {
 
             case .map:
                 maps.append(resolved)
+
+            case .species:
+                species.append(resolved)
             }
         }
 
@@ -281,6 +289,7 @@ public actor ActivePackRegistry {
             models: models.sorted { $0.id < $1.id },
             knowledge: knowledge.sorted { $0.id < $1.id },
             maps: maps.sorted { $0.id < $1.id },
+            species: species.sorted { $0.id < $1.id },
             installedTiers: installedTiers,
             issues: issues
         )

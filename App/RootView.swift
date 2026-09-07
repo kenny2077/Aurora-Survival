@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 enum AppTab: String, Hashable {
     case ask
@@ -36,8 +37,23 @@ struct RootView: View {
             }
         }
         .onChange(of: scenePhase) { _, phase in
-            guard phase == .active else { return }
-            model.refreshPhotoAuthorizationStatus()
+            if phase == .active {
+                model.refreshPhotoAuthorizationStatus()
+            } else {
+                model.unloadSpeciesClassifier()
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(
+            for: UIApplication.didReceiveMemoryWarningNotification
+        )) { _ in
+            Task { await model.handleRuntimePressure() }
+        }
+        .onReceive(NotificationCenter.default.publisher(
+            for: ProcessInfo.thermalStateDidChangeNotification
+        )) { _ in
+            let state = ProcessInfo.processInfo.thermalState
+            guard state == .serious || state == .critical else { return }
+            Task { await model.handleRuntimePressure() }
         }
     }
 
