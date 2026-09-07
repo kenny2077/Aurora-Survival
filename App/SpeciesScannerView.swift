@@ -33,6 +33,10 @@ struct SpeciesScannerView: View {
         .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
         .navigationTitle("Species ID")
         .navigationBarTitleDisplayMode(.inline)
+        .task(id: model.speciesPackDescriptor?.encoderSHA256) {
+            guard model.speciesPackDescriptor != nil else { return }
+            try? await model.prepareSpeciesClassifier()
+        }
         .photosPicker(
             isPresented: $showsPhotoPicker,
             selection: $photoItem,
@@ -139,6 +143,21 @@ struct SpeciesScannerView: View {
 
     private var scanner: some View {
         VStack(spacing: AuroraDesign.Space.md) {
+            if model.speciesRuntimeState == .preparing {
+                HStack(spacing: AuroraDesign.Space.sm) {
+                    ProgressView()
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Preparing Species ID")
+                            .font(.subheadline.bold())
+                        Text("You can choose a photo while the offline model loads.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                }
+                .accessibilityIdentifier("species.preparing")
+            }
+
             if let previewImage {
                 Image(uiImage: previewImage)
                     .resizable()

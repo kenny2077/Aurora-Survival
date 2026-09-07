@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "device": "iPhone14,5",
+  "runtime_package": {
+    "repository": "kenny2077/aurora-species-BioCLIP",
+    "version": "0.2.0",
+    "commit": "782b310a41db713c2e00f0dfb668d65b2151b170"
+  },
+  "selection": "fp16",
+  "selection_reason": "Neither compressed encoder improved first compile/load by the required 30 percent while preserving all other gates.",
+  "fp16_synthetic_12mp_gate": {
+    "photos": 10,
+    "warm_p95_milliseconds": 261,
+    "maximum_warm_latency_milliseconds": 261,
+    "peak_footprint_bytes": 623167584,
+    "final_thermal_state": "fair",
+    "metrics_passed": true,
+    "note": "The run exposed a test-only expected-count bug; the counter was corrected and the signed device build passed afterward."
+  },
+  "candidates": [
+    {
+      "variant": "fp16",
+      "encoder_bytes": 608281001,
+      "mac_true_top1": 79,
+      "mac_true_top5": 85,
+      "device_true_top1": 79,
+      "device_true_top5": 85,
+      "device_model_load_milliseconds": 15498.64399433136,
+      "device_warm_p95_milliseconds": 195,
+      "device_peak_footprint_bytes": 634799888,
+      "device_final_thermal_state": "fair"
+    },
+    {
+      "variant": "int8-linear",
+      "encoder_bytes": 305123536,
+      "size_reduction_percent": 49.83839122077068,
+      "mac_true_top1": 78,
+      "mac_true_top5": 85,
+      "device_true_top1": 78,
+      "device_true_top5": 85,
+      "device_first_compile_load_milliseconds": 10869.48299407959,
+      "cold_load_improvement_percent": 29.8681678341982,
+      "device_warm_p95_milliseconds": 201,
+      "device_peak_footprint_bytes": 312853832,
+      "device_final_thermal_state": "fair"
+    },
+    {
+      "variant": "palettized6-kmeans",
+      "encoder_bytes": 228762620,
+      "size_reduction_percent": 62.391950492630954,
+      "mac_true_top1": 77,
+      "mac_true_top5": 85,
+      "device_true_top1": 77,
+      "device_true_top5": 85,
+      "device_model_load_milliseconds": 14945.619106292725,
+      "device_warm_p95_milliseconds": 227,
+      "device_peak_footprint_bytes": 869173128,
+      "device_final_thermal_state": "fair"
+    }
+  ]
+}

@@ -97,6 +97,7 @@ def build(args: argparse.Namespace) -> None:
                 "model_identity": "imageomics/bioclip-2",
                 "model_revision": args.model_revision,
                 "upstream_code_commit": args.upstream_code_commit,
+                "encoder_variant": args.encoder_variant,
                 "encoder_path": ENCODER_PATH,
                 "encoder_digest_artifact_path": weight_artifacts[0]["path"],
                 "species_table_path": TABLE_PATH,
@@ -135,6 +136,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--package-id", default="species.bioclip2.north-america-504")
     parser.add_argument("--version", default="1.0.0")
     parser.add_argument("--minimum-app-version", default="1.1.0")
+    parser.add_argument("--encoder-variant", default="fp16")
     parser.add_argument(
         "--attribution",
         type=pathlib.Path,
@@ -146,7 +148,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--upstream-code-commit",
-        default="be503d235dfa6009645eb06453c8580a79f5dfa1",
+        default="782b310a41db713c2e00f0dfb668d65b2151b170",
     )
     return parser.parse_args()
 

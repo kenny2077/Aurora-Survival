@@ -40,6 +40,13 @@ enum SpeciesScannerFailure: Error, LocalizedError {
     }
 }
 
+enum SpeciesRuntimeState: Equatable {
+    case idle
+    case preparing
+    case ready
+    case failed(String)
+}
+
 #if DEBUG
 private struct DebugSpeciesPCReference: Decodable {
     struct Match: Decodable { let sci: String }
@@ -108,6 +115,9 @@ final class AppModel: ObservableObject {
     @Published private(set) var offlineMaps: [ResolvedOfflineMap] = []
     @Published private(set) var speciesPackDescriptor: SpeciesPackDescriptor?
     @Published private(set) var speciesRuntimeError: String?
+    @Published private(set) var speciesRuntimeState: SpeciesRuntimeState = .idle
+    @Published private(set) var lastSpeciesLoadMilliseconds: Double?
+    @Published private(set) var lastSpeciesInferenceMetrics: SpeciesInferenceMetrics?
     @Published var allowsCellularModelDownloads: Bool {
         didSet {
             userDefaults.set(
@@ -165,6 +175,9 @@ final class AppModel: ObservableObject {
     )
     private var loadedLlamaModel: LlamaLanguageModel?
     private var speciesClassifier: AuroraSpeciesKit.SpeciesClassifier?
+    private var speciesPreparationTask: Task<AuroraSpeciesKit.SpeciesClassifier, Error>?
+    private var speciesRuntimeGeneration: UInt = 0
+    private var speciesPreparationStartedAt: Date?
 #if DEBUG
     private var debugModelCompletions: [String] = []
     private var debugExpertStreamDeltas: [String] = []
@@ -999,6 +1012,22 @@ final class AppModel: ObservableObject {
         imageData: Data,
         topK: Int = 3
     ) async throws -> [SpeciesResult] {
+        try await prepareSpeciesClassifier()
+        guard let classifier = speciesClassifier else {
+            throw CancellationError()
+        }
+        speciesRuntimeError = nil
+        do {
+            let output = try await classifier.classifyMeasured(imageData, topK: topK)
+            lastSpeciesInferenceMetrics = output.metrics
+            return output.results
+        } catch {
+            speciesRuntimeError = error.localizedDescription
+            throw error
+        }
+    }
+
+    func prepareSpeciesClassifier() async throws {
         guard let descriptor = speciesPackDescriptor else {
             throw SpeciesScannerFailure.packageMissing
         }
@@ -1016,42 +1045,78 @@ final class AppModel: ObservableObject {
                 || device.freeStorageBytes >= 1_200_000_000 else {
             throw SpeciesScannerFailure.insufficientCompileSpace
         }
+        if speciesClassifier != nil {
+            speciesRuntimeState = .ready
+            return
+        }
 
-        await unloadModel()
-        speciesRuntimeError = nil
-        do {
-            let classifier: AuroraSpeciesKit.SpeciesClassifier
-            if let loaded = speciesClassifier {
-                classifier = loaded
-            } else {
+        let generation = speciesRuntimeGeneration
+        let task: Task<AuroraSpeciesKit.SpeciesClassifier, Error>
+        if let existing = speciesPreparationTask {
+            task = existing
+        } else {
+            speciesRuntimeError = nil
+            speciesRuntimeState = .preparing
+            speciesPreparationStartedAt = Date()
 #if DEBUG
-                let computeUnits = debugSpeciesComputeUnits
+            let computeUnits = debugSpeciesComputeUnits
 #else
-                let computeUnits: MLComputeUnits = .all
+            let computeUnits: MLComputeUnits = .all
 #endif
-                classifier = try await AuroraSpeciesKit.SpeciesClassifier.load(
-                    artifacts: SpeciesArtifactSet(
-                        encoderURL: descriptor.encoderURL,
-                        speciesTableURL: descriptor.speciesTableURL,
-                        embeddingsURL: descriptor.embeddingsURL,
-                        modelIdentity: descriptor.modelIdentity,
-                        version: descriptor.version,
-                        encoderSHA256: descriptor.encoderSHA256,
-                        compileCacheDirectory: speciesCompileCacheDirectory
-                    ),
+            let artifacts = SpeciesArtifactSet(
+                encoderURL: descriptor.encoderURL,
+                speciesTableURL: descriptor.speciesTableURL,
+                embeddingsURL: descriptor.embeddingsURL,
+                modelIdentity: descriptor.modelIdentity,
+                version: descriptor.version,
+                encoderSHA256: descriptor.encoderSHA256,
+                compileCacheDirectory: speciesCompileCacheDirectory
+            )
+            task = Task(priority: .userInitiated) { [weak self] in
+                guard let self else { throw CancellationError() }
+                await self.unloadModel()
+                try Task.checkCancellation()
+                return try await AuroraSpeciesKit.SpeciesClassifier.load(
+                    artifacts: artifacts,
                     computeUnits: computeUnits
                 )
-                speciesClassifier = classifier
             }
-            return try await classifier.classify(imageData, topK: topK)
+            speciesPreparationTask = task
+        }
+
+        do {
+            let classifier = try await task.value
+            guard generation == speciesRuntimeGeneration else {
+                throw CancellationError()
+            }
+            speciesClassifier = classifier
+            speciesPreparationTask = nil
+            speciesRuntimeState = .ready
+            if let started = speciesPreparationStartedAt {
+                lastSpeciesLoadMilliseconds = Date().timeIntervalSince(started) * 1_000
+            }
         } catch {
-            speciesRuntimeError = error.localizedDescription
+            guard generation == speciesRuntimeGeneration else {
+                throw CancellationError()
+            }
+            speciesPreparationTask = nil
+            if error is CancellationError {
+                speciesRuntimeState = .idle
+            } else {
+                speciesRuntimeError = error.localizedDescription
+                speciesRuntimeState = .failed(error.localizedDescription)
+            }
             throw error
         }
     }
 
     func unloadSpeciesClassifier() {
+        speciesRuntimeGeneration &+= 1
+        speciesPreparationTask?.cancel()
+        speciesPreparationTask = nil
+        speciesPreparationStartedAt = nil
         speciesClassifier = nil
+        speciesRuntimeState = .idle
     }
 
     func handleRuntimePressure() async {
@@ -1557,9 +1622,15 @@ final class AppModel: ObservableObject {
 #if DEBUG
     private func runDebugSpeciesPhysicalExam() async {
         UIApplication.shared.isIdleTimerDisabled = true
-        defer { UIApplication.shared.isIdleTimerDisabled = false }
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        defer {
+            UIApplication.shared.isIdleTimerDisabled = false
+            UIDevice.current.isBatteryMonitoringEnabled = false
+        }
 
         let environment = ProcessInfo.processInfo.environment
+        let is12MPPerformanceRun = environment["AURORA_DEBUG_SPECIES_12MP"] == "1"
+        let expectedPhotoCount = is12MPPerformanceRun ? 10 : 85
         let documents = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask
@@ -1578,6 +1649,7 @@ final class AppModel: ObservableObject {
         var packageIdentity = "missing"
         var computePlan: [String: Int] = [:]
         let initial = deviceProfiler.snapshot()
+        let initialBatteryLevel = UIDevice.current.batteryLevel
         let baselineFootprint = ExpertProcessMemoryProbe.physicalFootprintBytes()
         let sampler = ExpertProcessMemorySampler()
         let samplingTask = Task.detached { await sampler.sampleUntilStopped() }
@@ -1594,24 +1666,35 @@ final class AppModel: ObservableObject {
             let deviceTop1Matches = rows.filter {
                 ($0["device_top1_matches_pc"] as? Bool) == true
             }.count
+            let trueTop1Hits = rows.filter {
+                ($0["device_top1_matches_true_species"] as? Bool) == true
+            }.count
             let top5Hits = rows.filter {
                 ($0["true_species_in_device_top5"] as? Bool) == true
             }.count
+            let seriousThermal = rows.contains {
+                guard let state = $0["thermal_state"] as? String else { return false }
+                return ["serious", "critical"].contains(state)
+            }
             let report: [String: Any] = [
-                "schema_version": 1,
+                "schema_version": 2,
                 "completed": completed,
                 "device_hardware": Self.hardwareIdentifier,
                 "device_name": UIDevice.current.name,
                 "os_version": UIDevice.current.systemVersion,
                 "package_identity": packageIdentity,
+                "input_profile": is12MPPerformanceRun ? "synthetic_4032x3024" : "sealed_500px",
                 "requested_compute_units": debugSpeciesComputeUnitsLabel,
                 "available_compute_devices": MLModel.availableComputeDevices.map(\.description),
                 "preferred_operation_devices": computePlan,
                 "photos_completed": rows.count,
                 "device_vs_pc_top1_matches": deviceTop1Matches,
+                "true_species_top1_hits": trueTop1Hits,
                 "true_species_top5_hits": top5Hits,
-                "cold_latency_milliseconds": latencies.first ?? 0,
-                "warm_p95_latency_milliseconds": percentile95(latencies.dropFirst()),
+                "model_load_milliseconds": lastSpeciesLoadMilliseconds ?? 0,
+                "first_prediction_milliseconds": latencies.first ?? 0,
+                "warm_p95_latency_milliseconds": percentile95(latencies[...]),
+                "maximum_warm_latency_milliseconds": latencies.max() ?? 0,
                 "mean_latency_milliseconds": latencies.isEmpty
                     ? 0
                     : latencies.reduce(0, +) / latencies.count,
@@ -1622,14 +1705,21 @@ final class AppModel: ObservableObject {
                 "final_available_memory_bytes": current.availableMemoryBytes ?? 0,
                 "initial_thermal_state": initial.thermalCondition.rawValue,
                 "final_thermal_state": current.thermalCondition.rawValue,
+                "initial_battery_level": initialBatteryLevel,
+                "final_battery_level": UIDevice.current.batteryLevel,
+                "battery_delta": initialBatteryLevel - UIDevice.current.batteryLevel,
                 "terminal_failure": terminalFailure ?? NSNull(),
                 "passed": completed
                     && terminalFailure == nil
-                    && rows.count == 85
-                    && deviceTop1Matches == rows.count
-                    && top5Hits == rows.count
-                    && percentile95(latencies.dropFirst()) < 5_000
-                    && (memory?.peakPhysicalFootprintBytes ?? .max) < 1_500_000_000,
+                    && rows.count == expectedPhotoCount
+                    && (is12MPPerformanceRun || trueTop1Hits >= 77)
+                    && (is12MPPerformanceRun || top5Hits == rows.count)
+                    && percentile95(latencies[...]) <= (is12MPPerformanceRun ? 750 : 350)
+                    && (latencies.max() ?? .max) < 2_000
+                    && !seriousThermal
+                    && current.thermalCondition != .serious
+                    && current.thermalCondition != .critical
+                    && (memory?.peakPhysicalFootprintBytes ?? .max) < 1_000_000_000,
                 "rows": rows,
             ]
             guard JSONSerialization.isValidJSONObject(report),
@@ -1660,6 +1750,18 @@ final class AppModel: ObservableObject {
             terminalFailure = "staged_species_install_failed: \(error.localizedDescription)"
             return
         }
+        if let requestedVersion = environment["AURORA_DEBUG_SPECIES_ACTIVATE_VERSION"] {
+            do {
+                try await packageInstaller.activate(
+                    packageID: "species.bioclip2.north-america-504",
+                    version: requestedVersion
+                )
+                await refreshActivePacks()
+            } catch {
+                terminalFailure = "species_activation_failed: \(error.localizedDescription)"
+                return
+            }
+        }
         if speciesPackDescriptor == nil {
             guard let catalogURL = environment["AURORA_CATALOG_URL"] else {
                 terminalFailure = "missing_catalog_url"
@@ -1678,6 +1780,12 @@ final class AppModel: ObservableObject {
             return
         }
         packageIdentity = "\(descriptor.packageID)@\(descriptor.version)"
+        do {
+            try await prepareSpeciesClassifier()
+        } catch {
+            terminalFailure = "species_prepare_failed: \(error.localizedDescription)"
+            return
+        }
 
         let referenceURL = fixtureRoot.appendingPathComponent("exam_pc_branchB.json")
         let photosRoot = fixtureRoot.appendingPathComponent("Photos", isDirectory: true)
@@ -1696,7 +1804,7 @@ final class AppModel: ObservableObject {
             return
         }
 
-        for (index, expected) in reference.rows.enumerated() {
+        for (index, expected) in reference.rows.prefix(expectedPhotoCount).enumerated() {
             let pathParts = expected.image
                 .replacingOccurrences(of: "\\", with: "/")
                 .split(separator: "/")
@@ -1709,7 +1817,31 @@ final class AppModel: ObservableObject {
                 .appendingPathComponent(String(pathParts.first!))
                 .appendingPathComponent(String(pathParts.last!))
             do {
-                let imageData = try Data(contentsOf: imageURL, options: [.mappedIfSafe])
+                var imageData = try Data(contentsOf: imageURL, options: [.mappedIfSafe])
+                if is12MPPerformanceRun {
+                    guard let image = UIImage(data: imageData) else {
+                        throw SpeciesClassifierError.imageDecodeFailed
+                    }
+                    let size = CGSize(width: 4_032, height: 3_024)
+                    let scale = max(size.width / image.size.width, size.height / image.size.height)
+                    let drawSize = CGSize(
+                        width: image.size.width * scale,
+                        height: image.size.height * scale
+                    )
+                    let origin = CGPoint(
+                        x: (size.width - drawSize.width) / 2,
+                        y: (size.height - drawSize.height) / 2
+                    )
+                    let format = UIGraphicsImageRendererFormat()
+                    format.scale = 1
+                    let rendered = UIGraphicsImageRenderer(size: size, format: format).image { _ in
+                        image.draw(in: CGRect(origin: origin, size: drawSize))
+                    }
+                    guard let jpeg = rendered.jpegData(compressionQuality: 0.9) else {
+                        throw SpeciesClassifierError.imageDecodeFailed
+                    }
+                    imageData = jpeg
+                }
                 let preflight = deviceProfiler.snapshot()
                 let started = Date()
                 let results = try await classifySpecies(imageData: imageData, topK: 5)
@@ -1729,7 +1861,13 @@ final class AppModel: ObservableObject {
                     "post_available_memory_bytes": deviceProfiler.snapshot().availableMemoryBytes ?? 0,
                     "thermal_state": deviceProfiler.snapshot().thermalCondition.rawValue,
                     "device_top1_matches_pc": deviceTop5.first == pcTop5.first,
+                    "device_top1_matches_true_species": deviceTop5.first == expected.trueSpecies,
                     "true_species_in_device_top5": deviceTop5.contains(expected.trueSpecies),
+                    "decode_milliseconds": lastSpeciesInferenceMetrics?.decodeMilliseconds ?? 0,
+                    "preprocessing_milliseconds": lastSpeciesInferenceMetrics?.preprocessingMilliseconds ?? 0,
+                    "prediction_milliseconds": lastSpeciesInferenceMetrics?.predictionMilliseconds ?? 0,
+                    "ranking_milliseconds": lastSpeciesInferenceMetrics?.rankingMilliseconds ?? 0,
+                    "measured_total_milliseconds": lastSpeciesInferenceMetrics?.totalMilliseconds ?? 0,
                 ])
                 debugPhysicalStatus = PhysicalBenchmarkStatus(
                     completedCases: rows.count,
@@ -1746,7 +1884,7 @@ final class AppModel: ObservableObject {
                 break
             }
         }
-        if terminalFailure == nil, rows.count != reference.rows.count {
+        if terminalFailure == nil, rows.count != expectedPhotoCount {
             terminalFailure = "incomplete_exam"
         }
         computePlan = await debugSpeciesComputePlan(descriptor)
