@@ -16,19 +16,25 @@ struct SpeciesScannerView: View {
     @State private var errorMessage: String?
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
-                coverageNotice
-                if model.speciesPackDescriptor == nil {
-                    setupCard
-                } else {
-                    scanner
+        GeometryReader { geometry in
+            ScrollView {
+                VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
+                    if model.speciesPackDescriptor == nil {
+                        setupCard
+                    } else {
+                        scanner
+                    }
+                    Spacer(minLength: AuroraDesign.Space.lg)
+                    coverageFooter
                 }
-                safetyNotice
+                .padding(AuroraDesign.Space.md)
+                .frame(
+                    maxWidth: AuroraDesign.readableWidth,
+                    minHeight: geometry.size.height,
+                    alignment: .top
+                )
+                .frame(maxWidth: .infinity)
             }
-            .padding(AuroraDesign.Space.md)
-            .frame(maxWidth: AuroraDesign.readableWidth)
-            .frame(maxWidth: .infinity)
         }
         .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
         .navigationTitle("Species ID")
@@ -79,19 +85,21 @@ struct SpeciesScannerView: View {
         .accessibilityIdentifier("species.home")
     }
 
-    private var coverageNotice: some View {
-        Label {
+    private var coverageFooter: some View {
+        HStack(alignment: .top, spacing: AuroraDesign.Space.sm) {
+            Image(systemName: "pawprint.fill")
+                .font(.subheadline)
+                .foregroundStyle(AuroraDesign.river)
             VStack(alignment: .leading, spacing: 3) {
                 Text("504 supported North American animals")
-                    .font(.headline)
+                    .font(.subheadline.weight(.semibold))
                 Text("Birds, mammals, reptiles, and amphibians. Identification runs offline.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-        } icon: {
-            Image(systemName: "pawprint.fill")
-                .foregroundStyle(AuroraDesign.river)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.top, AuroraDesign.Space.sm)
         .accessibilityIdentifier("species.coverage")
     }
 
@@ -168,15 +176,15 @@ struct SpeciesScannerView: View {
             } else {
                 ContentUnavailableView(
                     "Choose a clear wildlife photo",
-                    systemImage: "camera.viewfinder",
-                    description: Text("Fill the frame with one animal when possible.")
+                    systemImage: "camera.viewfinder"
                 )
-                .frame(minHeight: 220)
+                .frame(minHeight: 280)
             }
 
-            HStack {
+            HStack(spacing: AuroraDesign.Space.sm) {
                 Button { showsCamera = true } label: {
                     Label("Take Photo", systemImage: "camera.fill")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
                 .disabled(isClassifying)
@@ -184,6 +192,7 @@ struct SpeciesScannerView: View {
 
                 Button { showsPhotoPicker = true } label: {
                     Label("Choose Photo", systemImage: "photo.on.rectangle")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
                 .disabled(isClassifying)
@@ -261,16 +270,6 @@ struct SpeciesScannerView: View {
                 .accessibilityIdentifier("species.result.\(result.rank)")
             }
         }
-    }
-
-    private var safetyNotice: some View {
-        Label(
-            "Do not approach, handle, or consume wildlife based only on a photo identification.",
-            systemImage: "exclamationmark.shield.fill"
-        )
-        .font(.footnote)
-        .foregroundStyle(.secondary)
-        .accessibilityIdentifier("species.safety")
     }
 
     private func load(_ item: PhotosPickerItem?) async {
