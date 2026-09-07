@@ -1024,6 +1024,11 @@ final class AppModel: ObservableObject {
             if let loaded = speciesClassifier {
                 classifier = loaded
             } else {
+#if DEBUG
+                let computeUnits = debugSpeciesComputeUnits
+#else
+                let computeUnits: MLComputeUnits = .all
+#endif
                 classifier = try await AuroraSpeciesKit.SpeciesClassifier.load(
                     artifacts: SpeciesArtifactSet(
                         encoderURL: descriptor.encoderURL,
@@ -1034,7 +1039,7 @@ final class AppModel: ObservableObject {
                         encoderSHA256: descriptor.encoderSHA256,
                         compileCacheDirectory: speciesCompileCacheDirectory
                     ),
-                    computeUnits: debugSpeciesComputeUnits
+                    computeUnits: computeUnits
                 )
                 speciesClassifier = classifier
             }
