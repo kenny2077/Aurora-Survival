@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "release_gate_pending",
+  "status": "manual_review_candidate_not_release_qualified",
   "device": { "hardware": "iPhone14,5", "os_version": "26.6.1" },
   "artifacts": {
     "encoder_release": "encoder-fp16.2026-09-05",
@@ -34,5 +34,21 @@
     },
     "passed": false
   },
-  "remaining_gate": "Run the full 85-photo exam with CPU+GPU compute units and require 85/85 top-one plus 85/85 top-five."
+  "iphone_cpu_and_gpu_fallback": {
+    "photos_completed": 47,
+    "device_vs_pc_top1_matches": 47,
+    "true_species_top5_hits": 47,
+    "cold_latency_milliseconds": 2625,
+    "warm_p95_latency_milliseconds": 1092,
+    "mean_latency_milliseconds": 948,
+    "peak_physical_footprint_bytes": 670074256,
+    "minimum_available_memory_bytes": 1529838192,
+    "initial_thermal_state": "fair",
+    "final_thermal_state": "serious",
+    "preferred_gpu_operations": 826,
+    "terminal_failure": "case_47_failed: Species ID is paused until the device cools down.",
+    "accepted": false,
+    "rejection_reason": "The fallback reached serious thermal state before completing the sealed pool."
+  },
+  "decision": "Keep Core ML computeUnits=.all. CPU+GPU is rejected on iPhone 13. Keep top-three likely-match presentation and do not promote until the remaining one-photo ANE top-one difference is resolved or the zero-flip release gate is explicitly revised."
 }
