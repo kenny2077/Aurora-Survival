@@ -328,9 +328,8 @@ final class ConversationalRAGTests: XCTestCase {
     func testGroundedCodecAcceptsConciseProseAndRejectsOnlyOverlongAnswers() {
         let evidence = [RetrievedPassage(article: makeManualArticle(), score: 1)]
         let codec = GroundedResponseCodec()
-        for count in [21, 27] {
-            let answer = Array(repeating: "action", count: count)
-                .joined(separator: " ")
+        for count in [125, 161, 700] {
+            let answer = String(repeating: "a", count: count)
             XCTAssertNoThrow(
                 try codec.decodeConversationalAndValidate(
                     "{\"a\":\"\(answer)\",\"e\":[1]}",
@@ -339,7 +338,7 @@ final class ConversationalRAGTests: XCTestCase {
                 )
             )
         }
-        let overlong = Array(repeating: "action", count: 71).joined(separator: " ")
+        let overlong = String(repeating: "a", count: 701)
         XCTAssertThrowsError(try codec.decodeConversationalAndValidate(
             "{\"a\":\"\(overlong)\",\"e\":[1]}",
             evidence: evidence,
@@ -740,14 +739,14 @@ final class ConversationalRAGTests: XCTestCase {
 
     func testIncidentFallbackAcceptsConciseAndRejectsOverlongAnswers() {
         let codec = GroundedResponseCodec()
-        let concise = Array(repeating: "action", count: 23).joined(separator: " ")
+        let concise = String(repeating: "a", count: 700)
         XCTAssertNoThrow(try codec.decodeConversationalAndValidate(
             "{\"a\":\"\(concise)\",\"e\":[]}",
             evidence: [],
             purpose: .incidentFallback,
             question: "Unknown incident"
         ))
-        let overlong = Array(repeating: "action", count: 76).joined(separator: " ")
+        let overlong = String(repeating: "a", count: 701)
         XCTAssertThrowsError(try codec.decodeConversationalAndValidate(
             "{\"a\":\"\(overlong)\",\"e\":[]}",
             evidence: [],
