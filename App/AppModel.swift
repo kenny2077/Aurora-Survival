@@ -1,5 +1,7 @@
 import Foundation
 import CryptoKit
+import CoreML
+import Darwin
 import SwiftUI
 import UIKit
 import AuroraSpeciesKit
@@ -37,6 +39,23 @@ enum SpeciesScannerFailure: Error, LocalizedError {
         }
     }
 }
+
+#if DEBUG
+private struct DebugSpeciesPCReference: Decodable {
+    struct Match: Decodable { let sci: String }
+    struct Row: Decodable {
+        let image: String
+        let trueSpecies: String
+        let top5: [Match]
+
+        enum CodingKeys: String, CodingKey {
+            case image, top5
+            case trueSpecies = "true"
+        }
+    }
+    let rows: [Row]
+}
+#endif
 
 enum AppearancePreference: String, CaseIterable, Identifiable {
     case system
@@ -976,7 +995,10 @@ final class AppModel: ObservableObject {
         removeAttachment()
     }
 
-    func classifySpecies(imageData: Data) async throws -> [SpeciesResult] {
+    func classifySpecies(
+        imageData: Data,
+        topK: Int = 3
+    ) async throws -> [SpeciesResult] {
         guard let descriptor = speciesPackDescriptor else {
             throw SpeciesScannerFailure.packageMissing
         }
@@ -1011,11 +1033,12 @@ final class AppModel: ObservableObject {
                         version: descriptor.version,
                         encoderSHA256: descriptor.encoderSHA256,
                         compileCacheDirectory: speciesCompileCacheDirectory
-                    )
+                    ),
+                    computeUnits: debugSpeciesComputeUnits
                 )
                 speciesClassifier = classifier
             }
-            return try await classifier.classify(imageData, topK: 3)
+            return try await classifier.classify(imageData, topK: topK)
         } catch {
             speciesRuntimeError = error.localizedDescription
             throw error
@@ -1231,6 +1254,10 @@ final class AppModel: ObservableObject {
         }
         if mode == "lite-shared-rag" {
             await runDebugLiteSharedRAGInference()
+            return
+        }
+        if mode == "species-exam" {
+            await runDebugSpeciesPhysicalExam()
             return
         }
         if mode.hasPrefix("expert-") {
@@ -1521,6 +1548,261 @@ final class AppModel: ObservableObject {
         writeReport(completed: true)
 #endif
     }
+
+#if DEBUG
+    private func runDebugSpeciesPhysicalExam() async {
+        UIApplication.shared.isIdleTimerDisabled = true
+        defer { UIApplication.shared.isIdleTimerDisabled = false }
+
+        let environment = ProcessInfo.processInfo.environment
+        let documents = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first ?? appDataRoot
+        let fixtureRoot = documents.appendingPathComponent(
+            "SpeciesExam",
+            isDirectory: true
+        )
+        let reportURL = documents.appendingPathComponent(
+            "exam_device_iphone13.json"
+        )
+        var rows: [[String: Any]] = []
+        var latencies: [Int] = []
+        var terminalFailure: String?
+        var finalized = false
+        var packageIdentity = "missing"
+        var computePlan: [String: Int] = [:]
+        let initial = deviceProfiler.snapshot()
+        let baselineFootprint = ExpertProcessMemoryProbe.physicalFootprintBytes()
+        let sampler = ExpertProcessMemorySampler()
+        let samplingTask = Task.detached { await sampler.sampleUntilStopped() }
+
+        func percentile95(_ values: ArraySlice<Int>) -> Int {
+            let sorted = values.sorted()
+            guard !sorted.isEmpty else { return 0 }
+            let index = max(0, Int(ceil(Double(sorted.count) * 0.95)) - 1)
+            return sorted[index]
+        }
+
+        func writeReport(completed: Bool, memory: ExpertProcessMemoryResult? = nil) {
+            let current = deviceProfiler.snapshot()
+            let deviceTop1Matches = rows.filter {
+                ($0["device_top1_matches_pc"] as? Bool) == true
+            }.count
+            let top5Hits = rows.filter {
+                ($0["true_species_in_device_top5"] as? Bool) == true
+            }.count
+            let report: [String: Any] = [
+                "schema_version": 1,
+                "completed": completed,
+                "device_hardware": Self.hardwareIdentifier,
+                "device_name": UIDevice.current.name,
+                "os_version": UIDevice.current.systemVersion,
+                "package_identity": packageIdentity,
+                "requested_compute_units": debugSpeciesComputeUnitsLabel,
+                "available_compute_devices": MLModel.availableComputeDevices.map(\.description),
+                "preferred_operation_devices": computePlan,
+                "photos_completed": rows.count,
+                "device_vs_pc_top1_matches": deviceTop1Matches,
+                "true_species_top5_hits": top5Hits,
+                "cold_latency_milliseconds": latencies.first ?? 0,
+                "warm_p95_latency_milliseconds": percentile95(latencies.dropFirst()),
+                "mean_latency_milliseconds": latencies.isEmpty
+                    ? 0
+                    : latencies.reduce(0, +) / latencies.count,
+                "baseline_physical_footprint_bytes": baselineFootprint,
+                "peak_physical_footprint_bytes": memory?.peakPhysicalFootprintBytes ?? 0,
+                "minimum_available_memory_bytes": memory?.minimumAvailableMemoryBytes ?? 0,
+                "initial_available_memory_bytes": initial.availableMemoryBytes ?? 0,
+                "final_available_memory_bytes": current.availableMemoryBytes ?? 0,
+                "initial_thermal_state": initial.thermalCondition.rawValue,
+                "final_thermal_state": current.thermalCondition.rawValue,
+                "terminal_failure": terminalFailure ?? NSNull(),
+                "passed": completed
+                    && terminalFailure == nil
+                    && rows.count == 85
+                    && deviceTop1Matches == rows.count
+                    && top5Hits == rows.count
+                    && percentile95(latencies.dropFirst()) < 5_000
+                    && (memory?.peakPhysicalFootprintBytes ?? .max) < 1_500_000_000,
+                "rows": rows,
+            ]
+            guard JSONSerialization.isValidJSONObject(report),
+                  let data = try? JSONSerialization.data(
+                    withJSONObject: report,
+                    options: [.prettyPrinted, .sortedKeys]
+                  ) else { return }
+            try? data.write(to: reportURL, options: [.atomic])
+        }
+
+        writeReport(completed: false)
+        defer {
+            if !finalized {
+                Task {
+                    await sampler.stop()
+                    await samplingTask.value
+                    writeReport(
+                        completed: terminalFailure == nil,
+                        memory: await sampler.result()
+                    )
+                }
+            }
+        }
+
+        do {
+            try await installDebugStagedPackagesIfPresent()
+        } catch {
+            terminalFailure = "staged_species_install_failed: \(error.localizedDescription)"
+            return
+        }
+        if speciesPackDescriptor == nil {
+            guard let catalogURL = environment["AURORA_CATALOG_URL"] else {
+                terminalFailure = "missing_catalog_url"
+                return
+            }
+            catalogURLString = catalogURL
+            await refreshCatalog()
+            guard let entry = speciesCatalogEntry else {
+                terminalFailure = "species_catalog_entry_unavailable: \(catalogStatus)"
+                return
+            }
+            await download(entry)
+        }
+        guard let descriptor = speciesPackDescriptor else {
+            terminalFailure = "species_install_failed"
+            return
+        }
+        packageIdentity = "\(descriptor.packageID)@\(descriptor.version)"
+
+        let referenceURL = fixtureRoot.appendingPathComponent("exam_pc_branchB.json")
+        let photosRoot = fixtureRoot.appendingPathComponent("Photos", isDirectory: true)
+        let reference: DebugSpeciesPCReference
+        do {
+            reference = try JSONDecoder().decode(
+                DebugSpeciesPCReference.self,
+                from: Data(contentsOf: referenceURL)
+            )
+        } catch {
+            terminalFailure = "invalid_exam_reference: \(error.localizedDescription)"
+            return
+        }
+        guard reference.rows.count == 85 else {
+            terminalFailure = "unexpected_exam_count_\(reference.rows.count)"
+            return
+        }
+
+        for (index, expected) in reference.rows.enumerated() {
+            let pathParts = expected.image
+                .replacingOccurrences(of: "\\", with: "/")
+                .split(separator: "/")
+                .suffix(2)
+            guard pathParts.count == 2 else {
+                terminalFailure = "invalid_reference_path: \(expected.image)"
+                break
+            }
+            let imageURL = photosRoot
+                .appendingPathComponent(String(pathParts.first!))
+                .appendingPathComponent(String(pathParts.last!))
+            do {
+                let imageData = try Data(contentsOf: imageURL, options: [.mappedIfSafe])
+                let preflight = deviceProfiler.snapshot()
+                let started = Date()
+                let results = try await classifySpecies(imageData: imageData, topK: 5)
+                let elapsed = Int(Date().timeIntervalSince(started) * 1_000)
+                latencies.append(elapsed)
+                let deviceTop5 = results.map(\.scientificName)
+                let pcTop5 = expected.top5.map(\.sci)
+                rows.append([
+                    "index": index,
+                    "image": pathParts.map(String.init).joined(separator: "/"),
+                    "true_species": expected.trueSpecies,
+                    "pc_top1": pcTop5.first ?? "missing",
+                    "device_top1": deviceTop5.first ?? "missing",
+                    "device_top5": deviceTop5,
+                    "latency_milliseconds": elapsed,
+                    "pre_available_memory_bytes": preflight.availableMemoryBytes ?? 0,
+                    "post_available_memory_bytes": deviceProfiler.snapshot().availableMemoryBytes ?? 0,
+                    "thermal_state": deviceProfiler.snapshot().thermalCondition.rawValue,
+                    "device_top1_matches_pc": deviceTop5.first == pcTop5.first,
+                    "true_species_in_device_top5": deviceTop5.contains(expected.trueSpecies),
+                ])
+                debugPhysicalStatus = PhysicalBenchmarkStatus(
+                    completedCases: rows.count,
+                    totalCases: reference.rows.count,
+                    phase: "species_exam",
+                    thermal: deviceProfiler.snapshot().thermalCondition,
+                    batteryLevel: UIDevice.current.batteryLevel,
+                    availableMemoryBytes: deviceProfiler.snapshot().availableMemoryBytes,
+                    cooldownSecondsRemaining: nil
+                )
+                writeReport(completed: false)
+            } catch {
+                terminalFailure = "case_\(index)_failed: \(error.localizedDescription)"
+                break
+            }
+        }
+        if terminalFailure == nil, rows.count != reference.rows.count {
+            terminalFailure = "incomplete_exam"
+        }
+        computePlan = await debugSpeciesComputePlan(descriptor)
+        finalized = true
+        await sampler.stop()
+        await samplingTask.value
+        writeReport(completed: true, memory: await sampler.result())
+    }
+
+    private func debugSpeciesComputePlan(
+        _ descriptor: SpeciesPackDescriptor
+    ) async -> [String: Int] {
+        let compiledURL = speciesCompileCacheDirectory
+            .appendingPathComponent(descriptor.encoderSHA256, isDirectory: true)
+            .appendingPathExtension("mlmodelc")
+        let configuration = MLModelConfiguration()
+        configuration.computeUnits = debugSpeciesComputeUnits
+        guard let plan = try? await MLComputePlan.load(
+            contentsOf: compiledURL,
+            configuration: configuration
+        ) else { return [:] }
+        var counts: [String: Int] = [:]
+        func visit(_ block: MLModelStructure.Program.Block) {
+            for operation in block.operations {
+                if let usage = plan.deviceUsage(for: operation) {
+                    counts[usage.preferred.description, default: 0] += 1
+                }
+                operation.blocks.forEach(visit)
+            }
+        }
+        if case let .program(program) = plan.modelStructure {
+            program.functions.values.forEach { visit($0.block) }
+        }
+        return counts
+    }
+
+    private var debugSpeciesComputeUnits: MLComputeUnits {
+#if DEBUG
+        if ProcessInfo.processInfo.environment[
+            "AURORA_DEBUG_SPECIES_COMPUTE_UNITS"
+        ] == "cpuAndGPU" {
+            return .cpuAndGPU
+        }
+#endif
+        return .all
+    }
+
+    private var debugSpeciesComputeUnitsLabel: String {
+        debugSpeciesComputeUnits == .cpuAndGPU ? "cpuAndGPU" : "all"
+    }
+
+    private static var hardwareIdentifier: String {
+        var system = utsname()
+        uname(&system)
+        return withUnsafePointer(to: &system.machine) { pointer in
+            pointer.withMemoryRebound(to: CChar.self, capacity: 1) {
+                String(cString: $0)
+            }
+        }
+    }
+#endif
 
     func installDebugPackagesOnlyIfRequested() async {
 #if DEBUG
@@ -1895,10 +2177,15 @@ final class AppModel: ObservableObject {
                 SignedPackageEnvelope.self,
                 from: Data(contentsOf: envelopeURL)
             )
-            _ = try await packageInstaller.install(
-                envelope: envelope,
-                stagedDirectory: stagedPackage
-            )
+            do {
+                _ = try await packageInstaller.install(
+                    envelope: envelope,
+                    stagedDirectory: stagedPackage
+                )
+            } catch PackageInstallError.packageAlreadyInstalled {
+                // USB staging is intentionally repeatable across exam launches.
+                continue
+            }
         }
         await refreshActivePacks()
     }

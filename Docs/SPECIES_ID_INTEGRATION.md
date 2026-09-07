@@ -1,12 +1,22 @@
 # Species ID integration
 
+## Device validation status (2026-09-07)
+
+The released fp16 encoder is integrated and hash-verified. Mac Core ML parity
+passed 20/20 at a minimum cosine of 0.999479, and AuroraSpeciesKit 0.1.3's
+Pillow-compatible bicubic preprocessing matched the PC reference 85/85 on Mac.
+The iPhone 13 `.all` compute run passed every performance, memory, thermal, and
+top-five requirement, but one close moose/Dall-sheep case changed top-one on the
+A15 Neural Engine (84/85). Release remains gated on the complete CPU+GPU fallback
+run. See `Reports/species-id/iphone13-2026-09-07.json`.
+
 Aurora's Species ID is an optional signed package. The app does not bundle the
 BioCLIP encoder, species table, or embeddings.
 
 ## Locked inputs
 
-- Runtime package: `kenny2077/aurora-species-BioCLIP` tag `0.1.1`
-- Runtime commit: `be503d235dfa6009645eb06453c8580a79f5dfa1`
+- Runtime package: `kenny2077/aurora-species-BioCLIP` tag `0.1.3`
+- Runtime commit: `01f6d97284807ae5282df6b7010baae5cbe955c9`
 - BioCLIP-2 model: `imageomics/bioclip-2`
 - Model revision: `2957b322090f9cb17ae72c71981c7218a28d81e0`
 - Safetensors SHA-256: `b7b2bf6fbc95799e42630e394cf95803892ab447c1a8ab629dbc82fbeaf7dfef`

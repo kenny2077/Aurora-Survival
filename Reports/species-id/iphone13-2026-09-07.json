@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "release_gate_pending",
+  "device": { "hardware": "iPhone14,5", "os_version": "26.6.1" },
+  "artifacts": {
+    "encoder_release": "encoder-fp16.2026-09-05",
+    "release_zip_sha256": "972447f149fea2bba17a8367ee0bc6467ce5c05dbf3ef3107a7dfce16fdd6bc5",
+    "encoder_weight_sha256": "ca1658ec95d05347165a3f602b4cc465a41da5dde88f4ecec04497a81333829a",
+    "aurora_species_kit": "0.1.3"
+  },
+  "mac_coreml_gate": {
+    "photos": 20, "top1_matches": 20, "minimum_cosine": 0.999479, "passed": true
+  },
+  "mac_swift_preprocessing_gate": {
+    "photos": 85, "top1_matches": 85, "passed": true
+  },
+  "iphone_all_compute_units_gate": {
+    "photos": 85,
+    "device_vs_pc_top1_matches": 84,
+    "true_species_top5_hits": 85,
+    "cold_latency_milliseconds": 14870,
+    "warm_p95_latency_milliseconds": 958,
+    "mean_latency_milliseconds": 902,
+    "peak_physical_footprint_bytes": 637339672,
+    "minimum_available_memory_bytes": 1562572776,
+    "initial_thermal_state": "nominal",
+    "final_thermal_state": "fair",
+    "preferred_neural_engine_operations": 827,
+    "mismatch": {
+      "image": "moose/130296407.jpg",
+      "pc_top1": "Alces alces",
+      "device_top1": "Ovis dalli",
+      "true_species_in_device_top5": true
+    },
+    "passed": false
+  },
+  "remaining_gate": "Run the full 85-photo exam with CPU+GPU compute units and require 85/85 top-one plus 85/85 top-five."
+}

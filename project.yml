@@ -21,7 +21,7 @@ packages:
     path: Runtime/AuroraLlamaRuntime
   AuroraSpeciesKit:
     url: https://github.com/kenny2077/aurora-species-BioCLIP
-    exactVersion: 0.1.1
+      exactVersion: 0.1.3
 targets:
   Aurora:
     type: application
