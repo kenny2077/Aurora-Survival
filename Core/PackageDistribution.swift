@@ -235,6 +235,7 @@ public enum PackageTransferPhase: String, Codable, CaseIterable, Sendable {
     case downloading
     case paused
     case verifying
+    case installing
     case installed
     case active
     case updateAvailable = "update_available"

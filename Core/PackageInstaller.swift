@@ -123,15 +123,40 @@ public actor PackageInstaller {
         try ensureRoot()
         try verifier.verify(envelope: envelope, packageDirectory: stagedDirectory)
 
+        return try installVerified(
+            envelope: envelope,
+            stagedDirectory: stagedDirectory,
+            activate: activate
+        )
+    }
+
+    func verifyStagedPackage(
+        envelope: SignedPackageEnvelope,
+        stagedDirectory: URL
+    ) throws {
+        try ensureRoot()
+        try verifier.verify(envelope: envelope, packageDirectory: stagedDirectory)
+    }
+
+    /// Activates a package whose signature and artifacts were just verified.
+    /// The staging directory and package store are on the same volume, so the
+    /// final move does not require room for a second copy of the package.
+    @discardableResult
+    func installVerified(
+        envelope: SignedPackageEnvelope,
+        stagedDirectory: URL,
+        activate: Bool = true
+    ) throws -> InstalledPackageVersion {
+        try ensureRoot()
+
         let manifest = envelope.manifest
-        let required = manifest.artifacts.reduce(Int64(0)) { $0 + $1.byteCount }
         let available = try rootDirectory.resourceValues(
             forKeys: [.volumeAvailableCapacityForImportantUsageKey]
         ).volumeAvailableCapacityForImportantUsage ?? 0
-        let reserve = max(256_000_000, required / 10)
-        guard available >= required + reserve else {
+        let reserve: Int64 = 256_000_000
+        guard available >= reserve else {
             throw PackageInstallError.insufficientSpace(
-                required: required + reserve,
+                required: reserve,
                 available: available
             )
         }

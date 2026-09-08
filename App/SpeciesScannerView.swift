@@ -138,6 +138,10 @@ struct SpeciesScannerView: View {
                     ProgressView(value: fraction)
                     Button("Pause") { model.cancelSpeciesSetup() }
                 }
+            case .verifying:
+                ProgressView("Verifying download…")
+            case .installing:
+                ProgressView("Installing…")
             case let .paused(fraction):
                 Button("Resume · \(fraction.formatted(.percent.precision(.fractionLength(0))))") {
                     model.startSpeciesSetup()
@@ -146,7 +150,7 @@ struct SpeciesScannerView: View {
                 ProgressView("Activating verified model…")
             case .updateAvailable:
                 Button("Update") { model.startSpeciesSetup() }
-            case let .failed(message):
+            case let .failed(message, _):
                 VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
                     Text(message).font(.caption).foregroundStyle(.red)
                     Button("Retry") { model.startSpeciesSetup() }

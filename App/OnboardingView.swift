@@ -196,6 +196,17 @@ struct OnboardingView: View {
     private var navigationBar: some View {
         VStack(spacing: AuroraDesign.Space.sm) {
             if page == .introduction {
+                Button {
+                    model.acceptLegalTerms()
+                    move(by: 1)
+                } label: {
+                    Text("Agree & Continue")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, minHeight: 52)
+                }
+                .buttonStyle(.glassProminent)
+                .accessibilityIdentifier("onboarding.accept")
+
                 NavigationLink {
                     LegalPrivacyHubView()
                 } label: {
@@ -204,34 +215,30 @@ struct OnboardingView: View {
                         .multilineTextAlignment(.center)
                 }
                 .accessibilityIdentifier("onboarding.legal")
-            }
-
-            HStack(spacing: AuroraDesign.Space.md) {
-                if page == .features {
-                    Button("Back") { move(by: -1) }
+            } else if page == .features {
+                HStack(spacing: AuroraDesign.Space.md) {
+                    Button { move(by: -1) } label: {
+                        Text("Back")
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                    }
                         .buttonStyle(.glassProminent)
                         .frame(maxWidth: .infinity)
 
-                    Button("Continue") { move(by: 1) }
+                    Button { move(by: 1) } label: {
+                        Text("Continue")
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                    }
                         .buttonStyle(.glassProminent)
                         .frame(maxWidth: .infinity)
                         .accessibilityIdentifier("onboarding.continue")
-                } else if page == .models {
-                    Button("Set Up Later") {
-                        model.completeOnboarding(openModels: false)
-                    }
-                    .buttonStyle(.glassProminent)
-                    .frame(maxWidth: .infinity)
-                    .accessibilityIdentifier("onboarding.skipModels")
-                } else {
-                    Button("Agree & Continue") {
-                        model.acceptLegalTerms()
-                        move(by: 1)
-                    }
-                    .buttonStyle(.glassProminent)
-                    .frame(maxWidth: .infinity)
-                    .accessibilityIdentifier("onboarding.accept")
                 }
+            } else {
+                Button("Set Up Later") {
+                    model.completeOnboarding(openModels: false)
+                }
+                .buttonStyle(.glassProminent)
+                .frame(maxWidth: .infinity)
+                .accessibilityIdentifier("onboarding.skipModels")
             }
         }
         .disabled(isTransitioning)

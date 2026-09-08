@@ -52,6 +52,7 @@ struct RootView: View {
             for: ProcessInfo.thermalStateDidChangeNotification
         )) { _ in
             let state = ProcessInfo.processInfo.thermalState
+            model.updateDownloadThermalState()
             guard state == .serious || state == .critical else { return }
             Task { await model.handleRuntimePressure() }
         }

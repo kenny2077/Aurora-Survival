@@ -96,7 +96,7 @@ final class SurvivalLocationService: NSObject, LocationProviding,
         manager.allowsBackgroundLocationUpdates = false
         manager.showsBackgroundLocationIndicator = false
         manager.pausesLocationUpdatesAutomatically = true
-        startDisplayUpdates()
+        stopDisplayUpdates()
     }
 
     func locationManager(

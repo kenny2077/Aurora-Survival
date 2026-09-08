@@ -61,9 +61,9 @@ struct MapPackView: View {
         .onAppear {
             mapChromeVisible = true
             configure()
-            coordinator.requestLocation()
+            coordinator.mapDidAppear()
         }
-        .onDisappear { coordinator.stopDisplayLocation() }
+        .onDisappear { coordinator.mapDidDisappear() }
         .onChange(of: model.offlineMaps.map(\.id)) { _, _ in configure() }
         .onChange(of: coordinator.pendingWaypointCoordinate) { _, coordinate in
             showsWaypointEditor = coordinate != nil

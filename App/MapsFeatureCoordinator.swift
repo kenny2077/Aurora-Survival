@@ -26,6 +26,7 @@ final class MapsFeatureCoordinator: ObservableObject {
     private var maps: [ResolvedOfflineMap] = []
     private var locationTask: Task<Void, Never>?
     private var connectivityTask: Task<Void, Never>?
+    private var isMapVisible = false
 
     init(
         locationService: (any LocationProviding)? = nil,
@@ -71,7 +72,13 @@ final class MapsFeatureCoordinator: ObservableObject {
         locationService.startDisplayUpdates()
     }
 
-    func stopDisplayLocation() {
+    func mapDidAppear() {
+        isMapVisible = true
+        requestLocation()
+    }
+
+    func mapDidDisappear() {
+        isMapVisible = false
         guard recording.trail?.state != .recording else { return }
         locationService.stopDisplayUpdates()
     }
@@ -105,6 +112,7 @@ final class MapsFeatureCoordinator: ObservableObject {
             do {
                 try await recorder.pause(at: Date())
                 locationService.stopRecordingUpdates()
+                if isMapVisible { locationService.startDisplayUpdates() }
                 await refreshRecording()
             } catch { statusMessage = "The trail could not be paused." }
         }
@@ -125,6 +133,7 @@ final class MapsFeatureCoordinator: ObservableObject {
             do {
                 try await recorder.finish(at: Date())
                 locationService.stopRecordingUpdates()
+                if isMapVisible { locationService.startDisplayUpdates() }
                 breadcrumbReturnEnabled = false
                 await refreshRecording()
                 savedTrails = (try? await store.trails()) ?? []
@@ -221,7 +230,7 @@ final class MapsFeatureCoordinator: ObservableObject {
             }
             updateSceneFromRecording()
         }
-        requestLocation()
+        if isMapVisible { requestLocation() }
     }
 
     private func refreshRecording() async {

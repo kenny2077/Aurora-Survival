@@ -61,7 +61,11 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
             )
             XCTFail("Expected simulated interruption")
         } catch {
-            XCTAssertEqual((error as? URLError)?.code, .networkConnectionLost)
+            XCTAssertEqual(
+                (error as? URLError)?.code,
+                .networkConnectionLost,
+                "Unexpected error: \(error)"
+            )
         }
 
         await transport.clearFailure()
@@ -111,6 +115,107 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
         }
         let requestCount = await transport.totalRequestCount()
         XCTAssertEqual(requestCount, 1)
+    }
+
+    func testDownloadReportsFinalizationPhasesAfterBytesComplete() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let transport = MemoryResumableTransport(
+            envelopeURL: fixture.location.envelopeURL,
+            envelopeData: try JSONEncoder().encode(fixture.envelope),
+            artifactData: fixture.artifactData
+        )
+        let coordinator = PackageDownloadCoordinator(
+            stagingRoot: fixture.root.appendingPathComponent("staging"),
+            transport: transport,
+            installer: fixture.installer,
+            chunkByteCount: 3
+        )
+        let phases = PhaseRecorder()
+
+        _ = try await coordinator.downloadAndInstall(
+            from: fixture.location,
+            phase: { await phases.record($0) }
+        )
+
+        let recordedPhases = await phases.values()
+        XCTAssertEqual(recordedPhases, [.downloading, .verifying, .installing])
+    }
+
+    func testRangeResponseRequiresExactBoundsTotalAndValidator() throws {
+        let url = URL(string: "https://example.invalid/artifact.bin")!
+        let valid = HTTPURLResponse(
+            url: url,
+            statusCode: 206,
+            httpVersion: "HTTP/1.1",
+            headerFields: [
+                "Content-Range": "bytes 16-31/64",
+                "ETag": "fixture-v1",
+            ]
+        )!
+        let metadata = try PackageRangeResponse.validate(
+            response: valid,
+            requestedRange: 16..<32
+        )
+        XCTAssertEqual(metadata.totalByteCount, 64)
+        XCTAssertEqual(metadata.validator, "fixture-v1")
+
+        let wrongBounds = HTTPURLResponse(
+            url: url,
+            statusCode: 206,
+            httpVersion: "HTTP/1.1",
+            headerFields: [
+                "Content-Range": "bytes 0-15/64",
+                "ETag": "fixture-v1",
+            ]
+        )!
+        XCTAssertThrowsError(try PackageRangeResponse.validate(
+            response: wrongBounds,
+            requestedRange: 16..<32
+        ))
+    }
+
+    func testChangedRemoteValidatorDiscardsOnlyArtifactPartial() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let transport = ChangingValidatorTransport(
+            envelopeURL: fixture.location.envelopeURL,
+            envelopeData: try JSONEncoder().encode(fixture.envelope),
+            artifactData: fixture.artifactData
+        )
+        let coordinator = PackageDownloadCoordinator(
+            stagingRoot: fixture.root.appendingPathComponent("staging"),
+            transport: transport,
+            installer: fixture.installer,
+            chunkByteCount: 3
+        )
+
+        do {
+            _ = try await coordinator.downloadAndInstall(from: fixture.location)
+            XCTFail("Expected interruption")
+        } catch {
+            XCTAssertEqual(
+                (error as? URLError)?.code,
+                .networkConnectionLost,
+                "Unexpected error: \(error)"
+            )
+        }
+        await transport.changeRemoteVersion()
+        do {
+            _ = try await coordinator.downloadAndInstall(from: fixture.location)
+            XCTFail("Expected validator rejection")
+        } catch {
+            XCTAssertEqual(
+                error as? PackageDownloadError,
+                .remoteArtifactChanged,
+                "Unexpected error: \(error)"
+            )
+        }
+
+        let partials = try FileManager.default.subpathsOfDirectory(
+            atPath: fixture.root.path
+        ).filter { $0.hasSuffix(".partial") }
+        XCTAssertTrue(partials.isEmpty)
     }
 
     private struct Fixture {
@@ -189,6 +294,18 @@ private actor ProgressRecorder {
     }
 }
 
+private actor PhaseRecorder {
+    private var recorded: [PackageTransferPhase] = []
+
+    func record(_ phase: PackageTransferPhase) {
+        recorded.append(phase)
+    }
+
+    func values() -> [PackageTransferPhase] {
+        recorded
+    }
+}
+
 private actor MemoryResumableTransport: ResumablePackageTransport {
     let envelopeURL: URL
     let envelopeData: Data
@@ -244,5 +361,55 @@ private actor MemoryResumableTransport: ResumablePackageTransport {
 
     func totalRequestCount() -> Int {
         requestCount
+    }
+}
+
+private actor ChangingValidatorTransport: ValidatedRangePackageTransport {
+    let envelopeURL: URL
+    let envelopeData: Data
+    let artifactData: Data
+    private var validator = "v1"
+    private var rangeCalls = 0
+    private var shouldInterrupt = true
+
+    init(envelopeURL: URL, envelopeData: Data, artifactData: Data) {
+        self.envelopeURL = envelopeURL
+        self.envelopeData = envelopeData
+        self.artifactData = artifactData
+    }
+
+    func data(from url: URL) async throws -> Data {
+        guard url == envelopeURL else { throw URLError(.badURL) }
+        return envelopeData
+    }
+
+    func download(from url: URL, to destination: URL) async throws {
+        try artifactData.write(to: destination)
+    }
+
+    func data(from url: URL, byteRange: Range<Int64>) async throws -> Data {
+        try await range(from: url, byteRange: byteRange).data
+    }
+
+    func range(
+        from url: URL,
+        byteRange: Range<Int64>
+    ) async throws -> PackageRangeResponse {
+        rangeCalls += 1
+        if shouldInterrupt && rangeCalls == 2 {
+            throw URLError(.networkConnectionLost)
+        }
+        return PackageRangeResponse(
+            data: artifactData.subdata(
+                in: Int(byteRange.lowerBound)..<Int(byteRange.upperBound)
+            ),
+            totalByteCount: Int64(artifactData.count),
+            validator: validator
+        )
+    }
+
+    func changeRemoteVersion() {
+        validator = "v2"
+        shouldInterrupt = false
     }
 }

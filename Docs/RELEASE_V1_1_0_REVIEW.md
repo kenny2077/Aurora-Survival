@@ -104,3 +104,8 @@ owner-approved ten-photo device gate passed. The app now uses:
 The catalog resolves package `species.bioclip2.north-america-504@1.0.1` with
 609,125,423 verified artifact bytes. This remains an owner-accepted development
 endpoint with variable rate limits, not a production availability SLA.
+
+Debug builds use the separately signed `catalog-development.json`, which exposes
+the existing beta Lite/shared-knowledge packages alongside the production-signed
+species package. Release builds continue to exclude development trust and use the
+species-only catalog until Gemma's production legal-review gate is satisfied.

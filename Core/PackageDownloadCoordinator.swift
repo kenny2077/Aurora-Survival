@@ -20,13 +20,56 @@ public protocol ResumablePackageTransport: PackageTransport {
     func data(from url: URL, byteRange: Range<Int64>) async throws -> Data
 }
 
-public protocol BackgroundFilePackageTransport: ResumablePackageTransport {
-    func downloadArtifact(
+public protocol ValidatedRangePackageTransport: ResumablePackageTransport {
+    func range(
         from url: URL,
-        to destination: URL,
-        expectedByteCount: Int64,
-        progress: @escaping @Sendable (Int64) async -> Void
-    ) async throws
+        byteRange: Range<Int64>
+    ) async throws -> PackageRangeResponse
+}
+
+public struct PackageRangeResponse: Equatable, Sendable {
+    public let data: Data
+    public let totalByteCount: Int64
+    public let validator: String
+
+    public init(data: Data, totalByteCount: Int64, validator: String) {
+        self.data = data
+        self.totalByteCount = totalByteCount
+        self.validator = validator
+    }
+
+    public static func validate(
+        response: HTTPURLResponse,
+        requestedRange: Range<Int64>
+    ) throws -> (totalByteCount: Int64, validator: String) {
+        guard response.statusCode == 206,
+              let value = response.value(forHTTPHeaderField: "Content-Range"),
+              let parsed = parseContentRange(value),
+              parsed.start == requestedRange.lowerBound,
+              parsed.end == requestedRange.upperBound - 1,
+              parsed.total >= requestedRange.upperBound,
+              let validator = response.value(forHTTPHeaderField: "ETag")
+                ?? response.value(forHTTPHeaderField: "Last-Modified"),
+              !validator.isEmpty else {
+            throw PackageDownloadError.invalidRangeResponse
+        }
+        return (parsed.total, validator)
+    }
+
+    private static func parseContentRange(
+        _ value: String
+    ) -> (start: Int64, end: Int64, total: Int64)? {
+        let components = value.split(separator: " ")
+        guard components.count == 2, components[0].lowercased() == "bytes" else {
+            return nil
+        }
+        let boundsAndTotal = components[1].split(separator: "/")
+        let bounds = boundsAndTotal.first?.split(separator: "-") ?? []
+        guard boundsAndTotal.count == 2, bounds.count == 2,
+              let start = Int64(bounds[0]), let end = Int64(bounds[1]),
+              let total = Int64(boundsAndTotal[1]) else { return nil }
+        return (start, end, total)
+    }
 }
 
 public enum PackageDownloadError: Error, Equatable {
@@ -34,6 +77,7 @@ public enum PackageDownloadError: Error, Equatable {
     case invalidRangeResponse
     case invalidChunkSize(expected: Int, actual: Int)
     case assemblyDidNotAdvance(expectedOffset: Int64, actualOffset: Int64)
+    case remoteArtifactChanged
 }
 
 public struct PackageDownloadExpectation: Equatable, Sendable {
@@ -149,8 +193,12 @@ public actor PackageDownloadCoordinator {
         expecting expectation: PackageDownloadExpectation? = nil,
         progress: @escaping @MainActor @Sendable (
             PackageDownloadProgress
+        ) async -> Void = { _ in },
+        phase: @escaping @MainActor @Sendable (
+            PackageTransferPhase
         ) async -> Void = { _ in }
     ) async throws -> InstalledPackageVersion {
+        await phase(.downloading)
         let envelopeData = try await transport.data(from: location.envelopeURL)
         let envelope = try JSONDecoder().decode(
             SignedPackageEnvelope.self,
@@ -177,11 +225,41 @@ public actor PackageDownloadCoordinator {
             at: staging,
             withIntermediateDirectories: true
         )
+        let transferIdentity = "\(envelope.manifest.packageID)@\(envelope.manifest.version)"
+        try Data(transferIdentity.utf8).write(
+            to: staging.appendingPathComponent(".package-identity"),
+            options: [.atomic]
+        )
+        let transferStore = PackageManager(
+            stateURL: stagingRoot.appendingPathComponent("transfer-state.json")
+        )
 
         do {
             let totalByteCount = envelope.manifest.artifacts.reduce(Int64(0)) {
                 $0 + $1.byteCount
             }
+            let alreadyStaged = try envelope.manifest.artifacts.reduce(Int64(0)) {
+                let destination = try PackageVerifier.safeArtifactURL(
+                    path: $1.path,
+                    root: staging
+                )
+                if Self.fileSize(at: destination) == $1.byteCount {
+                    return $0 + $1.byteCount
+                }
+                let partial = destination.appendingPathExtension("partial")
+                return $0 + min(Self.fileSize(at: partial) ?? 0, $1.byteCount)
+            }
+            try Self.preflightStorage(
+                at: stagingRoot,
+                remainingByteCount: totalByteCount - alreadyStaged,
+                packageByteCount: totalByteCount
+            )
+            try await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .downloading,
+                receivedByteCount: alreadyStaged,
+                totalByteCount: totalByteCount
+            ))
             var completedByteCount: Int64 = 0
             for artifact in envelope.manifest.artifacts {
                 let destination = try PackageVerifier.safeArtifactURL(
@@ -205,28 +283,14 @@ public actor PackageDownloadCoordinator {
                     .reduce(location.artifactBaseURL) {
                         $0.appendingPathComponent(String($1), isDirectory: false)
                     }
-                if let backgroundTransport = transport as? any BackgroundFilePackageTransport {
-                    let completedBeforeArtifact = completedByteCount
-                    try await backgroundTransport.downloadArtifact(
-                        from: remoteURL,
-                        to: destination,
-                        expectedByteCount: artifact.byteCount,
-                        progress: { artifactBytes in
-                            await progress(
-                                PackageDownloadProgress(
-                                    packageID: envelope.manifest.packageID,
-                                    artifactPath: artifact.path,
-                                    receivedByteCount: completedBeforeArtifact + artifactBytes,
-                                    totalByteCount: totalByteCount
-                                )
-                            )
-                        }
-                    )
-                    completedByteCount += artifact.byteCount
-                    continue
-                }
-
                 let partial = destination.appendingPathExtension("partial")
+                let validatorURL = partial.appendingPathExtension("validator")
+                try? FileManager.default.removeItem(
+                    at: destination.appendingPathExtension("resume-data")
+                )
+                try? FileManager.default.removeItem(
+                    at: destination.appendingPathExtension("resume-progress")
+                )
                 let assembler = ResumableArtifactAssembler(
                     partialURL: partial,
                     expectedByteCount: artifact.byteCount
@@ -252,10 +316,41 @@ public actor PackageDownloadCoordinator {
                         state.receivedByteCount + chunkByteCount
                     )
                     let expected = Int(end - state.receivedByteCount)
-                    let chunk = try await transport.data(
-                        from: remoteURL,
-                        byteRange: state.receivedByteCount..<end
-                    )
+                    let requestedRange = state.receivedByteCount..<end
+                    let chunk: Data
+                    if let validated = transport as? any ValidatedRangePackageTransport {
+                        let response = try await validated.range(
+                            from: remoteURL,
+                            byteRange: requestedRange
+                        )
+                        guard response.totalByteCount == artifact.byteCount else {
+                            throw PackageDownloadError.invalidRangeResponse
+                        }
+                        if let existing = try? String(
+                            contentsOf: validatorURL,
+                            encoding: .utf8
+                        ), existing != response.validator {
+                            try? FileManager.default.removeItem(at: partial)
+                            try? FileManager.default.removeItem(at: validatorURL)
+                            throw PackageDownloadError.remoteArtifactChanged
+                        }
+                        if !FileManager.default.fileExists(atPath: validatorURL.path) {
+                            try FileManager.default.createDirectory(
+                                at: validatorURL.deletingLastPathComponent(),
+                                withIntermediateDirectories: true
+                            )
+                            try Data(response.validator.utf8).write(
+                                to: validatorURL,
+                                options: [.atomic]
+                            )
+                        }
+                        chunk = response.data
+                    } else {
+                        chunk = try await transport.data(
+                            from: remoteURL,
+                            byteRange: requestedRange
+                        )
+                    }
                     guard chunk.count == expected else {
                         throw PackageDownloadError.invalidChunkSize(
                             expected: expected,
@@ -282,19 +377,111 @@ public actor PackageDownloadCoordinator {
                             totalByteCount: totalByteCount
                         )
                     )
+                    try await transferStore.record(PackageTransferSnapshot(
+                        packageID: transferIdentity,
+                        phase: .downloading,
+                        receivedByteCount: completedByteCount + updated.receivedByteCount,
+                        totalByteCount: totalByteCount,
+                        artifactFilename: artifact.path
+                    ))
                 }
                 try await assembler.finalize(to: destination)
+                try? FileManager.default.removeItem(at: validatorURL)
                 completedByteCount += artifact.byteCount
             }
-            return try await installer.install(
+            try Task.checkCancellation()
+            await phase(.verifying)
+            try await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .verifying,
+                receivedByteCount: totalByteCount,
+                totalByteCount: totalByteCount
+            ))
+            try await installer.verifyStagedPackage(
                 envelope: envelope,
                 stagedDirectory: staging
             )
+            try Task.checkCancellation()
+            try? FileManager.default.removeItem(
+                at: staging.appendingPathComponent(".package-identity")
+            )
+            await phase(.installing)
+            try await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .installing,
+                receivedByteCount: totalByteCount,
+                totalByteCount: totalByteCount
+            ))
+            let installed = try await installer.installVerified(
+                envelope: envelope,
+                stagedDirectory: staging
+            )
+            try await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .active,
+                receivedByteCount: totalByteCount,
+                totalByteCount: totalByteCount
+            ))
+            return installed
+        } catch is CancellationError {
+            try? await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .paused,
+                receivedByteCount: Self.stagedByteCount(
+                    for: envelope.manifest,
+                    under: staging
+                ),
+                totalByteCount: envelope.manifest.artifacts.reduce(0) { $0 + $1.byteCount },
+                detail: "Paused"
+            ))
+            throw CancellationError()
         } catch let error as PackageVerificationError {
             try? FileManager.default.removeItem(at: staging)
             throw error
         } catch let error as PackageInstallError {
-            try? FileManager.default.removeItem(at: staging)
+            switch error {
+            case .insufficientSpace, .fileOperationFailed:
+                break
+            default:
+                try? FileManager.default.removeItem(at: staging)
+            }
+            try? await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .failed,
+                receivedByteCount: Self.stagedByteCount(
+                    for: envelope.manifest,
+                    under: staging
+                ),
+                totalByteCount: envelope.manifest.artifacts.reduce(0) { $0 + $1.byteCount },
+                detail: String(describing: error)
+            ))
+            throw error
+        } catch let error as ArtifactAssemblyError {
+            if error != .fileOperationFailed {
+                try? FileManager.default.removeItem(at: staging)
+            }
+            try? await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .failed,
+                receivedByteCount: Self.stagedByteCount(
+                    for: envelope.manifest,
+                    under: staging
+                ),
+                totalByteCount: envelope.manifest.artifacts.reduce(0) { $0 + $1.byteCount },
+                detail: String(describing: error)
+            ))
+            throw error
+        } catch {
+            try? await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .failed,
+                receivedByteCount: Self.stagedByteCount(
+                    for: envelope.manifest,
+                    under: staging
+                ),
+                totalByteCount: envelope.manifest.artifacts.reduce(0) { $0 + $1.byteCount },
+                detail: String(describing: error)
+            ))
             throw error
         }
     }
@@ -309,5 +496,42 @@ public actor PackageDownloadCoordinator {
             return nil
         }
         return Int64(size)
+    }
+
+    private static func preflightStorage(
+        at url: URL,
+        remainingByteCount: Int64,
+        packageByteCount: Int64
+    ) throws {
+        let available = try url.deletingLastPathComponent().resourceValues(
+            forKeys: [.volumeAvailableCapacityForImportantUsageKey]
+        ).volumeAvailableCapacityForImportantUsage ?? 0
+        let reserve = max(256_000_000, packageByteCount / 10)
+        let required = remainingByteCount + reserve
+        guard available >= required else {
+            throw PackageInstallError.insufficientSpace(
+                required: required,
+                available: available
+            )
+        }
+    }
+
+    private static func stagedByteCount(
+        for manifest: PackageManifest,
+        under root: URL
+    ) -> Int64 {
+        manifest.artifacts.reduce(0) { total, artifact in
+            guard let destination = try? PackageVerifier.safeArtifactURL(
+                path: artifact.path,
+                root: root
+            ) else { return total }
+            let complete = fileSize(at: destination) == artifact.byteCount
+                ? artifact.byteCount : 0
+            let partial = min(
+                fileSize(at: destination.appendingPathExtension("partial")) ?? 0,
+                artifact.byteCount
+            )
+            return total + max(complete, partial)
+        }
     }
 }

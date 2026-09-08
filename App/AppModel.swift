@@ -2,6 +2,7 @@ import Foundation
 import CryptoKit
 import CoreML
 import Darwin
+import OSLog
 import SwiftUI
 import UIKit
 import AuroraSpeciesKit
@@ -18,6 +19,8 @@ enum ModelSetupState: Equatable {
     case available
     case updateAvailable
     case downloading(Double)
+    case verifying
+    case installing
     case paused(Double)
     case ready
     case failed(String)
@@ -83,6 +86,10 @@ enum AppearancePreference: String, CaseIterable, Identifiable {
 
 @MainActor
 final class AppModel: ObservableObject {
+    private static let packageLogger = Logger(
+        subsystem: "com.example.AuroraSurvivalAgent",
+        category: "PackageTransfer"
+    )
     @Published var modelSelection: ModelSelectionPreference = .lite {
         didSet {
             modelPreferenceStore.save(modelSelection)
@@ -112,6 +119,7 @@ final class AppModel: ObservableObject {
     ] = [:]
     @Published private(set) var catalogStatus = "Connect to a signed package catalog."
     @Published private(set) var isLoadingCatalog = false
+    @Published private(set) var downloadThermalWarning: String?
     @Published private(set) var offlineMaps: [ResolvedOfflineMap] = []
     @Published private(set) var speciesPackDescriptor: SpeciesPackDescriptor?
     @Published private(set) var speciesRuntimeError: String?
@@ -150,7 +158,9 @@ final class AppModel: ObservableObject {
     private let userDefaults: UserDefaults
     private let onboardingStore: OnboardingStateStore
     private var isRefreshingActivePacks = false
+    private var activePackRefreshRequested = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
+    private var packageDownloadProgress: [String: Double] = [:]
     private lazy var wifiPackageTransport = BackgroundURLSessionPackageTransport(
         identifier: "com.example.AuroraSurvivalAgent.packages.wifi",
         allowsCellularAccess: false
@@ -467,14 +477,14 @@ final class AppModel: ObservableObject {
         let modelState = packageState(for: modelEntry)
         let ragState = packageState(for: ragEntry)
         let ownsDependencyTransfer = switch modelState {
-        case .downloading, .paused:
+        case .downloading, .verifying, .installing, .paused:
             true
         default:
             false
         }
-        if case let .failed(message) = modelState { return .failed(message) }
+        if case let .failed(message, _) = modelState { return .failed(message) }
         if ownsDependencyTransfer,
-           case let .failed(message) = ragState {
+           case let .failed(message, _) = ragState {
             return .failed(message)
         }
         if case .updateAvailable = modelState { return .updateAvailable }
@@ -485,6 +495,10 @@ final class AppModel: ObservableObject {
             )
         }
         let total = Double(modelEntry.totalByteCount + ragEntry.totalByteCount)
+        if ownsDependencyTransfer, case .verifying = ragState { return .verifying }
+        if ownsDependencyTransfer, case .installing = ragState { return .installing }
+        if case .verifying = modelState { return .verifying }
+        if case .installing = modelState { return .installing }
         if ownsDependencyTransfer,
            case let .downloading(fraction) = ragState {
             return .downloading(
@@ -657,7 +671,11 @@ final class AppModel: ObservableObject {
         }
 
         packageDownloadStates[entry.id] = .downloading(0)
+        let transferStartedAt = ContinuousClock.now
         do {
+            if !isThinking { await unloadModel() }
+            unloadSpeciesClassifier()
+            Self.packageLogger.info("Package transfer started: \(entry.id, privacy: .public)")
             let location = try entry.remoteLocation(relativeTo: catalogURL)
             let coordinator = PackageDownloadCoordinator(
                 stagingRoot: appDataRoot.appendingPathComponent(
@@ -668,7 +686,7 @@ final class AppModel: ObservableObject {
                     ? cellularPackageTransport
                     : wifiPackageTransport,
                 installer: packageInstaller,
-                chunkByteCount: 8 * 1_048_576
+                chunkByteCount: 16 * 1_048_576
             )
             _ = try await coordinator.downloadAndInstall(
                 from: location,
@@ -678,14 +696,38 @@ final class AppModel: ObservableObject {
                     kind: entry.kind
                 ),
                 progress: { [weak self] progress in
+                    self?.packageDownloadProgress[entry.id] = progress.fractionCompleted
                     self?.packageDownloadStates[entry.id] = .downloading(
                         progress.fractionCompleted
                     )
+                },
+                phase: { [weak self] phase in
+                    switch phase {
+                    case .downloading:
+                        break
+                    case .verifying:
+                        self?.packageDownloadStates[entry.id] = .verifying
+                        Self.packageLogger.info(
+                            "Package verification started after \(transferStartedAt.duration(to: .now).components.seconds, privacy: .public)s"
+                        )
+                    case .installing:
+                        self?.packageDownloadStates[entry.id] = .installing
+                        Self.packageLogger.info(
+                            "Package activation started after \(transferStartedAt.duration(to: .now).components.seconds, privacy: .public)s"
+                        )
+                    default:
+                        break
+                    }
                 }
             )
             try await refreshInstalledPackageStates()
             await refreshActivePacks()
+            packageDownloadProgress[entry.id] = nil
+            Self.packageLogger.info(
+                "Package transfer completed after \(transferStartedAt.duration(to: .now).components.seconds, privacy: .public)s"
+            )
         } catch PackageInstallError.packageAlreadyInstalled {
+            packageDownloadProgress[entry.id] = nil
             try? await refreshInstalledPackageStates()
             await refreshActivePacks()
         } catch is CancellationError {
@@ -699,22 +741,25 @@ final class AppModel: ObservableObject {
             }
             packageDownloadStates[entry.id] = .paused(fraction)
         } catch {
+            Self.packageLogger.error(
+                "Package transfer failed after \(transferStartedAt.duration(to: .now).components.seconds, privacy: .public)s: \(String(describing: error), privacy: .public)"
+            )
             packageDownloadStates[entry.id] = .failed(
-                Self.userMessage(for: error)
+                Self.userMessage(for: error),
+                resumableFraction: packageDownloadProgress[entry.id]
             )
         }
     }
 
     func startDownload(_ entry: PackageCatalogEntry) {
         guard downloadTasks[entry.id] == nil else { return }
+        setPausedDownload(entry.id, paused: false)
         setPendingDownload(entry.id, pending: true)
         downloadTasks[entry.id] = Task { [weak self] in
             await self?.downloadWithDependencies(entry)
             if let self,
-               case .paused = self.packageDownloadStates[entry.id] {
-                // Keep the identity so a normal relaunch can resume it.
-            } else {
-                self?.setPendingDownload(entry.id, pending: false)
+               case .installed = self.packageDownloadStates[entry.id] {
+                self.setPendingDownload(entry.id, pending: false)
             }
             self?.downloadTasks[entry.id] = nil
         }
@@ -724,11 +769,22 @@ final class AppModel: ObservableObject {
         await wifiPackageTransport.recoverOrphanedTasks()
         await cellularPackageTransport.recoverOrphanedTasks()
         await ensureCatalogLoaded()
+        try? await refreshInstalledPackageStates()
         let pending = Set(
             userDefaults.stringArray(forKey: Self.pendingDownloadsDefaultsKey)
                 ?? []
         )
         for entry in catalogEntries where pending.contains(entry.id) {
+            if case .installed = packageDownloadStates[entry.id] {
+                setPendingDownload(entry.id, pending: false)
+                continue
+            }
+            if pausedDownloadIDs.contains(entry.id) {
+                if packageDownloadStates[entry.id] == nil {
+                    packageDownloadStates[entry.id] = .paused(0)
+                }
+                continue
+            }
             if packageDownloadStates[entry.id] == nil {
                 packageDownloadStates[entry.id] = .paused(0)
             }
@@ -748,7 +804,19 @@ final class AppModel: ObservableObject {
                 )
                 return
             }
-            await download(dependency)
+            try? await refreshInstalledPackageStates()
+            if case let .installed(active) = packageDownloadStates[dependency.id] {
+                if !active {
+                    try? await packageInstaller.activate(
+                        packageID: dependency.packageID,
+                        version: dependency.version
+                    )
+                    try? await refreshInstalledPackageStates()
+                    await refreshActivePacks()
+                }
+            } else {
+                await download(dependency)
+            }
             guard case .installed(active: true) = packageDownloadStates[dependency.id]
             else {
                 if Task.isCancelled {
@@ -770,11 +838,23 @@ final class AppModel: ObservableObject {
     func cancelDownload(_ entry: PackageCatalogEntry) {
         if case let .downloading(fraction) = packageDownloadStates[entry.id] {
             packageDownloadStates[entry.id] = .paused(fraction)
+        } else if packageDownloadStates[entry.id] == .verifying
+                    || packageDownloadStates[entry.id] == .installing {
+            packageDownloadStates[entry.id] = .paused(1)
         }
+        setPausedDownload(entry.id, paused: true)
         downloadTasks[entry.id]?.cancel()
     }
 
     func removePackage(_ entry: PackageCatalogEntry) {
+        if case .failed = packageDownloadStates[entry.id] {
+            discardStagedDownload(entry)
+            return
+        }
+        if case .paused = packageDownloadStates[entry.id] {
+            discardStagedDownload(entry)
+            return
+        }
         Task { [weak self] in
             guard let self else { return }
             do {
@@ -792,14 +872,47 @@ final class AppModel: ObservableObject {
         }
     }
 
+    private func discardStagedDownload(_ entry: PackageCatalogEntry) {
+        downloadTasks[entry.id]?.cancel()
+        let root = appDataRoot.appendingPathComponent(
+            "download-staging",
+            isDirectory: true
+        )
+        let identity = "\(entry.packageID)@\(entry.version)"
+        let directories = (try? FileManager.default.contentsOfDirectory(
+            at: root,
+            includingPropertiesForKeys: [.isDirectoryKey]
+        )) ?? []
+        for directory in directories where directory.lastPathComponent.hasPrefix("download-") {
+            let marker = directory.appendingPathComponent(".package-identity")
+            guard (try? String(contentsOf: marker, encoding: .utf8)) == identity else {
+                continue
+            }
+            try? FileManager.default.removeItem(at: directory)
+        }
+        setPendingDownload(entry.id, pending: false)
+        setPausedDownload(entry.id, paused: false)
+        packageDownloadProgress[entry.id] = nil
+        packageDownloadStates[entry.id] = .available
+    }
+
     func packageState(for entry: PackageCatalogEntry) -> PackageDownloadState {
         packageDownloadStates[entry.id] ?? .available
     }
 
     func refreshActivePacks() async {
-        guard !isRefreshingActivePacks else { return }
+        if isRefreshingActivePacks {
+            activePackRefreshRequested = true
+            return
+        }
         isRefreshingActivePacks = true
-        defer { isRefreshingActivePacks = false }
+        defer {
+            isRefreshingActivePacks = false
+            if activePackRefreshRequested {
+                activePackRefreshRequested = false
+                Task { await self.refreshActivePacks() }
+            }
+        }
 
         let verifier = PackageVerifier(
             trustedKeys: Self.loadTrustedPackageKeys()
@@ -3651,6 +3764,10 @@ final class AppModel: ObservableObject {
                 if case .downloading = packageDownloadStates[entry.id] {
                     continue
                 }
+                if packageDownloadStates[entry.id] == .verifying
+                    || packageDownloadStates[entry.id] == .installing {
+                    continue
+                }
                 if case .paused = packageDownloadStates[entry.id] {
                     continue
                 }
@@ -3664,6 +3781,8 @@ final class AppModel: ObservableObject {
         switch error {
         case PackageDownloadError.unexpectedPackage:
             return "The package identity did not match the signed catalog."
+        case PackageDownloadError.remoteArtifactChanged:
+            return "The download changed on the server. Resume to restart this file safely."
         case PackageCatalogError.invalidSignature,
              PackageVerificationError.invalidSignature:
             return "The signature is invalid. Nothing was installed."
@@ -3677,6 +3796,13 @@ final class AppModel: ObservableObject {
         default:
             return error.localizedDescription
         }
+    }
+
+    func updateDownloadThermalState() {
+        let state = ProcessInfo.processInfo.thermalState
+        downloadThermalWarning = state == .serious || state == .critical
+            ? "Your iPhone is hot. Downloads will continue, but iOS may slow or pause them."
+            : nil
     }
 
     private static var appVersion: String {
@@ -3695,6 +3821,12 @@ final class AppModel: ObservableObject {
     private static let appearanceDefaultsKey = "Aurora.appearance"
     private static let pendingDownloadsDefaultsKey =
         "Aurora.pendingPackageDownloads"
+    private static let pausedDownloadsDefaultsKey =
+        "Aurora.pausedPackageDownloads"
+
+    private var pausedDownloadIDs: Set<String> {
+        Set(userDefaults.stringArray(forKey: Self.pausedDownloadsDefaultsKey) ?? [])
+    }
 
     var hasAcceptedLegalTerms: Bool {
         onboardingState.accepts(schemaVersion: Self.legalSchemaVersion)
@@ -3731,6 +3863,15 @@ final class AppModel: ObservableObject {
         userDefaults.set(
             values.sorted(),
             forKey: Self.pendingDownloadsDefaultsKey
+        )
+    }
+
+    private func setPausedDownload(_ id: String, paused: Bool) {
+        var values = pausedDownloadIDs
+        if paused { values.insert(id) } else { values.remove(id) }
+        userDefaults.set(
+            values.sorted(),
+            forKey: Self.pausedDownloadsDefaultsKey
         )
     }
 
@@ -3797,10 +3938,12 @@ final class AppModel: ObservableObject {
 enum PackageDownloadState: Equatable {
     case available
     case downloading(Double)
+    case verifying
+    case installing
     case paused(Double)
     case installed(active: Bool)
     case updateAvailable(installedVersion: String, availableVersion: String)
-    case failed(String)
+    case failed(String, resumableFraction: Double? = nil)
 }
 
 struct ChatMessage: Identifiable {

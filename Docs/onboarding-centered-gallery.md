@@ -51,3 +51,8 @@ model activation, inference, or Cloudflare distribution.
   restored-state details to Tools.
 - Considered: state-aware onboarding labels; rejected to keep first-run model
   selection simple and consistent.
+- Chosen: place the first-page agreement action before the legal-review link
+  and give it a 52-point minimum height so the primary action is clear.
+- Chosen: give the second-page Back and Continue labels equal flexible widths
+  and 50-point minimum heights; fixed pixel widths were rejected because they
+  do not adapt well to iPad or Dynamic Type.

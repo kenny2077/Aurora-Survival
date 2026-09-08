@@ -78,6 +78,7 @@ targets:
       configs:
         Debug:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUG AURORA_MESH_BETA"
+          AURORA_PACKAGE_CATALOG_URL: "https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/catalog-development.json"
           AURORA_CAMERA_USAGE_DESCRIPTION: "Take a photo for offline visual assistance or scan an in-person Aurora Mesh Chat invite."
         Release:
           EXCLUDED_SOURCE_FILE_NAMES: development_trusted_package_keys.json

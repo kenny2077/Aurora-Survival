@@ -1,6 +1,10 @@
 import Foundation
 import XCTest
+#if SWIFT_PACKAGE
 @testable import AuroraCore
+#else
+@testable import Aurora
+#endif
 
 final class SpeciesPackResolverTests: XCTestCase {
     func testResolvesVerifiedSpeciesArtifacts() throws {

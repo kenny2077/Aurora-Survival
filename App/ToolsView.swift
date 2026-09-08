@@ -48,7 +48,10 @@ struct ToolsView: View {
                     .accessibilityIdentifier("tools.settings")
             }
         }
-        .task { await model.ensureCatalogLoaded() }
+        .task {
+            model.updateDownloadThermalState()
+            await model.ensureCatalogLoaded()
+        }
         .sheet(isPresented: $showsSettings) {
             ToolsSettingsView(model: model, checklistStore: checklistStore)
         }
@@ -79,6 +82,11 @@ struct ToolsView: View {
     private var offlineModels: some View {
         VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
             Text("Offline Models").font(.title2.bold())
+            if let warning = model.downloadThermalWarning {
+                Label(warning, systemImage: "thermometer.high")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+            }
             GlassEffectContainer(spacing: AuroraDesign.Space.sm) {
                 VStack(spacing: AuroraDesign.Space.sm) {
                     tierCard(.lite)
@@ -176,6 +184,11 @@ struct ToolsView: View {
                 .buttonBorderShape(.circle)
                 .accessibilityLabel("Pause \(tier.displayName) download")
                 .accessibilityIdentifier("tools.model.pause.\(tier.rawValue)")
+            case .verifying, .installing:
+                ProgressView()
+                    .accessibilityLabel(
+                        setupState == .verifying ? "Verifying \(tier.displayName)" : "Installing \(tier.displayName)"
+                    )
             case let .paused(fraction):
                 modelIconButton(
                     "play.fill",
@@ -231,9 +244,21 @@ struct ToolsView: View {
             progressRow(tier, fraction: fraction, paused: false)
         case let .paused(fraction):
             progressRow(tier, fraction: fraction, paused: true)
+        case .verifying:
+            finalizationRow("Verifying downloaded files")
+        case .installing:
+            finalizationRow("Installing offline model")
         default:
             EmptyView()
         }
+    }
+
+    private func finalizationRow(_ title: String) -> some View {
+        HStack(spacing: AuroraDesign.Space.sm) {
+            ProgressView()
+            Text(title).font(.caption.weight(.semibold))
+        }
+        .foregroundStyle(.secondary)
     }
 
     private func progressRow(

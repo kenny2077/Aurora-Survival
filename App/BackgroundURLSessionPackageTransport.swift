@@ -1,30 +1,22 @@
 import Foundation
 
 final class BackgroundURLSessionPackageTransport: NSObject,
-    BackgroundFilePackageTransport,
+    ValidatedRangePackageTransport,
     URLSessionDownloadDelegate,
     URLSessionTaskDelegate,
     @unchecked Sendable {
 
-    private final class Operation {
-        let destination: URL
-        let expectedByteCount: Int64
-        let initialByteCount: Int64
-        let progress: @Sendable (Int64) async -> Void
-        var continuation: CheckedContinuation<Void, Error>?
-        var finished = false
+    private final class RangeOperation {
+        let requestedRange: Range<Int64>
+        var downloadedData: Data?
+        var downloadError: Error?
+        var continuation: CheckedContinuation<PackageRangeResponse, Error>?
 
         init(
-            destination: URL,
-            expectedByteCount: Int64,
-            initialByteCount: Int64,
-            progress: @escaping @Sendable (Int64) async -> Void,
-            continuation: CheckedContinuation<Void, Error>
+            requestedRange: Range<Int64>,
+            continuation: CheckedContinuation<PackageRangeResponse, Error>
         ) {
-            self.destination = destination
-            self.expectedByteCount = expectedByteCount
-            self.initialByteCount = initialByteCount
-            self.progress = progress
+            self.requestedRange = requestedRange
             self.continuation = continuation
         }
     }
@@ -32,7 +24,7 @@ final class BackgroundURLSessionPackageTransport: NSObject,
     private let identifier: String
     private let allowsCellularAccess: Bool
     private let lock = NSLock()
-    private var operations: [Int: Operation] = [:]
+    private var operations: [Int: RangeOperation] = [:]
     private static let lifecycleLock = NSLock()
     private static var completionHandlers: [String: () -> Void] = [:]
 
@@ -90,104 +82,101 @@ final class BackgroundURLSessionPackageTransport: NSObject,
     }
 
     func data(from url: URL, byteRange: Range<Int64>) async throws -> Data {
+        try await range(from: url, byteRange: byteRange).data
+    }
+
+    func range(
+        from url: URL,
+        byteRange: Range<Int64>
+    ) async throws -> PackageRangeResponse {
         var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         request.setValue(
             "bytes=\(byteRange.lowerBound)-\(byteRange.upperBound - 1)",
             forHTTPHeaderField: "Range"
         )
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse,
-              http.statusCode == 206 else {
-            throw PackageDownloadError.invalidRangeResponse
-        }
-        return data
-    }
-
-    func downloadArtifact(
-        from url: URL,
-        to destination: URL,
-        expectedByteCount: Int64,
-        progress: @escaping @Sendable (Int64) async -> Void
-    ) async throws {
-        if Self.fileSize(destination) == expectedByteCount {
-            await progress(expectedByteCount)
-            return
-        }
-        try FileManager.default.createDirectory(
-            at: destination.deletingLastPathComponent(),
-            withIntermediateDirectories: true
-        )
-
-        let resumeURL = Self.resumeURL(for: destination)
-        let progressURL = Self.progressURL(for: destination)
-        let resumeData = try? Data(contentsOf: resumeURL)
-        let initialByteCount = Self.persistedProgress(at: progressURL)
-
-        try await withTaskCancellationHandler {
+        return try await withTaskCancellationHandler {
             try await withCheckedThrowingContinuation { continuation in
-                let task: URLSessionDownloadTask
-                if let resumeData, !resumeData.isEmpty {
-                    task = backgroundSession.downloadTask(withResumeData: resumeData)
-                } else {
-                    var request = URLRequest(url: url)
-                    request.cachePolicy = .reloadIgnoringLocalCacheData
-                    task = backgroundSession.downloadTask(with: request)
+                let task = backgroundSession.downloadTask(with: request)
+                task.taskDescription = "range:\(byteRange.lowerBound):\(byteRange.upperBound)"
+                withLock {
+                    operations[task.taskIdentifier] = RangeOperation(
+                        requestedRange: byteRange,
+                        continuation: continuation
+                    )
                 }
-                task.taskDescription = destination.path
-                let operation = Operation(
-                    destination: destination,
-                    expectedByteCount: expectedByteCount,
-                    initialByteCount: initialByteCount,
-                    progress: progress,
-                    continuation: continuation
-                )
-                withLock { operations[task.taskIdentifier] = operation }
                 task.resume()
             }
         } onCancel: {
-            self.pauseTransfer(to: destination)
+            self.cancel(range: byteRange)
         }
     }
 
+    /// Orphaned tasks contain at most one uncommitted chunk. Wait for their
+    /// cancellation before the coordinator resumes from the durable partial.
     func recoverOrphanedTasks() async {
         let tasks = await allBackgroundTasks()
-        for task in tasks {
-            guard let download = task as? URLSessionDownloadTask,
-                  let path = task.taskDescription,
-                  !path.isEmpty else {
-                task.cancel()
-                continue
-            }
-            let destination = URL(fileURLWithPath: path)
-            download.cancel(byProducingResumeData: { resumeData in
-                guard let resumeData else { return }
-                try? resumeData.write(
-                    to: Self.resumeURL(for: destination),
-                    options: [.atomic]
-                )
-                Self.persist(
-                    task.countOfBytesReceived,
-                    at: Self.progressURL(for: destination)
-                )
-            })
+        for task in tasks { task.cancel() }
+        guard !tasks.isEmpty else { return }
+        while !(await allBackgroundTasks()).isEmpty {
+            try? await Task.sleep(for: .milliseconds(50))
         }
     }
 
     func urlSession(
         _ session: URLSession,
         downloadTask: URLSessionDownloadTask,
-        didWriteData bytesWritten: Int64,
-        totalBytesWritten: Int64,
-        totalBytesExpectedToWrite: Int64
+        didFinishDownloadingTo location: URL
     ) {
-        guard let operation = withLock({ operations[downloadTask.taskIdentifier] })
-        else { return }
-        let received = min(
-            operation.expectedByteCount,
-            operation.initialByteCount + totalBytesWritten
-        )
-        Self.persist(received, at: Self.progressURL(for: operation.destination))
-        Task { await operation.progress(received) }
+        withLock {
+            do {
+                operations[downloadTask.taskIdentifier]?.downloadedData = try Data(
+                    contentsOf: location
+                )
+            } catch {
+                operations[downloadTask.taskIdentifier]?.downloadError = error
+            }
+        }
+    }
+
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didCompleteWithError error: Error?
+    ) {
+        guard let operation = withLock({
+            operations.removeValue(forKey: task.taskIdentifier)
+        }) else { return }
+        let continuation = operation.continuation
+        operation.continuation = nil
+
+        if let error {
+            let nsError = error as NSError
+            continuation?.resume(throwing:
+                nsError.code == NSURLErrorCancelled ? CancellationError() : error
+            )
+            return
+        }
+
+        do {
+            if let downloadError = operation.downloadError { throw downloadError }
+            guard let response = task.response as? HTTPURLResponse,
+                  response.url == task.originalRequest?.url,
+                  let downloadedData = operation.downloadedData else {
+                throw PackageDownloadError.invalidRangeResponse
+            }
+            let metadata = try PackageRangeResponse.validate(
+                response: response,
+                requestedRange: operation.requestedRange
+            )
+            continuation?.resume(returning: PackageRangeResponse(
+                data: downloadedData,
+                totalByteCount: metadata.totalByteCount,
+                validator: metadata.validator
+            ))
+        } catch {
+            continuation?.resume(throwing: error)
+        }
     }
 
     func urlSessionDidFinishEvents(
@@ -199,81 +188,13 @@ final class BackgroundURLSessionPackageTransport: NSObject,
         DispatchQueue.main.async { completion?() }
     }
 
-    func urlSession(
-        _ session: URLSession,
-        downloadTask: URLSessionDownloadTask,
-        didFinishDownloadingTo location: URL
-    ) {
-        guard let operation = withLock({ operations[downloadTask.taskIdentifier] })
-        else { return }
-        do {
-            if FileManager.default.fileExists(atPath: operation.destination.path) {
-                try FileManager.default.removeItem(at: operation.destination)
-            }
-            try FileManager.default.moveItem(at: location, to: operation.destination)
-            try? FileManager.default.removeItem(at: Self.resumeURL(for: operation.destination))
-            try? FileManager.default.removeItem(at: Self.progressURL(for: operation.destination))
-            operation.finished = true
-            let continuation = operation.continuation
-            operation.continuation = nil
-            Task { await operation.progress(operation.expectedByteCount) }
-            continuation?.resume()
-        } catch {
-            operation.finished = true
-            let continuation = operation.continuation
-            operation.continuation = nil
-            continuation?.resume(throwing: error)
-        }
-    }
-
-    func urlSession(
-        _ session: URLSession,
-        task: URLSessionTask,
-        didCompleteWithError error: Error?
-    ) {
-        guard let operation = withLock({ operations.removeValue(forKey: task.taskIdentifier) }),
-              !operation.finished else { return }
-        let nsError = error as NSError?
-        if let resumeData = nsError?.userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
-            try? resumeData.write(
-                to: Self.resumeURL(for: operation.destination),
-                options: [.atomic]
-            )
-            Self.persist(
-                operation.initialByteCount + task.countOfBytesReceived,
-                at: Self.progressURL(for: operation.destination)
-            )
-        }
-        let continuation = operation.continuation
-        operation.continuation = nil
-        if nsError?.code == NSURLErrorCancelled {
-            continuation?.resume(throwing: CancellationError())
-        } else {
-            continuation?.resume(throwing: error ?? URLError(.unknown))
-        }
-    }
-
-    private func pauseTransfer(to destination: URL) {
-        let target = withLock {
-            operations.first { $0.value.destination == destination }
-        }
-        guard let (taskIdentifier, operation) = target else { return }
+    private func cancel(range: Range<Int64>) {
         backgroundSession.getAllTasks { tasks in
-            guard let task = tasks.first(where: {
-                $0.taskIdentifier == taskIdentifier
-            }) as? URLSessionDownloadTask else { return }
-            task.cancel(byProducingResumeData: { resumeData in
-                if let resumeData {
-                    try? resumeData.write(
-                        to: Self.resumeURL(for: operation.destination),
-                        options: [.atomic]
-                    )
+            tasks.first(where: { task in
+                self.withLock {
+                    self.operations[task.taskIdentifier]?.requestedRange == range
                 }
-                Self.persist(
-                    operation.initialByteCount + task.countOfBytesReceived,
-                    at: Self.progressURL(for: operation.destination)
-                )
-            })
+            })?.cancel()
         }
     }
 
@@ -294,29 +215,5 @@ final class BackgroundURLSessionPackageTransport: NSObject,
               (200..<300).contains(http.statusCode) else {
             throw URLError(.badServerResponse)
         }
-    }
-
-    private static func fileSize(_ url: URL) -> Int64? {
-        guard let value = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize
-        else { return nil }
-        return Int64(value)
-    }
-
-    private static func resumeURL(for destination: URL) -> URL {
-        destination.appendingPathExtension("resume-data")
-    }
-
-    private static func progressURL(for destination: URL) -> URL {
-        destination.appendingPathExtension("resume-progress")
-    }
-
-    private static func persistedProgress(at url: URL) -> Int64 {
-        guard let text = try? String(contentsOf: url, encoding: .utf8),
-              let value = Int64(text) else { return 0 }
-        return value
-    }
-
-    private static func persist(_ value: Int64, at url: URL) {
-        try? Data(String(value).utf8).write(to: url, options: [.atomic])
     }
 }

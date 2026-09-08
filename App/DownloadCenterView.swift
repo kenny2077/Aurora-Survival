@@ -30,6 +30,13 @@ struct DownloadCenterView: View {
 
     var body: some View {
         List {
+            if let warning = model.downloadThermalWarning {
+                Section {
+                    Label(warning, systemImage: "thermometer.high")
+                        .foregroundStyle(.orange)
+                        .font(.callout)
+                }
+            }
             if showsCatalogConnection {
                 catalogSection
             }
@@ -282,6 +289,12 @@ struct PackageDownloadCard: View {
             }
             .accessibilityValue(fraction.formatted(.percent))
 
+        case .verifying:
+            statusRow("Verifying download", systemImage: "checkmark.shield")
+
+        case .installing:
+            statusRow("Installing", systemImage: "internaldrive")
+
         case let .paused(fraction):
             VStack(alignment: .leading, spacing: 8) {
                 ProgressView(value: fraction) {
@@ -317,15 +330,35 @@ struct PackageDownloadCard: View {
                 .buttonStyle(.bordered)
             }
 
-        case let .failed(message):
+        case let .failed(message, resumableFraction):
             VStack(alignment: .leading, spacing: 8) {
                 Label(message, systemImage: "exclamationmark.triangle.fill")
                     .font(.caption)
                     .foregroundStyle(.red)
-                Button("Resume", action: start)
-                    .buttonStyle(.borderedProminent)
+                if let resumableFraction, resumableFraction > 0 {
+                    ProgressView(value: resumableFraction) {
+                        Text("Saved at \(resumableFraction.formatted(.percent.precision(.fractionLength(0))))")
+                    }
+                }
+                HStack {
+                    Button("Resume", action: start)
+                        .buttonStyle(.borderedProminent)
+                    Button("Remove", role: .destructive) {
+                        confirmsRemoval = true
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
         }
+    }
+
+    private func statusRow(_ text: String, systemImage: String) -> some View {
+        HStack(spacing: 8) {
+            ProgressView()
+            Label(text, systemImage: systemImage)
+                .font(.subheadline.weight(.semibold))
+        }
+        .accessibilityIdentifier("package.finalizing.\(entry.id)")
     }
 
     private var icon: String {
