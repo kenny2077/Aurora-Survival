@@ -157,7 +157,7 @@ final class AppModel: ObservableObject {
     private let capturedPhotoSaver: any CapturedPhotoSaving
     private let userDefaults: UserDefaults
     private let onboardingStore: OnboardingStateStore
-    private var isRefreshingActivePacks = false
+    @Published private(set) var isRefreshingActivePacks = false
     private var activePackRefreshRequested = false
     private var downloadTasks: [String: Task<Void, Never>] = [:]
     private var packageDownloadProgress: [String: Double] = [:]
@@ -490,7 +490,8 @@ final class AppModel: ObservableObject {
         if case .updateAvailable = modelState { return .updateAvailable }
         if case .updateAvailable = ragState { return .updateAvailable }
         if case .installed = modelState, case .installed = ragState {
-            return runtimeTiers.contains(tier) ? .ready : .failed(
+            if runtimeTiers.contains(tier) { return .ready }
+            return isRefreshingActivePacks ? .verifying : .failed(
                 "The installed model or shared survival knowledge failed validation."
             )
         }
@@ -1048,6 +1049,7 @@ final class AppModel: ObservableObject {
             case .lite:
                 configuration = .lite(
                     modelURL: modelDescriptor.modelURL,
+                    maximumOutputTokens: modelDescriptor.maximumOutputTokens,
                     threadCount: 4
                 )
             case .expert:

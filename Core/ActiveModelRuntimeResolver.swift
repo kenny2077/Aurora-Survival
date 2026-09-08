@@ -363,15 +363,17 @@ public struct ActiveModelRuntimeResolver: Sendable {
         metadata: [String: String],
         issues: inout [ActiveModelRuntimeIssue]
     ) -> ActiveModelRuntimeDescriptor? {
-        guard metadata["model_identity"] == Self.acceptedLiteModelIdentity,
+        guard let maximumOutputTokens = Int(metadata["maximum_output_tokens"] ?? ""),
+              metadata["model_identity"] == Self.acceptedLiteModelIdentity,
               metadata["model_family"] == "gemma3",
               metadata["quantization"] == "Q4_K_M",
               metadata["runtime_release"] == Self.acceptedRuntimeRelease,
               metadata["chat_template"] == "embedded",
               metadata["context_tokens"]
                 == String(LlamaRuntimeConfiguration.liteContextTokens),
-              metadata["maximum_output_tokens"]
-                == String(LlamaRuntimeConfiguration.liteMaximumOutputTokens),
+              maximumOutputTokens == 160
+                || maximumOutputTokens
+                    == LlamaRuntimeConfiguration.liteMaximumOutputTokens,
               metadata["required_rag_package_id"]
                 == "knowledge.shared-survival-rag-v3",
               metadata["required_rag_contract"]
@@ -385,7 +387,7 @@ public struct ActiveModelRuntimeResolver: Sendable {
             tier: .lite,
             modelURL: modelURL,
             contextTokens: LlamaRuntimeConfiguration.liteContextTokens,
-            maximumOutputTokens: LlamaRuntimeConfiguration.liteMaximumOutputTokens
+            maximumOutputTokens: maximumOutputTokens
         )
     }
 

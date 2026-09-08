@@ -57,12 +57,13 @@ public struct LlamaRuntimeConfiguration: Equatable, Sendable {
 
     public static func lite(
         modelURL: URL,
+        maximumOutputTokens: Int = liteMaximumOutputTokens,
         threadCount: Int
     ) -> LlamaRuntimeConfiguration {
         LlamaRuntimeConfiguration(
             modelURL: modelURL,
             contextTokens: liteContextTokens,
-            maximumOutputTokens: liteMaximumOutputTokens,
+            maximumOutputTokens: maximumOutputTokens,
             threadCount: threadCount
         )
     }

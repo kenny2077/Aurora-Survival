@@ -33,6 +33,19 @@ final class LlamaRuntimeAdapterTests: XCTestCase {
         XCTAssertNil(configuration.visionProjectorURL)
     }
 
+    func testLiteConfigurationHonorsSignedLegacyOutputLimit() throws {
+        let fixture = try makeFiles(includeProjector: false)
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+
+        let configuration = LlamaRuntimeConfiguration.lite(
+            modelURL: fixture.model,
+            maximumOutputTokens: 160,
+            threadCount: 2
+        )
+
+        XCTAssertEqual(configuration.maximumOutputTokens, 160)
+    }
+
     func testTextTierNeverForwardsImage() async throws {
         let fixture = try makeFiles(includeProjector: false)
         defer { try? FileManager.default.removeItem(at: fixture.root) }

@@ -136,6 +136,18 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
         XCTAssertEqual(descriptor.maximumOutputTokens, 256)
     }
 
+    func testLegacyLiteTokenLimitRemainsLoadable() throws {
+        let fixture = try makeFixture(maximumOutputTokens: "160")
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+
+        let resolution = ActiveModelRuntimeResolver().resolve(
+            activePacks: snapshot(package: fixture.package)
+        )
+
+        XCTAssertTrue(resolution.issues.isEmpty)
+        XCTAssertEqual(resolution.descriptors[.lite]?.maximumOutputTokens, 160)
+    }
+
     func testMetadataCannotSelectUnverifiedArtifact() throws {
         let fixture = try makeFixture(
             modelPath: "weights/unverified.gguf",
@@ -224,7 +236,8 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
         modelPath: String = "weights/model.gguf",
         artifactPath: String = "weights/model.gguf",
         contextTokens: String = "2048",
-        modelIdentity: String = ActiveModelRuntimeResolver.acceptedLiteModelIdentity
+        modelIdentity: String = ActiveModelRuntimeResolver.acceptedLiteModelIdentity,
+        maximumOutputTokens: String = "256"
     ) throws -> (
         root: URL,
         modelURL: URL,
@@ -264,7 +277,7 @@ final class ActiveModelRuntimeResolverTests: XCTestCase {
                 "runtime_release": "b9637",
                 "chat_template": "embedded",
                 "context_tokens": contextTokens,
-                "maximum_output_tokens": "256",
+                "maximum_output_tokens": maximumOutputTokens,
                 "required_rag_package_id": "knowledge.shared-survival-rag-v3",
                 "required_rag_contract": "3",
             ]
