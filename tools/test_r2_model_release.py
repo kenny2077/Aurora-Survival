@@ -6,6 +6,7 @@ import pathlib
 import tempfile
 import unittest
 from unittest import mock
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 import publish_r2_models as release
 
@@ -38,14 +39,18 @@ class R2ModelReleaseTests(unittest.TestCase):
                 },
             ],
         }
-        private = release.serialization.load_pem_private_key(
-            (release.ROOT / ".trailguard/development/package-signing-key.pem").read_bytes(), password=None
+        private = Ed25519PrivateKey.generate()
+        public = private.public_key().public_bytes(
+            release.serialization.Encoding.Raw, release.serialization.PublicFormat.Raw
         )
         signed = {
             "catalog": catalog, "keyID": release.KEY_ID,
             "signature": release.base64.b64encode(private.sign(release.catalog_signing_payload(catalog))).decode(),
         }
-        with self.assertRaisesRegex(ValueError, "dependency mismatch"):
+        with mock.patch.object(release, "load_keyring", return_value=[{
+            "id": release.KEY_ID,
+            "publicKeyBase64": release.base64.b64encode(public).decode(),
+        }]), self.assertRaisesRegex(ValueError, "dependency mismatch"):
             release.validate_catalog(signed)
 
     def test_public_range_probe_requires_partial_content(self) -> None:

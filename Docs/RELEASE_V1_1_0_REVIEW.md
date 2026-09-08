@@ -64,3 +64,34 @@ Final legal-copy build/tests, final code safety pass after the requested push,
 ten-photo public-download report, package removal/reinstall and lifecycle checks,
 CI, real camera/library review, and App Store Connect account/metadata review.
 No security certification, App Review approval, or production SLA is claimed.
+
+## Post-push safety pass
+
+Reviewed the pushed candidate across package trust and activation, transport and
+resume, scanner lifecycle, model routing, photo/location handling, generated
+guidance, Release exclusions, and legal disclosures. This is a source/configuration
+review with automated regression checks, not a penetration test or independent
+medical/content certification.
+
+- Final regression run: all 30 Swift test classes passed; species packaging,
+  public-verification, R2 release, Expert packaging, and reproducibility checks passed.
+- Signed Release archive succeeded. Its resources contain the production keyring
+  and privacy manifest, not the development keyring. Binary string checks found
+  no species/physical benchmark environment controls or development key ID.
+- One follow-up found: scanner preparation task identity still used only encoder
+  digest. It now includes package identity/version, matching runtime invalidation.
+- Catalog verification checks current key validity. Installed-package verification
+  checks signing-time validity to preserve offline availability; revocation relies
+  on removing trust/recall, not wall-clock expiration of an installed model.
+- URLSession uses platform HTTPS validation; cross-host redirects remain permitted
+  for artifact hosting. Signatures and hashes authenticate the result. No claim
+  of a custom redirect allowlist is made.
+- Source-only checks cannot prove absence of memory warnings, all SDK collection,
+  harmful generated advice, or accessibility defects. Camera/library and actual
+  airplane-mode journeys remain owner manual checks.
+- Ten-photo sampling does not establish 504-class generalization or replace the
+  full 85-image acceptance exam. Its reduced scope is explicitly owner-approved.
+
+The candidate remains suitable for further testing, not a completed public-store
+release. Store contact/privacy URL, account access, metadata declarations, and
+manual approval remain required before submitting publicly.
