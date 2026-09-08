@@ -142,6 +142,43 @@ final class PackageDownloadCoordinatorTests: XCTestCase {
         XCTAssertEqual(recordedPhases, [.downloading, .verifying, .installing])
     }
 
+    func testAlreadyInstalledPackageDoesNotDownloadArtifacts() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let staged = fixture.root.appendingPathComponent("preinstalled")
+        let artifact = staged.appendingPathComponent("content/data.bin")
+        try FileManager.default.createDirectory(
+            at: artifact.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+        try fixture.artifactData.write(to: artifact)
+        _ = try await fixture.installer.install(
+            envelope: fixture.envelope,
+            stagedDirectory: staged
+        )
+        let transport = MemoryResumableTransport(
+            envelopeURL: fixture.location.envelopeURL,
+            envelopeData: try JSONEncoder().encode(fixture.envelope),
+            artifactData: fixture.artifactData
+        )
+        let coordinator = PackageDownloadCoordinator(
+            stagingRoot: fixture.root.appendingPathComponent("staging"),
+            transport: transport,
+            installer: fixture.installer,
+            chunkByteCount: 3
+        )
+
+        let installed = try await coordinator.downloadAndInstall(
+            from: fixture.location
+        )
+
+        XCTAssertEqual(installed.packageID, fixture.envelope.manifest.packageID)
+        let requestCount = await transport.totalRequestCount()
+        let ranges = await transport.requestedRanges()
+        XCTAssertEqual(requestCount, 1)
+        XCTAssertEqual(ranges, [])
+    }
+
     func testRangeResponseRequiresExactBoundsTotalAndValidator() throws {
         let url = URL(string: "https://example.invalid/artifact.bin")!
         let valid = HTTPURLResponse(

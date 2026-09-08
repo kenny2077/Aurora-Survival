@@ -212,6 +212,19 @@ public actor PackageDownloadCoordinator {
             throw PackageDownloadError.unexpectedPackage
         }
 
+        let current = try await installer.index()
+        if let installed = current.installed.first(where: {
+            $0.packageID == envelope.manifest.packageID
+                && $0.version == envelope.manifest.version
+        }) {
+            try await installer.activate(
+                packageID: installed.packageID,
+                version: installed.version
+            )
+            await phase(.active)
+            return installed
+        }
+
         let stagingKey = SHA256.hash(
             data: envelope.manifest.signingPayload
         ).prefix(12).map {
@@ -438,6 +451,31 @@ public actor PackageDownloadCoordinator {
         } catch let error as PackageVerificationError {
             try? FileManager.default.removeItem(at: staging)
             throw error
+        } catch PackageInstallError.packageAlreadyInstalled {
+            let current = try await installer.index()
+            guard let installed = current.installed.first(where: {
+                $0.packageID == envelope.manifest.packageID
+                    && $0.version == envelope.manifest.version
+            }) else {
+                throw PackageInstallError.packageAlreadyInstalled
+            }
+            try await installer.activate(
+                packageID: installed.packageID,
+                version: installed.version
+            )
+            try? FileManager.default.removeItem(at: staging)
+            try? await transferStore.record(PackageTransferSnapshot(
+                packageID: transferIdentity,
+                phase: .active,
+                receivedByteCount: envelope.manifest.artifacts.reduce(0) {
+                    $0 + $1.byteCount
+                },
+                totalByteCount: envelope.manifest.artifacts.reduce(0) {
+                    $0 + $1.byteCount
+                }
+            ))
+            await phase(.active)
+            return installed
         } catch let error as PackageInstallError {
             switch error {
             case .insufficientSpace, .fileOperationFailed:

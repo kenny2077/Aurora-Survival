@@ -663,6 +663,20 @@ final class AppModel: ObservableObject {
     }
 
     func download(_ entry: PackageCatalogEntry) async {
+        try? await refreshInstalledPackageStates()
+        if case let .installed(active) = packageDownloadStates[entry.id] {
+            if !active {
+                try? await packageInstaller.activate(
+                    packageID: entry.packageID,
+                    version: entry.version
+                )
+                try? await refreshInstalledPackageStates()
+            }
+            await refreshActivePacks()
+            packageDownloadProgress[entry.id] = nil
+            return
+        }
+
         guard let catalogURL = URL(string: catalogURLString) else {
             packageDownloadStates[entry.id] = .failed(
                 "The catalog URL is invalid."
