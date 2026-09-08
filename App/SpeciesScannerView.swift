@@ -25,7 +25,12 @@ struct SpeciesScannerView: View {
                         scanner
                     }
                     Spacer(minLength: AuroraDesign.Space.lg)
-                    coverageFooter
+                    VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
+                        if model.speciesPackDescriptor != nil {
+                            photoActions
+                        }
+                        coverageFooter
+                    }
                 }
                 .padding(AuroraDesign.Space.md)
                 .frame(
@@ -181,24 +186,6 @@ struct SpeciesScannerView: View {
                 .frame(minHeight: 280)
             }
 
-            HStack(spacing: AuroraDesign.Space.sm) {
-                Button { showsCamera = true } label: {
-                    Label("Take Photo", systemImage: "camera.fill")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .disabled(isClassifying)
-                .accessibilityIdentifier("species.camera")
-
-                Button { showsPhotoPicker = true } label: {
-                    Label("Choose Photo", systemImage: "photo.on.rectangle")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .disabled(isClassifying)
-                .accessibilityIdentifier("species.library")
-            }
-
             if let imageData {
                 Button {
                     classify(imageData)
@@ -238,6 +225,33 @@ struct SpeciesScannerView: View {
                 resultList
             }
         }
+    }
+
+    private var photoActions: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: AuroraDesign.Space.sm) { photoButtons }
+            VStack(spacing: AuroraDesign.Space.sm) { photoButtons }
+        }
+        .font(.title3.weight(.semibold))
+        .controlSize(.large)
+        .buttonStyle(.bordered)
+        .disabled(isClassifying)
+    }
+
+    @ViewBuilder private var photoButtons: some View {
+        Button { showsCamera = true } label: {
+            Label("Take Photo", systemImage: "camera.fill")
+                .fixedSize(horizontal: true, vertical: false)
+                .frame(maxWidth: .infinity, minHeight: 36)
+        }
+        .accessibilityIdentifier("species.camera")
+
+        Button { showsPhotoPicker = true } label: {
+            Label("Choose Photo", systemImage: "photo.on.rectangle")
+                .fixedSize(horizontal: true, vertical: false)
+                .frame(maxWidth: .infinity, minHeight: 36)
+        }
+        .accessibilityIdentifier("species.library")
     }
 
     private var resultList: some View {
