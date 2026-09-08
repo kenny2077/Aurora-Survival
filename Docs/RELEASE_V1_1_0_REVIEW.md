@@ -95,3 +95,12 @@ medical/content certification.
 The candidate remains suitable for further testing, not a completed public-store
 release. Store contact/privacy URL, account access, metadata declarations, and
 manual approval remain required before submitting publicly.
+
+## Distribution status — September 8, 2026
+
+The production-key-signed species catalog was promoted after CI and the
+owner-approved ten-photo device gate passed. The app now uses:
+`https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/species/catalog.json`.
+The catalog resolves package `species.bioclip2.north-america-504@1.0.1` with
+609,125,423 verified artifact bytes. This remains an owner-accepted development
+endpoint with variable rate limits, not a production availability SLA.
