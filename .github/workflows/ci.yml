@@ -26,6 +26,11 @@ jobs:
         run: python3 tools/validate.py
       - name: Verify reproducible signed pack build
         run: python3 tools/test_pack_reproducibility.py
+      - name: Verify species packaging and public download checks
+        run: |
+          python3 tools/test_species_packaging.py
+          python3 tools/test_species_release.py
+          python3 tools/test_r2_model_release.py
 
   swift-core:
     runs-on: macos-latest

@@ -9,6 +9,34 @@ import XCTest
 #endif
 
 final class PackageDownloadCoordinatorTests: XCTestCase {
+    func testInvalidManifestSignatureRejectsBeforeArtifactRequests() async throws {
+        let fixture = try makeFixture()
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let invalid = SignedPackageEnvelope(
+            manifest: fixture.envelope.manifest,
+            keyID: fixture.envelope.keyID,
+            signature: Data(repeating: 0, count: 64).base64EncodedString()
+        )
+        let transport = MemoryResumableTransport(
+            envelopeURL: fixture.location.envelopeURL,
+            envelopeData: try JSONEncoder().encode(invalid),
+            artifactData: fixture.artifactData
+        )
+        let coordinator = PackageDownloadCoordinator(
+            stagingRoot: fixture.root.appendingPathComponent("staging"),
+            transport: transport,
+            installer: fixture.installer
+        )
+        do {
+            _ = try await coordinator.downloadAndInstall(from: fixture.location)
+            XCTFail("Expected invalid signature rejection")
+        } catch {
+            XCTAssertEqual(error as? PackageVerificationError, .invalidSignature)
+        }
+        let count = await transport.totalRequestCount()
+        XCTAssertEqual(count, 1)
+    }
+
     func testInterruptedPackageDownloadResumesFromPartialOffset() async throws {
         let fixture = try makeFixture()
         defer { try? FileManager.default.removeItem(at: fixture.root) }

@@ -64,6 +64,10 @@ def build(args: argparse.Namespace) -> None:
         notice_destination = staging / "legal" / "BIOCLIP2_NOTICE.md"
         notice_destination.parent.mkdir(parents=True)
         shutil.copy2(args.attribution, notice_destination)
+        shutil.copy2(
+            ROOT / "Resources/Legal/LICENSE_MIT_BIOCLIP2.txt",
+            notice_destination.parent / "LICENSE_MIT_BIOCLIP2.txt",
+        )
 
         artifacts = []
         for path in sorted(staging.rglob("*")):

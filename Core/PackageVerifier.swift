@@ -34,6 +34,12 @@ public struct PackageVerifier: Sendable {
         envelope: SignedPackageEnvelope,
         packageDirectory: URL
     ) throws {
+        try verifyManifest(envelope)
+        try verifyArtifacts(envelope.manifest, packageDirectory: packageDirectory)
+    }
+
+    /// Authenticate metadata before it controls download paths or byte counts.
+    public func verifyManifest(_ envelope: SignedPackageEnvelope) throws {
         let manifest = envelope.manifest
         guard manifest.schemaVersion == 1 else {
             throw PackageVerificationError.unsupportedSchema
@@ -47,7 +53,15 @@ public struct PackageVerifier: Sendable {
             throw PackageVerificationError.emptyPackage
         }
         var seenPaths: Set<String> = []
+        var totalBytes: Int64 = 0
         for artifact in manifest.artifacts {
+            let sum = totalBytes.addingReportingOverflow(artifact.byteCount)
+            guard artifact.byteCount >= 0, !sum.overflow,
+                  artifact.sha256.count == 64,
+                  artifact.sha256.allSatisfy({ $0.isHexDigit }) else {
+                throw PackageVerificationError.invalidPackageIdentity
+            }
+            totalBytes = sum.partialValue
             guard seenPaths.insert(artifact.path).inserted else {
                 throw PackageVerificationError.duplicateArtifactPath(artifact.path)
             }
@@ -83,6 +97,9 @@ public struct PackageVerifier: Sendable {
             throw PackageVerificationError.invalidSignature
         }
 
+    }
+
+    private func verifyArtifacts(_ manifest: PackageManifest, packageDirectory: URL) throws {
         let root = packageDirectory.standardizedFileURL
         for artifact in manifest.artifacts {
             let fileURL = try Self.safeArtifactURL(path: artifact.path, root: root)
@@ -150,6 +167,14 @@ public struct PackageVerifier: Sendable {
             : root.standardizedFileURL.path + "/"
         guard candidate.path.hasPrefix(rootPath) else {
             throw PackageVerificationError.unsafeArtifactPath(path)
+        }
+        // Check each existing component: the final download file may not exist yet.
+        var componentURL = root.standardizedFileURL
+        for component in components {
+            componentURL.appendPathComponent(String(component))
+            if (try? FileManager.default.destinationOfSymbolicLink(atPath: componentURL.path)) != nil {
+                throw PackageVerificationError.unsafeArtifactPath(path)
+            }
         }
         return candidate
     }

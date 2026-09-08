@@ -14,6 +14,7 @@ struct SpeciesScannerView: View {
     @State private var results: [SpeciesResult] = []
     @State private var isClassifying = false
     @State private var errorMessage: String?
+    @State private var sessionGeneration: UInt = 0
 
     var body: some View {
         GeometryReader { geometry in
@@ -288,12 +289,15 @@ struct SpeciesScannerView: View {
 
     private func load(_ item: PhotosPickerItem?) async {
         guard let item else { return }
+        let generation = sessionGeneration
         do {
             guard let data = try await item.loadTransferable(type: Data.self) else {
                 throw SpeciesClassifierError.imageDecodeFailed
             }
+            guard generation == sessionGeneration else { return }
             select(data)
         } catch {
+            guard generation == sessionGeneration else { return }
             errorMessage = error.localizedDescription
         }
         photoItem = nil
@@ -312,18 +316,25 @@ struct SpeciesScannerView: View {
 
     private func classify(_ data: Data) {
         isClassifying = true
+        let generation = sessionGeneration
         Task {
-            defer { isClassifying = false }
+            defer {
+                if generation == sessionGeneration { isClassifying = false }
+            }
             do {
-                results = try await model.classifySpecies(imageData: data)
+                let matches = try await model.classifySpecies(imageData: data)
+                guard generation == sessionGeneration else { return }
+                results = matches
                 imageData = nil
             } catch {
+                guard generation == sessionGeneration, !(error is CancellationError) else { return }
                 errorMessage = error.localizedDescription
             }
         }
     }
 
     private func clearSession() {
+        sessionGeneration &+= 1
         imageData = nil
         previewImage = nil
         results = []

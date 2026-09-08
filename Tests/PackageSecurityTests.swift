@@ -9,6 +9,33 @@ import XCTest
 #endif
 
 final class PackageSecurityTests: XCTestCase {
+    func testManifestCanBeAuthenticatedBeforeArtifactsExist() throws {
+        let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        try FileManager.default.removeItem(at: fixture.staging)
+        XCTAssertNoThrow(try fixture.verifier.verifyManifest(fixture.envelope))
+        let invalid = SignedPackageEnvelope(
+            manifest: fixture.envelope.manifest,
+            keyID: fixture.envelope.keyID,
+            signature: Data(repeating: 0, count: 64).base64EncodedString()
+        )
+        XCTAssertThrowsError(try fixture.verifier.verifyManifest(invalid)) { error in
+            XCTAssertEqual(error as? PackageVerificationError, .invalidSignature)
+        }
+    }
+
+    func testArtifactSymlinkCannotEscapePackageDirectory() throws {
+        let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let link = fixture.staging.appendingPathComponent("outside")
+        try FileManager.default.createSymbolicLink(at: link, withDestinationURL: fixture.root)
+        XCTAssertThrowsError(
+            try PackageVerifier.safeArtifactURL(path: "outside/escaped.bin", root: fixture.staging)
+        ) { error in
+            XCTAssertEqual(error as? PackageVerificationError, .unsafeArtifactPath("outside/escaped.bin"))
+        }
+    }
+
     func testValidSignedPackagePassesVerification() throws {
         let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
         defer { try? FileManager.default.removeItem(at: fixture.root) }

@@ -936,7 +936,7 @@ private struct CombinedAuroraAgreementView: View {
                     if index < documents.count - 1 { Divider() }
                 }
 
-                Text("Beta legal text · August 22, 2026")
+                Text("Legal notices · September 7, 2026")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -952,6 +952,18 @@ private struct CombinedAuroraAgreementView: View {
 private struct ModelLicensesAndNoticesView: View {
     var body: some View {
         List {
+            Section("BioCLIP-2") {
+                NavigationLink("MIT License") {
+                    BundledLegalTextView(
+                        title: "BioCLIP-2 MIT License",
+                        resource: "LICENSE_MIT_BIOCLIP2",
+                        fileExtension: "txt"
+                    )
+                }
+                NavigationLink("Attribution") {
+                    BundledLegalTextView(title: "BioCLIP-2 Attribution", resource: "BIOCLIP2_NOTICE")
+                }
+            }
             Section("Gemma") {
                 NavigationLink("Gemma Terms of Use") {
                     BundledLegalTextView(
@@ -1013,33 +1025,36 @@ struct LegalDocument {
     let sections: [(String, String)]
 
     static let ai = LegalDocument(title: "AI Usage Disclosure",
-        introduction: "Beta notice: this disclosure is drafted for Aurora’s beta release and should receive professional legal review before production distribution.", sections: [
+        introduction: "Aurora uses on-device AI to provide information and likely image matches. AI output is not a guarantee of accuracy or safety.", sections: [
             ("Offline AI", "Aurora uses locally installed language, vision, embedding, and retrieval models. Outputs are probabilistic and may be incomplete, outdated, misunderstood, or wrong even when confident or accompanied by reviewed sources."),
             ("Not professional advice", "Aurora is not a medical professional, emergency dispatcher, rescue service, navigator, attorney, mechanic, or substitute for trained judgment. Do not delay contacting qualified emergency services because of an Aurora response."),
             ("User verification", "Check critical instructions against conditions, official guidance, product labels, and qualified professionals. Stop any action that appears unsafe or exceeds your skills, equipment, or physical condition."),
-            ("Photos", "Expert may analyze only a photo you deliberately capture or select after contextual permission. Image interpretation can miss hazards, injuries, text, scale, depth, and environmental context."),
+            ("Photos and wildlife", "Expert and Species ID analyze photos you choose. Images can omit hazards, injuries, scale, and context. Species ID covers 504 North American animals, not all wildlife; match scores are not calibrated probabilities. Do not approach, handle, or consume wildlife based only on photo identification."),
         ])
-    static let terms = LegalDocument(title: "Beta Terms of Use",
-        introduction: "By using this beta, you agree to use Aurora lawfully, responsibly, and subject to these limitations. If you do not agree, do not use the beta.", sections: [
+    static let terms = LegalDocument(title: "Terms of Use",
+        introduction: "Aurora Survival is an educational preparation and reference tool. By choosing Agree & Continue, you accept these terms and acknowledge the AI and safety limitations. If you do not agree, do not continue.", sections: [
             ("Permitted use", "Aurora is a preparation and informational aid. You are responsible for your decisions, route, equipment, communications, compliance with local law, and the safety of people affected by your actions."),
             ("Emergency services", "Aurora does not place emergency calls, dispatch responders, guarantee communication, or create a rescue relationship. Call the applicable local emergency number whenever circumstances require it."),
             ("Gemma use restrictions", "Aurora Lite includes Google Gemma. You agree that your use of Gemma is governed by the Gemma Terms of Use and must not violate the incorporated Gemma Prohibited Use Policy, including prohibited dangerous, illegal, malicious, rights-infringing, deceptive, or privacy-invasive activity."),
             ("Third-party services", "Maps, Apple satellite features, carriers, emergency systems, external links, model licenses, and other third-party services have separate availability, terms, fees, and privacy practices."),
-            ("Changes", "Beta features, models, datasets, compatibility, and these terms may change. Material legal text should be versioned and reviewed before production."),
+            ("Offline preparation", "Download and test any models or maps before travel. Downloads require connectivity, storage, and a compatible device; network or carrier charges may apply. Download servers may be unavailable or rate-limited. Installed features can still be affected by battery, heat, storage, permissions, and device failure."),
+            ("Changes and rights", "App features, datasets, and compatibility may change with updates. Material changes to the acknowledgment require acceptance again. Nothing in these notices excludes rights or remedies that applicable law does not permit us to exclude."),
         ])
     static let safety = LegalDocument(title: "Safety & Liability",
         introduction: "Outdoor and emergency activities involve inherent risks, including serious injury, illness, property damage, getting lost, and death.", sections: [
-            ("No warranty", "To the maximum extent permitted by law, the beta is provided as-is and as-available without warranties of accuracy, fitness for a particular purpose, uninterrupted operation, availability, or successful rescue."),
+            ("Availability and accuracy", "Aurora is provided as-is and as-available to the extent permitted by law. It does not guarantee accurate instructions, uninterrupted operation, communication, or successful rescue. Statutory rights remain unaffected."),
             ("Medical and survival limits", "Coordinates can be inaccurate; compasses can be affected by interference; offline maps can be old; torch signals may not be seen; satellite features vary; and AI guidance may hallucinate. Maintain independent navigation, signaling, first-aid, shelter, food, water, and communication plans."),
-            ("Limitation of liability", "To the maximum extent permitted by applicable law, Aurora’s developers and distributors are not liable for indirect, incidental, special, consequential, or exemplary loss arising from reliance on the beta. Rights that cannot legally be excluded remain unaffected."),
+            ("Independent checks", "An AI answer, source citation, map marker, or species match is not a safety certification. Confirm critical decisions with official guidance, current conditions, and qualified help. Do not delay emergency care while using Aurora."),
             ("User responsibility", "You decide whether conditions permit an action and accept responsibility for using information within your training and capabilities. Never perform a hazardous procedure merely because the app describes it."),
         ])
     static let privacy = LegalDocument(title: "Privacy",
         introduction: "Aurora is designed for offline use and data minimization.", sections: [
-            ("Local information", "Emergency profile, checklist, conversations, trails, downloaded packages, and selected attachments stay on the device unless you deliberately share or remove them. Emergency profile storage uses iOS file protection."),
-            ("Permissions", "Location is requested for coordinates, compass, maps, and explicitly started trails. Camera or Photo Library access is requested only when you choose an Expert attachment workflow. Denying a permission limits only the related feature."),
+            ("On-device processing", "Language and image inference run on your device. Aurora does not upload your prompts, selected photos, or location for AI inference and does not include advertising or tracking analytics. App settings, downloaded packages, and saved map or trail data are stored locally."),
+            ("Photos", "Species ID keeps the selected photo and results only for the active scanner session; it does not save scanner captures to Photos or chat history. Expert attachments are a separate workflow and may remain visible in the active conversation. Photos saved through a photo-saving action are managed by your Photos library and its backup settings."),
+            ("Permissions and location", "Camera and photo permissions support the actions you choose. Location supports maps, coordinates, compass, and explicitly started trails; a running trail may use location in the background until stopped. You can change permissions in iOS Settings. Denying access limits the related feature."),
+            ("Downloads", "When you request models, maps, or catalogs, the hosting provider receives network information such as your IP address, requested file, and request timing. Cloudflare and other download providers process that information under their own privacy policies. These requests do not contain your scanner photos or AI prompts."),
             ("Sharing and links", "Copy, Share, phone, map, and external-link actions leave Aurora at your direction and may be handled by another service under its terms. Do not share medical or location information with people you do not trust."),
-            ("Beta review", "This beta text describes the current local implementation and is not a substitute for a finalized jurisdiction-specific privacy policy or legal review."),
+            ("Retention and device services", "Remove downloaded packages using Aurora’s controls. Uninstalling removes the app container, but copies you shared, Photos-library items, and device backups may remain under your control or the relevant provider’s settings. iOS may independently manage backups and diagnostics. Protect access to your device."),
         ])
     static let gemmaRestrictions = LegalDocument(
         title: "Gemma Prohibited Use Policy",
@@ -1069,7 +1084,7 @@ struct LegalDocumentView: View {
                         Text(section.1).foregroundStyle(.secondary)
                     }
                 }
-                Text("Beta legal text · August 22, 2026").font(.caption).foregroundStyle(.tertiary)
+                Text("Legal notices · September 7, 2026").font(.caption).foregroundStyle(.tertiary)
             }.padding().frame(maxWidth: AuroraDesign.readableWidth, alignment: .leading).frame(maxWidth: .infinity)
         }.navigationTitle(document.title).navigationBarTitleDisplayMode(.inline)
     }

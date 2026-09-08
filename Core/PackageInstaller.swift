@@ -108,6 +108,10 @@ public actor PackageInstaller {
         }
     }
 
+    public func verifyManifest(_ envelope: SignedPackageEnvelope) throws {
+        try verifier.verifyManifest(envelope)
+    }
+
     /// Installs a verified directory. The caller owns `stagedDirectory` until
     /// verification passes; after success it is atomically moved into the store.
     @discardableResult

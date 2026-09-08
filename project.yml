@@ -11,7 +11,7 @@ settings:
     CODE_SIGN_STYLE: Automatic
     MARKETING_VERSION: "1.1.0"
     CURRENT_PROJECT_VERSION: "1"
-    AURORA_PACKAGE_CATALOG_URL: ""
+    AURORA_PACKAGE_CATALOG_URL: "https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/species/candidate-v1.1.0.json"
     AURORA_CAMERA_USAGE_DESCRIPTION: "Take a photo for fully offline visual assistance."
 packages:
   MapLibre:

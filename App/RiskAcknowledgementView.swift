@@ -15,7 +15,7 @@ struct RiskAcknowledgementView: View {
                     .font(.largeTitle.bold())
                     .accessibilityAddTraits(.isHeader)
 
-                Text("Aurora runs offline and can still be wrong. Its models may hallucinate, omit hazards, or produce unsafe instructions—even when an answer is labeled verified.")
+                Text("Aurora runs offline and can still be wrong. Its models may omit hazards or produce unsafe instructions, even when an answer includes source references.")
                     .font(.title3)
 
                 VStack(alignment: .leading, spacing: AuroraDesign.Space.md) {
@@ -29,7 +29,7 @@ struct RiskAcknowledgementView: View {
                     )
                     acknowledgementRow(
                         icon: "checkmark.shield.fill",
-                        text: "Reviewed sources support only attributed claims. Warnings identify sentences that could not be fully verified."
+                        text: "Source references do not verify every sentence or guarantee that an action is safe."
                     )
                     acknowledgementRow(
                         icon: "book.pages.fill",

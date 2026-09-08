@@ -197,9 +197,9 @@ struct OnboardingView: View {
         VStack(spacing: AuroraDesign.Space.sm) {
             if page == .introduction {
                 NavigationLink {
-                    LegalDocumentView(document: .terms)
+                    LegalPrivacyHubView()
                 } label: {
-                    Text("AI can make mistakes—review Aurora’s Terms.")
+                    Text("Review Terms, AI limitations, and Privacy before continuing.")
                         .font(.footnote.weight(.semibold))
                         .multilineTextAlignment(.center)
                 }

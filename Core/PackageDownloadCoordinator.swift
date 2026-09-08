@@ -156,6 +156,7 @@ public actor PackageDownloadCoordinator {
             SignedPackageEnvelope.self,
             from: envelopeData
         )
+        try await installer.verifyManifest(envelope)
         if let expectation,
            envelope.manifest.packageID != expectation.packageID
             || envelope.manifest.version != expectation.version

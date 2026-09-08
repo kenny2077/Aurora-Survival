@@ -830,9 +830,9 @@ final class AppModel: ObservableObject {
             activePacks: snapshot,
             validateContents: false
         )
-        let previousSpeciesDigest = discoveredSpeciesRuntime.descriptor?.encoderSHA256
+        let previousSpeciesDescriptor = discoveredSpeciesRuntime.descriptor
         discoveredSpeciesRuntime = SpeciesPackResolver().resolve(activePacks: snapshot)
-        if previousSpeciesDigest != discoveredSpeciesRuntime.descriptor?.encoderSHA256 {
+        if previousSpeciesDescriptor != discoveredSpeciesRuntime.descriptor {
             unloadSpeciesClassifier()
         }
         speciesPackDescriptor = discoveredSpeciesRuntime.descriptor
@@ -1017,11 +1017,17 @@ final class AppModel: ObservableObject {
             throw CancellationError()
         }
         speciesRuntimeError = nil
+        let generation = speciesRuntimeGeneration
         do {
             let output = try await classifier.classifyMeasured(imageData, topK: topK)
+            try Task.checkCancellation()
+            guard generation == speciesRuntimeGeneration else { throw CancellationError() }
             lastSpeciesInferenceMetrics = output.metrics
             return output.results
         } catch {
+            guard generation == speciesRuntimeGeneration, !(error is CancellationError) else {
+                throw CancellationError()
+            }
             speciesRuntimeError = error.localizedDescription
             throw error
         }
@@ -1094,6 +1100,7 @@ final class AppModel: ObservableObject {
             speciesRuntimeState = .ready
             if let started = speciesPreparationStartedAt {
                 lastSpeciesLoadMilliseconds = Date().timeIntervalSince(started) * 1_000
+                speciesPreparationStartedAt = nil
             }
         } catch {
             guard generation == speciesRuntimeGeneration else {
@@ -1630,7 +1637,8 @@ final class AppModel: ObservableObject {
 
         let environment = ProcessInfo.processInfo.environment
         let is12MPPerformanceRun = environment["AURORA_DEBUG_SPECIES_12MP"] == "1"
-        let expectedPhotoCount = is12MPPerformanceRun ? 10 : 85
+        let isBurstRun = environment["AURORA_DEBUG_SPECIES_BURST"] == "1"
+        let expectedPhotoCount = is12MPPerformanceRun || isBurstRun ? 10 : 85
         let documents = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask
@@ -1693,8 +1701,10 @@ final class AppModel: ObservableObject {
                 "true_species_top5_hits": top5Hits,
                 "model_load_milliseconds": lastSpeciesLoadMilliseconds ?? 0,
                 "first_prediction_milliseconds": latencies.first ?? 0,
-                "warm_p95_latency_milliseconds": percentile95(latencies[...]),
-                "maximum_warm_latency_milliseconds": latencies.max() ?? 0,
+                "warm_sample_count": max(0, latencies.count - 1),
+                "burst_spacing_seconds": isBurstRun ? 3 : 0,
+                "warm_p95_latency_milliseconds": percentile95(latencies.dropFirst()),
+                "maximum_warm_latency_milliseconds": latencies.dropFirst().max() ?? 0,
                 "mean_latency_milliseconds": latencies.isEmpty
                     ? 0
                     : latencies.reduce(0, +) / latencies.count,
@@ -1712,9 +1722,9 @@ final class AppModel: ObservableObject {
                 "passed": completed
                     && terminalFailure == nil
                     && rows.count == expectedPhotoCount
-                    && (is12MPPerformanceRun || trueTop1Hits >= 77)
-                    && (is12MPPerformanceRun || top5Hits == rows.count)
-                    && percentile95(latencies[...]) <= (is12MPPerformanceRun ? 750 : 350)
+                    && (expectedPhotoCount == 10 || trueTop1Hits >= 77)
+                    && top5Hits == rows.count
+                    && percentile95(latencies.dropFirst()) <= (is12MPPerformanceRun ? 750 : 350)
                     && (latencies.max() ?? .max) < 2_000
                     && !seriousThermal
                     && current.thermalCondition != .serious
@@ -1762,7 +1772,7 @@ final class AppModel: ObservableObject {
                 return
             }
         }
-        if speciesPackDescriptor == nil {
+        if speciesPackDescriptor == nil || environment["AURORA_DEBUG_SPECIES_PUBLIC_DOWNLOAD"] == "1" {
             guard let catalogURL = environment["AURORA_CATALOG_URL"] else {
                 terminalFailure = "missing_catalog_url"
                 return
@@ -1805,6 +1815,9 @@ final class AppModel: ObservableObject {
         }
 
         for (index, expected) in reference.rows.prefix(expectedPhotoCount).enumerated() {
+            if isBurstRun && index > 0 {
+                try? await Task.sleep(for: .seconds(3))
+            }
             let pathParts = expected.image
                 .replacingOccurrences(of: "\\", with: "/")
                 .split(separator: "/")
@@ -3676,7 +3689,7 @@ final class AppModel: ObservableObject {
         appDataRoot.appendingPathComponent("compiled-species", isDirectory: true)
     }
 
-    static let legalSchemaVersion = 1
+    static let legalSchemaVersion = 2
     private static let cellularDownloadsDefaultsKey =
         "Aurora.allowsCellularModelDownloads"
     private static let appearanceDefaultsKey = "Aurora.appearance"
