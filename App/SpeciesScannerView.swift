@@ -232,8 +232,8 @@ struct SpeciesScannerView: View {
             HStack(spacing: AuroraDesign.Space.sm) { photoButtons }
             VStack(spacing: AuroraDesign.Space.sm) { photoButtons }
         }
-        .font(.title3.weight(.semibold))
-        .controlSize(.large)
+        .font(.subheadline.weight(.semibold))
+        .controlSize(.regular)
         .buttonStyle(.bordered)
         .disabled(isClassifying)
     }
@@ -242,14 +242,14 @@ struct SpeciesScannerView: View {
         Button { showsCamera = true } label: {
             Label("Take Photo", systemImage: "camera.fill")
                 .fixedSize(horizontal: true, vertical: false)
-                .frame(maxWidth: .infinity, minHeight: 36)
+                .frame(maxWidth: .infinity, minHeight: 27)
         }
         .accessibilityIdentifier("species.camera")
 
         Button { showsPhotoPicker = true } label: {
             Label("Choose Photo", systemImage: "photo.on.rectangle")
                 .fixedSize(horizontal: true, vertical: false)
-                .frame(maxWidth: .infinity, minHeight: 36)
+                .frame(maxWidth: .infinity, minHeight: 27)
         }
         .accessibilityIdentifier("species.library")
     }
