@@ -452,9 +452,7 @@ struct ToolsView: View {
     private var speciesTool: some View {
         toolLink(
             "Species Detector",
-            model.speciesPackDescriptor == nil
-                ? "Optional offline model"
-                : "504 animals · Offline",
+            "BioCLIP 2 · Offline species recognition",
             "pawprint.fill",
             AuroraDesign.ordinaryAccent(
                 light: .green,

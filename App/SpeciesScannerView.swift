@@ -49,7 +49,7 @@ struct SpeciesScannerView: View {
             }
         }
         .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
-        .navigationTitle("Species Detector")
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .task(id: model.speciesPackDescriptor.map { "\($0.packageID)@\($0.version):\($0.encoderSHA256)" }) {
             guard model.speciesPackDescriptor != nil else { return }
