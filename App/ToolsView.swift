@@ -296,11 +296,11 @@ struct ToolsView: View {
     private func modelDescription(for tier: ModelTier) -> String {
         switch tier {
         case .lite:
-            "Fast offline text"
+            "Gemma 3 1B • Fast offline text"
         case .expert where !model.expertDeviceIsEligible:
-            "Requires a newer device"
+            "Qwen3-VL 2B • Requires 6 GB RAM"
         case .expert:
-            "Offline text and photos"
+            "Qwen3-VL 2B • Offline text and photos"
         }
     }
 
