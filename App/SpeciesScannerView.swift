@@ -19,27 +19,32 @@ struct SpeciesScannerView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
-                    if model.speciesPackDescriptor == nil {
-                        setupCard
-                    } else {
+                if model.speciesPackDescriptor == nil {
+                    setupCard
+                        .padding(AuroraDesign.Space.md)
+                        .frame(
+                            maxWidth: AuroraDesign.readableWidth,
+                            minHeight: geometry.size.height,
+                            alignment: .center
+                        )
+                        .frame(maxWidth: .infinity)
+                } else {
+                    VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
                         scanner
-                    }
-                    Spacer(minLength: AuroraDesign.Space.lg)
-                    VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-                        if model.speciesPackDescriptor != nil {
+                        Spacer(minLength: AuroraDesign.Space.lg)
+                        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
                             photoActions
+                            coverageFooter
                         }
-                        coverageFooter
                     }
+                    .padding(AuroraDesign.Space.md)
+                    .frame(
+                        maxWidth: AuroraDesign.readableWidth,
+                        minHeight: geometry.size.height,
+                        alignment: .top
+                    )
+                    .frame(maxWidth: .infinity)
                 }
-                .padding(AuroraDesign.Space.md)
-                .frame(
-                    maxWidth: AuroraDesign.readableWidth,
-                    minHeight: geometry.size.height,
-                    alignment: .top
-                )
-                .frame(maxWidth: .infinity)
             }
         }
         .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
@@ -110,15 +115,29 @@ struct SpeciesScannerView: View {
     }
 
     private var setupCard: some View {
-        VStack(alignment: .leading, spacing: AuroraDesign.Space.sm) {
-            Text("Download Species ID").font(.title3.bold())
-            Text("The optional BioCLIP-2 model is about 581 MB. After setup, photos stay on this device.")
-                .font(.callout)
-                .foregroundStyle(.secondary)
+        VStack(spacing: AuroraDesign.Space.lg) {
+            Image("BioCLIPSetupHero")
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: AuroraDesign.Radius.standard))
+                .accessibilityLabel("Elk, eagle, bear, and turtle in a mountain landscape")
+
+            VStack(spacing: AuroraDesign.Space.xs) {
+                Text("BioCLIP 2 Species ID")
+                    .font(.title2.bold())
+                Text("Identify 504 North American birds, mammals, reptiles, and amphibians—fully offline.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                Text("581 MB optional download")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .multilineTextAlignment(.center)
+
             setupControl
+                .frame(maxWidth: 320)
         }
-        .padding(AuroraDesign.Space.md)
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 18))
+        .frame(maxWidth: 560)
         .accessibilityIdentifier("species.setup")
     }
 
@@ -130,9 +149,13 @@ struct SpeciesScannerView: View {
         } else {
             switch model.speciesPackageState {
             case .available:
-                Button("Download") { model.startSpeciesSetup() }
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("species.download")
+                Button { model.startSpeciesSetup() } label: {
+                    Text("Download")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .accessibilityIdentifier("species.download")
             case let .downloading(fraction):
                 let percentage = fraction.formatted(
                     .percent.precision(.fractionLength(0))
@@ -155,23 +178,53 @@ struct SpeciesScannerView: View {
                         .accessibilityValue(percentage)
                         .accessibilityIdentifier("species.progress")
                     Button("Pause") { model.cancelSpeciesSetup() }
+                        .frame(maxWidth: .infinity)
                 }
             case .verifying:
                 ProgressView("Verifying download…")
             case .installing:
                 ProgressView("Installing…")
             case let .paused(fraction):
-                Button("Resume · \(fraction.formatted(.percent.precision(.fractionLength(0))))") {
-                    model.startSpeciesSetup()
+                VStack(spacing: AuroraDesign.Space.xs) {
+                    HStack {
+                        Text("Paused")
+                        Spacer()
+                        Text(fraction.formatted(.percent.precision(.fractionLength(0))))
+                            .monospacedDigit()
+                    }
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    ProgressView(value: fraction)
+                        .progressViewStyle(.linear)
+                        .tint(AuroraDesign.river)
+                    Button { model.startSpeciesSetup() } label: {
+                        Text("Resume")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
                 }
             case .installed:
                 ProgressView("Activating verified model…")
             case .updateAvailable:
-                Button("Update") { model.startSpeciesSetup() }
+                Button { model.startSpeciesSetup() } label: {
+                    Text("Update")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
             case let .failed(message, _):
-                VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
-                    Text(message).font(.caption).foregroundStyle(.red)
-                    Button("Retry") { model.startSpeciesSetup() }
+                VStack(spacing: AuroraDesign.Space.xs) {
+                    Text(message)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                        .multilineTextAlignment(.center)
+                    Button { model.startSpeciesSetup() } label: {
+                        Text("Retry")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
                 }
             }
         }
