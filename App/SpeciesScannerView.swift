@@ -134,8 +134,26 @@ struct SpeciesScannerView: View {
                     .buttonStyle(.borderedProminent)
                     .accessibilityIdentifier("species.download")
             case let .downloading(fraction):
-                VStack(alignment: .leading) {
+                let percentage = fraction.formatted(
+                    .percent.precision(.fractionLength(0))
+                )
+                VStack(alignment: .leading, spacing: AuroraDesign.Space.xs) {
+                    HStack {
+                        Text("Downloading")
+                        Spacer()
+                        Text(percentage)
+                            .monospacedDigit()
+                            .accessibilityIdentifier("species.progressLabel")
+                    }
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
                     ProgressView(value: fraction)
+                        .progressViewStyle(.linear)
+                        .tint(AuroraDesign.river)
+                        .accessibilityLabel("Species ID download progress")
+                        .accessibilityValue(percentage)
+                        .accessibilityIdentifier("species.progress")
                     Button("Pause") { model.cancelSpeciesSetup() }
                 }
             case .verifying:
