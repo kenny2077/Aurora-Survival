@@ -20,13 +20,14 @@ struct SpeciesScannerView: View {
         GeometryReader { geometry in
             ScrollView {
                 if model.speciesPackDescriptor == nil {
-                    setupCard
-                        .padding(AuroraDesign.Space.md)
-                        .frame(
-                            maxWidth: AuroraDesign.readableWidth,
-                            minHeight: geometry.size.height,
-                            alignment: .center
+                    setupCard(
+                        availableHeight: max(
+                            0,
+                            geometry.size.height - (AuroraDesign.Space.md * 2)
                         )
+                    )
+                        .padding(AuroraDesign.Space.md)
+                        .frame(maxWidth: AuroraDesign.readableWidth)
                         .frame(maxWidth: .infinity)
                 } else {
                     VStack(alignment: .leading, spacing: AuroraDesign.Space.lg) {
@@ -48,7 +49,7 @@ struct SpeciesScannerView: View {
             }
         }
         .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
-        .navigationTitle("Species ID")
+        .navigationTitle("Species Detector")
         .navigationBarTitleDisplayMode(.inline)
         .task(id: model.speciesPackDescriptor.map { "\($0.packageID)@\($0.version):\($0.encoderSHA256)" }) {
             guard model.speciesPackDescriptor != nil else { return }
@@ -85,7 +86,7 @@ struct SpeciesScannerView: View {
             clearSession()
             model.unloadSpeciesClassifier()
         }
-        .alert("Species ID", isPresented: Binding(
+        .alert("Species Detector", isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
         )) {
@@ -114,7 +115,7 @@ struct SpeciesScannerView: View {
         .accessibilityIdentifier("species.coverage")
     }
 
-    private var setupCard: some View {
+    private func setupCard(availableHeight: CGFloat) -> some View {
         VStack(spacing: AuroraDesign.Space.lg) {
             Image("BioCLIPSetupHero")
                 .resizable()
@@ -122,9 +123,16 @@ struct SpeciesScannerView: View {
                 .clipShape(RoundedRectangle(cornerRadius: AuroraDesign.Radius.standard))
                 .accessibilityLabel("Elk, eagle, bear, and turtle in a mountain landscape")
 
+            Text("BioCLIP 2 Species Detector")
+                .font(.title2.bold())
+                .multilineTextAlignment(.center)
+
+            setupControl
+                .frame(maxWidth: 320)
+
+            Spacer(minLength: AuroraDesign.Space.lg)
+
             VStack(spacing: AuroraDesign.Space.xs) {
-                Text("BioCLIP 2 Species ID")
-                    .font(.title2.bold())
                 Text("Identify 504 North American birds, mammals, reptiles, and amphibians—fully offline.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -133,17 +141,14 @@ struct SpeciesScannerView: View {
                     .foregroundStyle(.secondary)
             }
             .multilineTextAlignment(.center)
-
-            setupControl
-                .frame(maxWidth: 320)
         }
-        .frame(maxWidth: 560)
+        .frame(maxWidth: 560, minHeight: availableHeight, alignment: .top)
         .accessibilityIdentifier("species.setup")
     }
 
     @ViewBuilder private var setupControl: some View {
         if model.speciesCatalogEntry == nil {
-            Text("Species ID is not available in the connected signed catalog.")
+            Text("Species Detector is not available in the connected signed catalog.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         } else {
@@ -174,7 +179,7 @@ struct SpeciesScannerView: View {
                     ProgressView(value: fraction)
                         .progressViewStyle(.linear)
                         .tint(AuroraDesign.river)
-                        .accessibilityLabel("Species ID download progress")
+                        .accessibilityLabel("Species Detector download progress")
                         .accessibilityValue(percentage)
                         .accessibilityIdentifier("species.progress")
                     Button("Pause") { model.cancelSpeciesSetup() }
@@ -236,7 +241,7 @@ struct SpeciesScannerView: View {
                 HStack(spacing: AuroraDesign.Space.sm) {
                     ProgressView()
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Preparing Species ID")
+                        Text("Preparing Species Detector")
                             .font(.subheadline.bold())
                         Text("You can choose a photo while the offline model loads.")
                             .font(.caption)

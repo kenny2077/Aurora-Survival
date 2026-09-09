@@ -451,7 +451,7 @@ struct ToolsView: View {
 
     private var speciesTool: some View {
         toolLink(
-            "Species ID",
+            "Species Detector",
             model.speciesPackDescriptor == nil
                 ? "Optional offline model"
                 : "504 animals · Offline",
@@ -1054,7 +1054,7 @@ struct LegalDocument {
             ("Offline AI", "Aurora uses locally installed language, vision, embedding, and retrieval models. Outputs are probabilistic and may be incomplete, outdated, misunderstood, or wrong even when confident or accompanied by reviewed sources."),
             ("Not professional advice", "Aurora is not a medical professional, emergency dispatcher, rescue service, navigator, attorney, mechanic, or substitute for trained judgment. Do not delay contacting qualified emergency services because of an Aurora response."),
             ("User verification", "Check critical instructions against conditions, official guidance, product labels, and qualified professionals. Stop any action that appears unsafe or exceeds your skills, equipment, or physical condition."),
-            ("Photos and wildlife", "Expert and Species ID analyze photos you choose. Images can omit hazards, injuries, scale, and context. Species ID covers 504 North American animals, not all wildlife; match scores are not calibrated probabilities. Do not approach, handle, or consume wildlife based only on photo identification."),
+            ("Photos and wildlife", "Expert and Species Detector analyze photos you choose. Images can omit hazards, injuries, scale, and context. Species Detector covers 504 North American animals, not all wildlife; match scores are not calibrated probabilities. Do not approach, handle, or consume wildlife based only on photo identification."),
         ])
     static let terms = LegalDocument(title: "Terms of Use",
         introduction: "Aurora Survival is an educational preparation and reference tool. By choosing Agree & Continue, you accept these terms and acknowledge the AI and safety limitations. If you do not agree, do not continue.", sections: [
@@ -1075,7 +1075,7 @@ struct LegalDocument {
     static let privacy = LegalDocument(title: "Privacy",
         introduction: "Aurora is designed for offline use and data minimization.", sections: [
             ("On-device processing", "Language and image inference run on your device. Aurora does not upload your prompts, selected photos, or location for AI inference and does not include advertising or tracking analytics. App settings, downloaded packages, and saved map or trail data are stored locally."),
-            ("Photos", "Species ID keeps the selected photo and results only for the active scanner session; it does not save scanner captures to Photos or chat history. Expert attachments are a separate workflow and may remain visible in the active conversation. Photos saved through a photo-saving action are managed by your Photos library and its backup settings."),
+            ("Photos", "Species Detector keeps the selected photo and results only for the active scanner session; it does not save scanner captures to Photos or chat history. Expert attachments are a separate workflow and may remain visible in the active conversation. Photos saved through a photo-saving action are managed by your Photos library and its backup settings."),
             ("Permissions and location", "Camera and photo permissions support the actions you choose. Location supports maps, coordinates, compass, and explicitly started trails; a running trail may use location in the background until stopped. You can change permissions in iOS Settings. Denying access limits the related feature."),
             ("Downloads", "When you request models, maps, or catalogs, the hosting provider receives network information such as your IP address, requested file, and request timing. Cloudflare and other download providers process that information under their own privacy policies. These requests do not contain your scanner photos or AI prompts."),
             ("Sharing and links", "Copy, Share, phone, map, and external-link actions leave Aurora at your direction and may be handled by another service under its terms. Do not share medical or location information with people you do not trust."),

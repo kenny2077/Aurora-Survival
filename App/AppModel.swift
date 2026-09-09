@@ -34,11 +34,11 @@ enum SpeciesScannerFailure: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .packageMissing:
-            "Download and activate Species ID before scanning."
+            "Download and activate Species Detector before scanning."
         case .insufficientCompileSpace:
-            "Species ID needs at least 1.2 GB free to prepare the downloaded model."
+            "Species Detector needs at least 1.2 GB free to prepare the downloaded model."
         case .deviceUnderPressure:
-            "Species ID is paused until the device cools down."
+            "Species Detector is paused until the device cools down."
         }
     }
 }
