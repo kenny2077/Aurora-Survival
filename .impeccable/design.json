@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-10T14:45:00-05:00",
+  "generatedAt": "2026-09-10T15:20:00-05:00",
   "title": "Design System: Aurora Survival",
   "extensions": {
     "colorMeta": {
@@ -19,7 +19,7 @@
       "display": { "displayName": "Display", "purpose": "Cinematic hero argument only." },
       "headline": { "displayName": "Headline", "purpose": "Section-level product arguments." },
       "title": { "displayName": "Title", "purpose": "Feature and disclosure labels." },
-      "body": { "displayName": "Body", "purpose": "Readable product, privacy, and trust copy." },
+      "body": { "displayName": "Body", "purpose": "Readable product and trust copy." },
       "label": { "displayName": "Measurement Label", "purpose": "Facts, device metadata, status signals, and captions." }
     },
     "shadows": [
@@ -34,7 +34,6 @@
       { "name": "pointer-field", "value": "12% eased tracking", "purpose": "Fine-pointer-only hero light that follows movement without replacing the cursor." }
     ],
     "breakpoints": [
-      { "name": "status-collapse", "value": "980px" },
       { "name": "stack", "value": "800px" },
       { "name": "compact", "value": "520px" },
       { "name": "proof-single", "value": "340px" }
@@ -67,8 +66,8 @@
     {
       "name": "Navigation",
       "kind": "nav",
-      "description": "Compact product navigation with an underline response and descriptive GitHub exit.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\">Product</a><a href=\"#\">Open Source</a><a href=\"#\">Privacy</a><a href=\"#\">GitHub ↗</a></nav>",
+      "description": "Compact product navigation with a quiet Aurora family label and descriptive GitHub exit.",
+      "html": "<nav class=\"ds-nav\"><span>Aurora Survival <small>An Aurora product</small></span><a href=\"#\">Product</a><a href=\"#\">Open Source</a><a href=\"#\">Founder</a><a href=\"#\">GitHub ↗</a></nav>",
       "css": ".ds-nav { display: flex; align-items: center; gap: 24px; color: var(--ink, #10201a); background: var(--paper, #f7f9f5); font: 660 .76rem/1 -apple-system, BlinkMacSystemFont, sans-serif; } .ds-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 12px 0; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: color 180ms ease, border-color 180ms ease; } .ds-nav a:hover { color: var(--teal, #087b76); border-color: currentColor; } .ds-nav a:focus-visible { outline: 3px solid var(--signal, #a6300f); outline-offset: 4px; }"
     },
     {
@@ -77,18 +76,25 @@
       "description": "A native, ruled disclosure for practical product details.",
       "html": "<details class=\"ds-faq\"><summary>Does Aurora work without a connection?</summary><p>Prepared guidance and maps run locally.</p></details>",
       "css": ".ds-faq { max-width: 620px; color: var(--ink, #10201a); border-top: 1px solid var(--line-strong, #9eaaa1); border-bottom: 1px solid var(--line-strong, #9eaaa1); font-family: -apple-system, BlinkMacSystemFont, sans-serif; } .ds-faq summary { min-height: 44px; padding: 24px 44px 24px 0; cursor: pointer; font-weight: 710; transition: color 180ms ease; } .ds-faq summary:hover { color: var(--teal, #087b76); } .ds-faq summary:focus-visible { outline: 3px solid var(--signal, #a6300f); outline-offset: 4px; } .ds-faq p { color: var(--muted, #5b6962); line-height: 1.6; }"
+    },
+    {
+      "name": "Product Family Footer",
+      "kind": "custom",
+      "description": "A compact, subordinate mention of Aurora Digest with direct live and source links.",
+      "html": "<p class=\"ds-family\">Also from Aurora: <a href=\"#\">Aurora Digest</a> — A self-hosted daily learning radar for AI builders. <a href=\"#\">Source ↗</a></p>",
+      "css": ".ds-family { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; color: var(--muted, #5b6962); font: .72rem/1.4 ui-monospace, monospace; } .ds-family a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink, #10201a); text-decoration: underline; text-underline-offset: 4px; }"
     }
   ],
   "narrative": {
     "northStar": "Kinetic Field Signal",
-    "overview": "Aurora feels like dependable field equipment activated under a moving night sky. The field-manual foundation remains direct, legible, and evidence-led; controlled aurora light supplies motion, depth, and a memorable sense of readiness. The system is a mature SaaS presentation grounded in an outdoor product. It uses real product evidence, strong section pacing, and restrained atmospheric effects without generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.",
-    "keyCharacteristics": ["A cinematic full-width first viewport with slow teal, blue, and violet light.", "Full-width chapters with centered content measures and no negative section overlap.", "Physical-device proof as the primary product material.", "Warm paper reading sections separated by decisive dark product moments.", "Square controls, thin rules, compact measurement labels, and generous space.", "One coordinated motion language that becomes completely static when requested."],
+    "overview": "Aurora feels like dependable field equipment activated under a moving night sky. The field-manual foundation remains direct, legible, and evidence-led; controlled aurora light supplies motion, depth, and a memorable sense of readiness. Aurora Survival remains the flagship within the Aurora product family, with a quiet family label and compact Aurora Digest footer mention. The system is a mature SaaS presentation grounded in an outdoor product. It uses real product evidence, strong section pacing, and restrained atmospheric effects without generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.",
+    "keyCharacteristics": ["A cinematic full-width first viewport with slow teal, blue, and violet light.", "Full-width chapters with centered content measures and no negative section overlap.", "Physical-device proof as the primary product material.", "Warm paper reading sections separated by decisive dark product moments.", "Square controls, thin rules, compact measurement labels, and generous space.", "One coordinated motion language that becomes completely static when requested.", "Quiet product-family labeling that keeps Aurora Survival visually primary."],
     "rules": [
       { "name": "The Aurora Field Rule", "body": "Saturated teal, blue, and violet may move across dark atmospheric surfaces. Reading surfaces remain restrained, and saturated color never replaces product evidence.", "section": "colors" },
       { "name": "The Plain Language Rule", "body": "Let scale and weight supply authority; copy stays concrete and never performs futurism.", "section": "typography" },
       { "name": "The Physical Evidence Rule", "body": "Depth supports real product evidence; it never turns ordinary content into floating UI chrome.", "section": "elevation" }
     ],
-    "dos": ["Do use real app captures whenever describing product behavior.", "Do keep claims traceable to product documentation or repository evidence.", "Do use light, motion, spacing, and scale to lead attention.", "Do preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.", "Do keep the BioCLIP and founder GitHub links descriptive and safe."],
+    "dos": ["Do use real app captures whenever describing product behavior.", "Do keep claims traceable to product documentation or repository evidence.", "Do use light, motion, spacing, and scale to lead attention.", "Do preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.", "Do keep the BioCLIP, founder GitHub, Aurora Digest, and Digest source links descriptive and safe."],
     "donts": ["Don't add particles, glowing orbs, fake dashboards, testimonials, customer logos, or decorative chat bubbles.", "Don't turn sections into interchangeable rounded cards or oversized pills.", "Don't introduce web fonts, trackers, or third-party runtime assets.", "Don't publish the founder's name in page copy; use contact and profile links.", "Don't imply the App Store release is currently available."]
   }
 }

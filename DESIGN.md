@@ -79,6 +79,8 @@ Aurora feels like dependable field equipment activated under a moving night sky.
 
 The system is a mature SaaS presentation grounded in an outdoor product. It uses real product evidence, strong section pacing, and restrained atmospheric effects without generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.
 
+Aurora Survival remains the flagship within the Aurora product family. A quiet header label establishes the relationship, while the footer introduces Aurora Digest without competing with Survival's primary story.
+
 **Key Characteristics:**
 
 - A cinematic, full-width first viewport with slow teal, blue, and violet light.
@@ -86,14 +88,15 @@ The system is a mature SaaS presentation grounded in an outdoor product. It uses
 - Warm paper reading sections separated by decisive dark product moments.
 - Square controls, thin rules, compact measurement labels, and generous space.
 - One coordinated motion language that becomes completely static when requested.
+- Quiet product-family labeling that keeps Survival visually primary.
 
 ## Colors
 
-Warm paper and green-gray neutrals keep reading calm. Night and spruce surfaces carry product proof, privacy, and open-source material. Signal rust remains reserved for visible focus.
+Warm paper and green-gray neutrals keep reading calm. Night and spruce surfaces carry product proof and open-source material. Signal rust remains reserved for visible focus.
 
 ### Primary
 
-- **Deep Spruce:** Product and privacy surfaces.
+- **Deep Spruce:** Product surfaces.
 - **Field Teal:** Interactive emphasis and technical labels.
 
 ### Secondary
@@ -128,7 +131,7 @@ Typography supplies authority; copy stays concrete and never performs futurism.
 
 ## Layout
 
-The site uses full-width chapters with centered content measures instead of a framed desktop canvas. The hero, real-device stage, product overview, species proof, and privacy statement each claim at least one desktop viewport, with no negative overlap between them. Tonal transition bands join dark and paper surfaces without scroll snapping or hiding the natural document flow. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column.
+The site uses full-width chapters with centered content measures instead of a framed desktop canvas. The hero, real-device stage, product overview, and species proof each claim clear visual space, with no negative overlap between them. Tonal transition bands join dark and paper surfaces without scroll snapping or hiding the natural document flow. Product and species sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column. The compact footer stacks cleanly on mobile and carries the only secondary-product promotion.
 
 Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences. Aurora light uses `aurora-drift` over 18–24 seconds, the hero guide line breathes over six seconds, the species field uses `scan-pass` over 7.5 seconds, and section reveals resolve over 700ms. On fine pointers, one hero-only light field follows the pointer with request-animation-frame easing while the physical device depth stays below five degrees. Touch input and reduced-motion preferences disable pointer response. No motion may replace the system cursor, scroll-jack, flash, delay content access, or imitate a loading state.
 
@@ -146,7 +149,7 @@ Content frames and controls remain square. Thin rules establish structure. The a
 
 ### Navigation
 
-The sticky header pairs the production icon and name with plain product anchors, the founder GitHub profile, and a truthful App Store status. Desktop links respond with color and a fine underline; mobile links become full-width ruled rows.
+The sticky header pairs the production icon and name with a small “An Aurora product” family label, plain product anchors, and the founder GitHub profile. Desktop links respond with color and a fine underline; mobile links become full-width ruled rows.
 
 ### Hero
 
@@ -160,9 +163,9 @@ A dark split surface pairs physical-build facts with the native-resolution iPhon
 
 The scanner motif uses verified offline-species count, measurement rules, and one slow scan line. It links directly to the public BioCLIP repository and never pretends to be a live product interface.
 
-### Privacy Art
+### Product Family Footer
 
-The high-resolution aurora photograph is displayed at its natural aspect and may receive only subtle hover scale on fine pointers. It must never be stretched, softened, or replaced by a low-resolution crop.
+The footer quietly introduces Aurora Digest as another Aurora product, using one factual sentence plus direct live and source links. It must remain compact, subordinate to Aurora Survival, and stack without overflow on narrow screens.
 
 ## Do's and Don'ts
 
@@ -172,7 +175,7 @@ The high-resolution aurora photograph is displayed at its natural aspect and may
 - Keep claims traceable to product documentation or repository evidence.
 - Use light, motion, spacing, and scale to lead attention.
 - Preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.
-- Keep the BioCLIP and founder GitHub links descriptive and safe.
+- Keep the BioCLIP, founder GitHub, Aurora Digest, and Digest source links descriptive and safe.
 
 ### Don't
 

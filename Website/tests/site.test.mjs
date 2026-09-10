@@ -29,7 +29,6 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /Coming to the App Store/);
   assert.match(html, /mailto:guokenny7@gmail\.com/);
   assert.match(html, /founder-led/i);
-  assert.match(html, /class="nav-status"[^>]*>Coming to the App Store<\/span>/);
   assert.match(html, /class="button button-primary"[^>]*href="mailto:guokenny7@gmail\.com/);
   assert.match(html, /class="availability-label">Coming to the App Store<\/span>/);
   assert.match(html, />guokenny7@gmail\.com<\/a>/);
@@ -59,6 +58,28 @@ test("the kinetic field journey exposes safe open-source and founder links", () 
   );
   assert.ok((html.match(/data-reveal/g) ?? []).length >= 6, "expected reveal hooks across the page");
   assert.match(html, /aria-label="Aurora Survival on GitHub"/);
+});
+
+test("Aurora Survival remains primary while the header and footer identify the product family", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+
+  assert.match(html, /class="brand-family">An Aurora product<\/span>/);
+  assert.match(html, /class="footer-family"/);
+  assert.match(html, /Also from Aurora:/);
+  assert.match(html, /Aurora Digest/);
+  assert.match(html, /A self-hosted daily learning radar for AI builders\./);
+  assert.match(
+    html,
+    /href="https:\/\/kenny2077\.github\.io\/Aurora\/"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/kenny2077\/Aurora"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
+  );
+  assert.doesNotMatch(html, /<a[^>]*href="#(?:digest|products)"/);
+  assert.match(css, /\.footer-family\s*\{/);
+  assert.match(css, /@media\s*\(max-width:\s*800px\)[\s\S]*\.site-footer\s*\{[^}]*grid-template-columns:\s*1fr/s);
 });
 
 test("the page avoids rejected brands and unsupported claims", () => {
@@ -95,17 +116,15 @@ test("all local page assets resolve and images carry intrinsic dimensions and al
   assert.ok(statSync(resolve(websiteRoot, "assets", "aurora-icon.webp")).size < 250_000, "brand icon should be web-sized");
 });
 
-test("the privacy panel uses a dedicated high-resolution aurora photograph", () => {
+test("the page omits the redundant privacy, closing availability, and header status areas", () => {
   const html = readRequired(indexPath);
-  const privacyFigure = html.match(/<figure class="privacy-art"[^>]*>([\s\S]*?)<\/figure>/)?.[1] ?? "";
+  const css = readRequired(stylesPath);
 
-  assert.match(privacyFigure, /src="assets\/aurora-field-v2\.webp"/);
-  assert.match(privacyFigure, /width="1122"/);
-  assert.match(privacyFigure, /height="1402"/);
-  assert.ok(
-    statSync(resolve(websiteRoot, "assets", "aurora-field-v2.webp")).size > 100_000,
-    "the full-size privacy photograph should retain useful detail after web optimization",
-  );
+  assert.doesNotMatch(html, /href="#privacy"/);
+  assert.doesNotMatch(html, /class="privacy-section"/);
+  assert.doesNotMatch(html, /class="availability-section"/);
+  assert.doesNotMatch(html, /class="nav-status"/);
+  assert.doesNotMatch(css, /\.privacy-section|\.privacy-copy|\.privacy-art|\.availability-section|\.nav-status/);
 });
 
 test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts", () => {
@@ -166,6 +185,7 @@ test("the design record preserves the approved direction contract", () => {
   assert.match(system, /Motion is progressive enhancement/);
   assert.match(system, /aurora-drift/);
   assert.match(system, /scan-pass/);
+  assert.match(system, /Aurora product family/);
 });
 
 test("main pushes deploy the tested Website directory to the existing Cloudflare project", () => {
