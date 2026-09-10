@@ -9,6 +9,7 @@ const stylesPath = resolve(websiteRoot, "styles.css");
 const scriptPath = resolve(websiteRoot, "script.js");
 const designSpecPath = resolve(websiteRoot, "..", "Docs", "superpowers", "specs", "2026-09-10-aurora-kinetic-field-refresh-design.md");
 const designSystemPath = resolve(websiteRoot, "..", "DESIGN.md");
+const deploymentWorkflowPath = resolve(websiteRoot, "..", ".github", "workflows", "pages-deployment.yml");
 
 function readRequired(path) {
   assert.ok(existsSync(path), `required file is missing: ${path}`);
@@ -165,4 +166,18 @@ test("the design record preserves the approved direction contract", () => {
   assert.match(system, /Motion is progressive enhancement/);
   assert.match(system, /aurora-drift/);
   assert.match(system, /scan-pass/);
+});
+
+test("main pushes deploy the tested Website directory to the existing Cloudflare project", () => {
+  const workflow = readRequired(deploymentWorkflowPath);
+
+  assert.match(workflow, /push:\s*\n\s+branches:\s*\[main\]/);
+  assert.match(workflow, /paths:\s*\n\s+- "Website\/\*\*"/);
+  assert.match(workflow, /timeout-minutes:\s*10/);
+  assert.match(workflow, /node --test Website\/tests\/site\.test\.mjs/);
+  assert.match(workflow, /python3 tools\/validate\.py/);
+  assert.match(workflow, /cloudflare\/wrangler-action@v3/);
+  assert.match(workflow, /apiToken:\s*\$\{\{ secrets\.CLOUDFLARE_API_TOKEN \}\}/);
+  assert.match(workflow, /accountId:\s*\$\{\{ secrets\.CLOUDFLARE_ACCOUNT_ID \}\}/);
+  assert.match(workflow, /command:\s*pages deploy Website --project-name=aurora-survival/);
 });

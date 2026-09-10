@@ -1,0 +1,50 @@
+name: Deploy Aurora Survival
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Website/**"
+      - ".github/workflows/pages-deployment.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: aurora-survival-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    name: Test and deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Test website contract
+        run: node --test Website/tests/site.test.mjs
+
+      - name: Validate Aurora repository
+        run: python3 tools/validate.py
+
+      - name: Deploy production site
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy Website --project-name=aurora-survival
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
