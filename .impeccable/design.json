@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-10T12:30:00-05:00",
+  "generatedAt": "2026-09-10T14:45:00-05:00",
   "title": "Design System: Aurora Survival",
   "extensions": {
     "colorMeta": {
@@ -23,16 +23,15 @@
       "label": { "displayName": "Measurement Label", "purpose": "Facts, device metadata, status signals, and captions." }
     },
     "shadows": [
-      { "name": "product-field", "value": "0 30px 70px rgba(5, 23, 19, 0.19)", "purpose": "Ground the large product stage above the paper surface." },
-      { "name": "physical-device", "value": "0 36px 88px rgba(0, 0, 0, 0.5)", "purpose": "Lift the real iPhone capture within the product field." },
-      { "name": "section-field", "value": "0 26px 64px rgba(11, 38, 31, 0.14)", "purpose": "Give dark evidence sections restrained structural depth." }
+      { "name": "physical-device", "value": "0 36px 88px rgba(0, 0, 0, 0.5)", "purpose": "Lift the real iPhone capture within the product field." }
     ],
     "motion": [
       { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Primary easing for reveals, depth, and directional movement." },
       { "name": "interaction", "value": "180ms–220ms", "purpose": "Fast link, button, disclosure, and list feedback." },
       { "name": "reveal", "value": "700ms", "purpose": "One-time opacity, rise, and blur resolution after capability checks." },
       { "name": "aurora-drift", "value": "18s–24s", "purpose": "Slow atmospheric light movement on the hero." },
-      { "name": "scan-pass", "value": "7.5s", "purpose": "Measured sweep across the species proof field." }
+      { "name": "scan-pass", "value": "7.5s", "purpose": "Measured sweep across the species proof field." },
+      { "name": "pointer-field", "value": "12% eased tracking", "purpose": "Fine-pointer-only hero light that follows movement without replacing the cursor." }
     ],
     "breakpoints": [
       { "name": "status-collapse", "value": "980px" },
@@ -83,7 +82,7 @@
   "narrative": {
     "northStar": "Kinetic Field Signal",
     "overview": "Aurora feels like dependable field equipment activated under a moving night sky. The field-manual foundation remains direct, legible, and evidence-led; controlled aurora light supplies motion, depth, and a memorable sense of readiness. The system is a mature SaaS presentation grounded in an outdoor product. It uses real product evidence, strong section pacing, and restrained atmospheric effects without generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.",
-    "keyCharacteristics": ["A cinematic dark first viewport with slow teal, blue, and violet light.", "Physical-device proof as the primary product material.", "Warm paper reading sections separated by decisive dark product moments.", "Square controls, thin rules, compact measurement labels, and generous space.", "One coordinated motion language that becomes completely static when requested."],
+    "keyCharacteristics": ["A cinematic full-width first viewport with slow teal, blue, and violet light.", "Full-width chapters with centered content measures and no negative section overlap.", "Physical-device proof as the primary product material.", "Warm paper reading sections separated by decisive dark product moments.", "Square controls, thin rules, compact measurement labels, and generous space.", "One coordinated motion language that becomes completely static when requested."],
     "rules": [
       { "name": "The Aurora Field Rule", "body": "Saturated teal, blue, and violet may move across dark atmospheric surfaces. Reading surfaces remain restrained, and saturated color never replaces product evidence.", "section": "colors" },
       { "name": "The Plain Language Rule", "body": "Let scale and weight supply authority; copy stays concrete and never performs futurism.", "section": "typography" },

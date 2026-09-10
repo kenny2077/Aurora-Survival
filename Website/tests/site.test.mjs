@@ -181,3 +181,30 @@ test("main pushes deploy the tested Website directory to the existing Cloudflare
   assert.match(workflow, /accountId:\s*\$\{\{ secrets\.CLOUDFLARE_ACCOUNT_ID \}\}/);
   assert.match(workflow, /command:\s*pages deploy Website --project-name=aurora-survival/);
 });
+
+test("the landing experience uses full-screen chapters without section overlap", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+
+  assert.match(html, /class="cursor-field" aria-hidden="true"/);
+  assert.match(css, /\.site-header,\s*\nmain,\s*\n\.site-footer\s*\{[^}]*width:\s*100%/s);
+  assert.match(css, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - 74px\)/s);
+  assert.match(css, /\.product-stage\s*\{[^}]*min-height:\s*calc\(100svh - 74px\)[^}]*margin:\s*0/s);
+  assert.doesNotMatch(css, /\.product-stage\s*\{[^}]*margin:\s*-\d/s);
+  assert.match(css, /\.product-stage::after\s*\{[^}]*linear-gradient/s);
+  assert.match(css, /\.device-capture\s*\{\s*\n\s*width:\s*min\(100%,\s*320px\);\s*\n\s*margin/s);
+});
+
+test("the hero pointer field is bounded and respects motion preferences", () => {
+  const css = readRequired(stylesPath);
+  const script = readRequired(scriptPath);
+
+  assert.match(css, /\.cursor-field\s*\{[^}]*--pointer-x[^}]*--pointer-y/s);
+  assert.doesNotMatch(css, /cursor:\s*none/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.cursor-field[\s\S]*display:\s*none/);
+  assert.match(script, /function\s+setupHeroPointerField\(\)/);
+  assert.match(script, /\(hover: hover\) and \(pointer: fine\)/);
+  assert.match(script, /requestAnimationFrame/);
+  assert.match(script, /--pointer-x/);
+  assert.match(script, /--pointer-y/);
+});

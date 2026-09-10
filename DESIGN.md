@@ -81,7 +81,7 @@ The system is a mature SaaS presentation grounded in an outdoor product. It uses
 
 **Key Characteristics:**
 
-- A cinematic dark first viewport with slow teal, blue, and violet light.
+- A cinematic, full-width first viewport with slow teal, blue, and violet light.
 - Physical-device proof as the primary product material.
 - Warm paper reading sections separated by decisive dark product moments.
 - Square controls, thin rules, compact measurement labels, and generous space.
@@ -128,13 +128,13 @@ Typography supplies authority; copy stays concrete and never performs futurism.
 
 ## Layout
 
-The site occupies a centered 1180px canvas. The dark hero establishes the world, the real-device stage overlaps its lower edge, and quieter paper sections alternate with dense product moments. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column.
+The site uses full-width chapters with centered content measures instead of a framed desktop canvas. The hero, real-device stage, product overview, species proof, and privacy statement each claim at least one desktop viewport, with no negative overlap between them. Tonal transition bands join dark and paper surfaces without scroll snapping or hiding the natural document flow. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column.
 
-Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences. Aurora light uses `aurora-drift` over 18–24 seconds, the hero guide line breathes over six seconds, the species field uses `scan-pass` over 7.5 seconds, and section reveals resolve over 700ms. Fine-pointer device depth stays below five degrees. No motion may scroll-jack, flash, delay content access, or imitate a loading state.
+Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences. Aurora light uses `aurora-drift` over 18–24 seconds, the hero guide line breathes over six seconds, the species field uses `scan-pass` over 7.5 seconds, and section reveals resolve over 700ms. On fine pointers, one hero-only light field follows the pointer with request-animation-frame easing while the physical device depth stays below five degrees. Touch input and reduced-motion preferences disable pointer response. No motion may replace the system cursor, scroll-jack, flash, delay content access, or imitate a loading state.
 
 ## Elevation & Depth
 
-The system combines tonal layering with a narrow shadow vocabulary. Shadows carry visible vertical offset and soft blur, and are reserved for the physical device and large dark product fields rather than generic cards.
+The system uses tonal layering for full-width chapters and reserves its visible shadow for the physical device. Section boundaries rely on color, rules, and transition bands rather than floating panels.
 
 **The Physical Evidence Rule.** Depth supports real product evidence; it never turns ordinary content into floating UI chrome.
 
@@ -150,7 +150,7 @@ The sticky header pairs the production icon and name with plain product anchors,
 
 ### Hero
 
-The hero combines the product promise, real availability state, and a subtle field signal over slow aurora light. The headline and action remain visually dominant at every viewport.
+The hero combines the product promise, real availability state, and a subtle field signal over slow aurora light. On fine pointers, a softly bounded light field follows movement with delayed easing; it never replaces the cursor or obscures the headline and action.
 
 ### Product Stage
 

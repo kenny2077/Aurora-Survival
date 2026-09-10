@@ -57,6 +57,51 @@ function setupRevealMotion() {
   revealItems.forEach((item) => observer.observe(item));
 }
 
+function setupHeroPointerField() {
+  const hero = document.querySelector(".hero");
+  const field = document.querySelector(".cursor-field");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (!hero || !field || reduceMotion.matches || !finePointer.matches) return;
+
+  let currentX = hero.clientWidth / 2;
+  let currentY = hero.clientHeight * 0.42;
+  let targetX = currentX;
+  let targetY = currentY;
+  let animationFrame = null;
+
+  function renderField() {
+    currentX += (targetX - currentX) * 0.12;
+    currentY += (targetY - currentY) * 0.12;
+    field.style.setProperty("--pointer-x", `${currentX.toFixed(1)}px`);
+    field.style.setProperty("--pointer-y", `${currentY.toFixed(1)}px`);
+
+    if (Math.abs(targetX - currentX) > 0.2 || Math.abs(targetY - currentY) > 0.2) {
+      animationFrame = requestAnimationFrame(renderField);
+    } else {
+      animationFrame = null;
+    }
+  }
+
+  function queueRender() {
+    if (animationFrame === null) animationFrame = requestAnimationFrame(renderField);
+  }
+
+  hero.addEventListener("pointerenter", () => hero.classList.add("is-pointer-active"));
+  hero.addEventListener("pointermove", (event) => {
+    const bounds = hero.getBoundingClientRect();
+    targetX = event.clientX - bounds.left;
+    targetY = event.clientY - bounds.top;
+    hero.classList.add("is-pointer-active");
+    queueRender();
+  });
+  hero.addEventListener("pointerleave", () => {
+    hero.classList.remove("is-pointer-active");
+    targetX = hero.clientWidth / 2;
+    targetY = hero.clientHeight * 0.42;
+    queueRender();
+  });
+}
+
 function setupDeviceDepth() {
   const stage = document.querySelector(".product-stage");
   const device = document.querySelector(".device-capture");
@@ -80,4 +125,5 @@ function setupDeviceDepth() {
 }
 
 setupRevealMotion();
+setupHeroPointerField();
 setupDeviceDepth();
