@@ -76,6 +76,19 @@ test("all local page assets resolve and images carry intrinsic dimensions and al
   assert.ok(statSync(resolve(websiteRoot, "assets", "aurora-icon.webp")).size < 250_000, "brand icon should be web-sized");
 });
 
+test("the privacy panel uses a dedicated high-resolution aurora photograph", () => {
+  const html = readRequired(indexPath);
+  const privacyFigure = html.match(/<figure class="privacy-art">([\s\S]*?)<\/figure>/)?.[1] ?? "";
+
+  assert.match(privacyFigure, /src="assets\/aurora-field-v2\.webp"/);
+  assert.match(privacyFigure, /width="1122"/);
+  assert.match(privacyFigure, /height="1402"/);
+  assert.ok(
+    statSync(resolve(websiteRoot, "assets", "aurora-field-v2.webp")).size > 100_000,
+    "the full-size privacy photograph should retain useful detail after web optimization",
+  );
+});
+
 test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts", () => {
   const css = readRequired(stylesPath);
 
