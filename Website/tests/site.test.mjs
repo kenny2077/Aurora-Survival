@@ -97,6 +97,7 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.match(css, /@media[^\{]*max-width/);
   assert.match(css, /overflow-wrap/);
   assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
+  assert.match(css, /section\[id\]\s*\{[^}]*scroll-margin-top:\s*76px/s);
   assert.doesNotMatch(css, /0\.6[69]rem/);
   assert.match(css, /\.contact-email\s*\{[^}]*0\.8125rem/s);
   assert.match(css, /@media\s*\(max-width:\s*340px\)/);

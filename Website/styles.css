@@ -25,6 +25,10 @@ html {
   scrollbar-color: var(--spruce) var(--canvas);
 }
 
+section[id] {
+  scroll-margin-top: 76px;
+}
+
 body {
   margin: 0;
   color: var(--ink);
