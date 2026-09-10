@@ -137,6 +137,13 @@ test("the navigation script is local and progressively enhances the page", () =>
   assert.match(script, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
   assert.match(script, /event\.key === "Escape"/);
   assert.match(script, /navToggle\?\.focus\(\)/);
+  assert.match(script, /function\s+setupRevealMotion\(\)/);
+  assert.match(script, /IntersectionObserver/);
+  assert.match(script, /document\.documentElement\.classList\.add\("motion-ready"\)/);
+  assert.match(script, /function\s+setupDeviceDepth\(\)/);
+  assert.match(script, /\(hover: hover\) and \(pointer: fine\)/);
+  assert.match(script, /--tilt-x/);
+  assert.match(script, /--tilt-y/);
 });
 
 test("the design record preserves the approved direction contract", () => {
