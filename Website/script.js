@@ -17,6 +17,13 @@ navLinks?.addEventListener("click", (event) => {
   if (event.target.closest("a")) closeNavigation();
 });
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && navToggle?.getAttribute("aria-expanded") === "true") {
+    closeNavigation();
+    navToggle?.focus();
+  }
+});
+
 window.addEventListener("resize", () => {
   if (window.innerWidth > 800) closeNavigation();
 });

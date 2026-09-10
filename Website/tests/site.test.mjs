@@ -7,6 +7,8 @@ const websiteRoot = resolve(import.meta.dirname, "..");
 const indexPath = resolve(websiteRoot, "index.html");
 const stylesPath = resolve(websiteRoot, "styles.css");
 const scriptPath = resolve(websiteRoot, "script.js");
+const designSpecPath = resolve(websiteRoot, "..", "Docs", "superpowers", "specs", "2026-09-10-aurora-marketing-site-design.md");
+const designSystemPath = resolve(websiteRoot, "..", "DESIGN.md");
 
 function readRequired(path) {
   assert.ok(existsSync(path), `required file is missing: ${path}`);
@@ -25,6 +27,13 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /<h1[^>]*>\s*Survival knowledge that stays with you\./);
   assert.match(html, /Coming to the App Store/);
   assert.match(html, /mailto:guokenny7@gmail\.com/);
+  assert.match(html, /founder-led/i);
+  assert.match(html, /class="nav-status"[^>]*>Coming to the App Store<\/span>/);
+  assert.match(html, /class="button button-primary"[^>]*href="mailto:guokenny7@gmail\.com/);
+  assert.match(html, /class="availability-label">Coming to the App Store<\/span>/);
+  assert.match(html, />guokenny7@gmail\.com<\/a>/);
+  assert.match(html, /How is Aurora’s content verified\?/);
+  assert.match(html, /source metadata[^<]*signed before activation[^<]*physical iPhone 13/i);
   assert.match(html, /1,050/);
   assert.match(html, /504/);
   assert.match(html, />Ask</);
@@ -40,6 +49,8 @@ test("the page avoids rejected brands and unsupported claims", () => {
   assert.doesNotMatch(visibleCopy, /Aurora|Aurora Labs|Aurora LLC/i);
   assert.doesNotMatch(visibleCopy, /download now|available now|customers love|trusted by/i);
   assert.doesNotMatch(visibleCopy, /Built by Kenny Guo/i);
+  assert.doesNotMatch(visibleCopy, /No account required/i);
+  assert.doesNotMatch(visibleCopy, /Lite model targets iPhone 13-class/i);
 });
 
 test("all local page assets resolve and images carry intrinsic dimensions and alt text", () => {
@@ -61,6 +72,8 @@ test("all local page assets resolve and images carry intrinsic dimensions and al
     assert.match(image, /width="\d+"/, `image needs intrinsic width: ${image}`);
     assert.match(image, /height="\d+"/, `image needs intrinsic height: ${image}`);
   }
+
+  assert.ok(statSync(resolve(websiteRoot, "assets", "aurora-icon.webp")).size < 250_000, "brand icon should be web-sized");
 });
 
 test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts", () => {
@@ -70,6 +83,10 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /@media[^\{]*max-width/);
   assert.match(css, /overflow-wrap/);
+  assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
+  assert.doesNotMatch(css, /0\.6[69]rem/);
+  assert.match(css, /\.contact-email\s*\{[^}]*0\.8125rem/s);
+  assert.match(css, /@media\s*\(max-width:\s*340px\)/);
 });
 
 test("the navigation script is local and progressively enhances the page", () => {
@@ -79,4 +96,18 @@ test("the navigation script is local and progressively enhances the page", () =>
   assert.match(html, /<script\s+src="script\.js"\s+defer><\/script>/);
   assert.match(script, /aria-expanded/);
   assert.match(script, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
+  assert.match(script, /event\.key === "Escape"/);
+  assert.match(script, /navToggle\?\.focus\(\)/);
+});
+
+test("the design record preserves the approved direction contract", () => {
+  const spec = readRequired(designSpecPath);
+  const system = readRequired(designSystemPath);
+
+  for (const block of ["THESIS", "OWN-WORLD", "STORY", "FIRST VIEWPORT", "FORM", "FINISH"]) {
+    assert.match(spec, new RegExp(`\\*\\*${block}:\\*\\*`), `missing ${block} direction block`);
+  }
+  assert.match(spec, /approve-mature-saas/);
+  assert.match(system, /^---\nname: Aurora Survival/m);
+  assert.match(system, /Creative North Star: "The Field Manual"/);
 });

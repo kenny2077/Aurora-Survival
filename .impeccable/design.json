@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T08:45:00-05:00",
+  "title": "Design System: Aurora Survival",
+  "extensions": {
+    "colorMeta": {
+      "canvas": { "role": "neutral", "displayName": "Warm Canvas", "canonical": "#e8ece7", "tonalRamp": ["#1b211c", "#303832", "#4b564d", "#69766c", "#8b978e", "#adb7af", "#cdd4ce", "#edf1ed"] },
+      "paper": { "role": "neutral", "displayName": "Clean Paper", "canonical": "#fafbf8", "tonalRamp": ["#1d201c", "#343832", "#50564e", "#70776e", "#929990", "#b5bbb2", "#d5d9d2", "#f5f7f2"] },
+      "ink": { "role": "neutral", "displayName": "Graphite Ink", "canonical": "#14221d", "tonalRamp": ["#14221d", "#293a33", "#40544b", "#5a7065", "#768d81", "#95aa9e", "#b7c8bf", "#dce7e1"] },
+      "spruce": { "role": "primary", "displayName": "Deep Spruce", "canonical": "#173f35", "tonalRamp": ["#10241f", "#173f35", "#245c4e", "#397b69", "#579a85", "#7ab9a4", "#a5d7c5", "#d8f2e8"] },
+      "teal": { "role": "secondary", "displayName": "Field Teal", "canonical": "#087b76", "tonalRamp": ["#062927", "#08423f", "#08605c", "#087b76", "#209b95", "#55b9b3", "#8fd6d1", "#d1efed"] },
+      "signal": { "role": "primary", "displayName": "Signal Rust", "canonical": "#a6300f", "tonalRamp": ["#321208", "#541b0a", "#7d260d", "#a6300f", "#c94f30", "#e57a60", "#f2aa98", "#fbded5"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero argument only." },
+      "body": { "displayName": "Body", "purpose": "Readable product and trust copy." },
+      "label": { "displayName": "Utility Label", "purpose": "Navigation, actions, facts, and captions." }
+    },
+    "shadows": [
+      { "name": "physical-device", "value": "0 32px 80px rgba(0, 0, 0, 0.46)", "purpose": "Lift the real iPhone capture above the product stage." }
+    ],
+    "motion": [
+      { "name": "state", "value": "160ms ease", "purpose": "Button color and two-pixel hover lift; removed for reduced-motion users." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "800px" },
+      { "name": "compact", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The decisive availability or contact action.",
+      "html": "<button class=\"ds-button-primary\">COMING TO THE APP STORE</button>",
+      "css": ".ds-button-primary { min-height: 46px; padding: 12px 17px; border: 1px solid #14221d; border-radius: 0; color: #f7fbf8; background: #14221d; font: 700 .75rem/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; transition: background-color 160ms ease, transform 160ms ease; } .ds-button-primary:hover { background: #173f35; transform: translateY(-2px); } .ds-button-primary:active { transform: translateY(0); } .ds-button-primary:focus-visible { outline: 3px solid #a6300f; outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A quieter action with identical geometry.",
+      "html": "<button class=\"ds-button-secondary\">CONTACT AURORA</button>",
+      "css": ".ds-button-secondary { min-height: 46px; padding: 12px 17px; border: 1px solid #14221d; border-radius: 0; color: #14221d; background: transparent; font: 700 .75rem/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; transition: transform 160ms ease; } .ds-button-secondary:hover { transform: translateY(-2px); } .ds-button-secondary:active { transform: translateY(0); } .ds-button-secondary:focus-visible { outline: 3px solid #a6300f; outline-offset: 4px; }"
+    },
+    {
+      "name": "Proof Metric",
+      "kind": "card",
+      "description": "A ruled product fact with a tabular figure.",
+      "html": "<div class=\"ds-proof\"><strong>1,050</strong><span>Indexed manual passages</span></div>",
+      "css": ".ds-proof { padding: 29px 26px; border: 1px solid #cad2cb; color: #14221d; background: #fafbf8; } .ds-proof strong { display: block; font: 700 1.75rem/1 -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -.04em; font-variant-numeric: tabular-nums; } .ds-proof span { display: block; margin-top: 8px; color: #637069; font: .75rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Compact monospaced navigation with a ruled hover response.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">PRODUCT</a><a href=\"#\">PRIVACY</a><a href=\"#\">STORY</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 28px; color: #14221d; background: #fafbf8; font: 560 .75rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; } .ds-nav a { padding: 12px 0; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; } .ds-nav a:hover { border-color: currentColor; } .ds-nav a:focus-visible { outline: 3px solid #a6300f; outline-offset: 4px; }"
+    },
+    {
+      "name": "FAQ Row",
+      "kind": "custom",
+      "description": "A plain ruled disclosure for practical details.",
+      "html": "<details class=\"ds-faq\"><summary>Does Aurora work without a connection?</summary><p>Prepared guidance and maps run locally.</p></details>",
+      "css": ".ds-faq { max-width: 620px; color: #14221d; border-top: 1px solid #aab6ad; border-bottom: 1px solid #aab6ad; font-family: -apple-system, BlinkMacSystemFont, sans-serif; } .ds-faq summary { padding: 22px 44px 22px 0; cursor: pointer; font-weight: 700; } .ds-faq summary:focus-visible { outline: 3px solid #a6300f; outline-offset: 4px; } .ds-faq p { color: #637069; line-height: 1.55; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Manual",
+    "overview": "Aurora feels like dependable equipment laid out on a clean work surface: direct, legible, and built to be trusted. Its maturity comes from measured spacing, blunt typography, thin rules, real product evidence, and a single controlled atmospheric moment rather than decorative technology imagery. The system is pragmatic SaaS presentation grounded in an outdoor product.",
+    "keyCharacteristics": ["Narrow ruled canvas with generous breathing room.", "Physical-device proof as the primary product material.", "Deep spruce and warm paper, with aurora color reserved for the real identity asset.", "Square, decisive controls and compact monospaced utility copy."],
+    "rules": [
+      { "name": "The Aurora Reserve Rule", "body": "Saturated aurora color belongs mainly to the production mark and real product imagery; it is not a generic decoration.", "section": "colors" },
+      { "name": "The Plain Language Rule", "body": "Typography supplies authority; copy stays concrete and never performs futurism.", "section": "typography" },
+      { "name": "The Physical Depth Rule", "body": "Shadow belongs to the device proof, not to generic content containers.", "section": "elevation" }
+    ],
+    "dos": ["Do use real app captures whenever describing product behavior.", "Do keep claims traceable to product documentation or repository evidence.", "Do use whitespace, rules, and scale to create hierarchy.", "Do retain visible focus and reduced-motion behavior."],
+    "donts": ["Don't add glowing orbs, particle fields, fake dashboards, or decorative chat bubbles.", "Don't turn sections into interchangeable rounded cards or oversized pills.", "Don't introduce web fonts or third-party runtime assets without a specific need.", "Don't publish founder identity in page copy; use the Aurora contact link."]
+  }
+}
