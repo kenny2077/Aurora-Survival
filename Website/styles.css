@@ -599,9 +599,8 @@ main,
 .site-footer p { margin: 0; }
 .footer-brand { min-height: 44px; color: var(--ink); font-family: var(--sans); font-size: 0.92rem; }
 .footer-brand img { width: 28px; height: 28px; border-radius: 8px; }
-.footer-family { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; max-width: 620px; }
-.footer-family a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-.footer-family a span { margin-left: 4px; }
+.footer-project { min-height: 44px; display: inline-flex; align-items: center; justify-self: start; gap: 9px; color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.footer-project img { width: 24px; height: 24px; }
 .footer-links { display: flex; gap: 18px; }
 .footer-links a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
 

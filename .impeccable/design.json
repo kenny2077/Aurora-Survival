@@ -79,9 +79,9 @@
     {
       "name": "Product Family Footer",
       "kind": "custom",
-      "description": "A compact, subordinate mention of Aurora Digest with direct live and source links.",
-      "html": "<p class=\"ds-family\">Also from Aurora: <a href=\"#\">Aurora Digest</a> — A self-hosted daily learning radar for AI builders. <a href=\"#\">Source ↗</a></p>",
-      "css": ".ds-family { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; color: var(--muted, #5b6962); font: .72rem/1.4 ui-monospace, monospace; } .ds-family a { min-height: 44px; display: inline-flex; align-items: center; color: var(--ink, #10201a); text-decoration: underline; text-underline-offset: 4px; }"
+      "description": "A compact, subordinate icon-and-name link to the Aurora Digest repository.",
+      "html": "<a class=\"ds-project\" href=\"#\"><img src=\"digest-icon.svg\" width=\"24\" height=\"24\" alt=\"Aurora Digest icon\"><span>Aurora Digest</span></a>",
+      "css": ".ds-project { min-height: 44px; display: inline-flex; align-items: center; gap: 9px; color: var(--ink, #10201a); font: 700 .72rem/1.4 ui-monospace, monospace; text-decoration: underline; text-underline-offset: 4px; } .ds-project img { width: 24px; height: 24px; }"
     }
   ],
   "narrative": {
@@ -93,7 +93,7 @@
       { "name": "The Plain Language Rule", "body": "Let scale and weight supply authority; copy stays concrete and never performs futurism.", "section": "typography" },
       { "name": "The Physical Evidence Rule", "body": "Depth supports real product evidence; it never turns ordinary content into floating UI chrome.", "section": "elevation" }
     ],
-    "dos": ["Do use real app captures whenever describing product behavior.", "Do keep claims traceable to product documentation or repository evidence.", "Do use light, motion, spacing, and scale to lead attention.", "Do preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.", "Do keep the BioCLIP, founder GitHub, Aurora Digest, and Digest source links descriptive and safe."],
+    "dos": ["Do use real app captures whenever describing product behavior.", "Do keep claims traceable to product documentation or repository evidence.", "Do use light, motion, spacing, and scale to lead attention.", "Do preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.", "Do keep the BioCLIP, founder GitHub, and Aurora Digest repository links descriptive and safe."],
     "donts": ["Don't add particles, glowing orbs, fake dashboards, testimonials, customer logos, or decorative chat bubbles.", "Don't turn sections into interchangeable rounded cards or oversized pills.", "Don't introduce web fonts, trackers, or third-party runtime assets.", "Don't publish the founder's name in page copy; use contact and profile links.", "Don't imply the App Store release is currently available."]
   }
 }

@@ -169,7 +169,7 @@ The founder section has one “Contact Aurora” disclosure. Email and GitHub re
 
 ### Product Family Footer
 
-The footer quietly introduces Aurora Digest as another Aurora product, using one factual sentence plus direct live and source links. It must remain compact, subordinate to Aurora Survival, and stack without overflow on narrow screens.
+The footer quietly links to Aurora Digest with its local icon and product name. The single repository link stays compact, subordinate to Aurora Survival, and stacks without overflow on narrow screens; it carries no description, live-site link, or separate source label.
 
 ## Do's and Don'ts
 
@@ -179,7 +179,7 @@ The footer quietly introduces Aurora Digest as another Aurora product, using one
 - Keep claims traceable to product documentation or repository evidence.
 - Use light, motion, spacing, and scale to lead attention.
 - Preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.
-- Keep the BioCLIP, founder GitHub, Aurora Digest, and Digest source links descriptive and safe.
+- Keep the BioCLIP, founder GitHub, and Aurora Digest repository links descriptive and safe.
 
 ### Don't
 
