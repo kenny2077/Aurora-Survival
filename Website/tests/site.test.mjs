@@ -42,6 +42,24 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, />Tools</);
 });
 
+test("the kinetic field journey exposes safe open-source and founder links", () => {
+  const html = readRequired(indexPath);
+
+  assert.match(html, /class="hero-signal"/);
+  assert.match(html, /id="open-source"/);
+  assert.match(html, /class="species-section[^"]*"/);
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/kenny2077\/aurora-species-BioCLIP"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/kenny2077"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
+  );
+  assert.ok((html.match(/data-reveal/g) ?? []).length >= 6, "expected reveal hooks across the page");
+  assert.match(html, /aria-label="Aurora Survival on GitHub"/);
+});
+
 test("the page avoids rejected brands and unsupported claims", () => {
   const html = readRequired(indexPath);
   const visibleCopy = html.replace(/<[^>]+>/g, " ");
@@ -78,7 +96,7 @@ test("all local page assets resolve and images carry intrinsic dimensions and al
 
 test("the privacy panel uses a dedicated high-resolution aurora photograph", () => {
   const html = readRequired(indexPath);
-  const privacyFigure = html.match(/<figure class="privacy-art">([\s\S]*?)<\/figure>/)?.[1] ?? "";
+  const privacyFigure = html.match(/<figure class="privacy-art"[^>]*>([\s\S]*?)<\/figure>/)?.[1] ?? "";
 
   assert.match(privacyFigure, /src="assets\/aurora-field-v2\.webp"/);
   assert.match(privacyFigure, /width="1122"/);

@@ -27,8 +27,10 @@
 
       <div class="nav-links" id="nav-links">
         <a href="#product">Product</a>
+        <a href="#open-source">Open Source</a>
         <a href="#privacy">Privacy</a>
-        <a href="#story">Story</a>
+        <a href="#story">Founder</a>
+        <a class="nav-github" href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer" aria-label="Aurora Survival on GitHub">GitHub <span aria-hidden="true">↗</span></a>
         <span class="nav-status">Coming to the App Store</span>
       </div>
     </nav>
@@ -36,16 +38,22 @@
 
   <main id="main-content">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <h1 id="hero-title">Survival knowledge that stays with you.</h1>
-      <p class="hero-copy">Aurora brings field guidance, offline maps, and species identification onto the device you already carry—ready when the network isn’t.</p>
-      <div class="hero-actions" aria-label="Aurora availability and contact">
+      <div class="hero-atmosphere" aria-hidden="true">
+        <span class="aurora-ribbon aurora-ribbon-one"></span>
+        <span class="aurora-ribbon aurora-ribbon-two"></span>
+        <span class="field-grid"></span>
+      </div>
+      <h1 id="hero-title" data-reveal>Survival knowledge that stays with you.</h1>
+      <p class="hero-copy" data-reveal>Aurora brings field guidance, offline maps, and species identification onto the device you already carry—ready when the network isn’t.</p>
+      <div class="hero-actions" aria-label="Aurora availability and contact" data-reveal>
         <a class="button button-primary" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora</a>
         <span class="availability-label">Coming to the App Store</span>
       </div>
+      <p class="hero-signal" data-reveal><span aria-hidden="true"></span> Private · Source-backed · Fully offline</p>
     </section>
 
     <section class="product-stage" aria-labelledby="product-capture-title">
-      <div class="stage-copy">
+      <div class="stage-copy" data-reveal>
         <h2 id="product-capture-title">The real app.<br>On the real device.</h2>
         <p>Captured directly from Aurora 1.1.0 running on iPhone 13. No concept interface, cloud session, or staged dashboard.</p>
         <dl class="stage-notes">
@@ -54,13 +62,13 @@
           <div><dt>Surface</dt><dd>Ask home</dd></div>
         </dl>
       </div>
-      <figure class="device-capture">
+      <figure class="device-capture" data-reveal>
         <img src="assets/iphone-ask-home.webp" width="1170" height="2532" alt="Aurora Survival running on an iPhone 13, showing the Ask home with fire, water, shelter, first aid, navigation, and food categories" decoding="async" fetchpriority="high">
         <figcaption>Native-resolution capture from the physical iPhone build.</figcaption>
       </figure>
     </section>
 
-    <section class="proof-band" aria-label="Aurora product facts">
+    <section class="proof-band" aria-label="Aurora product facts" data-reveal>
       <div><strong>1,050</strong><span>Indexed manual passages</span></div>
       <div><strong>504</strong><span>Offline species</span></div>
       <div><strong>4</strong><span>Primary areas</span></div>
@@ -68,12 +76,12 @@
     </section>
 
     <section class="product-section" id="product" aria-labelledby="product-title">
-      <div class="section-intro">
+      <div class="section-intro" data-reveal>
         <h2 id="product-title">Focused tools.<br>One local system.</h2>
         <p>Aurora keeps the interface direct: prepare what you need, carry it offline, and move between guidance and reference without losing context.</p>
       </div>
 
-      <ol class="feature-list">
+      <ol class="feature-list" data-reveal>
         <li>
           <h3>Ask</h3>
           <p>Local conversation grounded in exact passages from the Manual.</p>
@@ -93,8 +101,22 @@
       </ol>
     </section>
 
+    <section class="species-section" id="open-source" aria-labelledby="species-title" data-reveal>
+      <div class="species-visual" aria-hidden="true">
+        <span class="scan-line"></span>
+        <span class="species-mark">504</span>
+        <span class="species-caption">species available offline</span>
+      </div>
+      <div class="species-copy">
+        <p class="eyebrow">Open-source species intelligence</p>
+        <h2 id="species-title">Identify what’s around you. Keep the photo local.</h2>
+        <p>Aurora’s separate species scanner uses an on-device BioCLIP workflow prepared for offline field use.</p>
+        <a class="text-link external-link" href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">Explore the BioCLIP repository <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
     <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
-      <div class="privacy-copy">
+      <div class="privacy-copy" data-reveal>
         <h2 id="privacy-title">Your field questions don’t leave the field.</h2>
         <p>Questions and selected photos are processed locally. Model and map downloads happen only during explicit preparation.</p>
         <ul>
@@ -102,20 +124,23 @@
           <li>No photo upload for species identification</li>
         </ul>
       </div>
-      <figure class="privacy-art">
+      <figure class="privacy-art" data-reveal>
         <img src="assets/aurora-field-v2.webp" width="1122" height="1402" alt="Teal and violet northern lights above a dark mountain range" loading="lazy" decoding="async">
         <figcaption>Questions + photos / processed locally</figcaption>
       </figure>
     </section>
 
-    <section class="story-section" id="story" aria-labelledby="story-title">
+    <section class="story-section" id="story" aria-labelledby="story-title" data-reveal>
       <h2 id="story-title">Built for the moments infrastructure can’t reach.</h2>
       <p>Aurora Survival is a founder-led field product built around privacy, evidence, and offline reliability. It is an educational aid—not a replacement for emergency services, certified first-aid training, or professional judgment.</p>
-      <a class="text-link" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora <span aria-hidden="true">→</span></a>
+      <div class="story-actions">
+        <a class="text-link" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora <span aria-hidden="true">→</span></a>
+        <a class="text-link external-link" href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">View the founder’s GitHub <span aria-hidden="true">↗</span></a>
+      </div>
       <a class="contact-email" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">guokenny7@gmail.com</a>
     </section>
 
-    <section class="faq-section" aria-labelledby="faq-title">
+    <section class="faq-section" aria-labelledby="faq-title" data-reveal>
       <div class="section-intro compact">
         <h2 id="faq-title">The useful details.</h2>
       </div>
@@ -139,7 +164,7 @@
       </div>
     </section>
 
-    <section class="availability-section" id="availability" aria-labelledby="availability-title">
+    <section class="availability-section" id="availability" aria-labelledby="availability-title" data-reveal>
       <h2 id="availability-title">Ready when the network isn’t.</h2>
       <p>Coming to the App Store.</p>
       <a class="button button-primary" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora</a>
@@ -152,6 +177,10 @@
       <span>Aurora Survival</span>
     </a>
     <p>Independent field software. Built for offline use.</p>
+    <div class="footer-links">
+      <a href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">BioCLIP</a>
+      <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
     <p>© 2026 Aurora Survival</p>
   </footer>
 </body>
