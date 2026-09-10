@@ -33,8 +33,15 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /class="availability-label">Coming to the App Store<\/span>/);
   assert.match(html, /How is Aurora’s content verified\?/);
   assert.match(html, /source metadata[^<]*signed before activation[^<]*physical iPhone 13/i);
-  assert.match(html, /1,050/);
-  assert.match(html, /504/);
+});
+
+test("the standalone product metrics strip is removed", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+
+  assert.doesNotMatch(html, /class="proof-band"/);
+  assert.doesNotMatch(html, /Indexed manual passages|Offline species|Primary areas|Cloud queries in ordinary use/);
+  assert.doesNotMatch(css, /\.proof-band/);
 });
 
 test("the product overview is removed and the species visual uses crisp pixel wildlife art", () => {
@@ -163,7 +170,6 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.match(css, /section\[id\]\s*\{[^}]*scroll-margin-top:\s*76px/s);
   assert.doesNotMatch(css, /0\.6[69]rem/);
   assert.match(css, /\.contact-options\s+small\s*\{[^}]*0\.72rem/s);
-  assert.match(css, /@media\s*\(max-width:\s*340px\)/);
   assert.match(css, /@keyframes\s+aurora-drift/);
   assert.match(css, /@keyframes\s+signal-pulse/);
   assert.match(css, /@keyframes\s+scan-pass/);

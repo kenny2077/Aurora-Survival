@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-10T15:40:00-05:00",
+  "generatedAt": "2026-09-10T15:50:00-05:00",
   "title": "Design System: Aurora Survival",
   "extensions": {
     "colorMeta": {
@@ -35,8 +35,7 @@
     ],
     "breakpoints": [
       { "name": "stack", "value": "800px" },
-      { "name": "compact", "value": "520px" },
-      { "name": "proof-single", "value": "340px" }
+      { "name": "compact", "value": "520px" }
     ]
   },
   "components": [
@@ -55,13 +54,6 @@
       "description": "The luminous contact action reserved for dark atmospheric surfaces.",
       "html": "<a class=\"ds-hero-button\" href=\"#\">Contact Aurora</a>",
       "css": ".ds-hero-button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 13px 19px; border: 1px solid var(--aurora-cyan, #15d9c5); border-radius: 0; color: var(--night, #061311); background: var(--aurora-cyan, #15d9c5); font: 740 .78rem/1.1 -apple-system, BlinkMacSystemFont, sans-serif; text-decoration: none; transition: background-color 180ms ease, transform 180ms cubic-bezier(.22,1,.36,1), box-shadow 180ms ease; } .ds-hero-button:hover { background: #6ef3e2; transform: translateY(-2px); box-shadow: 0 16px 26px rgba(0,0,0,.3); } .ds-hero-button:active { transform: translateY(0); } .ds-hero-button:focus-visible { outline: 3px solid var(--signal, #a6300f); outline-offset: 4px; }"
-    },
-    {
-      "name": "Proof Metric",
-      "kind": "card",
-      "description": "A ruled product fact with a tabular figure and no floating-card treatment.",
-      "html": "<div class=\"ds-proof\"><strong>1,050</strong><span>Indexed manual passages</span></div>",
-      "css": ".ds-proof { padding: 32px 26px; border-right: 1px solid var(--line, #c5cec6); color: var(--ink, #10201a); background: #eef2ed; } .ds-proof strong { display: block; color: var(--spruce, #143f35); font: 700 2.35rem/1 -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -.04em; font-variant-numeric: tabular-nums; } .ds-proof span { display: block; margin-top: 9px; color: var(--muted, #5b6962); font: .78rem/1.4 -apple-system, BlinkMacSystemFont, sans-serif; }"
     },
     {
       "name": "Navigation",
