@@ -119,6 +119,13 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.doesNotMatch(css, /0\.6[69]rem/);
   assert.match(css, /\.contact-email\s*\{[^}]*0\.8125rem/s);
   assert.match(css, /@media\s*\(max-width:\s*340px\)/);
+  assert.match(css, /@keyframes\s+aurora-drift/);
+  assert.match(css, /@keyframes\s+signal-pulse/);
+  assert.match(css, /@keyframes\s+scan-pass/);
+  assert.match(css, /\.species-section\s*\{/);
+  assert.match(css, /\.motion-ready\s+\[data-reveal\]/);
+  assert.match(css, /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*\.aurora-ribbon[\s\S]*animation:\s*none/);
 });
 
 test("the navigation script is local and progressively enhances the page", () => {
