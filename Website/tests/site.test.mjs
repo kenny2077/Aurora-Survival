@@ -155,5 +155,8 @@ test("the design record preserves the approved direction contract", () => {
   }
   assert.match(spec, /approve-mature-saas/);
   assert.match(system, /^---\nname: Aurora Survival/m);
-  assert.match(system, /Creative North Star: "The Field Manual"/);
+  assert.match(system, /Creative North Star: "Kinetic Field Signal"/);
+  assert.match(system, /Motion is progressive enhancement/);
+  assert.match(system, /aurora-drift/);
+  assert.match(system, /scan-pass/);
 });

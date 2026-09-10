@@ -1,34 +1,38 @@
 ---
 name: Aurora Survival
-description: Pragmatic offline field software presented with physical proof and editorial restraint.
+description: Kinetic offline field software grounded in physical proof and editorial restraint.
 colors:
-  canvas: "#e8ece7"
-  paper: "#fafbf8"
-  ink: "#14221d"
-  muted: "#637069"
-  line: "#cad2cb"
-  line-strong: "#aab6ad"
-  spruce: "#173f35"
+  canvas: "#dfe5df"
+  paper: "#f7f9f5"
+  ink: "#10201a"
+  muted: "#5b6962"
+  line: "#c5cec6"
+  line-strong: "#9eaaa1"
+  spruce: "#143f35"
   teal: "#087b76"
   signal: "#a6300f"
-  white: "#f7fbf8"
+  white: "#f5fbf7"
+  night: "#061311"
+  aurora-cyan: "#15d9c5"
+  aurora-blue: "#3478f6"
+  aurora-violet: "#7546ff"
 typography:
   display:
     fontFamily: "-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif"
-    fontSize: "clamp(3.2rem, 7.1vw, 5.6rem)"
-    fontWeight: 700
-    lineHeight: 0.92
+    fontSize: "clamp(3.35rem, 7.5vw, 5.8rem)"
+    fontWeight: 780
+    lineHeight: 0.91
     letterSpacing: "-0.04em"
   body:
     fontFamily: "-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.65
   label:
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
     fontSize: "0.75rem"
     fontWeight: 700
-    lineHeight: 1.1
+    lineHeight: 1.4
 rounded:
   square: "0"
   icon: "10px"
@@ -37,132 +41,119 @@ spacing:
   xs: "10px"
   sm: "18px"
   md: "28px"
-  lg: "48px"
-  section: "clamp(68px, 9vw, 104px)"
+  lg: "54px"
+  section: "clamp(82px, 10vw, 124px)"
+motion:
+  easing: "cubic-bezier(0.22, 1, 0.36, 1)"
+  revealDuration: "700ms"
+  auroraDuration: "18s"
+  scanDuration: "7.5s"
 components:
   button-primary:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.white}"
-    typography: "{typography.label}"
     rounded: "{rounded.square}"
-    padding: "12px 17px"
-    height: "46px"
-  button-secondary:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
+    padding: "13px 19px"
+    height: "48px"
+  hero-button:
+    backgroundColor: "{colors.aurora-cyan}"
+    textColor: "{colors.night}"
     rounded: "{rounded.square}"
-    padding: "12px 17px"
-    height: "46px"
+    padding: "13px 19px"
+    height: "48px"
 ---
 
 # Design System: Aurora Survival
 
 ## Overview
 
-**Creative North Star: "The Field Manual"**
+**Creative North Star: "Kinetic Field Signal"**
 
-Aurora feels like dependable equipment laid out on a clean work surface: direct, legible, and built to be trusted. Its maturity comes from measured spacing, blunt typography, thin rules, real product evidence, and a single controlled atmospheric moment rather than decorative technology imagery.
+Aurora feels like dependable field equipment activated under a moving night sky. The field-manual foundation remains direct, legible, and evidence-led; controlled aurora light supplies motion, depth, and a memorable sense of readiness.
 
-The system is pragmatic SaaS presentation grounded in an outdoor product. It avoids glossy AI tropes, fake interfaces, glowing ornaments, pill-heavy layouts, and motion without function.
+The system is a mature SaaS presentation grounded in an outdoor product. It uses real product evidence, strong section pacing, and restrained atmospheric effects without generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.
 
 **Key Characteristics:**
 
-- Narrow ruled canvas with generous breathing room.
+- A cinematic dark first viewport with slow teal, blue, and violet light.
 - Physical-device proof as the primary product material.
-- Deep spruce and warm paper, with aurora color reserved for the real identity asset.
-- Square, decisive controls and compact monospaced utility copy.
+- Warm paper reading sections separated by decisive dark product moments.
+- Square controls, thin rules, compact measurement labels, and generous space.
+- One coordinated motion language that becomes completely static when requested.
 
 ## Colors
 
-Warm paper and quiet green-gray neutrals establish calm; spruce carries privacy and field reliability, while signal rust is reserved for focus visibility.
+Warm paper and green-gray neutrals keep reading calm. Night and spruce surfaces carry product proof, privacy, and open-source material. Signal rust remains reserved for visible focus.
 
-### Primary
-
-- **Deep Spruce:** Used for privacy surfaces, selections, and confident hover states.
-
-### Secondary
-
-- **Field Teal:** A restrained supporting accent. The production icon remains the richest teal/indigo moment.
-
-### Neutral
-
-- **Warm Canvas:** The outer page ground.
-- **Clean Paper:** The centered content surface.
-- **Graphite Ink:** Primary text and action fill.
-- **Weathered Gray:** Supporting copy.
-- **Fine Rule / Strong Rule:** Structural dividers and list boundaries.
-
-**The Aurora Reserve Rule.** Saturated aurora color belongs mainly to the production mark and real product imagery; it is not a generic decoration.
+**The Aurora Field Rule.** Saturated teal, blue, and violet may move across dark atmospheric surfaces. Reading surfaces remain restrained, and saturated color never replaces product evidence.
 
 ## Typography
 
-**Display Font:** System sans with SF Pro Display and Helvetica Neue fallbacks  
-**Body Font:** System sans  
-**Label/Mono Font:** System monospace with SFMono and Menlo fallbacks
+System sans is used for display and body copy to keep the static site fast and native to Apple-device audiences. System monospace is limited to measured facts, device metadata, status signals, and technical captions.
 
-**Character:** Large sans headings are compressed, sturdy, and plainspoken. Monospaced labels provide technical precision without turning body copy into a terminal theme.
+- **Display:** Heavy, tightly tracked, balanced, and capped below 6rem.
+- **Headline:** Compact section arguments with more space above than below.
+- **Body:** Relaxed 1.65 line height and limited measure.
+- **Measurement:** Small monospace only where the content behaves like data.
 
-### Hierarchy
+Typography supplies authority; copy stays concrete and never performs futurism.
 
-- **Display:** Heavy, tightly tracked, near-solid line spacing; reserved for the hero.
-- **Headline:** Large and compact; used for section arguments.
-- **Title:** Strong one-line labels for tools and FAQ questions.
-- **Body:** Regular-weight, relaxed line spacing, and limited measure for easy reading.
-- **Label:** Small, bold monospace for navigation, actions, captions, and measured facts.
+## Layout and Rhythm
 
-**The Plain Language Rule.** Typography supplies authority; copy stays concrete and never performs futurism.
+The site occupies a centered 1180px canvas. The dark hero establishes the world, the real-device stage overlaps its lower edge, and quieter paper sections alternate with dense product moments. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable.
 
-## Layout
+## Motion
 
-The site occupies a centered 1120px canvas with fine vertical rules. Sections use generous vertical rhythm and grid relationships rather than card stacks. The hero centers its argument; product and privacy sections use deliberate split compositions. At 800px, navigation becomes a controlled menu and all primary splits stack. At 520px, proof metrics become a single column and feature rows simplify.
+Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences.
 
-## Elevation & Depth
+- `aurora-drift` moves two low-opacity light fields over 18–24 seconds.
+- `signal-pulse` gives the privacy/offline status a slow breathing cadence.
+- `scan-pass` supplies a seven-second measurement sweep in the species section.
+- Section reveals use a short rise, blur resolution, and exponential ease-out once per element.
+- Fine-pointer devices may tilt the physical iPhone capture by no more than five degrees; touch and reduced-motion contexts receive no tilt.
 
-The system is flat by default. Borders, tonal fields, and overlapping scale create structure. The physical iPhone capture alone receives a substantial shadow because it represents a real object above the dark stage; the sticky header uses a restrained translucent blur for continuity while scrolling.
+No motion may scroll-jack, flash, delay content access, or imitate a loading state.
 
-**The Physical Depth Rule.** Shadow belongs to the device proof, not to generic content containers.
+## Depth and Shapes
 
-## Shapes
-
-Controls, sections, lists, and content frames use square edges. The rounded app icon and iPhone silhouette are factual product shapes and remain the exceptions. Thin one-pixel rules organize the page without soft card chrome.
+Content frames and controls remain square. The app icon and iPhone silhouette keep their factual rounded shapes. Shadows carry visible vertical offset and soft blur, and are reserved for the device and large dark product fields rather than generic cards.
 
 ## Components
 
-### Buttons
-
-- **Shape:** Rectangular with square corners and a one-pixel graphite border.
-- **Primary:** Graphite fill with warm-white text; spruce on hover.
-- **Secondary:** Transparent paper fill with graphite text.
-- **Hover / Focus:** A two-pixel lift on hover, reset on active, and a three-pixel rust focus outline with four-pixel offset.
-
-### Cards / Containers
-
-- **Corner Style:** Square for content surfaces; the physical device keeps its native rounded silhouette.
-- **Background:** Paper for reading, spruce or near-black green for product and privacy proof.
-- **Shadow Strategy:** No generic card shadows.
-- **Border:** Thin neutral rules or translucent white rules on dark surfaces.
-
 ### Navigation
 
-The sticky header pairs the production icon and name with compact monospaced links. Desktop links use an underline response; mobile links become full-width ruled rows, with the App Store status retained as the strongest action.
+The sticky header pairs the production icon and name with plain product anchors, the founder GitHub profile, and a truthful App Store status. Desktop links respond with color and a fine underline; mobile links become full-width ruled rows.
+
+### Hero
+
+The hero combines the product promise, real availability state, and a subtle field signal over slow aurora light. The headline and action remain visually dominant at every viewport.
 
 ### Product Stage
 
-A dark, square-edged split field pairs compact factual copy with one tall real-device capture. Atmospheric color is subtle and subordinate to the screenshot.
+A dark split surface pairs physical-build facts with the native-resolution iPhone capture. Grid and light treatments support the real screen instead of replacing it.
 
-## Do's and Don'ts
+### Species Section
 
-### Do:
+The scanner motif uses verified offline-species count, measurement rules, and one slow scan line. It links directly to the public BioCLIP repository and never pretends to be a live product interface.
 
-- **Do** use real app captures whenever describing product behavior.
-- **Do** keep claims traceable to product documentation or repository evidence.
-- **Do** use whitespace, rules, and scale to create hierarchy.
-- **Do** retain visible focus and reduced-motion behavior.
+### Privacy Art
 
-### Don't:
+The high-resolution aurora photograph is displayed at its natural aspect and may receive only subtle hover scale on fine pointers. It must never be stretched, softened, or replaced by a low-resolution crop.
 
-- **Don't** add glowing orbs, particle fields, fake dashboards, or decorative chat bubbles.
-- **Don't** turn sections into interchangeable rounded cards or oversized pills.
-- **Don't** introduce web fonts or third-party runtime assets without a specific need.
-- **Don't** publish founder identity in page copy; use the Aurora contact link.
+## Do and Don't
+
+### Do
+
+- Use real app captures whenever describing product behavior.
+- Keep claims traceable to product documentation or repository evidence.
+- Use light, motion, spacing, and scale to lead attention.
+- Preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.
+- Keep the BioCLIP and founder GitHub links descriptive and safe.
+
+### Don't
+
+- Don't add particles, glowing orbs, fake dashboards, testimonials, customer logos, or decorative chat bubbles.
+- Don't turn sections into interchangeable rounded cards or oversized pills.
+- Don't introduce web fonts, trackers, or third-party runtime assets.
+- Don't publish the founder's name in page copy; use contact and profile links.
+- Don't imply the App Store release is currently available.
