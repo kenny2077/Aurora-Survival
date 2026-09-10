@@ -23,6 +23,17 @@ typography:
     fontWeight: 780
     lineHeight: 0.91
     letterSpacing: "-0.04em"
+  headline:
+    fontFamily: "-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif"
+    fontSize: "clamp(2.45rem, 5vw, 4.45rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-0.04em"
+  title:
+    fontFamily: "-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 700
+    lineHeight: 1.4
   body:
     fontFamily: "-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif"
     fontSize: "1rem"
@@ -43,11 +54,6 @@ spacing:
   md: "28px"
   lg: "54px"
   section: "clamp(82px, 10vw, 124px)"
-motion:
-  easing: "cubic-bezier(0.22, 1, 0.36, 1)"
-  revealDuration: "700ms"
-  auroraDuration: "18s"
-  scanDuration: "7.5s"
 components:
   button-primary:
     backgroundColor: "{colors.ink}"
@@ -85,38 +91,56 @@ The system is a mature SaaS presentation grounded in an outdoor product. It uses
 
 Warm paper and green-gray neutrals keep reading calm. Night and spruce surfaces carry product proof, privacy, and open-source material. Signal rust remains reserved for visible focus.
 
+### Primary
+
+- **Deep Spruce:** Product and privacy surfaces.
+- **Field Teal:** Interactive emphasis and technical labels.
+
+### Secondary
+
+- **Aurora Cyan:** Primary actions and controlled atmospheric light.
+- **Aurora Blue and Violet:** Supporting light fields on night surfaces only.
+
+### Neutral
+
+- **Night:** Cinematic hero and evidence-stage ground.
+- **Paper and Canvas:** Reading surfaces and the outer page field.
+- **Ink and Muted:** Primary and secondary text.
+- **Line and Strong Line:** Rules, dividers, and disclosure structure.
+
 **The Aurora Field Rule.** Saturated teal, blue, and violet may move across dark atmospheric surfaces. Reading surfaces remain restrained, and saturated color never replaces product evidence.
 
 ## Typography
 
 System sans is used for display and body copy to keep the static site fast and native to Apple-device audiences. System monospace is limited to measured facts, device metadata, status signals, and technical captions.
 
+### Hierarchy
+
 - **Display:** Heavy, tightly tracked, balanced, and capped below 6rem.
 - **Headline:** Compact section arguments with more space above than below.
+- **Title:** Strong one-line labels for features and disclosures.
 - **Body:** Relaxed 1.65 line height and limited measure.
-- **Measurement:** Small monospace only where the content behaves like data.
+- **Label:** Small monospace only where the content behaves like data.
 
 Typography supplies authority; copy stays concrete and never performs futurism.
 
-## Layout and Rhythm
+**The Plain Language Rule.** Let scale and weight supply authority; copy stays concrete and never performs futurism.
 
-The site occupies a centered 1180px canvas. The dark hero establishes the world, the real-device stage overlaps its lower edge, and quieter paper sections alternate with dense product moments. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable.
+## Layout
 
-## Motion
+The site occupies a centered 1180px canvas. The dark hero establishes the world, the real-device stage overlaps its lower edge, and quieter paper sections alternate with dense product moments. Product, species, and privacy sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column.
 
-Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences.
+Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences. Aurora light uses `aurora-drift` over 18–24 seconds, the hero guide line breathes over six seconds, the species field uses `scan-pass` over 7.5 seconds, and section reveals resolve over 700ms. Fine-pointer device depth stays below five degrees. No motion may scroll-jack, flash, delay content access, or imitate a loading state.
 
-- `aurora-drift` moves two low-opacity light fields over 18–24 seconds.
-- `signal-pulse` gives the privacy/offline status a slow breathing cadence.
-- `scan-pass` supplies a seven-second measurement sweep in the species section.
-- Section reveals use a short rise, blur resolution, and exponential ease-out once per element.
-- Fine-pointer devices may tilt the physical iPhone capture by no more than five degrees; touch and reduced-motion contexts receive no tilt.
+## Elevation & Depth
 
-No motion may scroll-jack, flash, delay content access, or imitate a loading state.
+The system combines tonal layering with a narrow shadow vocabulary. Shadows carry visible vertical offset and soft blur, and are reserved for the physical device and large dark product fields rather than generic cards.
 
-## Depth and Shapes
+**The Physical Evidence Rule.** Depth supports real product evidence; it never turns ordinary content into floating UI chrome.
 
-Content frames and controls remain square. The app icon and iPhone silhouette keep their factual rounded shapes. Shadows carry visible vertical offset and soft blur, and are reserved for the device and large dark product fields rather than generic cards.
+## Shapes
+
+Content frames and controls remain square. Thin rules establish structure. The app icon and iPhone silhouette alone retain their factual rounded shapes, with the device using its native 42px silhouette radius.
 
 ## Components
 
@@ -140,7 +164,7 @@ The scanner motif uses verified offline-species count, measurement rules, and on
 
 The high-resolution aurora photograph is displayed at its natural aspect and may receive only subtle hover scale on fine pointers. It must never be stretched, softened, or replaced by a low-resolution crop.
 
-## Do and Don't
+## Do's and Don'ts
 
 ### Do
 

@@ -7,7 +7,7 @@ const websiteRoot = resolve(import.meta.dirname, "..");
 const indexPath = resolve(websiteRoot, "index.html");
 const stylesPath = resolve(websiteRoot, "styles.css");
 const scriptPath = resolve(websiteRoot, "script.js");
-const designSpecPath = resolve(websiteRoot, "..", "Docs", "superpowers", "specs", "2026-09-10-aurora-marketing-site-design.md");
+const designSpecPath = resolve(websiteRoot, "..", "Docs", "superpowers", "specs", "2026-09-10-aurora-kinetic-field-refresh-design.md");
 const designSystemPath = resolve(websiteRoot, "..", "DESIGN.md");
 
 function readRequired(path) {
@@ -126,6 +126,10 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.match(css, /\.motion-ready\s+\[data-reveal\]/);
   assert.match(css, /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*\.aurora-ribbon[\s\S]*animation:\s*none/);
+  assert.doesNotMatch(css, /\.hero-signal\s*>\s*span\s*\{[^}]*animation:/s);
+  assert.doesNotMatch(css, /box-shadow:\s*0\s+0\s+\d+px\s+rgba\(21,\s*217,\s*197/s);
+  assert.doesNotMatch(css, /\.hero-signal\s*\{[^}]*text-transform:\s*uppercase/s);
+  assert.doesNotMatch(css, /\.species-caption\s*\{[^}]*text-transform:\s*uppercase/s);
 });
 
 test("the navigation script is local and progressively enhances the page", () => {
@@ -150,10 +154,12 @@ test("the design record preserves the approved direction contract", () => {
   const spec = readRequired(designSpecPath);
   const system = readRequired(designSystemPath);
 
-  for (const block of ["THESIS", "OWN-WORLD", "STORY", "FIRST VIEWPORT", "FORM", "FINISH"]) {
-    assert.match(spec, new RegExp(`\\*\\*${block}:\\*\\*`), `missing ${block} direction block`);
+  for (const heading of ["Chosen Direction: Kinetic Field Signal", "Page Structure", "Motion and Interaction", "GitHub Link Contract", "Acceptance Criteria"]) {
+    assert.match(spec, new RegExp(`## ${heading}`), `missing ${heading} direction section`);
   }
-  assert.match(spec, /approve-mature-saas/);
+  assert.match(spec, /aurora-species-BioCLIP/);
+  assert.match(spec, /prefers-reduced-motion: reduce/);
+  assert.match(spec, /Do not publish the refresh until/);
   assert.match(system, /^---\nname: Aurora Survival/m);
   assert.match(system, /Creative North Star: "Kinetic Field Signal"/);
   assert.match(system, /Motion is progressive enhancement/);
