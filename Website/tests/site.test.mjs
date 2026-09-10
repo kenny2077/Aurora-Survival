@@ -31,15 +31,40 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /founder-led/i);
   assert.match(html, /class="button button-primary"[^>]*href="mailto:guokenny7@gmail\.com/);
   assert.match(html, /class="availability-label">Coming to the App Store<\/span>/);
-  assert.match(html, />guokenny7@gmail\.com<\/a>/);
   assert.match(html, /How is Aurora’s content verified\?/);
   assert.match(html, /source metadata[^<]*signed before activation[^<]*physical iPhone 13/i);
   assert.match(html, /1,050/);
   assert.match(html, /504/);
-  assert.match(html, />Ask</);
-  assert.match(html, />Manual</);
-  assert.match(html, />Maps</);
-  assert.match(html, />Tools</);
+});
+
+test("the product overview is removed and the species visual uses crisp pixel wildlife art", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+
+  assert.doesNotMatch(html, /href="#product"/);
+  assert.doesNotMatch(html, /class="product-section"|class="feature-list"/);
+  assert.doesNotMatch(css, /\.product-section|\.feature-list/);
+  assert.doesNotMatch(html, /class="species-mark"/);
+  assert.match(html, /<svg class="species-pixel-art"[^>]*shape-rendering="crispEdges"/);
+  assert.match(html, /class="pixel-animal"/);
+});
+
+test("founder contact methods stay hidden inside one accessible disclosure", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+  const contact = html.match(/<details class="contact-menu">([\s\S]*?)<\/details>/)?.[1] ?? "";
+
+  assert.match(contact, /<summary>Contact Aurora <span class="contact-toggle" aria-hidden="true"><\/span><\/summary>/);
+  assert.match(contact, /href="mailto:guokenny7@gmail\.com\?subject=Aurora%20Survival"[^>]*>Email/);
+  assert.match(
+    contact,
+    /href="https:\/\/github\.com\/kenny2077"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>GitHub/,
+  );
+  assert.doesNotMatch(html, /View the founder’s GitHub|class="contact-email"|class="story-actions"/);
+  assert.match(css, /\.contact-menu\s*\{/);
+  assert.match(css, /\.contact-options\s*\{/);
+  assert.match(css, /\.contact-toggle::before/);
+  assert.match(css, /\.contact-toggle::after/);
 });
 
 test("the kinetic field journey exposes safe open-source and founder links", () => {
@@ -137,7 +162,7 @@ test("the stylesheet preserves focus, reduced motion, and narrow-screen layouts"
   assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
   assert.match(css, /section\[id\]\s*\{[^}]*scroll-margin-top:\s*76px/s);
   assert.doesNotMatch(css, /0\.6[69]rem/);
-  assert.match(css, /\.contact-email\s*\{[^}]*0\.8125rem/s);
+  assert.match(css, /\.contact-options\s+small\s*\{[^}]*0\.72rem/s);
   assert.match(css, /@media\s*\(max-width:\s*340px\)/);
   assert.match(css, /@keyframes\s+aurora-drift/);
   assert.match(css, /@keyframes\s+signal-pulse/);

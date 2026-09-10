@@ -131,7 +131,7 @@ Typography supplies authority; copy stays concrete and never performs futurism.
 
 ## Layout
 
-The site uses full-width chapters with centered content measures instead of a framed desktop canvas. The hero, real-device stage, product overview, and species proof each claim clear visual space, with no negative overlap between them. Tonal transition bands join dark and paper surfaces without scroll snapping or hiding the natural document flow. Product and species sections use asymmetric splits rather than interchangeable cards. At 800px the navigation becomes a controlled menu and every split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column. The compact footer stacks cleanly on mobile and carries the only secondary-product promotion.
+The site uses full-width chapters with centered content measures instead of a framed desktop canvas. The hero, real-device stage, and species proof each claim clear visual space, with no negative overlap between them. Tonal transition bands join dark and paper surfaces without scroll snapping or hiding the natural document flow. The species section uses an asymmetric split rather than interchangeable cards. At 800px the navigation becomes a controlled menu and the split stacks. At 520px imagery and scanner geometry contract while actions remain readable; below 340px proof metrics become one column. The compact footer stacks cleanly on mobile and carries the only secondary-product promotion.
 
 Motion is progressive enhancement: the complete page remains visible without JavaScript and becomes static under reduced-motion preferences. Aurora light uses `aurora-drift` over 18–24 seconds, the hero guide line breathes over six seconds, the species field uses `scan-pass` over 7.5 seconds, and section reveals resolve over 700ms. On fine pointers, one hero-only light field follows the pointer with request-animation-frame easing while the physical device depth stays below five degrees. Touch input and reduced-motion preferences disable pointer response. No motion may replace the system cursor, scroll-jack, flash, delay content access, or imitate a loading state.
 
@@ -149,7 +149,7 @@ Content frames and controls remain square. Thin rules establish structure. The a
 
 ### Navigation
 
-The sticky header pairs the production icon and name with a small “An Aurora product” family label, plain product anchors, and the founder GitHub profile. Desktop links respond with color and a fine underline; mobile links become full-width ruled rows.
+The sticky header pairs the production icon and name with a small “An Aurora product” family label, plain section anchors, and the founder GitHub profile. Desktop links respond with color and a fine underline; mobile links become full-width ruled rows.
 
 ### Hero
 
@@ -161,7 +161,11 @@ A dark split surface pairs physical-build facts with the native-resolution iPhon
 
 ### Species Section
 
-The scanner motif uses verified offline-species count, measurement rules, and one slow scan line. It links directly to the public BioCLIP repository and never pretends to be a live product interface.
+The scanner motif uses a crisp pixel wildlife silhouette, measurement rules, and one slow scan line instead of an oversized metric. It links directly to the public BioCLIP repository and never pretends to be a live product interface.
+
+### Founder Contact
+
+The founder section has one “Contact Aurora” disclosure. Email and GitHub remain hidden until requested, then appear as two clear, keyboard-accessible choices without JavaScript.
 
 ### Product Family Footer
 

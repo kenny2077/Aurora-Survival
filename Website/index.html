@@ -29,7 +29,6 @@
       </button>
 
       <div class="nav-links" id="nav-links">
-        <a href="#product">Product</a>
         <a href="#open-source">Open Source</a>
         <a href="#story">Founder</a>
         <a class="nav-github" href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer" aria-label="Aurora Survival on GitHub">GitHub <span aria-hidden="true">↗</span></a>
@@ -77,36 +76,17 @@
       <div><strong>0</strong><span>Cloud queries in ordinary use</span></div>
     </section>
 
-    <section class="product-section" id="product" aria-labelledby="product-title">
-      <div class="section-intro" data-reveal>
-        <h2 id="product-title">Focused tools.<br>One local system.</h2>
-        <p>Aurora keeps the interface direct: prepare what you need, carry it offline, and move between guidance and reference without losing context.</p>
-      </div>
-
-      <ol class="feature-list" data-reveal>
-        <li>
-          <h3>Ask</h3>
-          <p>Local conversation grounded in exact passages from the Manual.</p>
-        </li>
-        <li>
-          <h3>Manual</h3>
-          <p>Reviewed wilderness lessons with visible source information.</p>
-        </li>
-        <li>
-          <h3>Maps</h3>
-          <p>Signed offline regions downloaded before the signal disappears.</p>
-        </li>
-        <li>
-          <h3>Tools</h3>
-          <p>On-device model setup and a separate offline species scanner.</p>
-        </li>
-      </ol>
-    </section>
-
     <section class="species-section" id="open-source" aria-labelledby="species-title" data-reveal>
       <div class="species-visual" aria-hidden="true">
         <span class="scan-line"></span>
-        <span class="species-mark">504</span>
+        <svg class="species-pixel-art" viewBox="0 0 240 200" shape-rendering="crispEdges" focusable="false">
+          <path class="pixel-frame" d="M20 62V20h42M178 20h42v42M220 138v42h-42M62 180H20v-42"/>
+          <g class="pixel-animal">
+            <path d="M56 42h28v14h14v14h44V56h14V42h28v42h-14v56h-14v14h-22v18h-28v-18H84v-14H70V84H56z"/>
+            <path class="pixel-cut" d="M70 56h14v14H70zM156 56h14v14h-14zM92 98h14v14H92zM134 98h14v14h-14zM106 140h28v14h-28z"/>
+            <path class="pixel-signal" d="M28 92h14v14H28zM198 92h14v14h-14zM113 28h14v14h-14z"/>
+          </g>
+        </svg>
         <span class="species-caption">species available offline</span>
       </div>
       <div class="species-copy">
@@ -120,11 +100,13 @@
     <section class="story-section" id="story" aria-labelledby="story-title" data-reveal>
       <h2 id="story-title">Built for the moments infrastructure can’t reach.</h2>
       <p>Aurora Survival is a founder-led field product built around privacy, evidence, and offline reliability. It is an educational aid—not a replacement for emergency services, certified first-aid training, or professional judgment.</p>
-      <div class="story-actions">
-        <a class="text-link" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora <span aria-hidden="true">→</span></a>
-        <a class="text-link external-link" href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">View the founder’s GitHub <span aria-hidden="true">↗</span></a>
-      </div>
-      <a class="contact-email" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">guokenny7@gmail.com</a>
+      <details class="contact-menu">
+        <summary>Contact Aurora <span class="contact-toggle" aria-hidden="true"></span></summary>
+        <div class="contact-options">
+          <a href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Email <small>guokenny7@gmail.com</small></a>
+          <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub <small>@kenny2077</small></a>
+        </div>
+      </details>
     </section>
 
     <section class="faq-section" aria-labelledby="faq-title" data-reveal>
