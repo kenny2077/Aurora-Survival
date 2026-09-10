@@ -8,6 +8,7 @@ Aurora.xcodeproj/
 *.xcuserstate
 xcuserdata/
 review/
+.worktrees/
 TestResults/
 __pycache__/
 *.pyc
