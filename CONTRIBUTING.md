@@ -1,7 +1,7 @@
 # Contributing to Aurora Survival
 
-This repository is private. Repository access and the MIT license are separate:
-the license does not make private source publicly accessible.
+Aurora Survival is open source under the MIT license. Contributions are welcome;
+please open an issue to discuss substantial changes before sending a pull request.
 
 ## Priorities
 
