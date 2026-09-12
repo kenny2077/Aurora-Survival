@@ -13,3 +13,4 @@ TestResults/
 __pycache__/
 *.pyc
 Runtime/AuroraLlamaRuntime/Artifacts/
+.playwright-cli/
