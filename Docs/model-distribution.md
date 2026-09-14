@@ -69,6 +69,7 @@ Future production model releases use
 `https://downloads.auroraforgelab.com/production/catalog.json` after the legal
 review gate passes.
 
-The previous public development URL remains enabled only for compatibility
-through October 14, 2026. At the end of the overlap, re-run public verification
-against the custom domain before disabling that URL in the bucket settings.
+The previous public development URL was disabled on September 14, 2026 after
+the owner approved an early cutover and the custom-domain catalogs and range
+requests passed verification. Older builds that still reference `r2.dev` can no
+longer fetch packages.

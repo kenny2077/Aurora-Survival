@@ -113,11 +113,11 @@ species-only catalog until Gemma's production legal-review gate is satisfied.
 ## Distribution hostname migration — September 14, 2026
 
 `downloads.auroraforgelab.com` was attached directly to the existing R2 bucket;
-no objects, paths, package signatures, or catalogs were replaced. The previous
-public development hostname remains available through October 14, 2026 for old
-build compatibility and rollback. Disable it only after the branded species and
-development catalogs and representative artifact range requests pass again at
-the end of that window.
+no objects, paths, package signatures, or catalogs were replaced. After the
+branded catalogs and representative artifact range requests passed verification,
+the owner approved an early cutover and the previous public development hostname
+was disabled on September 14, 2026. Older builds that still reference `r2.dev`
+can no longer fetch packages.
 
 The August 27 `/beta/catalog.json` snapshot was signed before the September 7
 development-key rotation reused its key ID, so the current trust store correctly

@@ -127,8 +127,8 @@ likely matches — not calibrated certainty, and never permission to approach, h
 consume wildlife.
 
 Package delivery uses `https://downloads.auroraforgelab.com`, a production custom domain on the
-existing Cloudflare R2 bucket. The previous `r2.dev` endpoint remains enabled only for a 30-day
-compatibility window ending October 14, 2026. Installed models keep working offline during an
+existing Cloudflare R2 bucket. The previous `r2.dev` endpoint was retired on September 14, 2026
+after the owner approved an early cutover. Installed models keep working offline during an
 endpoint outage.
 
 ## Privacy & security
