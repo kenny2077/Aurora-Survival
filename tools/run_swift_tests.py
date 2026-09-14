@@ -53,7 +53,13 @@ def main() -> None:
     )
     for class_name in classes:
         run(
-            ["swift", "test", "--skip-build", "--filter", class_name],
+            [
+                "swift",
+                "test",
+                "--skip-build",
+                "--filter",
+                rf"^AuroraCoreTests\.{re.escape(class_name)}/",
+            ],
             CLASS_TIMEOUT_SECONDS,
             f"Run {class_name}",
         )
