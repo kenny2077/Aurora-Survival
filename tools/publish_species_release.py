@@ -100,7 +100,7 @@ def main():
         "summary": "Offline identification of 504 North American animals.",
         "totalByteCount": sum(item["byteCount"] for item in manifest["artifacts"]),
         "envelopePath": f"{prefix}/envelope.json", "artifactBasePath": prefix,
-        "metadata": {"release_channel": "species", "endpoint_tier": "r2.dev-development"},
+        "metadata": {"release_channel": "species", "endpoint_tier": "custom-domain-public"},
     })
     catalog = {"schemaVersion": 1, "generatedAt": utc_now(), "entries": entries}
     private = serialization.load_pem_private_key(args.private_key.read_bytes(), password=None)

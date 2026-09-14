@@ -100,12 +100,27 @@ manual approval remain required before submitting publicly.
 
 The production-key-signed species catalog was promoted after CI and the
 owner-approved ten-photo device gate passed. The app now uses:
-`https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/species/catalog.json`.
+`https://downloads.auroraforgelab.com/species/catalog.json`.
 The catalog resolves package `species.bioclip2.north-america-504@1.0.1` with
-609,125,423 verified artifact bytes. This remains an owner-accepted development
-endpoint with variable rate limits, not a production availability SLA.
+609,125,423 verified artifact bytes. The branded hostname serves the unchanged
+objects from the existing Cloudflare R2 bucket.
 
 Debug builds use the separately signed `catalog-development.json`, which exposes
 the existing beta Lite/shared-knowledge packages alongside the production-signed
 species package. Release builds continue to exclude development trust and use the
 species-only catalog until Gemma's production legal-review gate is satisfied.
+
+## Distribution hostname migration — September 14, 2026
+
+`downloads.auroraforgelab.com` was attached directly to the existing R2 bucket;
+no objects, paths, package signatures, or catalogs were replaced. The previous
+public development hostname remains available through October 14, 2026 for old
+build compatibility and rollback. Disable it only after the branded species and
+development catalogs and representative artifact range requests pass again at
+the end of that window.
+
+The August 27 `/beta/catalog.json` snapshot was signed before the September 7
+development-key rotation reused its key ID, so the current trust store correctly
+rejects that snapshot and its envelopes. Its objects remain untouched for audit
+history. Physical UI download tests now use the valid, current
+`/catalog-development.json` catalog instead.

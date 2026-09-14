@@ -2,7 +2,7 @@ import XCTest
 
 final class PhysicalProductFlowTests: XCTestCase {
     private let catalogURL = "http://192.168.3.51:8765/catalog.json"
-    private let betaCatalogURL = "https://pub-6ac45181bc644cc3b7827299486a5230.r2.dev/beta/catalog.json"
+    private let developmentCatalogURL = "https://downloads.auroraforgelab.com/catalog-development.json"
 
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -254,7 +254,7 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCUIDevice.shared.orientation = .portrait
         let app = makeApp(acceptAgreement: false)
         app.launchEnvironment["AURORA_UI_RESET_AGREEMENT"] = "1"
-        app.launchEnvironment["AURORA_CATALOG_URL"] = betaCatalogURL
+        app.launchEnvironment["AURORA_CATALOG_URL"] = developmentCatalogURL
         app.launch()
 
         XCTAssertTrue(
@@ -315,7 +315,7 @@ final class PhysicalProductFlowTests: XCTestCase {
         XCUIDevice.shared.orientation = .portrait
         let app = makeApp(acceptAgreement: false)
         app.launchEnvironment["AURORA_UI_RESET_AGREEMENT"] = "1"
-        app.launchEnvironment["AURORA_CATALOG_URL"] = betaCatalogURL
+        app.launchEnvironment["AURORA_CATALOG_URL"] = developmentCatalogURL
         app.launch()
 
         XCTAssertTrue(

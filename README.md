@@ -126,10 +126,10 @@ download, not part of the base app. Photos are never sent off-device. Scanner re
 likely matches — not calibrated certainty, and never permission to approach, handle, or
 consume wildlife.
 
-The initial distribution endpoint uses Cloudflare's `r2.dev` development service by owner
-decision; it has variable rate limits and is not intended for production traffic. Installed
-models keep working offline during an endpoint outage. A custom domain is recommended before
-wider distribution.
+Package delivery uses `https://downloads.auroraforgelab.com`, a production custom domain on the
+existing Cloudflare R2 bucket. The previous `r2.dev` endpoint remains enabled only for a 30-day
+compatibility window ending October 14, 2026. Installed models keep working offline during an
+endpoint outage.
 
 ## Privacy & security
 

@@ -42,20 +42,18 @@ themselves satisfy the release gate.
 Authenticate Wrangler and configure an `rclone` S3 remote named `r2` with a
 bucket-scoped token stored outside the repository. Wrangler is used only for
 bucket setup; `rclone` is required for resumable multipart uploads because the
-model files exceed Wrangler's 315 MB limit. Create the bucket once and enable
-its development URL for beta testing:
+model files exceed Wrangler's 315 MB limit. Create the bucket once, then attach
+`downloads.auroraforgelab.com` under the bucket's **Settings → Custom Domains**:
 
 ```sh
 npx wrangler r2 bucket create aurora-survival-models
-npx wrangler r2 bucket dev-url enable aurora-survival-models
-npx wrangler r2 bucket dev-url get aurora-survival-models
 ```
 
 Then publish and verify every public artifact supports byte ranges:
 
 ```sh
 .trailguard/tooling-venv/bin/python tools/publish_r2_models.py publish \
-  --public-base-url https://<bucket-id>.r2.dev
+  --public-base-url https://downloads.auroraforgelab.com
 ```
 
 The publisher refuses to replace any publicly visible versioned object, uploads
@@ -63,9 +61,14 @@ large files with multipart transfer, uploads the catalog only after all package
 files, and requires public HTTPS plus `206` responses. Configure beta builds with:
 
 ```sh
-xcodebuild ... AURORA_PACKAGE_CATALOG_URL=https://<bucket-id>.r2.dev/beta/catalog.json
+xcodebuild ... AURORA_PACKAGE_CATALOG_URL=https://downloads.auroraforgelab.com/beta/catalog.json
 ```
 
-Store builds must use `https://models.<owned-aurora-domain>/production/catalog.json`.
-The first available domain preference is `aurorasurv.app`, then
-`aurorasurvival.app`, then `aurorasurv.com`.
+Release builds use `https://downloads.auroraforgelab.com/species/catalog.json`.
+Future production model releases use
+`https://downloads.auroraforgelab.com/production/catalog.json` after the legal
+review gate passes.
+
+The previous public development URL remains enabled only for compatibility
+through October 14, 2026. At the end of the overlap, re-run public verification
+against the custom domain before disabling that URL in the bucket settings.
