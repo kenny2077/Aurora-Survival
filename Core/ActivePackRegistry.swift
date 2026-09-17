@@ -9,6 +9,73 @@ public protocol PackageEnvelopeVerifying: Sendable {
 
 extension PackageVerifier: PackageEnvelopeVerifying {}
 
+/// Re-checks every signature but hashes an artifact again only when its size,
+/// modification date, or file number changed since a successful verification
+/// in this process. Active packs are refreshed many times per launch, and a full
+/// re-hash of multi-gigabyte models on each refresh delays Ask and drains power.
+public final class CachingPackageVerifier: PackageEnvelopeVerifying, @unchecked Sendable {
+    private struct ArtifactFingerprint: Equatable {
+        let size: Int64
+        let modificationDate: Date
+        let fileNumber: Int
+    }
+
+    private let base: PackageVerifier
+    private let lock = NSLock()
+    private var verified: [String: [ArtifactFingerprint]] = [:]
+
+    public init(_ base: PackageVerifier) {
+        self.base = base
+    }
+
+    public func verify(
+        envelope: SignedPackageEnvelope,
+        packageDirectory: URL
+    ) throws {
+        try base.verifyManifest(envelope)
+        let cacheKey = [
+            packageDirectory.standardizedFileURL.path,
+            envelope.keyID,
+            envelope.signature,
+        ].joined(separator: "\n")
+        let before = try? fingerprints(envelope.manifest, packageDirectory: packageDirectory)
+        if let before, lock.withLock({ verified[cacheKey] == before }) {
+            return
+        }
+
+        lock.withLock { verified[cacheKey] = nil }
+        try base.verify(envelope: envelope, packageDirectory: packageDirectory)
+        // Cache only if nothing changed while hashing.
+        if let before,
+           let after = try? fingerprints(envelope.manifest, packageDirectory: packageDirectory),
+           before == after {
+            lock.withLock { verified[cacheKey] = after }
+        }
+    }
+
+    private func fingerprints(
+        _ manifest: PackageManifest,
+        packageDirectory: URL
+    ) throws -> [ArtifactFingerprint] {
+        let root = packageDirectory.standardizedFileURL
+        return try manifest.artifacts.map { artifact in
+            let url = try PackageVerifier.safeArtifactURL(path: artifact.path, root: root)
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            guard let size = (attributes[.size] as? NSNumber)?.int64Value,
+                  let modificationDate = attributes[.modificationDate] as? Date,
+                  let fileNumber = (attributes[.systemFileNumber] as? NSNumber)?.intValue
+            else {
+                throw PackageVerificationError.artifactIsNotRegularFile(artifact.path)
+            }
+            return ArtifactFingerprint(
+                size: size,
+                modificationDate: modificationDate,
+                fileNumber: fileNumber
+            )
+        }
+    }
+}
+
 public enum ActivePackIssue: Equatable, Sendable {
     case invalidActivationIndex
     case missingInstalledRecord(packageID: String, version: String)

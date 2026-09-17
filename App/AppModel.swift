@@ -205,6 +205,9 @@ final class AppModel: ObservableObject {
             trustedKeys: Self.loadTrustedPackageKeys()
         )
     )
+    private let activePackVerifier = CachingPackageVerifier(
+        PackageVerifier(trustedKeys: AppModel.loadTrustedPackageKeys())
+    )
 
     init(
         photoLibraryAuthorization: (any PhotoLibraryAuthorizing)? = nil,
@@ -929,12 +932,9 @@ final class AppModel: ObservableObject {
             }
         }
 
-        let verifier = PackageVerifier(
-            trustedKeys: Self.loadTrustedPackageKeys()
-        )
         let registry = ActivePackRegistry(
             rootDirectory: appDataRoot,
-            verifier: verifier,
+            verifier: activePackVerifier,
             appVersion: Self.appVersion,
             expectedPolicyVersion: policyVersion,
             allowDevelopmentKnowledge: Self.allowDevelopmentKnowledge,

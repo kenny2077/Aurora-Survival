@@ -162,6 +162,47 @@ final class PackageSecurityTests: XCTestCase {
         }
     }
 
+    func testCachingVerifierSkipsRehashingUnchangedArtifacts() throws {
+        let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
+        let artifact = fixture.staging.appendingPathComponent("weights/model.gguf")
+        defer {
+            try? FileManager.default.setAttributes([.posixPermissions: 0o644], ofItemAtPath: artifact.path)
+            try? FileManager.default.removeItem(at: fixture.root)
+        }
+        let verifier = CachingPackageVerifier(fixture.verifier)
+        try verifier.verify(envelope: fixture.envelope, packageDirectory: fixture.staging)
+
+        // Unreadable contents with unchanged size and timestamps prove no re-hash.
+        try FileManager.default.setAttributes([.posixPermissions: 0], ofItemAtPath: artifact.path)
+
+        XCTAssertThrowsError(
+            try fixture.verifier.verify(envelope: fixture.envelope, packageDirectory: fixture.staging)
+        )
+        XCTAssertNoThrow(
+            try verifier.verify(envelope: fixture.envelope, packageDirectory: fixture.staging)
+        )
+    }
+
+    func testCachingVerifierRehashesModifiedArtifacts() throws {
+        let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
+        defer { try? FileManager.default.removeItem(at: fixture.root) }
+        let verifier = CachingPackageVerifier(fixture.verifier)
+        try verifier.verify(envelope: fixture.envelope, packageDirectory: fixture.staging)
+
+        let artifact = fixture.staging.appendingPathComponent("weights/model.gguf")
+        try Data("MODEL".utf8).write(to: artifact)
+        try FileManager.default.setAttributes(
+            [.modificationDate: Date().addingTimeInterval(60)],
+            ofItemAtPath: artifact.path
+        )
+
+        XCTAssertThrowsError(
+            try verifier.verify(envelope: fixture.envelope, packageDirectory: fixture.staging)
+        ) { error in
+            XCTAssertEqual(error as? PackageVerificationError, .checksumMismatch("weights/model.gguf"))
+        }
+    }
+
     func testInstallActivatesAndRollbackReturnsPreviousVersion() async throws {
         let first = try makeFixture(version: "1.0.0", content: Data("v1".utf8))
         defer { try? FileManager.default.removeItem(at: first.root) }
