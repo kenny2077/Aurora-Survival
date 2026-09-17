@@ -200,6 +200,42 @@ final class PackageSecurityTests: XCTestCase {
         XCTAssertEqual(index.activeVersions["model.lite"], "1.0.0")
     }
 
+    func testReinstallReplacesOrphanedDirectoryMissingFromIndex() async throws {
+        let first = try makeFixture(version: "1.0.0", content: Data("v1".utf8))
+        defer { try? FileManager.default.removeItem(at: first.root) }
+        let store = first.root.appendingPathComponent("store", isDirectory: true)
+        let installer = PackageInstaller(
+            rootDirectory: store,
+            verifier: first.verifier
+        )
+        _ = try await installer.install(
+            envelope: first.envelope,
+            stagedDirectory: first.staging
+        )
+        // Simulate a crash or failed index write after the directory move.
+        try FileManager.default.removeItem(
+            at: store.appendingPathComponent("activation-index.json")
+        )
+
+        let retryStaging = first.root.appendingPathComponent("stage-retry", isDirectory: true)
+        let retry = try makeSignedPackage(
+            staging: retryStaging,
+            packageID: "model.lite",
+            version: "1.0.0",
+            content: Data("v1".utf8),
+            keyID: first.envelope.keyID,
+            privateKey: first.privateKey
+        )
+        let record = try await installer.install(
+            envelope: retry,
+            stagedDirectory: retryStaging
+        )
+
+        let index = try await installer.index()
+        XCTAssertEqual(index.installed.map(\.id), [record.id])
+        XCTAssertEqual(index.activeVersions["model.lite"], "1.0.0")
+    }
+
     func testCannotDeleteActiveVersion() async throws {
         let fixture = try makeFixture(version: "1.0.0", content: Data("model".utf8))
         defer { try? FileManager.default.removeItem(at: fixture.root) }

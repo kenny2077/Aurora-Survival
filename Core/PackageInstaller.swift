@@ -166,14 +166,24 @@ public actor PackageInstaller {
             directoryName,
             isDirectory: true
         )
-        guard !fileManager.fileExists(atPath: destination.path) else {
-            throw PackageInstallError.packageAlreadyInstalled
-        }
         var current = try index()
         guard !(current.recalledVersions[manifest.packageID] ?? []).contains(
             manifest.version
         ) else {
             throw PackageInstallError.recalledPackage
+        }
+        if fileManager.fileExists(atPath: destination.path) {
+            let recordID = "\(manifest.packageID)@\(manifest.version)"
+            guard !current.installed.contains(where: { $0.id == recordID }) else {
+                throw PackageInstallError.packageAlreadyInstalled
+            }
+            // A crash or failed index write after a previous move left an
+            // unindexed directory; the freshly verified staging copy replaces it.
+            do {
+                try fileManager.removeItem(at: destination)
+            } catch {
+                throw PackageInstallError.fileOperationFailed
+            }
         }
 
         do {
@@ -209,11 +219,9 @@ public actor PackageInstaller {
             }
             try writeIndex(current)
             return record
-        } catch let error as PackageInstallError {
-            throw error
         } catch {
             try? fileManager.removeItem(at: destination)
-            throw PackageInstallError.fileOperationFailed
+            throw error as? PackageInstallError ?? .fileOperationFailed
         }
     }
 
