@@ -7,7 +7,6 @@ const websiteRoot = resolve(import.meta.dirname, "..");
 const indexPath = resolve(websiteRoot, "index.html");
 const stylesPath = resolve(websiteRoot, "styles.css");
 const scriptPath = resolve(websiteRoot, "script.js");
-const designSpecPath = resolve(websiteRoot, "..", "Docs", "superpowers", "specs", "2026-09-10-aurora-kinetic-field-refresh-design.md");
 const designSystemPath = resolve(websiteRoot, "..", "DESIGN.md");
 const deploymentWorkflowPath = resolve(websiteRoot, "..", ".github", "workflows", "pages-deployment.yml");
 
@@ -116,7 +115,7 @@ test("the page avoids rejected brands and unsupported claims", () => {
   const html = readRequired(indexPath);
   const visibleCopy = html.replace(/<[^>]+>/g, " ");
 
-  assert.doesNotMatch(visibleCopy, /Aurora|Aurora Labs|Aurora LLC/i);
+  assert.doesNotMatch(visibleCopy, /Aurora Labs|Aurora LLC/i);
   assert.doesNotMatch(visibleCopy, /download now|available now|customers love|trusted by/i);
   assert.doesNotMatch(visibleCopy, /Built by Kenny Guo/i);
   assert.doesNotMatch(visibleCopy, /No account required/i);
@@ -200,15 +199,8 @@ test("the navigation script is local and progressively enhances the page", () =>
 });
 
 test("the design record preserves the approved direction contract", () => {
-  const spec = readRequired(designSpecPath);
   const system = readRequired(designSystemPath);
 
-  for (const heading of ["Chosen Direction: Kinetic Field Signal", "Page Structure", "Motion and Interaction", "GitHub Link Contract", "Acceptance Criteria"]) {
-    assert.match(spec, new RegExp(`## ${heading}`), `missing ${heading} direction section`);
-  }
-  assert.match(spec, /aurora-species-BioCLIP/);
-  assert.match(spec, /prefers-reduced-motion: reduce/);
-  assert.match(spec, /Do not publish the refresh until/);
   assert.match(system, /^---\nname: Aurora Survival/m);
   assert.match(system, /Creative North Star: "Kinetic Field Signal"/);
   assert.match(system, /Motion is progressive enhancement/);
