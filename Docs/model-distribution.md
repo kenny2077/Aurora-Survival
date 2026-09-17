@@ -9,6 +9,8 @@ must not be committed.
 The `aurora-survival-models` bucket uses immutable versioned objects:
 
 ```
+catalog-development.json
+species/catalog.json
 beta/catalog.json
 beta/packages/<package-id>/<version>/...
 production/catalog.json
@@ -58,11 +60,16 @@ Then publish and verify every public artifact supports byte ranges:
 
 The publisher refuses to replace any publicly visible versioned object, uploads
 large files with multipart transfer, uploads the catalog only after all package
-files, and requires public HTTPS plus `206` responses. Configure beta builds with:
+files, and requires public HTTPS plus `206` responses. Debug and beta builds use
+the current development-signed catalog:
 
 ```sh
-xcodebuild ... AURORA_PACKAGE_CATALOG_URL=https://downloads.auroraforgelab.com/beta/catalog.json
+xcodebuild ... AURORA_PACKAGE_CATALOG_URL=https://downloads.auroraforgelab.com/catalog-development.json
 ```
+
+The August 27 `beta/catalog.json` snapshot predates the September 7
+development-key rotation and is rejected by the current trust store; re-sign and
+republish it before pointing any build at it.
 
 Release builds use `https://downloads.auroraforgelab.com/species/catalog.json`.
 Future production model releases use
