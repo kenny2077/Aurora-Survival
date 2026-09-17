@@ -60,3 +60,14 @@ jobs:
           -destination 'generic/platform=iOS Simulator'
           CODE_SIGNING_ALLOWED=NO
           build
+      - name: Test app target on simulator
+        run: |
+          SIMULATOR_ID=$(xcrun simctl list devices available -j \
+            | python3 -c 'import json,sys; print(next(d["udid"] for r,ds in json.load(sys.stdin)["devices"].items() if "iOS" in r for d in ds if d["name"].startswith("iPhone")))')
+          xcodebuild \
+            -project Aurora.xcodeproj \
+            -scheme Aurora \
+            -destination "id=$SIMULATOR_ID" \
+            -only-testing:AuroraTests \
+            CODE_SIGNING_ALLOWED=NO \
+            test
