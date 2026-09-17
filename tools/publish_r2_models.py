@@ -79,11 +79,11 @@ def artifact(path: pathlib.Path, root: pathlib.Path) -> dict[str, object]:
     }
 
 
-def load_keyring() -> list[dict[str, object]]:
-    paths = [
-        ROOT / "Resources/Packages/trusted_package_keys.json",
-        ROOT / "Resources/Packages/development_trusted_package_keys.json",
-    ]
+def load_keyring(*, production: bool = False) -> list[dict[str, object]]:
+    """Release builds never trust development keys, so production validation must not either."""
+    paths = [ROOT / "Resources/Packages/trusted_package_keys.json"]
+    if not production:
+        paths.append(ROOT / "Resources/Packages/development_trusted_package_keys.json")
     result: list[dict[str, object]] = []
     for path in paths:
         if path.is_file():
@@ -102,7 +102,7 @@ def verify_signature(envelope: dict[str, object], keyring: list[dict[str, object
 def validate_package(package: pathlib.Path, *, production: bool = False) -> dict[str, object]:
     envelope = json.loads((package / "envelope.json").read_text(encoding="utf-8"))
     manifest = envelope["manifest"]
-    verify_signature(envelope, load_keyring())
+    verify_signature(envelope, load_keyring(production=production))
     seen: set[str] = set()
     for item in manifest["artifacts"]:
         relative = item["path"]
@@ -135,8 +135,8 @@ def validate_package(package: pathlib.Path, *, production: bool = False) -> dict
     return envelope
 
 
-def validate_catalog(signed: dict[str, object]) -> dict[str, object]:
-    key = next((item for item in load_keyring() if item["id"] == signed["keyID"]), None)
+def validate_catalog(signed: dict[str, object], *, production: bool = False) -> dict[str, object]:
+    key = next((item for item in load_keyring(production=production) if item["id"] == signed["keyID"]), None)
     if key is None:
         raise ValueError(f"untrusted catalog signing key: {signed['keyID']}")
     public = Ed25519PublicKey.from_public_bytes(base64.b64decode(key["publicKeyBase64"]))
@@ -253,7 +253,7 @@ def prepare(args: argparse.Namespace) -> pathlib.Path:
         "catalog": catalog, "keyID": args.key_id,
         "signature": base64.b64encode(private_key.sign(catalog_signing_payload(catalog))).decode("ascii"),
     }
-    validate_catalog(signed)
+    validate_catalog(signed, production=args.channel == "production")
     (channel_root / "catalog.json").write_bytes(canonical_json(signed))
     metadata = {
         "schemaVersion": 1, "channel": args.channel, "createdAt": created_at,
@@ -306,7 +306,7 @@ def run_rclone(
 def publish(args: argparse.Namespace) -> None:
     channel_root = args.output.resolve() / args.channel
     signed = json.loads((channel_root / "catalog.json").read_text(encoding="utf-8"))
-    validate_catalog(signed)
+    validate_catalog(signed, production=args.channel == "production")
     files: list[tuple[pathlib.Path, str]] = []
     for entry in signed["catalog"]["entries"]:
         package = channel_root / entry["artifactBasePath"]

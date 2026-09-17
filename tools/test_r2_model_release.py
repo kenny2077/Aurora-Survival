@@ -53,6 +53,17 @@ class R2ModelReleaseTests(unittest.TestCase):
         }]), self.assertRaisesRegex(ValueError, "dependency mismatch"):
             release.validate_catalog(signed)
 
+    def test_production_keyring_excludes_development_keys(self) -> None:
+        production_ids = {key["id"] for key in release.load_keyring(production=True)}
+        self.assertNotIn(release.KEY_ID, production_ids)
+        self.assertIn("aurora-package-primary-2026", production_ids)
+        self.assertIn(release.KEY_ID, {key["id"] for key in release.load_keyring()})
+
+    def test_production_catalog_rejects_development_signature(self) -> None:
+        signed = {"catalog": {"entries": []}, "keyID": release.KEY_ID, "signature": ""}
+        with self.assertRaisesRegex(ValueError, "untrusted catalog signing key"):
+            release.validate_catalog(signed, production=True)
+
     def test_public_range_probe_requires_partial_content(self) -> None:
         with mock.patch.object(release.urllib.request, "urlopen") as urlopen:
             response = urlopen.return_value.__enter__.return_value
