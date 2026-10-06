@@ -325,6 +325,14 @@ if (finePointer.matches && !RM) {
   window.addEventListener("pointermove", (event) => {
     for (const f of fields) f.warm(event.clientX, event.clientY);
   }, { passive: true });
+} else if (!RM) {
+  // Touch has no hover: a tap lights the field where it lands.
+  window.addEventListener("pointerdown", (event) => {
+    for (const f of fields) {
+      f.last = null;
+      f.warm(event.clientX, event.clientY);
+    }
+  }, { passive: true });
 }
 
 /* Load moment: the aurora ignites once over 1.4s. Afterwards it only moves with scroll. */

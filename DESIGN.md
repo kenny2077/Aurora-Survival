@@ -110,7 +110,7 @@ A low-resolution buffer is upscaled with nearest-neighbour sampling and 1px seam
 
 It appears four times: the hero sky (dithered aurora curtains, far ridge, pine line), the 5x7 numerals on the field-kit cards, the topographic panel on the Maps card, and the AURORA wordmark revealed under the footer. The crisp pixel wildlife silhouette on the Species card belongs to the same family.
 
-Fields are decorative (`aria-hidden`), redraw only while dirty or warm, pause offscreen, cap device pixel ratio at 2, and never react on touch or under reduced motion.
+Fields are decorative (`aria-hidden`), redraw only while dirty or warm, pause offscreen, and cap device pixel ratio at 2. Touch has no hover, so a tap lights the field where it lands. Nothing reacts under reduced motion.
 
 ## Colors
 
@@ -161,7 +161,7 @@ The site uses full-width chapters aligned to a 1240px measure through one gutter
 
 The hero anchors copy bottom-left with the Ask card on the right; at 1100px the card flows beneath the copy. At 800px the navigation becomes a controlled menu and splits stack. At 760px the tool cards stop stacking and become a plain list. At 520px actions go full width. Nothing scrolls horizontally at 390px.
 
-Motion is progressive enhancement: the complete page, including every manual answer, remains readable without JavaScript, and becomes static under reduced-motion preferences. One load moment exists: the aurora ignites over 1.4 seconds. Everything else is scrubbed by scroll from a single request-animation-frame loop that only works when scroll changes or a field is warm: aurora drift, hero parallax and fade, statement lighting, device rise, card stacking, the species scan line, and the footer reveal. On fine pointers, the headlamp warms pixel fields, a soft light follows the pointer over Ask questions and tool cards, and the physical device tilts below five degrees. Touch input and reduced-motion preferences disable pointer response. No motion may replace the system cursor, scroll-jack, flash, delay content access, or imitate a loading state.
+Motion is progressive enhancement: the complete page, including every manual answer, remains readable without JavaScript, and becomes static under reduced-motion preferences. One load moment exists: the aurora ignites over 1.4 seconds. Everything else is scrubbed by scroll from a single request-animation-frame loop that only works when scroll changes or a field is warm: aurora drift, hero parallax and fade, statement lighting, device rise, card stacking, the species scan line, and the footer reveal. On fine pointers, the headlamp warms pixel fields, a soft light follows the pointer over Ask questions and tool cards, and the physical device tilts below five degrees. Touch gets tap-to-light instead of hover; reduced-motion preferences disable pointer response entirely. No motion may replace the system cursor, scroll-jack, flash, delay content access, or imitate a loading state.
 
 ## Elevation & Depth
 
