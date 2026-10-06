@@ -4,14 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Aurora Survival is a private, source-backed survival assistant for iPhone and iPad that works fully offline after preparation.">
-  <meta name="theme-color" content="#173f35">
+  <meta name="theme-color" content="#061311">
+  <meta name="color-scheme" content="dark">
   <title>Aurora Survival — Offline field guidance</title>
   <link rel="icon" href="assets/aurora-icon.webp" type="image/webp">
+  <link rel="preload" href="assets/fonts/archivo-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js")</script>
   <script src="script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
   <header class="site-header">
     <nav class="nav-shell" aria-label="Primary navigation">
@@ -29,32 +33,96 @@
       </button>
 
       <div class="nav-links" id="nav-links">
-        <a href="#open-source">Open Source</a>
-        <a href="#story">Founder</a>
+        <a href="#field-kit"><span class="nav-index" aria-hidden="true">1</span> Field kit</a>
+        <a href="#open-source"><span class="nav-index" aria-hidden="true">2</span> Open Source</a>
+        <a href="#story"><span class="nav-index" aria-hidden="true">3</span> Founder</a>
         <a class="nav-github" href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer" aria-label="Aurora Survival on GitHub">GitHub <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
 
+  <div class="page">
   <main id="main-content">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-atmosphere" aria-hidden="true">
-        <span class="aurora-ribbon aurora-ribbon-one"></span>
-        <span class="aurora-ribbon aurora-ribbon-two"></span>
-        <span class="cursor-field" aria-hidden="true"></span>
-        <span class="field-grid"></span>
+      <canvas class="field hero-field" aria-hidden="true"></canvas>
+      <div class="hero-copy-wrap">
+        <p class="kicker">Offline field assistant for iPhone &amp; iPad</p>
+        <h1 id="hero-title">Survival knowledge that stays with you.</h1>
+        <p class="hero-copy">Aurora brings field guidance, offline maps, and species identification onto the device you already carry—ready when the network isn’t.</p>
+        <div class="hero-actions" aria-label="Aurora availability and contact">
+          <a class="button button-primary" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora</a>
+          <span class="availability-label">Coming to the App Store</span>
+        </div>
+        <p class="hero-signal"><span aria-hidden="true"></span> Private · Source-backed · Fully offline</p>
       </div>
-      <h1 id="hero-title" data-reveal>Survival knowledge that stays with you.</h1>
-      <p class="hero-copy" data-reveal>Aurora brings field guidance, offline maps, and species identification onto the device you already carry—ready when the network isn’t.</p>
-      <div class="hero-actions" aria-label="Aurora availability and contact" data-reveal>
-        <a class="button button-primary" href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Contact Aurora</a>
-        <span class="availability-label">Coming to the App Store</span>
+
+      <aside class="ask" aria-labelledby="ask-title">
+        <div class="ask-head">
+          <h2 class="ask-title" id="ask-title">Ask the field manual</h2>
+          <span class="ask-state">Works offline</span>
+        </div>
+        <fieldset class="ask-questions">
+          <legend class="sr-only">Choose a question</legend>
+          <label><input type="radio" name="ask" value="lost" checked> <span>I’m lost. What do I do first?</span></label>
+          <label><input type="radio" name="ask" value="water"> <span>How long do I boil water?</span></label>
+          <label><input type="radio" name="ask" value="whistle"> <span>How do I signal with a whistle?</span></label>
+          <label><input type="radio" name="ask" value="lightning"> <span>Lightning is close. Where do I go?</span></label>
+        </fieldset>
+        <div class="ask-answers">
+          <article class="ask-answer" data-answer="lost">
+            <p class="ask-path">Survival Basics <span aria-hidden="true">/</span> Stop and Control Panic</p>
+            <ol>
+              <li>Take slow breaths and say out loud what happened.</li>
+              <li>Move only far enough to escape an immediate threat such as traffic, fire, falling rock, or rising water.</li>
+              <li>Mark where you stopped and note the time, weather, and last place you were certain of your location.</li>
+            </ol>
+            <p class="ask-warn">Do not run downhill or follow water just because it appears to lead out.</p>
+            <p class="ask-cite">Primary sources: U.S. National Park Service; U.S. Department of the Army, ATP 3-50.21</p>
+          </article>
+          <article class="ask-answer" data-answer="water">
+            <p class="ask-path">Find and Treat Water <span aria-hidden="true">/</span> Boil Water Correctly</p>
+            <ol>
+              <li>Bring clear water to a rolling boil for 1 minute.</li>
+              <li>Above 6,500 feet (about 1,980 metres), boil for 3 minutes.</li>
+              <li>Let it cool and store it in a clean, covered container without touching the inside of the cap.</li>
+            </ol>
+            <p class="ask-warn">Boiling does not remove fuel, toxic chemicals, salt, or radioactive contamination.</p>
+            <p class="ask-cite">Primary sources: Centers for Disease Control and Prevention</p>
+          </article>
+          <article class="ask-answer" data-answer="whistle">
+            <p class="ask-path">Signal for Rescue <span aria-hidden="true">/</span> Signal With a Whistle</p>
+            <ol>
+              <li>Give three strong blasts, pause, listen, and repeat at regular intervals.</li>
+              <li>Move only to a nearby safe opening or ridge if it clearly improves the signal.</li>
+              <li>Keep the whistle attached to clothing so it remains available after a fall or lost pack.</li>
+            </ol>
+            <p class="ask-warn">Do not blow continuously until exhausted or unable to hear a reply.</p>
+            <p class="ask-cite">Primary sources: U.S. National Park Service; U.S. Department of the Army, ATP 3-50.21</p>
+          </article>
+          <article class="ask-answer" data-answer="lightning">
+            <p class="ask-path">Weather and Wildlife <span aria-hidden="true">/</span> Act During Lightning</p>
+            <ol>
+              <li>Leave ridges, peaks, open water, open fields, and isolated tall objects immediately.</li>
+              <li>If no safe building or vehicle exists, spread a group apart and move toward lower terrain away from water and tall isolated trees.</li>
+              <li>Wait 30 minutes after the last thunder before leaving safe shelter.</li>
+            </ol>
+            <p class="ask-warn">A tent, cave entrance, picnic shelter, cliff overhang, or isolated tree is not reliable lightning protection.</p>
+            <p class="ask-cite">Primary sources: NOAA National Weather Service</p>
+          </article>
+        </div>
+        <p class="ask-note">Exact passages from Aurora’s reviewed manual, as stored in the app. An educational aid, not a replacement for emergency services.</p>
+      </aside>
+    </section>
+
+    <section class="statement" aria-label="Why Aurora exists">
+      <div class="pin">
+        <p>Aurora is built for the hours after the signal drops. A reviewed field manual, signed offline maps, species identification, and a language model live on the device you already carry, <em>so your questions and photos never have to leave it.</em></p>
       </div>
-      <p class="hero-signal" data-reveal><span aria-hidden="true"></span> Private · Source-backed · Fully offline</p>
     </section>
 
     <section class="product-stage" aria-labelledby="product-capture-title">
-      <div class="stage-copy" data-reveal>
+      <div class="stage-copy">
+        <p class="kicker">Physical build</p>
         <h2 id="product-capture-title">The real app.<br>On the real device.</h2>
         <p>Captured directly from Aurora 1.1.0 running on iPhone 13. No concept interface, cloud session, or staged dashboard.</p>
         <dl class="stage-notes">
@@ -63,88 +131,162 @@
           <div><dt>Surface</dt><dd>Ask home</dd></div>
         </dl>
       </div>
-      <figure class="device-capture" data-reveal>
-        <img src="assets/iphone-ask-home.webp" width="1170" height="2532" alt="Aurora Survival running on an iPhone 13, showing the Ask home with fire, water, shelter, first aid, navigation, and food categories" decoding="async" fetchpriority="high">
+      <figure class="device-capture">
+        <img src="assets/iphone-ask-home.webp" width="1170" height="2532" alt="Aurora Survival running on an iPhone 13, showing the Ask home with fire, water, shelter, first aid, navigation, and food categories" decoding="async">
         <figcaption>Native-resolution capture from the physical iPhone build.</figcaption>
       </figure>
     </section>
 
-    <section class="species-section" id="open-source" aria-labelledby="species-title" data-reveal>
-      <div class="species-visual" aria-hidden="true">
-        <span class="scan-line"></span>
-        <svg class="species-pixel-art" viewBox="0 0 240 200" shape-rendering="crispEdges" focusable="false">
-          <path class="pixel-frame" d="M20 62V20h42M178 20h42v42M220 138v42h-42M62 180H20v-42"/>
-          <g class="pixel-animal">
-            <path d="M56 42h28v14h14v14h44V56h14V42h28v42h-14v56h-14v14h-22v18h-28v-18H84v-14H70V84H56z"/>
-            <path class="pixel-cut" d="M70 56h14v14H70zM156 56h14v14h-14zM92 98h14v14H92zM134 98h14v14h-14zM106 140h28v14h-28z"/>
-            <path class="pixel-signal" d="M28 92h14v14H28zM198 92h14v14h-14zM113 28h14v14h-14z"/>
-          </g>
-        </svg>
-        <span class="species-caption">species available offline</span>
-      </div>
-      <div class="species-copy">
-        <p class="eyebrow">Open-source species intelligence</p>
-        <h2 id="species-title">Identify what’s around you. Keep the photo local.</h2>
-        <p>Aurora’s separate species scanner uses an on-device BioCLIP workflow prepared for offline field use.</p>
-        <a class="text-link external-link" href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">Explore the BioCLIP repository <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+    <section class="field-kit paper" id="field-kit" aria-labelledby="kit-title">
+      <div class="container">
+        <p class="kicker">Field kit</p>
+        <h2 id="kit-title">Four tools. No signal required.</h2>
+        <p class="sub">Prepare models and map packages while you are connected. After that, Ask, Manual, Maps, and Species ID run on the phone.</p>
 
-    <section class="story-section" id="story" aria-labelledby="story-title" data-reveal>
-      <h2 id="story-title">Built for the moments infrastructure can’t reach.</h2>
-      <p>Aurora Survival is a founder-led field product built around privacy, evidence, and offline reliability. It is an educational aid—not a replacement for emergency services, certified first-aid training, or professional judgment.</p>
-      <details class="contact-menu">
-        <summary>Contact Aurora <span class="contact-toggle" aria-hidden="true"></span></summary>
-        <div class="contact-options">
-          <a href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Email <small>guokenny7@gmail.com</small></a>
-          <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub <small>@kenny2077</small></a>
+        <div class="stack">
+          <article class="tool" style="--i:0" aria-labelledby="tool-ask">
+            <div class="tool-num"><canvas class="field numeral" data-glyph="01" aria-hidden="true"></canvas><span class="numeral-text" aria-hidden="true">01</span></div>
+            <div class="tool-body">
+              <p class="tool-tag">Ask</p>
+              <h3 id="tool-ask">An on-device language model.</h3>
+              <p>Ask in plain words. A local model answers on the phone and links up to two exact Manual passages, so you can read the source yourself.</p>
+              <ul class="chips" aria-label="Ask facts">
+                <li>Runs locally</li><li>Exact Manual links</li><li>Set up once in Tools</li>
+              </ul>
+              <p class="tool-note">No model installed? Ask shows setup instead of guessing.</p>
+            </div>
+            <ol class="tool-visual flow" aria-label="How Ask answers">
+              <li>Your question</li>
+              <li>Manual search finds the best passages</li>
+              <li>One local model call</li>
+              <li>Answer with exact Manual links</li>
+            </ol>
+          </article>
+
+          <article class="tool" style="--i:1" aria-labelledby="tool-manual">
+            <div class="tool-num"><canvas class="field numeral" data-glyph="02" aria-hidden="true"></canvas><span class="numeral-text" aria-hidden="true">02</span></div>
+            <div class="tool-body">
+              <p class="tool-tag">Manual</p>
+              <h3 id="tool-manual">A reviewed field manual.</h3>
+              <p>Short lessons with numbered steps and plain warnings. Every passage carries primary-source metadata and opens at the exact spot an answer cites.</p>
+              <ul class="chips" aria-label="Manual facts">
+                <li>Primary-source metadata</li><li>Exact passage links</li><li>Readable offline</li>
+              </ul>
+            </div>
+            <ol class="tool-visual chapters" aria-label="Manual chapters">
+              <li>Survival Basics</li><li>Find and Treat Water</li><li>Start a Fire</li><li>Build a Shelter</li><li>Find Food Safely</li>
+              <li>Navigate When Lost</li><li>Signal for Rescue</li><li>Wilderness First Aid</li><li>Weather and Wildlife</li><li>Car Breakdown</li>
+            </ol>
+          </article>
+
+          <article class="tool" style="--i:2" aria-labelledby="tool-maps">
+            <div class="tool-num"><canvas class="field numeral" data-glyph="03" aria-hidden="true"></canvas><span class="numeral-text" aria-hidden="true">03</span></div>
+            <div class="tool-body">
+              <p class="tool-tag">Maps</p>
+              <h3 id="tool-maps">Signed offline maps.</h3>
+              <p>Download map packages while you still have a connection. Each package is verified and signed before it activates, then works with no signal at all.</p>
+              <ul class="chips" aria-label="Maps facts">
+                <li>Ed25519 signatures</li><li>SHA-256 checks</li><li>Atomic activation</li>
+              </ul>
+              <p class="tool-note">Downloads happen only in explicit Preparation mode.</p>
+            </div>
+            <div class="tool-visual topo"><canvas class="field topo-field" aria-hidden="true"></canvas></div>
+          </article>
+
+          <article class="tool species-section" id="open-source" style="--i:3" aria-labelledby="species-title">
+            <div class="tool-num"><canvas class="field numeral" data-glyph="04" aria-hidden="true"></canvas><span class="numeral-text" aria-hidden="true">04</span></div>
+            <div class="tool-body">
+              <p class="tool-tag">Open-source species intelligence</p>
+              <h3 id="species-title">Identify what’s around you. Keep the photo local.</h3>
+              <p>Aurora’s separate species scanner runs BioCLIP-2 on the device through Core ML, prepared for offline field use. Photos are never sent off the phone.</p>
+              <ul class="chips" aria-label="Species ID facts">
+                <li>Core ML on device</li><li>Optional signed download</li><li>Open source</li>
+              </ul>
+              <p class="tool-note">Results are likely matches, not certainty, and never permission to approach, handle, or eat wildlife.</p>
+              <a class="text-link external-link" href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">Explore the BioCLIP repository <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="tool-visual species-visual" aria-hidden="true">
+              <span class="scan-line"></span>
+              <svg class="species-pixel-art" viewBox="0 0 240 200" shape-rendering="crispEdges" focusable="false">
+                <path class="pixel-frame" d="M20 62V20h42M178 20h42v42M220 138v42h-42M62 180H20v-42"/>
+                <g class="pixel-animal">
+                  <path d="M56 42h28v14h14v14h44V56h14V42h28v42h-14v56h-14v14h-22v18h-28v-18H84v-14H70V84H56z"/>
+                  <path class="pixel-cut" d="M70 56h14v14H70zM156 56h14v14h-14zM92 98h14v14H92zM134 98h14v14h-14zM106 140h28v14h-28z"/>
+                  <path class="pixel-signal" d="M28 92h14v14H28zM198 92h14v14h-14zM113 28h14v14h-14z"/>
+                </g>
+              </svg>
+              <span class="species-caption">species available offline</span>
+            </div>
+          </article>
         </div>
-      </details>
-    </section>
-
-    <section class="faq-section" aria-labelledby="faq-title" data-reveal>
-      <div class="section-intro compact">
-        <h2 id="faq-title">The useful details.</h2>
-      </div>
-      <div class="faq-list">
-        <details>
-          <summary>Does Aurora work without a connection?</summary>
-          <p>Yes. Once the selected model and map packages are prepared, Aurora’s guidance, Manual, maps, and species scanner run locally.</p>
-        </details>
-        <details>
-          <summary>How is Aurora’s content verified?</summary>
-          <p>Manual content carries source metadata and exact passage links, map packages are signed before activation, and the current build was validated on a physical iPhone 13.</p>
-        </details>
-        <details>
-          <summary>Which devices are supported?</summary>
-          <p>Aurora is being built for iPhone and iPad.</p>
-        </details>
-        <details>
-          <summary>Can I download it now?</summary>
-          <p>Not yet. Aurora Survival is coming to the App Store. Contact Aurora for product and partnership conversations.</p>
-        </details>
       </div>
     </section>
 
+    <section class="story-section" id="story" aria-labelledby="story-title">
+      <div class="container story-grid">
+        <div class="story-copy">
+          <p class="kicker">Founder</p>
+          <h2 id="story-title">Built for the moments infrastructure can’t reach.</h2>
+          <p>Aurora Survival is a founder-led field product built around privacy, evidence, and offline reliability. It is an educational aid—not a replacement for emergency services, certified first-aid training, or professional judgment.</p>
+          <details class="contact-menu">
+            <summary>Contact Aurora <span class="contact-toggle" aria-hidden="true"></span></summary>
+            <div class="contact-options">
+              <a href="mailto:guokenny7@gmail.com?subject=Aurora%20Survival">Email <small>guokenny7@gmail.com</small></a>
+              <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub <small>@kenny2077</small></a>
+            </div>
+          </details>
+        </div>
+
+        <div class="faq-section" aria-labelledby="faq-title">
+          <h2 id="faq-title">The useful details.</h2>
+          <div class="faq-list">
+            <details>
+              <summary>Does Aurora work without a connection?</summary>
+              <p>Yes. Once the selected model and map packages are prepared, Aurora’s guidance, Manual, maps, and species scanner run locally.</p>
+            </details>
+            <details>
+              <summary>How is Aurora’s content verified?</summary>
+              <p>Manual content carries source metadata and exact passage links, map packages are signed before activation, and the current build was validated on a physical iPhone 13.</p>
+            </details>
+            <details>
+              <summary>Which devices are supported?</summary>
+              <p>Aurora is being built for iPhone and iPad.</p>
+            </details>
+            <details>
+              <summary>Can I download it now?</summary>
+              <p>Not yet. Aurora Survival is coming to the App Store. Contact Aurora for product and partnership conversations.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+  </div>
 
   <footer class="site-footer">
-    <a class="brand footer-brand" href="#top" aria-label="Back to the top of Aurora Survival">
-      <img src="assets/aurora-icon.webp" width="512" height="512" alt="Aurora Survival app icon showing the northern lights" loading="lazy" decoding="async">
-      <span class="brand-lockup">
-        <span class="brand-title">Aurora Survival</span>
-        <span class="brand-family">An Aurora product</span>
-      </span>
-    </a>
-    <a class="footer-project" href="https://github.com/kenny2077/Aurora" target="_blank" rel="noopener noreferrer" aria-label="Aurora Digest on GitHub">
-      <img src="assets/aurora-digest-icon.svg" width="24" height="24" alt="Aurora Digest icon">
-      <span>Aurora Digest</span>
-    </a>
-    <div class="footer-links">
-      <a href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">BioCLIP</a>
-      <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <div class="footer-inner">
+      <a class="brand footer-brand" href="#top" aria-label="Back to the top of Aurora Survival">
+        <img src="assets/aurora-icon.webp" width="512" height="512" alt="Aurora Survival app icon showing the northern lights" loading="lazy" decoding="async">
+        <span class="brand-lockup">
+          <span class="brand-title">Aurora Survival</span>
+          <span class="brand-family">An Aurora product</span>
+        </span>
+      </a>
+      <a class="footer-project" href="https://github.com/kenny2077/Aurora" target="_blank" rel="noopener noreferrer" aria-label="Aurora Digest on GitHub">
+        <img src="assets/aurora-digest-icon.svg" width="24" height="24" alt="Aurora Digest icon">
+        <span>Aurora Digest</span>
+      </a>
+      <div class="footer-links">
+        <a href="https://github.com/kenny2077/aurora-species-BioCLIP" target="_blank" rel="noopener noreferrer">BioCLIP</a>
+        <a href="https://github.com/kenny2077" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <p class="footer-meta"><a class="forge-link" href="https://auroraforgelab.com/">An Aurora Forge Lab product</a> <span aria-hidden="true">·</span> © 2026 Aurora Survival</p>
     </div>
-    <p>© 2026 Aurora Survival</p>
+    <div class="wordmark" aria-hidden="true">
+      <canvas class="field wordmark-field" data-glyph="AURORA"></canvas>
+      <span class="wordmark-text">Aurora</span>
+    </div>
+    <p class="wordmark-hint">Move your cursor over the letters.</p>
   </footer>
 </body>
 </html>
