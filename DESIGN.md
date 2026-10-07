@@ -93,7 +93,7 @@ Aurora feels like dependable field equipment switched on under a night sky. The 
 
 The page proves the product instead of describing it. The hero carries a working sample of the reviewed manual, the stage shows the real iPhone build, and every claim traces to repository evidence. There are no generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.
 
-Aurora Survival remains the flagship within the Aurora product family. A quiet header label establishes the relationship, while the footer introduces Aurora Digest and the Aurora Forge Lab studio without competing with Survival's primary story.
+Aurora Survival remains the flagship within the Aurora product family. A quiet header label establishes the relationship, while the footer introduces Aurora Newsletter and the Aurora Forge Lab studio without competing with Survival's primary story.
 
 **Key Characteristics:**
 
@@ -201,7 +201,7 @@ The founder section has one “Contact Aurora” disclosure. Email and GitHub re
 
 ### Product Family Footer
 
-The footer sits beneath the page and is revealed as the page lifts away. It quietly links to Aurora Digest with its local icon and name, to Aurora Forge Lab as “An Aurora Forge Lab product”, and ends with the warmable AURORA pixel wordmark. It stacks without overflow on narrow screens.
+The footer sits beneath the page and is revealed as the page lifts away. It quietly links to Aurora Newsletter with its local icon and name, to Aurora Forge Lab as “An Aurora Forge Lab product”, and ends with the warmable AURORA pixel wordmark. It stacks without overflow on narrow screens.
 
 ## Do's and Don'ts
 
@@ -211,7 +211,7 @@ The footer sits beneath the page and is revealed as the page lifts away. It quie
 - Keep claims traceable to product documentation or repository evidence.
 - Reuse the Headlamp Pixel Field rather than adding new decorative motifs.
 - Preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.
-- Keep the BioCLIP, founder GitHub, Aurora Digest, and Aurora Forge Lab links descriptive and safe.
+- Keep the BioCLIP, founder GitHub, Aurora Newsletter, and Aurora Forge Lab links descriptive and safe.
 
 ### Don't
 

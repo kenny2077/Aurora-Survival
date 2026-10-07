@@ -145,20 +145,20 @@ test("the field journey exposes safe open-source and founder links", () => {
   }
 });
 
-test("Aurora Survival remains primary while the footer links quietly to Aurora Digest and Aurora Forge Lab", () => {
+test("Aurora Survival remains primary while the footer links quietly to Aurora Newsletter and Aurora Forge Lab", () => {
   const html = readRequired(indexPath);
   const css = readRequired(stylesPath);
 
   assert.match(html, /class="brand-family">An Aurora product<\/span>/);
   assert.match(
     html,
-    /class="footer-project"[^>]*href="https:\/\/github\.com\/kenny2077\/Aurora"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
+    /class="footer-project"[^>]*href="https:\/\/github\.com\/kenny2077\/Aurora-Newsletter"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
   );
   assert.match(
     html,
-    /src="assets\/aurora-digest-icon\.svg"[^>]*width="24"[^>]*height="24"[^>]*alt="Aurora Digest icon"/,
+    /src="assets\/aurora-digest-icon\.svg"[^>]*width="24"[^>]*height="24"[^>]*alt="Aurora Newsletter icon"/,
   );
-  assert.match(html, /<span>Aurora Digest<\/span>/);
+  assert.match(html, /<span>Aurora Newsletter<\/span>/);
   assert.match(html, /<footer[\s\S]*href="https:\/\/auroraforgelab\.com\/"[^>]*>An Aurora Forge Lab product<\/a>[\s\S]*<\/footer>/);
   assert.doesNotMatch(html, /kenny2077\.github\.io\/Aurora|Also from Aurora:|A self-hosted daily learning radar|>Source/);
   assert.doesNotMatch(html, /<a[^>]*href="#(?:digest|products)"/);
