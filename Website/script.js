@@ -304,9 +304,9 @@ document.querySelectorAll(".numeral").forEach((canvas) => {
   const text = canvas.dataset.glyph;
   fields.push(new PixelField(canvas, {
     cell: glyphCell(text.length),
-    paint: glyphPainter(text, [237, 241, 236], [20, 63, 53], [8, 123, 118]),
+    paint: glyphPainter(text, [11, 31, 27], [21, 217, 197], [52, 120, 246]),
     heat: AURORA,
-    seam: "rgb(237,241,236)",
+    seam: "rgb(11,31,27)",
     radius: 2.2,
     decay: 0.86,
   }));
@@ -371,7 +371,6 @@ const statements = [...document.querySelectorAll(".statement")].map((section) =>
 
 /* ---------- Scroll story: one handler, run only when scroll changes ---------- */
 const header = document.querySelector(".site-header");
-const papers = [...document.querySelectorAll(".paper")];
 const heroCopy = document.querySelector(".hero-copy-wrap");
 const ask = document.querySelector(".ask");
 const tools = [...document.querySelectorAll(".tool")];
@@ -388,11 +387,6 @@ function onScroll() {
 
   if (header) {
     header.classList.toggle("is-solid", y > 24);
-    const probe = header.offsetHeight / 2;
-    document.body.classList.toggle("on-paper", papers.some((p) => {
-      const r = p.getBoundingClientRect();
-      return r.top <= probe && r.bottom >= probe;
-    }));
   }
 
   for (const st of statements) {

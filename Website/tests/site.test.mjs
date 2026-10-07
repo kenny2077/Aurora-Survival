@@ -30,9 +30,9 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /class="nav-toggle"[^>]*aria-label="Toggle navigation menu"/);
   assert.match(html, /<h1[^>]*>\s*Survival knowledge that stays with you\./);
   assert.match(html, /Coming to the App Store/);
-  assert.match(html, /mailto:guokenny7@gmail\.com/);
+  assert.match(html, /mailto:hello@auroraforgelab\.com/);
   assert.match(html, /founder-led/i);
-  assert.match(html, /class="button button-primary"[^>]*href="mailto:guokenny7@gmail\.com/);
+  assert.match(html, /class="button button-primary"[^>]*href="mailto:hello@auroraforgelab\.com/);
   assert.match(html, /class="availability-label">Coming to the App Store<\/span>/);
   assert.match(html, /How is Aurora’s content verified\?/);
   assert.match(html, /source metadata[^<]*signed before activation[^<]*physical iPhone 13/i);
@@ -113,7 +113,7 @@ test("founder contact methods stay hidden inside one accessible disclosure", () 
   const contact = html.match(/<details class="contact-menu">([\s\S]*?)<\/details>/)?.[1] ?? "";
 
   assert.match(contact, /<summary>Contact Aurora <span class="contact-toggle" aria-hidden="true"><\/span><\/summary>/);
-  assert.match(contact, /href="mailto:guokenny7@gmail\.com\?subject=Aurora%20Survival"[^>]*>Email/);
+  assert.match(contact, /href="mailto:hello@auroraforgelab\.com\?subject=Aurora%20Survival"[^>]*>Email/);
   assert.match(
     contact,
     /href="https:\/\/github\.com\/kenny2077"[^>]*target="_blank"[^>]*rel="noopener noreferrer"[^>]*>GitHub/,
@@ -139,7 +139,7 @@ test("the field journey exposes safe open-source and founder links", () => {
     html,
     /href="https:\/\/github\.com\/kenny2077"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
   );
-  assert.match(html, /aria-label="Aurora Survival on GitHub"/);
+  assert.match(html, /class="nav-github" href="https:\/\/github\.com\/kenny2077\/Aurora-Survival"[^>]*aria-label="Aurora Survival on GitHub"/);
   for (const anchor of html.matchAll(/href="#([^"]+)"/g)) {
     assert.match(html, new RegExp(`id="${anchor[1]}"`), `in-page link #${anchor[1]} needs a target`);
   }
@@ -149,7 +149,7 @@ test("Aurora Survival remains primary while the footer links quietly to Aurora N
   const html = readRequired(indexPath);
   const css = readRequired(stylesPath);
 
-  assert.match(html, /class="brand-family">An Aurora product<\/span>/);
+  assert.match(html, /class="brand-family">An Aurora Forge Lab product<\/span>/);
   assert.match(
     html,
     /class="footer-project"[^>]*href="https:\/\/github\.com\/kenny2077\/Aurora-Newsletter"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
@@ -324,4 +324,11 @@ test("the landing experience uses full-screen chapters without section overlap",
   assert.match(css, /\.device-capture\s*\{[^}]*width:\s*min\(100%,\s*320px/s);
   assert.match(css, /\.statement \.pin\s*\{[^}]*position:\s*sticky/s);
   assert.match(css, /\.site-footer\s*\{[^}]*position:\s*sticky/s);
+});
+
+test("every chapter stays on the night palette, with no light paper section", () => {
+  const html = readRequired(indexPath);
+  const css = readRequired(stylesPath);
+  assert.doesNotMatch(html, /class="[^"]*\bpaper\b/);
+  assert.doesNotMatch(css, /--paper|\.on-paper|\.paper\b/);
 });

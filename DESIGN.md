@@ -2,22 +2,14 @@
 name: Aurora Survival
 description: Kinetic offline field software grounded in physical proof and editorial restraint.
 colors:
-  canvas: "#dfe5df"
-  paper: "#f7f9f5"
-  paper-2: "#edf1ec"
-  ink: "#10201a"
-  muted: "#5b6962"
-  line: "#c5cec6"
-  line-strong: "#9eaaa1"
   spruce: "#143f35"
-  teal: "#087b76"
-  signal: "#a6300f"
   flare: "#ff7a4d"
   lamp: "#ffd9a3"
   white: "#f5fbf7"
   mist: "#c3d4cc"
   faint: "#8aa298"
   night: "#061311"
+  night-2: "#0b1f1b"
   deep: "#030a09"
   aurora-cyan: "#15d9c5"
   aurora-blue: "#3478f6"
@@ -77,8 +69,8 @@ components:
     rounded: "{rounded.square}"
     padding: "18px 20px"
   tool-card:
-    backgroundColor: "{colors.paper-2}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.night-2}"
+    textColor: "{colors.white}"
     rounded: "{rounded.square}"
     padding: "clamp(28px, 3.4vw, 48px)"
 ---
@@ -114,12 +106,11 @@ Fields are decorative (`aria-hidden`), redraw only while dirty or warm, pause of
 
 ## Colors
 
-Warm paper and green-gray neutrals keep reading calm. Night carries the hero, statement, product proof, founder story, and footer; one paper chapter holds the field kit.
+One continuous night palette carries every chapter, from the hero through the field kit to the footer, so scrolling never flashes to a light surface. Green-gray text steps keep reading calm.
 
 ### Primary
 
 - **Deep Spruce:** Numeral pixels and dark product ground.
-- **Field Teal:** Interactive emphasis and labels on paper.
 
 ### Secondary
 
@@ -130,14 +121,13 @@ Warm paper and green-gray neutrals keep reading calm. Night carries the hero, st
 
 - **Lamp:** The headlamp warmth in pixel fields and the availability marker.
 - **Flare:** Focus outlines and warnings on night surfaces.
-- **Signal Rust:** Focus outlines and notes on paper.
 
 ### Neutral
 
 - **Night and Deep:** Cinematic surfaces and the footer beneath the page.
-- **Paper, Paper 2, and Canvas:** Reading surfaces.
-- **Ink, Muted, White, Mist, and Faint:** Text steps on paper and night.
-- **Line and Strong Line:** Rules, dividers, and disclosure structure.
+- **Night 2:** The raised surface of the field-kit cards.
+- **White, Mist, and Faint:** Text steps on night.
+- **Dark lines:** Translucent rules, dividers, and disclosure structure.
 
 **The Aurora Field Rule.** Saturated teal, blue, and violet move only inside generated light on dark surfaces. Reading surfaces remain restrained, and saturated color never replaces product evidence.
 
@@ -157,7 +147,7 @@ Archivo, a variable OFL face, is self-hosted from `Website/assets/fonts` and use
 
 ## Layout
 
-The site uses full-width chapters aligned to a 1240px measure through one gutter token, framed by four fixed viewfinder corners. The scroll story is: hero (100svh, sky and Ask card) → pinned statement (220vh, words light with scroll) → real-device stage → paper field kit (four sticky cards that stack and recede) → founder and FAQ → footer revealed from beneath the page. Sections never overlap with negative margins.
+The site uses full-width chapters aligned to a 1240px measure through one gutter token, framed by four fixed viewfinder corners. The scroll story is: hero (100svh, sky and Ask card) → pinned statement (220vh, words light with scroll) → real-device stage → night field kit (four sticky cards that stack and recede) → founder and FAQ → footer revealed from beneath the page. Sections never overlap with negative margins.
 
 The hero anchors copy bottom-left with the Ask card on the right; at 1100px the card flows beneath the copy. At 800px the navigation becomes a controlled menu and splits stack. At 760px the tool cards stop stacking and become a plain list. At 520px actions go full width. Nothing scrolls horizontally at 390px.
 
@@ -177,7 +167,7 @@ Content frames and controls remain square. Thin rules and inset 1px lines establ
 
 ### Navigation
 
-The fixed header pairs the production icon and name with a small “An Aurora product” family label, numbered section anchors, and the founder GitHub profile. It turns to night glass after the first scroll and to paper glass over the field kit. On narrow screens a labelled Menu toggle opens full-width ruled rows and closes with Escape.
+The fixed header pairs the production icon and name with a small “An Aurora Forge Lab product” family label, numbered section anchors, and a GitHub link to the Aurora Survival repository. It turns to night glass after the first scroll. On narrow screens a labelled Menu toggle opens full-width ruled rows and closes with Escape.
 
 ### Hero and Ask the field manual
 
