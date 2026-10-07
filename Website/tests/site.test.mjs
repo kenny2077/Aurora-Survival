@@ -28,7 +28,9 @@ test("the public page exposes the approved semantic journey", () => {
   assert.match(html, /href="#main-content"[^>]*>Skip to content</);
   assert.match(html, /id="main-content"/);
   assert.match(html, /class="nav-toggle"[^>]*aria-label="Toggle navigation menu"/);
-  assert.match(html, /<h1[^>]*>\s*Survival knowledge that stays with you\./);
+  assert.match(html, /<h1[^>]*>\s*Survival intelligence that stays with you\./);
+  // The hero leads with the on-device large language model.
+  assert.match(html, /class="hero-copy">[^<]*large language model that runs entirely on your iPhone or iPad/);
   assert.match(html, /Coming to the App Store/);
   assert.match(html, /mailto:hello@auroraforgelab\.com/);
   assert.match(html, /founder-led/i);
