@@ -185,14 +185,6 @@ html:not(.js) .site-header { background: rgba(6, 19, 17, 0.92); border-color: va
   font: 600 0.82rem/1.2 var(--mono);
 }
 .availability-label::before { content: ""; width: 8px; height: 8px; background: var(--lamp); }
-.hero-signal {
-  display: flex; align-items: center; gap: 10px;
-  margin-top: 26px;
-  color: var(--mist);
-  font: 500 0.8rem/1.3 var(--mono);
-  text-shadow: 0 1px 10px rgba(3, 10, 9, 0.9);
-}
-.hero-signal > span { width: 18px; height: 1px; background: currentColor; }
 
 /* ---------- Ask the manual (hero proof) ---------- */
 .ask {
@@ -212,8 +204,6 @@ html:not(.js) .site-header { background: rgba(6, 19, 17, 0.92); border-color: va
 .ask::after { right: -1px; bottom: -1px; border-width: 0 2px 2px 0; }
 .ask-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
 .ask-title { white-space: nowrap; font: 800 1.35rem/1 var(--display); font-stretch: 80%; letter-spacing: 0; }
-.ask-state { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; color: var(--aurora-cyan); font: 600 0.74rem/1 var(--mono); }
-.ask-state::before { content: ""; width: 6px; height: 6px; background: currentColor; box-shadow: 9px 0 0 -1px rgba(21, 217, 197, 0.5), 17px 0 0 -2px rgba(21, 217, 197, 0.25); margin-right: 18px; }
 .ask-questions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
 .ask-questions label {
   --mx: 50%; --my: 50%;
@@ -257,7 +247,6 @@ html:not(.js) .site-header { background: rgba(6, 19, 17, 0.92); border-color: va
   font-size: 0.8rem; line-height: 1.42;
 }
 .ask-cite { margin-top: 10px; color: var(--faint); font: 500 0.72rem/1.45 var(--mono); }
-.ask-note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-d); color: var(--faint); font-size: 0.76rem; line-height: 1.45; }
 
 /* With :has, only the chosen passage shows; without it, every passage stays readable. */
 @supports selector(:has(*)) {
@@ -492,13 +481,12 @@ main { width: 100%; }
   padding: 72px var(--gutter) 36px;
   background: var(--deep);
 }
-.footer-inner { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 24px 36px; }
-.footer-project { display: inline-flex; align-items: center; gap: 10px; color: var(--mist); font-size: 0.9rem; text-decoration: none; }
-.footer-project img { width: 24px; height: 24px; }
-.footer-project:hover, .footer-links a:hover, .forge-link:hover { color: var(--white); }
-.footer-links { display: flex; gap: 20px; }
-.footer-links a { color: var(--mist); font-size: 0.9rem; text-decoration: none; }
-.footer-meta { color: var(--faint); font: 500 0.76rem/1.4 var(--mono); }
+.footer-inner { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px 36px; }
+.footer-products { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 22px; }
+.footer-label { color: var(--faint); font: 500 0.74rem/1.4 var(--mono); }
+.footer-products a { color: var(--mist); font-size: 0.9rem; text-decoration: none; }
+.footer-products a:hover, .forge-link:hover { color: var(--white); }
+.footer-meta { grid-column: 1 / -1; color: var(--faint); font: 500 0.76rem/1.4 var(--mono); }
 .forge-link { color: var(--mist); text-underline-offset: 4px; }
 .wordmark { position: relative; aspect-ratio: 35 / 7; max-height: 320px; margin-top: clamp(40px, 7vh, 80px); will-change: transform, opacity; }
 .wordmark-text { display: block; color: var(--aurora-cyan); font: 900 clamp(6rem, 24vw, 22rem)/0.8 var(--display); font-stretch: 70%; text-transform: uppercase; }
@@ -545,6 +533,7 @@ main { width: 100%; }
   .product-stage { grid-template-columns: minmax(0, 1fr); min-height: 0; }
   .story-grid { grid-template-columns: minmax(0, 1fr); }
   .footer-inner { grid-template-columns: 1fr; }
+  .footer-products { justify-content: flex-start; }
 }
 
 @media (max-width: 760px) {

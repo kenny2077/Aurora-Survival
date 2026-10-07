@@ -85,7 +85,7 @@ Aurora feels like dependable field equipment switched on under a night sky. The 
 
 The page proves the product instead of describing it. The hero carries a working sample of the reviewed manual, the stage shows the real iPhone build, and every claim traces to repository evidence. There are no generic AI particles, fake dashboards, decorative chat bubbles, or invented claims.
 
-Aurora Survival remains the flagship within the Aurora product family. A quiet header label establishes the relationship, while the footer introduces Aurora Newsletter and the Aurora Forge Lab studio without competing with Survival's primary story.
+Aurora Survival remains the flagship within the Aurora product family. A quiet header label establishes the relationship, while the footer lists the studio's other current products and links to Aurora Forge Lab without competing with Survival's primary story.
 
 **Key Characteristics:**
 
@@ -167,11 +167,11 @@ Content frames and controls remain square. Thin rules and inset 1px lines establ
 
 ### Navigation
 
-The fixed header pairs the production icon and name with a small “An Aurora Forge Lab product” family label, numbered section anchors, and a GitHub link to the Aurora Survival repository. It turns to night glass after the first scroll. On narrow screens a labelled Menu toggle opens full-width ruled rows and closes with Escape.
+The fixed header pairs the production icon and name with a small “An Aurora Forge Lab product” family label, numbered anchors (Open Source opens the Aurora Survival repository), and the founder's GitHub profile. It turns to night glass after the first scroll. On narrow screens a labelled Menu toggle opens full-width ruled rows and closes with Escape.
 
 ### Hero and Ask the field manual
 
-The hero combines the product promise, the real availability state (“Coming to the App Store”), and a field signal over the pixel sky. The Ask card offers four questions as a native radio group; each answer is the exact steps, warning, and primary-source organizations of a reviewed lesson from `Resources/Knowledge/survival_knowledge_source.json`, enforced by the site tests. CSS `:has()` shows the chosen answer and replays a short stagger; without `:has()` or JavaScript, every answer stays visible. The card states that it is an educational aid.
+The hero combines the product promise, the real availability state (“Coming to the App Store”), over the pixel sky, with no extra taglines. The Ask card offers four questions as a native radio group; each answer is the exact steps, warning, and primary-source organizations of a reviewed lesson from `Resources/Knowledge/survival_knowledge_source.json`, enforced by the site tests. CSS `:has()` shows the chosen answer and replays a short stagger; without `:has()` or JavaScript, every answer stays visible. The card carries no status or footnote text; the educational-aid disclaimer lives in the founder section.
 
 ### Statement
 
@@ -191,7 +191,7 @@ The founder section has one “Contact Aurora” disclosure. Email and GitHub re
 
 ### Product Family Footer
 
-The footer sits beneath the page and is revealed as the page lifts away. It quietly links to Aurora Newsletter with its local icon and name, to Aurora Forge Lab as “An Aurora Forge Lab product”, and ends with the warmable AURORA pixel wordmark. It stacks without overflow on narrow screens.
+The footer sits beneath the page and is revealed as the page lifts away. Under “More from the lab” it links the studio’s current products (Aurora Forge, Aurora Newsletter, Pixel Web, Gopher Calendar), names Aurora Forge Lab as “An Aurora Forge Lab product”, and ends with the warmable AURORA pixel wordmark. It stacks without overflow on narrow screens.
 
 ## Do's and Don'ts
 
@@ -201,7 +201,7 @@ The footer sits beneath the page and is revealed as the page lifts away. It quie
 - Keep claims traceable to product documentation or repository evidence.
 - Reuse the Headlamp Pixel Field rather than adding new decorative motifs.
 - Preserve keyboard focus, mobile readability, no-JavaScript content, and reduced motion.
-- Keep the BioCLIP, founder GitHub, Aurora Newsletter, and Aurora Forge Lab links descriptive and safe.
+- Keep the BioCLIP, founder GitHub, sibling product, and Aurora Forge Lab links descriptive and safe.
 
 ### Don't
 

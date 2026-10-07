@@ -102,7 +102,9 @@ test("the hero demo quotes the reviewed manual verbatim and works without JavaSc
     for (const organization of organizations) assert.ok(body.includes(organization), `${title} must cite ${organization}`);
   }
 
-  assert.match(ask, /educational aid, not a replacement for emergency services/i);
+  // The card stays lean; the educational-aid disclaimer lives in the founder section.
+  assert.doesNotMatch(ask, /class="ask-state"|class="ask-note"/);
+  assert.match(html, /educational aid—not a replacement for emergency services/i);
   // Answers are only hidden where :has() can reveal the chosen one again.
   assert.match(css, /@supports selector\(:has\(\*\)\)\s*\{\s*\.ask-answer\s*\{\s*visibility:\s*hidden/);
 });
@@ -128,7 +130,11 @@ test("founder contact methods stay hidden inside one accessible disclosure", () 
 test("the field journey exposes safe open-source and founder links", () => {
   const html = readRequired(indexPath);
 
-  assert.match(html, /class="hero-signal"/);
+  assert.doesNotMatch(html, /class="hero-signal"|Offline field assistant for iPhone/);
+  assert.match(
+    html,
+    /<a href="https:\/\/github\.com\/kenny2077\/aurora-survival" target="_blank" rel="noopener noreferrer"><span class="nav-index" aria-hidden="true">2<\/span> Open Source<\/a>/,
+  );
   assert.match(html, /id="open-source"/);
   assert.match(html, /class="[^"]*\bspecies-section\b[^"]*"/);
   assert.match(
@@ -139,30 +145,29 @@ test("the field journey exposes safe open-source and founder links", () => {
     html,
     /href="https:\/\/github\.com\/kenny2077"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
   );
-  assert.match(html, /class="nav-github" href="https:\/\/github\.com\/kenny2077\/Aurora-Survival"[^>]*aria-label="Aurora Survival on GitHub"/);
+  assert.match(html, /class="nav-github" href="https:\/\/github\.com\/kenny2077"[^>]*aria-label="Kenny Guo on GitHub"/);
   for (const anchor of html.matchAll(/href="#([^"]+)"/g)) {
     assert.match(html, new RegExp(`id="${anchor[1]}"`), `in-page link #${anchor[1]} needs a target`);
   }
 });
 
-test("Aurora Survival remains primary while the footer links quietly to Aurora Newsletter and Aurora Forge Lab", () => {
+test("Aurora Survival remains primary while the footer lists the current Aurora Forge Lab products", () => {
   const html = readRequired(indexPath);
   const css = readRequired(stylesPath);
+  const products = html.match(/<nav class="footer-products"[\s\S]*?<\/nav>/)?.[0] ?? "";
 
   assert.match(html, /class="brand-family">An Aurora Forge Lab product<\/span>/);
-  assert.match(
-    html,
-    /class="footer-project"[^>]*href="https:\/\/github\.com\/kenny2077\/Aurora-Newsletter"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/,
-  );
-  assert.match(
-    html,
-    /src="assets\/aurora-digest-icon\.svg"[^>]*width="24"[^>]*height="24"[^>]*alt="Aurora Newsletter icon"/,
-  );
-  assert.match(html, /<span>Aurora Newsletter<\/span>/);
+  for (const [name, url] of [
+    ["Aurora Forge", "https://kenny2077.github.io/Aurora-Forge/"],
+    ["Aurora Newsletter", "https://kenny2077.github.io/Aurora-Newsletter/"],
+    ["Pixel Web", "https://pixel-web-803742923007.us-central1.run.app/"],
+    ["Gopher Calendar", "https://kenny2077.github.io/Gopher-Calendar/"],
+  ]) {
+    assert.ok(products.includes(`href="${url}" target="_blank" rel="noopener noreferrer">${name}</a>`), `footer must link ${name}`);
+  }
   assert.match(html, /<footer[\s\S]*href="https:\/\/auroraforgelab\.com\/"[^>]*>An Aurora Forge Lab product<\/a>[\s\S]*<\/footer>/);
-  assert.doesNotMatch(html, /kenny2077\.github\.io\/Aurora|Also from Aurora:|A self-hosted daily learning radar|>Source/);
-  assert.doesNotMatch(html, /<a[^>]*href="#(?:digest|products)"/);
-  assert.match(css, /\.footer-project\s*\{/);
+  assert.doesNotMatch(html, /Aurora Digest|kenny2077\.github\.io\/Aurora\/|github\.com\/kenny2077\/Aurora"|footer-project|>BioCLIP</);
+  assert.match(css, /\.footer-products\s*\{/);
   assert.match(css, /@media\s*\(max-width:\s*800px\)[\s\S]*\.footer-inner\s*\{[^}]*grid-template-columns:\s*1fr/s);
 });
 
